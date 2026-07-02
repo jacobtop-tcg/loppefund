@@ -58,6 +58,8 @@ export interface MatchCandidate {
   dates?: string[];
   /** Normalized category; two different known categories veto a merge. */
   category?: string | null;
+  /** Street address; two clearly different streets veto a weak-title merge. */
+  street?: string | null;
 }
 
 export interface MatchResult {
@@ -88,6 +90,18 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   const sim = titleSimilarity(a.title, b.title);
   if (sim < TITLE_WEAK) {
     return { isMatch: false, score: sim, reason: 'titles differ' };
+  }
+
+  // Two different street addresses is strong evidence of different events —
+  // e.g. two garage sales in the same postcode on the same Saturday.
+  let streetsDiffer = false;
+  if (a.street && b.street) {
+    const sa = normalizeTitle(a.street);
+    const sb = normalizeTitle(b.street);
+    streetsDiffer = sa !== sb && !sa.includes(sb) && !sb.includes(sa);
+  }
+  if (streetsDiffer && sim < TITLE_STRONG) {
+    return { isMatch: false, score: sim, reason: 'different streets' };
   }
 
   let colocated: boolean | null = null;

@@ -37,6 +37,20 @@ describe('markedskalenderen adapter', () => {
     expect(raw!.cancelled).toBeUndefined();
   });
 
+  it('extracts a one-off event using the singular "Periode:" label', () => {
+    const raw = markedskalenderen.extract(
+      'https://markedskalenderen.dk/marked/show/allan-larsen',
+      fixture('markedskalenderen-event-single.html'),
+    );
+    expect(raw).not.toBeNull();
+    expect(raw!.category).toBe('byloppemarked');
+    expect(raw!.street).toBe('Kongevej 2');
+    expect(raw!.postcode).toBe('4450');
+    expect(raw!.dateRanges).toEqual([{ start: '2026-07-04', end: '2026-07-05' }]);
+    expect(raw!.openingHoursText).toContain('9-17');
+    expect(raw!.isFree).toBe(true);
+  });
+
   it('finds event links on a category page', () => {
     const html = fixture('markedskalenderen-category.html');
     const links = [...html.matchAll(

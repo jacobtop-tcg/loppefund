@@ -44,6 +44,30 @@ if (command === 'stats') {
   process.exit(0);
 }
 
+if (command === 'rebuild') {
+  // Re-derive all canonical events from the immutable raw layer.
+  // Geocode cache persists, so this is offline-fast and reproducible.
+  console.log('rebuilding canonical events from raw layer…');
+  db.exec('DELETE FROM event_sources; DELETE FROM occurrences; DELETE FROM events;');
+  const trustRows = Object.fromEntries(adapters.map((a) => [a.key, a.trust]));
+  const raws = db
+    .prepare(`SELECT payload FROM raw_events ORDER BY source_key, extracted_at`)
+    .all() as unknown as Array<{ payload: string }>;
+  // Process highest-trust sources first so provenance starts from the best data.
+  raws.sort((a, b) => {
+    const ta = trustRows[(JSON.parse(a.payload) as { sourceKey: string }).sourceKey] ?? 0;
+    const tb = trustRows[(JSON.parse(b.payload) as { sourceKey: string }).sourceKey] ?? 0;
+    return tb - ta;
+  });
+  const stats: CanonicalizeStats = { created: 0, merged: 0, unchanged: 0, skippedNoDates: 0 };
+  for (const r of raws) {
+    await canonicalizeRawEvent(db, JSON.parse(r.payload), trustRows, stats);
+  }
+  expirePastEvents(db, new Date().toISOString().slice(0, 10));
+  console.log('rebuild done:', JSON.stringify(stats));
+  process.exit(0);
+}
+
 const limit = values.limit ? Number(values.limit) : Infinity;
 const selected = values.source
   ? adapters.filter((a) => a.key === values.source)

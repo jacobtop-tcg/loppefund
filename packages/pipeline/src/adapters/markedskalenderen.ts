@@ -82,14 +82,15 @@ export const markedskalenderen: SourceAdapter = {
       return v || undefined;
     };
 
-    // Perioder: <option>dd-mm-yyyy til dd-mm-yyyy</option> + trailing recurrence text
+    // Recurring events use "Perioder:" with a <select> of ranges; one-off
+    // events use "Periode:" with a plain-text range. Handle both.
     const dateRanges: Array<{ start: string; end: string }> = [];
     let scheduleText: string | undefined;
-    const perioder = fields.get('Perioder');
+    const perioder = fields.get('Perioder') ?? fields.get('Periode');
     if (perioder) {
-      for (const opt of perioder.querySelectorAll('option')) {
-        const m = opt.text.match(/(\S+)\s+til\s+(\S+)/);
-        if (!m) continue;
+      for (const m of perioder.text.matchAll(
+        /(\d{2}-\d{2}-\d{4})\s+til\s+(\d{2}-\d{2}-\d{4})/g,
+      )) {
         const start = parseDanishDate(m[1]!);
         const end = parseDanishDate(m[2]!);
         if (start && end && end >= start) dateRanges.push({ start, end });

@@ -33,31 +33,50 @@ export async function geocode(
   const query = [address.street, address.postcode, address.city]
     .filter(Boolean)
     .join(', ');
-  if (!address.street || query.length < 8) return NO_MATCH;
+  if (query.length < 4) return NO_MATCH;
 
   const cached = getCachedGeocode(db, query);
   if (cached) return cached;
 
   let result = NO_MATCH;
   try {
-    const wash = (await politeDawaFetch(
-      `${DAWA}/datavask/adgangsadresser?betegnelse=${encodeURIComponent(query)}`,
-    )) as {
-      kategori: 'A' | 'B' | 'C';
-      resultater: Array<{ aktueladresse: { href: string; postnr: string; postnrnavn: string } }>;
-    };
-    const hit = wash.resultater[0];
-    if ((wash.kategori === 'A' || wash.kategori === 'B') && hit) {
-      const detail = (await politeDawaFetch(
-        `${hit.aktueladresse.href}?struktur=mini`,
-      )) as { x: number; y: number; postnr: string; postnrnavn: string };
-      result = {
-        lat: detail.y,
-        lng: detail.x,
-        quality: wash.kategori,
-        resolvedCity: detail.postnrnavn ?? hit.aktueladresse.postnrnavn,
-        resolvedPostcode: detail.postnr ?? hit.aktueladresse.postnr,
+    if (address.street) {
+      const wash = (await politeDawaFetch(
+        `${DAWA}/datavask/adgangsadresser?betegnelse=${encodeURIComponent(query)}`,
+      )) as {
+        kategori: 'A' | 'B' | 'C';
+        resultater: Array<{ aktueladresse: { href: string; postnr: string; postnrnavn: string } }>;
       };
+      const hit = wash.resultater[0];
+      if ((wash.kategori === 'A' || wash.kategori === 'B') && hit) {
+        const detail = (await politeDawaFetch(
+          `${hit.aktueladresse.href}?struktur=mini`,
+        )) as { x: number; y: number; postnr: string; postnrnavn: string };
+        result = {
+          lat: detail.y,
+          lng: detail.x,
+          quality: wash.kategori,
+          resolvedCity: detail.postnrnavn ?? hit.aktueladresse.postnrnavn,
+          resolvedPostcode: detail.postnr ?? hit.aktueladresse.postnr,
+        };
+      }
+    }
+    // Fallback: postcode visual centre — approximate but honest (quality "P").
+    if (result.lat === null && address.postcode) {
+      const pn = (await politeDawaFetch(`${DAWA}/postnumre/${address.postcode}`)) as {
+        nr: string;
+        navn: string;
+        visueltcenter: [number, number];
+      };
+      if (pn.visueltcenter) {
+        result = {
+          lat: pn.visueltcenter[1],
+          lng: pn.visueltcenter[0],
+          quality: 'P',
+          resolvedCity: pn.navn,
+          resolvedPostcode: pn.nr,
+        };
+      }
     }
   } catch {
     // Network/API failure: return NO_MATCH but do NOT cache it,

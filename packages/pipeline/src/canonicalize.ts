@@ -96,7 +96,7 @@ export async function canonicalizeRawEvent(
   let geocodeQuality: string | null = raw.lat != null ? 'source' : null;
   let postcode = raw.postcode ?? null;
   let city = raw.city ?? null;
-  if (lat === null && raw.street) {
+  if (lat === null && (raw.street || raw.postcode)) {
     const g = await geocode(db, {
       street: raw.street,
       postcode: raw.postcode,
@@ -122,6 +122,7 @@ export async function canonicalizeRawEvent(
         postcode,
         dates: rawDates,
         category: raw.category,
+        street: raw.street,
       },
       {
         title: candidate.title,
@@ -130,6 +131,7 @@ export async function canonicalizeRawEvent(
         postcode: candidate.postcode,
         dates: occurrenceDates(db, candidate.id),
         category: candidate.category,
+        street: candidate.street,
       },
     );
     if (result.isMatch && (best === null || result.score > best.score)) {
@@ -193,7 +195,8 @@ export async function canonicalizeRawEvent(
       maxSourceTrust: Math.max(trust, ...Object.keys(provenance).map((f) => currentTrust(f))),
       sourceCount,
       daysSinceVerified: 0,
-      hasGoodLocation: merged.lat !== null && merged.geocodeQuality !== 'C',
+      // Postcode-centroid ("P") locations are approximate — not "good".
+      hasGoodLocation: merged.lat !== null && !['C', 'P'].includes(merged.geocodeQuality ?? ''),
       hasConcreteDates: occurrences.length > 0,
     });
     updateEvent(db, e.id, merged);
@@ -252,7 +255,7 @@ export async function canonicalizeRawEvent(
       maxSourceTrust: trust,
       sourceCount: 1,
       daysSinceVerified: 0,
-      hasGoodLocation: lat !== null && geocodeQuality !== 'C',
+      hasGoodLocation: lat !== null && !['C', 'P'].includes(geocodeQuality ?? ''),
       hasConcreteDates: true,
     }),
     fieldProvenance: provenance,

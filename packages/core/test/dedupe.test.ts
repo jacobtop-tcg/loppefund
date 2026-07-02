@@ -74,6 +74,47 @@ describe('matchEvents', () => {
     const b = { title: 'Loppemarked' };
     expect(matchEvents(a, b).isMatch).toBe(false);
   });
+
+  it('rejects two garage sales in the same postcode on the same day', () => {
+    // Approximate postcode-centroid coords are identical; streets differ.
+    const a = {
+      title: 'Garagesalg Kongevej 2',
+      street: 'Kongevej 2',
+      postcode: '4450',
+      lat: 55.66,
+      lng: 11.42,
+      dates: ['2026-07-04'],
+    };
+    const b = {
+      title: 'Garagesalg Møllevej 5',
+      street: 'Møllevej 5',
+      postcode: '4450',
+      lat: 55.66,
+      lng: 11.42,
+      dates: ['2026-07-04'],
+    };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
+  it('still merges when streets agree by containment', () => {
+    const a = {
+      title: 'Broens Lopper',
+      street: 'Strandgade 95',
+      postcode: '1401',
+      lat: 55.6799,
+      lng: 12.5988,
+      dates: ['2026-07-05'],
+    };
+    const b = {
+      title: 'Broens Lopper loppemarked',
+      street: 'Strandgade 95, på kajen',
+      postcode: '1401',
+      lat: 55.6799,
+      lng: 12.5988,
+      dates: ['2026-07-05'],
+    };
+    expect(matchEvents(a, b).isMatch).toBe(true);
+  });
 });
 
 describe('normalize helpers', () => {

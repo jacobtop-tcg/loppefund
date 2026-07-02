@@ -78,6 +78,23 @@ export async function geocode(
         };
       }
     }
+    // Last fallback: city-name centroid via the postal-district register.
+    if (result.lat === null && address.city) {
+      const districts = (await politeDawaFetch(
+        `${DAWA}/postnumre?navn=${encodeURIComponent(address.city)}`,
+      )) as Array<{ nr: string; navn: string; visueltcenter: [number, number] }>;
+      const hit = districts[0];
+      // Ambiguous city names (several districts) stay unresolved — honesty first.
+      if (hit?.visueltcenter && districts.length === 1) {
+        result = {
+          lat: hit.visueltcenter[1],
+          lng: hit.visueltcenter[0],
+          quality: 'P',
+          resolvedCity: hit.navn,
+          resolvedPostcode: hit.nr,
+        };
+      }
+    }
   } catch {
     // Network/API failure: return NO_MATCH but do NOT cache it,
     // so the next run retries.

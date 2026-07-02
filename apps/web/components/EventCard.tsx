@@ -16,19 +16,50 @@ export function EventCard({
   event,
   today,
   index,
+  openNow = false,
+  tripMode = false,
+  selected = false,
+  onToggleTrip,
 }: {
   event: EventSummary & { nextDate: string; distanceKm: number | null };
   today: string;
   index: number;
+  openNow?: boolean;
+  tripMode?: boolean;
+  selected?: boolean;
+  onToggleTrip?: (slug: string) => void;
 }) {
   const next = event.occurrences.find((o) => o.date === event.nextDate)!;
   const hours = formatHours(next.startTime, next.endTime);
   const isToday = event.nextDate === today;
   const moreDates = event.occurrences.filter((o) => o.date > event.nextDate).length;
+  const selectable = tripMode && event.lat != null && event.lng != null;
 
   return (
-    <Link href={`/marked/${event.slug}`}>
-      <article className="event-card" style={{ animationDelay: `${Math.min(index, 12) * 35}ms` }}>
+    <Link
+      href={`/marked/${event.slug}`}
+      onClick={
+        tripMode
+          ? (e) => {
+              e.preventDefault();
+              if (selectable) onToggleTrip?.(event.slug);
+            }
+          : undefined
+      }
+      aria-pressed={tripMode ? selected : undefined}
+    >
+      <article
+        className={`event-card${selected ? ' selected' : ''}${tripMode && !selectable ? ' trip-disabled' : ''}`}
+        style={{ animationDelay: `${Math.min(index, 12) * 35}ms` }}
+        title={tripMode && !selectable ? 'Mangler placering — kan ikke lægges på ruten' : undefined}
+      >
+        {tripMode && selectable && (
+          <span className="select-ring" aria-hidden>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round">
+              <path d="m4 12 5 5 11-11" />
+            </svg>
+          </span>
+        )}
         <div className={`date-block ${isToday ? 'today' : ''}`}>
           <div className="weekday">{isToday ? 'i dag' : weekdayShort(event.nextDate)}</div>
           <div className="day">{dayOfMonth(event.nextDate)}</div>
@@ -49,6 +80,13 @@ export function EventCard({
             {moreDates > 0 && ` · +${moreDates} ${moreDates === 1 ? 'dato' : 'datoer'}`}
           </div>
           <div className="badge-row">
+            {openNow && event.status !== 'cancelled' && (
+              <span className="badge open-now">
+                <span className="dot" aria-hidden />
+                Åbent nu
+              </span>
+            )}
+            {event.gem && <span className="badge gem">✦ Skjult perle</span>}
             <span className="badge">{CATEGORY_LABELS[event.category] ?? 'Marked'}</span>
             {event.isFree === true && <span className="badge free">Gratis</span>}
             {event.indoorOutdoor === 'indoor' && <span className="badge">Indendørs</span>}

@@ -133,6 +133,16 @@ export default async function EventPage({
                   )}
                 </ul>
               )}
+              {upcoming.length > 0 && (
+                <p style={{ marginBottom: 0 }}>
+                  <a
+                    href={`/marked/${event.slug}/ical`}
+                    style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--accent-deep)' }}
+                  >
+                    ↓ Føj til kalender (.ics)
+                  </a>
+                </p>
+              )}
               {event.scheduleText && (
                 <p style={{ color: 'var(--ink-soft)', fontSize: 13.5, marginBottom: 0 }}>
                   Mønster: {event.scheduleText}
@@ -234,6 +244,14 @@ export default async function EventPage({
               <p className="trust-note">
                 Loppefund samler automatisk oplysninger fra offentlige kilder og viser altid
                 hvor de kommer fra. Tag forbehold for ændringer hos arrangøren.
+              </p>
+              <p className="trust-note">
+                <a
+                  href={`mailto:hej@loppefund.dk?subject=${encodeURIComponent(`Fejl i "${event.title}"`)}&body=${encodeURIComponent(`Vedrører: https://loppefund.dk/marked/${event.slug}\n\nHvad er forkert?\n`)}`}
+                  style={{ color: 'var(--accent-deep)', fontWeight: 600 }}
+                >
+                  Fejl i oplysningerne? Skriv til os
+                </a>
               </p>
             </section>
           </aside>

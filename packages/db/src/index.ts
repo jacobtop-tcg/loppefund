@@ -183,6 +183,7 @@ export function linkEventSource(
 
 /** All active events with any occurrence in [from, to], with their occurrences in range. */
 export interface EventWithOccurrences extends EventRow {
+  source_count: number;
   occurrences: Array<{ date: string; start_time: string | null; end_time: string | null }>;
 }
 
@@ -193,11 +194,16 @@ export function listEventsBetween(
 ): EventWithOccurrences[] {
   const rows = db
     .prepare(
-      `SELECT DISTINCT e.* FROM events e
+      `SELECT DISTINCT e.*, (
+         SELECT COUNT(DISTINCT r.source_key) FROM event_sources es
+         JOIN raw_events r ON r.id = es.raw_event_id
+         WHERE es.event_id = e.id
+       ) AS source_count
+       FROM events e
        JOIN occurrences o ON o.event_id = e.id
        WHERE e.status = 'active' AND o.date >= ? AND o.date <= ?`,
     )
-    .all(from, to) as unknown as EventRow[];
+    .all(from, to) as unknown as (EventRow & { source_count: number })[];
   const occStmt = db.prepare(
     `SELECT date, start_time, end_time FROM occurrences
      WHERE event_id = ? AND date >= ? AND date <= ? ORDER BY date`,
@@ -224,13 +230,21 @@ export function getEventBySlug(
       `SELECT date, start_time, end_time FROM occurrences WHERE event_id = ? ORDER BY date`,
     )
     .all(e.id) as unknown as Array<{ date: string; start_time: string | null; end_time: string | null }>;
+  // One line per source — recurring series link many raw entries per source,
+  // so collapse to the freshest confirmation per source_key.
   const sources = db
     .prepare(
-      `SELECT r.source_key, r.source_url, s.name, es.last_confirmed_at
+      `SELECT r.source_key, s.name,
+              MAX(es.last_confirmed_at) AS last_confirmed_at,
+              (SELECT r2.source_url FROM event_sources es2
+               JOIN raw_events r2 ON r2.id = es2.raw_event_id
+               WHERE es2.event_id = es.event_id AND r2.source_key = r.source_key
+               ORDER BY es2.last_confirmed_at DESC LIMIT 1) AS source_url
        FROM event_sources es
        JOIN raw_events r ON r.id = es.raw_event_id
        JOIN sources s ON s.key = r.source_key
-       WHERE es.event_id = ?`,
+       WHERE es.event_id = ?
+       GROUP BY r.source_key`,
     )
     .all(e.id) as unknown as Array<{ source_key: string; source_url: string; name: string; last_confirmed_at: string }>;
   return { ...e, occurrences, sources };
@@ -329,6 +343,90 @@ export function cacheGeocode(db: DatabaseSync, query: string, r: GeocodeResult):
      ON CONFLICT(query) DO UPDATE SET lat=excluded.lat, lng=excluded.lng, quality=excluded.quality,
        resolved_city=excluded.resolved_city, resolved_postcode=excluded.resolved_postcode, cached_at=excluded.cached_at`,
   ).run(query, r.lat, r.lng, r.quality, r.resolvedCity, r.resolvedPostcode, new Date().toISOString());
+}
+
+// --- source candidates (auto-discovery funnel) ---
+
+export interface SourceCandidateRow {
+  domain: string;
+  mentions: number;
+  distinct_titles: number;
+  sources: string;
+  fields: string;
+  first_seen: string;
+  last_seen: string;
+  status: string;
+  probe_score: number | null;
+  probe_signals: string | null;
+  probed_at: string | null;
+  notes: string | null;
+}
+
+/**
+ * Refresh a candidate's mined counts. Deliberately never touches status,
+ * notes or probe_* — re-mining must not reset a probed/promoted/rejected
+ * verdict. Counts are absolute overwrites because mining is a full recompute.
+ */
+export function upsertSourceCandidate(
+  db: DatabaseSync,
+  c: { domain: string; mentions: number; distinctTitles: number; sources: string[]; fields: string[]; seenAt: string },
+): void {
+  db.prepare(
+    `INSERT INTO source_candidates(domain, mentions, distinct_titles, sources, fields, first_seen, last_seen)
+     VALUES (?, ?, ?, ?, ?, ?, ?)
+     ON CONFLICT(domain) DO UPDATE SET
+       mentions = excluded.mentions,
+       distinct_titles = excluded.distinct_titles,
+       sources = excluded.sources,
+       fields = excluded.fields,
+       last_seen = excluded.last_seen`,
+  ).run(
+    c.domain, c.mentions, c.distinctTitles,
+    JSON.stringify(c.sources), JSON.stringify(c.fields), c.seenAt, c.seenAt,
+  );
+}
+
+export function listSourceCandidates(
+  db: DatabaseSync,
+  opts: { status?: string; minMentions?: number } = {},
+): SourceCandidateRow[] {
+  const where: string[] = [];
+  const params: Array<string | number> = [];
+  if (opts.status) {
+    where.push('status = ?');
+    params.push(opts.status);
+  }
+  if (opts.minMentions !== undefined) {
+    where.push('mentions >= ?');
+    params.push(opts.minMentions);
+  }
+  const sql = `SELECT * FROM source_candidates
+    ${where.length > 0 ? `WHERE ${where.join(' AND ')}` : ''}
+    ORDER BY (probe_score IS NULL), probe_score DESC, mentions DESC`;
+  return db.prepare(sql).all(...params) as unknown as SourceCandidateRow[];
+}
+
+export function markCandidateProbed(
+  db: DatabaseSync,
+  domain: string,
+  r: { score: number; signals: object },
+): void {
+  db.prepare(
+    `UPDATE source_candidates
+     SET status = 'probed', probe_score = ?, probe_signals = ?, probed_at = ?
+     WHERE domain = ? AND status NOT IN ('promoted', 'rejected')`,
+  ).run(r.score, JSON.stringify(r.signals), new Date().toISOString(), domain);
+}
+
+export function setCandidateStatus(
+  db: DatabaseSync,
+  domain: string,
+  status: 'candidate' | 'probed' | 'promoted' | 'rejected',
+  notes?: string,
+): void {
+  db.prepare(
+    `UPDATE source_candidates SET status = ?, notes = COALESCE(?, notes) WHERE domain = ?`,
+  ).run(status, notes ?? null, domain);
 }
 
 // --- pipeline runs ---

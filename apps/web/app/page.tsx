@@ -1,3 +1,4 @@
+import { copenhagenNow } from '@loppefund/core';
 import { listUpcomingEvents, todayIso } from '../lib/data.ts';
 import { Explorer } from '../components/Explorer.tsx';
 
@@ -6,6 +7,7 @@ export const dynamic = 'force-dynamic';
 export default function HomePage() {
   const events = listUpcomingEvents();
   const today = todayIso();
+  const now = copenhagenNow();
   return (
     <>
       <header className="site-header container">
@@ -15,7 +17,7 @@ export default function HomePage() {
         <p className="tagline">Alle loppemarkeder i Danmark. Ét sted, altid opdateret.</p>
       </header>
       <main className="container">
-        <Explorer events={events} today={today} />
+        <Explorer events={events} today={today} now={now} />
       </main>
       <footer className="site-footer">
         <div className="container">

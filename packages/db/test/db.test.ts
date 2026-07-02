@@ -116,6 +116,53 @@ describe('db round trip', () => {
     expect(listEventsBetween(db, '2026-01-01', '2026-12-31')).toHaveLength(0);
   });
 
+  it('exposes source_count and one source line per source_key', () => {
+    const db = openDb(':memory:');
+    upsertSource(db, { key: 's1', name: 'S1', baseUrl: 'https://a', trust: 0.7 });
+    const id = insertEvent(db, testEvent());
+    replaceOccurrences(db, id, [{ date: '2026-07-05', startTime: null, endTime: null }]);
+    // Two raw entries from the same source (recurring series pattern)
+    for (const eid of ['a', 'b']) {
+      const raw = upsertRawEvent(db, {
+        sourceKey: 's1',
+        sourceEventId: eid,
+        sourceUrl: `https://a/${eid}`,
+        title: 'Broens Lopper',
+      });
+      linkEventSource(db, id, raw.id);
+    }
+    expect(listEventsBetween(db, '2026-07-01', '2026-07-31')[0]?.source_count).toBe(1);
+    expect(getEventBySlug(db, 'broens-lopper')?.sources).toHaveLength(1);
+  });
+
+  it('round-trips source candidates', async () => {
+    const { upsertSourceCandidate, listSourceCandidates, markCandidateProbed, setCandidateStatus } =
+      await import('../src/index.ts');
+    const db = openDb(':memory:');
+    upsertSourceCandidate(db, {
+      domain: 'hgloppemarked.dk', mentions: 3, distinctTitles: 2,
+      sources: ['markedskalenderen'], fields: ['contactWebsite'], seenAt: '2026-07-02T10:00:00Z',
+    });
+    let [c] = listSourceCandidates(db);
+    expect(c?.status).toBe('candidate');
+    expect(c?.first_seen).toBe('2026-07-02T10:00:00Z');
+    markCandidateProbed(db, 'hgloppemarked.dk', { score: 7, signals: { jsonLdEvent: true } });
+    [c] = listSourceCandidates(db);
+    expect(c?.status).toBe('probed');
+    expect(c?.probe_score).toBe(7);
+    // Re-mining refreshes counts but never resets the verdict
+    upsertSourceCandidate(db, {
+      domain: 'hgloppemarked.dk', mentions: 5, distinctTitles: 3,
+      sources: ['markedskalenderen'], fields: ['contactWebsite'], seenAt: '2026-07-03T10:00:00Z',
+    });
+    [c] = listSourceCandidates(db);
+    expect(c?.mentions).toBe(5);
+    expect(c?.status).toBe('probed');
+    expect(c?.first_seen).toBe('2026-07-02T10:00:00Z');
+    setCandidateStatus(db, 'hgloppemarked.dk', 'promoted', 'adapter written');
+    expect(listSourceCandidates(db, { status: 'promoted' })).toHaveLength(1);
+  });
+
   it('caches geocodes', () => {
     const db = openDb(':memory:');
     expect(getCachedGeocode(db, 'Strandgade 95, 1401')).toBeNull();

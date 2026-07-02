@@ -55,21 +55,29 @@ interface TribeEvent {
 }
 
 /** "Brusagervej 1, 4070 Kirke Hyllinge, Danmark" -> parts */
-function parseAddress(text: string | undefined): {
+export function parseAddress(text: string | undefined): {
   street?: string;
   postcode?: string;
   city?: string;
 } {
   if (!text) return {};
-  const cleaned = decodeEntities(text).replace(/,?\s*(Danmark|Denmark)\s*$/i, '');
+  const cleaned = decodeEntities(text).replace(/,?\s*(Danmark|Denmark)\s*/gi, '');
   const postcode = extractPostcode(cleaned) ?? undefined;
-  const parts = cleaned.split(',').map((p) => p.trim()).filter(Boolean);
-  const street = parts[0];
+  // Venue strings repeat segments ("6640 Lunderskov, 6640 Lunderskov") — dedupe.
+  const parts = [...new Set(cleaned.split(',').map((p) => p.trim()).filter(Boolean))];
+  const street = parts[0] || undefined;
   let city: string | undefined;
   for (const p of parts.slice(1)) {
-    const withoutPostcode = p.replace(/\b[1-9]\d{3}\b/, '').trim();
-    if (withoutPostcode) {
-      city = withoutPostcode;
+    const candidate = p.replace(/\b[1-9]\d{3}\b/, '').trim();
+    // A city name is letters only (incl. æøå) and reasonably short —
+    // reject leftovers like "Kovej, Torvet, Nørregade" or "på Banevej".
+    if (
+      candidate &&
+      candidate.length <= 40 &&
+      /^[a-zA-ZæøåÆØÅé.\- ]+$/.test(candidate) &&
+      !/^(på|ved|i|bag)\s/i.test(candidate)
+    ) {
+      city = candidate;
       break;
     }
   }

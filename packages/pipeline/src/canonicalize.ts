@@ -57,6 +57,60 @@ function mergeField<T>(
   return current;
 }
 
+/**
+ * Recompute every active event's confidence from the current state of its
+ * source links — this is what makes the freshness decay actually run:
+ * a market no source has confirmed lately loses its "godt bekræftet" label
+ * long before its dates expire.
+ */
+export function recomputeConfidence(
+  db: DatabaseSync,
+  sourceTrust: Record<string, number>,
+  today: string,
+): number {
+  const rows = db
+    .prepare(
+      `SELECT e.id, e.lat, e.geocode_quality,
+         (SELECT COUNT(DISTINCT r.source_key) FROM event_sources es
+          JOIN raw_events r ON r.id = es.raw_event_id WHERE es.event_id = e.id) AS source_count,
+         (SELECT MAX(es.last_confirmed_at) FROM event_sources es WHERE es.event_id = e.id) AS last_confirmed,
+         (SELECT GROUP_CONCAT(DISTINCT r.source_key) FROM event_sources es
+          JOIN raw_events r ON r.id = es.raw_event_id WHERE es.event_id = e.id) AS source_keys,
+         EXISTS(SELECT 1 FROM occurrences o WHERE o.event_id = e.id AND o.date >= ?) AS has_dates
+       FROM events e WHERE e.status = 'active'`,
+    )
+    .all(today) as unknown as Array<{
+    id: number;
+    lat: number | null;
+    geocode_quality: string | null;
+    source_count: number;
+    last_confirmed: string | null;
+    source_keys: string | null;
+    has_dates: number;
+  }>;
+  const upd = db.prepare(`UPDATE events SET confidence = ? WHERE id = ?`);
+  let changed = 0;
+  for (const r of rows) {
+    const daysSince = r.last_confirmed
+      ? Math.max(0, (Date.parse(`${today}T00:00:00Z`) - Date.parse(r.last_confirmed)) / 86400000)
+      : 365;
+    const maxTrust = Math.max(
+      0,
+      ...(r.source_keys?.split(',') ?? []).map((k) => sourceTrust[k] ?? 0),
+    );
+    const confidence = computeConfidence({
+      maxSourceTrust: maxTrust,
+      sourceCount: Math.max(1, r.source_count),
+      daysSinceVerified: daysSince,
+      hasGoodLocation: r.lat !== null && !['C', 'P'].includes(r.geocode_quality ?? ''),
+      hasConcreteDates: r.has_dates === 1,
+    });
+    upd.run(confidence, r.id);
+    changed++;
+  }
+  return changed;
+}
+
 export async function canonicalizeRawEvent(
   db: DatabaseSync,
   raw: RawEvent,

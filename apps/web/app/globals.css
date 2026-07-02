@@ -173,6 +173,20 @@ h1, h2, h3 {
   background: var(--line);
 }
 
+.chip .live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  margin-right: 7px;
+  vertical-align: 1px;
+}
+
+.chip.active .live-dot {
+  background: #a9d6b4;
+}
+
 /* ---------- result meta ---------- */
 
 .result-meta {
@@ -191,6 +205,24 @@ h1, h2, h3 {
 .result-count strong {
   color: var(--ink);
   font-weight: 600;
+}
+
+.sort-gems {
+  border: none;
+  background: none;
+  padding: 2px 4px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  transition: color 0.13s ease;
+}
+
+.sort-gems:hover {
+  color: var(--ink);
+}
+
+.sort-gems.active {
+  color: var(--accent-deep);
 }
 
 .view-toggle {
@@ -225,6 +257,7 @@ h1, h2, h3 {
 }
 
 .event-card {
+  position: relative;
   display: flex;
   gap: 16px;
   background: var(--paper-raised);
@@ -234,6 +267,36 @@ h1, h2, h3 {
   box-shadow: var(--shadow-card);
   transition: transform 0.16s ease, box-shadow 0.16s ease;
   animation: card-in 0.35s ease backwards;
+}
+
+.event-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-wash), var(--shadow-card);
+}
+
+.event-card.trip-disabled {
+  opacity: 0.55;
+}
+
+.select-ring {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--paper-raised);
+  display: grid;
+  place-items: center;
+  color: transparent;
+  transition: all 0.13s ease;
+}
+
+.event-card.selected .select-ring {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
 }
 
 .event-card:hover {
@@ -358,6 +421,33 @@ h1, h2, h3 {
 
 .badge.distance {
   background: var(--accent-wash);
+  color: var(--accent-deep);
+}
+
+.badge.open-now {
+  background: var(--green-wash);
+  color: var(--green);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.badge.open-now .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: live-pulse 2s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.badge.gem {
+  background: linear-gradient(115deg, var(--accent-wash), var(--amber-wash));
   color: var(--accent-deep);
 }
 
@@ -632,6 +722,76 @@ h1, h2, h3 {
   margin-top: 14px;
 }
 
+/* ---------- trip bar ---------- */
+
+.trip-bar {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 18px;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--paper-raised);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 12px 10px 20px;
+  box-shadow: var(--shadow-card-hover);
+  animation: bar-in 0.25s ease;
+}
+
+@keyframes bar-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+
+.trip-count {
+  font-size: 14px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.trip-count strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.trip-go {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.trip-go:hover {
+  background: var(--accent-deep);
+}
+
+.trip-go:disabled {
+  background: var(--paper-sunken);
+  color: var(--ink-faint);
+  cursor: default;
+}
+
+.trip-clear {
+  border: none;
+  background: none;
+  color: var(--ink-faint);
+  font-size: 13px;
+  padding: 4px;
+}
+
+.trip-clear:hover {
+  color: var(--accent-deep);
+}
+
 /* ---------- footer ---------- */
 
 .site-footer {
@@ -667,5 +827,23 @@ h1, h2, h3 {
 
   .chip-sep {
     flex: 0 0 1px;
+  }
+
+  .trip-bar {
+    left: 12px;
+    right: 12px;
+    transform: none;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    animation-name: bar-in-mobile;
+  }
+}
+
+@keyframes bar-in-mobile {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
 }

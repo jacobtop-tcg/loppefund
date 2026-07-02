@@ -1,19 +1,27 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { copenhagenNow, isOpenAt, type CphNow } from '@loppefund/core';
 import type { EventSummary } from '../lib/data.ts';
 import { EventCard } from './EventCard.tsx';
-import { addDaysIso, distanceKm, foldForSearch } from '../lib/client-utils.ts';
+import {
+  addDaysIso,
+  buildTripUrl,
+  distanceKm,
+  foldForSearch,
+  MAX_TRIP_STOPS,
+} from '../lib/client-utils.ts';
 
 const MapView = dynamic(() => import('./MapView.tsx').then((m) => m.MapView), {
   ssr: false,
   loading: () => <div className="map-shell" style={{ display: 'grid', placeItems: 'center', color: 'var(--ink-faint)' }}>Indlæser kort…</div>,
 });
 
-type DateFilter = 'idag' | 'imorgen' | 'weekend' | 'naeste-weekend' | 'alle';
+type DateFilter = 'aabent-nu' | 'idag' | 'imorgen' | 'weekend' | 'naeste-weekend' | 'alle';
 
 const DATE_CHIPS: Array<{ key: DateFilter; label: string }> = [
+  { key: 'aabent-nu', label: 'Åbent nu' },
   { key: 'idag', label: 'I dag' },
   { key: 'imorgen', label: 'I morgen' },
   { key: 'weekend', label: 'I weekenden' },
@@ -28,6 +36,8 @@ const CATEGORY_CHIPS: Array<{ key: string; label: string }> = [
   { key: 'antikmarked', label: 'Antik' },
 ];
 
+const RADIUS_CHIPS = [10, 25, 50] as const;
+
 function weekdayOfIso(date: string): number {
   const [y, m, d] = date.split('-').map(Number) as [number, number, number];
   const dow = new Date(Date.UTC(y, m - 1, d)).getUTCDay();
@@ -36,7 +46,7 @@ function weekdayOfIso(date: string): number {
 
 /** [from, to] inclusive for each date filter. Weekend = Sat+Sun (or rest of it). */
 function dateRangeFor(filter: DateFilter, today: string): [string, string] {
-  if (filter === 'idag') return [today, today];
+  if (filter === 'idag' || filter === 'aabent-nu') return [today, today];
   if (filter === 'imorgen') {
     const tomorrow = addDaysIso(today, 1);
     return [tomorrow, tomorrow];
@@ -51,7 +61,15 @@ function dateRangeFor(filter: DateFilter, today: string): [string, string] {
   return [addDaysIso(saturday, wd === 7 ? 6 : 7), addDaysIso(sunday, wd === 7 ? 6 : 7)];
 }
 
-export function Explorer({ events, today }: { events: EventSummary[]; today: string }) {
+export function Explorer({
+  events,
+  today,
+  now: initialNow,
+}: {
+  events: EventSummary[];
+  today: string;
+  now: CphNow;
+}) {
   const [dateFilter, setDateFilter] = useState<DateFilter>('weekend');
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<string | null>(null);
@@ -59,30 +77,49 @@ export function Explorer({ events, today }: { events: EventSummary[]; today: str
   const [inOut, setInOut] = useState<'indoor' | 'outdoor' | null>(null);
   const [view, setView] = useState<'list' | 'map'>('list');
   const [pos, setPos] = useState<{ lat: number; lng: number } | null>(null);
+  const [radius, setRadius] = useState<number | null>(null);
   const [locating, setLocating] = useState(false);
+  const [now, setNow] = useState<CphNow>(initialNow);
+  const [gemsFirst, setGemsFirst] = useState(false);
+  const [tripMode, setTripMode] = useState(false);
+  const [tripSlugs, setTripSlugs] = useState<string[]>([]); // insertion order = route order
+
+  // Live clock only while the "Åbent nu" filter is active.
+  useEffect(() => {
+    if (dateFilter !== 'aabent-nu') return;
+    setNow(copenhagenNow());
+    const id = setInterval(() => setNow(copenhagenNow()), 30_000);
+    return () => clearInterval(id);
+  }, [dateFilter]);
 
   const [from, to] = dateRangeFor(dateFilter, today);
 
   const filtered = useMemo(() => {
     const q = foldForSearch(query.trim());
-    const result: Array<EventSummary & { nextDate: string; distanceKm: number | null }> = [];
+    const result: Array<
+      EventSummary & { nextDate: string; distanceKm: number | null; openNow: boolean }
+    > = [];
     for (const e of events) {
       const inRange = e.occurrences.filter((o) => o.date >= from && o.date <= to);
       if (inRange.length === 0) continue;
+      const openNow = isOpenAt(inRange, now.date, now.time);
+      if (dateFilter === 'aabent-nu' && !openNow) continue;
       if (category && e.category !== category) continue;
       if (freeOnly && e.isFree !== true) continue;
       if (inOut && e.indoorOutdoor !== inOut && e.indoorOutdoor !== 'mixed') continue;
       if (q) {
-        const haystack = foldForSearch(
-          `${e.title} ${e.city ?? ''} ${e.venueName ?? ''} ${e.municipality ?? ''} ${e.postcode ?? ''}`,
-        );
+        const haystack =
+          foldForSearch(
+            `${e.title} ${e.city ?? ''} ${e.venueName ?? ''} ${e.municipality ?? ''} ${e.postcode ?? ''}`,
+          ) + ` ${e.searchText}`;
         if (!haystack.includes(q)) continue;
       }
       const d =
         pos && e.lat != null && e.lng != null
           ? distanceKm(pos.lat, pos.lng, e.lat, e.lng)
           : null;
-      result.push({ ...e, nextDate: inRange[0]!.date, distanceKm: d });
+      if (pos && radius !== null && (d === null || d > radius)) continue;
+      result.push({ ...e, nextDate: inRange[0]!.date, distanceKm: d, openNow });
     }
     result.sort((a, b) => {
       if (a.nextDate !== b.nextDate) return a.nextDate.localeCompare(b.nextDate);
@@ -93,14 +130,44 @@ export function Explorer({ events, today }: { events: EventSummary[]; today: str
       if (a.distanceKm !== null && b.distanceKm !== null) return a.distanceKm - b.distanceKm;
       return b.confidence - a.confidence;
     });
+    if (dateFilter === 'aabent-nu') {
+      // Closing soonest first — "we can still make it" ordering.
+      const endOf = (e: (typeof result)[number]) =>
+        e.occurrences.find((o) => o.date === now.date)?.endTime ?? '99:99';
+      result.sort((a, b) => endOf(a).localeCompare(endOf(b)));
+    }
     if (pos) {
       result.sort((a, b) => {
         if (a.distanceKm === null || b.distanceKm === null) return 0;
         return a.distanceKm - b.distanceKm;
       });
     }
+    if (gemsFirst) result.sort((a, b) => Number(b.gem) - Number(a.gem));
     return result;
-  }, [events, from, to, query, category, freeOnly, inOut, pos]);
+  }, [events, from, to, query, category, freeOnly, inOut, pos, radius, dateFilter, now, gemsFirst]);
+
+  // Trip selection is keyed by slug against the full list, so filter changes
+  // never drop chosen stops.
+  const eventsBySlug = useMemo(() => new Map(events.map((e) => [e.slug, e])), [events]);
+  const tripStops = tripSlugs
+    .map((s) => eventsBySlug.get(s))
+    .filter((e): e is EventSummary => !!e && e.lat != null && e.lng != null);
+  const tripUrl = buildTripUrl(tripStops.map((e) => ({ lat: e.lat!, lng: e.lng! })));
+
+  function toggleTrip(slug: string) {
+    setTripSlugs((prev) =>
+      prev.includes(slug)
+        ? prev.filter((x) => x !== slug)
+        : prev.length >= MAX_TRIP_STOPS
+          ? prev
+          : [...prev, slug],
+    );
+  }
+
+  function exitTrip() {
+    setTripMode(false);
+    setTripSlugs([]);
+  }
 
   function locate() {
     if (!navigator.geolocation) return;
@@ -148,6 +215,7 @@ export function Explorer({ events, today }: { events: EventSummary[]; today: str
               className={`chip ${dateFilter === c.key ? 'active' : ''}`}
               onClick={() => setDateFilter(c.key)}
             >
+              {c.key === 'aabent-nu' && <span className="live-dot" aria-hidden />}
               {c.label}
             </button>
           ))}
@@ -178,8 +246,27 @@ export function Explorer({ events, today }: { events: EventSummary[]; today: str
             Udendørs
           </button>
           <span className="chip-sep" aria-hidden />
-          <button className={`chip accent ${pos ? 'active' : ''}`} onClick={() => (pos ? setPos(null) : locate())}>
+          <button
+            className={`chip accent ${pos ? 'active' : ''}`}
+            onClick={() => (pos ? (setPos(null), setRadius(null)) : locate())}
+          >
             {locating ? 'Finder dig…' : pos ? '✓ Nær mig' : '◎ Nær mig'}
+          </button>
+          {pos &&
+            RADIUS_CHIPS.map((r) => (
+              <button
+                key={r}
+                className={`chip ${radius === r ? 'active' : ''}`}
+                onClick={() => setRadius(radius === r ? null : r)}
+              >
+                {r} km
+              </button>
+            ))}
+          <button
+            className={`chip accent ${tripMode ? 'active' : ''}`}
+            onClick={() => (tripMode ? exitTrip() : setTripMode(true))}
+          >
+            {tripMode ? '✓ Loppetur' : 'Lav en loppetur'}
           </button>
         </div>
       </div>
@@ -191,8 +278,18 @@ export function Explorer({ events, today }: { events: EventSummary[]; today: str
           {dateFilter === 'weekend' && ' i weekenden'}
           {dateFilter === 'idag' && ' i dag'}
           {dateFilter === 'imorgen' && ' i morgen'}
+          {dateFilter === 'aabent-nu' && ' åbne lige nu'}
           {dateFilter === 'naeste-weekend' && ' næste weekend'}
         </span>
+        {view === 'list' && filtered.some((e) => e.gem) && (
+          <button
+            className={`sort-gems ${gemsFirst ? 'active' : ''}`}
+            onClick={() => setGemsFirst(!gemsFirst)}
+            aria-pressed={gemsFirst}
+          >
+            ✦ Perler først
+          </button>
+        )}
       </div>
 
       {view === 'map' ? (
@@ -205,8 +302,48 @@ export function Explorer({ events, today }: { events: EventSummary[]; today: str
       ) : (
         <div className="event-grid">
           {filtered.map((e, i) => (
-            <EventCard key={e.slug} event={e} today={today} index={i} />
+            <EventCard
+              key={e.slug}
+              event={e}
+              today={today}
+              index={i}
+              openNow={e.openNow}
+              tripMode={tripMode}
+              selected={tripSlugs.includes(e.slug)}
+              onToggleTrip={toggleTrip}
+            />
           ))}
+        </div>
+      )}
+
+      {tripMode && (
+        <div className="trip-bar" role="region" aria-label="Loppetur">
+          <span className="trip-count">
+            {tripSlugs.length === 0 ? (
+              'Vælg markeder til din tur'
+            ) : tripSlugs.length === 1 ? (
+              '1 stop — vælg mindst 2'
+            ) : (
+              <>
+                <strong>{tripSlugs.length}</strong> stop
+                {tripSlugs.length >= MAX_TRIP_STOPS && ' (maks)'}
+              </>
+            )}
+          </span>
+          {tripUrl ? (
+            <a className="trip-go" href={tripUrl} target="_blank" rel="noopener noreferrer">
+              Åbn rute i Google Maps
+            </a>
+          ) : (
+            <button className="trip-go" disabled>
+              Åbn rute i Google Maps
+            </button>
+          )}
+          {tripSlugs.length > 0 && (
+            <button className="trip-clear" onClick={() => setTripSlugs([])}>
+              Ryd
+            </button>
+          )}
         </div>
       )}
     </>

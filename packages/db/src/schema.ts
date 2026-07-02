@@ -1,11 +1,12 @@
 import type { DatabaseSync } from 'node:sqlite';
 
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 
 export function migrate(db: DatabaseSync): void {
   db.exec(`
     PRAGMA journal_mode = WAL;
     PRAGMA foreign_keys = ON;
+    PRAGMA busy_timeout = 5000;
 
     CREATE TABLE IF NOT EXISTS meta (
       key TEXT PRIMARY KEY,
@@ -103,6 +104,22 @@ export function migrate(db: DatabaseSync): void {
       resolved_postcode TEXT,
       cached_at TEXT NOT NULL
     );
+
+    CREATE TABLE IF NOT EXISTS source_candidates (
+      domain TEXT PRIMARY KEY,              -- normalized hostname, no www.
+      mentions INTEGER NOT NULL DEFAULT 0,  -- raw_events referencing this domain
+      distinct_titles INTEGER NOT NULL DEFAULT 0,
+      sources TEXT NOT NULL DEFAULT '[]',   -- JSON: source_keys that mentioned it
+      fields TEXT NOT NULL DEFAULT '[]',    -- JSON: subset of ["contactWebsite","description"]
+      first_seen TEXT NOT NULL,
+      last_seen TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'candidate', -- candidate | probed | promoted | rejected
+      probe_score REAL,
+      probe_signals TEXT,
+      probed_at TEXT,
+      notes TEXT
+    );
+    CREATE INDEX IF NOT EXISTS idx_source_candidates_status ON source_candidates(status);
 
     CREATE TABLE IF NOT EXISTS pipeline_runs (
       id INTEGER PRIMARY KEY,

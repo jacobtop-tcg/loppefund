@@ -17,6 +17,31 @@ export function foldForSearch(text: string): string {
     .replaceAll('aa', 'a');
 }
 
+export interface TripStop {
+  lat: number;
+  lng: number;
+}
+
+/** Google Maps URL API limit: 9 waypoints + destination. */
+export const MAX_TRIP_STOPS = 10;
+
+/**
+ * Directions URL from the user's current location through stops in order;
+ * the last stop is the destination. Returns null for fewer than 2 stops.
+ * Omitting `origin` makes Google start from the user's current position.
+ */
+export function buildTripUrl(stops: ReadonlyArray<TripStop>): string | null {
+  if (stops.length < 2) return null;
+  const fmt = (s: TripStop) => `${s.lat.toFixed(6)},${s.lng.toFixed(6)}`;
+  const params = new URLSearchParams({
+    api: '1',
+    destination: fmt(stops[stops.length - 1]!),
+    travelmode: 'driving',
+  });
+  params.set('waypoints', stops.slice(0, -1).map(fmt).join('|'));
+  return `https://www.google.com/maps/dir/?${params.toString()}`;
+}
+
 export function distanceKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371;
   const toRad = (deg: number) => (deg * Math.PI) / 180;

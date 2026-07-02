@@ -181,6 +181,10 @@ describe('normalize helpers', () => {
     expect(normalizeCategory('Bagagerumsmarked')).toBe('bagagerumsmarked');
     expect(normalizeCategory('Gade/vej/gårdloppemarked')).toBe('byloppemarked');
     expect(normalizeCategory('Dyrskue')).toBe('andet');
+    // Seasonal jule outranks the market-type words inside compound titles.
+    expect(normalizeCategory('Julekræmmermarked i Hårlev Hallen')).toBe('julemarked');
+    expect(normalizeCategory('Jul på Haughus Gods')).toBe('julemarked');
+    expect(normalizeCategory('Juleloppemarked')).toBe('julemarked');
   });
   it('normalizes indoor/outdoor', () => {
     expect(normalizeIndoorOutdoor('Udendørs')).toBe('outdoor');

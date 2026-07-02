@@ -67,6 +67,12 @@ export async function canonicalizeRawEvent(
   const trust = sourceTrust[raw.sourceKey] ?? 0.5;
   const now = new Date().toISOString();
 
+  // Seasonal override: a title that says jule is a julemarked no matter how
+  // the source categorized it — this feeds the julemarked dedup veto, so it
+  // must be applied consistently at canonicalization time.
+  const rawCategory =
+    normalizeCategory(raw.title) === 'julemarked' ? 'julemarked' : raw.category;
+
   // Resolve concrete occurrences. Events we cannot date are not shown to
   // consumers — a market without a date is a rumor, not an event.
   const occurrences = resolveSchedule(
@@ -121,7 +127,7 @@ export async function canonicalizeRawEvent(
         lng,
         postcode,
         dates: rawDates,
-        category: raw.category,
+        category: rawCategory,
         street: raw.street,
       },
       {
@@ -162,7 +168,7 @@ export async function canonicalizeRawEvent(
       slug: e.slug,
       title: m(e.title, raw.title, 'title') ?? e.title,
       description: m(e.description, raw.description, 'description'),
-      category: (m(e.category, raw.category, 'category') ?? 'andet') as ReturnType<typeof normalizeCategory>,
+      category: (m(e.category, rawCategory, 'category') ?? 'andet') as ReturnType<typeof normalizeCategory>,
       venueName: m(e.venue_name, raw.venueName, 'venueName'),
       street: m(e.street, raw.street, 'street'),
       postcode: m(e.postcode, postcode ?? undefined, 'postcode'),
@@ -231,7 +237,7 @@ export async function canonicalizeRawEvent(
     slug,
     title: raw.title,
     description: raw.description ?? null,
-    category: raw.category ?? 'andet',
+    category: rawCategory ?? 'andet',
     venueName: raw.venueName ?? null,
     street: raw.street ?? null,
     postcode,

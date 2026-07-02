@@ -17,10 +17,12 @@ export function slugify(text: string): string {
 }
 
 const CATEGORY_PATTERNS: Array<[RegExp, EventCategory]> = [
+  // Jule first: "Julekræmmermarked" is seasonally a julemarked, and the
+  // julemarked/non-julemarked distinction feeds the dedup veto.
+  [/jule|(^|\s)jul(?=$|\s|e)|christmas/i, 'julemarked'],
   [/bagagerum|car ?boot/, 'bagagerumsmarked'],
   [/antik|antique/, 'antikmarked'],
   [/kr(æ|ae)mmer/, 'kraemmermarked'],
-  [/jule|christmas/, 'julemarked'],
   [/genbrug|second ?hand|charity/, 'genbrugsmarked'],
   [/gade|vej|g(å|aa)rd|byloppe|garage/, 'byloppemarked'],
   [/loppe|flea|vintage/, 'loppemarked'],

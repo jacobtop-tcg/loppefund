@@ -66,8 +66,10 @@ export function parseKultunautDate(text: string): Occurrence[] {
  * show up under "Loppemarked/Torvedag/Genbrug". Require positive market
  * evidence in the event's own text before accepting it.
  */
+// "genbrug" alone also means recycled *materials* ("skibe af træ og
+// genbrug"), so require the market compound.
 const MARKET_SIGNAL =
-  /loppe|marked|kr(æ|ae)mmer|genbrug|bagagerum|antik|vintage|brugt|stadeplads|byttemarked|torvedag|second ?hand|kirppu/i;
+  /loppe|marked|kr(æ|ae)mmer|genbrugsmarked|genbrugssalg|bagagerum|antik|vintage|brugt|stadeplads|byttemarked|torvedag|second ?hand|kirppu/i;
 
 export function looksLikeMarket(title: string, description?: string): boolean {
   return MARKET_SIGNAL.test(`${title} ${description ?? ''}`);

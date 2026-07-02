@@ -24,7 +24,8 @@ const CATEGORY_PATTERNS: Array<[RegExp, EventCategory]> = [
   [/bagagerum|car ?boot/, 'bagagerumsmarked'],
   [/antik|antique/, 'antikmarked'],
   [/kr(æ|ae)mmer/, 'kraemmermarked'],
-  [/genbrug|second ?hand|charity/, 'genbrugsmarked'],
+  // Compound only — bare "genbrug" is the material, not a market.
+  [/genbrugsmarked|genbrugssalg|genbrugsbutik|second ?hand|charity/, 'genbrugsmarked'],
   // Compounds only — a bare "vej"/"gade" would match every Danish street name.
   [/gade\/vej|gadeloppe|vejloppe|g(å|aa)rdloppe|byloppe|gadesalg|garage/, 'byloppemarked'],
   [/loppe|flea|vintage/, 'loppemarked'],

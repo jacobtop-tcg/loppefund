@@ -43,6 +43,9 @@ describe('looksLikeMarket', () => {
   it('rejects non-market events that slip through the genre facet', () => {
     expect(looksLikeMarket('Efterfødselstræning på reformer', 'Kom i form efter fødslen')).toBe(false);
     expect(looksLikeMarket('Yoga i parken')).toBe(false);
+    // "genbrug" as material (recycled wood) is not a market signal.
+    expect(looksLikeMarket('Feriesjov på museet', 'byg små skibe af træ og genbrug')).toBe(false);
+    expect(looksLikeMarket('Genbrugsmarked i sognegården')).toBe(true);
   });
 });
 

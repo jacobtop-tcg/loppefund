@@ -83,6 +83,17 @@ All crawling respects robots.txt, uses a descriptive User-Agent
   times stay unknown rather than being invented; geocodes below DAWA
   quality B fall back to explicit postcode-centroid approximation.
 
+## Keeping data fresh
+
+The pipeline is idempotent — re-running it detects changes (content hashes),
+confirms events (freshness feeds the confidence score), picks up new dates
+and expires markets whose last date has passed. Schedule it, e.g.:
+
+```cron
+# crontab -e — refresh every morning at 06:00
+0 6 * * * cd "$HOME/Documents/Loppemarkeder i DK" && /usr/local/bin/node packages/pipeline/src/cli.ts run >> data/pipeline.log 2>&1
+```
+
 ## Development
 
 - `npm test` — vitest across all packages (adapter tests run against saved

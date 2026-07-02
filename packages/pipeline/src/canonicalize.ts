@@ -212,12 +212,35 @@ export async function canonicalizeRawEvent(
     const m = <T>(cur: T | null, inc: T | undefined, field: string) =>
       mergeField(cur, inc, field, raw.sourceKey, provenance, trust, currentTrust);
 
-    const sourceCount = (
-      db.prepare(
-        `SELECT COUNT(DISTINCT r.source_key) c FROM event_sources es
+    const contributing = db
+      .prepare(
+        `SELECT DISTINCT r.source_key k FROM event_sources es
          JOIN raw_events r ON r.id = es.raw_event_id WHERE es.event_id = ?`,
-      ).get(e.id) as { c: number }
-    ).c;
+      )
+      .all(e.id) as unknown as Array<{ k: string }>;
+    const sourceCount = contributing.length;
+    const maxContributingTrust = Math.max(
+      trust,
+      ...contributing.map((s) => sourceTrust[s.k] ?? 0),
+    );
+
+    // Cancellation policy (asymmetric on purpose):
+    // - Flipping to cancelled requires meaningful trust — a mis-parsed
+    //   low-trust tip must never cancel a corroborated market. A source can
+    //   always cancel an event it dominates itself.
+    // - Restoring to active is stricter: only the dominant source, and only
+    //   when its listing actually changed (organizer re-published). A wrong
+    //   "cancelled" costs a missed trip; a wrong "active" sends a family to
+    //   a closed venue.
+    const cancelThreshold = Math.min(0.5, maxContributingTrust);
+    let status = e.status as 'active' | 'cancelled' | 'expired';
+    if (cancelled && trust >= cancelThreshold) {
+      status = 'cancelled';
+    } else if (!cancelled && status === 'cancelled' && trust >= maxContributingTrust && changed) {
+      status = 'active';
+    } else if (status === 'expired') {
+      status = 'active';
+    }
 
     const merged = {
       slug: e.slug,
@@ -246,7 +269,7 @@ export async function canonicalizeRawEvent(
       ) ?? 'unknown') as IndoorOutdoor,
       scheduleText: m(e.schedule_text, raw.scheduleText, 'scheduleText'),
       openingHoursText: m(e.opening_hours_text, raw.openingHoursText, 'openingHoursText'),
-      status: (cancelled ? 'cancelled' : e.status === 'expired' ? 'active' : e.status) as 'active' | 'cancelled' | 'expired',
+      status,
       confidence: 0,
       fieldProvenance: provenance,
       firstSeenAt: e.first_seen_at,

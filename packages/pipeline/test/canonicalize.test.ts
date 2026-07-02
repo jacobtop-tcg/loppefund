@@ -119,4 +119,42 @@ describe('canonicalizeRawEvent', () => {
     const e = getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!;
     expect(e.status).toBe('cancelled');
   });
+
+  it('does not let a low-trust source cancel a higher-trust event', async () => {
+    const db = openDb(':memory:');
+    upsertSource(db, { key: 'markedskalenderen', name: 'MK', baseUrl: 'x', trust: 0.7 });
+    upsertSource(db, { key: 'tip', name: 'Tip', baseUrl: 'x', trust: 0.35 });
+    const t2 = { ...trust, tip: 0.35 };
+    const stats = newStats();
+    await canonicalizeRawEvent(db, rawA(), t2, stats);
+    await canonicalizeRawEvent(
+      db,
+      { ...rawA(), sourceKey: 'tip', sourceUrl: 'tip:1', sourceEventId: 't1', cancelled: true },
+      t2,
+      stats,
+    );
+    expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.status).toBe('active');
+  });
+
+  it('lets the dominant source restore a cancelled event it re-publishes', async () => {
+    const db = openDb(':memory:');
+    upsertSource(db, { key: 'markedskalenderen', name: 'MK', baseUrl: 'x', trust: 0.7 });
+    const stats = newStats();
+    const laterDate = (() => {
+      const d = new Date();
+      d.setDate(d.getDate() + 30);
+      return d.toISOString().slice(0, 10);
+    })();
+    await canonicalizeRawEvent(db, rawA(), trust, stats);
+    await canonicalizeRawEvent(db, { ...rawA(), cancelled: true }, trust, stats);
+    expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.status).toBe('cancelled');
+    // Organizer re-publishes with a new date and a clean title.
+    await canonicalizeRawEvent(
+      db,
+      { ...rawA(), dateRanges: [{ start: laterDate, end: laterDate }] },
+      trust,
+      stats,
+    );
+    expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.status).toBe('active');
+  });
 });

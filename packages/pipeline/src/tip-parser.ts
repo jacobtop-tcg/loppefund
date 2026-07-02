@@ -66,8 +66,9 @@ const STREET_RE =
   /([A-ZÆØÅ][a-zæøåé.]+(?:\s+[A-ZÆØÅa-zæøåé.]+){0,3}\s+\d{1,3}[a-zA-Z]?)(?=[\s,.]|$)/;
 
 export function parseTip(
-  tip: { id: number; url: string | null; text: string | null },
+  tip: { id: number | string; url: string | null; text: string | null },
   refDate: string,
+  source: { key: string; idPrefix: string } = { key: 'tip', idPrefix: 'tip' },
 ): RawEvent | null {
   const text = tip.text?.trim() ?? '';
   if (!text && !tip.url) return null;
@@ -98,9 +99,9 @@ export function parseTip(
   }
 
   return {
-    sourceKey: 'tip',
-    sourceUrl: tip.url || `tip:${tip.id}`,
-    sourceEventId: `tip-${tip.id}`,
+    sourceKey: source.key,
+    sourceUrl: tip.url || `${source.idPrefix}:${tip.id}`,
+    sourceEventId: `${source.idPrefix}-${tip.id}`,
     title,
     description: text.length > title.length ? text : undefined,
     category: normalizeCategory(text),

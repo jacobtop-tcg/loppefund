@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:saeby-havnefest-saeby-2026-07-10@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260710T100000
 DTEND;TZID=Europe/Copenhagen:20260710T160000
 SUMMARY:Sæby Havnefest
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/saeby-havnefest-saeby
 END:VEVENT
 BEGIN:VEVENT
 UID:saeby-havnefest-saeby-2026-07-11@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260711
 SUMMARY:Sæby Havnefest
 LOCATION:Havnen\, Havnen\, 9300 Sæby
@@ -22,7 +22,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/saeby-havnefest-saeby
 END:VEVENT
 BEGIN:VEVENT
 UID:saeby-havnefest-saeby-2026-07-12@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260712
 SUMMARY:Sæby Havnefest
 LOCATION:Havnen\, Havnen\, 9300 Sæby

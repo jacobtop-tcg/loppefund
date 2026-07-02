@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-18@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260718
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -12,7 +12,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-19@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260719
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -21,7 +21,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-20@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260720
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -30,7 +30,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-21@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260721
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -39,7 +39,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-22@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260722
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -48,7 +48,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-23@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260723
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -57,7 +57,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-24@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260724
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -66,7 +66,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-25@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260725
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -75,7 +75,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-26@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260726
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -84,7 +84,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-27@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260727
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -93,7 +93,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-28@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260728
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -102,7 +102,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-29@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260729
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -111,7 +111,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-30@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260730
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -120,7 +120,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-07-31@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260731
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk
@@ -129,7 +129,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-fred
 END:VEVENT
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-frederiksvaerk-2026-08-01@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260801
 SUMMARY:Kunsthåndværkermarked
 LOCATION:Værkstedet\, Kunstforeningens værksted\, Hans Futtrups Sti 4\, Frederiksværk

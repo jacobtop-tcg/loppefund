@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hogager-kraemmermarked-holstebro-2026-08-01@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260801T090000
 DTEND;TZID=Europe/Copenhagen:20260801T180000
 SUMMARY:Hogager Kræmmermarked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hogager-kraemmermarked-holst
 END:VEVENT
 BEGIN:VEVENT
 UID:hogager-kraemmermarked-holstebro-2026-08-02@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260802T093000
 DTEND;TZID=Europe/Copenhagen:20260802T160000
 SUMMARY:Hogager Kræmmermarked

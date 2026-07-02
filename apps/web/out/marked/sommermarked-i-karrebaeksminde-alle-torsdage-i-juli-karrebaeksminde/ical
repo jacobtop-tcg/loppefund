@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:sommermarked-i-karrebaeksminde-alle-torsdage-i-juli-karrebaeksminde-2026-07-02@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260702T110000
 DTEND;TZID=Europe/Copenhagen:20260702T160000
 SUMMARY:Sommermarked i Karrebæksminde - alle torsdage i juli
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/sommermarked-i-karrebaeksmin
 END:VEVENT
 BEGIN:VEVENT
 UID:sommermarked-i-karrebaeksminde-alle-torsdage-i-juli-karrebaeksminde-2026-07-09@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260709T110000
 DTEND;TZID=Europe/Copenhagen:20260709T160000
 SUMMARY:Sommermarked i Karrebæksminde - alle torsdage i juli
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/sommermarked-i-karrebaeksmin
 END:VEVENT
 BEGIN:VEVENT
 UID:sommermarked-i-karrebaeksminde-alle-torsdage-i-juli-karrebaeksminde-2026-07-16@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260716T110000
 DTEND;TZID=Europe/Copenhagen:20260716T160000
 SUMMARY:Sommermarked i Karrebæksminde - alle torsdage i juli
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/sommermarked-i-karrebaeksmin
 END:VEVENT
 BEGIN:VEVENT
 UID:sommermarked-i-karrebaeksminde-alle-torsdage-i-juli-karrebaeksminde-2026-07-23@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260723T110000
 DTEND;TZID=Europe/Copenhagen:20260723T160000
 SUMMARY:Sommermarked i Karrebæksminde - alle torsdage i juli
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/sommermarked-i-karrebaeksmin
 END:VEVENT
 BEGIN:VEVENT
 UID:sommermarked-i-karrebaeksminde-alle-torsdage-i-juli-karrebaeksminde-2026-07-30@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260730T110000
 DTEND;TZID=Europe/Copenhagen:20260730T160000
 SUMMARY:Sommermarked i Karrebæksminde - alle torsdage i juli

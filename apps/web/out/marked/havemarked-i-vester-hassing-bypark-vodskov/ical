@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:havemarked-i-vester-hassing-bypark-vodskov-2026-08-16@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260816T130000
 DTEND;TZID=Europe/Copenhagen:20260816T160000
 SUMMARY:Havemarked i Vester Hassing bypark

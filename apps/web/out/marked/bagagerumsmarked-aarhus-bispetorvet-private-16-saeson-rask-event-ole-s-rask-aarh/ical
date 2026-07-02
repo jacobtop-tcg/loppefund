@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bagagerumsmarked-aarhus-bispetorvet-private-16-saeson-rask-event-ole-s-rask-aarh-2026-07-04@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260704T103000
 DTEND;TZID=Europe/Copenhagen:20260704T153000
 SUMMARY:Bagagerumsmarked Aarhus Bispetorvet private 16. sæson Rask Event\, Ole S. Rask
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-aarhus-bisp
 END:VEVENT
 BEGIN:VEVENT
 UID:bagagerumsmarked-aarhus-bispetorvet-private-16-saeson-rask-event-ole-s-rask-aarh-2026-08-01@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260801T103000
 DTEND;TZID=Europe/Copenhagen:20260801T153000
 SUMMARY:Bagagerumsmarked Aarhus Bispetorvet private 16. sæson Rask Event\, Ole S. Rask
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-aarhus-bisp
 END:VEVENT
 BEGIN:VEVENT
 UID:bagagerumsmarked-aarhus-bispetorvet-private-16-saeson-rask-event-ole-s-rask-aarh-2026-09-13@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260913T103000
 DTEND;TZID=Europe/Copenhagen:20260913T153000
 SUMMARY:Bagagerumsmarked Aarhus Bispetorvet private 16. sæson Rask Event\, Ole S. Rask

@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-paa-den-sorte-plads-2026-koebenhavn-n-2026-08-29@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260829T100000
 DTEND;TZID=Europe/Copenhagen:20260829T160000
 SUMMARY:Loppemarked på Den Sorte Plads 2026

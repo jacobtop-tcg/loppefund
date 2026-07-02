@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:fjellerup-strands-marked-glesborg-2026-07-16@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260716T100000
 DTEND;TZID=Europe/Copenhagen:20260716T160000
 SUMMARY:Fjellerup Strands Marked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/fjellerup-strands-marked-gle
 END:VEVENT
 BEGIN:VEVENT
 UID:fjellerup-strands-marked-glesborg-2026-07-17@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;VALUE=DATE:20260717
 SUMMARY:Fjellerup Strands Marked
 LOCATION:Festpladsen\, Møllebækvej\, Møllebækvej\, 8585 Glesborg
@@ -22,7 +22,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/fjellerup-strands-marked-gle
 END:VEVENT
 BEGIN:VEVENT
 UID:fjellerup-strands-marked-glesborg-2026-07-18@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260718T100000
 DTEND;TZID=Europe/Copenhagen:20260718T220000
 SUMMARY:Fjellerup Strands Marked
@@ -32,7 +32,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/fjellerup-strands-marked-gle
 END:VEVENT
 BEGIN:VEVENT
 UID:fjellerup-strands-marked-glesborg-2026-07-19@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260719T100000
 DTEND;TZID=Europe/Copenhagen:20260719T180000
 SUMMARY:Fjellerup Strands Marked

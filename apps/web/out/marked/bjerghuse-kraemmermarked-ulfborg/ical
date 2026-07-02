@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bjerghuse-kraemmermarked-ulfborg-2026-07-05@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260705T100000
 DTEND;TZID=Europe/Copenhagen:20260705T160000
 SUMMARY:Bjerghuse kræmmermarked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bjerghuse-kraemmermarked-ulf
 END:VEVENT
 BEGIN:VEVENT
 UID:bjerghuse-kraemmermarked-ulfborg-2026-07-12@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260712T100000
 DTEND;TZID=Europe/Copenhagen:20260712T160000
 SUMMARY:Bjerghuse kræmmermarked
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bjerghuse-kraemmermarked-ulf
 END:VEVENT
 BEGIN:VEVENT
 UID:bjerghuse-kraemmermarked-ulfborg-2026-07-19@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260719T100000
 DTEND;TZID=Europe/Copenhagen:20260719T160000
 SUMMARY:Bjerghuse kræmmermarked
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bjerghuse-kraemmermarked-ulf
 END:VEVENT
 BEGIN:VEVENT
 UID:bjerghuse-kraemmermarked-ulfborg-2026-07-26@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260726T100000
 DTEND;TZID=Europe/Copenhagen:20260726T160000
 SUMMARY:Bjerghuse kræmmermarked

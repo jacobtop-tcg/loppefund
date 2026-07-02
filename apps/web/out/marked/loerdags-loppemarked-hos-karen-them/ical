@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loerdags-loppemarked-hos-karen-them-2026-07-25@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260725T100000
 DTEND;TZID=Europe/Copenhagen:20260725T140000
 SUMMARY:Lørdags-loppemarked hos Karen
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loerdags-loppemarked-hos-kar
 END:VEVENT
 BEGIN:VEVENT
 UID:loerdags-loppemarked-hos-karen-them-2026-08-29@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260829T100000
 DTEND;TZID=Europe/Copenhagen:20260829T140000
 SUMMARY:Lørdags-loppemarked hos Karen

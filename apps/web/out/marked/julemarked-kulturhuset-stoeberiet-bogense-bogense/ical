@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:julemarked-kulturhuset-stoeberiet-bogense-bogense-2026-11-07@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20261107T100000
 DTEND;TZID=Europe/Copenhagen:20261107T160000
 SUMMARY:Julemarked kulturhuset Støberiet Bogense
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-kulturhuset-stoeb
 END:VEVENT
 BEGIN:VEVENT
 UID:julemarked-kulturhuset-stoeberiet-bogense-bogense-2026-11-08@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20261108T100000
 DTEND;TZID=Europe/Copenhagen:20261108T160000
 SUMMARY:Julemarked kulturhuset Støberiet Bogense
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-kulturhuset-stoeb
 END:VEVENT
 BEGIN:VEVENT
 UID:julemarked-kulturhuset-stoeberiet-bogense-bogense-2026-11-14@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20261114T100000
 DTEND;TZID=Europe/Copenhagen:20261114T160000
 SUMMARY:Julemarked kulturhuset Støberiet Bogense
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-kulturhuset-stoeb
 END:VEVENT
 BEGIN:VEVENT
 UID:julemarked-kulturhuset-stoeberiet-bogense-bogense-2026-11-15@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20261115T100000
 DTEND;TZID=Europe/Copenhagen:20261115T160000
 SUMMARY:Julemarked kulturhuset Støberiet Bogense

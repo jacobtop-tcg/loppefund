@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:lopper-aarhus-v-2026-07-02@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T180000
 SUMMARY:Lopper
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lopper-aarhus-v
 END:VEVENT
 BEGIN:VEVENT
 UID:lopper-aarhus-v-2026-07-03@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260703T100000
 DTEND;TZID=Europe/Copenhagen:20260703T180000
 SUMMARY:Lopper
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lopper-aarhus-v
 END:VEVENT
 BEGIN:VEVENT
 UID:lopper-aarhus-v-2026-07-04@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260704T100000
 DTEND;TZID=Europe/Copenhagen:20260704T180000
 SUMMARY:Lopper
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lopper-aarhus-v
 END:VEVENT
 BEGIN:VEVENT
 UID:lopper-aarhus-v-2026-07-05@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260705T100000
 DTEND;TZID=Europe/Copenhagen:20260705T180000
 SUMMARY:Lopper
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lopper-aarhus-v
 END:VEVENT
 BEGIN:VEVENT
 UID:lopper-aarhus-v-2026-07-06@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260706T100000
 DTEND;TZID=Europe/Copenhagen:20260706T180000
 SUMMARY:Lopper
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lopper-aarhus-v
 END:VEVENT
 BEGIN:VEVENT
 UID:lopper-aarhus-v-2026-07-07@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260707T100000
 DTEND;TZID=Europe/Copenhagen:20260707T180000
 SUMMARY:Lopper
@@ -63,7 +63,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lopper-aarhus-v
 END:VEVENT
 BEGIN:VEVENT
 UID:lopper-aarhus-v-2026-07-08@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260708T100000
 DTEND;TZID=Europe/Copenhagen:20260708T180000
 SUMMARY:Lopper
@@ -73,7 +73,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lopper-aarhus-v
 END:VEVENT
 BEGIN:VEVENT
 UID:lopper-aarhus-v-2026-07-09@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260709T100000
 DTEND;TZID=Europe/Copenhagen:20260709T180000
 SUMMARY:Lopper
@@ -83,7 +83,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lopper-aarhus-v
 END:VEVENT
 BEGIN:VEVENT
 UID:lopper-aarhus-v-2026-07-10@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260710T100000
 DTEND;TZID=Europe/Copenhagen:20260710T180000
 SUMMARY:Lopper
@@ -93,7 +93,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lopper-aarhus-v
 END:VEVENT
 BEGIN:VEVENT
 UID:lopper-aarhus-v-2026-07-11@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260711T100000
 DTEND;TZID=Europe/Copenhagen:20260711T180000
 SUMMARY:Lopper

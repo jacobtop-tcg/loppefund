@@ -17,6 +17,10 @@ const BASE_URL = process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
+  appleWebApp: { capable: true, title: 'Loppefund', statusBarStyle: 'default' },
+  icons: {
+    apple: `${process.env.LOPPEFUND_BASE_PATH ?? ''}/apple-touch-icon.png`,
+  },
   title: 'Loppefund — alle loppemarkeder i Danmark',
   description:
     'Find loppemarkeder, kræmmermarkeder og bagagerumsmarkeder i hele Danmark. Opdateret automatisk, verificeret og samlet ét sted.',

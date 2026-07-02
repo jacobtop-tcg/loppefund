@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:langelands-foedevaremarked-torvet-i-rudkoebing-rudkoebing-2026-07-04@loppefund.dk
+DTSTAMP:20260702T194731Z
+DTSTART;VALUE=DATE:20260704
+SUMMARY:LANGELANDS FØDEVAREMARKED - TORVET I RUDKØBING
+LOCATION:Torvet i Rudkøbing\, Torvet\, 5900 Rudkøbing
+GEO:54.88518842;10.80968538
+URL:https://jacobtop-tcg.github.io/loppefund/marked/langelands-foedevaremarked-torvet-i-rudkoebing-rudkoebing
+END:VEVENT
+BEGIN:VEVENT
+UID:langelands-foedevaremarked-torvet-i-rudkoebing-rudkoebing-2026-07-11@loppefund.dk
+DTSTAMP:20260702T194731Z
+DTSTART;VALUE=DATE:20260711
+SUMMARY:LANGELANDS FØDEVAREMARKED - TORVET I RUDKØBING
+LOCATION:Torvet i Rudkøbing\, Torvet\, 5900 Rudkøbing
+GEO:54.88518842;10.80968538
+URL:https://jacobtop-tcg.github.io/loppefund/marked/langelands-foedevaremarked-torvet-i-rudkoebing-rudkoebing
+END:VEVENT
+END:VCALENDAR

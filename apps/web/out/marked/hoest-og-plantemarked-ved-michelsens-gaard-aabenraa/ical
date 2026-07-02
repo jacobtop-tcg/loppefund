@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hoest-og-plantemarked-ved-michelsens-gaard-aabenraa-2026-09-05@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260905T140000
 DTEND;TZID=Europe/Copenhagen:20260905T170000
 SUMMARY:Høst- og plantemarked

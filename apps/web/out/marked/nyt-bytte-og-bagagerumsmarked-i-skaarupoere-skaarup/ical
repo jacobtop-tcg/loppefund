@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:nyt-bytte-og-bagagerumsmarked-i-skaarupoere-skaarup-2026-07-04@loppefund.dk
+DTSTAMP:20260702T194731Z
+DTSTART;VALUE=DATE:20260704
+SUMMARY:NYT BYTTE- OG BAGAGERUMSMARKED I SKÅRUPØRE
+LOCATION:P-pladsen ved Skårupøre Strandcafe\, Skårupøre Strandvej 52A\, 5881 Skårup
+GEO:55.05760139;10.68145555
+URL:https://jacobtop-tcg.github.io/loppefund/marked/nyt-bytte-og-bagagerumsmarked-i-skaarupoere-skaarup
+END:VEVENT
+BEGIN:VEVENT
+UID:nyt-bytte-og-bagagerumsmarked-i-skaarupoere-skaarup-2026-07-11@loppefund.dk
+DTSTAMP:20260702T194731Z
+DTSTART;VALUE=DATE:20260711
+SUMMARY:NYT BYTTE- OG BAGAGERUMSMARKED I SKÅRUPØRE
+LOCATION:P-pladsen ved Skårupøre Strandcafe\, Skårupøre Strandvej 52A\, 5881 Skårup
+GEO:55.05760139;10.68145555
+URL:https://jacobtop-tcg.github.io/loppefund/marked/nyt-bytte-og-bagagerumsmarked-i-skaarupoere-skaarup
+END:VEVENT
+END:VCALENDAR

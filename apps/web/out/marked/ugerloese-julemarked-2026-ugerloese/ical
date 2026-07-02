@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:ugerloese-julemarked-2026-ugerloese-2026-11-21@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20261121T100000
 DTEND;TZID=Europe/Copenhagen:20261121T150000
 SUMMARY:Ugerløse Julemarked 2026
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/ugerloese-julemarked-2026-ug
 END:VEVENT
 BEGIN:VEVENT
 UID:ugerloese-julemarked-2026-ugerloese-2026-11-22@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20261122T100000
 DTEND;TZID=Europe/Copenhagen:20261122T150000
 SUMMARY:Ugerløse Julemarked 2026

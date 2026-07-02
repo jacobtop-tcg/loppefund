@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:efteraarsplantemarked-silkeborg-2026-09-06@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260906T090000
 DTEND;TZID=Europe/Copenhagen:20260906T120000
 SUMMARY:Efterårsplantemarked

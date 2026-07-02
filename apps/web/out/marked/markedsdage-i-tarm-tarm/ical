@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:markedsdage-i-tarm-tarm-2026-07-08@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260708T090000
 DTEND;TZID=Europe/Copenhagen:20260708T140000
 SUMMARY:Markedsdage i Tarm
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdage-i-tarm-tarm
 END:VEVENT
 BEGIN:VEVENT
 UID:markedsdage-i-tarm-tarm-2026-07-15@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260715T090000
 DTEND;TZID=Europe/Copenhagen:20260715T140000
 SUMMARY:Markedsdage i Tarm
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdage-i-tarm-tarm
 END:VEVENT
 BEGIN:VEVENT
 UID:markedsdage-i-tarm-tarm-2026-07-22@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260722T090000
 DTEND;TZID=Europe/Copenhagen:20260722T140000
 SUMMARY:Markedsdage i Tarm
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdage-i-tarm-tarm
 END:VEVENT
 BEGIN:VEVENT
 UID:markedsdage-i-tarm-tarm-2026-07-29@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260729T090000
 DTEND;TZID=Europe/Copenhagen:20260729T140000
 SUMMARY:Markedsdage i Tarm
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdage-i-tarm-tarm
 END:VEVENT
 BEGIN:VEVENT
 UID:markedsdage-i-tarm-tarm-2026-08-05@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260805T090000
 DTEND;TZID=Europe/Copenhagen:20260805T140000
 SUMMARY:Markedsdage i Tarm
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdage-i-tarm-tarm
 END:VEVENT
 BEGIN:VEVENT
 UID:markedsdage-i-tarm-tarm-2026-08-12@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260812T090000
 DTEND;TZID=Europe/Copenhagen:20260812T140000
 SUMMARY:Markedsdage i Tarm
@@ -63,7 +63,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdage-i-tarm-tarm
 END:VEVENT
 BEGIN:VEVENT
 UID:markedsdage-i-tarm-tarm-2026-08-19@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260819T090000
 DTEND;TZID=Europe/Copenhagen:20260819T140000
 SUMMARY:Markedsdage i Tarm
@@ -73,7 +73,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdage-i-tarm-tarm
 END:VEVENT
 BEGIN:VEVENT
 UID:markedsdage-i-tarm-tarm-2026-08-26@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260826T090000
 DTEND;TZID=Europe/Copenhagen:20260826T140000
 SUMMARY:Markedsdage i Tarm

@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hilleroed-loppemarked-hilleroed-2026-07-05@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260705
 SUMMARY:Hillerød Loppemarked
 LOCATION:Hillerød Loppemarked Torvet\, Torvet\, Hillerød
@@ -12,7 +12,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hilleroed-loppemarked-hiller
 END:VEVENT
 BEGIN:VEVENT
 UID:hilleroed-loppemarked-hilleroed-2026-08-02@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260802
 SUMMARY:Hillerød Loppemarked
 LOCATION:Hillerød Loppemarked Torvet\, Torvet\, Hillerød
@@ -21,7 +21,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hilleroed-loppemarked-hiller
 END:VEVENT
 BEGIN:VEVENT
 UID:hilleroed-loppemarked-hilleroed-2026-09-06@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260906
 SUMMARY:Hillerød Loppemarked
 LOCATION:Hillerød Loppemarked Torvet\, Torvet\, Hillerød
@@ -30,7 +30,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hilleroed-loppemarked-hiller
 END:VEVENT
 BEGIN:VEVENT
 UID:hilleroed-loppemarked-hilleroed-2026-10-04@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261004
 SUMMARY:Hillerød Loppemarked
 LOCATION:Hillerød Loppemarked Torvet\, Torvet\, Hillerød

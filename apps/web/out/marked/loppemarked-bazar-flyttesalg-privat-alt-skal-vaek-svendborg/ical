@@ -1,0 +1,40 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-bazar-flyttesalg-privat-alt-skal-vaek-svendborg-2026-07-04@loppefund.dk
+DTSTAMP:20260702T194731Z
+DTSTART;VALUE=DATE:20260704
+SUMMARY:LOPPEMARKED - BAZAR - FLYTTESALG PRIVAT ALT SKAL VÆK
+LOCATION:Sarah Soliånd\, Belvedere 3 B st.\, 5700 Svendborg
+GEO:55.01443666;10.59802878
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-bazar-flyttesalg-privat-alt-skal-vaek-svendborg
+END:VEVENT
+BEGIN:VEVENT
+UID:loppemarked-bazar-flyttesalg-privat-alt-skal-vaek-svendborg-2026-07-05@loppefund.dk
+DTSTAMP:20260702T194731Z
+DTSTART;VALUE=DATE:20260705
+SUMMARY:LOPPEMARKED - BAZAR - FLYTTESALG PRIVAT ALT SKAL VÆK
+LOCATION:Sarah Soliånd\, Belvedere 3 B st.\, 5700 Svendborg
+GEO:55.01443666;10.59802878
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-bazar-flyttesalg-privat-alt-skal-vaek-svendborg
+END:VEVENT
+BEGIN:VEVENT
+UID:loppemarked-bazar-flyttesalg-privat-alt-skal-vaek-svendborg-2026-07-11@loppefund.dk
+DTSTAMP:20260702T194731Z
+DTSTART;VALUE=DATE:20260711
+SUMMARY:LOPPEMARKED - BAZAR - FLYTTESALG PRIVAT ALT SKAL VÆK
+LOCATION:Sarah Soliånd\, Belvedere 3 B st.\, 5700 Svendborg
+GEO:55.01443666;10.59802878
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-bazar-flyttesalg-privat-alt-skal-vaek-svendborg
+END:VEVENT
+BEGIN:VEVENT
+UID:loppemarked-bazar-flyttesalg-privat-alt-skal-vaek-svendborg-2026-07-12@loppefund.dk
+DTSTAMP:20260702T194731Z
+DTSTART;VALUE=DATE:20260712
+SUMMARY:LOPPEMARKED - BAZAR - FLYTTESALG PRIVAT ALT SKAL VÆK
+LOCATION:Sarah Soliånd\, Belvedere 3 B st.\, 5700 Svendborg
+GEO:55.01443666;10.59802878
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-bazar-flyttesalg-privat-alt-skal-vaek-svendborg
+END:VEVENT
+END:VCALENDAR

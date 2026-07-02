@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:groennessegaard-gods-idylliske-julemarked-2026-11-28@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20261128T100000
 DTEND;TZID=Europe/Copenhagen:20261128T170000
 SUMMARY:Grønnessegaard Gods’ idylliske julemarked
@@ -12,7 +12,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/groennessegaard-gods-idyllis
 END:VEVENT
 BEGIN:VEVENT
 UID:groennessegaard-gods-idylliske-julemarked-2026-11-29@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20261129T100000
 DTEND;TZID=Europe/Copenhagen:20261129T170000
 SUMMARY:Grønnessegaard Gods’ idylliske julemarked
@@ -21,7 +21,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/groennessegaard-gods-idyllis
 END:VEVENT
 BEGIN:VEVENT
 UID:groennessegaard-gods-idylliske-julemarked-2026-12-05@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20261205T100000
 DTEND;TZID=Europe/Copenhagen:20261205T170000
 SUMMARY:Grønnessegaard Gods’ idylliske julemarked
@@ -30,7 +30,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/groennessegaard-gods-idyllis
 END:VEVENT
 BEGIN:VEVENT
 UID:groennessegaard-gods-idylliske-julemarked-2026-12-06@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20261206T100000
 DTEND;TZID=Europe/Copenhagen:20261206T170000
 SUMMARY:Grønnessegaard Gods’ idylliske julemarked

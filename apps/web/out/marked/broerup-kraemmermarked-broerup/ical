@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-07-03@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260703T100000
 DTEND;TZID=Europe/Copenhagen:20260703T160000
 SUMMARY:Brørup Kræmmermarked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-07-10@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260710
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -22,7 +22,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-07-11@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260711
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -31,7 +31,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-07-17@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260717
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -40,7 +40,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-07-24@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260724
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -49,7 +49,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-07-31@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260731
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -58,7 +58,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-08-07@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260807
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -67,7 +67,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-08-08@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260808
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -76,7 +76,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-08-14@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260814
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -85,7 +85,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-08-21@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260821
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -94,7 +94,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-08-28@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260828
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -103,7 +103,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-09-04@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260904
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -112,7 +112,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-09-11@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260911
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -121,7 +121,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-09-18@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260918
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -130,7 +130,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-09-25@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260925
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -139,7 +139,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-10-02@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261002
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -148,7 +148,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-10-09@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261009
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -157,7 +157,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-10-16@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261016
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -166,7 +166,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-10-17@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261017
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -175,7 +175,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-10-23@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261023
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -184,7 +184,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-10-30@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261030
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -193,7 +193,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-11-06@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261106
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -202,7 +202,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-11-13@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261113
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -211,7 +211,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-11-20@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261120
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -220,7 +220,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-11-27@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261127
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -229,7 +229,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-12-04@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261204
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -238,7 +238,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-12-11@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261211
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -247,7 +247,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-12-18@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261218
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup
@@ -256,7 +256,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/broerup-kraemmermarked-broer
 END:VEVENT
 BEGIN:VEVENT
 UID:broerup-kraemmermarked-broerup-2026-12-25@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261225
 SUMMARY:Brørup Kræmmermarked
 LOCATION:Find Brørup Kræmmermarked ved E20 mellem Esbjerg og Kolding. Der er marked både inde og ude på Industri Vest 6650 Brørup.\, Industri Vest\, 6650 Brørup

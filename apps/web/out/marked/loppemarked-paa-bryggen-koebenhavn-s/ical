@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-paa-bryggen-koebenhavn-s-2026-07-02@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T160000
 SUMMARY:Loppemarked på Bryggen
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-bryggen-koeb
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-bryggen-koebenhavn-s-2026-08-23@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260823T100000
 DTEND;TZID=Europe/Copenhagen:20260823T160000
 SUMMARY:Loppemarked på Bryggen
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-bryggen-koeb
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-bryggen-koebenhavn-s-2026-09-06@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260906T100000
 DTEND;TZID=Europe/Copenhagen:20260906T160000
 SUMMARY:Loppemarked på Bryggen
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-bryggen-koeb
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-bryggen-koebenhavn-s-2026-09-27@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20260927T100000
 DTEND;TZID=Europe/Copenhagen:20260927T160000
 SUMMARY:Loppemarked på Bryggen
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-bryggen-koeb
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-bryggen-koebenhavn-s-2026-10-11@loppefund.dk
-DTSTAMP:20260702T181544Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20261011T100000
 DTEND;TZID=Europe/Copenhagen:20261011T160000
 SUMMARY:Loppemarked på Bryggen

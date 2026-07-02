@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:baeredygtigt-loppemarked-paa-enghave-plads-koebenhavn-v-2026-08-30@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260830T100000
 DTEND;TZID=Europe/Copenhagen:20260830T160000
 SUMMARY:Bæredygtigt Loppemarked på Enghave Plads

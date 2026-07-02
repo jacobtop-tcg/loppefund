@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:vbc-julemarked-julehygge-for-hele-familien-d-14-november-viborg-2026-11-14@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20261114T100000
 DTEND;TZID=Europe/Copenhagen:20261114T150000
 SUMMARY:VBC Julemarked – Julehygge for hele familien d. 12. december!
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/vbc-julemarked-julehygge-for
 END:VEVENT
 BEGIN:VEVENT
 UID:vbc-julemarked-julehygge-for-hele-familien-d-14-november-viborg-2026-12-12@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194731Z
 DTSTART;TZID=Europe/Copenhagen:20261212T100000
 DTEND;TZID=Europe/Copenhagen:20261212T160000
 SUMMARY:VBC Julemarked – Julehygge for hele familien d. 12. december!

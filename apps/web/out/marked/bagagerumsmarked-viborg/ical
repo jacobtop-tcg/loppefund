@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bagagerumsmarked-viborg-2026-07-04@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260704
 SUMMARY:Bagagerumsmarked
 LOCATION:Viborg Dyrskueplads\, Fabrikvej 19\, Viborg
@@ -12,7 +12,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-viborg
 END:VEVENT
 BEGIN:VEVENT
 UID:bagagerumsmarked-viborg-2026-07-05@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260705
 SUMMARY:Bagagerumsmarked
 LOCATION:Viborg Dyrskueplads\, Fabrikvej 19\, Viborg
@@ -21,7 +21,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-viborg
 END:VEVENT
 BEGIN:VEVENT
 UID:bagagerumsmarked-viborg-2026-08-01@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260801
 SUMMARY:Bagagerumsmarked
 LOCATION:Viborg Dyrskueplads\, Fabrikvej 19\, Viborg
@@ -30,7 +30,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-viborg
 END:VEVENT
 BEGIN:VEVENT
 UID:bagagerumsmarked-viborg-2026-08-02@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260802
 SUMMARY:Bagagerumsmarked
 LOCATION:Viborg Dyrskueplads\, Fabrikvej 19\, Viborg
@@ -39,7 +39,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-viborg
 END:VEVENT
 BEGIN:VEVENT
 UID:bagagerumsmarked-viborg-2026-09-05@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260905
 SUMMARY:Bagagerumsmarked
 LOCATION:Viborg Dyrskueplads\, Fabrikvej 19\, Viborg
@@ -48,7 +48,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-viborg
 END:VEVENT
 BEGIN:VEVENT
 UID:bagagerumsmarked-viborg-2026-09-06@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20260906
 SUMMARY:Bagagerumsmarked
 LOCATION:Viborg Dyrskueplads\, Fabrikvej 19\, Viborg
@@ -57,7 +57,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-viborg
 END:VEVENT
 BEGIN:VEVENT
 UID:bagagerumsmarked-viborg-2026-10-03@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261003
 SUMMARY:Bagagerumsmarked
 LOCATION:Viborg Dyrskueplads\, Fabrikvej 19\, Viborg
@@ -66,7 +66,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-viborg
 END:VEVENT
 BEGIN:VEVENT
 UID:bagagerumsmarked-viborg-2026-10-04@loppefund.dk
-DTSTAMP:20260702T181533Z
+DTSTAMP:20260702T194731Z
 DTSTART;VALUE=DATE:20261004
 SUMMARY:Bagagerumsmarked
 LOCATION:Viborg Dyrskueplads\, Fabrikvej 19\, Viborg

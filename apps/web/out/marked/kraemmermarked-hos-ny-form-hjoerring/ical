@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kraemmermarked-hos-ny-form-hjoerring-2026-07-10@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260710T100000
 DTEND;TZID=Europe/Copenhagen:20260710T170000
 SUMMARY:Kræmmermarked Hos Ny Form
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kraemmermarked-hos-ny-form-h
 END:VEVENT
 BEGIN:VEVENT
 UID:kraemmermarked-hos-ny-form-hjoerring-2026-07-17@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260717T100000
 DTEND;TZID=Europe/Copenhagen:20260717T170000
 SUMMARY:Kræmmermarked Hos Ny Form
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kraemmermarked-hos-ny-form-h
 END:VEVENT
 BEGIN:VEVENT
 UID:kraemmermarked-hos-ny-form-hjoerring-2026-07-24@loppefund.dk
-DTSTAMP:20260702T181534Z
+DTSTAMP:20260702T194730Z
 DTSTART;TZID=Europe/Copenhagen:20260724T100000
 DTEND;TZID=Europe/Copenhagen:20260724T170000
 SUMMARY:Kræmmermarked Hos Ny Form

@@ -93,14 +93,23 @@ export const kultunaut: SourceAdapter = {
     const genre = root.querySelector('h4.genre')?.text.trim();
     const place = root.querySelector('.event-place');
     const venueName = place?.querySelector('a')?.text.trim();
+    // Address text like "Torvet, Gråsten" or "Storegade 12, 6300 Gråsten"
     const addressLines =
       place
         ?.querySelector('p')
-        ?.structuredText.split('\n')
-        .map((l) => l.trim().replace(/,$/, ''))
+        ?.structuredText.split(/\n|,/)
+        .map((l) => l.trim())
         .filter(Boolean) ?? [];
     const street = addressLines[0];
-    const city = addressLines.length > 1 ? addressLines[addressLines.length - 1] : undefined;
+    let city = addressLines.length > 1 ? addressLines[addressLines.length - 1] : undefined;
+    let postcode: string | undefined;
+    if (city) {
+      const pc = city.match(/^([1-9]\d{3})\s+(.*)$/);
+      if (pc) {
+        postcode = pc[1];
+        city = pc[2] || undefined;
+      }
+    }
 
     const dateText = root.querySelector('.event-date p')?.text ?? '';
     const occurrences = parseKultunautDate(dateText);
@@ -140,6 +149,7 @@ export const kultunaut: SourceAdapter = {
       category,
       venueName,
       street,
+      postcode,
       city,
       lat: latMatch ? Number(latMatch[1]) : undefined,
       lng: lngMatch ? Number(lngMatch[1]) : undefined,

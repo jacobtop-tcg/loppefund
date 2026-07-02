@@ -9,6 +9,7 @@ import {
   formatHours,
 } from '../../../lib/format.ts';
 import { DetailMap } from '../../../components/DetailMap.tsx';
+import { ShareButton } from '../../../components/ShareButton.tsx';
 import { listUpcomingEvents } from '../../../lib/data.ts';
 
 // Only known event slugs render; unknowns 404. generateStaticParams reads the
@@ -139,6 +140,12 @@ export default async function EventPage({
             ]
               .filter(Boolean)
               .join(' · ')}
+          </p>
+          <p style={{ marginTop: 14 }}>
+            <ShareButton
+              title={displayTitle(event.title)}
+              path={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${event.slug}`}
+            />
           </p>
         </header>
 

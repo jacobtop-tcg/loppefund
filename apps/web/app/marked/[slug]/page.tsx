@@ -11,6 +11,7 @@ import {
 import { DetailMap } from '../../../components/DetailMap.tsx';
 import { ShareButton } from '../../../components/ShareButton.tsx';
 import { listUpcomingEvents } from '../../../lib/data.ts';
+import { distanceKm } from '../../../lib/client-utils.ts';
 
 // Only known event slugs render; unknowns 404. generateStaticParams reads the
 // live DB so both the static export and `next dev` cover every active event.
@@ -105,6 +106,17 @@ export default async function EventPage({
   const today = todayIso();
   const upcoming = event.occurrences.filter((o) => o.date >= today);
   const shownDates = upcoming.slice(0, 10);
+
+  // Same-visit discovery: the three nearest other upcoming markets.
+  const nearby =
+    event.lat != null && event.lng != null
+      ? listUpcomingEvents(60)
+          .filter((e) => e.slug !== event.slug && e.lat != null && e.lng != null)
+          .map((e) => ({ ...e, km: distanceKm(event.lat!, event.lng!, e.lat!, e.lng!) }))
+          .filter((e) => e.km <= 40)
+          .sort((a, b) => a.km - b.km)
+          .slice(0, 3)
+      : [];
 
   const confidencePct = Math.round(event.confidence * 100);
   const trustLabel =
@@ -319,6 +331,24 @@ export default async function EventPage({
                 </a>
               </p>
             </section>
+
+            {nearby.length > 0 && (
+              <section className="panel">
+                <h2>I nærheden</h2>
+                <ul className="occurrence-list">
+                  {nearby.map((n) => (
+                    <li key={n.slug}>
+                      <span className="when">
+                        <Link href={`/marked/${n.slug}`} style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
+                          {displayTitle(n.title)}
+                        </Link>
+                      </span>
+                      <span className="hours">{Math.round(n.km)} km</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
           </aside>
         </div>
       </div>

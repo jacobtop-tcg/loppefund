@@ -127,5 +127,13 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   if (sim >= TITLE_WEAK && colocated === true && dateOverlap) {
     return { isMatch: true, score: sim, reason: 'title + location + dates' };
   }
+  // Distinctive identical titles merge even without location or date overlap —
+  // recurring series often publish each date as a separate entry with no
+  // address data. Generic titles ("Loppemarked") never qualify.
+  const na = normalizeTitle(a.title);
+  const distinctive = na.length >= 15 || na.split(' ').length >= 3;
+  if (sim >= 0.95 && distinctive && colocated !== false && !streetsDiffer) {
+    return { isMatch: true, score: sim, reason: 'identical distinctive title' };
+  }
   return { isMatch: false, score: sim, reason: 'insufficient evidence' };
 }

@@ -259,12 +259,23 @@ export function searchEvents(db: DatabaseSync, query: string, limit = 50): numbe
   return rows.map((r) => r.rowid);
 }
 
-/** Candidate events for dedup matching: same postcode, or all geocoded within bbox. */
+/**
+ * Candidate events for dedup matching: same postcode, geocoded within a
+ * ~1km bbox, or identical title (catches recurring series that never
+ * geocoded — no location data means postcode/bbox lookups find nothing).
+ */
 export function findCandidateEvents(
   db: DatabaseSync,
-  opts: { postcode?: string | null; lat?: number | null; lng?: number | null },
+  opts: { postcode?: string | null; lat?: number | null; lng?: number | null; title?: string },
 ): EventRow[] {
   const candidates = new Map<number, EventRow>();
+  if (opts.title) {
+    for (const r of db
+      .prepare(`SELECT * FROM events WHERE title = ? COLLATE NOCASE`)
+      .all(opts.title) as unknown as EventRow[]) {
+      candidates.set(r.id, r);
+    }
+  }
   if (opts.postcode) {
     for (const r of db
       .prepare(`SELECT * FROM events WHERE postcode = ?`)

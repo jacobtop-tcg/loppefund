@@ -110,7 +110,7 @@ export async function canonicalizeRawEvent(
   }
 
   // Find the canonical event this raw event belongs to.
-  const candidates = findCandidateEvents(db, { postcode, lat, lng });
+  const candidates = findCandidateEvents(db, { postcode, lat, lng, title: raw.title });
   const rawDates = occurrences.map((o) => o.date);
   let best: { event: EventRow; score: number } | null = null;
   for (const candidate of candidates) {

@@ -75,6 +75,24 @@ describe('matchEvents', () => {
     expect(matchEvents(a, b).isMatch).toBe(false);
   });
 
+  it('merges recurring series entries with identical distinctive titles and no location', () => {
+    const a = { title: 'Fredensborg Kokkedal Loppemarked', dates: ['2026-07-04'] };
+    const b = { title: 'Fredensborg Kokkedal Loppemarked', dates: ['2026-07-11'] };
+    expect(matchEvents(a, b).isMatch).toBe(true);
+  });
+
+  it('does not merge generic identical titles without location', () => {
+    const a = { title: 'Loppemarked', dates: ['2026-07-04'] };
+    const b = { title: 'Loppemarked', dates: ['2026-07-11'] };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
+  it('does not merge identical titles at contradicting locations', () => {
+    const a = { title: 'Sommerens Store Loppemarked', lat: 55.68, lng: 12.59, dates: ['2026-07-04'] };
+    const b = { title: 'Sommerens Store Loppemarked', lat: 56.15, lng: 10.2, dates: ['2026-07-04'] };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
   it('rejects two garage sales in the same postcode on the same day', () => {
     // Approximate postcode-centroid coords are identical; streets differ.
     const a = {

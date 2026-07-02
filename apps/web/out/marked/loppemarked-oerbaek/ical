@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-oerbaek-2026-08-31@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260831T180000
 DTEND;TZID=Europe/Copenhagen:20260831T200000
 SUMMARY:Loppemarked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-oerbaek
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-oerbaek-2026-10-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261006T180000
 DTEND;TZID=Europe/Copenhagen:20261006T200000
 SUMMARY:Loppemarked
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-oerbaek
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-oerbaek-2026-12-02@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261202T180000
 DTEND;TZID=Europe/Copenhagen:20261202T200000
 SUMMARY:Loppemarked

@@ -26,6 +26,9 @@ export default function HomePage() {
           oplysningerne kommer fra. Fandt du en fejl? Kilderne er linket på hvert marked.{' '}
           <Link href="/tip" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
             Mangler vi et marked? Tip os →
+          </Link>{' '}
+          <Link href="/byer" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
+            · Find din by →
           </Link>
         </div>
       </footer>

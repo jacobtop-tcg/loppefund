@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kraemmermarked-eventyrgaarden-janderup-janderup-vestj-2026-07-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260708T110000
 DTEND;TZID=Europe/Copenhagen:20260708T150000
 SUMMARY:Kræmmermarked Eventyrgården Janderup
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kraemmermarked-eventyrgaarde
 END:VEVENT
 BEGIN:VEVENT
 UID:kraemmermarked-eventyrgaarden-janderup-janderup-vestj-2026-07-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260715T110000
 DTEND;TZID=Europe/Copenhagen:20260715T150000
 SUMMARY:Kræmmermarked Eventyrgården Janderup
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kraemmermarked-eventyrgaarde
 END:VEVENT
 BEGIN:VEVENT
 UID:kraemmermarked-eventyrgaarden-janderup-janderup-vestj-2026-07-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260722T110000
 DTEND;TZID=Europe/Copenhagen:20260722T150000
 SUMMARY:Kræmmermarked Eventyrgården Janderup
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kraemmermarked-eventyrgaarde
 END:VEVENT
 BEGIN:VEVENT
 UID:kraemmermarked-eventyrgaarden-janderup-janderup-vestj-2026-07-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260729T110000
 DTEND;TZID=Europe/Copenhagen:20260729T150000
 SUMMARY:Kræmmermarked Eventyrgården Janderup
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kraemmermarked-eventyrgaarde
 END:VEVENT
 BEGIN:VEVENT
 UID:kraemmermarked-eventyrgaarden-janderup-janderup-vestj-2026-08-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260805T110000
 DTEND;TZID=Europe/Copenhagen:20260805T150000
 SUMMARY:Kræmmermarked Eventyrgården Janderup
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/kraemmermarked-eventyrgaarde
 END:VEVENT
 BEGIN:VEVENT
 UID:kraemmermarked-eventyrgaarden-janderup-janderup-vestj-2026-08-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260812T110000
 DTEND;TZID=Europe/Copenhagen:20260812T150000
 SUMMARY:Kræmmermarked Eventyrgården Janderup

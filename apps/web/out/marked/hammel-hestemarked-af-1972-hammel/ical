@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hammel-hestemarked-af-1972-hammel-2026-09-03@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260903T100000
 DTEND;TZID=Europe/Copenhagen:20260903T160000
 SUMMARY:Hammel Hestemarked af 1972
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hammel-hestemarked-af-1972-h
 END:VEVENT
 BEGIN:VEVENT
 UID:hammel-hestemarked-af-1972-hammel-2026-09-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260904T160000
 DTEND;TZID=Europe/Copenhagen:20260904T220000
 SUMMARY:Hammel Hestemarked af 1972
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hammel-hestemarked-af-1972-h
 END:VEVENT
 BEGIN:VEVENT
 UID:hammel-hestemarked-af-1972-hammel-2026-09-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260905T090000
 DTEND;TZID=Europe/Copenhagen:20260905T180000
 SUMMARY:Hammel Hestemarked af 1972
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hammel-hestemarked-af-1972-h
 END:VEVENT
 BEGIN:VEVENT
 UID:hammel-hestemarked-af-1972-hammel-2026-09-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260906T100000
 DTEND;TZID=Europe/Copenhagen:20260906T170000
 SUMMARY:Hammel Hestemarked af 1972

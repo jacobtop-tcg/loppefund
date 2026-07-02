@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:soendags-marked-greve-midtby-center-2026-07-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260705T090000
 DTEND;TZID=Europe/Copenhagen:20260705T140000
 SUMMARY:Søndags Marked Greve Midtby Center
@@ -12,7 +12,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/soendags-marked-greve-midtby
 END:VEVENT
 BEGIN:VEVENT
 UID:soendags-marked-greve-midtby-center-2026-07-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260712T090000
 DTEND;TZID=Europe/Copenhagen:20260712T140000
 SUMMARY:Søndags Marked Greve Midtby Center
@@ -21,7 +21,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/soendags-marked-greve-midtby
 END:VEVENT
 BEGIN:VEVENT
 UID:soendags-marked-greve-midtby-center-2026-07-19@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260719T090000
 DTEND;TZID=Europe/Copenhagen:20260719T140000
 SUMMARY:Søndags Marked Greve Midtby Center
@@ -30,7 +30,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/soendags-marked-greve-midtby
 END:VEVENT
 BEGIN:VEVENT
 UID:soendags-marked-greve-midtby-center-2026-07-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260726T090000
 DTEND;TZID=Europe/Copenhagen:20260726T140000
 SUMMARY:Søndags Marked Greve Midtby Center
@@ -39,7 +39,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/soendags-marked-greve-midtby
 END:VEVENT
 BEGIN:VEVENT
 UID:soendags-marked-greve-midtby-center-2026-08-02@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260802T090000
 DTEND;TZID=Europe/Copenhagen:20260802T140000
 SUMMARY:Søndags Marked Greve Midtby Center
@@ -48,7 +48,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/soendags-marked-greve-midtby
 END:VEVENT
 BEGIN:VEVENT
 UID:soendags-marked-greve-midtby-center-2026-08-09@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260809T090000
 DTEND;TZID=Europe/Copenhagen:20260809T140000
 SUMMARY:Søndags Marked Greve Midtby Center
@@ -57,7 +57,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/soendags-marked-greve-midtby
 END:VEVENT
 BEGIN:VEVENT
 UID:soendags-marked-greve-midtby-center-2026-08-16@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260816T090000
 DTEND;TZID=Europe/Copenhagen:20260816T140000
 SUMMARY:Søndags Marked Greve Midtby Center
@@ -66,7 +66,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/soendags-marked-greve-midtby
 END:VEVENT
 BEGIN:VEVENT
 UID:soendags-marked-greve-midtby-center-2026-08-23@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260823T090000
 DTEND;TZID=Europe/Copenhagen:20260823T140000
 SUMMARY:Søndags Marked Greve Midtby Center
@@ -75,7 +75,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/soendags-marked-greve-midtby
 END:VEVENT
 BEGIN:VEVENT
 UID:soendags-marked-greve-midtby-center-2026-08-30@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260830T090000
 DTEND;TZID=Europe/Copenhagen:20260830T140000
 SUMMARY:Søndags Marked Greve Midtby Center

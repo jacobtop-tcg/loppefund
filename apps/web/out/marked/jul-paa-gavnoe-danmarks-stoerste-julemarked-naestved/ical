@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:jul-paa-gavnoe-danmarks-stoerste-julemarked-naestved-2026-11-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261106T150000
 DTEND;TZID=Europe/Copenhagen:20261106T200000
 SUMMARY:Jul på Gavnø – Danmarks største Julemarked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/jul-paa-gavnoe-danmarks-stoe
 END:VEVENT
 BEGIN:VEVENT
 UID:jul-paa-gavnoe-danmarks-stoerste-julemarked-naestved-2026-11-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261107T093000
 DTEND;TZID=Europe/Copenhagen:20261107T160000
 SUMMARY:Jul på Gavnø – Danmarks største Julemarked
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/jul-paa-gavnoe-danmarks-stoe
 END:VEVENT
 BEGIN:VEVENT
 UID:jul-paa-gavnoe-danmarks-stoerste-julemarked-naestved-2026-11-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261108T093000
 DTEND;TZID=Europe/Copenhagen:20261108T160000
 SUMMARY:Jul på Gavnø – Danmarks største Julemarked
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/jul-paa-gavnoe-danmarks-stoe
 END:VEVENT
 BEGIN:VEVENT
 UID:jul-paa-gavnoe-danmarks-stoerste-julemarked-naestved-2026-11-13@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261113T150000
 DTEND;TZID=Europe/Copenhagen:20261113T200000
 SUMMARY:Jul på Gavnø – Danmarks største Julemarked
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/jul-paa-gavnoe-danmarks-stoe
 END:VEVENT
 BEGIN:VEVENT
 UID:jul-paa-gavnoe-danmarks-stoerste-julemarked-naestved-2026-11-14@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261114T093000
 DTEND;TZID=Europe/Copenhagen:20261114T160000
 SUMMARY:Jul på Gavnø – Danmarks største Julemarked
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/jul-paa-gavnoe-danmarks-stoe
 END:VEVENT
 BEGIN:VEVENT
 UID:jul-paa-gavnoe-danmarks-stoerste-julemarked-naestved-2026-11-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261115T093000
 DTEND;TZID=Europe/Copenhagen:20261115T160000
 SUMMARY:Jul på Gavnø – Danmarks største Julemarked

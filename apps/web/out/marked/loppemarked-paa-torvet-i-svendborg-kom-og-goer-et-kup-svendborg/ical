@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-paa-torvet-i-svendborg-kom-og-goer-et-kup-svendborg-2026-07-23@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260723T100000
 DTEND;TZID=Europe/Copenhagen:20260723T150000
 SUMMARY:Loppemarked på Torvet i Svendborg - kom og gør et kup!

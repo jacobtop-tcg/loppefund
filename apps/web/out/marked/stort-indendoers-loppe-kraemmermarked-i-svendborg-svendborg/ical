@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:stort-indendoers-loppe-kraemmermarked-i-svendborg-svendborg-2026-10-31@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261031T100000
 DTEND;TZID=Europe/Copenhagen:20261031T150000
 SUMMARY:Stort indendørs loppe- kræmmermarked i Svendborg
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/stort-indendoers-loppe-kraem
 END:VEVENT
 BEGIN:VEVENT
 UID:stort-indendoers-loppe-kraemmermarked-i-svendborg-svendborg-2026-11-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261101T100000
 DTEND;TZID=Europe/Copenhagen:20261101T150000
 SUMMARY:Stort indendørs loppe- kræmmermarked i Svendborg
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/stort-indendoers-loppe-kraem
 END:VEVENT
 BEGIN:VEVENT
 UID:stort-indendoers-loppe-kraemmermarked-i-svendborg-svendborg-2027-02-28@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20270228T100000
 DTEND;TZID=Europe/Copenhagen:20270228T160000
 SUMMARY:Stort indendørs loppe- kræmmermarked i Svendborg

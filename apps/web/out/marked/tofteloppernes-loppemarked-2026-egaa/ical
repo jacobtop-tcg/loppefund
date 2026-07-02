@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:tofteloppernes-loppemarked-2026-egaa-2026-09-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20260905
 SUMMARY:Tofteloppernes Loppemarked 2026
 LOCATION:Tofteloppernes Loppemarked\, Østtoften 5\, Egå

@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:aarets-loppemarked-paa-museet-anholt-2026-07-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260708T120000
 DTEND;TZID=Europe/Copenhagen:20260708T140000
 SUMMARY:Årets loppemarked på Museet

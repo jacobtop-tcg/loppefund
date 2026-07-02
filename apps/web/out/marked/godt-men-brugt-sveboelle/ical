@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-03@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260703T100000
 DTEND;TZID=Europe/Copenhagen:20260703T160000
 SUMMARY:Godt men brugt
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260704
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -22,7 +22,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260705T100000
 DTEND;TZID=Europe/Copenhagen:20260705T180000
 SUMMARY:Godt men brugt
@@ -32,7 +32,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-10@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260710
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -41,7 +41,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260711
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -50,7 +50,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260712T100000
 DTEND;TZID=Europe/Copenhagen:20260712T180000
 SUMMARY:Godt men brugt
@@ -60,7 +60,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-17@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260717
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -69,7 +69,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260718
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -78,7 +78,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-19@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260719T100000
 DTEND;TZID=Europe/Copenhagen:20260719T180000
 SUMMARY:Godt men brugt
@@ -88,7 +88,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-24@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260724
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -97,7 +97,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260725
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -106,7 +106,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260726T100000
 DTEND;TZID=Europe/Copenhagen:20260726T180000
 SUMMARY:Godt men brugt
@@ -116,7 +116,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-07-31@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260731
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -125,7 +125,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260801
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -134,7 +134,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-02@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260802T100000
 DTEND;TZID=Europe/Copenhagen:20260802T180000
 SUMMARY:Godt men brugt
@@ -144,7 +144,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260807
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -153,7 +153,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260808
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -162,7 +162,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-09@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260809T100000
 DTEND;TZID=Europe/Copenhagen:20260809T180000
 SUMMARY:Godt men brugt
@@ -172,7 +172,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-14@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260814
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -181,7 +181,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260815
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -190,7 +190,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-16@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260816T100000
 DTEND;TZID=Europe/Copenhagen:20260816T180000
 SUMMARY:Godt men brugt
@@ -200,7 +200,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-21@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260821
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -209,7 +209,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260822
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -218,7 +218,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-23@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260823T100000
 DTEND;TZID=Europe/Copenhagen:20260823T180000
 SUMMARY:Godt men brugt
@@ -228,7 +228,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-28@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260828
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -237,7 +237,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260829
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -246,7 +246,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-08-30@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260830T100000
 DTEND;TZID=Europe/Copenhagen:20260830T180000
 SUMMARY:Godt men brugt
@@ -256,7 +256,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-09-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260904
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -265,7 +265,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-09-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;VALUE=DATE:20260905
 SUMMARY:Godt men brugt
 LOCATION:600m2 loppe og antik marked\, dødsbo Rydes guld og sølv købes\, Kelleklintegårdsvej 4\, 4470 Svebølle
@@ -274,7 +274,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/godt-men-brugt-sveboelle
 END:VEVENT
 BEGIN:VEVENT
 UID:godt-men-brugt-sveboelle-2026-09-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260906T100000
 DTEND;TZID=Europe/Copenhagen:20260906T180000
 SUMMARY:Godt men brugt

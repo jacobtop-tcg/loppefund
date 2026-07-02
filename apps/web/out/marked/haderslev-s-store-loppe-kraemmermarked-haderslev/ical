@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:haderslev-s-store-loppe-kraemmermarked-haderslev-2026-11-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261115T100000
 DTEND;TZID=Europe/Copenhagen:20261115T140000
 SUMMARY:Haderslev's store loppe & kræmmermarked

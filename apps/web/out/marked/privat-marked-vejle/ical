@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:privat-marked-vejle-2026-08-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260801T100000
 DTEND;TZID=Europe/Copenhagen:20260801T130000
 SUMMARY:Privat marked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/privat-marked-vejle
 END:VEVENT
 BEGIN:VEVENT
 UID:privat-marked-vejle-2026-09-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260905T100000
 DTEND;TZID=Europe/Copenhagen:20260905T130000
 SUMMARY:Privat marked
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/privat-marked-vejle
 END:VEVENT
 BEGIN:VEVENT
 UID:privat-marked-vejle-2026-10-03@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261003T100000
 DTEND;TZID=Europe/Copenhagen:20261003T130000
 SUMMARY:Privat marked
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/privat-marked-vejle
 END:VEVENT
 BEGIN:VEVENT
 UID:privat-marked-vejle-2026-11-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261107T100000
 DTEND;TZID=Europe/Copenhagen:20261107T130000
 SUMMARY:Privat marked
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/privat-marked-vejle
 END:VEVENT
 BEGIN:VEVENT
 UID:privat-marked-vejle-2026-12-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261205T100000
 DTEND;TZID=Europe/Copenhagen:20261205T130000
 SUMMARY:Privat marked

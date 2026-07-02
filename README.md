@@ -12,6 +12,23 @@ premium web experience.
 provenance, and every event page links to its sources. Missing events are
 acceptable; wrong events are not.
 
+## Coverage vs. the alternatives (measured 2026-07-02)
+
+| | Markedskalenderen | Facebook | **Loppefund** |
+|---|---|---|---|
+| Active upcoming markets | 166 | scattered across groups | **612** (incl. all 166) |
+| Sources per event | 1 | 1 | up to 4, cross-corroborated |
+| Map, filters, route planning | – | – | **✓** |
+| "Åbent nu" / weekend / radius | – | – | **✓** |
+| Recurring text → real dates | – | – | **✓** ("søndag i ulige uger") |
+| Parking/food/kids extracted | – | free text | **✓** structured |
+| Calendar export (.ics) | – | ✓ | **✓** |
+| Confidence + source links | – | – | **✓** |
+
+Loppefund's canonical database contains every active market Markedskalenderen
+lists **plus 446 more** discovered from Kultunaut, loppemarkeder.nu,
+findmarked.dk and community tips — deduplicated to 2 known ambiguous pairs.
+
 ## Quick start
 
 ```bash

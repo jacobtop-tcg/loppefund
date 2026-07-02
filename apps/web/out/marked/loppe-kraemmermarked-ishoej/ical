@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppe-kraemmermarked-ishoej-2026-10-31@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261031T100000
 DTEND;TZID=Europe/Copenhagen:20261031T150000
 SUMMARY:LOPPE – KRÆMMERMARKED – Ishøj
@@ -12,7 +12,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppe-kraemmermarked-ishoej
 END:VEVENT
 BEGIN:VEVENT
 UID:loppe-kraemmermarked-ishoej-2026-11-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261101T100000
 DTEND;TZID=Europe/Copenhagen:20261101T150000
 SUMMARY:LOPPE – KRÆMMERMARKED – Ishøj

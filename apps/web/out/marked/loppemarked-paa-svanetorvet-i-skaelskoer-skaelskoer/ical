@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-07-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260704T100000
 DTEND;TZID=Europe/Copenhagen:20260704T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-svanetorvet-
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-07-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260711T100000
 DTEND;TZID=Europe/Copenhagen:20260711T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-svanetorvet-
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-07-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260718T100000
 DTEND;TZID=Europe/Copenhagen:20260718T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-svanetorvet-
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-07-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260725T100000
 DTEND;TZID=Europe/Copenhagen:20260725T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-svanetorvet-
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-08-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260801T100000
 DTEND;TZID=Europe/Copenhagen:20260801T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-svanetorvet-
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-08-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260808T100000
 DTEND;TZID=Europe/Copenhagen:20260808T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør
@@ -63,7 +63,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-svanetorvet-
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-08-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260815T100000
 DTEND;TZID=Europe/Copenhagen:20260815T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør
@@ -73,7 +73,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-svanetorvet-
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-08-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260822T100000
 DTEND;TZID=Europe/Copenhagen:20260822T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør
@@ -83,7 +83,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-svanetorvet-
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-08-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260829T100000
 DTEND;TZID=Europe/Copenhagen:20260829T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør
@@ -93,7 +93,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-svanetorvet-
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-09-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260905T100000
 DTEND;TZID=Europe/Copenhagen:20260905T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør
@@ -103,7 +103,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-svanetorvet-
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-svanetorvet-i-skaelskoer-skaelskoer-2026-09-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260912T100000
 DTEND;TZID=Europe/Copenhagen:20260912T130000
 SUMMARY:Loppemarked på Svanetorvet i Skælskør

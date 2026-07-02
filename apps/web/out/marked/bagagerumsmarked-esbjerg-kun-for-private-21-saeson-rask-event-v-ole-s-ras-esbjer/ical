@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bagagerumsmarked-esbjerg-kun-for-private-21-saeson-rask-event-v-ole-s-ras-esbjer-2026-08-30@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260830T093000
 DTEND;TZID=Europe/Copenhagen:20260830T141500
 SUMMARY:Bagagerumsmarked Esbjerg (kun for private) 21. sæson. Rask Event v/ Ole S. Ras

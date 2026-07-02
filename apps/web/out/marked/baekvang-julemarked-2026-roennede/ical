@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:baekvang-julemarked-2026-roennede-2026-11-21@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261121T100000
 DTEND;TZID=Europe/Copenhagen:20261121T170000
 SUMMARY:Bækvang Julemarked 2026
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/baekvang-julemarked-2026-roe
 END:VEVENT
 BEGIN:VEVENT
 UID:baekvang-julemarked-2026-roennede-2026-11-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261122T100000
 DTEND;TZID=Europe/Copenhagen:20261122T170000
 SUMMARY:Bækvang Julemarked 2026

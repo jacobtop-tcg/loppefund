@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-fanefjord-torv-askeby-2026-07-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260705T100000
 DTEND;TZID=Europe/Copenhagen:20260705T140000
 SUMMARY:Loppmarked Fanefjord Torv
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-fanefjord-torv-a
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-fanefjord-torv-askeby-2026-07-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260726T100000
 DTEND;TZID=Europe/Copenhagen:20260726T140000
 SUMMARY:Loppmarked Fanefjord Torv

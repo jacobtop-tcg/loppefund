@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import type { DatabaseSync } from 'node:sqlite';
 import { addDays, isHiddenGem, searchFold, type Amenities } from '@loppefund/core';
-import { getEventBySlug, listEventsBetween, openDb } from '@loppefund/db';
+import { getEventBySlug, listEventsBetween, openDb, openDbReadOnly } from '@loppefund/db';
 
 let db: DatabaseSync | null = null;
 
@@ -20,7 +20,15 @@ function resolveDbPath(): string {
 }
 
 function getDb(): DatabaseSync {
-  db ??= openDb(resolveDbPath());
+  if (db) return db;
+  const path = resolveDbPath();
+  try {
+    db = openDbReadOnly(path);
+  } catch {
+    // First-ever run without an existing db: create it, then reopen read-only.
+    openDb(path).close();
+    db = openDbReadOnly(path);
+  }
   return db;
 }
 
@@ -96,6 +104,46 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       })),
     }))
     .sort((a, b) => (a.occurrences[0]?.date ?? '').localeCompare(b.occurrences[0]?.date ?? ''));
+}
+
+export interface CityInfo {
+  city: string;
+  slug: string;
+  count: number;
+}
+
+/** Cities with 2+ upcoming markets — the per-city SEO landing pages. */
+export function listCities(): CityInfo[] {
+  const bySlug = new Map<string, CityInfo>();
+  for (const e of listUpcomingEvents(180)) {
+    if (!e.city) continue;
+    const slug = slugifyCity(e.city);
+    if (!slug) continue;
+    const existing = bySlug.get(slug);
+    if (existing) existing.count++;
+    else bySlug.set(slug, { city: e.city, slug, count: 1 });
+  }
+  return [...bySlug.values()]
+    .filter((c) => c.count >= 2)
+    .sort((a, b) => b.count - a.count);
+}
+
+export function slugifyCity(city: string): string {
+  return city
+    .toLowerCase()
+    .replaceAll('æ', 'ae')
+    .replaceAll('ø', 'oe')
+    .replaceAll('å', 'aa')
+    .replace(/[^a-z0-9 ]+/g, ' ')
+    .trim()
+    .replace(/\s+/g, '-')
+    .slice(0, 60);
+}
+
+export function listEventsForCity(citySlug: string): EventSummary[] {
+  return listUpcomingEvents(180).filter(
+    (e) => e.city && slugifyCity(e.city) === citySlug,
+  );
 }
 
 export function loadEventDetail(slug: string) {

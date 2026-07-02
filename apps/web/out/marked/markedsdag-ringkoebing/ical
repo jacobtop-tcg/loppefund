@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:markedsdag-ringkoebing-2026-08-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260826T093000
 DTEND;TZID=Europe/Copenhagen:20260826T130000
 SUMMARY:Markedsdag
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdag-ringkoebing
 END:VEVENT
 BEGIN:VEVENT
 UID:markedsdag-ringkoebing-2026-09-30@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260930T100000
 DTEND;TZID=Europe/Copenhagen:20260930T143000
 SUMMARY:Markedsdag
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdag-ringkoebing
 END:VEVENT
 BEGIN:VEVENT
 UID:markedsdag-ringkoebing-2026-10-28@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261028T100000
 DTEND;TZID=Europe/Copenhagen:20261028T143000
 SUMMARY:Markedsdag
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdag-ringkoebing
 END:VEVENT
 BEGIN:VEVENT
 UID:markedsdag-ringkoebing-2026-11-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261125T100000
 DTEND;TZID=Europe/Copenhagen:20261125T143000
 SUMMARY:Markedsdag

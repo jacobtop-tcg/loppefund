@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-ved-brugsen-i-kulhuse-2026-07-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260704T100000
 DTEND;TZID=Europe/Copenhagen:20260704T140000
 SUMMARY:Loppemarked ved Brugsen i Kulhuse
@@ -12,7 +12,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-ved-brugsen-i-ku
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-ved-brugsen-i-kulhuse-2026-07-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260718T100000
 DTEND;TZID=Europe/Copenhagen:20260718T140000
 SUMMARY:Loppemarked ved Brugsen i Kulhuse
@@ -21,7 +21,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-ved-brugsen-i-ku
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-ved-brugsen-i-kulhuse-2026-08-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260822T100000
 DTEND;TZID=Europe/Copenhagen:20260822T140000
 SUMMARY:Loppemarked ved Brugsen i Kulhuse
@@ -30,7 +30,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-ved-brugsen-i-ku
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-ved-brugsen-i-kulhuse-2026-09-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260926T100000
 DTEND;TZID=Europe/Copenhagen:20260926T140000
 SUMMARY:Loppemarked ved Brugsen i Kulhuse
@@ -39,7 +39,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-ved-brugsen-i-ku
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-ved-brugsen-i-kulhuse-2026-10-17@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261017T100000
 DTEND;TZID=Europe/Copenhagen:20261017T140000
 SUMMARY:Loppemarked ved Brugsen i Kulhuse

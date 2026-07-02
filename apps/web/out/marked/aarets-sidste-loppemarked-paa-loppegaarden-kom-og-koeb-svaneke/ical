@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:aarets-sidste-loppemarked-paa-loppegaarden-kom-og-koeb-svaneke-2026-10-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261011T130000
 DTEND;TZID=Europe/Copenhagen:20261011T150000
 SUMMARY:Årets sidste loppemarked på loppegården - kom og køb

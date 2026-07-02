@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:lynge-byfest-kraemmermarked-lynge-2026-08-21@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260821T100000
 DTEND;TZID=Europe/Copenhagen:20260821T160000
 SUMMARY:Lynge Byfest & Kræmmermarked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lynge-byfest-kraemmermarked-
 END:VEVENT
 BEGIN:VEVENT
 UID:lynge-byfest-kraemmermarked-lynge-2026-08-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260822T100000
 DTEND;TZID=Europe/Copenhagen:20260822T160000
 SUMMARY:Lynge Byfest & Kræmmermarked
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lynge-byfest-kraemmermarked-
 END:VEVENT
 BEGIN:VEVENT
 UID:lynge-byfest-kraemmermarked-lynge-2026-08-23@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260823T100000
 DTEND;TZID=Europe/Copenhagen:20260823T160000
 SUMMARY:Lynge Byfest & Kræmmermarked

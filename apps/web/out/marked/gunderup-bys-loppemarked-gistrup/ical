@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:gunderup-bys-loppemarked-gistrup-2026-08-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260815T110000
 DTEND;TZID=Europe/Copenhagen:20260815T160000
 SUMMARY:Gunderup bys loppemarked

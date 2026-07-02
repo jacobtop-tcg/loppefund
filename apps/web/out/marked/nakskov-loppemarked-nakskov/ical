@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-07-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260704T100000
 DTEND;TZID=Europe/Copenhagen:20260704T143000
 SUMMARY:Nakskov Loppemarked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-07-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260708T100000
 DTEND;TZID=Europe/Copenhagen:20260708T143000
 SUMMARY:Nakskov Loppemarked
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-07-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260711T100000
 DTEND;TZID=Europe/Copenhagen:20260711T143000
 SUMMARY:Nakskov Loppemarked
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-07-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260715T100000
 DTEND;TZID=Europe/Copenhagen:20260715T143000
 SUMMARY:Nakskov Loppemarked
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-07-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260718T100000
 DTEND;TZID=Europe/Copenhagen:20260718T143000
 SUMMARY:Nakskov Loppemarked
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-07-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260722T100000
 DTEND;TZID=Europe/Copenhagen:20260722T143000
 SUMMARY:Nakskov Loppemarked
@@ -63,7 +63,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-07-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260725T100000
 DTEND;TZID=Europe/Copenhagen:20260725T143000
 SUMMARY:Nakskov Loppemarked
@@ -73,7 +73,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-07-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260729T100000
 DTEND;TZID=Europe/Copenhagen:20260729T143000
 SUMMARY:Nakskov Loppemarked
@@ -83,7 +83,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-08-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260801T100000
 DTEND;TZID=Europe/Copenhagen:20260801T143000
 SUMMARY:Nakskov Loppemarked
@@ -93,7 +93,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-08-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260805T100000
 DTEND;TZID=Europe/Copenhagen:20260805T143000
 SUMMARY:Nakskov Loppemarked
@@ -103,7 +103,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-08-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260808T100000
 DTEND;TZID=Europe/Copenhagen:20260808T143000
 SUMMARY:Nakskov Loppemarked
@@ -113,7 +113,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-08-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260812T100000
 DTEND;TZID=Europe/Copenhagen:20260812T143000
 SUMMARY:Nakskov Loppemarked
@@ -123,7 +123,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-08-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260815T100000
 DTEND;TZID=Europe/Copenhagen:20260815T143000
 SUMMARY:Nakskov Loppemarked
@@ -133,7 +133,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-08-19@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260819T100000
 DTEND;TZID=Europe/Copenhagen:20260819T143000
 SUMMARY:Nakskov Loppemarked
@@ -143,7 +143,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-08-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260822T100000
 DTEND;TZID=Europe/Copenhagen:20260822T143000
 SUMMARY:Nakskov Loppemarked
@@ -153,7 +153,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-08-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260826T100000
 DTEND;TZID=Europe/Copenhagen:20260826T143000
 SUMMARY:Nakskov Loppemarked
@@ -163,7 +163,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-08-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260829T100000
 DTEND;TZID=Europe/Copenhagen:20260829T143000
 SUMMARY:Nakskov Loppemarked
@@ -173,7 +173,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-09-02@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260902T100000
 DTEND;TZID=Europe/Copenhagen:20260902T143000
 SUMMARY:Nakskov Loppemarked
@@ -183,7 +183,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-09-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260905T100000
 DTEND;TZID=Europe/Copenhagen:20260905T143000
 SUMMARY:Nakskov Loppemarked
@@ -193,7 +193,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-09-09@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260909T100000
 DTEND;TZID=Europe/Copenhagen:20260909T143000
 SUMMARY:Nakskov Loppemarked
@@ -203,7 +203,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-09-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260912T100000
 DTEND;TZID=Europe/Copenhagen:20260912T143000
 SUMMARY:Nakskov Loppemarked
@@ -213,7 +213,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-09-16@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260916T100000
 DTEND;TZID=Europe/Copenhagen:20260916T143000
 SUMMARY:Nakskov Loppemarked
@@ -223,7 +223,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-09-19@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260919T100000
 DTEND;TZID=Europe/Copenhagen:20260919T143000
 SUMMARY:Nakskov Loppemarked
@@ -233,7 +233,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-09-23@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260923T100000
 DTEND;TZID=Europe/Copenhagen:20260923T143000
 SUMMARY:Nakskov Loppemarked
@@ -243,7 +243,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-09-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260926T100000
 DTEND;TZID=Europe/Copenhagen:20260926T143000
 SUMMARY:Nakskov Loppemarked
@@ -253,7 +253,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-09-30@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260930T100000
 DTEND;TZID=Europe/Copenhagen:20260930T143000
 SUMMARY:Nakskov Loppemarked
@@ -263,7 +263,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-10-03@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261003T100000
 DTEND;TZID=Europe/Copenhagen:20261003T143000
 SUMMARY:Nakskov Loppemarked
@@ -273,7 +273,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-10-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261007T100000
 DTEND;TZID=Europe/Copenhagen:20261007T143000
 SUMMARY:Nakskov Loppemarked
@@ -283,7 +283,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-10-10@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261010T100000
 DTEND;TZID=Europe/Copenhagen:20261010T143000
 SUMMARY:Nakskov Loppemarked
@@ -293,7 +293,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/nakskov-loppemarked-nakskov
 END:VEVENT
 BEGIN:VEVENT
 UID:nakskov-loppemarked-nakskov-2026-10-14@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261014T100000
 DTEND;TZID=Europe/Copenhagen:20261014T143000
 SUMMARY:Nakskov Loppemarked

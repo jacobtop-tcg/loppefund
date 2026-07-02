@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-09-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260905T100000
 DTEND;TZID=Europe/Copenhagen:20260905T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-09-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260906T110000
 DTEND;TZID=Europe/Copenhagen:20260906T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-09-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20260912
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -32,7 +32,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-09-13@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260913T110000
 DTEND;TZID=Europe/Copenhagen:20260913T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -42,7 +42,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-09-19@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20260919
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -51,7 +51,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-09-20@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260920T110000
 DTEND;TZID=Europe/Copenhagen:20260920T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -61,7 +61,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-09-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20260926
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -70,7 +70,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-09-27@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260927T110000
 DTEND;TZID=Europe/Copenhagen:20260927T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -80,7 +80,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-10-03@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261003
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -89,7 +89,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-10-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261004T110000
 DTEND;TZID=Europe/Copenhagen:20261004T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -99,7 +99,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-10-10@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261010
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -108,7 +108,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-10-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261011T110000
 DTEND;TZID=Europe/Copenhagen:20261011T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -118,7 +118,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-10-17@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261017
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -127,7 +127,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-10-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261018T110000
 DTEND;TZID=Europe/Copenhagen:20261018T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -137,7 +137,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-10-24@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261024
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -146,7 +146,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-10-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261025T110000
 DTEND;TZID=Europe/Copenhagen:20261025T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -156,7 +156,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-10-31@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261031
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -165,7 +165,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-11-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261101T110000
 DTEND;TZID=Europe/Copenhagen:20261101T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -175,7 +175,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-11-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261107
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -184,7 +184,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-11-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261108T110000
 DTEND;TZID=Europe/Copenhagen:20261108T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -194,7 +194,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-11-14@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261114
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -203,7 +203,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-11-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261115T110000
 DTEND;TZID=Europe/Copenhagen:20261115T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -213,7 +213,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-11-21@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261121
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -222,7 +222,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-11-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261122T110000
 DTEND;TZID=Europe/Copenhagen:20261122T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -232,7 +232,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-11-28@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261128
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -241,7 +241,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-11-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261129T110000
 DTEND;TZID=Europe/Copenhagen:20261129T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -251,7 +251,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-12-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261205
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -260,7 +260,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-12-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261206T110000
 DTEND;TZID=Europe/Copenhagen:20261206T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads
@@ -270,7 +270,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-12-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;VALUE=DATE:20261212
 SUMMARY:Hvalsø kræmmerhal og markedsplads
 LOCATION:Tæt ved Hvalsø station.\, Åsvejen 22\, 4330 Hvalsø
@@ -279,7 +279,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/hvalsoe-kraemmerhal-og-marke
 END:VEVENT
 BEGIN:VEVENT
 UID:hvalsoe-kraemmerhal-og-markedsplads-hvalsoe-2026-12-13@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261213T110000
 DTEND;TZID=Europe/Copenhagen:20261213T160000
 SUMMARY:Hvalsø kræmmerhal og markedsplads

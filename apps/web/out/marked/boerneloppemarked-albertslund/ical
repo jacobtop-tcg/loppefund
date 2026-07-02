@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:boerneloppemarked-albertslund-2026-08-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;VALUE=DATE:20260808
 SUMMARY:Børneloppemarked
 LOCATION:Bytorvet\, Albertslund Centrum\, Bytorvet\, Albertslund

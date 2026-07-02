@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:saxogades-loppemarked-koebenhavn-v-2026-07-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260725T100000
 DTEND;TZID=Europe/Copenhagen:20260725T150000
 SUMMARY:Saxogades loppemarked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/saxogades-loppemarked-koeben
 END:VEVENT
 BEGIN:VEVENT
 UID:saxogades-loppemarked-koebenhavn-v-2026-08-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260829T100000
 DTEND;TZID=Europe/Copenhagen:20260829T150000
 SUMMARY:Saxogades loppemarked
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/saxogades-loppemarked-koeben
 END:VEVENT
 BEGIN:VEVENT
 UID:saxogades-loppemarked-koebenhavn-v-2026-09-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260926T100000
 DTEND;TZID=Europe/Copenhagen:20260926T150000
 SUMMARY:Saxogades loppemarked

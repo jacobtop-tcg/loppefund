@@ -18,6 +18,14 @@ export function openDb(path: string): DatabaseSync {
   return db;
 }
 
+/**
+ * Read-only open for consumers (the web app): no migration writes, so many
+ * parallel build workers can read the same file without lock contention.
+ */
+export function openDbReadOnly(path: string): DatabaseSync {
+  return new DatabaseSync(path, { readOnly: true });
+}
+
 export interface SourceRow {
   key: string;
   name: string;

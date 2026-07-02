@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:marked-paa-stjerne-camping-vejers-strand-2026-07-10@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260710T080000
 DTEND;TZID=Europe/Copenhagen:20260710T160000
 SUMMARY:Marked på Stjerne Camping
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/marked-paa-stjerne-camping-v
 END:VEVENT
 BEGIN:VEVENT
 UID:marked-paa-stjerne-camping-vejers-strand-2026-07-17@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260717T080000
 DTEND;TZID=Europe/Copenhagen:20260717T160000
 SUMMARY:Marked på Stjerne Camping
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/marked-paa-stjerne-camping-v
 END:VEVENT
 BEGIN:VEVENT
 UID:marked-paa-stjerne-camping-vejers-strand-2026-07-24@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260724T080000
 DTEND;TZID=Europe/Copenhagen:20260724T160000
 SUMMARY:Marked på Stjerne Camping
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/marked-paa-stjerne-camping-v
 END:VEVENT
 BEGIN:VEVENT
 UID:marked-paa-stjerne-camping-vejers-strand-2026-07-31@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260731T080000
 DTEND;TZID=Europe/Copenhagen:20260731T160000
 SUMMARY:Marked på Stjerne Camping
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/marked-paa-stjerne-camping-v
 END:VEVENT
 BEGIN:VEVENT
 UID:marked-paa-stjerne-camping-vejers-strand-2026-08-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260807T080000
 DTEND;TZID=Europe/Copenhagen:20260807T160000
 SUMMARY:Marked på Stjerne Camping
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/marked-paa-stjerne-camping-v
 END:VEVENT
 BEGIN:VEVENT
 UID:marked-paa-stjerne-camping-vejers-strand-2026-08-14@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260814T080000
 DTEND;TZID=Europe/Copenhagen:20260814T160000
 SUMMARY:Marked på Stjerne Camping
@@ -63,7 +63,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/marked-paa-stjerne-camping-v
 END:VEVENT
 BEGIN:VEVENT
 UID:marked-paa-stjerne-camping-vejers-strand-2026-08-21@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260821T080000
 DTEND;TZID=Europe/Copenhagen:20260821T160000
 SUMMARY:Marked på Stjerne Camping
@@ -73,7 +73,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/marked-paa-stjerne-camping-v
 END:VEVENT
 BEGIN:VEVENT
 UID:marked-paa-stjerne-camping-vejers-strand-2026-09-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260926T080000
 DTEND;TZID=Europe/Copenhagen:20260926T160000
 SUMMARY:Marked på Stjerne Camping
@@ -83,7 +83,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/marked-paa-stjerne-camping-v
 END:VEVENT
 BEGIN:VEVENT
 UID:marked-paa-stjerne-camping-vejers-strand-2026-10-16@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20261016T080000
 DTEND;TZID=Europe/Copenhagen:20261016T160000
 SUMMARY:Marked på Stjerne Camping

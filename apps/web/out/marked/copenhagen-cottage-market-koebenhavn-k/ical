@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-07-03@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260703T110000
 DTEND;TZID=Europe/Copenhagen:20260703T180000
 SUMMARY:Copenhagen Cottage Market
@@ -12,7 +12,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-07-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260704T110000
 DTEND;TZID=Europe/Copenhagen:20260704T180000
 SUMMARY:Copenhagen Cottage Market
@@ -21,7 +21,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-07-10@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260710T110000
 DTEND;TZID=Europe/Copenhagen:20260710T180000
 SUMMARY:Copenhagen Cottage Market
@@ -30,7 +30,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-07-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260711T110000
 DTEND;TZID=Europe/Copenhagen:20260711T180000
 SUMMARY:Copenhagen Cottage Market
@@ -39,7 +39,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-07-17@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260717T110000
 DTEND;TZID=Europe/Copenhagen:20260717T180000
 SUMMARY:Copenhagen Cottage Market
@@ -48,7 +48,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-07-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260718T110000
 DTEND;TZID=Europe/Copenhagen:20260718T180000
 SUMMARY:Copenhagen Cottage Market
@@ -57,7 +57,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-07-24@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260724T110000
 DTEND;TZID=Europe/Copenhagen:20260724T180000
 SUMMARY:Copenhagen Cottage Market
@@ -66,7 +66,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-07-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260725T110000
 DTEND;TZID=Europe/Copenhagen:20260725T180000
 SUMMARY:Copenhagen Cottage Market
@@ -75,7 +75,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-07-31@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260731T110000
 DTEND;TZID=Europe/Copenhagen:20260731T180000
 SUMMARY:Copenhagen Cottage Market
@@ -84,7 +84,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-08-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260801T110000
 DTEND;TZID=Europe/Copenhagen:20260801T180000
 SUMMARY:Copenhagen Cottage Market
@@ -93,7 +93,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-08-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260807T110000
 DTEND;TZID=Europe/Copenhagen:20260807T180000
 SUMMARY:Copenhagen Cottage Market
@@ -102,7 +102,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-08-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260808T110000
 DTEND;TZID=Europe/Copenhagen:20260808T180000
 SUMMARY:Copenhagen Cottage Market
@@ -111,7 +111,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-08-14@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260814T110000
 DTEND;TZID=Europe/Copenhagen:20260814T180000
 SUMMARY:Copenhagen Cottage Market
@@ -120,7 +120,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-08-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260815T110000
 DTEND;TZID=Europe/Copenhagen:20260815T180000
 SUMMARY:Copenhagen Cottage Market
@@ -129,7 +129,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-08-21@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260821T110000
 DTEND;TZID=Europe/Copenhagen:20260821T180000
 SUMMARY:Copenhagen Cottage Market
@@ -138,7 +138,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-08-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260822T110000
 DTEND;TZID=Europe/Copenhagen:20260822T180000
 SUMMARY:Copenhagen Cottage Market
@@ -147,7 +147,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-08-28@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260828T110000
 DTEND;TZID=Europe/Copenhagen:20260828T180000
 SUMMARY:Copenhagen Cottage Market
@@ -156,7 +156,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-08-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260829T110000
 DTEND;TZID=Europe/Copenhagen:20260829T180000
 SUMMARY:Copenhagen Cottage Market
@@ -165,7 +165,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-09-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260904T110000
 DTEND;TZID=Europe/Copenhagen:20260904T180000
 SUMMARY:Copenhagen Cottage Market
@@ -174,7 +174,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-09-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260905T110000
 DTEND;TZID=Europe/Copenhagen:20260905T180000
 SUMMARY:Copenhagen Cottage Market
@@ -183,7 +183,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-09-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260911T110000
 DTEND;TZID=Europe/Copenhagen:20260911T180000
 SUMMARY:Copenhagen Cottage Market
@@ -192,7 +192,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-09-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260912T110000
 DTEND;TZID=Europe/Copenhagen:20260912T180000
 SUMMARY:Copenhagen Cottage Market
@@ -201,7 +201,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-09-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260918T110000
 DTEND;TZID=Europe/Copenhagen:20260918T180000
 SUMMARY:Copenhagen Cottage Market
@@ -210,7 +210,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-09-19@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260919T110000
 DTEND;TZID=Europe/Copenhagen:20260919T180000
 SUMMARY:Copenhagen Cottage Market
@@ -219,7 +219,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-09-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260925T110000
 DTEND;TZID=Europe/Copenhagen:20260925T180000
 SUMMARY:Copenhagen Cottage Market
@@ -228,7 +228,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/copenhagen-cottage-market-ko
 END:VEVENT
 BEGIN:VEVENT
 UID:copenhagen-cottage-market-koebenhavn-k-2026-09-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260926T110000
 DTEND;TZID=Europe/Copenhagen:20260926T180000
 SUMMARY:Copenhagen Cottage Market

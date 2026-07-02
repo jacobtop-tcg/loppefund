@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260704T100000
 DTEND;TZID=Europe/Copenhagen:20260704T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260705T100000
 DTEND;TZID=Europe/Copenhagen:20260705T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260706T100000
 DTEND;TZID=Europe/Copenhagen:20260706T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260711T100000
 DTEND;TZID=Europe/Copenhagen:20260711T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260712T100000
 DTEND;TZID=Europe/Copenhagen:20260712T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-13@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260713T100000
 DTEND;TZID=Europe/Copenhagen:20260713T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -63,7 +63,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260718T100000
 DTEND;TZID=Europe/Copenhagen:20260718T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -73,7 +73,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-19@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260719T100000
 DTEND;TZID=Europe/Copenhagen:20260719T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -83,7 +83,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-20@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260720T100000
 DTEND;TZID=Europe/Copenhagen:20260720T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -93,7 +93,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260725T100000
 DTEND;TZID=Europe/Copenhagen:20260725T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -103,7 +103,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260726T100000
 DTEND;TZID=Europe/Copenhagen:20260726T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -113,7 +113,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-07-27@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260727T100000
 DTEND;TZID=Europe/Copenhagen:20260727T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -123,7 +123,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260801T100000
 DTEND;TZID=Europe/Copenhagen:20260801T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -133,7 +133,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-02@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260802T100000
 DTEND;TZID=Europe/Copenhagen:20260802T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -143,7 +143,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-03@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260803T100000
 DTEND;TZID=Europe/Copenhagen:20260803T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -153,7 +153,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260808T100000
 DTEND;TZID=Europe/Copenhagen:20260808T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -163,7 +163,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-09@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260809T100000
 DTEND;TZID=Europe/Copenhagen:20260809T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -173,7 +173,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-10@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260810T100000
 DTEND;TZID=Europe/Copenhagen:20260810T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -183,7 +183,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260815T100000
 DTEND;TZID=Europe/Copenhagen:20260815T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -193,7 +193,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-16@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260816T100000
 DTEND;TZID=Europe/Copenhagen:20260816T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -203,7 +203,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-17@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260817T100000
 DTEND;TZID=Europe/Copenhagen:20260817T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -213,7 +213,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260822T100000
 DTEND;TZID=Europe/Copenhagen:20260822T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -223,7 +223,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-23@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260823T100000
 DTEND;TZID=Europe/Copenhagen:20260823T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -233,7 +233,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-24@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260824T100000
 DTEND;TZID=Europe/Copenhagen:20260824T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -243,7 +243,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260829T100000
 DTEND;TZID=Europe/Copenhagen:20260829T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -253,7 +253,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-30@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260830T100000
 DTEND;TZID=Europe/Copenhagen:20260830T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -263,7 +263,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-08-31@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260831T100000
 DTEND;TZID=Europe/Copenhagen:20260831T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -273,7 +273,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-09-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260905T100000
 DTEND;TZID=Europe/Copenhagen:20260905T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -283,7 +283,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-09-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260906T100000
 DTEND;TZID=Europe/Copenhagen:20260906T160000
 SUMMARY:Den Blaa hal på Majgaarden
@@ -293,7 +293,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/den-blaa-hal-paa-majgaarden-
 END:VEVENT
 BEGIN:VEVENT
 UID:den-blaa-hal-paa-majgaarden-kastrup-2026-09-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260907T100000
 DTEND;TZID=Europe/Copenhagen:20260907T160000
 SUMMARY:Den Blaa hal på Majgaarden

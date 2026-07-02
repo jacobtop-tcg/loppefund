@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-07-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260704T080000
 DTEND;TZID=Europe/Copenhagen:20260704T140000
 SUMMARY:Torvedage
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-07-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;VALUE=DATE:20260708
 SUMMARY:Torvedage
 LOCATION:Stændertorvet\, Stændertorvet 1\, Roskilde
@@ -22,7 +22,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-07-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260711T080000
 DTEND;TZID=Europe/Copenhagen:20260711T140000
 SUMMARY:Torvedage
@@ -32,7 +32,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-07-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;VALUE=DATE:20260715
 SUMMARY:Torvedage
 LOCATION:Stændertorvet\, Stændertorvet 1\, Roskilde
@@ -41,7 +41,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-07-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260718T080000
 DTEND;TZID=Europe/Copenhagen:20260718T140000
 SUMMARY:Torvedage
@@ -51,7 +51,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-07-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;VALUE=DATE:20260722
 SUMMARY:Torvedage
 LOCATION:Stændertorvet\, Stændertorvet 1\, Roskilde
@@ -60,7 +60,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-07-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260725T080000
 DTEND;TZID=Europe/Copenhagen:20260725T140000
 SUMMARY:Torvedage
@@ -70,7 +70,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-07-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;VALUE=DATE:20260729
 SUMMARY:Torvedage
 LOCATION:Stændertorvet\, Stændertorvet 1\, Roskilde
@@ -79,7 +79,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-08-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260801T080000
 DTEND;TZID=Europe/Copenhagen:20260801T140000
 SUMMARY:Torvedage
@@ -89,7 +89,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-08-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;VALUE=DATE:20260805
 SUMMARY:Torvedage
 LOCATION:Stændertorvet\, Stændertorvet 1\, Roskilde
@@ -98,7 +98,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-08-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260808T080000
 DTEND;TZID=Europe/Copenhagen:20260808T140000
 SUMMARY:Torvedage
@@ -108,7 +108,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-08-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;VALUE=DATE:20260812
 SUMMARY:Torvedage
 LOCATION:Stændertorvet\, Stændertorvet 1\, Roskilde
@@ -117,7 +117,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-08-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260815T080000
 DTEND;TZID=Europe/Copenhagen:20260815T140000
 SUMMARY:Torvedage
@@ -127,7 +127,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-08-19@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;VALUE=DATE:20260819
 SUMMARY:Torvedage
 LOCATION:Stændertorvet\, Stændertorvet 1\, Roskilde
@@ -136,7 +136,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-08-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260822T080000
 DTEND;TZID=Europe/Copenhagen:20260822T140000
 SUMMARY:Torvedage
@@ -146,7 +146,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-08-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;VALUE=DATE:20260826
 SUMMARY:Torvedage
 LOCATION:Stændertorvet\, Stændertorvet 1\, Roskilde
@@ -155,7 +155,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedage-roskilde
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedage-roskilde-2026-08-29@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260829T080000
 DTEND;TZID=Europe/Copenhagen:20260829T140000
 SUMMARY:Torvedage

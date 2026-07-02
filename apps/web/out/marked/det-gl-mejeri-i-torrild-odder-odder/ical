@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-09-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260926T100000
 DTEND;TZID=Europe/Copenhagen:20260926T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-09-27@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20260927T100000
 DTEND;TZID=Europe/Copenhagen:20260927T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-02@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261002T100000
 DTEND;TZID=Europe/Copenhagen:20261002T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-03@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261003T100000
 DTEND;TZID=Europe/Copenhagen:20261003T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261004T100000
 DTEND;TZID=Europe/Copenhagen:20261004T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-09@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261009T100000
 DTEND;TZID=Europe/Copenhagen:20261009T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -63,7 +63,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-10@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261010T100000
 DTEND;TZID=Europe/Copenhagen:20261010T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -73,7 +73,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261011T100000
 DTEND;TZID=Europe/Copenhagen:20261011T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -83,7 +83,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261012T100000
 DTEND;TZID=Europe/Copenhagen:20261012T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -93,7 +93,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-13@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261013T100000
 DTEND;TZID=Europe/Copenhagen:20261013T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -103,7 +103,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-14@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261014T100000
 DTEND;TZID=Europe/Copenhagen:20261014T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -113,7 +113,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261015T100000
 DTEND;TZID=Europe/Copenhagen:20261015T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -123,7 +123,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-16@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261016T100000
 DTEND;TZID=Europe/Copenhagen:20261016T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -133,7 +133,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-17@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261017T100000
 DTEND;TZID=Europe/Copenhagen:20261017T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -143,7 +143,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261018T100000
 DTEND;TZID=Europe/Copenhagen:20261018T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -153,7 +153,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-23@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261023T100000
 DTEND;TZID=Europe/Copenhagen:20261023T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -163,7 +163,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-24@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261024T100000
 DTEND;TZID=Europe/Copenhagen:20261024T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -173,7 +173,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261025T100000
 DTEND;TZID=Europe/Copenhagen:20261025T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -183,7 +183,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-30@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261030T100000
 DTEND;TZID=Europe/Copenhagen:20261030T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -193,7 +193,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-10-31@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261031T100000
 DTEND;TZID=Europe/Copenhagen:20261031T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -203,7 +203,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-11-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261101T100000
 DTEND;TZID=Europe/Copenhagen:20261101T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -213,7 +213,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-11-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261106T100000
 DTEND;TZID=Europe/Copenhagen:20261106T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -223,7 +223,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-11-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261107T100000
 DTEND;TZID=Europe/Copenhagen:20261107T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -233,7 +233,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-11-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261108T100000
 DTEND;TZID=Europe/Copenhagen:20261108T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -243,7 +243,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-11-13@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261113T100000
 DTEND;TZID=Europe/Copenhagen:20261113T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -253,7 +253,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-11-14@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261114T100000
 DTEND;TZID=Europe/Copenhagen:20261114T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -263,7 +263,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-11-15@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261115T100000
 DTEND;TZID=Europe/Copenhagen:20261115T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -273,7 +273,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-11-20@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261120T100000
 DTEND;TZID=Europe/Copenhagen:20261120T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -283,7 +283,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-11-21@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261121T100000
 DTEND;TZID=Europe/Copenhagen:20261121T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder
@@ -293,7 +293,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/det-gl-mejeri-i-torrild-odde
 END:VEVENT
 BEGIN:VEVENT
 UID:det-gl-mejeri-i-torrild-odder-odder-2026-11-22@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181533Z
 DTSTART;TZID=Europe/Copenhagen:20261122T100000
 DTEND;TZID=Europe/Copenhagen:20261122T173000
 SUMMARY:Det Gl. Mejeri i Torrild\, Odder

@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-03@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260703T110000
 DTEND;TZID=Europe/Copenhagen:20260703T150000
 SUMMARY:LP Antik & Design
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260705T110000
 DTEND;TZID=Europe/Copenhagen:20260705T150000
 SUMMARY:LP Antik & Design
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260707T110000
 DTEND;TZID=Europe/Copenhagen:20260707T150000
 SUMMARY:LP Antik & Design
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-10@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260710T110000
 DTEND;TZID=Europe/Copenhagen:20260710T150000
 SUMMARY:LP Antik & Design
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260712T110000
 DTEND;TZID=Europe/Copenhagen:20260712T150000
 SUMMARY:LP Antik & Design
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-14@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260714T110000
 DTEND;TZID=Europe/Copenhagen:20260714T150000
 SUMMARY:LP Antik & Design
@@ -63,7 +63,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-17@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260717T110000
 DTEND;TZID=Europe/Copenhagen:20260717T150000
 SUMMARY:LP Antik & Design
@@ -73,7 +73,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-19@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260719T110000
 DTEND;TZID=Europe/Copenhagen:20260719T150000
 SUMMARY:LP Antik & Design
@@ -83,7 +83,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-21@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260721T110000
 DTEND;TZID=Europe/Copenhagen:20260721T150000
 SUMMARY:LP Antik & Design
@@ -93,7 +93,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-24@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260724T110000
 DTEND;TZID=Europe/Copenhagen:20260724T150000
 SUMMARY:LP Antik & Design
@@ -103,7 +103,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260726T110000
 DTEND;TZID=Europe/Copenhagen:20260726T150000
 SUMMARY:LP Antik & Design
@@ -113,7 +113,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-28@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260728T110000
 DTEND;TZID=Europe/Copenhagen:20260728T150000
 SUMMARY:LP Antik & Design
@@ -123,7 +123,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-07-31@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260731T110000
 DTEND;TZID=Europe/Copenhagen:20260731T150000
 SUMMARY:LP Antik & Design
@@ -133,7 +133,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-02@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260802T110000
 DTEND;TZID=Europe/Copenhagen:20260802T150000
 SUMMARY:LP Antik & Design
@@ -143,7 +143,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260804T110000
 DTEND;TZID=Europe/Copenhagen:20260804T150000
 SUMMARY:LP Antik & Design
@@ -153,7 +153,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-07@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260807T110000
 DTEND;TZID=Europe/Copenhagen:20260807T150000
 SUMMARY:LP Antik & Design
@@ -163,7 +163,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-09@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260809T110000
 DTEND;TZID=Europe/Copenhagen:20260809T150000
 SUMMARY:LP Antik & Design
@@ -173,7 +173,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-11@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260811T110000
 DTEND;TZID=Europe/Copenhagen:20260811T150000
 SUMMARY:LP Antik & Design
@@ -183,7 +183,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-14@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260814T110000
 DTEND;TZID=Europe/Copenhagen:20260814T150000
 SUMMARY:LP Antik & Design
@@ -193,7 +193,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-16@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260816T110000
 DTEND;TZID=Europe/Copenhagen:20260816T150000
 SUMMARY:LP Antik & Design
@@ -203,7 +203,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-18@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260818T110000
 DTEND;TZID=Europe/Copenhagen:20260818T150000
 SUMMARY:LP Antik & Design
@@ -213,7 +213,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-21@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260821T110000
 DTEND;TZID=Europe/Copenhagen:20260821T150000
 SUMMARY:LP Antik & Design
@@ -223,7 +223,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-23@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260823T110000
 DTEND;TZID=Europe/Copenhagen:20260823T150000
 SUMMARY:LP Antik & Design
@@ -233,7 +233,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-25@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260825T110000
 DTEND;TZID=Europe/Copenhagen:20260825T150000
 SUMMARY:LP Antik & Design
@@ -243,7 +243,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-28@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260828T110000
 DTEND;TZID=Europe/Copenhagen:20260828T150000
 SUMMARY:LP Antik & Design
@@ -253,7 +253,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-08-30@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260830T110000
 DTEND;TZID=Europe/Copenhagen:20260830T150000
 SUMMARY:LP Antik & Design
@@ -263,7 +263,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-09-01@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260901T110000
 DTEND;TZID=Europe/Copenhagen:20260901T150000
 SUMMARY:LP Antik & Design
@@ -273,7 +273,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-09-04@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260904T110000
 DTEND;TZID=Europe/Copenhagen:20260904T150000
 SUMMARY:LP Antik & Design
@@ -283,7 +283,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-09-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260906T110000
 DTEND;TZID=Europe/Copenhagen:20260906T150000
 SUMMARY:LP Antik & Design
@@ -293,7 +293,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/lp-antik-design-holmegaard
 END:VEVENT
 BEGIN:VEVENT
 UID:lp-antik-design-holmegaard-2026-09-08@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181544Z
 DTSTART;TZID=Europe/Copenhagen:20260908T110000
 DTEND;TZID=Europe/Copenhagen:20260908T150000
 SUMMARY:LP Antik & Design

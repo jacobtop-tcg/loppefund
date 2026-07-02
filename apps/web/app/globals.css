@@ -887,6 +887,21 @@ a:focus-visible .event-card {
   margin: 0;
 }
 
+/* ---------- city pages ---------- */
+
+.city-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 22px 0 80px;
+}
+
+.city-count {
+  color: var(--ink-faint);
+  font-size: 12px;
+  margin-left: 2px;
+}
+
 /* ---------- footer ---------- */
 
 .site-footer {

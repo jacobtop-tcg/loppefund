@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bondemarked-samsoe-2026-07-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260712T110000
 DTEND;TZID=Europe/Copenhagen:20260712T150000
 SUMMARY:Bondemarked
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/bondemarked-samsoe
 END:VEVENT
 BEGIN:VEVENT
 UID:bondemarked-samsoe-2026-08-16@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181534Z
 DTSTART;TZID=Europe/Copenhagen:20260816T110000
 DTEND;TZID=Europe/Copenhagen:20260816T150000
 SUMMARY:Bondemarked

@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-07-02@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T160000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -13,7 +13,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-07-05@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260705T080000
 DTEND;TZID=Europe/Copenhagen:20260705T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -23,7 +23,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-07-12@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260712T080000
 DTEND;TZID=Europe/Copenhagen:20260712T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -33,7 +33,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-07-19@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260719T080000
 DTEND;TZID=Europe/Copenhagen:20260719T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -43,7 +43,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-07-26@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260726T080000
 DTEND;TZID=Europe/Copenhagen:20260726T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -53,7 +53,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-08-02@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260802T080000
 DTEND;TZID=Europe/Copenhagen:20260802T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -63,7 +63,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-08-09@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260809T080000
 DTEND;TZID=Europe/Copenhagen:20260809T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -73,7 +73,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-08-16@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260816T080000
 DTEND;TZID=Europe/Copenhagen:20260816T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -83,7 +83,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-08-23@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260823T080000
 DTEND;TZID=Europe/Copenhagen:20260823T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -93,7 +93,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-08-30@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260830T080000
 DTEND;TZID=Europe/Copenhagen:20260830T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -103,7 +103,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-09-06@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260906T080000
 DTEND;TZID=Europe/Copenhagen:20260906T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -113,7 +113,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-09-13@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260913T080000
 DTEND;TZID=Europe/Copenhagen:20260913T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -123,7 +123,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-09-20@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260920T080000
 DTEND;TZID=Europe/Copenhagen:20260920T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK
@@ -133,7 +133,7 @@ URL:https://jacobtop-tcg.github.io/loppefund/marked/roedovre-loppemarked-v-boldk
 END:VEVENT
 BEGIN:VEVENT
 UID:roedovre-loppemarked-v-boldklubben-avarta-og-rsik-roedovre-2026-09-27@loppefund.dk
-DTSTAMP:20260702T163051Z
+DTSTAMP:20260702T181543Z
 DTSTART;TZID=Europe/Copenhagen:20260927T080000
 DTEND;TZID=Europe/Copenhagen:20260927T140000
 SUMMARY:Rødovre Loppemarked v/boldklubben AVARTA og RSIK

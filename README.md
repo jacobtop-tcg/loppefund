@@ -95,6 +95,22 @@ the promote threshold are adapter-ready — the funnel is
   times stay unknown rather than being invented; geocodes below DAWA
   quality B fall back to explicit postcode-centroid approximation.
 
+## Production
+
+```bash
+# Verified production build (First Load JS ~113 kB)
+npm run build --workspace @loppefund/web
+npm run start --workspace @loppefund/web   # serves on :3000
+```
+
+Deployment needs a Node host with a persistent disk for `data/loppefund.db`
+(a small VPS or Fly.io/Railway volume — Vercel's ephemeral filesystem won't
+fit the SQLite architecture without moving the db to LiteFS/Turso). Set
+`LOPPEFUND_BASE_URL` for correct sitemap/robots URLs and schedule the
+pipeline (below). Facebook-group ingestion activates by setting
+`LOPPEFUND_FB_FEED_URLS` to a scraping-vendor dataset URL (e.g. an Apify
+actor scheduled vendor-side).
+
 ## Keeping data fresh
 
 The pipeline is idempotent — re-running it detects changes (content hashes),

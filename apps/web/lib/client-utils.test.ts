@@ -1,6 +1,37 @@
 import { describe, expect, it } from 'vitest';
 import { buildTripUrl } from './client-utils.ts';
 
+// Mirror of Explorer's dateRangeFor to pin the Sunday "næste weekend" bug.
+function addDaysIso(isoDate: string, days: number): string {
+  const [y, m, d] = isoDate.split('-').map(Number) as [number, number, number];
+  return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
+}
+function weekdayOfIso(date: string): number {
+  const [y, m, d] = date.split('-').map(Number) as [number, number, number];
+  const dow = new Date(Date.UTC(y, m - 1, d)).getUTCDay();
+  return dow === 0 ? 7 : dow;
+}
+function nextWeekendRange(today: string): [string, string] {
+  const wd = weekdayOfIso(today);
+  const thisSat = wd === 7 ? addDaysIso(today, -1) : addDaysIso(today, (6 - wd + 7) % 7);
+  const thisSun = addDaysIso(thisSat, 1);
+  return [addDaysIso(thisSat, 7), addDaysIso(thisSun, 7)];
+}
+
+describe('nextWeekendRange', () => {
+  it('is a valid forward range on every weekday incl. Sunday', () => {
+    // 2026-07-05 is a Sunday; the old code produced an inverted range here.
+    for (let i = 0; i < 7; i++) {
+      const day = addDaysIso('2026-07-05', i);
+      const [from, to] = nextWeekendRange(day);
+      expect(from <= to).toBe(true);
+      expect(weekdayOfIso(from)).toBe(6); // Saturday
+      expect(weekdayOfIso(to)).toBe(7); // Sunday
+      expect(from > day).toBe(true); // strictly in the future
+    }
+  });
+});
+
 describe('buildTripUrl', () => {
   it('returns null below 2 stops', () => {
     expect(buildTripUrl([])).toBeNull();

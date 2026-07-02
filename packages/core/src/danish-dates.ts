@@ -133,8 +133,18 @@ export function parseOpeningHours(text: string): OpeningHours {
     'g',
   );
 
+  const monthAfter = new RegExp(
+    `^\\s*\\.?\\s*(?:januar|februar|marts|april|maj|juni|juli|august|september|oktober|november|december)`,
+    'i',
+  );
   let matched = false;
   for (const m of t.matchAll(clauseRe)) {
+    const startH = Number(m[3]);
+    const endH = Number(m[5]);
+    // Reject date ranges in disguise: "lørdag-søndag 5.-6. september"
+    // must not become 05:00-06:00.
+    if (startH > 23 || endH > 24) continue;
+    if (monthAfter.test(t.slice((m.index ?? 0) + m[0].length))) continue;
     matched = true;
     const from = WEEKDAYS[m[1]!]!;
     const to = m[2] ? WEEKDAYS[m[2]]! : from;

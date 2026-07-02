@@ -82,7 +82,8 @@ if (command === 'rebuild') {
   });
   const stats: CanonicalizeStats = { created: 0, merged: 0, unchanged: 0, skippedNoDates: 0 };
   for (const r of raws) {
-    await canonicalizeRawEvent(db, JSON.parse(r.payload), trustRows, stats);
+    // touch=false: offline reprocessing must not fabricate freshness.
+    await canonicalizeRawEvent(db, JSON.parse(r.payload), trustRows, stats, { touch: false });
   }
   const rebuildToday = new Date().toISOString().slice(0, 10);
   expirePastEvents(db, rebuildToday);

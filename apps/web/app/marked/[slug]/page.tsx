@@ -61,6 +61,31 @@ function eventJsonLd(event: NonNullable<ReturnType<typeof loadEventDetail>>, tod
   };
 }
 
+/**
+ * Serialize JSON-LD for inline injection. Event data is crawled from the
+ * public web, so "</script>" or a raw line/paragraph separator in a title
+ * must be escaped or it breaks out of the <script> tag (stored XSS).
+ */
+function safeJsonLd(data: unknown): string {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/[\u2028\u2029]/g, (c) => (c === '\u2028' ? '\\u2028' : '\\u2029'));
+}
+
+/** Validate a crawled website value: only http(s), scheme repaired, else null. */
+function safeExternalUrl(raw: string | null): { href: string; label: string } | null {
+  if (!raw) return null;
+  const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+  try {
+    const u = new URL(withScheme);
+    if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+    return { href: u.href, label: u.hostname.replace(/^www\./, '') };
+  } catch {
+    return null;
+  }
+}
+
 export default async function EventPage({
   params,
 }: {
@@ -77,13 +102,16 @@ export default async function EventPage({
   const trustLabel =
     event.confidence >= 0.75 ? 'Godt bekræftet' : event.confidence >= 0.45 ? 'Bekræftet' : 'Ubekræftet';
   const jsonLd = eventJsonLd(event, today);
+  const safeWebsite = safeExternalUrl(event.contactWebsite);
 
   return (
     <>
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          // Event data is crawled from the public web — a title containing
+          // "</script>" or a line-separator must not break out of the tag.
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       )}
       <div className="container">
@@ -209,12 +237,12 @@ export default async function EventPage({
                     <span className="v">{event.organizer}</span>
                   </li>
                 )}
-                {event.contactWebsite && (
+                {safeWebsite && (
                   <li>
                     <span className="k">Hjemmeside</span>
                     <span className="v">
-                      <a href={event.contactWebsite} target="_blank" rel="noopener noreferrer">
-                        {new URL(event.contactWebsite).hostname.replace('www.', '')}
+                      <a href={safeWebsite.href} target="_blank" rel="noopener noreferrer">
+                        {safeWebsite.label}
                       </a>
                     </span>
                   </li>

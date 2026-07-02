@@ -46,10 +46,17 @@ export function recordDocument(
   ).run(d.sourceKey, d.url, new Date().toISOString(), d.httpStatus, d.contentHash);
 }
 
-/** Store a raw extraction; returns id and whether the payload changed since last time. */
+/**
+ * Store a raw extraction; returns id and whether the payload changed.
+ * extracted_at doubles as "last seen at the source": an unchanged payload
+ * from a LIVE crawl still bumps it (the source is re-confirming the data),
+ * while offline reprocessing passes touch=false so rebuilds never fabricate
+ * freshness.
+ */
 export function upsertRawEvent(
   db: DatabaseSync,
   raw: RawEvent,
+  opts: { touch?: boolean } = {},
 ): { id: number; changed: boolean } {
   const payload = JSON.stringify(raw);
   const hash = hashContent(payload);
@@ -62,7 +69,13 @@ export function upsertRawEvent(
     | undefined;
   const now = new Date().toISOString();
   if (existing) {
-    if (existing.content_hash === hash) return { id: existing.id, changed: false };
+    if (existing.content_hash === hash) {
+      if (opts.touch !== false) {
+        db.prepare(`UPDATE raw_events SET extracted_at = ? WHERE id = ?`).run(now, existing.id);
+      }
+      return { id: existing.id, changed: false };
+    }
+    if (opts.touch === false) return { id: existing.id, changed: true };
     db.prepare(
       `UPDATE raw_events SET payload = ?, content_hash = ?, extracted_at = ? WHERE id = ?`,
     ).run(payload, hash, now, existing.id);
@@ -177,12 +190,14 @@ export function linkEventSource(
   eventId: number,
   rawEventId: number,
 ): void {
+  // last_confirmed_at mirrors the raw event's extracted_at (= when the
+  // source last showed this data), so offline rebuilds keep real freshness.
   const now = new Date().toISOString();
   db.prepare(
     `INSERT INTO event_sources(event_id, raw_event_id, first_linked_at, last_confirmed_at)
-     VALUES (?, ?, ?, ?)
+     VALUES (?, ?, ?, COALESCE((SELECT extracted_at FROM raw_events WHERE id = ?), ?))
      ON CONFLICT(event_id, raw_event_id) DO UPDATE SET last_confirmed_at = excluded.last_confirmed_at`,
-  ).run(eventId, rawEventId, now, now);
+  ).run(eventId, rawEventId, now, rawEventId, now);
 }
 
 /** All active events with any occurrence in [from, to], with their occurrences in range. */
@@ -261,13 +276,15 @@ export function searchEvents(db: DatabaseSync, query: string, limit = 50): numbe
     .trim()
     .split(/\s+/)
     .filter(Boolean);
-  // Each token must match either as typed or in a Danish ascii-folded form.
+  // Each token must match as typed or in a Danish ascii-folded form; groups
+  // are joined with explicit AND (FTS5 rejects space-separated parenthesized
+  // groups). Empty variants are dropped so no bare '""*' reaches the parser.
   const q = tokens
     .map((t) => {
-      const variants = new Set([t, ...searchFold(t).split(' ')]);
-      return `(${[...variants].map((v) => `"${v}"*`).join(' OR ')})`;
+      const variants = [...new Set([t, ...searchFold(t).split(' ')])].filter(Boolean);
+      return `(${variants.map((v) => `"${v}"*`).join(' OR ')})`;
     })
-    .join(' ');
+    .join(' AND ');
   if (!q) return [];
   const rows = db
     .prepare(
@@ -292,6 +309,15 @@ export function findCandidateEvents(
       .prepare(`SELECT * FROM events WHERE title = ? COLLATE NOCASE`)
       .all(opts.title) as unknown as EventRow[]) {
       candidates.set(r.id, r);
+    }
+    // Fuzzy title lookup via FTS so location-less variants
+    // ("Loppemarked på Vanløse Torv" vs "Vanløse Torv Loppemarked") surface
+    // as candidates; matchEvents still makes the final merge decision.
+    for (const id of searchEvents(db, opts.title, 20)) {
+      if (!candidates.has(id)) {
+        const r = db.prepare(`SELECT * FROM events WHERE id = ?`).get(id) as EventRow | undefined;
+        if (r) candidates.set(r.id, r);
+      }
     }
   }
   if (opts.postcode) {

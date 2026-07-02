@@ -256,6 +256,28 @@ h1, h2, h3 {
   padding-bottom: 80px;
 }
 
+.card-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.card-button:disabled {
+  cursor: default;
+}
+
+.card-button:focus-visible .event-card,
+a:focus-visible .event-card {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .event-card {
   position: relative;
   display: flex;

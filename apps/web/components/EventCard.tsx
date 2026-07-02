@@ -35,31 +35,29 @@ export function EventCard({
   const moreDates = event.occurrences.filter((o) => o.date > event.nextDate).length;
   const selectable = tripMode && event.lat != null && event.lng != null;
 
-  return (
-    <Link
-      href={`/marked/${event.slug}`}
-      onClick={
-        tripMode
-          ? (e) => {
-              e.preventDefault();
-              if (selectable) onToggleTrip?.(event.slug);
-            }
-          : undefined
-      }
-      aria-pressed={tripMode ? selected : undefined}
+  // In trip mode the card is a real toggle button (Space/Enter, aria-pressed,
+  // disabled) instead of a link with preventDefault — proper keyboard/AT
+  // semantics and no swallowed modifier-clicks.
+  const inner = (
+    <article
+      className={`event-card${selected ? ' selected' : ''}${tripMode && !selectable ? ' trip-disabled' : ''}`}
+      style={{ animationDelay: `${Math.min(index, 12) * 35}ms` }}
+      title={tripMode && !selectable ? 'Mangler placering — kan ikke lægges på ruten' : undefined}
     >
-      <article
-        className={`event-card${selected ? ' selected' : ''}${tripMode && !selectable ? ' trip-disabled' : ''}`}
-        style={{ animationDelay: `${Math.min(index, 12) * 35}ms` }}
-        title={tripMode && !selectable ? 'Mangler placering — kan ikke lægges på ruten' : undefined}
-      >
-        {tripMode && selectable && (
-          <span className="select-ring" aria-hidden>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round">
-              <path d="m4 12 5 5 11-11" />
-            </svg>
-          </span>
-        )}
+      {tripMode && selectable && (
+        <span className="select-ring" aria-hidden>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round">
+            <path d="m4 12 5 5 11-11" />
+          </svg>
+        </span>
+      )}
+      <CardBody />
+    </article>
+  );
+
+  function CardBody() {
+    return (
+      <>
         <div className={`date-block ${isToday ? 'today' : ''}`}>
           <div className="weekday">{isToday ? 'i dag' : weekdayShort(event.nextDate)}</div>
           <div className="day">{dayOfMonth(event.nextDate)}</div>
@@ -100,7 +98,23 @@ export function EventCard({
             )}
           </div>
         </div>
-      </article>
-    </Link>
-  );
+      </>
+    );
+  }
+
+  if (tripMode) {
+    return (
+      <button
+        type="button"
+        className="card-button"
+        aria-pressed={selectable ? selected : undefined}
+        disabled={!selectable}
+        onClick={() => selectable && onToggleTrip?.(event.slug)}
+      >
+        {inner}
+      </button>
+    );
+  }
+
+  return <Link href={`/marked/${event.slug}`}>{inner}</Link>;
 }

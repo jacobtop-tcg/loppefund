@@ -52,9 +52,9 @@ export function parseRecurrence(text: string): Rule[] {
   if (!t) return [];
   const rules: Rule[] = [];
 
-  // "søndag i alle ulige uger", "lørdag i lige uger"
+  // "søndag i alle ulige uger", "lørdag i lige uger", "alle søndage i lige uger"
   let m = t.match(
-    new RegExp(`(${WEEKDAY_NAMES})\\s+i\\s+(?:alle\\s+)?(ulige|lige)\\s+uger`),
+    new RegExp(`(${WEEKDAY_NAMES})e?\\s+i\\s+(?:alle\\s+)?(ulige|lige)\\s+uger`),
   );
   if (m) {
     rules.push({
@@ -141,9 +141,25 @@ export function resolveSchedule(
     }
   }
 
+  // When the source publishes explicit ranges, recurrence text only fills in
+  // days WITHIN that published span — a summer market's "hver søndag" must
+  // not invent occurrences after its season ends.
+  const ranges = input.dateRanges ?? [];
+  const ruleFrom =
+    ranges.length > 0
+      ? ranges.reduce((min, r) => (r.start < min ? r.start : min), ranges[0]!.start)
+      : window.from;
+  const ruleTo =
+    ranges.length > 0
+      ? ranges.reduce((max, r) => (r.end > max ? r.end : max), ranges[0]!.end)
+      : to;
   const rules = input.scheduleText ? parseRecurrence(input.scheduleText) : [];
   for (const rule of rules) {
-    for (let d = window.from; d <= to; d = addDays(d, 1)) {
+    for (
+      let d = ruleFrom < window.from ? window.from : ruleFrom;
+      d <= (ruleTo > to ? to : ruleTo);
+      d = addDays(d, 1)
+    ) {
       if (!rule.weekdays.includes(weekdayOf(d))) continue;
       switch (rule.kind) {
         case 'weekly':

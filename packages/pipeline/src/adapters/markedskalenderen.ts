@@ -111,10 +111,18 @@ export const markedskalenderen: SourceAdapter = {
     let city: string | undefined;
     if (addressText) {
       postcode = extractPostcode(addressText) ?? undefined;
-      const parts = addressText.split(',').map((p) => p.trim());
+      const parts = addressText.split(',').map((p) => p.trim()).filter(Boolean);
       street = parts[0];
-      const tail = parts.slice(1).join(', ');
-      city = tail.replace(/^\d{4}\s*/, '').trim() || undefined;
+      // City = the segment beginning with the 4-digit postcode ("2740
+      // Skovlunde"), scanning from the end so multi-comma addresses
+      // ("Kovej, Torvet, 6280 Højer") don't dump the whole tail into city.
+      for (let i = parts.length - 1; i >= 1; i--) {
+        const seg = parts[i]!;
+        if (/^[1-9]\d{3}\s+\S/.test(seg)) {
+          city = seg.replace(/^\d{4}\s*/, '').trim();
+          break;
+        }
+      }
     }
 
     // Description: the <p> after <h2>Beskrivelse</h2>

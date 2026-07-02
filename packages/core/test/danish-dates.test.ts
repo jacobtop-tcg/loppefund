@@ -91,4 +91,12 @@ describe('parseOpeningHours', () => {
     expect(r.generic).toBeNull();
     expect(r.byWeekday.size).toBe(0);
   });
+
+  it('does not read date ranges after weekdays as opening hours', () => {
+    // "5.-6. september" is a date range, not 05:00-06:00.
+    const r = parseOpeningHours('lørdag-søndag 5-6 september');
+    expect(r.byWeekday.size).toBe(0);
+    const r2 = parseOpeningHours('søndag 5.-6. september');
+    expect(r2.byWeekday.size).toBe(0);
+  });
 });

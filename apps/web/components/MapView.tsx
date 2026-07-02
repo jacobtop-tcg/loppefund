@@ -48,6 +48,10 @@ export function MapView({ events }: { events: MapEvent[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const readyRef = useRef(false);
+  // The 'load' handler runs asynchronously; read the latest events from a ref
+  // so filters applied before the map finishes loading aren't lost.
+  const eventsRef = useRef(events);
+  eventsRef.current = events;
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -62,7 +66,7 @@ export function MapView({ events }: { events: MapEvent[] }) {
     map.on('load', () => {
       map.addSource('events', {
         type: 'geojson',
-        data: toGeoJson(events),
+        data: toGeoJson(eventsRef.current),
         cluster: true,
         clusterMaxZoom: 12,
         clusterRadius: 46,

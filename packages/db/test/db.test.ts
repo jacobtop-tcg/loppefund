@@ -104,6 +104,9 @@ describe('db round trip', () => {
     expect(searchEvents(db, 'københavn')).toEqual([id]);
     expect(searchEvents(db, 'kobenhavn')).toEqual([id]);
     expect(searchEvents(db, 'aarhus')).toEqual([]);
+    // Multi-word queries must join FTS groups with AND, not a bare space.
+    expect(searchEvents(db, 'broens lopper')).toEqual([id]);
+    expect(searchEvents(db, 'broens aarhus')).toEqual([]);
   });
 
   it('expires events with no future occurrences', () => {

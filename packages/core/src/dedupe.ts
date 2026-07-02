@@ -83,6 +83,16 @@ const TITLE_STRONG = 0.85;
 const TITLE_WEAK = 0.45;
 const NEAR_METERS = 500;
 
+/** Tokens that carry no identity: stopwords, category vocab, venue nouns. */
+const GENERIC_TITLE_TOKENS = new Set([
+  'paa', 'i', 'ved', 'hos', 'og', 'med', 'til', 'for', 'det', 'den', 'de', 'stort', 'store',
+  'loppemarked', 'loppemarkeder', 'marked', 'markedsdag', 'kraemmermarked', 'bagagerumsmarked',
+  'genbrugsmarked', 'julemarked', 'antikmarked', 'byttemarked', 'garagesalg', 'loppetorv',
+  'lopper', 'lopperne', 'loppe', 'kraemmer',
+  'havn', 'havnen', 'torv', 'torvet', 'hal', 'hallen', 'skole', 'skolen', 'kirke', 'kirken',
+  'plads', 'pladsen', 'by', 'byen', 'centrum', 'park', 'parken',
+]);
+
 /**
  * Decide whether two events from different sources are the same market.
  * Requires either a strong title match plus location agreement, or a decent
@@ -158,10 +168,17 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   }
   // Distinctive identical titles merge even without location or date overlap —
   // recurring series often publish each date as a separate entry with no
-  // address data. Generic titles ("Loppemarked") never qualify.
+  // address data. Generic titles never qualify: after dropping stopwords,
+  // category vocabulary and common venue nouns, at least one proper token
+  // must remain ("Bagagerumsmarked på havnen" -> none; "Fredensborg
+  // Kokkedal Loppemarked" -> fredensborg, kokkedal).
   // (Contradicting locations already returned above.)
   const na = normalizeTitle(a.title);
-  const distinctive = na.length >= 15 || na.split(' ').length >= 3;
+  const properTokens = na
+    .split(' ')
+    .filter((w) => w.length > 1 && !GENERIC_TITLE_TOKENS.has(w));
+  const distinctive =
+    properTokens.length >= 1 && (na.length >= 15 || na.split(' ').length >= 3);
   if (sim >= 0.95 && distinctive && !streetsDiffer) {
     return { isMatch: true, score: sim, reason: 'identical distinctive title' };
   }

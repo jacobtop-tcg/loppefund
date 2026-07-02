@@ -53,12 +53,16 @@ function dateRangeFor(filter: DateFilter, today: string): [string, string] {
   }
   if (filter === 'alle') return [today, addDaysIso(today, 120)];
   const wd = weekdayOfIso(today);
-  const daysToSaturday = (6 - wd + 7) % 7;
-  const saturday = addDaysIso(today, daysToSaturday);
-  const sunday = wd === 7 ? today : addDaysIso(saturday, 1);
-  const start = wd >= 6 ? today : saturday;
-  if (filter === 'weekend') return [start, sunday];
-  return [addDaysIso(saturday, wd === 7 ? 6 : 7), addDaysIso(sunday, wd === 7 ? 6 : 7)];
+  // This weekend's Saturday and Sunday. On Sunday the Saturday is yesterday.
+  const thisSat = wd === 7 ? addDaysIso(today, -1) : addDaysIso(today, (6 - wd + 7) % 7);
+  const thisSun = addDaysIso(thisSat, 1);
+  if (filter === 'weekend') {
+    // Show only the remaining part of the current weekend.
+    const start = today > thisSat ? today : thisSat;
+    return [start, thisSun];
+  }
+  // "Næste weekend" = the Saturday–Sunday one week after this weekend's.
+  return [addDaysIso(thisSat, 7), addDaysIso(thisSun, 7)];
 }
 
 export function Explorer({
@@ -139,8 +143,12 @@ export function Explorer({
       result.sort((a, b) => endOf(a).localeCompare(endOf(b)));
     }
     if (pos) {
+      // Nearest first; coordinate-less events sink to the end (a 0-return
+      // comparator is intransitive and leaves TimSort partly unsorted).
       result.sort((a, b) => {
-        if (a.distanceKm === null || b.distanceKm === null) return 0;
+        if (a.distanceKm === null && b.distanceKm === null) return 0;
+        if (a.distanceKm === null) return 1;
+        if (b.distanceKm === null) return -1;
         return a.distanceKm - b.distanceKm;
       });
     }

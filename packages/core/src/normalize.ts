@@ -19,7 +19,8 @@ export function slugify(text: string): string {
 const CATEGORY_PATTERNS: Array<[RegExp, EventCategory]> = [
   // Jule first: "Julekræmmermarked" is seasonally a julemarked, and the
   // julemarked/non-julemarked distinction feeds the dedup veto.
-  [/jule|(^|\s)jul(?=$|\s|e)|christmas/i, 'julemarked'],
+  // (?<!h) keeps "hjulet"/"tohjulede" from reading as jule.
+  [/(?<!h)jule|(^|\s)jul(?=$|\s|e)|christmas/i, 'julemarked'],
   [/bagagerum|car ?boot/, 'bagagerumsmarked'],
   [/antik|antique/, 'antikmarked'],
   [/kr(æ|ae)mmer/, 'kraemmermarked'],
@@ -75,6 +76,14 @@ export function searchFold(text: string): string {
     .replaceAll('ø', 'o')
     .replaceAll('å', 'a');
   return `${translit} ${lazy}`;
+}
+
+const DATE_TOKEN =
+  /\b(mandag|tirsdag|onsdag|torsdag|fredag|l(ø|oe)rdag|s(ø|oe)ndag|januar|februar|marts|april|maj|juni|juli|august|september|oktober|november|december)\b|\bd\.\s*\d|\d{1,2}[./-]\d{1,2}/i;
+
+/** Does a title carry date tokens ("Loppemarked lørdag d. 5. juli")? */
+export function titleHasDateTokens(title: string): boolean {
+  return DATE_TOKEN.test(title);
 }
 
 /** Extract a Danish postcode (4 digits, 1000-9999) from text. */

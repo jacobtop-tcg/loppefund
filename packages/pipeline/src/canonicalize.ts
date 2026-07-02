@@ -10,7 +10,9 @@ import {
   normalizeCategory,
   resolveSchedule,
   slugify,
+  titleHasDateTokens,
   type IndoorOutdoor,
+  type Occurrence,
   type RawEvent,
 } from '@loppefund/core';
 import {
@@ -117,8 +119,9 @@ export async function canonicalizeRawEvent(
   raw: RawEvent,
   sourceTrust: Record<string, number>,
   stats: CanonicalizeStats,
+  opts: { touch?: boolean } = {},
 ): Promise<void> {
-  const { id: rawId, changed } = upsertRawEvent(db, raw);
+  const { id: rawId, changed } = upsertRawEvent(db, raw, opts);
   const trust = sourceTrust[raw.sourceKey] ?? 0.5;
   const now = new Date().toISOString();
 
@@ -242,19 +245,54 @@ export async function canonicalizeRawEvent(
       status = 'active';
     }
 
+    // Location merges atomically by geocode-quality rank: approximate
+    // postcode centroids must never overwrite exact source coordinates,
+    // regardless of source trust.
+    const qualityRank = (q: string | null) =>
+      q === 'source' ? 3 : q === 'A' ? 2 : q === 'B' ? 1 : 0;
+    let mergedLat = e.lat;
+    let mergedLng = e.lng;
+    let mergedQuality = e.geocode_quality;
+    if (
+      lat !== null &&
+      (e.lat === null ||
+        qualityRank(geocodeQuality) > qualityRank(e.geocode_quality) ||
+        (qualityRank(geocodeQuality) === qualityRank(e.geocode_quality) &&
+          trust >= currentTrust('lat')))
+    ) {
+      mergedLat = lat;
+      mergedLng = lng;
+      mergedQuality = geocodeQuality;
+      provenance.lat = raw.sourceKey;
+      provenance.lng = raw.sourceKey;
+      provenance.geocodeQuality = raw.sourceKey;
+    }
+
+    // Per-date series titles ("Loppemarked lørdag d. 5. juli") must not
+    // replace a clean canonical title.
+    const incomingTitle =
+      titleHasDateTokens(raw.title) && !titleHasDateTokens(e.title)
+        ? undefined
+        : raw.title;
+
     const merged = {
       slug: e.slug,
-      title: m(e.title, raw.title, 'title') ?? e.title,
+      title: m(e.title, incomingTitle, 'title') ?? e.title,
       description: m(e.description, raw.description, 'description'),
-      category: (m(e.category, rawCategory, 'category') ?? 'andet') as ReturnType<typeof normalizeCategory>,
+      // 'andet' is a sentinel, not information — mirror indoorOutdoor.
+      category: (m(
+        e.category === 'andet' ? null : e.category,
+        rawCategory === 'andet' ? undefined : rawCategory,
+        'category',
+      ) ?? 'andet') as ReturnType<typeof normalizeCategory>,
       venueName: m(e.venue_name, raw.venueName, 'venueName'),
       street: m(e.street, raw.street, 'street'),
       postcode: m(e.postcode, postcode ?? undefined, 'postcode'),
       city: m(e.city, city ?? undefined, 'city'),
       municipality: m(e.municipality, raw.municipality, 'municipality'),
-      lat: m(e.lat, lat ?? undefined, 'lat'),
-      lng: m(e.lng, lng ?? undefined, 'lng'),
-      geocodeQuality: m(e.geocode_quality, geocodeQuality ?? undefined, 'geocodeQuality'),
+      lat: mergedLat,
+      lng: mergedLng,
+      geocodeQuality: mergedQuality,
       organizer: m(e.organizer, raw.organizer, 'organizer'),
       contactWebsite: m(e.contact_website, raw.contactWebsite, 'contactWebsite'),
       contactEmail: m(e.contact_email, raw.contactEmail, 'contactEmail'),
@@ -290,19 +328,46 @@ export async function canonicalizeRawEvent(
     });
     updateEvent(db, e.id, { ...merged, amenities: mergedAmenities });
 
-    // Occurrences: union of existing future dates and this source's dates.
-    const existing = db
-      .prepare(`SELECT date, start_time, end_time FROM occurrences WHERE event_id = ?`)
-      .all(e.id) as unknown as Array<{ date: string; start_time: string | null; end_time: string | null }>;
-    const byDate = new Map(
-      existing.map((o) => [o.date, { date: o.date, startTime: o.start_time, endTime: o.end_time }]),
-    );
-    for (const o of occurrences) {
-      const prior = byDate.get(o.date);
-      // Prefer entries that carry times over ones that don't.
-      if (!prior || (prior.startTime === null && o.startTime !== null)) byDate.set(o.date, o);
+    // Occurrences re-derive from ALL linked raw payloads, so a date a source
+    // retracted disappears and reschedules take effect. Per date, the
+    // highest-trust source with known times wins.
+    const linkedPayloads = db
+      .prepare(
+        `SELECT r.payload, r.source_key FROM event_sources es
+         JOIN raw_events r ON r.id = es.raw_event_id WHERE es.event_id = ?`,
+      )
+      .all(e.id) as unknown as Array<{ payload: string; source_key: string }>;
+    const byDate = new Map<string, { occ: Occurrence; trust: number }>();
+    for (const lp of linkedPayloads) {
+      const p = JSON.parse(lp.payload) as RawEvent;
+      const lpTrust = sourceTrust[lp.source_key] ?? 0.5;
+      const occs = resolveSchedule(
+        {
+          dateRanges: p.dateRanges,
+          scheduleText: p.scheduleText,
+          openingHoursText: p.openingHoursText,
+        },
+        { from: today(), horizonDays: HORIZON_DAYS },
+      );
+      if (p.occurrences) {
+        for (const o of p.occurrences) {
+          if (o.date >= today() && !occs.some((x) => x.date === o.date)) occs.push(o);
+        }
+      }
+      for (const o of occs) {
+        const prior = byDate.get(o.date);
+        const better =
+          !prior ||
+          (o.startTime !== null && prior.occ.startTime === null) ||
+          (o.startTime !== null && prior.occ.startTime !== null && lpTrust > prior.trust);
+        if (better) byDate.set(o.date, { occ: o, trust: lpTrust });
+      }
     }
-    replaceOccurrences(db, e.id, [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date)));
+    replaceOccurrences(
+      db,
+      e.id,
+      [...byDate.values()].map((v) => v.occ).sort((a, b) => a.date.localeCompare(b.date)),
+    );
     if (changed) stats.merged++;
     else stats.unchanged++;
     return;

@@ -135,15 +135,27 @@ describe('resolveSchedule — recurrence text', () => {
     expect(occ).toEqual([]);
   });
 
-  it('unions explicit ranges with recurrence, deduplicated', () => {
+  it('unions ranges with recurrence but never extends past the published span', () => {
     const occ = resolveSchedule(
       {
-        dateRanges: [{ start: '2026-07-05', end: '2026-07-05' }],
+        dateRanges: [
+          { start: '2026-07-05', end: '2026-07-05' },
+          { start: '2026-07-19', end: '2026-07-19' },
+        ],
         scheduleText: 'hver søndag',
       },
-      { from: '2026-07-01', horizonDays: 14 },
+      { from: '2026-07-01', horizonDays: 30 },
     );
-    expect(occ.map((o) => o.date)).toEqual(['2026-07-05', '2026-07-12']);
+    // The rule fills 07-12 inside the span; nothing after 07-19 is invented.
+    expect(occ.map((o) => o.date)).toEqual(['2026-07-05', '2026-07-12', '2026-07-19']);
+  });
+
+  it('resolves plural weekday parity text ("Alle søndage i lige uger")', () => {
+    const occ = resolveSchedule(
+      { scheduleText: 'Alle søndage i lige uger' },
+      { from: '2026-07-01', horizonDays: 28 },
+    );
+    expect(occ.map((o) => o.date)).toEqual(['2026-07-12', '2026-07-26']);
   });
 
   it('returns empty for pure noise', () => {

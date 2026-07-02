@@ -21,4 +21,9 @@ export interface SourceAdapter {
   trust: number;
   discover(fetch: FetchFn): Promise<string[]>;
   extract(url: string, html: string): RawEvent | null;
+  /**
+   * API-shaped sources implement this instead of discover/extract:
+   * fetch everything in bulk and return raw events directly.
+   */
+  fetchRawEvents?(fetch: FetchFn): Promise<RawEvent[]>;
 }

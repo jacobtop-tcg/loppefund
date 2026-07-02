@@ -68,6 +68,27 @@ for (const adapter of selected) {
     discovered: 0, fetched: 0, fetchErrors: 0, extracted: 0,
     created: 0, merged: 0, unchanged: 0, skippedNoDates: 0,
   };
+  // API-shaped sources return raw events in bulk.
+  if (adapter.fetchRawEvents) {
+    console.log(`[${adapter.key}] fetching via API…`);
+    const raws = (await adapter.fetchRawEvents((u) => fetcher.fetch(u))).slice(0, limit);
+    stats.discovered = raws.length;
+    let n = 0;
+    for (const raw of raws) {
+      n++;
+      stats.extracted++;
+      await canonicalizeRawEvent(db, raw, trustMap, stats);
+      if (n % 100 === 0) {
+        console.log(`[${adapter.key}] ${n}/${raws.length} — created ${stats.created}, merged ${stats.merged}`);
+      }
+    }
+    const expiredApi = expirePastEvents(db, new Date().toISOString().slice(0, 10));
+    stats.expired = expiredApi;
+    finishRun(db, runId, stats);
+    console.log(`[${adapter.key}] done:`, JSON.stringify(stats));
+    continue;
+  }
+
   console.log(`[${adapter.key}] discovering…`);
   const urls = (await adapter.discover((u) => fetcher.fetch(u))).slice(0, limit);
   stats.discovered = urls.length;

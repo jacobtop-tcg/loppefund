@@ -160,6 +160,39 @@ export function Explorer({
     return result;
   }, [events, from, to, query, category, freeOnly, familyOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
 
+  // The empty state must always help onward: when filters yield nothing,
+  // relax date/radius (keep category & search) and suggest the nearest
+  // upcoming alternatives instead of a dead end.
+  const suggestions = useMemo(() => {
+    if (filtered.length > 0) return [];
+    const q = foldForSearch(query.trim());
+    const horizon = addDaysIso(today, 45);
+    const alt: Array<EventSummary & { nextDate: string; distanceKm: number | null; openNow: boolean }> = [];
+    for (const e of events) {
+      const upcoming = e.occurrences.filter((o) => o.date >= today && o.date <= horizon);
+      if (upcoming.length === 0) continue;
+      if (category && e.category !== category) continue;
+      if (q) {
+        const haystack =
+          foldForSearch(`${e.title} ${e.city ?? ''} ${e.venueName ?? ''} ${e.municipality ?? ''}`) +
+          ` ${e.searchText}`;
+        if (!haystack.includes(q)) continue;
+      }
+      const d =
+        pos && e.lat != null && e.lng != null
+          ? distanceKm(pos.lat, pos.lng, e.lat, e.lng)
+          : null;
+      alt.push({ ...e, nextDate: upcoming[0]!.date, distanceKm: d, openNow: false });
+    }
+    alt.sort((a, b) => {
+      if (pos && a.distanceKm !== null && b.distanceKm !== null) {
+        return a.distanceKm - b.distanceKm;
+      }
+      return a.nextDate.localeCompare(b.nextDate);
+    });
+    return alt.slice(0, 3);
+  }, [filtered.length, events, today, query, category, pos]);
+
   // Trip selection is keyed by slug against the full list, so filter changes
   // never drop chosen stops.
   const eventsBySlug = useMemo(() => new Map(events.map((e) => [e.slug, e])), [events]);
@@ -321,8 +354,21 @@ export function Explorer({
         <MapView events={filtered} />
       ) : filtered.length === 0 ? (
         <div className="empty-state">
-          <h2>Ingen markeder fundet</h2>
-          <p>Prøv en anden dato eller fjern et filter — der kommer hele tiden nye markeder til.</p>
+          <h2>Ingen markeder fundet lige her</h2>
+          <p>
+            {suggestions.length > 0
+              ? pos
+                ? 'Men de her er tættest på dig i de kommende uger:'
+                : 'Men de her kommer snart:'
+              : 'Prøv en anden dato eller fjern et filter — der kommer hele tiden nye markeder til.'}
+          </p>
+          {suggestions.length > 0 && (
+            <div className="event-grid" style={{ textAlign: 'left', marginTop: 22 }}>
+              {suggestions.map((e, i) => (
+                <EventCard key={e.slug} event={e} today={today} index={i} />
+              ))}
+            </div>
+          )}
         </div>
       ) : (
         <div className="event-grid">

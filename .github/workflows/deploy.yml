@@ -32,9 +32,10 @@ jobs:
       # Pages site already exists (created via API with build_type=workflow).
       - uses: actions/configure-pages@v5
 
+      # Node 24+: node:sqlite and TS type-stripping work without flags.
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
 
       # Persist the SQLite database across runs so the geocode cache and the
       # immutable raw layer survive — each run is an incremental crawl, not a

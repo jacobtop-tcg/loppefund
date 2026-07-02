@@ -1,5 +1,5 @@
 {
-  "_kommentar": "Indsæt som input i en Facebook EVENTS-søge-actor (fx apify/facebook-events-scraper). Feltnavnet for søgninger kan hedde searchQueries/queries afhængigt af actor — omdøb ved behov. Sæt derefter actor'en på dagligt skema hos Apify.",
+  "_kommentar": "KONFIGURERET LIVE 2026-07-03: indsat i apify/facebook-events-scraper på Jacobs konto, ugentligt skema (cron 0 3 * * 4 UTC = torsdag nat, frisk til weekenden). maxEvents 90 holder forbruget ~$4.7/md inden for free tier ($13/1000 events).",
   "searchQueries": [
     "loppemarked København",
     "loppemarked Amager",
@@ -149,5 +149,5 @@
     "loppetorv",
     "kirkeloppemarked"
   ],
-  "maxEvents": 2000
+  "maxEvents": 90
 }

@@ -127,6 +127,47 @@ describe('matchEvents', () => {
     expect(matchEvents(a, b).isMatch).toBe(true);
   });
 
+  it('does not let a one-sided street override far-apart coordinates', () => {
+    // Rural postcodes span >10 km; a street on only one side is no evidence.
+    const a = {
+      title: 'Loppemarked',
+      street: 'Møllevej 3',
+      postcode: '4720',
+      lat: 55.0,
+      lng: 12.0,
+      dates: ['2026-07-04'],
+    };
+    const b = {
+      title: 'Loppemarked',
+      street: null,
+      postcode: '4720',
+      lat: 55.05,
+      lng: 12.0,
+      dates: ['2026-08-01'],
+    };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
+  it('does not let a bare category title strong-match by containment', () => {
+    // "Loppemarked" is contained in countless titles; different streets,
+    // 270 m apart, disjoint dates -> must not merge.
+    const a = {
+      title: 'Loppemarked',
+      street: 'Blågårdsgade 10',
+      lat: 55.6879,
+      lng: 12.5619,
+      dates: ['2026-07-04'],
+    };
+    const b = {
+      title: 'Loppemarked i Kulturhuset',
+      street: 'Korsgade 5',
+      lat: 55.6883,
+      lng: 12.5583,
+      dates: ['2026-07-11'],
+    };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
   it('rejects two garage sales in the same postcode on the same day', () => {
     // Approximate postcode-centroid coords are identical; streets differ.
     const a = {

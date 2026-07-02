@@ -16,7 +16,18 @@ export function titleSimilarity(a: string, b: string): number {
   if (!na || !nb) return 0;
   if (na === nb) return 1;
   const [shorter, longer] = na.length <= nb.length ? [na, nb] : [nb, na];
-  if (shorter.length >= 8 && longer.includes(shorter)) return 0.9;
+  // Containment boost — but only for distinctive titles. A bare category
+  // word ("loppemarked", "julemarked") is contained in countless other
+  // titles and must never reach the strong-match tier on its own.
+  const genericAlone = /^(loppemarked|kr(æ|ae)mmermarked|julemarked|genbrugsmarked|antikmarked|bagagerumsmarked|byttemarked|marked|markedsdag|garagesalg|loppetorv)$/;
+  if (
+    shorter.length >= 8 &&
+    longer.includes(shorter) &&
+    !genericAlone.test(shorter) &&
+    shorter.split(' ').length >= 2
+  ) {
+    return 0.9;
+  }
   const bigrams = (s: string) => {
     const map = new Map<string, number>();
     for (let i = 0; i < s.length - 1; i++) {
@@ -110,9 +121,11 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
     return { isMatch: false, score: sim, reason: 'different streets' };
   }
 
-  // Streets agree when equal or one contains the other (or one is unknown).
+  // Streets agree only when BOTH are known and equal/containing — a
+  // one-sided street is zero evidence of co-location and must not override
+  // coordinates that prove the events are far apart.
   const streetsAgree =
-    !streetsDiffer && Boolean(a.street || b.street);
+    !streetsDiffer && Boolean(a.street && b.street);
 
   let colocated: boolean | null = null;
   if (a.lat != null && a.lng != null && b.lat != null && b.lng != null) {

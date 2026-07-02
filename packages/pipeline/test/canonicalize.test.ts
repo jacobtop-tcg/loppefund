@@ -110,6 +110,21 @@ describe('canonicalizeRawEvent', () => {
     expect(stats.skippedNoDates).toBe(1);
   });
 
+  it('keeps a hinted slug across re-derivation even when the title changed', async () => {
+    const db = openDb(':memory:');
+    upsertSource(db, { key: 'markedskalenderen', name: 'MK', baseUrl: 'x', trust: 0.7 });
+    const stats = newStats();
+    // Source retitled the market; the published URL must not change.
+    await canonicalizeRawEvent(
+      db,
+      { ...rawA(), title: 'Testmarked på Havnen — nu med café' },
+      trust,
+      stats,
+      { slugHints: new Map([['markedskalenderen:testmarked', 'testmarked-paa-havnen-odense-c']]) },
+    );
+    expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')).not.toBeNull();
+  });
+
   it('marks cancelled events', async () => {
     const db = openDb(':memory:');
     upsertSource(db, { key: 'markedskalenderen', name: 'MK', baseUrl: 'x', trust: 0.7 });

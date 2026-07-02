@@ -119,7 +119,14 @@ export async function canonicalizeRawEvent(
   raw: RawEvent,
   sourceTrust: Record<string, number>,
   stats: CanonicalizeStats,
-  opts: { touch?: boolean } = {},
+  opts: {
+    touch?: boolean;
+    /**
+     * (sourceKey:sourceEventId -> slug) captured before a rebuild, so
+     * published URLs stay stable when canonical events are re-derived.
+     */
+    slugHints?: Map<string, string>;
+  } = {},
 ): Promise<void> {
   const { id: rawId, changed } = upsertRawEvent(db, raw, opts);
   const trust = sourceTrust[raw.sourceKey] ?? 0.5;
@@ -376,7 +383,13 @@ export async function canonicalizeRawEvent(
   // New canonical event.
   const provenance: Record<string, string> = {};
   for (const f of Object.keys(raw)) provenance[f] = raw.sourceKey;
-  const baseSlug = slugify(`${raw.title} ${city ?? raw.municipality ?? ''}`);
+  // Published URLs must survive rebuilds: reuse the slug this raw event's
+  // canonical had before, falling back to a fresh deterministic one.
+  const hinted = opts.slugHints?.get(`${raw.sourceKey}:${raw.sourceEventId}`);
+  const baseSlug =
+    hinted && !db.prepare(`SELECT 1 FROM events WHERE slug = ?`).get(hinted)
+      ? hinted
+      : slugify(`${raw.title} ${city ?? raw.municipality ?? ''}`);
   let slug = baseSlug;
   for (let i = 2; db.prepare(`SELECT 1 FROM events WHERE slug = ?`).get(slug); i++) {
     slug = `${baseSlug}-${i}`;

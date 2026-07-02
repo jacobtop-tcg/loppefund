@@ -69,6 +69,17 @@ if (command === 'rebuild') {
   // Re-derive all canonical events from the immutable raw layer.
   // Geocode cache persists, so this is offline-fast and reproducible.
   console.log('rebuilding canonical events from raw layer…');
+  // Snapshot slugs so published /marked/ URLs survive the re-derivation.
+  const slugHints = new Map<string, string>(
+    (
+      db.prepare(
+        `SELECT r.source_key || ':' || r.source_event_id AS k, e.slug AS s
+         FROM event_sources es
+         JOIN raw_events r ON r.id = es.raw_event_id
+         JOIN events e ON e.id = es.event_id`,
+      ).all() as unknown as Array<{ k: string; s: string }>
+    ).map((r) => [r.k, r.s]),
+  );
   db.exec('DELETE FROM event_sources; DELETE FROM occurrences; DELETE FROM events;');
   const trustRows = Object.fromEntries(adapters.map((a) => [a.key, a.trust]));
   const raws = db
@@ -83,7 +94,10 @@ if (command === 'rebuild') {
   const stats: CanonicalizeStats = { created: 0, merged: 0, unchanged: 0, skippedNoDates: 0 };
   for (const r of raws) {
     // touch=false: offline reprocessing must not fabricate freshness.
-    await canonicalizeRawEvent(db, JSON.parse(r.payload), trustRows, stats, { touch: false });
+    await canonicalizeRawEvent(db, JSON.parse(r.payload), trustRows, stats, {
+      touch: false,
+      slugHints,
+    });
   }
   const rebuildToday = new Date().toISOString().slice(0, 10);
   expirePastEvents(db, rebuildToday);

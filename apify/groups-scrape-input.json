@@ -1,0 +1,7 @@
+{
+  "_kommentar": "Trin 2: høst opslagene. Indsæt gruppe-URL'erne fra trin 1. ÅBNE grupper kræver intet login. LUKKEDE grupper kræver cookies fra en medlemskonto (kontorisikoen ligger dér) — udelad cookies for kun at tage de åbne. Skemalæg dagligt.",
+  "startUrls": [
+    "<indsæt gruppe-URL'er fra groups-search-resultatet>"
+  ],
+  "resultsLimit": 200
+}

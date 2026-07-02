@@ -41,6 +41,94 @@ describe('facebook-feed adapter', () => {
     ).toEqual(['https://a/items?token=x', 'https://b/items']);
   });
 
+  it('derives last-run dataset URLs from APIFY_TOKEN', () => {
+    const urls = feedUrls({ APIFY_TOKEN: 'tok123' } as NodeJS.ProcessEnv);
+    expect(urls).toHaveLength(2);
+    expect(urls[0]).toBe(
+      'https://api.apify.com/v2/acts/apify~facebook-events-scraper/runs/last/dataset/items?token=tok123&status=SUCCEEDED&clean=true',
+    );
+    expect(
+      feedUrls({ APIFY_TOKEN: 't', APIFY_ACTORS: 'me~custom-actor' } as NodeJS.ProcessEnv),
+    ).toEqual([
+      'https://api.apify.com/v2/acts/me~custom-actor/runs/last/dataset/items?token=t&status=SUCCEEDED&clean=true',
+    ]);
+  });
+
+  describe('event-shaped items (Facebook events actor)', () => {
+    it('maps machine dates, coordinates and address directly', () => {
+      const raw = itemToRaw(
+        {
+          id: '987',
+          name: 'Stort loppemarked på havnen',
+          description: 'Boder, kaffe og loppefund til alle.',
+          startDate: '2026-07-12T10:00:00+02:00',
+          endDate: '2026-07-12T16:00:00+02:00',
+          eventUrl: 'https://www.facebook.com/events/987',
+          location: {
+            name: 'Havnepladsen',
+            address: 'Havnevej 3, 5700 Svendborg',
+            latitude: 55.059,
+            longitude: 10.61,
+          },
+        },
+        REF,
+      );
+      expect(raw).not.toBeNull();
+      expect(raw!.sourceEventId).toBe('fbevent-987');
+      expect(raw!.occurrences).toEqual([
+        { date: '2026-07-12', startTime: '10:00', endTime: '16:00' },
+      ]);
+      expect(raw!.venueName).toBe('Havnepladsen');
+      expect(raw!.street).toBe('Havnevej 3');
+      expect(raw!.postcode).toBe('5700');
+      expect(raw!.lat).toBeCloseTo(55.059, 3);
+    });
+
+    it('converts unix timestamps to Danish wall-clock time', () => {
+      const ts = Date.parse('2026-07-12T08:00:00Z') / 1000; // 10:00 dansk sommertid
+      const raw = itemToRaw(
+        { id: '1', name: 'Kræmmermarked i parken', startTimestamp: ts },
+        REF,
+      );
+      expect(raw!.occurrences![0]).toEqual({
+        date: '2026-07-12',
+        startTime: '10:00',
+        endTime: null,
+      });
+    });
+
+    it('spans multi-day events with end time only on the last day', () => {
+      const raw = itemToRaw(
+        {
+          id: '2',
+          name: 'Weekend-loppemarked',
+          startDate: '2026-07-11T10:00:00+02:00',
+          endDate: '2026-07-12T15:00:00+02:00',
+        },
+        REF,
+      );
+      expect(raw!.occurrences).toEqual([
+        { date: '2026-07-11', startTime: '10:00', endTime: null },
+        { date: '2026-07-12', startTime: null, endTime: '15:00' },
+      ]);
+    });
+
+    it('rejects non-market events and past-only events, honors cancellation', () => {
+      expect(
+        itemToRaw({ id: '3', name: 'Sommerkoncert i parken', startDate: '2026-07-12T20:00:00+02:00' }, REF),
+      ).toBeNull();
+      expect(
+        itemToRaw({ id: '4', name: 'Loppemarked', startDate: '2026-06-01T10:00:00+02:00' }, REF),
+      ).toBeNull();
+      expect(
+        itemToRaw(
+          { id: '5', name: 'Loppemarked på torvet', startDate: '2026-07-12T10:00:00+02:00', isCanceled: true },
+          REF,
+        )!.cancelled,
+      ).toBe(true);
+    });
+  });
+
   it('fetches and parses configured feeds', async () => {
     process.env.LOPPEFUND_FB_FEED_URLS = 'https://api.example.com/v2/datasets/d1/items';
     try {

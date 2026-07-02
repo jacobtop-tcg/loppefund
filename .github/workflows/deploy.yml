@@ -53,6 +53,10 @@ jobs:
       - name: Crawl sources & rebuild canonical layer
         env:
           LOPPEFUND_FB_FEED_URLS: ${{ secrets.LOPPEFUND_FB_FEED_URLS }}
+          # Sæt APIFY_TOKEN som repo-secret, så høstes Facebook-events/-grupper
+          # automatisk fra actor'ens seneste kørsel (se apify/README.md).
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          APIFY_ACTORS: ${{ vars.APIFY_ACTORS }}
         run: |
           node packages/pipeline/src/cli.ts run
           node packages/pipeline/src/cli.ts tips || true

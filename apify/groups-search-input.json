@@ -1,0 +1,19 @@
+{
+  "_kommentar": "Trin 1: find grupperne. Indsæt i en Facebook GROUPS-SEARCH-actor for at bygge gruppelisten automatisk. Resultatet (gruppe-URL'er) indsættes i groups-scrape-input.json.",
+  "searchQueries": [
+    "loppemarked",
+    "loppegruppe",
+    "kræmmermarked",
+    "bagagerumsmarked",
+    "det sker i Svendborg",
+    "det sker i Faaborg",
+    "det sker i Odense",
+    "det sker i Aarhus",
+    "det sker i Aalborg",
+    "det sker i København",
+    "det sker i Roskilde",
+    "det sker i Næstved",
+    "det sker i Vejle",
+    "det sker i Herning"
+  ]
+}

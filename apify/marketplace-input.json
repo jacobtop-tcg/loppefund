@@ -1,0 +1,11 @@
+{
+  "_kommentar": "Valgfrit trin 3 (lav prioritet, mest varesalg): Marketplace-søge-actor. Vores parser kræver en dato i opslaget, så varestøj frasorteres automatisk.",
+  "searchQueries": [
+    "loppemarked København",
+    "loppemarked Odense",
+    "loppemarked Aarhus",
+    "loppemarked Aalborg",
+    "loppemarked Sydfyn",
+    "lopper sælges samlet"
+  ]
+}

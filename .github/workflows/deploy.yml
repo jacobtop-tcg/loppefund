@@ -88,6 +88,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+
       - id: deployment
         uses: actions/deploy-pages@v4
         with:
@@ -100,30 +102,10 @@ jobs:
       # IndexNow: tell Bing/DuckDuckGo/Yandex about every fresh URL after
       # each deploy — free, no account, key file is served from the site.
       - name: Ping IndexNow
+        continue-on-error: true
         env:
           BASE: ${{ vars.LOPPEFUND_BASE_URL }}
           KEY: 15b31cab260b1e8fe4446bf5ed4b197c
         run: |
           sleep 30
-          curl -s "$BASE/sitemap.xml" \
-            | grep -o '<loc>[^<]*</loc>' | sed 's/<[^>]*>//g' | head -800 \
-            | python3 -c '
-          import json, os, sys, urllib.request
-          urls = [l.strip() for l in sys.stdin if l.strip()]
-          base = os.environ["BASE"]
-          host = base.split("//")[1].split("/")[0]
-          body = json.dumps({
-            "host": host,
-            "key": os.environ["KEY"],
-            "keyLocation": f"{base}/{os.environ[\"KEY\"]}.txt",
-            "urlList": urls,
-          }).encode()
-          req = urllib.request.Request(
-            "https://api.indexnow.org/indexnow", data=body,
-            headers={"Content-Type": "application/json; charset=utf-8"})
-          try:
-            with urllib.request.urlopen(req, timeout=30) as r:
-              print("IndexNow:", r.status, len(urls), "urls")
-          except Exception as e:
-            print("IndexNow ping failed (non-fatal):", e)
-          '
+          python3 "$GITHUB_WORKSPACE/scripts/indexnow.py"

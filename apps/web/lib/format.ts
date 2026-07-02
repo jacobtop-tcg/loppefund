@@ -44,6 +44,27 @@ export function formatDateLong(isoDate: string): string {
   return `${WEEKDAYS_LONG[p.weekday]} ${p.d}. ${MONTHS_LONG[p.m - 1]}`;
 }
 
+/**
+ * Tame shouting user-submitted titles: if a string is mostly uppercase,
+ * convert to sentence case for display. Raw data is never altered.
+ */
+export function displayTitle(text: string): string {
+  const letters = text.replace(/[^a-zA-ZæøåÆØÅ]/g, '');
+  if (letters.length < 4) return text;
+  const upper = letters.replace(/[^A-ZÆØÅ]/g, '').length;
+  if (upper / letters.length <= 0.7) return text;
+  const lowered = text.toLowerCase();
+  return lowered.charAt(0).toUpperCase() + lowered.slice(1);
+}
+
+/** Capitalize each word — for city names that arrive lowercase. */
+export function displayPlace(text: string): string {
+  return text
+    .split(/\s+/)
+    .map((w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w))
+    .join(' ');
+}
+
 /** "10–16" or "10.30–16" from HH:MM strings */
 export function formatHours(start: string | null, end: string | null): string | null {
   if (!start) return null;

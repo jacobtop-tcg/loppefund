@@ -3,6 +3,8 @@ import type { EventSummary } from '../lib/data.ts';
 import {
   CATEGORY_LABELS,
   dayOfMonth,
+  displayPlace,
+  displayTitle,
   formatHours,
   monthShort,
   weekdayShort,
@@ -33,10 +35,14 @@ export function EventCard({
           <div className="month">{monthShort(event.nextDate)}</div>
         </div>
         <div className="event-card-body">
-          <h3 className="event-title">{event.title}</h3>
+          <h3 className="event-title">{displayTitle(event.title)}</h3>
           <div className="event-place">
-            {[event.venueName, event.city ?? event.municipality].filter(Boolean).join(' · ') ||
-              'Sted ukendt'}
+            {[
+              event.venueName && displayTitle(event.venueName),
+              (event.city ?? event.municipality) && displayPlace(event.city ?? event.municipality!),
+            ]
+              .filter(Boolean)
+              .join(' · ') || 'Sted ukendt'}
           </div>
           <div className="event-time">
             {hours ?? 'Tidspunkt ikke oplyst'}

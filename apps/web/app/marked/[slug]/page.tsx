@@ -3,12 +3,63 @@ import { notFound } from 'next/navigation';
 import { loadEventDetail, todayIso } from '../../../lib/data.ts';
 import {
   CATEGORY_LABELS,
+  displayPlace,
+  displayTitle,
   formatDateLong,
   formatHours,
 } from '../../../lib/format.ts';
 import { DetailMap } from '../../../components/DetailMap.tsx';
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const event = loadEventDetail(slug);
+  if (!event) return { title: 'Marked ikke fundet — Loppefund' };
+  const place = [event.city ?? event.municipality].filter(Boolean).join(', ');
+  return {
+    title: `${event.title}${place ? ` i ${place}` : ''} — Loppefund`,
+    description:
+      event.description?.slice(0, 155) ??
+      `${CATEGORY_LABELS[event.category] ?? 'Marked'}${place ? ` i ${place}` : ''} — datoer, åbningstider og praktisk info på Loppefund.`,
+  };
+}
+
+function eventJsonLd(event: NonNullable<ReturnType<typeof loadEventDetail>>, today: string) {
+  const next = event.occurrences.find((o) => o.date >= today);
+  if (!next) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.title,
+    startDate: next.startTime ? `${next.date}T${next.startTime}:00` : next.date,
+    ...(next.endTime ? { endDate: `${next.date}T${next.endTime}:00` } : {}),
+    eventStatus:
+      event.status === 'cancelled'
+        ? 'https://schema.org/EventCancelled'
+        : 'https://schema.org/EventScheduled',
+    location: {
+      '@type': 'Place',
+      name: event.venueName ?? event.title,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: event.street ?? undefined,
+        postalCode: event.postcode ?? undefined,
+        addressLocality: event.city ?? undefined,
+        addressCountry: 'DK',
+      },
+      ...(event.lat != null && event.lng != null
+        ? { geo: { '@type': 'GeoCoordinates', latitude: event.lat, longitude: event.lng } }
+        : {}),
+    },
+    ...(event.description ? { description: event.description.slice(0, 500) } : {}),
+    ...(event.isFree !== null ? { isAccessibleForFree: event.isFree } : {}),
+  };
+}
 
 export default async function EventPage({
   params,
@@ -25,9 +76,16 @@ export default async function EventPage({
   const confidencePct = Math.round(event.confidence * 100);
   const trustLabel =
     event.confidence >= 0.75 ? 'Godt bekræftet' : event.confidence >= 0.45 ? 'Bekræftet' : 'Ubekræftet';
+  const jsonLd = eventJsonLd(event, today);
 
   return (
     <>
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
       <div className="container">
         <Link href="/" className="back-link">
           ← Alle markeder
@@ -37,9 +95,13 @@ export default async function EventPage({
             {CATEGORY_LABELS[event.category] ?? 'Marked'}
             {event.status === 'cancelled' && ' · AFLYST'}
           </div>
-          <h1 className="detail-title">{event.title}</h1>
+          <h1 className="detail-title">{displayTitle(event.title)}</h1>
           <p className="detail-place">
-            {[event.venueName, event.street, [event.postcode, event.city].filter(Boolean).join(' ')]
+            {[
+              event.venueName && displayTitle(event.venueName),
+              event.street,
+              [event.postcode, event.city && displayPlace(event.city)].filter(Boolean).join(' '),
+            ]
               .filter(Boolean)
               .join(' · ')}
           </p>

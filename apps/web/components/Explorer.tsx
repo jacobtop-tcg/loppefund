@@ -11,10 +11,11 @@ const MapView = dynamic(() => import('./MapView.tsx').then((m) => m.MapView), {
   loading: () => <div className="map-shell" style={{ display: 'grid', placeItems: 'center', color: 'var(--ink-faint)' }}>Indlæser kort…</div>,
 });
 
-type DateFilter = 'idag' | 'weekend' | 'naeste-weekend' | 'alle';
+type DateFilter = 'idag' | 'imorgen' | 'weekend' | 'naeste-weekend' | 'alle';
 
 const DATE_CHIPS: Array<{ key: DateFilter; label: string }> = [
   { key: 'idag', label: 'I dag' },
+  { key: 'imorgen', label: 'I morgen' },
   { key: 'weekend', label: 'I weekenden' },
   { key: 'naeste-weekend', label: 'Næste weekend' },
   { key: 'alle', label: 'Alle datoer' },
@@ -36,6 +37,10 @@ function weekdayOfIso(date: string): number {
 /** [from, to] inclusive for each date filter. Weekend = Sat+Sun (or rest of it). */
 function dateRangeFor(filter: DateFilter, today: string): [string, string] {
   if (filter === 'idag') return [today, today];
+  if (filter === 'imorgen') {
+    const tomorrow = addDaysIso(today, 1);
+    return [tomorrow, tomorrow];
+  }
   if (filter === 'alle') return [today, addDaysIso(today, 120)];
   const wd = weekdayOfIso(today);
   const daysToSaturday = (6 - wd + 7) % 7;
@@ -185,6 +190,7 @@ export function Explorer({ events, today }: { events: EventSummary[]; today: str
           {filtered.length === 1 ? 'marked' : 'markeder'}
           {dateFilter === 'weekend' && ' i weekenden'}
           {dateFilter === 'idag' && ' i dag'}
+          {dateFilter === 'imorgen' && ' i morgen'}
           {dateFilter === 'naeste-weekend' && ' næste weekend'}
         </span>
       </div>

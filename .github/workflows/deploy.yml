@@ -90,3 +90,9 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # First deployments to a fresh Pages site can be slow/flaky;
+          # default 10 min timeout + 10 errors aborted run 2.
+          timeout: 1200000
+          error_count: 60
+          reporting_interval: 10000

@@ -24,7 +24,8 @@ const CATEGORY_PATTERNS: Array<[RegExp, EventCategory]> = [
   [/antik|antique/, 'antikmarked'],
   [/kr(æ|ae)mmer/, 'kraemmermarked'],
   [/genbrug|second ?hand|charity/, 'genbrugsmarked'],
-  [/gade|vej|g(å|aa)rd|byloppe|garage/, 'byloppemarked'],
+  // Compounds only — a bare "vej"/"gade" would match every Danish street name.
+  [/gade\/vej|gadeloppe|vejloppe|g(å|aa)rdloppe|byloppe|gadesalg|garage/, 'byloppemarked'],
   [/loppe|flea|vintage/, 'loppemarked'],
 ];
 

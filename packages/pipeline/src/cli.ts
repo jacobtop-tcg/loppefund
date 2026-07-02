@@ -28,6 +28,7 @@ import {
   type CanonicalizeStats,
 } from './canonicalize.ts';
 import { formatReport, mineDomains, probeDomain } from './discovery.ts';
+import { parseTip } from './tip-parser.ts';
 import { adapters } from './adapters/index.ts';
 
 const { values, positionals } = parseArgs({
@@ -87,6 +88,30 @@ if (command === 'rebuild') {
   expirePastEvents(db, rebuildToday);
   recomputeConfidence(db, trustRows, rebuildToday);
   console.log('rebuild done:', JSON.stringify(stats));
+  process.exit(0);
+}
+
+if (command === 'tips') {
+  // Parse community tips into draft events at LOW trust ("ubekræftet").
+  const { listTips, setTipStatus } = await import('@loppefund/db');
+  upsertSource(db, { key: 'tip', name: 'Fællesskabstip', baseUrl: 'https://loppefund.dk/tip', trust: 0.35 });
+  const trustAll = { ...Object.fromEntries(adapters.map((a) => [a.key, a.trust])), tip: 0.35 };
+  const today = new Date().toISOString().slice(0, 10);
+  const tips = listTips(db, 'new');
+  const stats: CanonicalizeStats = { created: 0, merged: 0, unchanged: 0, skippedNoDates: 0 };
+  let unparsed = 0;
+  for (const tip of tips) {
+    const raw = parseTip(tip, today);
+    if (!raw) {
+      unparsed++;
+      console.log(`[tip ${tip.id}] kunne ikke parses automatisk — kræver et menneske:`, (tip.text ?? tip.url ?? '').slice(0, 80));
+      continue;
+    }
+    await canonicalizeRawEvent(db, raw, trustAll, stats);
+    setTipStatus(db, tip.id, 'processed');
+    console.log(`[tip ${tip.id}] -> "${raw.title}" (${raw.occurrences?.[0]?.date})`);
+  }
+  console.log(`tips: ${tips.length} nye, ${stats.created} oprettet, ${stats.merged} matchede eksisterende, ${unparsed} kræver manuel behandling`);
   process.exit(0);
 }
 

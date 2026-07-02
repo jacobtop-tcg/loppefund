@@ -65,7 +65,9 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       stallCountText: e.stall_count_text,
       status: e.status,
       confidence: e.confidence,
-      occurrences: e.occurrences.map((o) => ({
+      // Cap the serialized occurrence list — always-open venues have one per
+      // day, which bloats the payload without changing filter results.
+      occurrences: e.occurrences.slice(0, 40).map((o) => ({
         date: o.date,
         startTime: o.start_time,
         endTime: o.end_time,

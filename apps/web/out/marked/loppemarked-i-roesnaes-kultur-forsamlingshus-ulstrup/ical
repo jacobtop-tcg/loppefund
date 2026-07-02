@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-i-roesnaes-kultur-forsamlingshus-ulstrup-2026-07-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260719T100000
 DTEND;TZID=Europe/Copenhagen:20260719T160000
 SUMMARY:Loppemarked i Røsnæs Kultur-Forsamlingshus
 LOCATION:Søbakken 7\, Ulstrup
-URL:https://loppefund.dk/marked/loppemarked-i-roesnaes-kultur-forsamlingshus-ulstrup
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-i-roesnaes-kultur-forsamlingshus-ulstrup
 END:VEVENT
 END:VCALENDAR

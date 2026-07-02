@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bagagerumsmarked-morud-2026-08-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260829T093000
 DTEND;TZID=Europe/Copenhagen:20260829T150000
 SUMMARY:Bagagerumsmarked
 LOCATION:Langesøhallerne\, Idrætsvej 7\, Morud
 GEO:55.4418;10.1897
-URL:https://loppefund.dk/marked/bagagerumsmarked-morud
+URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-morud
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:toejbyttetogtet-fjordfestival-roskilde-2026-07-06@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260706T110000
 DTEND;TZID=Europe/Copenhagen:20260706T150000
 SUMMARY:Tøjbyttetogtet & Fjordfestival
 LOCATION:Sankt Clara Vej 41\, Sankt Clara Vej 41\, 4000 Roskilde
 GEO:55.6508;12.0815
-URL:https://loppefund.dk/marked/toejbyttetogtet-fjordfestival-roskilde
+URL:https://jacobtop-tcg.github.io/loppefund/marked/toejbyttetogtet-fjordfestival-roskilde
 END:VEVENT
 END:VCALENDAR

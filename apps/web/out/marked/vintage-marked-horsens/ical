@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:vintage-marked-horsens-2026-09-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260905
 SUMMARY:Vintage Marked
 LOCATION:Platform K\, Madevej 2\, Horsens
 GEO:55.8692;9.83349
-URL:https://loppefund.dk/marked/vintage-marked-horsens
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vintage-marked-horsens
 END:VEVENT
 END:VCALENDAR

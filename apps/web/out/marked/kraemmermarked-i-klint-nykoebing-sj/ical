@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kraemmermarked-i-klint-nykoebing-sj-2026-08-01@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260801T100000
 DTEND;TZID=Europe/Copenhagen:20260801T150000
 SUMMARY:Kræmmermarked i Klint
 LOCATION:Klintvej 123\, Klintvej 123\, Nykøbing Sj
 GEO:55.9541;11.5914
-URL:https://loppefund.dk/marked/kraemmermarked-i-klint-nykoebing-sj
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kraemmermarked-i-klint-nykoebing-sj
 END:VEVENT
 END:VCALENDAR

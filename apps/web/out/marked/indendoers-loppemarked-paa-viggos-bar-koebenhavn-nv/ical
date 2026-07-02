@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:indendoers-loppemarked-paa-viggos-bar-koebenhavn-nv-2026-07-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260705T120000
 DTEND;TZID=Europe/Copenhagen:20260705T180000
 SUMMARY:Indendørs loppemarked på Viggos bar.
 LOCATION:Indendørs loppemarked på Viggos bar. Køb en øl eller sodavand i baren og gå på opdagelse i lopperne\, Frederiksborgvej 86\, 2400 København NV
 GEO:55.70835814;12.53234345
-URL:https://loppefund.dk/marked/indendoers-loppemarked-paa-viggos-bar-koebenhavn-nv
+URL:https://jacobtop-tcg.github.io/loppefund/marked/indendoers-loppemarked-paa-viggos-bar-koebenhavn-nv
 END:VEVENT
 END:VCALENDAR

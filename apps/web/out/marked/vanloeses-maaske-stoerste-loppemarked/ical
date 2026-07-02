@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:vanloeses-maaske-stoerste-loppemarked-2026-08-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260815T110000
 DTEND;TZID=Europe/Copenhagen:20260815T140000
 SUMMARY:Vanløses måske største loppemarked
 LOCATION:Lyngholmvej
-URL:https://loppefund.dk/marked/vanloeses-maaske-stoerste-loppemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vanloeses-maaske-stoerste-loppemarked
 END:VEVENT
 END:VCALENDAR

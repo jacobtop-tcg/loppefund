@@ -3,38 +3,38 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:falkoner-loppemarked-2026-07-04@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260704T100000
 DTEND;TZID=Europe/Copenhagen:20260704T140000
 SUMMARY:Falkoner Loppemarked
 LOCATION:Falkoner alle 63
-URL:https://loppefund.dk/marked/falkoner-loppemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/falkoner-loppemarked
 END:VEVENT
 BEGIN:VEVENT
 UID:falkoner-loppemarked-2026-07-18@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260718T100000
 DTEND;TZID=Europe/Copenhagen:20260718T140000
 SUMMARY:Falkoner Loppemarked
 LOCATION:Falkoner alle 63
-URL:https://loppefund.dk/marked/falkoner-loppemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/falkoner-loppemarked
 END:VEVENT
 BEGIN:VEVENT
 UID:falkoner-loppemarked-2026-08-01@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260801T100000
 DTEND;TZID=Europe/Copenhagen:20260801T140000
 SUMMARY:Falkoner Loppemarked
 LOCATION:Falkoner alle 63
-URL:https://loppefund.dk/marked/falkoner-loppemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/falkoner-loppemarked
 END:VEVENT
 BEGIN:VEVENT
 UID:falkoner-loppemarked-2026-08-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260815T100000
 DTEND;TZID=Europe/Copenhagen:20260815T140000
 SUMMARY:Falkoner Loppemarked
 LOCATION:Falkoner alle 63
-URL:https://loppefund.dk/marked/falkoner-loppemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/falkoner-loppemarked
 END:VEVENT
 END:VCALENDAR

@@ -3,42 +3,42 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg-2026-07-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260705T110000
 DTEND;TZID=Europe/Copenhagen:20260705T140000
 SUMMARY:Kæmpe loppemarked i Loppehuset Aarhus
 LOCATION:Loppehuset ligger i Viby/Højbjerg på Søren Nymarks Vej tæt på Golfskoven. Gode og gratis parkeringsmuligheder på den store p-plads ved det høje skilt hvor der står angivet husnummeret 6 på.\, Søren Nymarks Vej 6L\, 8270 Højbjerg
 GEO:56.1099;10.1553
-URL:https://loppefund.dk/marked/kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg
 END:VEVENT
 BEGIN:VEVENT
 UID:kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg-2026-07-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260712T110000
 DTEND;TZID=Europe/Copenhagen:20260712T140000
 SUMMARY:Kæmpe loppemarked i Loppehuset Aarhus
 LOCATION:Loppehuset ligger i Viby/Højbjerg på Søren Nymarks Vej tæt på Golfskoven. Gode og gratis parkeringsmuligheder på den store p-plads ved det høje skilt hvor der står angivet husnummeret 6 på.\, Søren Nymarks Vej 6L\, 8270 Højbjerg
 GEO:56.1099;10.1553
-URL:https://loppefund.dk/marked/kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg
 END:VEVENT
 BEGIN:VEVENT
 UID:kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg-2026-07-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260719T110000
 DTEND;TZID=Europe/Copenhagen:20260719T140000
 SUMMARY:Kæmpe loppemarked i Loppehuset Aarhus
 LOCATION:Loppehuset ligger i Viby/Højbjerg på Søren Nymarks Vej tæt på Golfskoven. Gode og gratis parkeringsmuligheder på den store p-plads ved det høje skilt hvor der står angivet husnummeret 6 på.\, Søren Nymarks Vej 6L\, 8270 Højbjerg
 GEO:56.1099;10.1553
-URL:https://loppefund.dk/marked/kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg
 END:VEVENT
 BEGIN:VEVENT
 UID:kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg-2026-07-26@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260726T110000
 DTEND;TZID=Europe/Copenhagen:20260726T140000
 SUMMARY:Kæmpe loppemarked i Loppehuset Aarhus
 LOCATION:Loppehuset ligger i Viby/Højbjerg på Søren Nymarks Vej tæt på Golfskoven. Gode og gratis parkeringsmuligheder på den store p-plads ved det høje skilt hvor der står angivet husnummeret 6 på.\, Søren Nymarks Vej 6L\, 8270 Højbjerg
 GEO:56.1099;10.1553
-URL:https://loppefund.dk/marked/kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kaempe-loppemarked-i-loppehuset-aarhus-hoejbjerg
 END:VEVENT
 END:VCALENDAR

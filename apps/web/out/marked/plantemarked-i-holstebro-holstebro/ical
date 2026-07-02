@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:plantemarked-i-holstebro-holstebro-2026-09-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260905T090000
 DTEND;TZID=Europe/Copenhagen:20260905T130000
 SUMMARY:Plantemarked i Holstebro
 LOCATION:Slagteriet\, Struervej 32\, Holstebro
 GEO:56.3676;8.61874
-URL:https://loppefund.dk/marked/plantemarked-i-holstebro-holstebro
+URL:https://jacobtop-tcg.github.io/loppefund/marked/plantemarked-i-holstebro-holstebro
 END:VEVENT
 END:VCALENDAR

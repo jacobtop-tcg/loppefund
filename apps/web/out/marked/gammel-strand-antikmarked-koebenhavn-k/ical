@@ -3,293 +3,293 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-03@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260703T100000
 DTEND;TZID=Europe/Copenhagen:20260703T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-04@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260704T080000
 DTEND;TZID=Europe/Copenhagen:20260704T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-05@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260705T100000
 DTEND;TZID=Europe/Copenhagen:20260705T150000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-10@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260710
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-11@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260711T080000
 DTEND;TZID=Europe/Copenhagen:20260711T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-12@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260712T100000
 DTEND;TZID=Europe/Copenhagen:20260712T150000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-17@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260717
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-18@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260718T080000
 DTEND;TZID=Europe/Copenhagen:20260718T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-19@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260719T100000
 DTEND;TZID=Europe/Copenhagen:20260719T150000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-24@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260724
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-25@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260725T080000
 DTEND;TZID=Europe/Copenhagen:20260725T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-26@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260726T100000
 DTEND;TZID=Europe/Copenhagen:20260726T150000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-07-31@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260731
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-01@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260801T080000
 DTEND;TZID=Europe/Copenhagen:20260801T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-02@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260802T100000
 DTEND;TZID=Europe/Copenhagen:20260802T150000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-07@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260807
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-08@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260808T080000
 DTEND;TZID=Europe/Copenhagen:20260808T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-09@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260809T100000
 DTEND;TZID=Europe/Copenhagen:20260809T150000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-14@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260814
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-15@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260815T080000
 DTEND;TZID=Europe/Copenhagen:20260815T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-16@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260816T100000
 DTEND;TZID=Europe/Copenhagen:20260816T150000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-21@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260821
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-22@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260822T080000
 DTEND;TZID=Europe/Copenhagen:20260822T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-23@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260823T100000
 DTEND;TZID=Europe/Copenhagen:20260823T150000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-28@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260828
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-29@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260829T080000
 DTEND;TZID=Europe/Copenhagen:20260829T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-08-30@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260830T100000
 DTEND;TZID=Europe/Copenhagen:20260830T150000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-09-04@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260904
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-09-05@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260905T080000
 DTEND;TZID=Europe/Copenhagen:20260905T160000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 BEGIN:VEVENT
 UID:gammel-strand-antikmarked-koebenhavn-k-2026-09-06@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260906T100000
 DTEND;TZID=Europe/Copenhagen:20260906T150000
 SUMMARY:Gammel Strand Antikmarked
 LOCATION:Pladsen ligger hyggeligt på Gammel Strand med udsigt til Thorvaldsens museum\, kanalen til Christiansborg Slotskirke\, og Prinsens Palæ. Metro / Gammel Strand\, Gammel Strand\, 1202 København K
 GEO:55.67781662;12.57957803
-URL:https://loppefund.dk/marked/gammel-strand-antikmarked-koebenhavn-k
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gammel-strand-antikmarked-koebenhavn-k
 END:VEVENT
 END:VCALENDAR

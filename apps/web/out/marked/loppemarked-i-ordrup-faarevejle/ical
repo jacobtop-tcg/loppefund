@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-i-ordrup-faarevejle-2026-07-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260719T080000
 DTEND;TZID=Europe/Copenhagen:20260719T110000
 SUMMARY:Loppemarked i Ordrup
 LOCATION:Ordrupvej\, 4540 Fårevejle
-URL:https://loppefund.dk/marked/loppemarked-i-ordrup-faarevejle
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-i-ordrup-faarevejle
 END:VEVENT
 END:VCALENDAR

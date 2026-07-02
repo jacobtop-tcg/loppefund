@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:byt-en-bog-dag-kolding-2026-11-14@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261114T093000
 DTEND;TZID=Europe/Copenhagen:20261114T120000
 SUMMARY:Byt-en-bog-dag
 LOCATION:Jens Holms Hus\, Nicolaiplads 2\, Kolding
 GEO:55.4909;9.47198
-URL:https://loppefund.dk/marked/byt-en-bog-dag-kolding
+URL:https://jacobtop-tcg.github.io/loppefund/marked/byt-en-bog-dag-kolding
 END:VEVENT
 END:VCALENDAR

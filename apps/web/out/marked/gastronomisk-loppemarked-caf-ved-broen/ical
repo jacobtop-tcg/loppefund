@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:gastronomisk-loppemarked-caf-ved-broen-2026-08-02@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260802T100000
 DTEND;TZID=Europe/Copenhagen:20260802T150000
 SUMMARY:Gastronomisk Loppemarked
 LOCATION:Det Hvide Hus i Gilleleje\, Café Ved Broen
-URL:https://loppefund.dk/marked/gastronomisk-loppemarked-caf-ved-broen
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gastronomisk-loppemarked-caf-ved-broen
 END:VEVENT
 END:VCALENDAR

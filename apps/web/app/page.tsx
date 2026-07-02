@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { copenhagenNow } from '@loppefund/core';
 import { listUpcomingEvents, todayIso } from '../lib/data.ts';
 import { Explorer } from '../components/Explorer.tsx';
@@ -23,9 +24,9 @@ export default function HomePage() {
         <div className="container">
           Loppefund samler markeder automatisk fra offentlige kilder og viser altid, hvor
           oplysningerne kommer fra. Fandt du en fejl? Kilderne er linket på hvert marked.{' '}
-          <a href="/tip" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
+          <Link href="/tip" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
             Mangler vi et marked? Tip os →
-          </a>
+          </Link>
         </div>
       </footer>
     </>

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-i-odd-fellow-huset-slagelse-2026-08-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260822T100000
 DTEND;TZID=Europe/Copenhagen:20260822T150000
 SUMMARY:Loppemarked i Odd Fellow Huset
 LOCATION:Frederiksgade 15\, 4200 Slagelse
 GEO:55.40477189;11.35056006
-URL:https://loppefund.dk/marked/loppemarked-i-odd-fellow-huset-slagelse
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-i-odd-fellow-huset-slagelse
 END:VEVENT
 END:VCALENDAR

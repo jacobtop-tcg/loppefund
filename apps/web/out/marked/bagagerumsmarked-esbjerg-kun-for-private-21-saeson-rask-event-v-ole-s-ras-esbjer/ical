@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bagagerumsmarked-esbjerg-kun-for-private-21-saeson-rask-event-v-ole-s-ras-esbjer-2026-08-30@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260830T093000
 DTEND;TZID=Europe/Copenhagen:20260830T141500
 SUMMARY:Bagagerumsmarked Esbjerg (kun for private) 21. sæson. Rask Event v/ Ole S. Ras
 LOCATION:Veldtofte Idrætspark\, ved EFI Hallerne KØRSELSVEJLEDNING: Markedspladsen ligger meget tæt ved Storegade/Bilbyen.\, Sportsvej 15\, 6705 Esbjerg Ø
 GEO:55.478684;8.501357
-URL:https://loppefund.dk/marked/bagagerumsmarked-esbjerg-kun-for-private-21-saeson-rask-event-v-ole-s-ras-esbjer
+URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-esbjerg-kun-for-private-21-saeson-rask-event-v-ole-s-ras-esbjer
 END:VEVENT
 END:VCALENDAR

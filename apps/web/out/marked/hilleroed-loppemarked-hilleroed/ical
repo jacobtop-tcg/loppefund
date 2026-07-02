@@ -3,38 +3,38 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hilleroed-loppemarked-hilleroed-2026-07-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260705
 SUMMARY:Hillerød Loppemarked
 LOCATION:Hillerød Loppemarked Torvet\, Torvet\, Hillerød
 GEO:55.9294;12.3032
-URL:https://loppefund.dk/marked/hilleroed-loppemarked-hilleroed
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hilleroed-loppemarked-hilleroed
 END:VEVENT
 BEGIN:VEVENT
 UID:hilleroed-loppemarked-hilleroed-2026-08-02@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260802
 SUMMARY:Hillerød Loppemarked
 LOCATION:Hillerød Loppemarked Torvet\, Torvet\, Hillerød
 GEO:55.9294;12.3032
-URL:https://loppefund.dk/marked/hilleroed-loppemarked-hilleroed
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hilleroed-loppemarked-hilleroed
 END:VEVENT
 BEGIN:VEVENT
 UID:hilleroed-loppemarked-hilleroed-2026-09-06@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260906
 SUMMARY:Hillerød Loppemarked
 LOCATION:Hillerød Loppemarked Torvet\, Torvet\, Hillerød
 GEO:55.9294;12.3032
-URL:https://loppefund.dk/marked/hilleroed-loppemarked-hilleroed
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hilleroed-loppemarked-hilleroed
 END:VEVENT
 BEGIN:VEVENT
 UID:hilleroed-loppemarked-hilleroed-2026-10-04@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20261004
 SUMMARY:Hillerød Loppemarked
 LOCATION:Hillerød Loppemarked Torvet\, Torvet\, Hillerød
 GEO:55.9294;12.3032
-URL:https://loppefund.dk/marked/hilleroed-loppemarked-hilleroed
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hilleroed-loppemarked-hilleroed
 END:VEVENT
 END:VCALENDAR

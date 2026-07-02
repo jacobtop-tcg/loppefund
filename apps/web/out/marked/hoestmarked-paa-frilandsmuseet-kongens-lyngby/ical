@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hoestmarked-paa-frilandsmuseet-kongens-lyngby-2026-09-27@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260927
 SUMMARY:Høstmarked på Frilandsmuseet
 LOCATION:Frilandsmuseet\, Kongevejen 100\, Kongens Lyngby
 GEO:55.7857;12.4902
-URL:https://loppefund.dk/marked/hoestmarked-paa-frilandsmuseet-kongens-lyngby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoestmarked-paa-frilandsmuseet-kongens-lyngby
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:julemarked-paa-nybro-frugtplantage-mesinge-2026-11-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261129T100000
 DTEND;TZID=Europe/Copenhagen:20261129T160000
 SUMMARY:Julemarked på Nybro Frugtplantage
 LOCATION:Nybro frugtplantage\, v/ Thomas Nybro\, Mesinge
 GEO:55.4895;10.6398
-URL:https://loppefund.dk/marked/julemarked-paa-nybro-frugtplantage-mesinge
+URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-paa-nybro-frugtplantage-mesinge
 END:VEVENT
 END:VCALENDAR

@@ -171,7 +171,7 @@ export default async function EventPage({
               {upcoming.length > 0 && (
                 <p style={{ marginBottom: 0 }}>
                   <a
-                    href={`/marked/${event.slug}/ical`}
+                    href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${event.slug}/ical`}
                     style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--accent-deep)' }}
                   >
                     ↓ Føj til kalender (.ics)
@@ -305,7 +305,7 @@ export default async function EventPage({
               </p>
               <p className="trust-note">
                 <a
-                  href={`mailto:hej@loppefund.dk?subject=${encodeURIComponent(`Fejl i "${event.title}"`)}&body=${encodeURIComponent(`Vedrører: https://loppefund.dk/marked/${event.slug}\n\nHvad er forkert?\n`)}`}
+                  href={`mailto:${process.env.NEXT_PUBLIC_TIP_EMAIL ?? 'hej@loppefund.dk'}?subject=${encodeURIComponent(`Fejl i "${event.title}"`)}&body=${encodeURIComponent(`Vedrører: ${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}\n\nHvad er forkert?\n`)}`}
                   style={{ color: 'var(--accent-deep)', fontWeight: 600 }}
                 >
                   Fejl i oplysningerne? Skriv til os

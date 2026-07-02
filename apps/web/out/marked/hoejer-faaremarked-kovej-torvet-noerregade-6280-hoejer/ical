@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hoejer-faaremarked-kovej-torvet-noerregade-6280-hoejer-2026-09-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260912T090000
 DTEND;TZID=Europe/Copenhagen:20260912T173000
 SUMMARY:Højer Fåremarked
 LOCATION:Højer Fåremarked afholdes i byens gader. der er stort set ingen pladser på græs\, og vi har heller ingen deciderede hjørnepladser. Der er festtelt der åbner fredag aften. Der vil være live musik stort set hele weekenden.\, Østerende\, 6280 Kovej\, Torvet\, Nørregade\, 6280 Højer
 GEO:55.15;9.1
-URL:https://loppefund.dk/marked/hoejer-faaremarked-kovej-torvet-noerregade-6280-hoejer
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoejer-faaremarked-kovej-torvet-noerregade-6280-hoejer
 END:VEVENT
 BEGIN:VEVENT
 UID:hoejer-faaremarked-kovej-torvet-noerregade-6280-hoejer-2026-09-13@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260913T100000
 DTEND;TZID=Europe/Copenhagen:20260913T160000
 SUMMARY:Højer Fåremarked
 LOCATION:Højer Fåremarked afholdes i byens gader. der er stort set ingen pladser på græs\, og vi har heller ingen deciderede hjørnepladser. Der er festtelt der åbner fredag aften. Der vil være live musik stort set hele weekenden.\, Østerende\, 6280 Kovej\, Torvet\, Nørregade\, 6280 Højer
 GEO:55.15;9.1
-URL:https://loppefund.dk/marked/hoejer-faaremarked-kovej-torvet-noerregade-6280-hoejer
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoejer-faaremarked-kovej-torvet-noerregade-6280-hoejer
 END:VEVENT
 END:VCALENDAR

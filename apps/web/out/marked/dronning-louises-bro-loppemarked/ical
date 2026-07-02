@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:dronning-louises-bro-loppemarked-2026-08-23@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260823T100000
 DTEND;TZID=Europe/Copenhagen:20260823T150000
 SUMMARY:Dronning Louises Bro – Loppemarked
 LOCATION:Dronning Louises Bro
-URL:https://loppefund.dk/marked/dronning-louises-bro-loppemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/dronning-louises-bro-loppemarked
 END:VEVENT
 END:VCALENDAR

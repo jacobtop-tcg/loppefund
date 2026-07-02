@@ -3,32 +3,32 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:foel-og-plageskue-samt-kraemmermarked-goerlev-2026-09-11@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260911T140000
 DTEND;TZID=Europe/Copenhagen:20260911T190000
 SUMMARY:Føl- og plageskue samt kræmmermarked
 LOCATION:Søparken. Cirkus og markedsplads\, Søkrogen 4a\, 4281 Gørlev
 GEO:55.540211;11.220121
-URL:https://loppefund.dk/marked/foel-og-plageskue-samt-kraemmermarked-goerlev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/foel-og-plageskue-samt-kraemmermarked-goerlev
 END:VEVENT
 BEGIN:VEVENT
 UID:foel-og-plageskue-samt-kraemmermarked-goerlev-2026-09-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260912T100000
 DTEND;TZID=Europe/Copenhagen:20260912T190000
 SUMMARY:Føl- og plageskue samt kræmmermarked
 LOCATION:Søparken. Cirkus og markedsplads\, Søkrogen 4a\, 4281 Gørlev
 GEO:55.540211;11.220121
-URL:https://loppefund.dk/marked/foel-og-plageskue-samt-kraemmermarked-goerlev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/foel-og-plageskue-samt-kraemmermarked-goerlev
 END:VEVENT
 BEGIN:VEVENT
 UID:foel-og-plageskue-samt-kraemmermarked-goerlev-2026-09-13@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260913T100000
 DTEND;TZID=Europe/Copenhagen:20260913T160000
 SUMMARY:Føl- og plageskue samt kræmmermarked
 LOCATION:Søparken. Cirkus og markedsplads\, Søkrogen 4a\, 4281 Gørlev
 GEO:55.540211;11.220121
-URL:https://loppefund.dk/marked/foel-og-plageskue-samt-kraemmermarked-goerlev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/foel-og-plageskue-samt-kraemmermarked-goerlev
 END:VEVENT
 END:VCALENDAR

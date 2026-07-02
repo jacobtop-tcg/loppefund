@@ -3,42 +3,42 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hammel-hestemarked-af-1972-hammel-2026-09-03@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260903T100000
 DTEND;TZID=Europe/Copenhagen:20260903T160000
 SUMMARY:Hammel Hestemarked af 1972
 LOCATION:Ved Hammel Idrætscenter.\, Thorsvej 4\, 8450 Hammel
 GEO:56.260005;9.868251
-URL:https://loppefund.dk/marked/hammel-hestemarked-af-1972-hammel
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hammel-hestemarked-af-1972-hammel
 END:VEVENT
 BEGIN:VEVENT
 UID:hammel-hestemarked-af-1972-hammel-2026-09-04@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260904T160000
 DTEND;TZID=Europe/Copenhagen:20260904T220000
 SUMMARY:Hammel Hestemarked af 1972
 LOCATION:Ved Hammel Idrætscenter.\, Thorsvej 4\, 8450 Hammel
 GEO:56.260005;9.868251
-URL:https://loppefund.dk/marked/hammel-hestemarked-af-1972-hammel
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hammel-hestemarked-af-1972-hammel
 END:VEVENT
 BEGIN:VEVENT
 UID:hammel-hestemarked-af-1972-hammel-2026-09-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260905T090000
 DTEND;TZID=Europe/Copenhagen:20260905T180000
 SUMMARY:Hammel Hestemarked af 1972
 LOCATION:Ved Hammel Idrætscenter.\, Thorsvej 4\, 8450 Hammel
 GEO:56.260005;9.868251
-URL:https://loppefund.dk/marked/hammel-hestemarked-af-1972-hammel
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hammel-hestemarked-af-1972-hammel
 END:VEVENT
 BEGIN:VEVENT
 UID:hammel-hestemarked-af-1972-hammel-2026-09-06@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260906T100000
 DTEND;TZID=Europe/Copenhagen:20260906T170000
 SUMMARY:Hammel Hestemarked af 1972
 LOCATION:Ved Hammel Idrætscenter.\, Thorsvej 4\, 8450 Hammel
 GEO:56.260005;9.868251
-URL:https://loppefund.dk/marked/hammel-hestemarked-af-1972-hammel
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hammel-hestemarked-af-1972-hammel
 END:VEVENT
 END:VCALENDAR

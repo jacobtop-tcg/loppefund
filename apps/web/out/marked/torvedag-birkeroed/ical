@@ -3,42 +3,42 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:torvedag-birkeroed-2026-08-08@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260808T100000
 DTEND;TZID=Europe/Copenhagen:20260808T140000
 SUMMARY:Torvedag
 LOCATION:Birkerød Hovedgade\, Hovedgaden\, Birkerød
 GEO:55.8437;12.4343
-URL:https://loppefund.dk/marked/torvedag-birkeroed
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-birkeroed
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedag-birkeroed-2026-09-11@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260911T170000
 DTEND;TZID=Europe/Copenhagen:20260911T200000
 SUMMARY:Torvedag
 LOCATION:Birkerød Hovedgade\, Hovedgaden\, Birkerød
 GEO:55.8437;12.4343
-URL:https://loppefund.dk/marked/torvedag-birkeroed
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-birkeroed
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedag-birkeroed-2026-09-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260919T170000
 DTEND;TZID=Europe/Copenhagen:20260919T200000
 SUMMARY:Torvedag
 LOCATION:Birkerød Hovedgade\, Hovedgaden\, Birkerød
 GEO:55.8437;12.4343
-URL:https://loppefund.dk/marked/torvedag-birkeroed
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-birkeroed
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedag-birkeroed-2026-10-03@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261003T170000
 DTEND;TZID=Europe/Copenhagen:20261003T200000
 SUMMARY:Torvedag
 LOCATION:Birkerød Hovedgade\, Hovedgaden\, Birkerød
 GEO:55.8437;12.4343
-URL:https://loppefund.dk/marked/torvedag-birkeroed
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-birkeroed
 END:VEVENT
 END:VCALENDAR

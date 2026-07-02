@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:efteraarsplantemarked-i-soeborg-soeborg-2026-09-20@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260920T100000
 DTEND;TZID=Europe/Copenhagen:20260920T130000
 SUMMARY:Efterårsplantemarked i Søborg
 LOCATION:Haveselskabet\, Tobaksvejen 23A\, Søborg
 GEO:55.7401;12.4772
-URL:https://loppefund.dk/marked/efteraarsplantemarked-i-soeborg-soeborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/efteraarsplantemarked-i-soeborg-soeborg
 END:VEVENT
 END:VCALENDAR

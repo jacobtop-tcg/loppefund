@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:koeges-laengste-loppemarked-koege-2026-08-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260829T100000
 DTEND;TZID=Europe/Copenhagen:20260829T140000
 SUMMARY:Køges længste loppemarked
 LOCATION:Pedersvej er lukket af for biler fra nr. 11-62\, så gæsterne frit kan gå på vejen.\, Pedersvej 11\, 4600 Køge
 GEO:55.45946534;12.17662306
-URL:https://loppefund.dk/marked/koeges-laengste-loppemarked-koege
+URL:https://jacobtop-tcg.github.io/loppefund/marked/koeges-laengste-loppemarked-koege
 END:VEVENT
 END:VCALENDAR

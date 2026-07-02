@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:brenderup-julemarked-brenderup-2026-11-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261122T100000
 DTEND;TZID=Europe/Copenhagen:20261122T160000
 SUMMARY:Brenderup Julemarked
 LOCATION:Brenderup forsamlingshus\, Brenderupvej 22\, 5464 Brenderup
 GEO:55.4845;9.9791
-URL:https://loppefund.dk/marked/brenderup-julemarked-brenderup
+URL:https://jacobtop-tcg.github.io/loppefund/marked/brenderup-julemarked-brenderup
 END:VEVENT
 END:VCALENDAR

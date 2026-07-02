@@ -7,15 +7,19 @@ import type { NextConfig } from 'next';
 // unset it for local `next dev` with live server rendering.
 const staticExport = process.env.LOPPEFUND_STATIC === '1';
 
+const basePath = process.env.LOPPEFUND_BASE_PATH ?? '';
+
 const nextConfig: NextConfig = {
   transpilePackages: ['@loppefund/core', '@loppefund/db'],
   ...(staticExport
     ? { output: 'export', images: { unoptimized: true } }
     : {}),
-  // Serve under a repo subpath on GitHub Pages when configured.
-  ...(process.env.LOPPEFUND_BASE_PATH
-    ? { basePath: process.env.LOPPEFUND_BASE_PATH }
-    : {}),
+  // Serve under a repo subpath on GitHub Pages when configured. next/link
+  // handles this automatically; raw hrefs read NEXT_PUBLIC_BASE_PATH.
+  ...(basePath ? { basePath } : {}),
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 };
 
 export default nextConfig;

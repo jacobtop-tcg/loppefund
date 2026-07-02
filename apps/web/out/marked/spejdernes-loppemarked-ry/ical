@@ -3,42 +3,42 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:spejdernes-loppemarked-ry-2026-08-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260815T100000
 DTEND;TZID=Europe/Copenhagen:20260815T150000
 SUMMARY:Spejdernes loppemarked
 LOCATION:18/4 - 19/4 loppemarked - Parallelvej 5 i Ry 15/8 - 16/8 Høstmarked - Skanderborgvej 86 i Ry 14/11 - 15/11 loppemarked - Skanderborgvej 86 i Ry\, Parallelvej 5\, 8680 Ry
 GEO:56.09046;9.780047
-URL:https://loppefund.dk/marked/spejdernes-loppemarked-ry
+URL:https://jacobtop-tcg.github.io/loppefund/marked/spejdernes-loppemarked-ry
 END:VEVENT
 BEGIN:VEVENT
 UID:spejdernes-loppemarked-ry-2026-08-16@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260816T100000
 DTEND;TZID=Europe/Copenhagen:20260816T130000
 SUMMARY:Spejdernes loppemarked
 LOCATION:18/4 - 19/4 loppemarked - Parallelvej 5 i Ry 15/8 - 16/8 Høstmarked - Skanderborgvej 86 i Ry 14/11 - 15/11 loppemarked - Skanderborgvej 86 i Ry\, Parallelvej 5\, 8680 Ry
 GEO:56.09046;9.780047
-URL:https://loppefund.dk/marked/spejdernes-loppemarked-ry
+URL:https://jacobtop-tcg.github.io/loppefund/marked/spejdernes-loppemarked-ry
 END:VEVENT
 BEGIN:VEVENT
 UID:spejdernes-loppemarked-ry-2026-11-14@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261114T100000
 DTEND;TZID=Europe/Copenhagen:20261114T150000
 SUMMARY:Spejdernes loppemarked
 LOCATION:18/4 - 19/4 loppemarked - Parallelvej 5 i Ry 15/8 - 16/8 Høstmarked - Skanderborgvej 86 i Ry 14/11 - 15/11 loppemarked - Skanderborgvej 86 i Ry\, Parallelvej 5\, 8680 Ry
 GEO:56.09046;9.780047
-URL:https://loppefund.dk/marked/spejdernes-loppemarked-ry
+URL:https://jacobtop-tcg.github.io/loppefund/marked/spejdernes-loppemarked-ry
 END:VEVENT
 BEGIN:VEVENT
 UID:spejdernes-loppemarked-ry-2026-11-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261115T100000
 DTEND;TZID=Europe/Copenhagen:20261115T130000
 SUMMARY:Spejdernes loppemarked
 LOCATION:18/4 - 19/4 loppemarked - Parallelvej 5 i Ry 15/8 - 16/8 Høstmarked - Skanderborgvej 86 i Ry 14/11 - 15/11 loppemarked - Skanderborgvej 86 i Ry\, Parallelvej 5\, 8680 Ry
 GEO:56.09046;9.780047
-URL:https://loppefund.dk/marked/spejdernes-loppemarked-ry
+URL:https://jacobtop-tcg.github.io/loppefund/marked/spejdernes-loppemarked-ry
 END:VEVENT
 END:VCALENDAR

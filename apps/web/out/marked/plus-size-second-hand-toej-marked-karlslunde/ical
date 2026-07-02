@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:plus-size-second-hand-toej-marked-karlslunde-2026-11-01@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261101T100000
 DTEND;TZID=Europe/Copenhagen:20261101T140000
 SUMMARY:Plus Size Second Hand Tøj-marked Karlslunde
 LOCATION:Karlslunde Hallen
-URL:https://loppefund.dk/marked/plus-size-second-hand-toej-marked-karlslunde
+URL:https://jacobtop-tcg.github.io/loppefund/marked/plus-size-second-hand-toej-marked-karlslunde
 END:VEVENT
 END:VCALENDAR

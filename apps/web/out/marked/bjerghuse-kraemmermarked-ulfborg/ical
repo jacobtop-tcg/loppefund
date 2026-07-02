@@ -3,42 +3,42 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bjerghuse-kraemmermarked-ulfborg-2026-07-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260705T100000
 DTEND;TZID=Europe/Copenhagen:20260705T160000
 SUMMARY:Bjerghuse kræmmermarked
 LOCATION:Det foregår på legepladsen i Bjerghuse\, Legepladsen Bjerghuse\, 6990 Ulfborg
 GEO:56.2;8.0167
-URL:https://loppefund.dk/marked/bjerghuse-kraemmermarked-ulfborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/bjerghuse-kraemmermarked-ulfborg
 END:VEVENT
 BEGIN:VEVENT
 UID:bjerghuse-kraemmermarked-ulfborg-2026-07-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260712T100000
 DTEND;TZID=Europe/Copenhagen:20260712T160000
 SUMMARY:Bjerghuse kræmmermarked
 LOCATION:Det foregår på legepladsen i Bjerghuse\, Legepladsen Bjerghuse\, 6990 Ulfborg
 GEO:56.2;8.0167
-URL:https://loppefund.dk/marked/bjerghuse-kraemmermarked-ulfborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/bjerghuse-kraemmermarked-ulfborg
 END:VEVENT
 BEGIN:VEVENT
 UID:bjerghuse-kraemmermarked-ulfborg-2026-07-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260719T100000
 DTEND;TZID=Europe/Copenhagen:20260719T160000
 SUMMARY:Bjerghuse kræmmermarked
 LOCATION:Det foregår på legepladsen i Bjerghuse\, Legepladsen Bjerghuse\, 6990 Ulfborg
 GEO:56.2;8.0167
-URL:https://loppefund.dk/marked/bjerghuse-kraemmermarked-ulfborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/bjerghuse-kraemmermarked-ulfborg
 END:VEVENT
 BEGIN:VEVENT
 UID:bjerghuse-kraemmermarked-ulfborg-2026-07-26@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260726T100000
 DTEND;TZID=Europe/Copenhagen:20260726T160000
 SUMMARY:Bjerghuse kræmmermarked
 LOCATION:Det foregår på legepladsen i Bjerghuse\, Legepladsen Bjerghuse\, 6990 Ulfborg
 GEO:56.2;8.0167
-URL:https://loppefund.dk/marked/bjerghuse-kraemmermarked-ulfborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/bjerghuse-kraemmermarked-ulfborg
 END:VEVENT
 END:VCALENDAR

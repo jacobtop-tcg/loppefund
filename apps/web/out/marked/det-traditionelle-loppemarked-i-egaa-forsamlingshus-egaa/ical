@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:det-traditionelle-loppemarked-i-egaa-forsamlingshus-egaa-2026-08-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260822T100000
 DTEND;TZID=Europe/Copenhagen:20260822T150000
 SUMMARY:Det traditionelle loppemarked i Egå Forsamlingshus
 LOCATION:Egå Forsamlingshus\, Egå Mosevej 6\, Egå
 GEO:56.2171;10.2654
-URL:https://loppefund.dk/marked/det-traditionelle-loppemarked-i-egaa-forsamlingshus-egaa
+URL:https://jacobtop-tcg.github.io/loppefund/marked/det-traditionelle-loppemarked-i-egaa-forsamlingshus-egaa
 END:VEVENT
 END:VCALENDAR

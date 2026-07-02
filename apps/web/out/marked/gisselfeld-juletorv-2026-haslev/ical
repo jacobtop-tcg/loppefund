@@ -3,62 +3,62 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:gisselfeld-juletorv-2026-haslev-2026-11-20@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261120T100000
 DTEND;TZID=Europe/Copenhagen:20261120T160000
 SUMMARY:Gisselfeld Juletorv 2026
 LOCATION:Gisselfeldvej 5\, 4690 Haslev
 GEO:55.28906478;11.97041567
-URL:https://loppefund.dk/marked/gisselfeld-juletorv-2026-haslev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gisselfeld-juletorv-2026-haslev
 END:VEVENT
 BEGIN:VEVENT
 UID:gisselfeld-juletorv-2026-haslev-2026-11-21@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261121T100000
 DTEND;TZID=Europe/Copenhagen:20261121T160000
 SUMMARY:Gisselfeld Juletorv 2026
 LOCATION:Gisselfeldvej 5\, 4690 Haslev
 GEO:55.28906478;11.97041567
-URL:https://loppefund.dk/marked/gisselfeld-juletorv-2026-haslev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gisselfeld-juletorv-2026-haslev
 END:VEVENT
 BEGIN:VEVENT
 UID:gisselfeld-juletorv-2026-haslev-2026-11-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261122T100000
 DTEND;TZID=Europe/Copenhagen:20261122T160000
 SUMMARY:Gisselfeld Juletorv 2026
 LOCATION:Gisselfeldvej 5\, 4690 Haslev
 GEO:55.28906478;11.97041567
-URL:https://loppefund.dk/marked/gisselfeld-juletorv-2026-haslev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gisselfeld-juletorv-2026-haslev
 END:VEVENT
 BEGIN:VEVENT
 UID:gisselfeld-juletorv-2026-haslev-2026-11-27@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261127T100000
 DTEND;TZID=Europe/Copenhagen:20261127T160000
 SUMMARY:Gisselfeld Juletorv 2026
 LOCATION:Gisselfeldvej 5\, 4690 Haslev
 GEO:55.28906478;11.97041567
-URL:https://loppefund.dk/marked/gisselfeld-juletorv-2026-haslev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gisselfeld-juletorv-2026-haslev
 END:VEVENT
 BEGIN:VEVENT
 UID:gisselfeld-juletorv-2026-haslev-2026-11-28@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261128T100000
 DTEND;TZID=Europe/Copenhagen:20261128T160000
 SUMMARY:Gisselfeld Juletorv 2026
 LOCATION:Gisselfeldvej 5\, 4690 Haslev
 GEO:55.28906478;11.97041567
-URL:https://loppefund.dk/marked/gisselfeld-juletorv-2026-haslev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gisselfeld-juletorv-2026-haslev
 END:VEVENT
 BEGIN:VEVENT
 UID:gisselfeld-juletorv-2026-haslev-2026-11-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261129T100000
 DTEND;TZID=Europe/Copenhagen:20261129T160000
 SUMMARY:Gisselfeld Juletorv 2026
 LOCATION:Gisselfeldvej 5\, 4690 Haslev
 GEO:55.28906478;11.97041567
-URL:https://loppefund.dk/marked/gisselfeld-juletorv-2026-haslev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/gisselfeld-juletorv-2026-haslev
 END:VEVENT
 END:VCALENDAR

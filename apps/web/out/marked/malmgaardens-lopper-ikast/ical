@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:malmgaardens-lopper-ikast-2026-07-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260705T100000
 DTEND;TZID=Europe/Copenhagen:20260705T150000
 SUMMARY:Malmgårdens Lopper
 LOCATION:Parkering ud til vejen v. Flaget - Indgang v. det store brune hegn.\, Sønderhusevej 3\, 7430 Ikast
 GEO:56.18150609;9.11610711
-URL:https://loppefund.dk/marked/malmgaardens-lopper-ikast
+URL:https://jacobtop-tcg.github.io/loppefund/marked/malmgaardens-lopper-ikast
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hvolris-oldtidsmarked-moeldrup-2026-09-13@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260913T100000
 DTEND;TZID=Europe/Copenhagen:20260913T170000
 SUMMARY:Hvolris Oldtidsmarked
 LOCATION:Hvolris Jernalder\, Herredsvejen 135\, Møldrup
 GEO:56.5815;9.5134
-URL:https://loppefund.dk/marked/hvolris-oldtidsmarked-moeldrup
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hvolris-oldtidsmarked-moeldrup
 END:VEVENT
 END:VCALENDAR

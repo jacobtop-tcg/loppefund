@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kraemmermarkeder-i-oeah-hallen-halvrimmen-brovst-halvrimmen-9460-brovst-2026-11-07@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261107T100000
 DTEND;TZID=Europe/Copenhagen:20261107T160000
 SUMMARY:Kræmmermarkeder i ØAH Hallen\, Halvrimmen\, Brovst
 LOCATION:ØAH hallen i Halvrimmen. Mange parkeringspladser.\, Bryggerivej 20\, 9460 Halvrimmen\, 9460 Brovst
 GEO:57.113325;9.589895
-URL:https://loppefund.dk/marked/kraemmermarkeder-i-oeah-hallen-halvrimmen-brovst-halvrimmen-9460-brovst
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kraemmermarkeder-i-oeah-hallen-halvrimmen-brovst-halvrimmen-9460-brovst
 END:VEVENT
 BEGIN:VEVENT
 UID:kraemmermarkeder-i-oeah-hallen-halvrimmen-brovst-halvrimmen-9460-brovst-2026-11-08@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261108T100000
 DTEND;TZID=Europe/Copenhagen:20261108T160000
 SUMMARY:Kræmmermarkeder i ØAH Hallen\, Halvrimmen\, Brovst
 LOCATION:ØAH hallen i Halvrimmen. Mange parkeringspladser.\, Bryggerivej 20\, 9460 Halvrimmen\, 9460 Brovst
 GEO:57.113325;9.589895
-URL:https://loppefund.dk/marked/kraemmermarkeder-i-oeah-hallen-halvrimmen-brovst-halvrimmen-9460-brovst
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kraemmermarkeder-i-oeah-hallen-halvrimmen-brovst-halvrimmen-9460-brovst
 END:VEVENT
 END:VCALENDAR

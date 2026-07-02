@@ -3,30 +3,30 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:vorbasse-marked-vorbasse-2026-07-16@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260716T100000
 DTEND;TZID=Europe/Copenhagen:20260716T160000
 SUMMARY:Vorbasse Marked
 LOCATION:På adressen\, Hovborgvej 7\, 6623 Vorbasse
 GEO:55.627051;9.073117
-URL:https://loppefund.dk/marked/vorbasse-marked-vorbasse
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vorbasse-marked-vorbasse
 END:VEVENT
 BEGIN:VEVENT
 UID:vorbasse-marked-vorbasse-2026-07-17@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260717
 SUMMARY:Vorbasse Marked
 LOCATION:På adressen\, Hovborgvej 7\, 6623 Vorbasse
 GEO:55.627051;9.073117
-URL:https://loppefund.dk/marked/vorbasse-marked-vorbasse
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vorbasse-marked-vorbasse
 END:VEVENT
 BEGIN:VEVENT
 UID:vorbasse-marked-vorbasse-2026-07-18@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260718
 SUMMARY:Vorbasse Marked
 LOCATION:På adressen\, Hovborgvej 7\, 6623 Vorbasse
 GEO:55.627051;9.073117
-URL:https://loppefund.dk/marked/vorbasse-marked-vorbasse
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vorbasse-marked-vorbasse
 END:VEVENT
 END:VCALENDAR

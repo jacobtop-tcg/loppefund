@@ -3,32 +3,32 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:vorupoer-kraemmermarked-vorupoer-7700-thisted-2026-07-31@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260731T100000
 DTEND;TZID=Europe/Copenhagen:20260731T160000
 SUMMARY:Vorupør Kræmmermarked
 LOCATION:Markedet ligger ved indkørslen til byen\, Klemsvej 2\, 7700 Vorupør\, 7700 Thisted
 GEO:56.94877637;8.38347095
-URL:https://loppefund.dk/marked/vorupoer-kraemmermarked-vorupoer-7700-thisted
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vorupoer-kraemmermarked-vorupoer-7700-thisted
 END:VEVENT
 BEGIN:VEVENT
 UID:vorupoer-kraemmermarked-vorupoer-7700-thisted-2026-08-01@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260801T100000
 DTEND;TZID=Europe/Copenhagen:20260801T200000
 SUMMARY:Vorupør Kræmmermarked
 LOCATION:Markedet ligger ved indkørslen til byen\, Klemsvej 2\, 7700 Vorupør\, 7700 Thisted
 GEO:56.94877637;8.38347095
-URL:https://loppefund.dk/marked/vorupoer-kraemmermarked-vorupoer-7700-thisted
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vorupoer-kraemmermarked-vorupoer-7700-thisted
 END:VEVENT
 BEGIN:VEVENT
 UID:vorupoer-kraemmermarked-vorupoer-7700-thisted-2026-08-02@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260802T100000
 DTEND;TZID=Europe/Copenhagen:20260802T160000
 SUMMARY:Vorupør Kræmmermarked
 LOCATION:Markedet ligger ved indkørslen til byen\, Klemsvej 2\, 7700 Vorupør\, 7700 Thisted
 GEO:56.94877637;8.38347095
-URL:https://loppefund.dk/marked/vorupoer-kraemmermarked-vorupoer-7700-thisted
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vorupoer-kraemmermarked-vorupoer-7700-thisted
 END:VEVENT
 END:VCALENDAR

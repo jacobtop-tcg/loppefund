@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bagagerumsmarked-paa-bindslevs-plads-skraldival-silkeborg-2026-09-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260919T100000
 DTEND;TZID=Europe/Copenhagen:20260919T150000
 SUMMARY:Bagagerumsmarked på Bindslevs Plads - Skraldival
 LOCATION:Silkeborg Bibliotek\, Hostrupsgade 41A\, Silkeborg
 GEO:56.1658;9.5462
-URL:https://loppefund.dk/marked/bagagerumsmarked-paa-bindslevs-plads-skraldival-silkeborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-paa-bindslevs-plads-skraldival-silkeborg
 END:VEVENT
 END:VCALENDAR

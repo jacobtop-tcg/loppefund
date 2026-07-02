@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:maria-marked-ebeltoft-2026-09-06@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260906T103000
 DTEND;TZID=Europe/Copenhagen:20260906T160000
 SUMMARY:Maria Marked
 LOCATION:Fuglslev Kirke\, Fuglslev Bygade 1A\, Ebeltoft
 GEO:56.2853;10.7182
-URL:https://loppefund.dk/marked/maria-marked-ebeltoft
+URL:https://jacobtop-tcg.github.io/loppefund/marked/maria-marked-ebeltoft
 END:VEVENT
 END:VCALENDAR

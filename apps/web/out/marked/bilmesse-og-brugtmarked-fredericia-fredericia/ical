@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bilmesse-og-brugtmarked-fredericia-fredericia-2026-10-17@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261017T100000
 DTEND;TZID=Europe/Copenhagen:20261017T160000
 SUMMARY:Bilmesse og Brugtmarked\, Fredericia
 LOCATION:Vestre Ringvej 101\, 7000 Fredericia
 GEO:55.579994;9.725026
-URL:https://loppefund.dk/marked/bilmesse-og-brugtmarked-fredericia-fredericia
+URL:https://jacobtop-tcg.github.io/loppefund/marked/bilmesse-og-brugtmarked-fredericia-fredericia
 END:VEVENT
 END:VCALENDAR

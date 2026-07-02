@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:saane-familie-loppemarked-tikoeb-2026-08-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260822T100000
 DTEND;TZID=Europe/Copenhagen:20260822T160000
 SUMMARY:Såne Familie loppemarked
 LOCATION:Naturhaven ligger lidt udenfor Tikøb på vejen mod Fredensborg\, Fredensborgvej 39\, 3080 Tikøb
 GEO:56.016639;12.437355
-URL:https://loppefund.dk/marked/saane-familie-loppemarked-tikoeb
+URL:https://jacobtop-tcg.github.io/loppefund/marked/saane-familie-loppemarked-tikoeb
 END:VEVENT
 END:VCALENDAR

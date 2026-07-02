@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:ho-lopperne-blaavand-2026-07-07@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260707T100000
 DTEND;TZID=Europe/Copenhagen:20260707T140000
 SUMMARY:Ho-Lopperne
 LOCATION:Tane Hedevej 80\, 6857 Blåvand
 GEO:55.549237;8.219475
-URL:https://loppefund.dk/marked/ho-lopperne-blaavand
+URL:https://jacobtop-tcg.github.io/loppefund/marked/ho-lopperne-blaavand
 END:VEVENT
 END:VCALENDAR

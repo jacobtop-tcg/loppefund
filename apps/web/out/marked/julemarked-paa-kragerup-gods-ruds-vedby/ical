@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:julemarked-paa-kragerup-gods-ruds-vedby-2026-11-14@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261114T100000
 DTEND;TZID=Europe/Copenhagen:20261114T160000
 SUMMARY:Julemarked på Kragerup Gods
 LOCATION:Kragerup Gods’ historie går helt tilbage til 1327 og godset har gennemgået en fantastisk renovering de sidste 30 år. Kragerup Gods er i dag et 4-stjernet og CO2-neutralt hotel med 57 værelser. Vi afholder konferencer\, selskaber og store events samt har en a la carte restaurant og en stor aktivitetspark. Dernæst driver vi et stort landbrug med 1200 ha. Jeg håber\, du vil nyde Kragerup Gods\, vores smukke omgivelser og føle dig hjemme i mine stuer. Med venlig hilsen 9. generation & godsejer Regitze Sophie Dinesen\, Kragerupgaardsvej 33\, 4291 Ruds Vedby
 GEO:55.5410589;11.3793898
-URL:https://loppefund.dk/marked/julemarked-paa-kragerup-gods-ruds-vedby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-paa-kragerup-gods-ruds-vedby
 END:VEVENT
 BEGIN:VEVENT
 UID:julemarked-paa-kragerup-gods-ruds-vedby-2026-11-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261115T100000
 DTEND;TZID=Europe/Copenhagen:20261115T160000
 SUMMARY:Julemarked på Kragerup Gods
 LOCATION:Kragerup Gods’ historie går helt tilbage til 1327 og godset har gennemgået en fantastisk renovering de sidste 30 år. Kragerup Gods er i dag et 4-stjernet og CO2-neutralt hotel med 57 værelser. Vi afholder konferencer\, selskaber og store events samt har en a la carte restaurant og en stor aktivitetspark. Dernæst driver vi et stort landbrug med 1200 ha. Jeg håber\, du vil nyde Kragerup Gods\, vores smukke omgivelser og føle dig hjemme i mine stuer. Med venlig hilsen 9. generation & godsejer Regitze Sophie Dinesen\, Kragerupgaardsvej 33\, 4291 Ruds Vedby
 GEO:55.5410589;11.3793898
-URL:https://loppefund.dk/marked/julemarked-paa-kragerup-gods-ruds-vedby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-paa-kragerup-gods-ruds-vedby
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kunst-kreativt-marked-randers-noe-2026-09-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260912T100000
 DTEND;TZID=Europe/Copenhagen:20260912T170000
 SUMMARY:Kunst & Kreativt Marked
 LOCATION:Bolværket -Kultur & Eventhus\, Kulholmsvej 2\, Randers NØ
 GEO:56.4573;10.0418
-URL:https://loppefund.dk/marked/kunst-kreativt-marked-randers-noe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kunst-kreativt-marked-randers-noe
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-paa-den-sorte-plads-2026-koebenhavn-n-2026-08-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260829T100000
 DTEND;TZID=Europe/Copenhagen:20260829T160000
 SUMMARY:Loppemarked på Den Sorte Plads 2026
 LOCATION:Den Sorte Plads\, Midgårdsgade 1\, København N
 GEO:55.701;12.5419
-URL:https://loppefund.dk/marked/loppemarked-paa-den-sorte-plads-2026-koebenhavn-n
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-den-sorte-plads-2026-koebenhavn-n
 END:VEVENT
 END:VCALENDAR

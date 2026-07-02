@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:menighedsplejens-loppemarked-roedovre-2026-09-27@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260927
 SUMMARY:Menighedsplejens loppemarked
 LOCATION:Rødovre Kirkes sognehus\, Kirkesvinget 3\, Rødovre
 GEO:55.6818;12.4669
-URL:https://loppefund.dk/marked/menighedsplejens-loppemarked-roedovre
+URL:https://jacobtop-tcg.github.io/loppefund/marked/menighedsplejens-loppemarked-roedovre
 END:VEVENT
 END:VCALENDAR

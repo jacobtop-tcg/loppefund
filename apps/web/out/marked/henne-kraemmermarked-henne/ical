@@ -3,32 +3,32 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:henne-kraemmermarked-henne-2026-07-03@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260703T090000
 DTEND;TZID=Europe/Copenhagen:20260703T160000
 SUMMARY:Henne Kræmmermarked
 LOCATION:Henne St. By på Sportspladsen - Henne Stadion\, Frederiksberg 27\, 6854 Henne
 GEO:55.708814;8.299185
-URL:https://loppefund.dk/marked/henne-kraemmermarked-henne
+URL:https://jacobtop-tcg.github.io/loppefund/marked/henne-kraemmermarked-henne
 END:VEVENT
 BEGIN:VEVENT
 UID:henne-kraemmermarked-henne-2026-07-04@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260704T090000
 DTEND;TZID=Europe/Copenhagen:20260704T160000
 SUMMARY:Henne Kræmmermarked
 LOCATION:Henne St. By på Sportspladsen - Henne Stadion\, Frederiksberg 27\, 6854 Henne
 GEO:55.708814;8.299185
-URL:https://loppefund.dk/marked/henne-kraemmermarked-henne
+URL:https://jacobtop-tcg.github.io/loppefund/marked/henne-kraemmermarked-henne
 END:VEVENT
 BEGIN:VEVENT
 UID:henne-kraemmermarked-henne-2026-07-05@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260705T090000
 DTEND;TZID=Europe/Copenhagen:20260705T160000
 SUMMARY:Henne Kræmmermarked
 LOCATION:Henne St. By på Sportspladsen - Henne Stadion\, Frederiksberg 27\, 6854 Henne
 GEO:55.708814;8.299185
-URL:https://loppefund.dk/marked/henne-kraemmermarked-henne
+URL:https://jacobtop-tcg.github.io/loppefund/marked/henne-kraemmermarked-henne
 END:VEVENT
 END:VCALENDAR

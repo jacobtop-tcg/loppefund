@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:julemarked-i-aeroeskoebing-aeroeskoebing-2026-12-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261205T093000
 DTEND;TZID=Europe/Copenhagen:20261205T170000
 SUMMARY:Julemarked i Ærøskøbing
 LOCATION:Torvet\, Torvet\, Ærøskøbing
 GEO:54.8879;10.4114
-URL:https://loppefund.dk/marked/julemarked-i-aeroeskoebing-aeroeskoebing
+URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-i-aeroeskoebing-aeroeskoebing
 END:VEVENT
 END:VCALENDAR

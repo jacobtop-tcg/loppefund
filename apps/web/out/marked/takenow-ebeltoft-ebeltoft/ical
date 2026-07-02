@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:takenow-ebeltoft-ebeltoft-2026-07-02@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T160000
 SUMMARY:takeNOW Ebeltoft
 LOCATION:Vestervej 7\, 8400 Ebeltoft
 GEO:56.192338;10.670733
-URL:https://loppefund.dk/marked/takenow-ebeltoft-ebeltoft
+URL:https://jacobtop-tcg.github.io/loppefund/marked/takenow-ebeltoft-ebeltoft
 END:VEVENT
 END:VCALENDAR

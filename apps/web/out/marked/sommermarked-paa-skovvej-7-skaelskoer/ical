@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:sommermarked-paa-skovvej-7-skaelskoer-2026-07-08@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260708
 SUMMARY:Sommermarked på skovvej 7
 LOCATION:Marked i Porten\, Skovvej 7\, Skælskør
 GEO:55.2549;11.2863
-URL:https://loppefund.dk/marked/sommermarked-paa-skovvej-7-skaelskoer
+URL:https://jacobtop-tcg.github.io/loppefund/marked/sommermarked-paa-skovvej-7-skaelskoer
 END:VEVENT
 END:VCALENDAR

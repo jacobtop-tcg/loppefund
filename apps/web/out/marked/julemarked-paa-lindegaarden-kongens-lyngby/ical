@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:julemarked-paa-lindegaarden-kongens-lyngby-2026-11-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20261122
 SUMMARY:Julemarked på Lindegaarden
 LOCATION:Kulturstedet Lindegaarden\, Peter Lunds Vej 8\, Kongens Lyngby
 GEO:55.7762;12.5051
-URL:https://loppefund.dk/marked/julemarked-paa-lindegaarden-kongens-lyngby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-paa-lindegaarden-kongens-lyngby
 END:VEVENT
 END:VCALENDAR

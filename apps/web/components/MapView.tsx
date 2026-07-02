@@ -126,7 +126,7 @@ export function MapView({ events }: { events: MapEvent[] }) {
           .setHTML(
             `<div class="map-popup-title">${escapeHtml(p.title!)}</div>` +
               `<div class="map-popup-meta">${escapeHtml(p.category!)}${p.city ? ` · ${escapeHtml(p.city)}` : ''} · ${formatDateLong(p.nextDate!)}</div>` +
-              `<a class="map-popup-link" href="/marked/${encodeURIComponent(p.slug!)}">Se marked →</a>`,
+              `<a class="map-popup-link" href="${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${encodeURIComponent(p.slug!)}">Se marked →</a>`,
           )
           .addTo(map);
       });

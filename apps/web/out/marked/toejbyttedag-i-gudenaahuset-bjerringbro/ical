@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:toejbyttedag-i-gudenaahuset-bjerringbro-2026-09-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260905T100000
 DTEND;TZID=Europe/Copenhagen:20260905T140000
 SUMMARY:Tøjbyttedag i Gudenåhuset
 LOCATION:Gudenåhuset - Bjerringbro Bibliotek & Kulturhus\, Realskolevej 12\, Bjerringbro
 GEO:56.3769;9.65644
-URL:https://loppefund.dk/marked/toejbyttedag-i-gudenaahuset-bjerringbro
+URL:https://jacobtop-tcg.github.io/loppefund/marked/toejbyttedag-i-gudenaahuset-bjerringbro
 END:VEVENT
 END:VCALENDAR

@@ -3,32 +3,32 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:vildsund-heste-og-kraemmermarked-thisted-2026-07-21@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260721T090000
 DTEND;TZID=Europe/Copenhagen:20260721T233000
 SUMMARY:Vildsund Heste- og Kræmmermarked
 LOCATION:Ved stranden.\, Ved Stranden 2\, 7700 Thisted
 GEO:56.8839;8.62505
-URL:https://loppefund.dk/marked/vildsund-heste-og-kraemmermarked-thisted
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vildsund-heste-og-kraemmermarked-thisted
 END:VEVENT
 BEGIN:VEVENT
 UID:vildsund-heste-og-kraemmermarked-thisted-2026-07-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260722T090000
 DTEND;TZID=Europe/Copenhagen:20260722T233000
 SUMMARY:Vildsund Heste- og Kræmmermarked
 LOCATION:Ved stranden.\, Ved Stranden 2\, 7700 Thisted
 GEO:56.8839;8.62505
-URL:https://loppefund.dk/marked/vildsund-heste-og-kraemmermarked-thisted
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vildsund-heste-og-kraemmermarked-thisted
 END:VEVENT
 BEGIN:VEVENT
 UID:vildsund-heste-og-kraemmermarked-thisted-2026-07-23@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260723T090000
 DTEND;TZID=Europe/Copenhagen:20260723T233000
 SUMMARY:Vildsund Heste- og Kræmmermarked
 LOCATION:Ved stranden.\, Ved Stranden 2\, 7700 Thisted
 GEO:56.8839;8.62505
-URL:https://loppefund.dk/marked/vildsund-heste-og-kraemmermarked-thisted
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vildsund-heste-og-kraemmermarked-thisted
 END:VEVENT
 END:VCALENDAR

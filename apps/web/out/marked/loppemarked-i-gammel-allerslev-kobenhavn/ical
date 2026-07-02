@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-i-gammel-allerslev-kobenhavn-2026-08-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260829T110000
 DTEND;TZID=Europe/Copenhagen:20260829T150000
 SUMMARY:Loppemarked i Gammel Allerslev
 LOCATION:Lejre\, Kobenhavn
-URL:https://loppefund.dk/marked/loppemarked-i-gammel-allerslev-kobenhavn
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-i-gammel-allerslev-kobenhavn
 END:VEVENT
 END:VCALENDAR

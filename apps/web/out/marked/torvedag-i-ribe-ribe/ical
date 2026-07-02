@@ -3,82 +3,82 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:torvedag-i-ribe-ribe-2026-07-08@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260708T080000
 DTEND;TZID=Europe/Copenhagen:20260708T150000
 SUMMARY:Torvedag i Ribe
 LOCATION:Ribe\, Ribe\, Ribe
 GEO:55.3373;8.77668
-URL:https://loppefund.dk/marked/torvedag-i-ribe-ribe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-i-ribe-ribe
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedag-i-ribe-ribe-2026-07-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260715T080000
 DTEND;TZID=Europe/Copenhagen:20260715T150000
 SUMMARY:Torvedag i Ribe
 LOCATION:Ribe\, Ribe\, Ribe
 GEO:55.3373;8.77668
-URL:https://loppefund.dk/marked/torvedag-i-ribe-ribe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-i-ribe-ribe
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedag-i-ribe-ribe-2026-07-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260722T080000
 DTEND;TZID=Europe/Copenhagen:20260722T150000
 SUMMARY:Torvedag i Ribe
 LOCATION:Ribe\, Ribe\, Ribe
 GEO:55.3373;8.77668
-URL:https://loppefund.dk/marked/torvedag-i-ribe-ribe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-i-ribe-ribe
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedag-i-ribe-ribe-2026-07-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260729T080000
 DTEND;TZID=Europe/Copenhagen:20260729T150000
 SUMMARY:Torvedag i Ribe
 LOCATION:Ribe\, Ribe\, Ribe
 GEO:55.3373;8.77668
-URL:https://loppefund.dk/marked/torvedag-i-ribe-ribe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-i-ribe-ribe
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedag-i-ribe-ribe-2026-08-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260805T080000
 DTEND;TZID=Europe/Copenhagen:20260805T150000
 SUMMARY:Torvedag i Ribe
 LOCATION:Ribe\, Ribe\, Ribe
 GEO:55.3373;8.77668
-URL:https://loppefund.dk/marked/torvedag-i-ribe-ribe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-i-ribe-ribe
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedag-i-ribe-ribe-2026-08-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260812T080000
 DTEND;TZID=Europe/Copenhagen:20260812T150000
 SUMMARY:Torvedag i Ribe
 LOCATION:Ribe\, Ribe\, Ribe
 GEO:55.3373;8.77668
-URL:https://loppefund.dk/marked/torvedag-i-ribe-ribe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-i-ribe-ribe
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedag-i-ribe-ribe-2026-08-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260819T080000
 DTEND;TZID=Europe/Copenhagen:20260819T150000
 SUMMARY:Torvedag i Ribe
 LOCATION:Ribe\, Ribe\, Ribe
 GEO:55.3373;8.77668
-URL:https://loppefund.dk/marked/torvedag-i-ribe-ribe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-i-ribe-ribe
 END:VEVENT
 BEGIN:VEVENT
 UID:torvedag-i-ribe-ribe-2026-08-26@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260826T080000
 DTEND;TZID=Europe/Copenhagen:20260826T150000
 SUMMARY:Torvedag i Ribe
 LOCATION:Ribe\, Ribe\, Ribe
 GEO:55.3373;8.77668
-URL:https://loppefund.dk/marked/torvedag-i-ribe-ribe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-i-ribe-ribe
 END:VEVENT
 END:VCALENDAR

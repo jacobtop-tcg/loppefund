@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:julemarked-i-sloejfen-hadsten-2026-11-14@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261114T100000
 DTEND;TZID=Europe/Copenhagen:20261114T160000
 SUMMARY:Julemarked i Sløjfen
 LOCATION:Hadsten Bibliotek\, Sløjfen\, Hadsten
 GEO:56.326;10.0448
-URL:https://loppefund.dk/marked/julemarked-i-sloejfen-hadsten
+URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-i-sloejfen-hadsten
 END:VEVENT
 END:VCALENDAR

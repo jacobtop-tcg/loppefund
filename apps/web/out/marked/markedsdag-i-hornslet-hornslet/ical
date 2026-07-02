@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:markedsdag-i-hornslet-hornslet-2026-08-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260829T100000
 DTEND;TZID=Europe/Copenhagen:20260829T150000
 SUMMARY:Markedsdag i Hornslet
 LOCATION:Tingvej (Ballesvej til Kastanievej) samt Byvej\, Tingvej\, 8543 Hornslet
 GEO:56.3194809;10.3139834
-URL:https://loppefund.dk/marked/markedsdag-i-hornslet-hornslet
+URL:https://jacobtop-tcg.github.io/loppefund/marked/markedsdag-i-hornslet-hornslet
 END:VEVENT
 END:VCALENDAR

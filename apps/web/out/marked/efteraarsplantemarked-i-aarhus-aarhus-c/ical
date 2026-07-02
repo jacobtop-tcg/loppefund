@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:efteraarsplantemarked-i-aarhus-aarhus-c-2026-09-20@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260920T100000
 DTEND;TZID=Europe/Copenhagen:20260920T140000
 SUMMARY:Efterårsplantemarked i Aarhus
 LOCATION:Botanisk Have\, Peter Holms Vej 10A\, Aarhus C
 GEO:56.161;10.1925
-URL:https://loppefund.dk/marked/efteraarsplantemarked-i-aarhus-aarhus-c
+URL:https://jacobtop-tcg.github.io/loppefund/marked/efteraarsplantemarked-i-aarhus-aarhus-c
 END:VEVENT
 END:VCALENDAR

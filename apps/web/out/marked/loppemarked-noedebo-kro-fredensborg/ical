@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-noedebo-kro-fredensborg-2026-08-23@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260823T100000
 DTEND;TZID=Europe/Copenhagen:20260823T150000
 SUMMARY:Loppemarked Nødebo Kro
 LOCATION:Nødebovej 26\, 3480 Fredensborg
 GEO:55.97870913;12.34719369
-URL:https://loppefund.dk/marked/loppemarked-noedebo-kro-fredensborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-noedebo-kro-fredensborg
 END:VEVENT
 END:VCALENDAR

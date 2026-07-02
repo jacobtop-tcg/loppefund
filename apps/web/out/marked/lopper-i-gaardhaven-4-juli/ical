@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:lopper-i-gaardhaven-4-juli-2026-07-04@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260704T100000
 DTEND;TZID=Europe/Copenhagen:20260704T150000
 SUMMARY:LOPPER I GÅRDHAVEN – 4. JULI
 LOCATION:Kongernes Feriepark Helsingevej 44 3230 Græsted\, 3230
-URL:https://loppefund.dk/marked/lopper-i-gaardhaven-4-juli
+URL:https://jacobtop-tcg.github.io/loppefund/marked/lopper-i-gaardhaven-4-juli
 END:VEVENT
 END:VCALENDAR

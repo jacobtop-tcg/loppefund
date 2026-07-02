@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:vbc-loppemarked-jyllands-hyggeligste-indendoers-marked-viborg-2026-09-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260912T100000
 DTEND;TZID=Europe/Copenhagen:20260912T150000
 SUMMARY:VBC Loppemarked – Jyllands hyggeligste indendørs marked!
 LOCATION:Vævervej 4\, 8800 Viborg\, 8800 Viborg
 GEO:56.461056;9.399105
-URL:https://loppefund.dk/marked/vbc-loppemarked-jyllands-hyggeligste-indendoers-marked-viborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vbc-loppemarked-jyllands-hyggeligste-indendoers-marked-viborg
 END:VEVENT
 BEGIN:VEVENT
 UID:vbc-loppemarked-jyllands-hyggeligste-indendoers-marked-viborg-2026-10-10@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261010T100000
 DTEND;TZID=Europe/Copenhagen:20261010T150000
 SUMMARY:VBC Loppemarked – Jyllands hyggeligste indendørs marked!
 LOCATION:Vævervej 4\, 8800 Viborg\, 8800 Viborg
 GEO:56.461056;9.399105
-URL:https://loppefund.dk/marked/vbc-loppemarked-jyllands-hyggeligste-indendoers-marked-viborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vbc-loppemarked-jyllands-hyggeligste-indendoers-marked-viborg
 END:VEVENT
 END:VCALENDAR

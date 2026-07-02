@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hou-havnefest-loppenarked-2026-hou-havn-8300-odder-2026-07-04@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260704T100000
 DTEND;TZID=Europe/Copenhagen:20260704T150000
 SUMMARY:Hou Havnefest loppenarked 2026
 LOCATION:Kom til loppemarked på Hou havn lørdag d. 4 juli 2026 🙂🙂🙂! Markedet sker samtidig med Hou Havnefest og inkluderer foruden lopper også madvogne\, bar\, musik og underholdning samt meget mere. Vi ses! Kh. Hou Havnefest\, Havnegade\, 8300 Hou Havn\, 8300 Odder
 GEO:55.92457284;10.24464778
-URL:https://loppefund.dk/marked/hou-havnefest-loppenarked-2026-hou-havn-8300-odder
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hou-havnefest-loppenarked-2026-hou-havn-8300-odder
 END:VEVENT
 END:VCALENDAR

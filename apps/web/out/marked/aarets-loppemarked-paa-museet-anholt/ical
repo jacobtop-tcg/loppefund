@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:aarets-loppemarked-paa-museet-anholt-2026-07-08@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260708T120000
 DTEND;TZID=Europe/Copenhagen:20260708T140000
 SUMMARY:Årets loppemarked på Museet
 LOCATION:Anholt museum\, Ageren 3\, Anholt
 GEO:56.7037;11.5423
-URL:https://loppefund.dk/marked/aarets-loppemarked-paa-museet-anholt
+URL:https://jacobtop-tcg.github.io/loppefund/marked/aarets-loppemarked-paa-museet-anholt
 END:VEVENT
 END:VCALENDAR

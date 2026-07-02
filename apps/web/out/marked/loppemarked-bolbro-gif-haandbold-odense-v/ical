@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-bolbro-gif-haandbold-odense-v-2026-09-06@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260906T100000
 DTEND;TZID=Europe/Copenhagen:20260906T150000
 SUMMARY:Loppemarked Bolbro GIF Håndbold
 LOCATION:Bolbro Hallen\, Friggasvej 14\, Odense V
 GEO:55.3923;10.3446
-URL:https://loppefund.dk/marked/loppemarked-bolbro-gif-haandbold-odense-v
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-bolbro-gif-haandbold-odense-v
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:lelop-oerestad-koebenhavn-s-2026-07-02@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T150000
 SUMMARY:LeLop Ørestad
 LOCATION:Richard Mortensens Vej 67a st \, 2300 København S\, 2300 København S
 GEO:55.65;12.55
-URL:https://loppefund.dk/marked/lelop-oerestad-koebenhavn-s
+URL:https://jacobtop-tcg.github.io/loppefund/marked/lelop-oerestad-koebenhavn-s
 END:VEVENT
 END:VCALENDAR

@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-book-gratis-stade-kongens-lyngby-2026-08-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260822
 SUMMARY:Loppemarked - book gratis stade
 LOCATION:Rævehøjvej Letbanestation\, Rævehøjvej 19\, Kongens Lyngby
 GEO:55.7873;12.5282
-URL:https://loppefund.dk/marked/loppemarked-book-gratis-stade-kongens-lyngby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-book-gratis-stade-kongens-lyngby
 END:VEVENT
 END:VCALENDAR

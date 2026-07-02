@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:det-glade-genbrug-klunserne-i-lading-sabro-2026-07-03@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260703T100000
 DTEND;TZID=Europe/Copenhagen:20260703T160000
 SUMMARY:Det Glade Genbrug - Klunserne i Lading
 LOCATION:Poppelgårdsvej 1\, 8471 Sabro
 GEO:56.22013;9.979035
-URL:https://loppefund.dk/marked/det-glade-genbrug-klunserne-i-lading-sabro
+URL:https://jacobtop-tcg.github.io/loppefund/marked/det-glade-genbrug-klunserne-i-lading-sabro
 END:VEVENT
 END:VCALENDAR

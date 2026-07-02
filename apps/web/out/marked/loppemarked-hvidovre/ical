@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-hvidovre-2026-08-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260822T090000
 DTEND;TZID=Europe/Copenhagen:20260822T140000
 SUMMARY:Loppemarked
 LOCATION:Avedøre Kirke\, Trædrejerporten 6\, Hvidovre
 GEO:55.6273;12.4437
-URL:https://loppefund.dk/marked/loppemarked-hvidovre
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-hvidovre
 END:VEVENT
 END:VCALENDAR

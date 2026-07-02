@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:byfest-og-torvedage-i-graasten-graasten-2026-07-31@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260731T090000
 DTEND;TZID=Europe/Copenhagen:20260731T230000
 SUMMARY:Byfest og Torvedage i Gråsten
 LOCATION:Torvet\, Torvet\, Gråsten
 GEO:54.9216;9.59319
-URL:https://loppefund.dk/marked/byfest-og-torvedage-i-graasten-graasten
+URL:https://jacobtop-tcg.github.io/loppefund/marked/byfest-og-torvedage-i-graasten-graasten
 END:VEVENT
 BEGIN:VEVENT
 UID:byfest-og-torvedage-i-graasten-graasten-2026-08-01@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260801T093000
 DTEND;TZID=Europe/Copenhagen:20260801T180000
 SUMMARY:Byfest og Torvedage i Gråsten
 LOCATION:Torvet\, Torvet\, Gråsten
 GEO:54.9216;9.59319
-URL:https://loppefund.dk/marked/byfest-og-torvedage-i-graasten-graasten
+URL:https://jacobtop-tcg.github.io/loppefund/marked/byfest-og-torvedage-i-graasten-graasten
 END:VEVENT
 END:VCALENDAR

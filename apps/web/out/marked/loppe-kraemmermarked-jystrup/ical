@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppe-kraemmermarked-jystrup-2026-07-25@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260725T100000
 DTEND;TZID=Europe/Copenhagen:20260725T160000
 SUMMARY:Loppe- & Kræmmermarked
 LOCATION:Skjoldenæsvej 95\, 4174 Jystrup
 GEO:55.53196176;11.8497114
-URL:https://loppefund.dk/marked/loppe-kraemmermarked-jystrup
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppe-kraemmermarked-jystrup
 END:VEVENT
 END:VCALENDAR

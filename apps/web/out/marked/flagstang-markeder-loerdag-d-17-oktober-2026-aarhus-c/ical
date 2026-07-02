@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:flagstang-markeder-loerdag-d-17-oktober-2026-aarhus-c-2026-10-17@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20261017
 SUMMARY:Flagstang Markeder Lørdag d. 17 Oktober 2026
 LOCATION:Tusindfryd Vintage Interior\, Trindsøvej 10\, Aarhus C
 GEO:56.1546;10.1798
-URL:https://loppefund.dk/marked/flagstang-markeder-loerdag-d-17-oktober-2026-aarhus-c
+URL:https://jacobtop-tcg.github.io/loppefund/marked/flagstang-markeder-loerdag-d-17-oktober-2026-aarhus-c
 END:VEVENT
 END:VCALENDAR

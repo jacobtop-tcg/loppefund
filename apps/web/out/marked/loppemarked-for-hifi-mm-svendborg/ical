@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-for-hifi-mm-svendborg-2026-11-08@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261108T120000
 DTEND;TZID=Europe/Copenhagen:20261108T163000
 SUMMARY:Loppemarked for HiFi mm
 LOCATION:Svendborg Forsamlingshus\, Lundevej 2\, Svendborg
 GEO:55.0583;10.6057
-URL:https://loppefund.dk/marked/loppemarked-for-hifi-mm-svendborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-for-hifi-mm-svendborg
 END:VEVENT
 END:VCALENDAR

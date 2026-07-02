@@ -3,20 +3,20 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kreativt-og-secondhand-julemarked-2026-11-14@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261114T100000
 DTEND;TZID=Europe/Copenhagen:20261114T150000
 SUMMARY:Kreativt og secondhand julemarked
 LOCATION:Det Røde Pakhus
-URL:https://loppefund.dk/marked/kreativt-og-secondhand-julemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kreativt-og-secondhand-julemarked
 END:VEVENT
 BEGIN:VEVENT
 UID:kreativt-og-secondhand-julemarked-2026-11-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261115T100000
 DTEND;TZID=Europe/Copenhagen:20261115T150000
 SUMMARY:Kreativt og secondhand julemarked
 LOCATION:Det Røde Pakhus
-URL:https://loppefund.dk/marked/kreativt-og-secondhand-julemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kreativt-og-secondhand-julemarked
 END:VEVENT
 END:VCALENDAR

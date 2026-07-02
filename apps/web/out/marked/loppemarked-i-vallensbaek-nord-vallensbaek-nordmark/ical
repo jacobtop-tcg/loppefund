@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-i-vallensbaek-nord-vallensbaek-nordmark-2026-08-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260815T110000
 DTEND;TZID=Europe/Copenhagen:20260815T150000
 SUMMARY:Loppemarked i Vallensbæk Nord
 LOCATION:Vallensbækvej 79\, 2625 Vallensbæk Nordmark
-URL:https://loppefund.dk/marked/loppemarked-i-vallensbaek-nord-vallensbaek-nordmark
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-i-vallensbaek-nord-vallensbaek-nordmark
 END:VEVENT
 END:VCALENDAR

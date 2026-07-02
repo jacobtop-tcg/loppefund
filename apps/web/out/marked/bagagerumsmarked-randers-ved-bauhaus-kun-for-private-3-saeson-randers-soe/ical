@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:bagagerumsmarked-randers-ved-bauhaus-kun-for-private-3-saeson-randers-soe-2026-07-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260705T083000
 DTEND;TZID=Europe/Copenhagen:20260705T140000
 SUMMARY:Bagagerumsmarked Randers ved BAUHAUS (kun for private) 3. sæson
 LOCATION:Ved Bauhaus\, Juventusvej 7\, 8960 Randers SØ
 GEO:56.4314;10.0565
-URL:https://loppefund.dk/marked/bagagerumsmarked-randers-ved-bauhaus-kun-for-private-3-saeson-randers-soe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-randers-ved-bauhaus-kun-for-private-3-saeson-randers-soe
 END:VEVENT
 BEGIN:VEVENT
 UID:bagagerumsmarked-randers-ved-bauhaus-kun-for-private-3-saeson-randers-soe-2026-08-02@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260802T083000
 DTEND;TZID=Europe/Copenhagen:20260802T140000
 SUMMARY:Bagagerumsmarked Randers ved BAUHAUS (kun for private) 3. sæson
 LOCATION:Ved Bauhaus\, Juventusvej 7\, 8960 Randers SØ
 GEO:56.4314;10.0565
-URL:https://loppefund.dk/marked/bagagerumsmarked-randers-ved-bauhaus-kun-for-private-3-saeson-randers-soe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/bagagerumsmarked-randers-ved-bauhaus-kun-for-private-3-saeson-randers-soe
 END:VEVENT
 END:VCALENDAR

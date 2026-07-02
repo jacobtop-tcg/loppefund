@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hoestmarked-i-asnaes-asnaes-2026-09-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260912T100000
 DTEND;TZID=Europe/Copenhagen:20260912T160000
 SUMMARY:Høstmarked i Asnæs
 LOCATION:Teglværkskrogen 2\, 4550 Asnæs
-URL:https://loppefund.dk/marked/hoestmarked-i-asnaes-asnaes
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoestmarked-i-asnaes-asnaes
 END:VEVENT
 END:VCALENDAR

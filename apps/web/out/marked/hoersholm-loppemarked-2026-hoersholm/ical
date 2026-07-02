@@ -3,52 +3,52 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hoersholm-loppemarked-2026-hoersholm-2026-07-02@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T160000
 SUMMARY:Hørsholm Loppemarked 2026
 LOCATION:Hørsholm Loppemarked\, Hørsholm alle 6\, 2970 Hørsholm
 GEO:55.8829;12.497
-URL:https://loppefund.dk/marked/hoersholm-loppemarked-2026-hoersholm
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoersholm-loppemarked-2026-hoersholm
 END:VEVENT
 BEGIN:VEVENT
 UID:hoersholm-loppemarked-2026-hoersholm-2026-08-02@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260802T080000
 DTEND;TZID=Europe/Copenhagen:20260802T140000
 SUMMARY:Hørsholm Loppemarked 2026
 LOCATION:Hørsholm Loppemarked\, Hørsholm alle 6\, 2970 Hørsholm
 GEO:55.8829;12.497
-URL:https://loppefund.dk/marked/hoersholm-loppemarked-2026-hoersholm
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoersholm-loppemarked-2026-hoersholm
 END:VEVENT
 BEGIN:VEVENT
 UID:hoersholm-loppemarked-2026-hoersholm-2026-08-30@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260830T080000
 DTEND;TZID=Europe/Copenhagen:20260830T140000
 SUMMARY:Hørsholm Loppemarked 2026
 LOCATION:Hørsholm Loppemarked\, Hørsholm alle 6\, 2970 Hørsholm
 GEO:55.8829;12.497
-URL:https://loppefund.dk/marked/hoersholm-loppemarked-2026-hoersholm
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoersholm-loppemarked-2026-hoersholm
 END:VEVENT
 BEGIN:VEVENT
 UID:hoersholm-loppemarked-2026-hoersholm-2026-09-06@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260906T080000
 DTEND;TZID=Europe/Copenhagen:20260906T140000
 SUMMARY:Hørsholm Loppemarked 2026
 LOCATION:Hørsholm Loppemarked\, Hørsholm alle 6\, 2970 Hørsholm
 GEO:55.8829;12.497
-URL:https://loppefund.dk/marked/hoersholm-loppemarked-2026-hoersholm
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoersholm-loppemarked-2026-hoersholm
 END:VEVENT
 BEGIN:VEVENT
 UID:hoersholm-loppemarked-2026-hoersholm-2026-09-27@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260927T080000
 DTEND;TZID=Europe/Copenhagen:20260927T140000
 SUMMARY:Hørsholm Loppemarked 2026
 LOCATION:Hørsholm Loppemarked\, Hørsholm alle 6\, 2970 Hørsholm
 GEO:55.8829;12.497
-URL:https://loppefund.dk/marked/hoersholm-loppemarked-2026-hoersholm
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoersholm-loppemarked-2026-hoersholm
 END:VEVENT
 END:VCALENDAR

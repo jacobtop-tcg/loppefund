@@ -3,52 +3,52 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-paa-bryggen-koebenhavn-s-2026-07-02@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T160000
 SUMMARY:Loppemarked på Bryggen
 LOCATION:Kulturhuset Islands Brygge\, Islands Brygge 18\, 2300 København S
 GEO:55.6668;12.5763
-URL:https://loppefund.dk/marked/loppemarked-paa-bryggen-koebenhavn-s
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-bryggen-koebenhavn-s
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-bryggen-koebenhavn-s-2026-08-23@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260823T100000
 DTEND;TZID=Europe/Copenhagen:20260823T160000
 SUMMARY:Loppemarked på Bryggen
 LOCATION:Kulturhuset Islands Brygge\, Islands Brygge 18\, 2300 København S
 GEO:55.6668;12.5763
-URL:https://loppefund.dk/marked/loppemarked-paa-bryggen-koebenhavn-s
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-bryggen-koebenhavn-s
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-bryggen-koebenhavn-s-2026-09-06@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260906T100000
 DTEND;TZID=Europe/Copenhagen:20260906T160000
 SUMMARY:Loppemarked på Bryggen
 LOCATION:Kulturhuset Islands Brygge\, Islands Brygge 18\, 2300 København S
 GEO:55.6668;12.5763
-URL:https://loppefund.dk/marked/loppemarked-paa-bryggen-koebenhavn-s
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-bryggen-koebenhavn-s
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-bryggen-koebenhavn-s-2026-09-27@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260927T100000
 DTEND;TZID=Europe/Copenhagen:20260927T160000
 SUMMARY:Loppemarked på Bryggen
 LOCATION:Kulturhuset Islands Brygge\, Islands Brygge 18\, 2300 København S
 GEO:55.6668;12.5763
-URL:https://loppefund.dk/marked/loppemarked-paa-bryggen-koebenhavn-s
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-bryggen-koebenhavn-s
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-paa-bryggen-koebenhavn-s-2026-10-11@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261011T100000
 DTEND;TZID=Europe/Copenhagen:20261011T160000
 SUMMARY:Loppemarked på Bryggen
 LOCATION:Kulturhuset Islands Brygge\, Islands Brygge 18\, 2300 København S
 GEO:55.6668;12.5763
-URL:https://loppefund.dk/marked/loppemarked-paa-bryggen-koebenhavn-s
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-bryggen-koebenhavn-s
 END:VEVENT
 END:VCALENDAR

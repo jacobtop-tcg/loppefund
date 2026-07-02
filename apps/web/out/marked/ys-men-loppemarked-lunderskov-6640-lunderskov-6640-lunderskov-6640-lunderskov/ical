@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:ys-men-loppemarked-lunderskov-6640-lunderskov-6640-lunderskov-6640-lunderskov-2026-09-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260905T090000
 DTEND;TZID=Europe/Copenhagen:20260905T120000
 SUMMARY:Ys Men Loppemarked - Lunderskov
 LOCATION:Kør fra Lunderskov mod Vejen - ca. 1\,5 km - drej til højre ad Rolykkevej - se skiltning\, Rolykkevej 4\, 6640 \, 6640 Lunderskov\, 6640 Lunderskov\, 6640 Lunderskov
 GEO:55.4763505;9.32882435
-URL:https://loppefund.dk/marked/ys-men-loppemarked-lunderskov-6640-lunderskov-6640-lunderskov-6640-lunderskov
+URL:https://jacobtop-tcg.github.io/loppefund/marked/ys-men-loppemarked-lunderskov-6640-lunderskov-6640-lunderskov-6640-lunderskov
 END:VEVENT
 BEGIN:VEVENT
 UID:ys-men-loppemarked-lunderskov-6640-lunderskov-6640-lunderskov-6640-lunderskov-2026-11-07@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261107T090000
 DTEND;TZID=Europe/Copenhagen:20261107T120000
 SUMMARY:Ys Men Loppemarked - Lunderskov
 LOCATION:Kør fra Lunderskov mod Vejen - ca. 1\,5 km - drej til højre ad Rolykkevej - se skiltning\, Rolykkevej 4\, 6640 \, 6640 Lunderskov\, 6640 Lunderskov\, 6640 Lunderskov
 GEO:55.4763505;9.32882435
-URL:https://loppefund.dk/marked/ys-men-loppemarked-lunderskov-6640-lunderskov-6640-lunderskov-6640-lunderskov
+URL:https://jacobtop-tcg.github.io/loppefund/marked/ys-men-loppemarked-lunderskov-6640-lunderskov-6640-lunderskov-6640-lunderskov
 END:VEVENT
 END:VCALENDAR

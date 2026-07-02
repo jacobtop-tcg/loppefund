@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kaempe-loppemarked-i-thy-hallen-thisted-2026-11-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261122T100000
 DTEND;TZID=Europe/Copenhagen:20261122T160000
 SUMMARY:Kæmpe Loppemarked i Thy Hallen
 LOCATION:Thyhallen idræts- & kulturcenter\, Lerpyttervej 50\, Thisted
 GEO:56.9676;8.69869
-URL:https://loppefund.dk/marked/kaempe-loppemarked-i-thy-hallen-thisted
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kaempe-loppemarked-i-thy-hallen-thisted
 END:VEVENT
 END:VCALENDAR

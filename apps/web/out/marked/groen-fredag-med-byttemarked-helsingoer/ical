@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:groen-fredag-med-byttemarked-helsingoer-2026-11-27@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261127T140000
 DTEND;TZID=Europe/Copenhagen:20261127T170000
 SUMMARY:Grøn fredag med byttemarked
 LOCATION:Biblioteket Kulturværftet\, Allegade 2\, Helsingør
 GEO:56.0379;12.6148
-URL:https://loppefund.dk/marked/groen-fredag-med-byttemarked-helsingoer
+URL:https://jacobtop-tcg.github.io/loppefund/marked/groen-fredag-med-byttemarked-helsingoer
 END:VEVENT
 END:VCALENDAR

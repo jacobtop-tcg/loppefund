@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppe-marked-hallen-park-vendia-hjoerring-hjoerring-2026-10-04@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261004T100000
 DTEND;TZID=Europe/Copenhagen:20261004T150000
 SUMMARY:Loppe marked Hallen Park Vendia Hjørring
 LOCATION:Park Vendia Hallen\, Thomas Morilds Vej 11B\, Hjørring
 GEO:57.463;10.0064
-URL:https://loppefund.dk/marked/loppe-marked-hallen-park-vendia-hjoerring-hjoerring
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppe-marked-hallen-park-vendia-hjoerring-hjoerring
 END:VEVENT
 END:VCALENDAR

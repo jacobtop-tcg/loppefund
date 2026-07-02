@@ -3,20 +3,20 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-loerdag-d-5-september-2026-skaelskoer-2026-09-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260905T100000
 DTEND;TZID=Europe/Copenhagen:20260905T130000
 SUMMARY:🛍️ Loppemarked – Lørdag d. 12 september 2026
 LOCATION:Svanetorvet\, 4230 Skælskør
-URL:https://loppefund.dk/marked/loppemarked-loerdag-d-5-september-2026-skaelskoer
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-loerdag-d-5-september-2026-skaelskoer
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-loerdag-d-5-september-2026-skaelskoer-2026-09-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260912T100000
 DTEND;TZID=Europe/Copenhagen:20260912T130000
 SUMMARY:🛍️ Loppemarked – Lørdag d. 12 september 2026
 LOCATION:Svanetorvet\, 4230 Skælskør
-URL:https://loppefund.dk/marked/loppemarked-loerdag-d-5-september-2026-skaelskoer
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-loerdag-d-5-september-2026-skaelskoer
 END:VEVENT
 END:VCALENDAR

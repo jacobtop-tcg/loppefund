@@ -3,31 +3,31 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:langeskov-kraemmermarked-langeskov-2026-09-18@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260918T100000
 DTEND;TZID=Europe/Copenhagen:20260918T160000
 SUMMARY:Langeskov Kræmmermarked
 LOCATION:Markedspladsen Grønvangen.\, Grønvangen 18\, 5550 Langeskov
 GEO:55.359654;10.582605
-URL:https://loppefund.dk/marked/langeskov-kraemmermarked-langeskov
+URL:https://jacobtop-tcg.github.io/loppefund/marked/langeskov-kraemmermarked-langeskov
 END:VEVENT
 BEGIN:VEVENT
 UID:langeskov-kraemmermarked-langeskov-2026-09-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260919
 SUMMARY:Langeskov Kræmmermarked
 LOCATION:Markedspladsen Grønvangen.\, Grønvangen 18\, 5550 Langeskov
 GEO:55.359654;10.582605
-URL:https://loppefund.dk/marked/langeskov-kraemmermarked-langeskov
+URL:https://jacobtop-tcg.github.io/loppefund/marked/langeskov-kraemmermarked-langeskov
 END:VEVENT
 BEGIN:VEVENT
 UID:langeskov-kraemmermarked-langeskov-2026-09-20@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260920T100000
 DTEND;TZID=Europe/Copenhagen:20260920T180000
 SUMMARY:Langeskov Kræmmermarked
 LOCATION:Markedspladsen Grønvangen.\, Grønvangen 18\, 5550 Langeskov
 GEO:55.359654;10.582605
-URL:https://loppefund.dk/marked/langeskov-kraemmermarked-langeskov
+URL:https://jacobtop-tcg.github.io/loppefund/marked/langeskov-kraemmermarked-langeskov
 END:VEVENT
 END:VCALENDAR

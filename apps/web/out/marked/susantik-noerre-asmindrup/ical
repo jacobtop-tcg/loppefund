@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:susantik-noerre-asmindrup-2026-07-04@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260704T110000
 DTEND;TZID=Europe/Copenhagen:20260704T150000
 SUMMARY:SusAntik
 LOCATION:Asmindrupvej 46\, 4572 Nørre Asmindrup
 GEO:55.891621;11.623339
-URL:https://loppefund.dk/marked/susantik-noerre-asmindrup
+URL:https://jacobtop-tcg.github.io/loppefund/marked/susantik-noerre-asmindrup
 END:VEVENT
 END:VCALENDAR

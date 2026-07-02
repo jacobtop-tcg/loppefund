@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:rosenlyparken-tjoernelyparkens-loppemarked-greve-2026-08-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260815T100000
 DTEND;TZID=Europe/Copenhagen:20260815T140000
 SUMMARY:Rosenlyparken & Tjørnelyparkens Loppemarked
 LOCATION:Indkørsel fra Lillevangsvej vi har 3 indkørsler som er markeret med 3 store skilte. Markedet er langs cykelstien modsat side af Lillevangsvej. Tag afkørsel Greve N (27) fra motorvejen. Fra Hundige station og Greve station køre bus 225 der stopper ved Rosenlyparken.\, Rosenlyparken\, 2670 Greve
 GEO:55.6049355;12.3136853
-URL:https://loppefund.dk/marked/rosenlyparken-tjoernelyparkens-loppemarked-greve
+URL:https://jacobtop-tcg.github.io/loppefund/marked/rosenlyparken-tjoernelyparkens-loppemarked-greve
 END:VEVENT
 END:VCALENDAR

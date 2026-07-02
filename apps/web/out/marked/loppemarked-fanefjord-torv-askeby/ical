@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-fanefjord-torv-askeby-2026-07-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260705T100000
 DTEND;TZID=Europe/Copenhagen:20260705T140000
 SUMMARY:Loppmarked Fanefjord Torv
 LOCATION:Fanefjordgade 121\, 4792 Askeby
 GEO:54.9170555;12.168673
-URL:https://loppefund.dk/marked/loppemarked-fanefjord-torv-askeby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-fanefjord-torv-askeby
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-fanefjord-torv-askeby-2026-07-26@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260726T100000
 DTEND;TZID=Europe/Copenhagen:20260726T140000
 SUMMARY:Loppmarked Fanefjord Torv
 LOCATION:Fanefjordgade 121\, 4792 Askeby
 GEO:54.9170555;12.168673
-URL:https://loppefund.dk/marked/loppemarked-fanefjord-torv-askeby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-fanefjord-torv-askeby
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppelinda-paa-raadhuspladsen-koebenhavn-v-2026-08-30@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260830T100000
 DTEND;TZID=Europe/Copenhagen:20260830T150000
 SUMMARY:Loppelinda på rådhuspladsen
 LOCATION:Rådhuspladsen\, Rådhuspladsen\, København V
 GEO:55.6758;12.569
-URL:https://loppefund.dk/marked/loppelinda-paa-raadhuspladsen-koebenhavn-v
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppelinda-paa-raadhuspladsen-koebenhavn-v
 END:VEVENT
 END:VCALENDAR

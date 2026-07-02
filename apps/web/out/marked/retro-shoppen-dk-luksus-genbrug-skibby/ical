@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:retro-shoppen-dk-luksus-genbrug-skibby-2026-07-02@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T160000
 SUMMARY:Retro-shoppen.dk Luksus genbrug
 LOCATION:Hovedgaden 58\, 4050 Skibby
 GEO:55.749332;11.958392
-URL:https://loppefund.dk/marked/retro-shoppen-dk-luksus-genbrug-skibby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/retro-shoppen-dk-luksus-genbrug-skibby
 END:VEVENT
 END:VCALENDAR

@@ -3,29 +3,29 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hif-s-gamle-kaemper-kraemmer-og-loppemarked-2026-08-08@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260808T090000
 DTEND;TZID=Europe/Copenhagen:20260808T150000
 SUMMARY:HIF’s Gamle Kæmper Kræmmer- og loppemarked
 LOCATION:Hvidovre Rådhus
-URL:https://loppefund.dk/marked/hif-s-gamle-kaemper-kraemmer-og-loppemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hif-s-gamle-kaemper-kraemmer-og-loppemarked
 END:VEVENT
 BEGIN:VEVENT
 UID:hif-s-gamle-kaemper-kraemmer-og-loppemarked-2026-08-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260829T090000
 DTEND;TZID=Europe/Copenhagen:20260829T150000
 SUMMARY:HIF’s Gamle Kæmper Kræmmer- og loppemarked
 LOCATION:Hvidovre Rådhus
-URL:https://loppefund.dk/marked/hif-s-gamle-kaemper-kraemmer-og-loppemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hif-s-gamle-kaemper-kraemmer-og-loppemarked
 END:VEVENT
 BEGIN:VEVENT
 UID:hif-s-gamle-kaemper-kraemmer-og-loppemarked-2026-09-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260919T090000
 DTEND;TZID=Europe/Copenhagen:20260919T150000
 SUMMARY:HIF’s Gamle Kæmper Kræmmer- og loppemarked
 LOCATION:Hvidovre Rådhus
-URL:https://loppefund.dk/marked/hif-s-gamle-kaemper-kraemmer-og-loppemarked
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hif-s-gamle-kaemper-kraemmer-og-loppemarked
 END:VEVENT
 END:VCALENDAR

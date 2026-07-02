@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:ry-retro-antik-og-designmesse-ry-2026-10-03@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261003T100000
 DTEND;TZID=Europe/Copenhagen:20261003T160000
 SUMMARY:Ry Retro\, Antik og Designmesse
 LOCATION:Skanderborgvej 50\, 8680 Ry
 GEO:56.091307;9.762392
-URL:https://loppefund.dk/marked/ry-retro-antik-og-designmesse-ry
+URL:https://jacobtop-tcg.github.io/loppefund/marked/ry-retro-antik-og-designmesse-ry
 END:VEVENT
 END:VCALENDAR

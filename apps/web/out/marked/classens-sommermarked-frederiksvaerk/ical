@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:classens-sommermarked-frederiksvaerk-2026-07-10@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260710T100000
 DTEND;TZID=Europe/Copenhagen:20260710T160000
 SUMMARY:Classens Sommermarked
 LOCATION:Nørregade 28A\, 3300 Frederiksværk
 GEO:55.974964;12.02015
-URL:https://loppefund.dk/marked/classens-sommermarked-frederiksvaerk
+URL:https://jacobtop-tcg.github.io/loppefund/marked/classens-sommermarked-frederiksvaerk
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:aarets-store-kraemmermarked-i-skanderborg-skanderborg-2026-09-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260905T100000
 DTEND;TZID=Europe/Copenhagen:20260905T150000
 SUMMARY:Årets store kræmmermarked i Skanderborg
 LOCATION:Adelgade\, Skanderborg\, Adelgade\, Skanderborg
 GEO:56.0331;9.9321
-URL:https://loppefund.dk/marked/aarets-store-kraemmermarked-i-skanderborg-skanderborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/aarets-store-kraemmermarked-i-skanderborg-skanderborg
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:takenow-fredericia-fredericia-2026-07-02@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T160000
 SUMMARY:takeNOW Fredericia
 LOCATION:Fuglsang Allé 12\, 7000 Fredericia
 GEO:55.567433;9.701227
-URL:https://loppefund.dk/marked/takenow-fredericia-fredericia
+URL:https://jacobtop-tcg.github.io/loppefund/marked/takenow-fredericia-fredericia
 END:VEVENT
 END:VCALENDAR

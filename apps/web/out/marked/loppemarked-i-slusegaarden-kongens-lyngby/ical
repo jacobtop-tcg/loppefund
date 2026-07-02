@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-i-slusegaarden-kongens-lyngby-2026-08-23@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260823T090000
 DTEND;TZID=Europe/Copenhagen:20260823T150000
 SUMMARY:Loppemarked i Slusegården
 LOCATION:I. C. Modewegs Vej 5A\, 2800 Kongens Lyngby
 GEO:55.79436648;12.49920954
-URL:https://loppefund.dk/marked/loppemarked-i-slusegaarden-kongens-lyngby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-i-slusegaarden-kongens-lyngby
 END:VEVENT
 BEGIN:VEVENT
 UID:loppemarked-i-slusegaarden-kongens-lyngby-2026-09-13@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260913T090000
 DTEND;TZID=Europe/Copenhagen:20260913T150000
 SUMMARY:Loppemarked i Slusegården
 LOCATION:I. C. Modewegs Vej 5A\, 2800 Kongens Lyngby
 GEO:55.79436648;12.49920954
-URL:https://loppefund.dk/marked/loppemarked-i-slusegaarden-kongens-lyngby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-i-slusegaarden-kongens-lyngby
 END:VEVENT
 END:VCALENDAR

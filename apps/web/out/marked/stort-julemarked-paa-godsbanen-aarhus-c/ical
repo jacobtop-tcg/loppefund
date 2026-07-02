@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:stort-julemarked-paa-godsbanen-aarhus-c-2026-12-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261212T100000
 DTEND;TZID=Europe/Copenhagen:20261212T170000
 SUMMARY:STORT JULEMARKED PÅ GODSBANEN
 LOCATION:Både Rå Hal og Kedlen er fuld af julestande.\, Skovgaardsgade 3\, 8000 Aarhus C
 GEO:56.15;10.2167
-URL:https://loppefund.dk/marked/stort-julemarked-paa-godsbanen-aarhus-c
+URL:https://jacobtop-tcg.github.io/loppefund/marked/stort-julemarked-paa-godsbanen-aarhus-c
 END:VEVENT
 END:VCALENDAR

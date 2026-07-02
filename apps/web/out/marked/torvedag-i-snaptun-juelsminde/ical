@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:torvedag-i-snaptun-juelsminde-2026-08-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260815T110000
 DTEND;TZID=Europe/Copenhagen:20260815T160000
 SUMMARY:Torvedag i Snaptun
 LOCATION:Spir Efterskole\, Havnevej 11\, Juelsminde
 GEO:55.821;10.0502
-URL:https://loppefund.dk/marked/torvedag-i-snaptun-juelsminde
+URL:https://jacobtop-tcg.github.io/loppefund/marked/torvedag-i-snaptun-juelsminde
 END:VEVENT
 END:VCALENDAR

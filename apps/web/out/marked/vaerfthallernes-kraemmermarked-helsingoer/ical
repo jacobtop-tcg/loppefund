@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:vaerfthallernes-kraemmermarked-helsingoer-2026-10-10@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261010T100000
 DTEND;TZID=Europe/Copenhagen:20261010T160000
 SUMMARY:Værfthallernes Kræmmermarked
 LOCATION:På adressen\, Ny Kronborgvej 10\, 3000 Helsingør
 GEO:56.03882605;12.61532526
-URL:https://loppefund.dk/marked/vaerfthallernes-kraemmermarked-helsingoer
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vaerfthallernes-kraemmermarked-helsingoer
 END:VEVENT
 BEGIN:VEVENT
 UID:vaerfthallernes-kraemmermarked-helsingoer-2026-10-11@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261011T100000
 DTEND;TZID=Europe/Copenhagen:20261011T160000
 SUMMARY:Værfthallernes Kræmmermarked
 LOCATION:På adressen\, Ny Kronborgvej 10\, 3000 Helsingør
 GEO:56.03882605;12.61532526
-URL:https://loppefund.dk/marked/vaerfthallernes-kraemmermarked-helsingoer
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vaerfthallernes-kraemmermarked-helsingoer
 END:VEVENT
 END:VCALENDAR

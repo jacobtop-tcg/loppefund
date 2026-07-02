@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:aulum-s-store-loppe-kraemmermarked-aulum-2026-11-08@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261108T100000
 DTEND;TZID=Europe/Copenhagen:20261108T140000
 SUMMARY:Aulum's store loppe & kræmmermarked
 LOCATION:Aulum Fritidscenter\, Markedspladsen 10\, Aulum
 GEO:56.2656;8.79776
-URL:https://loppefund.dk/marked/aulum-s-store-loppe-kraemmermarked-aulum
+URL:https://jacobtop-tcg.github.io/loppefund/marked/aulum-s-store-loppe-kraemmermarked-aulum
 END:VEVENT
 END:VCALENDAR

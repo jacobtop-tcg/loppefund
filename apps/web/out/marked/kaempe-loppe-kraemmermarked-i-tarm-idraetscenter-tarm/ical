@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kaempe-loppe-kraemmermarked-i-tarm-idraetscenter-tarm-2026-10-04@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261004T100000
 DTEND;TZID=Europe/Copenhagen:20261004T140000
 SUMMARY:KÆMPE loppe & kræmmermarked i Tarm idrætscenter
 LOCATION:Tarm Idrætscenter\, Skovvej 25\, 6880 Tarm
 GEO:55.9041;8.53088
-URL:https://loppefund.dk/marked/kaempe-loppe-kraemmermarked-i-tarm-idraetscenter-tarm
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kaempe-loppe-kraemmermarked-i-tarm-idraetscenter-tarm
 END:VEVENT
 END:VCALENDAR

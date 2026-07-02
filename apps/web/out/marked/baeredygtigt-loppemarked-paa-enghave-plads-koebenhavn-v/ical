@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:baeredygtigt-loppemarked-paa-enghave-plads-koebenhavn-v-2026-08-30@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260830T100000
 DTEND;TZID=Europe/Copenhagen:20260830T160000
 SUMMARY:Bæredygtigt Loppemarked på Enghave Plads
 LOCATION:Enghave Plads Metro\, Enghave Plads 11A\, København V
 GEO:55.6672;12.5461
-URL:https://loppefund.dk/marked/baeredygtigt-loppemarked-paa-enghave-plads-koebenhavn-v
+URL:https://jacobtop-tcg.github.io/loppefund/marked/baeredygtigt-loppemarked-paa-enghave-plads-koebenhavn-v
 END:VEVENT
 END:VCALENDAR

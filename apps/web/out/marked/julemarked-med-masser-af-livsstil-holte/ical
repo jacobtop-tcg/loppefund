@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:julemarked-med-masser-af-livsstil-holte-2026-11-21@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261121T100000
 DTEND;TZID=Europe/Copenhagen:20261121T160000
 SUMMARY:Julemarked med masser af livsstil
 LOCATION:Havarthivej 6\, 2840 Holte
 GEO:55.81956927;12.49694082
-URL:https://loppefund.dk/marked/julemarked-med-masser-af-livsstil-holte
+URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-med-masser-af-livsstil-holte
 END:VEVENT
 BEGIN:VEVENT
 UID:julemarked-med-masser-af-livsstil-holte-2026-11-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261122T100000
 DTEND;TZID=Europe/Copenhagen:20261122T160000
 SUMMARY:Julemarked med masser af livsstil
 LOCATION:Havarthivej 6\, 2840 Holte
 GEO:55.81956927;12.49694082
-URL:https://loppefund.dk/marked/julemarked-med-masser-af-livsstil-holte
+URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-med-masser-af-livsstil-holte
 END:VEVENT
 END:VCALENDAR

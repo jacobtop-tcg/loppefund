@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:plantemarked-greve-museum-greve-2026-09-06@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260906T110000
 DTEND;TZID=Europe/Copenhagen:20260906T130000
 SUMMARY:Plantemarked Greve Museum
 LOCATION:Greve Museum\, Bækgårdsvej 9\, Greve
 GEO:55.5908;12.2519
-URL:https://loppefund.dk/marked/plantemarked-greve-museum-greve
+URL:https://jacobtop-tcg.github.io/loppefund/marked/plantemarked-greve-museum-greve
 END:VEVENT
 END:VCALENDAR

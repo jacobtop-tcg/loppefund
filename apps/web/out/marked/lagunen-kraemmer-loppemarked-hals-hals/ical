@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:lagunen-kraemmer-loppemarked-hals-hals-2026-07-04@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260704T090000
 DTEND;TZID=Europe/Copenhagen:20260704T160000
 SUMMARY:Lagunen Kræmmer- & Loppemarked\, Hals
 LOCATION:Lagunen 8\, Hou\, 9370 Hals
 GEO:57.04013171;10.36054548
-URL:https://loppefund.dk/marked/lagunen-kraemmer-loppemarked-hals-hals
+URL:https://jacobtop-tcg.github.io/loppefund/marked/lagunen-kraemmer-loppemarked-hals-hals
 END:VEVENT
 END:VCALENDAR

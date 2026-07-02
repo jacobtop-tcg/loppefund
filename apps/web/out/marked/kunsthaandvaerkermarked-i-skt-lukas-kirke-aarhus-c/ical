@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:kunsthaandvaerkermarked-i-skt-lukas-kirke-aarhus-c-2026-09-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260919T100000
 DTEND;TZID=Europe/Copenhagen:20260919T160000
 SUMMARY:Kunsthåndværkermarked i Skt. Lukas Kirke
 LOCATION:Sct. Lucas Kirkeplads 1\, Sct. Lucas Kirkeplads 1\, Aarhus C
 GEO:56.146;10.2027
-URL:https://loppefund.dk/marked/kunsthaandvaerkermarked-i-skt-lukas-kirke-aarhus-c
+URL:https://jacobtop-tcg.github.io/loppefund/marked/kunsthaandvaerkermarked-i-skt-lukas-kirke-aarhus-c
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppe-marked-vestergadehallen-silkeborg-silkeborg-2026-09-20@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260920T100000
 DTEND;TZID=Europe/Copenhagen:20260920T160000
 SUMMARY:Loppe marked Vestergadehallen Silkeborg
 LOCATION:Vestergadehallen\, Vestergade 76\, Silkeborg
 GEO:56.1659;9.53484
-URL:https://loppefund.dk/marked/loppe-marked-vestergadehallen-silkeborg-silkeborg
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppe-marked-vestergadehallen-silkeborg-silkeborg
 END:VEVENT
 END:VCALENDAR

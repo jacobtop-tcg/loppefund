@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:lions-butikken-virum-2026-07-04@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260704T100000
 DTEND;TZID=Europe/Copenhagen:20260704T160000
 SUMMARY:Lions Butikken
 LOCATION:Frederiksdalsvej 107\, 2830 Virum
 GEO:55.794597;12.467952
-URL:https://loppefund.dk/marked/lions-butikken-virum
+URL:https://jacobtop-tcg.github.io/loppefund/marked/lions-butikken-virum
 END:VEVENT
 END:VCALENDAR

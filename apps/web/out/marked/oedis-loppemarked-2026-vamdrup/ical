@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:oedis-loppemarked-2026-vamdrup-2026-09-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260905T120000
 DTEND;TZID=Europe/Copenhagen:20260905T150000
 SUMMARY:Ødis Loppemarked 2026
 LOCATION:Steppingvej 12A\, Steppingvej 12A\, Vamdrup
 GEO:55.4061;9.38194
-URL:https://loppefund.dk/marked/oedis-loppemarked-2026-vamdrup
+URL:https://jacobtop-tcg.github.io/loppefund/marked/oedis-loppemarked-2026-vamdrup
 END:VEVENT
 END:VCALENDAR

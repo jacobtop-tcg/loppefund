@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:lidkoeb-noerrebro-koebenhavn-n-2026-07-02@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T160000
 SUMMARY:Lidkøb Nørrebro
 LOCATION:Jagtvej 65\, 2200 København N\, 2200 København N
 GEO:55.693747;12.547929
-URL:https://loppefund.dk/marked/lidkoeb-noerrebro-koebenhavn-n
+URL:https://jacobtop-tcg.github.io/loppefund/marked/lidkoeb-noerrebro-koebenhavn-n
 END:VEVENT
 END:VCALENDAR

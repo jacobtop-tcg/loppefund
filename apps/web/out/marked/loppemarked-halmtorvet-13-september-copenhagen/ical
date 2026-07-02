@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-halmtorvet-13-september-copenhagen-2026-09-13@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260913T100000
 DTEND;TZID=Europe/Copenhagen:20260913T153000
 SUMMARY:LOPPEMARKED HALMTORVET – 13 september
 LOCATION:Halmtorvet\, Copenhagen.
-URL:https://loppefund.dk/marked/loppemarked-halmtorvet-13-september-copenhagen
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-halmtorvet-13-september-copenhagen
 END:VEVENT
 END:VCALENDAR

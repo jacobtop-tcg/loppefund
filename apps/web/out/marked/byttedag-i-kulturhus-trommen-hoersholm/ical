@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:byttedag-i-kulturhus-trommen-hoersholm-2026-11-28@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261128T110000
 DTEND;TZID=Europe/Copenhagen:20261128T130000
 SUMMARY:Byttedag i Kulturhus Trommen
 LOCATION:Kulturhus Trommen\, Bibliotekstorvet 1\, Hørsholm
 GEO:55.8807;12.4974
-URL:https://loppefund.dk/marked/byttedag-i-kulturhus-trommen-hoersholm
+URL:https://jacobtop-tcg.github.io/loppefund/marked/byttedag-i-kulturhus-trommen-hoersholm
 END:VEVENT
 END:VCALENDAR

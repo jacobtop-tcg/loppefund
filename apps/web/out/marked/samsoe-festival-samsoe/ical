@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:samsoe-festival-samsoe-2026-07-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260715T100000
 SUMMARY:Samsø Festival
 LOCATION:Strandskoven 7C\, 8305 Samsø
 GEO:55.831646;10.636646
-URL:https://loppefund.dk/marked/samsoe-festival-samsoe
+URL:https://jacobtop-tcg.github.io/loppefund/marked/samsoe-festival-samsoe
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:julemarked-i-viby-sjaelland-viby-sjaelland-2026-11-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261129T110000
 DTEND;TZID=Europe/Copenhagen:20261129T170000
 SUMMARY:Julemarked i Viby Sjælland
 LOCATION:Vores Cosmos Det lokale kulturhus samt bibliotek.\, Søndergade 11\, 4130 Viby Sjælland
 GEO:55.548202;12.024601
-URL:https://loppefund.dk/marked/julemarked-i-viby-sjaelland-viby-sjaelland
+URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-i-viby-sjaelland-viby-sjaelland
 END:VEVENT
 END:VCALENDAR

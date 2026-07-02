@@ -3,42 +3,42 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv-2026-07-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260705T100000
 DTEND;TZID=Europe/Copenhagen:20260705T160000
 SUMMARY:Københavnstrup - Københavns hyggeligste loppemarked
 LOCATION:300 meter nord for Emdrup station. Når du ser det hvide ishus og "byskiltet" hvorpå der står "Københavnstrup"\, så er du fremme. Gratis parkering hele vejen ned langs med Emdrup station. Parkér dog ikke på Banebrinken eller lige ud for markedet på Emdrupvej - her er parkering ikke lovligt.\, Lundebakken 1\, 2400 København NV
 GEO:55.723;12.5408
-URL:https://loppefund.dk/marked/koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv
+URL:https://jacobtop-tcg.github.io/loppefund/marked/koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv
 END:VEVENT
 BEGIN:VEVENT
 UID:koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv-2026-08-02@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260802T100000
 DTEND;TZID=Europe/Copenhagen:20260802T160000
 SUMMARY:Københavnstrup - Københavns hyggeligste loppemarked
 LOCATION:300 meter nord for Emdrup station. Når du ser det hvide ishus og "byskiltet" hvorpå der står "Københavnstrup"\, så er du fremme. Gratis parkering hele vejen ned langs med Emdrup station. Parkér dog ikke på Banebrinken eller lige ud for markedet på Emdrupvej - her er parkering ikke lovligt.\, Lundebakken 1\, 2400 København NV
 GEO:55.723;12.5408
-URL:https://loppefund.dk/marked/koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv
+URL:https://jacobtop-tcg.github.io/loppefund/marked/koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv
 END:VEVENT
 BEGIN:VEVENT
 UID:koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv-2026-09-06@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260906T100000
 DTEND;TZID=Europe/Copenhagen:20260906T160000
 SUMMARY:Københavnstrup - Københavns hyggeligste loppemarked
 LOCATION:300 meter nord for Emdrup station. Når du ser det hvide ishus og "byskiltet" hvorpå der står "Københavnstrup"\, så er du fremme. Gratis parkering hele vejen ned langs med Emdrup station. Parkér dog ikke på Banebrinken eller lige ud for markedet på Emdrupvej - her er parkering ikke lovligt.\, Lundebakken 1\, 2400 København NV
 GEO:55.723;12.5408
-URL:https://loppefund.dk/marked/koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv
+URL:https://jacobtop-tcg.github.io/loppefund/marked/koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv
 END:VEVENT
 BEGIN:VEVENT
 UID:koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv-2026-10-04@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261004T100000
 DTEND;TZID=Europe/Copenhagen:20261004T160000
 SUMMARY:Københavnstrup - Københavns hyggeligste loppemarked
 LOCATION:300 meter nord for Emdrup station. Når du ser det hvide ishus og "byskiltet" hvorpå der står "Københavnstrup"\, så er du fremme. Gratis parkering hele vejen ned langs med Emdrup station. Parkér dog ikke på Banebrinken eller lige ud for markedet på Emdrupvej - her er parkering ikke lovligt.\, Lundebakken 1\, 2400 København NV
 GEO:55.723;12.5408
-URL:https://loppefund.dk/marked/koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv
+URL:https://jacobtop-tcg.github.io/loppefund/marked/koebenhavnstrup-koebenhavns-hyggeligste-loppemarked-koebenhavn-nv
 END:VEVENT
 END:VCALENDAR

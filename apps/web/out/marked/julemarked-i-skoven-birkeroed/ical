@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:julemarked-i-skoven-birkeroed-2026-11-28@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20261128T093000
 DTEND;TZID=Europe/Copenhagen:20261128T143000
 SUMMARY:Julemarked i skoven
 LOCATION:Sophie Magdelenes vej 7-9-11\, 3460 Birkerød
-URL:https://loppefund.dk/marked/julemarked-i-skoven-birkeroed
+URL:https://jacobtop-tcg.github.io/loppefund/marked/julemarked-i-skoven-birkeroed
 END:VEVENT
 END:VCALENDAR

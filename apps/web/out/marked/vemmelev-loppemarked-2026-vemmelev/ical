@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:vemmelev-loppemarked-2026-vemmelev-2026-07-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260719T100000
 DTEND;TZID=Europe/Copenhagen:20260719T130000
 SUMMARY:VEMMELEV LOPPEMARKED 2026
 LOCATION:Stationsvej 1\, 4241 Vemmelev
 GEO:55.36347891;11.25886515
-URL:https://loppefund.dk/marked/vemmelev-loppemarked-2026-vemmelev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/vemmelev-loppemarked-2026-vemmelev
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:virksund-marked-hoejslev-2026-07-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260719T100000
 DTEND;TZID=Europe/Copenhagen:20260719T160000
 SUMMARY:Virksund Marked
 LOCATION:Havnen i Virksund\, Sundvej 12\, Højslev
 GEO:56.608;9.28734
-URL:https://loppefund.dk/marked/virksund-marked-hoejslev
+URL:https://jacobtop-tcg.github.io/loppefund/marked/virksund-marked-hoejslev
 END:VEVENT
 END:VCALENDAR

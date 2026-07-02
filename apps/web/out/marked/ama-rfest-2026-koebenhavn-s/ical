@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:ama-rfest-2026-koebenhavn-s-2026-09-12@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260912T113000
 DTEND;TZID=Europe/Copenhagen:20260912T153000
 SUMMARY:AMA’RFEST 2026
 LOCATION:Sundholmsvej 12\, 2300 København S
 GEO:55.66062546;12.59819542
-URL:https://loppefund.dk/marked/ama-rfest-2026-koebenhavn-s
+URL:https://jacobtop-tcg.github.io/loppefund/marked/ama-rfest-2026-koebenhavn-s
 END:VEVENT
 END:VCALENDAR

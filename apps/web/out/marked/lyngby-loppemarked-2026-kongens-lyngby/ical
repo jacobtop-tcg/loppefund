@@ -3,22 +3,22 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:lyngby-loppemarked-2026-kongens-lyngby-2026-08-22@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260822T090000
 DTEND;TZID=Europe/Copenhagen:20260822T120000
 SUMMARY:Lyngby Loppemarked 2026
 LOCATION:Ulrikkenborg Plads\, Ulrikkenborg Plads\, Kongens Lyngby
 GEO:55.7675;12.5026
-URL:https://loppefund.dk/marked/lyngby-loppemarked-2026-kongens-lyngby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/lyngby-loppemarked-2026-kongens-lyngby
 END:VEVENT
 BEGIN:VEVENT
 UID:lyngby-loppemarked-2026-kongens-lyngby-2026-08-29@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260829T090000
 DTEND;TZID=Europe/Copenhagen:20260829T150000
 SUMMARY:Lyngby Loppemarked 2026
 LOCATION:Ulrikkenborg Plads\, Ulrikkenborg Plads\, Kongens Lyngby
 GEO:55.7675;12.5026
-URL:https://loppefund.dk/marked/lyngby-loppemarked-2026-kongens-lyngby
+URL:https://jacobtop-tcg.github.io/loppefund/marked/lyngby-loppemarked-2026-kongens-lyngby
 END:VEVENT
 END:VCALENDAR

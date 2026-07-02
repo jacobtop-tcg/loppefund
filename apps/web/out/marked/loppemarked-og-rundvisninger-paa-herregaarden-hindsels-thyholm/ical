@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-og-rundvisninger-paa-herregaarden-hindsels-thyholm-2026-08-16@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;VALUE=DATE:20260816
 SUMMARY:Loppemarked og rundvisninger på Herregården Hindsels
 LOCATION:Herregården Hindsels\, Hindselsvej 24\, Thyholm
 GEO:56.6742;8.57908
-URL:https://loppefund.dk/marked/loppemarked-og-rundvisninger-paa-herregaarden-hindsels-thyholm
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-og-rundvisninger-paa-herregaarden-hindsels-thyholm
 END:VEVENT
 END:VCALENDAR

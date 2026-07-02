@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hoest-og-plantemarked-ved-michelsens-gaard-aabenraa-2026-09-05@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260905T140000
 DTEND;TZID=Europe/Copenhagen:20260905T170000
 SUMMARY:Høst- og plantemarked
 LOCATION:Egnsmuseet Jacob Michelsens Gård\, Toften 37\, Aabenraa
 GEO:55.0499;9.41155
-URL:https://loppefund.dk/marked/hoest-og-plantemarked-ved-michelsens-gaard-aabenraa
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoest-og-plantemarked-ved-michelsens-gaard-aabenraa
 END:VEVENT
 END:VCALENDAR

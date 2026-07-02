@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:stort-loppemarked-i-center-thyregod-give-2026-09-27@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260927T100000
 DTEND;TZID=Europe/Copenhagen:20260927T140000
 SUMMARY:Stort loppemarked i Center Thyregod
 LOCATION:Center Thyregod\, Søndergade 27 E\, 7323 Give
 GEO:55.9058;9.26003
-URL:https://loppefund.dk/marked/stort-loppemarked-i-center-thyregod-give
+URL:https://jacobtop-tcg.github.io/loppefund/marked/stort-loppemarked-i-center-thyregod-give
 END:VEVENT
 END:VCALENDAR

@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:heltborg-jernaldermarked-hurup-thy-2026-07-26@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260726T110000
 DTEND;TZID=Europe/Copenhagen:20260726T160000
 SUMMARY:Heltborg Jernaldermarked
 LOCATION:Heltborg Museum\, Sydthy Kunst- og Kulturcenter\, Skårhøjvej 15\, Hurup Thy
 GEO:56.7517;8.4541
-URL:https://loppefund.dk/marked/heltborg-jernaldermarked-hurup-thy
+URL:https://jacobtop-tcg.github.io/loppefund/marked/heltborg-jernaldermarked-hurup-thy
 END:VEVENT
 END:VCALENDAR

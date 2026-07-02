@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppelux-holstebro-2026-07-02@loppefund.dk
-DTSTAMP:20260702T162537Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260702T100000
 DTEND;TZID=Europe/Copenhagen:20260702T160000
 SUMMARY:Loppelux
 LOCATION:Lavhedevej 24\, 7500 Holstebro
 GEO:56.375674;8.618501
-URL:https://loppefund.dk/marked/loppelux-holstebro
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppelux-holstebro
 END:VEVENT
 END:VCALENDAR

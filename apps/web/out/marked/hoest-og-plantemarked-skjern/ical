@@ -3,12 +3,12 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:hoest-og-plantemarked-skjern-2026-09-19@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260919T100000
 DTEND;TZID=Europe/Copenhagen:20260919T130000
 SUMMARY:Høst- og plantemarked
 LOCATION:Bundsbæk Mølle\, Bundsbækvej 27\, Skjern
 GEO:56.0069;8.47862
-URL:https://loppefund.dk/marked/hoest-og-plantemarked-skjern
+URL:https://jacobtop-tcg.github.io/loppefund/marked/hoest-og-plantemarked-skjern
 END:VEVENT
 END:VCALENDAR

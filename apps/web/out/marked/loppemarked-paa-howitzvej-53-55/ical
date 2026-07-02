@@ -3,11 +3,11 @@ VERSION:2.0
 PRODID:-//Loppefund//DA
 BEGIN:VEVENT
 UID:loppemarked-paa-howitzvej-53-55-2026-08-15@loppefund.dk
-DTSTAMP:20260702T162536Z
+DTSTAMP:20260702T163051Z
 DTSTART;TZID=Europe/Copenhagen:20260815T110000
 DTEND;TZID=Europe/Copenhagen:20260815T140000
 SUMMARY:Loppemarked på Howitzvej 53-55☀️
 LOCATION:Dragør Fortet
-URL:https://loppefund.dk/marked/loppemarked-paa-howitzvej-53-55
+URL:https://jacobtop-tcg.github.io/loppefund/marked/loppemarked-paa-howitzvej-53-55
 END:VEVENT
 END:VCALENDAR

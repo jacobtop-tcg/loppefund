@@ -11,17 +11,19 @@ export default function HomePage() {
   const now = copenhagenNow();
   return (
     <>
-      <header className="site-header container">
-        <div className="wordmark">
-          Loppefund<span className="dot">.</span>
+      <header className="site-header explorer-main">
+        <div className="brand-row">
+          <div className="wordmark">
+            Loppefund<span className="dot">.</span>
+          </div>
+          <p className="tagline">Alle loppemarkeder i Danmark. Ét sted, altid opdateret.</p>
         </div>
-        <p className="tagline">Alle loppemarkeder i Danmark. Ét sted, altid opdateret.</p>
       </header>
-      <main className="container">
+      <main className="explorer-main">
         <Explorer events={events} today={today} now={now} />
       </main>
       <footer className="site-footer">
-        <div className="container">
+        <div className="explorer-main">
           Loppefund samler markeder automatisk fra offentlige kilder og viser altid, hvor
           oplysningerne kommer fra. Fandt du en fejl? Kilderne er linket på hvert marked.{' '}
           <Link href="/tip" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>

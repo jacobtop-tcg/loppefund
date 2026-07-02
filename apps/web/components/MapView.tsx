@@ -4,157 +4,417 @@ import { useEffect, useRef } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import type { EventSummary } from '../lib/data.ts';
-import { CATEGORY_LABELS, formatDateLong } from '../lib/format.ts';
+import {
+  CATEGORY_LABELS,
+  dayOfMonth,
+  displayTitle,
+  formatDateLong,
+  formatHours,
+  weekdayShort,
+} from '../lib/format.ts';
+import { loadMapStyle, MAP } from '../lib/map-style.ts';
 
 const DENMARK_CENTER: [number, number] = [10.6, 56.05];
+const DENMARK_ZOOM = 6.1;
+const FIT_DEBOUNCE_MS = 350;
 
-const MAP_STYLE: maplibregl.StyleSpecification = {
-  version: 8,
-  // Required for symbol layers (cluster counts).
-  glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
-  sources: {
-    osm: {
-      type: 'raster',
-      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-      tileSize: 256,
-      attribution: '© OpenStreetMap-bidragydere',
-    },
-  },
-  layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
-};
+type MapEvent = EventSummary & { nextDate: string; openNow?: boolean };
 
-type MapEvent = EventSummary & { nextDate: string };
-
-function toGeoJson(events: MapEvent[]): GeoJSON.FeatureCollection {
+function toGeoJson(events: MapEvent[], today: string): GeoJSON.FeatureCollection {
   return {
     type: 'FeatureCollection',
     features: events
       .filter((e) => e.lat != null && e.lng != null)
-      .map((e) => ({
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [e.lng!, e.lat!] },
-        properties: {
-          slug: e.slug,
-          title: e.title,
-          city: e.city ?? '',
-          category: CATEGORY_LABELS[e.category] ?? 'Marked',
-          nextDate: e.nextDate,
-        },
-      })),
+      .map((e) => {
+        const next = e.occurrences.find((o) => o.date === e.nextDate);
+        const isToday = e.nextDate === today;
+        return {
+          type: 'Feature' as const,
+          geometry: { type: 'Point' as const, coordinates: [e.lng!, e.lat!] },
+          properties: {
+            slug: e.slug,
+            title: displayTitle(e.title),
+            city: e.city ?? '',
+            category: CATEGORY_LABELS[e.category] ?? 'Marked',
+            nextDate: e.nextDate,
+            hours: next ? (formatHours(next.startTime, next.endTime) ?? '') : '',
+            isFree: e.isFree === true,
+            // Drives marker color + label: green 'Åbent nu' > accent 'i dag' > accent-deep
+            state: e.openNow ? 'open' : isToday ? 'today' : 'upcoming',
+            label: isToday ? 'i dag' : `${weekdayShort(e.nextDate)} ${dayOfMonth(e.nextDate)}.`,
+          },
+        };
+      }),
   };
 }
 
-export function MapView({ events }: { events: MapEvent[] }) {
+function applyHighlight(map: maplibregl.Map, slug: string | null): void {
+  map.setFilter(
+    'point-highlight',
+    slug
+      ? ['all', ['!', ['has', 'point_count']], ['==', ['get', 'slug'], slug]]
+      : ['boolean', false],
+  );
+}
+
+function applySelected(map: maplibregl.Map, slugs: string[]): void {
+  map.setFilter(
+    'points-selected',
+    slugs.length
+      ? ['all', ['!', ['has', 'point_count']], ['in', ['get', 'slug'], ['literal', slugs]]]
+      : ['boolean', false],
+  );
+}
+
+export function MapView({
+  events,
+  today,
+  highlightSlug = null,
+  tripMode = false,
+  tripSlugs = [],
+  onToggleTrip,
+  fullscreen = false,
+}: {
+  events: MapEvent[];
+  today: string;
+  highlightSlug?: string | null;
+  tripMode?: boolean;
+  tripSlugs?: string[];
+  onToggleTrip?: (slug: string) => void;
+  fullscreen?: boolean;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const readyRef = useRef(false);
-  // The 'load' handler runs asynchronously; read the latest events from a ref
-  // so filters applied before the map finishes loading aren't lost.
+  // Signature of the last rendered result set — refit only when it changes.
+  const lastSigRef = useRef<string | null>(null);
+  const fitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // The style fetch and 'load' handler run asynchronously; read the latest
+  // events from a ref so filters applied before then aren't lost.
   const eventsRef = useRef(events);
   eventsRef.current = events;
+  // The popup click handler is bound once at load — read live trip state here.
+  const tripRef = useRef({ tripMode, tripSlugs, onToggleTrip });
+  tripRef.current = { tripMode, tripSlugs, onToggleTrip };
+  const highlightRef = useRef(highlightSlug);
+  highlightRef.current = highlightSlug;
+
+  function syncData(map: maplibregl.Map, evts: MapEvent[], animate: boolean) {
+    const data = toGeoJson(evts, today);
+    (map.getSource('events') as maplibregl.GeoJSONSource | undefined)?.setData(data);
+    const sig = data.features.map((f) => f.properties!.slug as string).join(',');
+    if (sig === lastSigRef.current) return;
+    const first = lastSigRef.current === null;
+    lastSigRef.current = sig;
+    if (fitTimerRef.current) {
+      clearTimeout(fitTimerRef.current);
+      fitTimerRef.current = null;
+    }
+    // Fly to the filtered result set — but never on the initial Denmark frame
+    // and never into an empty set. Debounced so typing doesn't yank the map.
+    if (!animate || first || data.features.length === 0) return;
+    const coords = data.features.map(
+      (f) => (f.geometry as GeoJSON.Point).coordinates as [number, number],
+    );
+    fitTimerRef.current = setTimeout(() => {
+      fitTimerRef.current = null;
+      if (coords.length === 1) {
+        map.easeTo({ center: coords[0]!, zoom: 11, duration: 650 });
+        return;
+      }
+      const bounds = new maplibregl.LngLatBounds();
+      for (const c of coords) bounds.extend(c);
+      map.fitBounds(bounds, {
+        padding: { top: 64, right: 56, bottom: 56, left: 56 },
+        maxZoom: 11,
+        duration: 700,
+      });
+    }, FIT_DEBOUNCE_MS);
+  }
 
   useEffect(() => {
-    if (!containerRef.current || mapRef.current) return;
-    const map = new maplibregl.Map({
-      container: containerRef.current,
-      style: MAP_STYLE,
-      center: DENMARK_CENTER,
-      zoom: 6.1,
-      attributionControl: { compact: true },
-    });
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
-    map.on('load', () => {
-      map.addSource('events', {
-        type: 'geojson',
-        data: toGeoJson(eventsRef.current),
-        cluster: true,
-        clusterMaxZoom: 12,
-        clusterRadius: 46,
+    const container = containerRef.current;
+    if (!container || mapRef.current) return;
+    let cancelled = false;
+    let map: maplibregl.Map | null = null;
+    let ro: ResizeObserver | null = null;
+    loadMapStyle().then(({ style, fonts }) => {
+      if (cancelled) return;
+      map = new maplibregl.Map({
+        container,
+        style,
+        center: DENMARK_CENTER,
+        zoom: DENMARK_ZOOM,
+        attributionControl: { compact: true },
+        // Only the mobile hero sits in the page scroll flow; the desktop
+        // split map is sticky and never fights one-finger scrolling.
+        cooperativeGestures:
+          typeof window !== 'undefined' && window.matchMedia('(max-width: 899px)').matches,
       });
-      map.addLayer({
-        id: 'clusters',
-        type: 'circle',
-        source: 'events',
-        filter: ['has', 'point_count'],
-        paint: {
-          'circle-color': '#e4572e',
-          'circle-radius': ['step', ['get', 'point_count'], 16, 10, 21, 40, 27],
-          'circle-stroke-width': 3,
-          'circle-stroke-color': '#faf5ec',
-        },
-      });
-      map.addLayer({
-        id: 'cluster-count',
-        type: 'symbol',
-        source: 'events',
-        filter: ['has', 'point_count'],
-        layout: {
-          'text-field': ['get', 'point_count_abbreviated'],
-          'text-size': 13,
-          'text-font': ['Noto Sans Regular'],
-        },
-        paint: { 'text-color': '#ffffff' },
-      });
-      map.addLayer({
-        id: 'points',
-        type: 'circle',
-        source: 'events',
-        filter: ['!', ['has', 'point_count']],
-        paint: {
-          'circle-color': '#c73e18',
-          'circle-radius': 8,
-          'circle-stroke-width': 2.5,
-          'circle-stroke-color': '#faf5ec',
-        },
-      });
-      map.on('click', 'clusters', async (e) => {
-        const feature = map.queryRenderedFeatures(e.point, { layers: ['clusters'] })[0];
-        if (!feature) return;
-        const source = map.getSource('events') as maplibregl.GeoJSONSource;
-        const zoom = await source.getClusterExpansionZoom(feature.properties!.cluster_id as number);
-        map.easeTo({
-          center: (feature.geometry as GeoJSON.Point).coordinates as [number, number],
-          zoom,
+      mapRef.current = map;
+      // Hero -> fullscreen -> sticky-pane size changes, handled without
+      // trusting maplibre's own container observer.
+      ro = new ResizeObserver(() => map?.resize());
+      ro.observe(container);
+      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+      map.addControl(
+        new maplibregl.GeolocateControl({
+          positionOptions: { enableHighAccuracy: false, timeout: 8000 },
+          fitBoundsOptions: { maxZoom: 12 },
+        }),
+        'top-right',
+      );
+      map.on('load', () => {
+        const m = map!;
+        m.addSource('events', {
+          type: 'geojson',
+          data: toGeoJson(eventsRef.current, today),
+          cluster: true,
+          clusterMaxZoom: 12,
+          clusterRadius: 46,
         });
+        // Soft warm glow behind clusters — reads as 'many markets here'.
+        m.addLayer({
+          id: 'cluster-halo',
+          type: 'circle',
+          source: 'events',
+          filter: ['has', 'point_count'],
+          paint: {
+            'circle-color': 'rgba(228, 87, 46, 0.18)',
+            'circle-radius': ['step', ['get', 'point_count'], 23, 10, 28, 40, 35],
+            'circle-blur': 0.35,
+          },
+        });
+        m.addLayer({
+          id: 'clusters',
+          type: 'circle',
+          source: 'events',
+          filter: ['has', 'point_count'],
+          paint: {
+            'circle-color': ['step', ['get', 'point_count'], MAP.accent, 40, MAP.accentDeep],
+            'circle-radius': ['step', ['get', 'point_count'], 16, 10, 21, 40, 27],
+            'circle-stroke-width': 2.5,
+            'circle-stroke-color': MAP.paperRaised,
+          },
+        });
+        m.addLayer({
+          id: 'cluster-count',
+          type: 'symbol',
+          source: 'events',
+          filter: ['has', 'point_count'],
+          layout: {
+            'text-field': ['get', 'point_count_abbreviated'],
+            'text-size': 13,
+            'text-font': fonts.bold,
+            'text-allow-overlap': true, // counts must never be culled
+          },
+          paint: { 'text-color': MAP.paperRaised },
+        });
+        // State halo: only 'Åbent nu' and 'i dag' points glow — zero clutter.
+        m.addLayer({
+          id: 'point-halo',
+          type: 'circle',
+          source: 'events',
+          filter: ['!', ['has', 'point_count']],
+          paint: {
+            'circle-radius': 15,
+            'circle-blur': 0.5,
+            'circle-color': [
+              'match', ['get', 'state'],
+              'open', 'rgba(62, 122, 78, 0.28)',
+              'today', 'rgba(228, 87, 46, 0.22)',
+              'rgba(0, 0, 0, 0)',
+            ],
+          },
+        });
+        m.addLayer({
+          id: 'points',
+          type: 'circle',
+          source: 'events',
+          filter: ['!', ['has', 'point_count']],
+          paint: {
+            'circle-color': [
+              'match', ['get', 'state'],
+              'open', MAP.green,
+              'today', MAP.accent,
+              MAP.accentDeep,
+            ],
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, 5.5, 10, 7.5, 14, 9],
+            'circle-stroke-width': 2.5,
+            'circle-stroke-color': MAP.paperRaised,
+          },
+        });
+        // Trip-mode selected stops: ink dots so the route reads at a glance.
+        m.addLayer({
+          id: 'points-selected',
+          type: 'circle',
+          source: 'events',
+          filter: ['boolean', false],
+          paint: {
+            'circle-color': MAP.ink,
+            'circle-radius': 9,
+            'circle-stroke-width': 2.5,
+            'circle-stroke-color': MAP.paper,
+          },
+        });
+        // Card hover/focus -> marker highlight (filter by slug; feature-state
+        // is unreliable with clustered GeoJSON).
+        m.addLayer({
+          id: 'point-highlight',
+          type: 'circle',
+          source: 'events',
+          filter: ['boolean', false],
+          paint: {
+            'circle-color': MAP.accent,
+            'circle-radius': 12,
+            'circle-stroke-width': 3,
+            'circle-stroke-color': MAP.paperRaised,
+          },
+        });
+        // Weekday label under each dot ('lør 5.' / 'i dag'). Chosen over DOM
+        // date-pills: at 615 points GL symbols cost nothing, and MapLibre's
+        // collision engine hides crowded labels instead of overlapping them.
+        m.addLayer({
+          id: 'point-labels',
+          type: 'symbol',
+          source: 'events',
+          filter: ['!', ['has', 'point_count']],
+          minzoom: 8, // country view stays clean
+          layout: {
+            'text-field': ['get', 'label'],
+            'text-font': fonts.regular,
+            'text-size': 11.5,
+            'text-anchor': 'top',
+            'text-offset': [0, 0.9],
+          },
+          paint: {
+            'text-color': [
+              'match', ['get', 'state'],
+              'open', MAP.green,
+              'today', MAP.accentDeep,
+              MAP.inkSoft,
+            ],
+            'text-halo-color': MAP.paper,
+            'text-halo-width': 1.4,
+          },
+        });
+        m.on('click', 'clusters', async (e) => {
+          const feature = m.queryRenderedFeatures(e.point, { layers: ['clusters'] })[0];
+          if (!feature) return;
+          const source = m.getSource('events') as maplibregl.GeoJSONSource;
+          const zoom = await source.getClusterExpansionZoom(
+            feature.properties!.cluster_id as number,
+          );
+          m.easeTo({
+            center: (feature.geometry as GeoJSON.Point).coordinates as [number, number],
+            zoom,
+            duration: 500,
+          });
+        });
+        const openPopup = (e: maplibregl.MapLayerMouseEvent) => {
+          const f = e.features?.[0];
+          if (!f) return;
+          const p = f.properties as Record<string, unknown>;
+          const slug = String(p.slug);
+          const { tripMode: inTrip, tripSlugs: selectedSlugs } = tripRef.current;
+          const popup = new maplibregl.Popup({ offset: 16, className: 'map-popup', maxWidth: '272px' })
+            .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+            .setHTML(popupHtml(p, { active: inTrip, selected: selectedSlugs.includes(slug) }))
+            .addTo(m);
+          // Popup removal on toggle keeps the button label trivially correct.
+          popup
+            .getElement()
+            ?.querySelector('.map-popup-add')
+            ?.addEventListener('click', () => {
+              tripRef.current.onToggleTrip?.(slug);
+              popup.remove();
+            });
+        };
+        m.on('click', 'points', openPopup);
+        m.on('click', 'point-labels', openPopup);
+        for (const layer of ['clusters', 'points', 'point-labels']) {
+          m.on('mouseenter', layer, () => (m.getCanvas().style.cursor = 'pointer'));
+          m.on('mouseleave', layer, () => (m.getCanvas().style.cursor = ''));
+        }
+        readyRef.current = true;
+        // Props may have changed while the style loaded.
+        applyHighlight(m, highlightRef.current);
+        applySelected(m, tripRef.current.tripSlugs);
+        syncData(m, eventsRef.current, false);
       });
-      map.on('click', 'points', (e) => {
-        const f = e.features?.[0];
-        if (!f) return;
-        const p = f.properties as Record<string, string>;
-        new maplibregl.Popup({ offset: 14, className: 'map-popup' })
-          .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
-          .setHTML(
-            `<div class="map-popup-title">${escapeHtml(p.title!)}</div>` +
-              `<div class="map-popup-meta">${escapeHtml(p.category!)}${p.city ? ` · ${escapeHtml(p.city)}` : ''} · ${formatDateLong(p.nextDate!)}</div>` +
-              `<a class="map-popup-link" href="${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${encodeURIComponent(p.slug!)}">Se marked →</a>`,
-          )
-          .addTo(map);
-      });
-      for (const layer of ['clusters', 'points']) {
-        map.on('mouseenter', layer, () => (map.getCanvas().style.cursor = 'pointer'));
-        map.on('mouseleave', layer, () => (map.getCanvas().style.cursor = ''));
-      }
-      readyRef.current = true;
     });
-    mapRef.current = map;
     return () => {
-      map.remove();
+      cancelled = true;
+      if (fitTimerRef.current) clearTimeout(fitTimerRef.current);
+      fitTimerRef.current = null;
+      ro?.disconnect();
+      map?.remove();
       mapRef.current = null;
       readyRef.current = false;
+      lastSigRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Keep data in sync with active filters.
+  // Keep data in sync with active filters — setData + fitBounds, never re-init.
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !readyRef.current) return;
-    (map.getSource('events') as maplibregl.GeoJSONSource | undefined)?.setData(
-      toGeoJson(events),
-    );
+    syncData(map, events, true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events]);
 
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !readyRef.current) return;
+    applyHighlight(map, highlightSlug);
+  }, [highlightSlug]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !readyRef.current) return;
+    applySelected(map, tripSlugs);
+  }, [tripSlugs]);
+
+  // Fullscreen map is a deliberate mode switch — one-finger panning is expected.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    if (fullscreen) map.cooperativeGestures.disable();
+    else if (window.matchMedia('(max-width: 899px)').matches) map.cooperativeGestures.enable();
+  }, [fullscreen]);
+
   return <div ref={containerRef} className="map-shell" />;
+}
+
+/** Popup = the event-card system, floating on the map. All values escaped. */
+function popupHtml(
+  p: Record<string, unknown>,
+  trip: { active: boolean; selected: boolean },
+): string {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+  const open = p.state === 'open';
+  const isToday = open || p.state === 'today';
+  const when =
+    (isToday ? 'i dag' : escapeHtml(formatDateLong(String(p.nextDate)))) +
+    (p.hours ? ` · ${escapeHtml(String(p.hours))}` : '');
+  const free = p.isFree === true || p.isFree === 'true';
+  const badges =
+    (open ? '<span class="badge open-now"><span class="dot"></span>Åbent nu</span>' : '') +
+    `<span class="badge">${escapeHtml(String(p.category))}</span>` +
+    (free ? '<span class="badge free">Gratis</span>' : '');
+  // In trip mode the popup toggles the stop instead of navigating away.
+  const cta = trip.active
+    ? `<button type="button" class="map-popup-add" data-slug="${escapeHtml(String(p.slug))}">${trip.selected ? 'Fjern fra turen' : 'Tilføj til turen'}</button>`
+    : `<a class="map-card-cta" href="${base}/marked/${encodeURIComponent(String(p.slug))}">Se marked</a>`;
+  return (
+    `<div class="map-card">` +
+    `<h3 class="map-card-title">${escapeHtml(String(p.title))}</h3>` +
+    `<div class="map-card-when${isToday ? ' today' : ''}">${when}${p.city ? ` · ${escapeHtml(String(p.city))}` : ''}</div>` +
+    `<div class="badge-row">${badges}</div>` +
+    cta +
+    `</div>`
+  );
 }
 
 function escapeHtml(s: string): string {

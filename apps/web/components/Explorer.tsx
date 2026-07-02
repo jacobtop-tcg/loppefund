@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { copenhagenNow, isOpenAt, type CphNow } from '@loppefund/core';
 import type { EventSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
-import { EventCard } from './EventCard.tsx';
+import { FilterBar, type DateFilter } from './FilterBar.tsx';
+import { ResultsList } from './ResultsList.tsx';
 import {
   addDaysIso,
   buildTripUrl,
@@ -18,26 +19,6 @@ const MapView = dynamic(() => import('./MapView.tsx').then((m) => m.MapView), {
   ssr: false,
   loading: () => <div className="map-shell" style={{ display: 'grid', placeItems: 'center', color: 'var(--ink-faint)' }}>Indlæser kort…</div>,
 });
-
-type DateFilter = 'aabent-nu' | 'idag' | 'imorgen' | 'weekend' | 'naeste-weekend' | 'alle';
-
-const DATE_CHIPS: Array<{ key: DateFilter; label: string }> = [
-  { key: 'aabent-nu', label: 'Åbent nu' },
-  { key: 'idag', label: 'I dag' },
-  { key: 'imorgen', label: 'I morgen' },
-  { key: 'weekend', label: 'I weekenden' },
-  { key: 'naeste-weekend', label: 'Næste weekend' },
-  { key: 'alle', label: 'Alle datoer' },
-];
-
-const CATEGORY_CHIPS: Array<{ key: string; label: string }> = [
-  { key: 'loppemarked', label: 'Loppemarked' },
-  { key: 'kraemmermarked', label: 'Kræmmer' },
-  { key: 'bagagerumsmarked', label: 'Bagagerum' },
-  { key: 'antikmarked', label: 'Antik' },
-];
-
-const RADIUS_CHIPS = [10, 25, 50] as const;
 
 function weekdayOfIso(date: string): number {
   const [y, m, d] = date.split('-').map(Number) as [number, number, number];
@@ -90,6 +71,7 @@ export function Explorer({
   const [tripMode, setTripMode] = useState(false);
   const [tripSlugs, setTripSlugs] = useState<string[]>([]); // insertion order = route order
   const [savedOnly, setSavedOnly] = useState(false);
+  const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
   const { favorites, count: favCount } = useFavorites();
 
   // Live clock only while the "Åbent nu" filter is active.
@@ -193,6 +175,10 @@ export function Explorer({
     return alt.slice(0, 3);
   }, [filtered.length, events, today, query, category, pos]);
 
+  // The map never goes blank: when filters yield nothing it shows the same
+  // three suggestions the empty state offers as list cards.
+  const mapEvents = filtered.length > 0 ? filtered : suggestions;
+
   // Trip selection is keyed by slug against the full list, so filter changes
   // never drop chosen stops.
   const eventsBySlug = useMemo(() => new Map(events.map((e) => [e.slug, e])), [events]);
@@ -201,7 +187,9 @@ export function Explorer({
     .filter((e): e is EventSummary => !!e && e.lat != null && e.lng != null);
   const tripUrl = buildTripUrl(tripStops.map((e) => ({ lat: e.lat!, lng: e.lng! })));
 
-  function toggleTrip(slug: string) {
+  // Handlers passed to the memoized FilterBar/ResultsList must be referentially
+  // stable, or every hoveredSlug change re-renders 600+ cards.
+  const toggleTrip = useCallback((slug: string) => {
     setTripSlugs((prev) =>
       prev.includes(slug)
         ? prev.filter((x) => x !== slug)
@@ -209,14 +197,19 @@ export function Explorer({
           ? prev
           : [...prev, slug],
     );
-  }
+  }, []);
 
-  function exitTrip() {
+  const exitTrip = useCallback(() => {
     setTripMode(false);
     setTripSlugs([]);
-  }
+  }, []);
 
-  function locate() {
+  const toggleTripMode = useCallback(
+    () => (tripMode ? exitTrip() : setTripMode(true)),
+    [tripMode, exitTrip],
+  );
+
+  const locate = useCallback(() => {
     if (!navigator.geolocation) return;
     setLocating(true);
     navigator.geolocation.getCurrentPosition(
@@ -227,165 +220,72 @@ export function Explorer({
       () => setLocating(false),
       { timeout: 8000 },
     );
-  }
+  }, []);
+
+  const clearPos = useCallback(() => {
+    setPos(null);
+    setRadius(null);
+  }, []);
 
   return (
-    <>
-      <div className="controls">
-        <div className="search-row">
-          <label className="search-box">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
-              <circle cx="11" cy="11" r="7" />
-              <path d="m20 20-3.5-3.5" />
-            </svg>
-            <input
-              type="search"
-              placeholder="Søg marked, by eller sted…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              aria-label="Søg"
-            />
-          </label>
-          <div className="view-toggle" role="tablist" aria-label="Visning">
-            <button className={view === 'list' ? 'active' : ''} onClick={() => setView('list')}>
-              Liste
-            </button>
-            <button className={view === 'map' ? 'active' : ''} onClick={() => setView('map')}>
-              Kort
-            </button>
-          </div>
-        </div>
-        <div className="chip-row">
-          {DATE_CHIPS.map((c) => (
-            <button
-              key={c.key}
-              className={`chip ${dateFilter === c.key ? 'active' : ''}`}
-              onClick={() => setDateFilter(c.key)}
-            >
-              {c.key === 'aabent-nu' && <span className="live-dot" aria-hidden />}
-              {c.label}
-            </button>
-          ))}
-          <span className="chip-sep" aria-hidden />
-          {CATEGORY_CHIPS.map((c) => (
-            <button
-              key={c.key}
-              className={`chip ${category === c.key ? 'active' : ''}`}
-              onClick={() => setCategory(category === c.key ? null : c.key)}
-            >
-              {c.label}
-            </button>
-          ))}
-          <span className="chip-sep" aria-hidden />
-          {favCount > 0 && (
-            <button
-              className={`chip accent ${savedOnly ? 'active' : ''}`}
-              onClick={() => setSavedOnly(!savedOnly)}
-            >
-              ♥ Gemte ({favCount})
-            </button>
-          )}
-          <button className={`chip ${freeOnly ? 'active' : ''}`} onClick={() => setFreeOnly(!freeOnly)}>
-            Gratis entré
-          </button>
-          <button className={`chip ${familyOnly ? 'active' : ''}`} onClick={() => setFamilyOnly(!familyOnly)}>
-            Børnevenligt
-          </button>
-          <button
-            className={`chip ${inOut === 'indoor' ? 'active' : ''}`}
-            onClick={() => setInOut(inOut === 'indoor' ? null : 'indoor')}
-          >
-            Indendørs
-          </button>
-          <button
-            className={`chip ${inOut === 'outdoor' ? 'active' : ''}`}
-            onClick={() => setInOut(inOut === 'outdoor' ? null : 'outdoor')}
-          >
-            Udendørs
-          </button>
-          <span className="chip-sep" aria-hidden />
-          <button
-            className={`chip accent ${pos ? 'active' : ''}`}
-            onClick={() => (pos ? (setPos(null), setRadius(null)) : locate())}
-          >
-            {locating ? 'Finder dig…' : pos ? '✓ Nær mig' : '◎ Nær mig'}
-          </button>
-          {pos &&
-            RADIUS_CHIPS.map((r) => (
-              <button
-                key={r}
-                className={`chip ${radius === r ? 'active' : ''}`}
-                onClick={() => setRadius(radius === r ? null : r)}
-              >
-                {r} km
-              </button>
-            ))}
-          <button
-            className={`chip accent ${tripMode ? 'active' : ''}`}
-            onClick={() => (tripMode ? exitTrip() : setTripMode(true))}
-          >
-            {tripMode ? '✓ Loppetur' : 'Lav en loppetur'}
-          </button>
-        </div>
+    <div className={`explorer${view === 'map' ? ' is-map-view' : ''}${tripMode ? ' has-trip' : ''}`}>
+      <FilterBar
+        query={query} onQuery={setQuery}
+        dateFilter={dateFilter} onDateFilter={setDateFilter}
+        category={category} onCategory={setCategory}
+        freeOnly={freeOnly} onFreeOnly={setFreeOnly}
+        familyOnly={familyOnly} onFamilyOnly={setFamilyOnly}
+        inOut={inOut} onInOut={setInOut}
+        savedOnly={savedOnly} onSavedOnly={setSavedOnly} favCount={favCount}
+        pos={pos} locating={locating} onLocate={locate} onClearPos={clearPos}
+        radius={radius} onRadius={setRadius}
+        tripMode={tripMode} onToggleTripMode={toggleTripMode}
+      />
+      <div className="explorer-split">
+        <section className="results-pane">
+          <ResultsList
+            filtered={filtered}
+            suggestions={suggestions}
+            today={today}
+            dateFilter={dateFilter}
+            hasPos={pos !== null}
+            gemsFirst={gemsFirst}
+            onGemsFirst={setGemsFirst}
+            tripMode={tripMode}
+            tripSlugs={tripSlugs}
+            onToggleTrip={toggleTrip}
+            onHoverSlug={setHoveredSlug}
+          />
+        </section>
+        <aside className="map-pane" aria-label="Kort over markeder">
+          <MapView
+            events={mapEvents}
+            today={today}
+            highlightSlug={hoveredSlug}
+            tripMode={tripMode}
+            tripSlugs={tripSlugs}
+            onToggleTrip={toggleTrip}
+            fullscreen={view === 'map'}
+          />
+        </aside>
       </div>
-
-      <div className="result-meta">
-        <span className="result-count">
-          <strong>{filtered.length}</strong>{' '}
-          {filtered.length === 1 ? 'marked' : 'markeder'}
-          {dateFilter === 'weekend' && ' i weekenden'}
-          {dateFilter === 'idag' && ' i dag'}
-          {dateFilter === 'imorgen' && ' i morgen'}
-          {dateFilter === 'aabent-nu' && ' åbne lige nu'}
-          {dateFilter === 'naeste-weekend' && ' næste weekend'}
-        </span>
-        {view === 'list' && filtered.some((e) => e.gem) && (
-          <button
-            className={`sort-gems ${gemsFirst ? 'active' : ''}`}
-            onClick={() => setGemsFirst(!gemsFirst)}
-            aria-pressed={gemsFirst}
-          >
-            ✦ Perler først
-          </button>
+      <button
+        className="view-pill"
+        aria-pressed={view === 'map'}
+        onClick={() => setView(view === 'list' ? 'map' : 'list')}
+      >
+        {view === 'list' ? (
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" aria-hidden>
+            <path d="M9 3 3.6 5.2a1 1 0 0 0-.6.9v13.4a.5.5 0 0 0 .7.5L9 18l6 3 5.4-2.2a1 1 0 0 0 .6-.9V4.5a.5.5 0 0 0-.7-.5L15 6 9 3Z" />
+            <path d="M9 3v15M15 6v15" />
+          </svg>
+        ) : (
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
         )}
-      </div>
-
-      {view === 'map' ? (
-        <MapView events={filtered} />
-      ) : filtered.length === 0 ? (
-        <div className="empty-state">
-          <h2>Ingen markeder fundet lige her</h2>
-          <p>
-            {suggestions.length > 0
-              ? pos
-                ? 'Men de her er tættest på dig i de kommende uger:'
-                : 'Men de her kommer snart:'
-              : 'Prøv en anden dato eller fjern et filter — der kommer hele tiden nye markeder til.'}
-          </p>
-          {suggestions.length > 0 && (
-            <div className="event-grid" style={{ textAlign: 'left', marginTop: 22 }}>
-              {suggestions.map((e, i) => (
-                <EventCard key={e.slug} event={e} today={today} index={i} />
-              ))}
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="event-grid">
-          {filtered.map((e, i) => (
-            <EventCard
-              key={e.slug}
-              event={e}
-              today={today}
-              index={i}
-              openNow={e.openNow}
-              tripMode={tripMode}
-              selected={tripSlugs.includes(e.slug)}
-              onToggleTrip={toggleTrip}
-            />
-          ))}
-        </div>
-      )}
+        {view === 'list' ? 'Kort' : 'Liste'}
+      </button>
 
       {tripMode && (
         <div className="trip-bar" role="region" aria-label="Loppetur">
@@ -417,6 +317,6 @@ export function Explorer({
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }

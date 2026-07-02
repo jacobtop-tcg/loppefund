@@ -1,4 +1,0 @@
-User-Agent: *
-Allow: /
-
-Sitemap: https://jacobtop-tcg.github.io/loppefund/sitemap.xml

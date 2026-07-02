@@ -3,36 +3,40 @@
 import { useEffect, useRef } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import { loadMapStyle } from '../lib/map-style.ts';
+
+const PIN_SVG =
+  '<svg width="34" height="44" viewBox="0 0 34 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+  '<path d="M17 42.5C17 42.5 31.5 26.4 31.5 15.9C31.5 7.8 25 1.5 17 1.5C9 1.5 2.5 7.8 2.5 15.9C2.5 26.4 17 42.5 17 42.5Z" fill="#c73e18" stroke="#fffdf8" stroke-width="2.6" stroke-linejoin="round"/>' +
+  '<circle cx="17" cy="15.9" r="5" fill="#fffdf8"/>' +
+  '</svg>';
 
 export function DetailMapInner({ lat, lng }: { lat: number; lng: number }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
-    const map = new maplibregl.Map({
-      container: ref.current,
-      style: {
-        version: 8,
-        sources: {
-          osm: {
-            type: 'raster',
-            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-            tileSize: 256,
-            attribution: '© OpenStreetMap-bidragydere',
-          },
-        },
-        layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
-      },
-      center: [lng, lat],
-      zoom: 13.5,
-      interactive: false,
-      attributionControl: { compact: true },
+    let cancelled = false;
+    let map: maplibregl.Map | null = null;
+    loadMapStyle().then(({ style }) => {
+      if (cancelled || !ref.current) return;
+      map = new maplibregl.Map({
+        container: ref.current,
+        style,
+        center: [lng, lat],
+        zoom: 13.6,
+        interactive: false,
+        attributionControl: { compact: true },
+      });
+      const el = document.createElement('div');
+      el.className = 'map-pin';
+      el.innerHTML = PIN_SVG;
+      new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat([lng, lat]).addTo(map);
     });
-    const el = document.createElement('div');
-    el.style.cssText =
-      'width:18px;height:18px;border-radius:50%;background:#c73e18;border:3px solid #faf5ec;box-shadow:0 2px 8px rgba(0,0,0,.35)';
-    new maplibregl.Marker({ element: el }).setLngLat([lng, lat]).addTo(map);
-    return () => map.remove();
+    return () => {
+      cancelled = true;
+      map?.remove();
+    };
   }, [lat, lng]);
 
   return <div ref={ref} style={{ height: '100%' }} />;

@@ -23,6 +23,7 @@ export function EventCard({
   tripMode = false,
   selected = false,
   onToggleTrip,
+  onHoverChange,
 }: {
   event: EventSummary & { nextDate: string; distanceKm: number | null };
   today: string;
@@ -31,8 +32,18 @@ export function EventCard({
   tripMode?: boolean;
   selected?: boolean;
   onToggleTrip?: (slug: string) => void;
+  onHoverChange?: (slug: string | null) => void;
 }) {
   const { isFavorite, toggle } = useFavorites();
+  // Hover/focus lights up this market's dot on the map (keyboard users too).
+  const hoverProps = onHoverChange
+    ? {
+        onMouseEnter: () => onHoverChange(event.slug),
+        onMouseLeave: () => onHoverChange(null),
+        onFocus: () => onHoverChange(event.slug),
+        onBlur: () => onHoverChange(null),
+      }
+    : {};
   const saved = isFavorite(event.slug);
   const next = event.occurrences.find((o) => o.date === event.nextDate)!;
   const hours = formatHours(next.startTime, next.endTime);
@@ -45,7 +56,7 @@ export function EventCard({
   // semantics and no swallowed modifier-clicks.
   const inner = (
     <article
-      className={`event-card${selected ? ' selected' : ''}${tripMode && !selectable ? ' trip-disabled' : ''}`}
+      className={`event-card cat-${event.category}${selected ? ' selected' : ''}${tripMode && !selectable ? ' trip-disabled' : ''}`}
       style={{ animationDelay: `${Math.min(index, 12) * 35}ms` }}
       title={tripMode && !selectable ? 'Mangler placering — kan ikke lægges på ruten' : undefined}
     >
@@ -133,11 +144,16 @@ export function EventCard({
         aria-pressed={selectable ? selected : undefined}
         disabled={!selectable}
         onClick={() => selectable && onToggleTrip?.(event.slug)}
+        {...hoverProps}
       >
         {inner}
       </button>
     );
   }
 
-  return <Link href={`/marked/${event.slug}`}>{inner}</Link>;
+  return (
+    <Link href={`/marked/${event.slug}`} {...hoverProps}>
+      {inner}
+    </Link>
+  );
 }

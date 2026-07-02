@@ -1,0 +1,140 @@
+import type { DatabaseSync } from 'node:sqlite';
+
+export const SCHEMA_VERSION = 1;
+
+export function migrate(db: DatabaseSync): void {
+  db.exec(`
+    PRAGMA journal_mode = WAL;
+    PRAGMA foreign_keys = ON;
+
+    CREATE TABLE IF NOT EXISTS meta (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS sources (
+      key TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      base_url TEXT NOT NULL,
+      trust REAL NOT NULL DEFAULT 0.5,
+      active INTEGER NOT NULL DEFAULT 1
+    );
+
+    CREATE TABLE IF NOT EXISTS documents (
+      id INTEGER PRIMARY KEY,
+      source_key TEXT NOT NULL REFERENCES sources(key),
+      url TEXT NOT NULL,
+      fetched_at TEXT NOT NULL,
+      http_status INTEGER,
+      content_hash TEXT,
+      UNIQUE(source_key, url, fetched_at)
+    );
+    CREATE INDEX IF NOT EXISTS idx_documents_url ON documents(url);
+
+    CREATE TABLE IF NOT EXISTS raw_events (
+      id INTEGER PRIMARY KEY,
+      source_key TEXT NOT NULL REFERENCES sources(key),
+      source_event_id TEXT NOT NULL,
+      source_url TEXT NOT NULL,
+      payload TEXT NOT NULL,          -- RawEvent JSON
+      extracted_at TEXT NOT NULL,
+      content_hash TEXT NOT NULL,     -- hash of payload for change detection
+      UNIQUE(source_key, source_event_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS events (
+      id INTEGER PRIMARY KEY,
+      slug TEXT NOT NULL UNIQUE,
+      title TEXT NOT NULL,
+      description TEXT,
+      category TEXT NOT NULL DEFAULT 'andet',
+      venue_name TEXT,
+      street TEXT,
+      postcode TEXT,
+      city TEXT,
+      municipality TEXT,
+      lat REAL,
+      lng REAL,
+      geocode_quality TEXT,
+      organizer TEXT,
+      contact_website TEXT,
+      contact_email TEXT,
+      contact_phone TEXT,
+      price_text TEXT,
+      is_free INTEGER,                -- 1/0/NULL
+      stall_count_text TEXT,
+      indoor_outdoor TEXT NOT NULL DEFAULT 'unknown',
+      schedule_text TEXT,
+      opening_hours_text TEXT,
+      status TEXT NOT NULL DEFAULT 'active',
+      confidence REAL NOT NULL DEFAULT 0,
+      field_provenance TEXT NOT NULL DEFAULT '{}',
+      first_seen_at TEXT NOT NULL,
+      last_seen_at TEXT NOT NULL,
+      search_text TEXT NOT NULL DEFAULT ''  -- ascii-folded shadow of searchable fields
+    );
+    CREATE INDEX IF NOT EXISTS idx_events_postcode ON events(postcode);
+    CREATE INDEX IF NOT EXISTS idx_events_status ON events(status);
+
+    CREATE TABLE IF NOT EXISTS occurrences (
+      id INTEGER PRIMARY KEY,
+      event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+      date TEXT NOT NULL,
+      start_time TEXT,
+      end_time TEXT,
+      UNIQUE(event_id, date)
+    );
+    CREATE INDEX IF NOT EXISTS idx_occurrences_date ON occurrences(date);
+
+    CREATE TABLE IF NOT EXISTS event_sources (
+      event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+      raw_event_id INTEGER NOT NULL REFERENCES raw_events(id),
+      first_linked_at TEXT NOT NULL,
+      last_confirmed_at TEXT NOT NULL,
+      PRIMARY KEY (event_id, raw_event_id)
+    );
+
+    CREATE TABLE IF NOT EXISTS geocode_cache (
+      query TEXT PRIMARY KEY,
+      lat REAL,
+      lng REAL,
+      quality TEXT,
+      resolved_city TEXT,
+      resolved_postcode TEXT,
+      cached_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS pipeline_runs (
+      id INTEGER PRIMARY KEY,
+      source_key TEXT,
+      started_at TEXT NOT NULL,
+      finished_at TEXT,
+      stats TEXT NOT NULL DEFAULT '{}'
+    );
+
+    CREATE VIRTUAL TABLE IF NOT EXISTS events_fts USING fts5(
+      title, venue_name, city, description, search_text,
+      content='events', content_rowid='id',
+      tokenize='unicode61 remove_diacritics 2'
+    );
+
+    CREATE TRIGGER IF NOT EXISTS events_fts_insert AFTER INSERT ON events BEGIN
+      INSERT INTO events_fts(rowid, title, venue_name, city, description, search_text)
+      VALUES (new.id, new.title, new.venue_name, new.city, new.description, new.search_text);
+    END;
+    CREATE TRIGGER IF NOT EXISTS events_fts_delete AFTER DELETE ON events BEGIN
+      INSERT INTO events_fts(events_fts, rowid, title, venue_name, city, description, search_text)
+      VALUES ('delete', old.id, old.title, old.venue_name, old.city, old.description, old.search_text);
+    END;
+    CREATE TRIGGER IF NOT EXISTS events_fts_update AFTER UPDATE ON events BEGIN
+      INSERT INTO events_fts(events_fts, rowid, title, venue_name, city, description, search_text)
+      VALUES ('delete', old.id, old.title, old.venue_name, old.city, old.description, old.search_text);
+      INSERT INTO events_fts(rowid, title, venue_name, city, description, search_text)
+      VALUES (new.id, new.title, new.venue_name, new.city, new.description, new.search_text);
+    END;
+  `);
+  db.prepare(
+    `INSERT INTO meta(key, value) VALUES ('schema_version', ?)
+     ON CONFLICT(key) DO UPDATE SET value = excluded.value`,
+  ).run(String(SCHEMA_VERSION));
+}

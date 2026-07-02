@@ -56,6 +56,24 @@ export function parseIsFree(priceText: string | undefined): boolean | null {
   return null;
 }
 
+/**
+ * Fold Danish letters for search indexing. Two conventions exist in the wild:
+ * transliteration (ø→oe) and lazy typing (ø→o); we index both so queries in
+ * either style hit.
+ */
+export function searchFold(text: string): string {
+  const lower = text.toLowerCase();
+  const translit = lower
+    .replaceAll('æ', 'ae')
+    .replaceAll('ø', 'oe')
+    .replaceAll('å', 'aa');
+  const lazy = lower
+    .replaceAll('æ', 'ae')
+    .replaceAll('ø', 'o')
+    .replaceAll('å', 'a');
+  return `${translit} ${lazy}`;
+}
+
 /** Extract a Danish postcode (4 digits, 1000-9999) from text. */
 export function extractPostcode(text: string): string | null {
   const m = text.match(/\b([1-9]\d{3})\b/);

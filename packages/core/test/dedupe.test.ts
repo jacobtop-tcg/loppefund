@@ -93,6 +93,28 @@ describe('matchEvents', () => {
     expect(matchEvents(a, b).isMatch).toBe(false);
   });
 
+  it('merges identical title + postcode + street despite conflicting geocodes', () => {
+    // Real case: "Bygaden 7" was geocoded to three different spots because
+    // Denmark has two towns called Søborg. Postcode + street agreement wins.
+    const a = {
+      title: 'Kræmmermarked i Søborg ved Gilleleje',
+      street: 'Bygaden 7',
+      postcode: '3250',
+      lat: 56.165,
+      lng: 12.293,
+      dates: ['2026-07-04'],
+    };
+    const b = {
+      title: 'Kræmmermarked i Søborg ved Gilleleje',
+      street: 'Bygaden 7, Søborg',
+      postcode: '3250',
+      lat: 55.95,
+      lng: 12.15,
+      dates: ['2026-08-01'],
+    };
+    expect(matchEvents(a, b).isMatch).toBe(true);
+  });
+
   it('rejects two garage sales in the same postcode on the same day', () => {
     // Approximate postcode-centroid coords are identical; streets differ.
     const a = {

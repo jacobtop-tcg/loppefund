@@ -104,9 +104,19 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
     return { isMatch: false, score: sim, reason: 'different streets' };
   }
 
+  // Streets agree when equal or one contains the other (or one is unknown).
+  const streetsAgree =
+    !streetsDiffer && Boolean(a.street || b.street);
+
   let colocated: boolean | null = null;
   if (a.lat != null && a.lng != null && b.lat != null && b.lng != null) {
     colocated = distanceMeters(a.lat, a.lng, b.lat, b.lng) <= NEAR_METERS;
+    // Geocodes are sometimes wrong (ambiguous street names, postcode
+    // centroids). Agreeing postcode + agreeing street outranks distant
+    // coordinates.
+    if (!colocated && a.postcode && b.postcode && a.postcode === b.postcode && streetsAgree) {
+      colocated = true;
+    }
   } else if (a.postcode && b.postcode) {
     colocated = a.postcode === b.postcode;
   }

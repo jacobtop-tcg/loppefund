@@ -61,6 +61,18 @@ export function parseKultunautDate(text: string): Occurrence[] {
   return out;
 }
 
+/**
+ * Kultunaut's genre facet is venue-selected and unreliable — yoga classes
+ * show up under "Loppemarked/Torvedag/Genbrug". Require positive market
+ * evidence in the event's own text before accepting it.
+ */
+const MARKET_SIGNAL =
+  /loppe|marked|kr(æ|ae)mmer|genbrug|bagagerum|antik|vintage|brugt|stadeplads|byttemarked|torvedag|second ?hand|kirppu/i;
+
+export function looksLikeMarket(title: string, description?: string): boolean {
+  return MARKET_SIGNAL.test(`${title} ${description ?? ''}`);
+}
+
 export const kultunaut: SourceAdapter = {
   key: 'kultunaut',
   name: 'Kultunaut',
@@ -134,6 +146,8 @@ export const kultunaut: SourceAdapter = {
 
     const arrNr = url.match(/ArrNr=(\d+)/)?.[1] ?? url;
     const cancelled = /aflyst/i.test(title) || undefined;
+
+    if (!looksLikeMarket(title, description)) return null;
 
     // The genre is a catch-all ("Loppemarked/Torvedag/Genbrug"); the title
     // is more specific, so let it decide first.

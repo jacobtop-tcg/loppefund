@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { kultunaut, parseKultunautDate } from '../src/adapters/kultunaut.ts';
+import { kultunaut, looksLikeMarket, parseKultunautDate } from '../src/adapters/kultunaut.ts';
 
 const fixture = (name: string) =>
   readFileSync(join(import.meta.dirname, 'fixtures', name), 'latin1');
@@ -30,6 +30,19 @@ describe('parseKultunautDate', () => {
 
   it('returns nothing for undated text', () => {
     expect(parseKultunautDate('Se hjemmesiden for datoer')).toEqual([]);
+  });
+});
+
+describe('looksLikeMarket', () => {
+  it('accepts events with market signals in title or description', () => {
+    expect(looksLikeMarket('Lopper på Torvet i Gråsten')).toBe(true);
+    expect(looksLikeMarket('Sommerfest', 'Stort kræmmermarked med 100 boder')).toBe(true);
+    expect(looksLikeMarket('Byttedag', 'byttemarked for børnetøj')).toBe(true);
+  });
+
+  it('rejects non-market events that slip through the genre facet', () => {
+    expect(looksLikeMarket('Efterfødselstræning på reformer', 'Kom i form efter fødslen')).toBe(false);
+    expect(looksLikeMarket('Yoga i parken')).toBe(false);
   });
 });
 

@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppebingo-i-ellens-have-ebeltoft-2026-07-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260708T150000
+DTEND;TZID=Europe/Copenhagen:20260708T170000
+SUMMARY:Loppebingo i Ellens Have
+LOCATION:Ellens Have\, Dråby Strandvej 2\, Ebeltoft
+GEO:56.2197;10.7278
+URL:https://loppefund.dk/marked/loppebingo-i-ellens-have-ebeltoft
+END:VEVENT
+BEGIN:VEVENT
+UID:loppebingo-i-ellens-have-ebeltoft-2026-07-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260715T150000
+DTEND;TZID=Europe/Copenhagen:20260715T170000
+SUMMARY:Loppebingo i Ellens Have
+LOCATION:Ellens Have\, Dråby Strandvej 2\, Ebeltoft
+GEO:56.2197;10.7278
+URL:https://loppefund.dk/marked/loppebingo-i-ellens-have-ebeltoft
+END:VEVENT
+BEGIN:VEVENT
+UID:loppebingo-i-ellens-have-ebeltoft-2026-07-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260722T150000
+DTEND;TZID=Europe/Copenhagen:20260722T170000
+SUMMARY:Loppebingo i Ellens Have
+LOCATION:Ellens Have\, Dråby Strandvej 2\, Ebeltoft
+GEO:56.2197;10.7278
+URL:https://loppefund.dk/marked/loppebingo-i-ellens-have-ebeltoft
+END:VEVENT
+BEGIN:VEVENT
+UID:loppebingo-i-ellens-have-ebeltoft-2026-07-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260729T150000
+DTEND;TZID=Europe/Copenhagen:20260729T170000
+SUMMARY:Loppebingo i Ellens Have
+LOCATION:Ellens Have\, Dråby Strandvej 2\, Ebeltoft
+GEO:56.2197;10.7278
+URL:https://loppefund.dk/marked/loppebingo-i-ellens-have-ebeltoft
+END:VEVENT
+BEGIN:VEVENT
+UID:loppebingo-i-ellens-have-ebeltoft-2026-08-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260805T150000
+DTEND;TZID=Europe/Copenhagen:20260805T170000
+SUMMARY:Loppebingo i Ellens Have
+LOCATION:Ellens Have\, Dråby Strandvej 2\, Ebeltoft
+GEO:56.2197;10.7278
+URL:https://loppefund.dk/marked/loppebingo-i-ellens-have-ebeltoft
+END:VEVENT
+END:VCALENDAR

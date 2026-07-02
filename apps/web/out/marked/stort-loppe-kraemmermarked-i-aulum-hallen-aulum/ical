@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:stort-loppe-kraemmermarked-i-aulum-hallen-aulum-2026-11-07@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261107T100000
+DTEND;TZID=Europe/Copenhagen:20261107T140000
+SUMMARY:stort loppe & kræmmermarked i Aulum hallen
+LOCATION:markedspladsen 10\, 7490 Aulum\, 7490 Aulum
+GEO:56.265625;8.799824
+URL:https://loppefund.dk/marked/stort-loppe-kraemmermarked-i-aulum-hallen-aulum
+END:VEVENT
+END:VCALENDAR

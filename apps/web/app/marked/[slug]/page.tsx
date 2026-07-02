@@ -9,8 +9,15 @@ import {
   formatHours,
 } from '../../../lib/format.ts';
 import { DetailMap } from '../../../components/DetailMap.tsx';
+import { listUpcomingEvents } from '../../../lib/data.ts';
 
-export const dynamic = 'force-dynamic';
+// Only known event slugs render; unknowns 404. generateStaticParams reads the
+// live DB so both the static export and `next dev` cover every active event.
+export const dynamicParams = false;
+
+export function generateStaticParams(): Array<{ slug: string }> {
+  return listUpcomingEvents(180).map((e) => ({ slug: e.slug }));
+}
 
 export async function generateMetadata({
   params,

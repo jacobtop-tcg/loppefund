@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:sommermarked-gram-2026-07-02@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260702T100000
+DTEND;TZID=Europe/Copenhagen:20260702T160000
+SUMMARY:Sommermarked
+LOCATION:Gram Slot\, Slotsvej 54\, Gram
+GEO:55.2953;9.05724
+URL:https://loppefund.dk/marked/sommermarked-gram
+END:VEVENT
+END:VCALENDAR

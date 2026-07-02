@@ -1,0 +1,274 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-07-02@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260702T090000
+DTEND;TZID=Europe/Copenhagen:20260702T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-07-09@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260709T090000
+DTEND;TZID=Europe/Copenhagen:20260709T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-07-16@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260716T090000
+DTEND;TZID=Europe/Copenhagen:20260716T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-07-23@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260723T090000
+DTEND;TZID=Europe/Copenhagen:20260723T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-07-30@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260730T090000
+DTEND;TZID=Europe/Copenhagen:20260730T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-08-06@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260806T090000
+DTEND;TZID=Europe/Copenhagen:20260806T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-08-13@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260813T090000
+DTEND;TZID=Europe/Copenhagen:20260813T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-08-20@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260820T090000
+DTEND;TZID=Europe/Copenhagen:20260820T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-08-27@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260827T090000
+DTEND;TZID=Europe/Copenhagen:20260827T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-09-03@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260903T090000
+DTEND;TZID=Europe/Copenhagen:20260903T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-09-10@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260910T090000
+DTEND;TZID=Europe/Copenhagen:20260910T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-09-17@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260917T090000
+DTEND;TZID=Europe/Copenhagen:20260917T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-09-24@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260924T090000
+DTEND;TZID=Europe/Copenhagen:20260924T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-10-01@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261001T090000
+DTEND;TZID=Europe/Copenhagen:20261001T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-10-08@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261008T090000
+DTEND;TZID=Europe/Copenhagen:20261008T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-10-15@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261015T090000
+DTEND;TZID=Europe/Copenhagen:20261015T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-10-22@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261022T090000
+DTEND;TZID=Europe/Copenhagen:20261022T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-10-29@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261029T090000
+DTEND;TZID=Europe/Copenhagen:20261029T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-11-05@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261105T090000
+DTEND;TZID=Europe/Copenhagen:20261105T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-11-12@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261112T090000
+DTEND;TZID=Europe/Copenhagen:20261112T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-11-19@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261119T090000
+DTEND;TZID=Europe/Copenhagen:20261119T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-11-26@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261126T090000
+DTEND;TZID=Europe/Copenhagen:20261126T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-12-03@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261203T090000
+DTEND;TZID=Europe/Copenhagen:20261203T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-12-10@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261210T090000
+DTEND;TZID=Europe/Copenhagen:20261210T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2026-12-17@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20261217T090000
+DTEND;TZID=Europe/Copenhagen:20261217T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2027-01-07@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20270107T090000
+DTEND;TZID=Europe/Copenhagen:20270107T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-i-bogense-bogense-2027-01-14@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20270114T090000
+DTEND;TZID=Europe/Copenhagen:20270114T143000
+SUMMARY:Torvedag i Bogense
+LOCATION:Torvet i Bogense\, Torvet\, Bogense
+GEO:55.5664;10.0892
+URL:https://loppefund.dk/marked/torvedag-i-bogense-bogense
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:mausing-marked-kjellerup-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260704T090000
+DTEND;TZID=Europe/Copenhagen:20260704T180000
+SUMMARY:Mausing Marked
+LOCATION:Dalen ved forsamlingshuset.\, Dalbakkevej 6\, 8620 Kjellerup
+GEO:56.234;9.42536
+URL:https://loppefund.dk/marked/mausing-marked-kjellerup
+END:VEVENT
+BEGIN:VEVENT
+UID:mausing-marked-kjellerup-2026-07-05@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260705T090000
+DTEND;TZID=Europe/Copenhagen:20260705T180000
+SUMMARY:Mausing Marked
+LOCATION:Dalen ved forsamlingshuset.\, Dalbakkevej 6\, 8620 Kjellerup
+GEO:56.234;9.42536
+URL:https://loppefund.dk/marked/mausing-marked-kjellerup
+END:VEVENT
+END:VCALENDAR

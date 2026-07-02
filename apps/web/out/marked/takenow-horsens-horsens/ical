@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:takenow-horsens-horsens-2026-07-02@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260702T100000
+DTEND;TZID=Europe/Copenhagen:20260702T160000
+SUMMARY:takeNOW Horsens
+LOCATION:Nørrebrogade 31\, 8700 Horsens
+GEO:55.87525;9.843142
+URL:https://loppefund.dk/marked/takenow-horsens-horsens
+END:VEVENT
+END:VCALENDAR

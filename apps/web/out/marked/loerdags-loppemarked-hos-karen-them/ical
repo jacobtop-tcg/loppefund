@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loerdags-loppemarked-hos-karen-them-2026-07-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260725T100000
+DTEND;TZID=Europe/Copenhagen:20260725T140000
+SUMMARY:Lørdags-loppemarked hos Karen
+LOCATION:Foran Karen Klarbæk Butik\, Horsensvej i Salten\, 8653 Them
+GEO:56.0901518;9.5465183
+URL:https://loppefund.dk/marked/loerdags-loppemarked-hos-karen-them
+END:VEVENT
+BEGIN:VEVENT
+UID:loerdags-loppemarked-hos-karen-them-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260829T100000
+DTEND;TZID=Europe/Copenhagen:20260829T140000
+SUMMARY:Lørdags-loppemarked hos Karen
+LOCATION:Foran Karen Klarbæk Butik\, Horsensvej i Salten\, 8653 Them
+GEO:56.0901518;9.5465183
+URL:https://loppefund.dk/marked/loerdags-loppemarked-hos-karen-them
+END:VEVENT
+END:VCALENDAR

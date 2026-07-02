@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kom-til-efteraars-plantemarked-paa-erholm-gods-aarup-2026-09-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260912T100000
+DTEND;TZID=Europe/Copenhagen:20260912T150000
+SUMMARY:Kom til efterårs plantemarked på Erholm Gods
+LOCATION:Erholm Gods\, Karen Borchenfeldtsvej 2\, Aarup
+GEO:55.3946;10.0546
+URL:https://loppefund.dk/marked/kom-til-efteraars-plantemarked-paa-erholm-gods-aarup
+END:VEVENT
+END:VCALENDAR

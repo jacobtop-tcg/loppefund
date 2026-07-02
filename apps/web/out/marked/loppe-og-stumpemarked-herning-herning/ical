@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppe-og-stumpemarked-herning-herning-2026-11-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261115T080000
+DTEND;TZID=Europe/Copenhagen:20261115T160000
+SUMMARY:Loppe- og stumpemarked\, Herning
+LOCATION:Vardevej 1\, 7400 Herning
+GEO:56.121785;8.950089
+URL:https://loppefund.dk/marked/loppe-og-stumpemarked-herning-herning
+END:VEVENT
+END:VCALENDAR

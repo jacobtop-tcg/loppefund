@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:byens-lopper-x-trianglen-koebenhavn-oe-2026-08-09@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260809T100000
+DTEND;TZID=Europe/Copenhagen:20260809T150000
+SUMMARY:Byens Lopper X Trianglen
+LOCATION:Ingrid Jespersens Plads\, Trianglen\, København Ø
+GEO:55.6992;12.5762
+URL:https://loppefund.dk/marked/byens-lopper-x-trianglen-koebenhavn-oe
+END:VEVENT
+BEGIN:VEVENT
+UID:byens-lopper-x-trianglen-koebenhavn-oe-2026-08-23@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260823T100000
+DTEND;TZID=Europe/Copenhagen:20260823T150000
+SUMMARY:Byens Lopper X Trianglen
+LOCATION:Ingrid Jespersens Plads\, Trianglen\, København Ø
+GEO:55.6992;12.5762
+URL:https://loppefund.dk/marked/byens-lopper-x-trianglen-koebenhavn-oe
+END:VEVENT
+BEGIN:VEVENT
+UID:byens-lopper-x-trianglen-koebenhavn-oe-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260906T100000
+DTEND;TZID=Europe/Copenhagen:20260906T150000
+SUMMARY:Byens Lopper X Trianglen
+LOCATION:Ingrid Jespersens Plads\, Trianglen\, København Ø
+GEO:55.6992;12.5762
+URL:https://loppefund.dk/marked/byens-lopper-x-trianglen-koebenhavn-oe
+END:VEVENT
+BEGIN:VEVENT
+UID:byens-lopper-x-trianglen-koebenhavn-oe-2026-09-20@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260920T100000
+DTEND;TZID=Europe/Copenhagen:20260920T150000
+SUMMARY:Byens Lopper X Trianglen
+LOCATION:Ingrid Jespersens Plads\, Trianglen\, København Ø
+GEO:55.6992;12.5762
+URL:https://loppefund.dk/marked/byens-lopper-x-trianglen-koebenhavn-oe
+END:VEVENT
+BEGIN:VEVENT
+UID:byens-lopper-x-trianglen-koebenhavn-oe-2026-10-11@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261011T100000
+DTEND;TZID=Europe/Copenhagen:20261011T150000
+SUMMARY:Byens Lopper X Trianglen
+LOCATION:Ingrid Jespersens Plads\, Trianglen\, København Ø
+GEO:55.6992;12.5762
+URL:https://loppefund.dk/marked/byens-lopper-x-trianglen-koebenhavn-oe
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppehusets-loppemarked-hoejbjerg-2-2026-08-02@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260802T100000
+DTEND;TZID=Europe/Copenhagen:20260802T160000
+SUMMARY:Loppehusets loppemarked
+LOCATION:Søren Nymarksvej 5 L\, 8270 Højbjerg\, 8270 Højbjerg
+GEO:56.1333;10.05
+URL:https://loppefund.dk/marked/loppehusets-loppemarked-hoejbjerg-2
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:efteraarsplantemarked-silkeborg-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260906T090000
+DTEND;TZID=Europe/Copenhagen:20260906T120000
+SUMMARY:Efterårsplantemarked
+LOCATION:Lunden\, Vestergade 74\, Silkeborg
+GEO:56.166;9.53528
+URL:https://loppefund.dk/marked/efteraarsplantemarked-silkeborg
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:bagagerumsmarked-loppemarked-i-sct-joergens-park-naestved-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T140000
+SUMMARY:Bagagerumsmarked/Loppemarked i Sct. Jørgens Park
+LOCATION:Sct. Jørgens Park - Næstveds Butikscenter\, Sct Jørgens Park 74\, Næstved
+GEO:55.2164;11.7559
+URL:https://loppefund.dk/marked/bagagerumsmarked-loppemarked-i-sct-joergens-park-naestved
+END:VEVENT
+END:VCALENDAR

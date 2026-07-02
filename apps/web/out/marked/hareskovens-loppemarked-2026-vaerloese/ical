@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:hareskovens-loppemarked-2026-vaerloese-2026-10-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261004T090000
+DTEND;TZID=Europe/Copenhagen:20261004T150000
+SUMMARY:Hareskovens Loppemarked 2026
+LOCATION:Hareskovhallen\, Månedalstien 8\, Værløse
+GEO:55.7657;12.4011
+URL:https://loppefund.dk/marked/hareskovens-loppemarked-2026-vaerloese
+END:VEVENT
+END:VCALENDAR

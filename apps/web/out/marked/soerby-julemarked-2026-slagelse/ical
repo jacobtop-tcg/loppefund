@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:soerby-julemarked-2026-slagelse-2026-11-21@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261121T100000
+DTEND;TZID=Europe/Copenhagen:20261121T160000
+SUMMARY:Sørby Julemarked 2026
+LOCATION:Kirkerup 16\, Slagelse
+URL:https://loppefund.dk/marked/soerby-julemarked-2026-slagelse
+END:VEVENT
+BEGIN:VEVENT
+UID:soerby-julemarked-2026-slagelse-2026-11-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261122T100000
+DTEND;TZID=Europe/Copenhagen:20261122T160000
+SUMMARY:Sørby Julemarked 2026
+LOCATION:Kirkerup 16\, Slagelse
+URL:https://loppefund.dk/marked/soerby-julemarked-2026-slagelse
+END:VEVENT
+END:VCALENDAR

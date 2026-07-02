@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { copenhagenNow, isOpenAt, type CphNow } from '@loppefund/core';
 import type { EventSummary } from '../lib/data.ts';
+import { useFavorites } from '../lib/favorites.ts';
 import { EventCard } from './EventCard.tsx';
 import {
   addDaysIso,
@@ -88,6 +89,8 @@ export function Explorer({
   const [gemsFirst, setGemsFirst] = useState(false);
   const [tripMode, setTripMode] = useState(false);
   const [tripSlugs, setTripSlugs] = useState<string[]>([]); // insertion order = route order
+  const [savedOnly, setSavedOnly] = useState(false);
+  const { favorites, count: favCount } = useFavorites();
 
   // Live clock only while the "Åbent nu" filter is active.
   useEffect(() => {
@@ -109,6 +112,7 @@ export function Explorer({
       if (inRange.length === 0) continue;
       const openNow = isOpenAt(inRange, now.date, now.time);
       if (dateFilter === 'aabent-nu' && !openNow) continue;
+      if (savedOnly && !favorites.includes(e.slug)) continue;
       if (category && e.category !== category) continue;
       if (freeOnly && e.isFree !== true) continue;
       if (familyOnly && !e.familyFriendly) continue;
@@ -154,7 +158,7 @@ export function Explorer({
     }
     if (gemsFirst) result.sort((a, b) => Number(b.gem) - Number(a.gem));
     return result;
-  }, [events, from, to, query, category, freeOnly, familyOnly, inOut, pos, radius, dateFilter, now, gemsFirst]);
+  }, [events, from, to, query, category, freeOnly, familyOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
 
   // Trip selection is keyed by slug against the full list, so filter changes
   // never drop chosen stops.
@@ -240,6 +244,14 @@ export function Explorer({
             </button>
           ))}
           <span className="chip-sep" aria-hidden />
+          {favCount > 0 && (
+            <button
+              className={`chip accent ${savedOnly ? 'active' : ''}`}
+              onClick={() => setSavedOnly(!savedOnly)}
+            >
+              ♥ Gemte ({favCount})
+            </button>
+          )}
           <button className={`chip ${freeOnly ? 'active' : ''}`} onClick={() => setFreeOnly(!freeOnly)}>
             Gratis entré
           </button>

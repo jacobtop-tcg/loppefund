@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:haughus-gods-antik-og-kraemmermarked-jelling-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T160000
+SUMMARY:Haughus Gods Antik- og Kræmmermarked
+LOCATION:Vejlevej 50\, 7300 Jelling\, 7300 Jelling
+GEO:55.753214;9.443931
+URL:https://loppefund.dk/marked/haughus-gods-antik-og-kraemmermarked-jelling
+END:VEVENT
+END:VCALENDAR

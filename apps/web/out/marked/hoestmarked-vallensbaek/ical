@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:hoestmarked-vallensbaek-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260829
+SUMMARY:Høstmarked
+LOCATION:Vallensbæk Kirke og Sognegård\, Kirkebakke Allé 6\, Vallensbæk
+GEO:55.6379;12.3653
+URL:https://loppefund.dk/marked/hoestmarked-vallensbaek
+END:VEVENT
+END:VCALENDAR

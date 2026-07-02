@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:familiedag-paa-egegaarden-for-boern-og-foraeldre-2026-08-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260822T100000
+DTEND;TZID=Europe/Copenhagen:20260822T160000
+SUMMARY:Familiedag på Egegården for børn og forældre
+LOCATION:Egegårdsvej 3\, 3060
+URL:https://loppefund.dk/marked/familiedag-paa-egegaarden-for-boern-og-foraeldre
+END:VEVENT
+END:VCALENDAR

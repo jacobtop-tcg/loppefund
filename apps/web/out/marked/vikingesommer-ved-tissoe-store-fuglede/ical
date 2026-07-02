@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:vikingesommer-ved-tissoe-store-fuglede-2026-07-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260725T100000
+DTEND;TZID=Europe/Copenhagen:20260725T150000
+SUMMARY:Vikingesommer ved Tissø
+LOCATION:Fugledegaard\, Bakkendrupvej 28\, Store Fuglede
+GEO:55.5748;11.2524
+URL:https://loppefund.dk/marked/vikingesommer-ved-tissoe-store-fuglede
+END:VEVENT
+END:VCALENDAR

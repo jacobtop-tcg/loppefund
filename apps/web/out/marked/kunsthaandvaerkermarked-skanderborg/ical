@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kunsthaandvaerkermarked-skanderborg-2026-10-03@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20261003
+SUMMARY:Kunsthåndværkermarked
+LOCATION:Kulturhuset Skanderborg\, Parkvej 10\, Skanderborg
+GEO:56.035;9.93285
+URL:https://loppefund.dk/marked/kunsthaandvaerkermarked-skanderborg
+END:VEVENT
+END:VCALENDAR

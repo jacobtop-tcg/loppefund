@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-standplads-6-september-charlottenlund-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260906T100000
+DTEND;TZID=Europe/Copenhagen:20260906T150000
+SUMMARY:Loppemarked standplads - 6. September
+LOCATION:Halgodt\, Skovshoved Havn 16B\, 2920 Charlottenlund
+GEO:55.759;12.5995
+URL:https://loppefund.dk/marked/loppemarked-standplads-6-september-charlottenlund
+END:VEVENT
+END:VCALENDAR

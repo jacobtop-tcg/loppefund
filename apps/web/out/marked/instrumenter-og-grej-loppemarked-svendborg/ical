@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:instrumenter-og-grej-loppemarked-svendborg-2026-10-18@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261018T120000
+DTEND;TZID=Europe/Copenhagen:20261018T163000
+SUMMARY:Instrumenter og Grej -loppemarked
+LOCATION:Svendborg Forsamlingshus\, Lundevej 2\, Svendborg
+GEO:55.0583;10.6057
+URL:https://loppefund.dk/marked/instrumenter-og-grej-loppemarked-svendborg
+END:VEVENT
+END:VCALENDAR

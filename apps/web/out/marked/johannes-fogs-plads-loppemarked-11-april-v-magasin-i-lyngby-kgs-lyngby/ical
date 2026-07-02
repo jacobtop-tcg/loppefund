@@ -1,0 +1,67 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T143000
+SUMMARY:Johannes Fogs plads loppemarked 11 april v. Magasin i Lyngby
+LOCATION:Johannes Fogs Plads\, 2800 Kgs. Lyngby
+URL:https://loppefund.dk/marked/johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby
+END:VEVENT
+BEGIN:VEVENT
+UID:johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby-2026-07-18@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260718T100000
+DTEND;TZID=Europe/Copenhagen:20260718T143000
+SUMMARY:Johannes Fogs plads loppemarked 11 april v. Magasin i Lyngby
+LOCATION:Johannes Fogs Plads\, 2800 Kgs. Lyngby
+URL:https://loppefund.dk/marked/johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby
+END:VEVENT
+BEGIN:VEVENT
+UID:johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby-2026-08-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260808T100000
+DTEND;TZID=Europe/Copenhagen:20260808T143000
+SUMMARY:Johannes Fogs plads loppemarked 11 april v. Magasin i Lyngby
+LOCATION:Johannes Fogs Plads\, 2800 Kgs. Lyngby
+URL:https://loppefund.dk/marked/johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby
+END:VEVENT
+BEGIN:VEVENT
+UID:johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby-2026-08-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260822T100000
+DTEND;TZID=Europe/Copenhagen:20260822T143000
+SUMMARY:Johannes Fogs plads loppemarked 11 april v. Magasin i Lyngby
+LOCATION:Johannes Fogs Plads\, 2800 Kgs. Lyngby
+URL:https://loppefund.dk/marked/johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby
+END:VEVENT
+BEGIN:VEVENT
+UID:johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T100000
+DTEND;TZID=Europe/Copenhagen:20260905T143000
+SUMMARY:Johannes Fogs plads loppemarked 11 april v. Magasin i Lyngby
+LOCATION:Johannes Fogs Plads\, 2800 Kgs. Lyngby
+URL:https://loppefund.dk/marked/johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby
+END:VEVENT
+BEGIN:VEVENT
+UID:johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby-2026-09-26@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260926T100000
+DTEND;TZID=Europe/Copenhagen:20260926T143000
+SUMMARY:Johannes Fogs plads loppemarked 11 april v. Magasin i Lyngby
+LOCATION:Johannes Fogs Plads\, 2800 Kgs. Lyngby
+URL:https://loppefund.dk/marked/johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby
+END:VEVENT
+BEGIN:VEVENT
+UID:johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby-2026-10-03@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261003T100000
+DTEND;TZID=Europe/Copenhagen:20261003T143000
+SUMMARY:Johannes Fogs plads loppemarked 11 april v. Magasin i Lyngby
+LOCATION:Johannes Fogs Plads\, 2800 Kgs. Lyngby
+URL:https://loppefund.dk/marked/johannes-fogs-plads-loppemarked-11-april-v-magasin-i-lyngby-kgs-lyngby
+END:VEVENT
+END:VCALENDAR

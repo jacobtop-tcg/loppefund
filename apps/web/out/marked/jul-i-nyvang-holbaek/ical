@@ -1,0 +1,84 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:jul-i-nyvang-holbaek-2026-11-21@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261121T100000
+DTEND;TZID=Europe/Copenhagen:20261121T160000
+SUMMARY:Jul i Nyvang
+LOCATION:Nyvangs Alle 4\, 4300 Holbæk
+GEO:55.69341201;11.74776378
+URL:https://loppefund.dk/marked/jul-i-nyvang-holbaek
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-i-nyvang-holbaek-2026-11-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261122T100000
+DTEND;TZID=Europe/Copenhagen:20261122T160000
+SUMMARY:Jul i Nyvang
+LOCATION:Nyvangs Alle 4\, 4300 Holbæk
+GEO:55.69341201;11.74776378
+URL:https://loppefund.dk/marked/jul-i-nyvang-holbaek
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-i-nyvang-holbaek-2026-11-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261125T100000
+DTEND;TZID=Europe/Copenhagen:20261125T160000
+SUMMARY:Jul i Nyvang
+LOCATION:Nyvangs Alle 4\, 4300 Holbæk
+GEO:55.69341201;11.74776378
+URL:https://loppefund.dk/marked/jul-i-nyvang-holbaek
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-i-nyvang-holbaek-2026-11-26@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261126T100000
+DTEND;TZID=Europe/Copenhagen:20261126T160000
+SUMMARY:Jul i Nyvang
+LOCATION:Nyvangs Alle 4\, 4300 Holbæk
+GEO:55.69341201;11.74776378
+URL:https://loppefund.dk/marked/jul-i-nyvang-holbaek
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-i-nyvang-holbaek-2026-11-28@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261128T100000
+DTEND;TZID=Europe/Copenhagen:20261128T160000
+SUMMARY:Jul i Nyvang
+LOCATION:Nyvangs Alle 4\, 4300 Holbæk
+GEO:55.69341201;11.74776378
+URL:https://loppefund.dk/marked/jul-i-nyvang-holbaek
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-i-nyvang-holbaek-2026-11-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261129T100000
+DTEND;TZID=Europe/Copenhagen:20261129T160000
+SUMMARY:Jul i Nyvang
+LOCATION:Nyvangs Alle 4\, 4300 Holbæk
+GEO:55.69341201;11.74776378
+URL:https://loppefund.dk/marked/jul-i-nyvang-holbaek
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-i-nyvang-holbaek-2026-12-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261205T100000
+DTEND;TZID=Europe/Copenhagen:20261205T160000
+SUMMARY:Jul i Nyvang
+LOCATION:Nyvangs Alle 4\, 4300 Holbæk
+GEO:55.69341201;11.74776378
+URL:https://loppefund.dk/marked/jul-i-nyvang-holbaek
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-i-nyvang-holbaek-2026-12-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261206T100000
+DTEND;TZID=Europe/Copenhagen:20261206T160000
+SUMMARY:Jul i Nyvang
+LOCATION:Nyvangs Alle 4\, 4300 Holbæk
+GEO:55.69341201;11.74776378
+URL:https://loppefund.dk/marked/jul-i-nyvang-holbaek
+END:VEVENT
+END:VCALENDAR

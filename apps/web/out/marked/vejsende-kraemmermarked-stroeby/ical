@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:vejsende-kraemmermarked-stroeby-2026-08-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260801T090000
+DTEND;TZID=Europe/Copenhagen:20260801T150000
+SUMMARY:Vejsende kræmmermarked
+LOCATION:Kystvejen 356\, 4671 Strøby
+GEO:55.39906707;12.31100363
+URL:https://loppefund.dk/marked/vejsende-kraemmermarked-stroeby
+END:VEVENT
+END:VCALENDAR

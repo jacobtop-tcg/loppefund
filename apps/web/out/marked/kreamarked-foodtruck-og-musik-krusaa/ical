@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kreamarked-foodtruck-og-musik-krusaa-2026-07-18@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260718T140000
+DTEND;TZID=Europe/Copenhagen:20260718T220000
+SUMMARY:Kreamarked\, foodtruck og musik
+LOCATION:Kruså Camping\, Åbenråvej 7\, Kruså
+GEO:54.8532;9.40059
+URL:https://loppefund.dk/marked/kreamarked-foodtruck-og-musik-krusaa
+END:VEVENT
+END:VCALENDAR

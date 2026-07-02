@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:svaneke-torvemarked-svaneke-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T160000
+SUMMARY:Svaneke Torvemarked
+LOCATION:Svaneke Torv\, 3740 Svaneke
+GEO:55.1363152;15.1409672
+URL:https://loppefund.dk/marked/svaneke-torvemarked-svaneke
+END:VEVENT
+END:VCALENDAR

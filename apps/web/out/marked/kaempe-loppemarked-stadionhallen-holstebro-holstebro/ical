@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kaempe-loppemarked-stadionhallen-holstebro-holstebro-2026-10-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261025T100000
+DTEND;TZID=Europe/Copenhagen:20261025T160000
+SUMMARY:Kæmpe Loppemarked Stadionhallen Holstebro
+LOCATION:Holstebro Idrætspark og Stadionhallen\, Rolf Krakes Vej 9\, Holstebro
+GEO:56.3668;8.62957
+URL:https://loppefund.dk/marked/kaempe-loppemarked-stadionhallen-holstebro-holstebro
+END:VEVENT
+END:VCALENDAR

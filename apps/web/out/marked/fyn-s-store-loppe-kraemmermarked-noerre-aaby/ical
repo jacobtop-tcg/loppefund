@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:fyn-s-store-loppe-kraemmermarked-noerre-aaby-2026-11-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261101T100000
+DTEND;TZID=Europe/Copenhagen:20261101T140000
+SUMMARY:Fyn's store loppe & kræmmermarked
+LOCATION:Vestfyns kultur og Idrætscenter\, Idrætsvej 9\, Nørre Aaby
+GEO:55.4538;9.87243
+URL:https://loppefund.dk/marked/fyn-s-store-loppe-kraemmermarked-noerre-aaby
+END:VEVENT
+END:VCALENDAR

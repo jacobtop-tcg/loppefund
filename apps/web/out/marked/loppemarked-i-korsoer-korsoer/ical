@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-korsoer-korsoer-2026-07-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260705T100000
+DTEND;TZID=Europe/Copenhagen:20260705T150000
+SUMMARY:Loppemarked i Korsør
+LOCATION:Lystskov Camping\, Korsør Lystskov 2\, 4220 Korsør
+GEO:55.3222;11.1845
+URL:https://loppefund.dk/marked/loppemarked-i-korsoer-korsoer
+END:VEVENT
+BEGIN:VEVENT
+UID:loppemarked-i-korsoer-korsoer-2026-08-02@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260802T100000
+DTEND;TZID=Europe/Copenhagen:20260802T150000
+SUMMARY:Loppemarked i Korsør
+LOCATION:Lystskov Camping\, Korsør Lystskov 2\, 4220 Korsør
+GEO:55.3222;11.1845
+URL:https://loppefund.dk/marked/loppemarked-i-korsoer-korsoer
+END:VEVENT
+END:VCALENDAR

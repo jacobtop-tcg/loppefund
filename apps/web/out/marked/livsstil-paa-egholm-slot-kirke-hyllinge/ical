@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:livsstil-paa-egholm-slot-kirke-hyllinge-2026-07-02@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260702T100000
+DTEND;TZID=Europe/Copenhagen:20260702T160000
+SUMMARY:Livsstil på Egholm Slot
+LOCATION:Trehøjevej 41\, 4070 Kirke Hyllinge
+GEO:55.731876;11.915582
+URL:https://loppefund.dk/marked/livsstil-paa-egholm-slot-kirke-hyllinge
+END:VEVENT
+END:VCALENDAR

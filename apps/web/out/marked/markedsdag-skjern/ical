@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:markedsdag-skjern-2026-11-18@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261118T100000
+DTEND;TZID=Europe/Copenhagen:20261118T150000
+SUMMARY:Markedsdag
+LOCATION:AktivitetsCenter Skjern\, Nygade 48\, Skjern
+GEO:55.9441;8.50027
+URL:https://loppefund.dk/marked/markedsdag-skjern
+END:VEVENT
+END:VCALENDAR

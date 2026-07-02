@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:faelles-byloppemarked-storstrom-2026-07-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260712T100000
+DTEND;TZID=Europe/Copenhagen:20260712T160000
+SUMMARY:Fælles byloppemarked
+LOCATION:Hunseby\, Storstrom
+URL:https://loppefund.dk/marked/faelles-byloppemarked-storstrom
+END:VEVENT
+END:VCALENDAR

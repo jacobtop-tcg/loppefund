@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:avedoerelejrens-julemarked-2026-2026-12-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261206T100000
+DTEND;TZID=Europe/Copenhagen:20261206T150000
+SUMMARY:Avedørelejrens Julemarked 2026
+LOCATION:Cirkusmuseet
+URL:https://loppefund.dk/marked/avedoerelejrens-julemarked-2026
+END:VEVENT
+END:VCALENDAR

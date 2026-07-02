@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppelinda-i-faelledparken-aug-marked-koebenhavn-oe-2026-08-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260815T100000
+DTEND;TZID=Europe/Copenhagen:20260815T150000
+SUMMARY:LoppeLinda i Fælledparken
+LOCATION:Den Franske Plads\, Serridslevvej 34\, København Ø
+GEO:55.7063;12.572
+URL:https://loppefund.dk/marked/loppelinda-i-faelledparken-aug-marked-koebenhavn-oe
+END:VEVENT
+BEGIN:VEVENT
+UID:loppelinda-i-faelledparken-aug-marked-koebenhavn-oe-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260906T100000
+DTEND;TZID=Europe/Copenhagen:20260906T150000
+SUMMARY:LoppeLinda i Fælledparken
+LOCATION:Den Franske Plads\, Serridslevvej 34\, København Ø
+GEO:55.7063;12.572
+URL:https://loppefund.dk/marked/loppelinda-i-faelledparken-aug-marked-koebenhavn-oe
+END:VEVENT
+END:VCALENDAR

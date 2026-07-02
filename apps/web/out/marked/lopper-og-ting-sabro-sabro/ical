@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:lopper-og-ting-sabro-sabro-2026-07-24@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260724T130000
+DTEND;TZID=Europe/Copenhagen:20260724T170000
+SUMMARY:Lopper og Ting\, Sabro
+LOCATION:Damvej 116\, 8471 Sabro
+GEO:56.209793;10.028772
+URL:https://loppefund.dk/marked/lopper-og-ting-sabro-sabro
+END:VEVENT
+END:VCALENDAR

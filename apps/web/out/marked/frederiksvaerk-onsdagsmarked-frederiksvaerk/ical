@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:frederiksvaerk-onsdagsmarked-frederiksvaerk-2026-07-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260708T100000
+DTEND;TZID=Europe/Copenhagen:20260708T160000
+SUMMARY:Frederiksværk Onsdagsmarked
+LOCATION:Onsdagsloppemarked i Frederiksværk afholdes på Krudtværkstorvet og i Nørregade\, Nørregade 28\, 3300 Frederiksværk
+GEO:55.974964;12.02015
+URL:https://loppefund.dk/marked/frederiksvaerk-onsdagsmarked-frederiksvaerk
+END:VEVENT
+BEGIN:VEVENT
+UID:frederiksvaerk-onsdagsmarked-frederiksvaerk-2026-07-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260715T100000
+DTEND;TZID=Europe/Copenhagen:20260715T160000
+SUMMARY:Frederiksværk Onsdagsmarked
+LOCATION:Onsdagsloppemarked i Frederiksværk afholdes på Krudtværkstorvet og i Nørregade\, Nørregade 28\, 3300 Frederiksværk
+GEO:55.974964;12.02015
+URL:https://loppefund.dk/marked/frederiksvaerk-onsdagsmarked-frederiksvaerk
+END:VEVENT
+BEGIN:VEVENT
+UID:frederiksvaerk-onsdagsmarked-frederiksvaerk-2026-07-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260722T100000
+DTEND;TZID=Europe/Copenhagen:20260722T160000
+SUMMARY:Frederiksværk Onsdagsmarked
+LOCATION:Onsdagsloppemarked i Frederiksværk afholdes på Krudtværkstorvet og i Nørregade\, Nørregade 28\, 3300 Frederiksværk
+GEO:55.974964;12.02015
+URL:https://loppefund.dk/marked/frederiksvaerk-onsdagsmarked-frederiksvaerk
+END:VEVENT
+BEGIN:VEVENT
+UID:frederiksvaerk-onsdagsmarked-frederiksvaerk-2026-07-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260729T100000
+DTEND;TZID=Europe/Copenhagen:20260729T160000
+SUMMARY:Frederiksværk Onsdagsmarked
+LOCATION:Onsdagsloppemarked i Frederiksværk afholdes på Krudtværkstorvet og i Nørregade\, Nørregade 28\, 3300 Frederiksværk
+GEO:55.974964;12.02015
+URL:https://loppefund.dk/marked/frederiksvaerk-onsdagsmarked-frederiksvaerk
+END:VEVENT
+BEGIN:VEVENT
+UID:frederiksvaerk-onsdagsmarked-frederiksvaerk-2026-08-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260805T100000
+DTEND;TZID=Europe/Copenhagen:20260805T160000
+SUMMARY:Frederiksværk Onsdagsmarked
+LOCATION:Onsdagsloppemarked i Frederiksværk afholdes på Krudtværkstorvet og i Nørregade\, Nørregade 28\, 3300 Frederiksværk
+GEO:55.974964;12.02015
+URL:https://loppefund.dk/marked/frederiksvaerk-onsdagsmarked-frederiksvaerk
+END:VEVENT
+END:VCALENDAR

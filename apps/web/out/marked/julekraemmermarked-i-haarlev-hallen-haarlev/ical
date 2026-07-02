@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:julekraemmermarked-i-haarlev-hallen-haarlev-2026-11-07@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261107T100000
+DTEND;TZID=Europe/Copenhagen:20261107T150000
+SUMMARY:Julekræmmermarked i Hårlev Hallen
+LOCATION:Stor SPORTS HAL\, Industrivej\, 4652 Hårlev
+GEO:55.34806;12.2283284
+URL:https://loppefund.dk/marked/julekraemmermarked-i-haarlev-hallen-haarlev
+END:VEVENT
+BEGIN:VEVENT
+UID:julekraemmermarked-i-haarlev-hallen-haarlev-2026-11-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261108T100000
+DTEND;TZID=Europe/Copenhagen:20261108T150000
+SUMMARY:Julekræmmermarked i Hårlev Hallen
+LOCATION:Stor SPORTS HAL\, Industrivej\, 4652 Hårlev
+GEO:55.34806;12.2283284
+URL:https://loppefund.dk/marked/julekraemmermarked-i-haarlev-hallen-haarlev
+END:VEVENT
+END:VCALENDAR

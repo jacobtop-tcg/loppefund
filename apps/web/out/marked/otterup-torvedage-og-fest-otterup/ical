@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:otterup-torvedage-og-fest-otterup-2026-07-11@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260711T090000
+DTEND;TZID=Europe/Copenhagen:20260711T140000
+SUMMARY:Otterup Torvedage og fest
+LOCATION:Torvet\, 5450 Otterup
+GEO:55.514153;10.398144
+URL:https://loppefund.dk/marked/otterup-torvedage-og-fest-otterup
+END:VEVENT
+END:VCALENDAR

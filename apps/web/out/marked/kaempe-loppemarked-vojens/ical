@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kaempe-loppemarked-vojens-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T090000
+DTEND;TZID=Europe/Copenhagen:20260704T140000
+SUMMARY:Kæmpe loppemarked
+LOCATION:Vennekredsens Loppegård\, Tingvejen 72\, Vojens
+GEO:55.2377;9.29283
+URL:https://loppefund.dk/marked/kaempe-loppemarked-vojens
+END:VEVENT
+BEGIN:VEVENT
+UID:kaempe-loppemarked-vojens-2026-08-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260801T090000
+DTEND;TZID=Europe/Copenhagen:20260801T140000
+SUMMARY:Kæmpe loppemarked
+LOCATION:Vennekredsens Loppegård\, Tingvejen 72\, Vojens
+GEO:55.2377;9.29283
+URL:https://loppefund.dk/marked/kaempe-loppemarked-vojens
+END:VEVENT
+BEGIN:VEVENT
+UID:kaempe-loppemarked-vojens-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T090000
+DTEND;TZID=Europe/Copenhagen:20260905T140000
+SUMMARY:Kæmpe loppemarked
+LOCATION:Vennekredsens Loppegård\, Tingvejen 72\, Vojens
+GEO:55.2377;9.29283
+URL:https://loppefund.dk/marked/kaempe-loppemarked-vojens
+END:VEVENT
+BEGIN:VEVENT
+UID:kaempe-loppemarked-vojens-2026-10-03@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261003T090000
+DTEND;TZID=Europe/Copenhagen:20261003T140000
+SUMMARY:Kæmpe loppemarked
+LOCATION:Vennekredsens Loppegård\, Tingvejen 72\, Vojens
+GEO:55.2377;9.29283
+URL:https://loppefund.dk/marked/kaempe-loppemarked-vojens
+END:VEVENT
+BEGIN:VEVENT
+UID:kaempe-loppemarked-vojens-2026-11-07@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261107T090000
+DTEND;TZID=Europe/Copenhagen:20261107T140000
+SUMMARY:Kæmpe loppemarked
+LOCATION:Vennekredsens Loppegård\, Tingvejen 72\, Vojens
+GEO:55.2377;9.29283
+URL:https://loppefund.dk/marked/kaempe-loppemarked-vojens
+END:VEVENT
+END:VCALENDAR

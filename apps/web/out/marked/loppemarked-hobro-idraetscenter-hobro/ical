@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-hobro-idraetscenter-hobro-2026-11-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261101T100000
+DTEND;TZID=Europe/Copenhagen:20261101T160000
+SUMMARY:Loppemarked Hobro Idrætscenter
+LOCATION:Hobro Idrætscenter\, Amerikavej 22\, Hobro
+GEO:56.6333;9.81704
+URL:https://loppefund.dk/marked/loppemarked-hobro-idraetscenter-hobro
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:stort-indendoers-loppe-kraemmermarked-i-roende-roende-2026-10-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20261004
+SUMMARY:Stort indendørs loppe- kræmmermarked i Rønde
+LOCATION:Rønde Idrætscenter\, Skrejrupvej 9B\, Rønde
+GEO:56.3127;10.4614
+URL:https://loppefund.dk/marked/stort-indendoers-loppe-kraemmermarked-i-roende-roende
+END:VEVENT
+END:VCALENDAR

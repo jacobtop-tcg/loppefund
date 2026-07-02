@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-engmosen-4160-gelsted-herlufmagle-2026-08-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260815T100000
+DTEND;TZID=Europe/Copenhagen:20260815T150000
+SUMMARY:Loppemarked Engmosen 4160
+LOCATION:Fællesområdet Mosevej\, 4160 Gelsted  Herlufmagle
+URL:https://loppefund.dk/marked/loppemarked-engmosen-4160-gelsted-herlufmagle
+END:VEVENT
+END:VCALENDAR

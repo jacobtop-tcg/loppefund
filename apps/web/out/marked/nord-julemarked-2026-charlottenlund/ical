@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:nord-julemarked-2026-charlottenlund-2026-12-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261204T100000
+DTEND;TZID=Europe/Copenhagen:20261204T170000
+SUMMARY:NORD Julemarked 2026
+LOCATION:Strandvejen 235\, 2920 Charlottenlund
+GEO:55.74927822;12.58679586
+URL:https://loppefund.dk/marked/nord-julemarked-2026-charlottenlund
+END:VEVENT
+BEGIN:VEVENT
+UID:nord-julemarked-2026-charlottenlund-2026-12-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261205T100000
+DTEND;TZID=Europe/Copenhagen:20261205T170000
+SUMMARY:NORD Julemarked 2026
+LOCATION:Strandvejen 235\, 2920 Charlottenlund
+GEO:55.74927822;12.58679586
+URL:https://loppefund.dk/marked/nord-julemarked-2026-charlottenlund
+END:VEVENT
+BEGIN:VEVENT
+UID:nord-julemarked-2026-charlottenlund-2026-12-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261206T100000
+DTEND;TZID=Europe/Copenhagen:20261206T170000
+SUMMARY:NORD Julemarked 2026
+LOCATION:Strandvejen 235\, 2920 Charlottenlund
+GEO:55.74927822;12.58679586
+URL:https://loppefund.dk/marked/nord-julemarked-2026-charlottenlund
+END:VEVENT
+END:VCALENDAR

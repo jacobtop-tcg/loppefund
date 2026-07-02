@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-stoeberigaarden-paa-holmbladsgade-amager-amager-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T110000
+DTEND;TZID=Europe/Copenhagen:20260704T140000
+SUMMARY:Loppemarked i Støberigården på Holmbladsgade Amager
+LOCATION:Holmbladsgade 51-55\, 2300 Amager
+URL:https://loppefund.dk/marked/loppemarked-i-stoeberigaarden-paa-holmbladsgade-amager-amager
+END:VEVENT
+END:VCALENDAR

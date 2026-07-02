@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:faelles-loppemarked-i-svoemmehalskvarteret-2026-frederiksberg-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260906T100000
+DTEND;TZID=Europe/Copenhagen:20260906T150000
+SUMMARY:Fælles Loppemarked i Svømmehalskvarteret 2026
+LOCATION:Frederiksberg Svømmehal\, Helgesvej 29\, Frederiksberg
+GEO:55.6845;12.5322
+URL:https://loppefund.dk/marked/faelles-loppemarked-i-svoemmehalskvarteret-2026-frederiksberg
+END:VEVENT
+END:VCALENDAR

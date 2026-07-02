@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:brugtvare-terminalen-i-viby-viby-j-2026-07-02@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260702T100000
+DTEND;TZID=Europe/Copenhagen:20260702T160000
+SUMMARY:Brugtvare Terminalen i Viby
+LOCATION:Øllegårdsvej 3\, 8260 Viby J
+GEO:56.114484;10.134666
+URL:https://loppefund.dk/marked/brugtvare-terminalen-i-viby-viby-j
+END:VEVENT
+END:VCALENDAR

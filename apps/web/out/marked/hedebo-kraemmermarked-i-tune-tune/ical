@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:hedebo-kraemmermarked-i-tune-tune-2026-10-17@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261017T100000
+DTEND;TZID=Europe/Copenhagen:20261017T160000
+SUMMARY:Hedebo Kræmmermarked i Tune
+LOCATION:Tune v. Roskilde\, Tunehøj 7\, 4030 Tune
+GEO:55.597404;12.170365
+URL:https://loppefund.dk/marked/hedebo-kraemmermarked-i-tune-tune
+END:VEVENT
+BEGIN:VEVENT
+UID:hedebo-kraemmermarked-i-tune-tune-2026-10-18@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261018T100000
+DTEND;TZID=Europe/Copenhagen:20261018T150000
+SUMMARY:Hedebo Kræmmermarked i Tune
+LOCATION:Tune v. Roskilde\, Tunehøj 7\, 4030 Tune
+GEO:55.597404;12.170365
+URL:https://loppefund.dk/marked/hedebo-kraemmermarked-i-tune-tune
+END:VEVENT
+END:VCALENDAR

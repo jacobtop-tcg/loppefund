@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:farmers-market-i-marketenderiet-valby-et-overdaadigt-madmarked-med-lokale-varer--2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260829T100000
+DTEND;TZID=Europe/Copenhagen:20260829T150000
+SUMMARY:Farmers Market i Marketenderiet\, Valby. Et overdådigt madmarked med lokale varer
+LOCATION:Marketenderiet\, Kirsten Walthers Vej 5\, Valby
+GEO:55.6589;12.5125
+URL:https://loppefund.dk/marked/farmers-market-i-marketenderiet-valby-et-overdaadigt-madmarked-med-lokale-varer-
+END:VEVENT
+END:VCALENDAR

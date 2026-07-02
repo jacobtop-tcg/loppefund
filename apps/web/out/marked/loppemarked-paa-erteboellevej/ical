@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-paa-erteboellevej-2026-07-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260705T100000
+DTEND;TZID=Europe/Copenhagen:20260705T150000
+SUMMARY:Loppemarked på Ertebøllevej
+LOCATION:Ertebøllevej 16
+URL:https://loppefund.dk/marked/loppemarked-paa-erteboellevej
+END:VEVENT
+END:VCALENDAR

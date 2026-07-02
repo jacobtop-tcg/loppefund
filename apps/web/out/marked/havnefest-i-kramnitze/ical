@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:havnefest-i-kramnitze-2026-07-16@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260716T120000
+DTEND;TZID=Europe/Copenhagen:20260716T150000
+SUMMARY:Havnefest i Kramnitze
+LOCATION:Kramnitze - Lolland
+URL:https://loppefund.dk/marked/havnefest-i-kramnitze
+END:VEVENT
+END:VCALENDAR

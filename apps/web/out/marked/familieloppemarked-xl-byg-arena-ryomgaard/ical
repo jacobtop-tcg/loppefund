@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:familieloppemarked-xl-byg-arena-ryomgaard-2026-10-03@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261003T100000
+DTEND;TZID=Europe/Copenhagen:20261003T150000
+SUMMARY:Familieloppemarked XL Byg Arena
+LOCATION:I begge sportshaller\, Marienhoffvej 13C\, 8550 Ryomgård
+GEO:56.38652846;10.4955097
+URL:https://loppefund.dk/marked/familieloppemarked-xl-byg-arena-ryomgaard
+END:VEVENT
+END:VCALENDAR

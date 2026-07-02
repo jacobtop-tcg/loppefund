@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:bagagerumsmarked-citymarked-aarhus-aarhus-c-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T103000
+DTEND;TZID=Europe/Copenhagen:20260704T153000
+SUMMARY:Bagagerumsmarked / Citymarked Aarhus
+LOCATION:Aarhus Teater\, Teatergaden 1\, Aarhus C
+GEO:56.1564;10.2113
+URL:https://loppefund.dk/marked/bagagerumsmarked-citymarked-aarhus-aarhus-c
+END:VEVENT
+BEGIN:VEVENT
+UID:bagagerumsmarked-citymarked-aarhus-aarhus-c-2026-08-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260801T103000
+DTEND;TZID=Europe/Copenhagen:20260801T153000
+SUMMARY:Bagagerumsmarked / Citymarked Aarhus
+LOCATION:Aarhus Teater\, Teatergaden 1\, Aarhus C
+GEO:56.1564;10.2113
+URL:https://loppefund.dk/marked/bagagerumsmarked-citymarked-aarhus-aarhus-c
+END:VEVENT
+BEGIN:VEVENT
+UID:bagagerumsmarked-citymarked-aarhus-aarhus-c-2026-10-03@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261003T103000
+DTEND;TZID=Europe/Copenhagen:20261003T153000
+SUMMARY:Bagagerumsmarked / Citymarked Aarhus
+LOCATION:Aarhus Teater\, Teatergaden 1\, Aarhus C
+GEO:56.1564;10.2113
+URL:https://loppefund.dk/marked/bagagerumsmarked-citymarked-aarhus-aarhus-c
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:koebenhavns-laengste-loppemarked-29-august-2026-copenhagen-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260829T080000
+DTEND;TZID=Europe/Copenhagen:20260829T160000
+SUMMARY:Københavns Længste Loppemarked 29 august 2026
+LOCATION:Ørestads boulevard 68\, Copenhagen
+URL:https://loppefund.dk/marked/koebenhavns-laengste-loppemarked-29-august-2026-copenhagen
+END:VEVENT
+END:VCALENDAR

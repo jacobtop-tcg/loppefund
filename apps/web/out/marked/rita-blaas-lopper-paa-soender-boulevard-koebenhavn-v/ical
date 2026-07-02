@@ -1,0 +1,44 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:rita-blaas-lopper-paa-soender-boulevard-koebenhavn-v-2026-07-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260705T110000
+DTEND;TZID=Europe/Copenhagen:20260705T160000
+SUMMARY:Rita Blås Lopper på Sønder Boulevard
+LOCATION:Sønder Boulevard\, Sønder Boulevard\, København V
+GEO:55.6647;12.5476
+URL:https://loppefund.dk/marked/rita-blaas-lopper-paa-soender-boulevard-koebenhavn-v
+END:VEVENT
+BEGIN:VEVENT
+UID:rita-blaas-lopper-paa-soender-boulevard-koebenhavn-v-2026-08-02@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260802T110000
+DTEND;TZID=Europe/Copenhagen:20260802T160000
+SUMMARY:Rita Blås Lopper på Sønder Boulevard
+LOCATION:Sønder Boulevard\, Sønder Boulevard\, København V
+GEO:55.6647;12.5476
+URL:https://loppefund.dk/marked/rita-blaas-lopper-paa-soender-boulevard-koebenhavn-v
+END:VEVENT
+BEGIN:VEVENT
+UID:rita-blaas-lopper-paa-soender-boulevard-koebenhavn-v-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260906T110000
+DTEND;TZID=Europe/Copenhagen:20260906T160000
+SUMMARY:Rita Blås Lopper på Sønder Boulevard
+LOCATION:Sønder Boulevard\, Sønder Boulevard\, København V
+GEO:55.6647;12.5476
+URL:https://loppefund.dk/marked/rita-blaas-lopper-paa-soender-boulevard-koebenhavn-v
+END:VEVENT
+BEGIN:VEVENT
+UID:rita-blaas-lopper-paa-soender-boulevard-koebenhavn-v-2026-10-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261004T110000
+DTEND;TZID=Europe/Copenhagen:20261004T160000
+SUMMARY:Rita Blås Lopper på Sønder Boulevard
+LOCATION:Sønder Boulevard\, Sønder Boulevard\, København V
+GEO:55.6647;12.5476
+URL:https://loppefund.dk/marked/rita-blaas-lopper-paa-soender-boulevard-koebenhavn-v
+END:VEVENT
+END:VCALENDAR

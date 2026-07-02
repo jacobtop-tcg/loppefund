@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:markedsdag-hornslet-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260829T100000
+DTEND;TZID=Europe/Copenhagen:20260829T150000
+SUMMARY:Markedsdag
+LOCATION:Tingvej\, Tingvej 48\, Hornslet
+GEO:56.3202;10.3112
+URL:https://loppefund.dk/marked/markedsdag-hornslet
+END:VEVENT
+END:VCALENDAR

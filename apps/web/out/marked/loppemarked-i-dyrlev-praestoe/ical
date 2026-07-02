@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-dyrlev-praestoe-2026-08-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260808T100000
+DTEND;TZID=Europe/Copenhagen:20260808T140000
+SUMMARY:Loppemarked i Dyrlev
+LOCATION:Dyrlev\, Dyrlevvej 22\, Præstø
+GEO:55.0936;11.9783
+URL:https://loppefund.dk/marked/loppemarked-i-dyrlev-praestoe
+END:VEVENT
+END:VCALENDAR

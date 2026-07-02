@@ -1,0 +1,44 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:amagerlopperne-paa-sundbyvester-plads-koebenhavn-s-2026-07-02@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260702T100000
+DTEND;TZID=Europe/Copenhagen:20260702T150000
+SUMMARY:Amagerlopperne på Sundbyvester Plads
+LOCATION:Find os på den store nyrenoverede plads\, mellem busser og legeplads.\, Sundbyvester Plads\, 2300 København S
+GEO:55.6525525;12.5154898
+URL:https://loppefund.dk/marked/amagerlopperne-paa-sundbyvester-plads-koebenhavn-s
+END:VEVENT
+BEGIN:VEVENT
+UID:amagerlopperne-paa-sundbyvester-plads-koebenhavn-s-2026-08-08@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260808T100000
+DTEND;TZID=Europe/Copenhagen:20260808T150000
+SUMMARY:Amagerlopperne på Sundbyvester Plads
+LOCATION:Find os på den store nyrenoverede plads\, mellem busser og legeplads.\, Sundbyvester Plads\, 2300 København S
+GEO:55.6525525;12.5154898
+URL:https://loppefund.dk/marked/amagerlopperne-paa-sundbyvester-plads-koebenhavn-s
+END:VEVENT
+BEGIN:VEVENT
+UID:amagerlopperne-paa-sundbyvester-plads-koebenhavn-s-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260829T100000
+DTEND;TZID=Europe/Copenhagen:20260829T150000
+SUMMARY:Amagerlopperne på Sundbyvester Plads
+LOCATION:Find os på den store nyrenoverede plads\, mellem busser og legeplads.\, Sundbyvester Plads\, 2300 København S
+GEO:55.6525525;12.5154898
+URL:https://loppefund.dk/marked/amagerlopperne-paa-sundbyvester-plads-koebenhavn-s
+END:VEVENT
+BEGIN:VEVENT
+UID:amagerlopperne-paa-sundbyvester-plads-koebenhavn-s-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260905T100000
+DTEND;TZID=Europe/Copenhagen:20260905T150000
+SUMMARY:Amagerlopperne på Sundbyvester Plads
+LOCATION:Find os på den store nyrenoverede plads\, mellem busser og legeplads.\, Sundbyvester Plads\, 2300 København S
+GEO:55.6525525;12.5154898
+URL:https://loppefund.dk/marked/amagerlopperne-paa-sundbyvester-plads-koebenhavn-s
+END:VEVENT
+END:VCALENDAR

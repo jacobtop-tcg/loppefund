@@ -1,4 +1,11 @@
-import { loadEventDetail, todayIso } from '../../../../lib/data.ts';
+import { listUpcomingEvents, loadEventDetail, todayIso } from '../../../../lib/data.ts';
+
+export const dynamicParams = false;
+
+/** Pre-generate an .ics for every event (static export + dev). */
+export function generateStaticParams(): Array<{ slug: string }> {
+  return listUpcomingEvents(180).map((e) => ({ slug: e.slug }));
+}
 
 /** iCalendar export: every upcoming occurrence as a VEVENT. */
 export async function GET(

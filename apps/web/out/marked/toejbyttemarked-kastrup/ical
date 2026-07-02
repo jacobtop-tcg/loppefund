@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:toejbyttemarked-kastrup-2026-09-26@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260926T100000
+DTEND;TZID=Europe/Copenhagen:20260926T140000
+SUMMARY:Tøjbyttemarked
+LOCATION:Tårnby Hovedbibliotek\, Kamillevej 10\, Kastrup
+GEO:55.6323;12.6227
+URL:https://loppefund.dk/marked/toejbyttemarked-kastrup
+END:VEVENT
+END:VCALENDAR

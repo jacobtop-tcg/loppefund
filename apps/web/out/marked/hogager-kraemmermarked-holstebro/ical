@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:hogager-kraemmermarked-holstebro-2026-08-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260801T090000
+DTEND;TZID=Europe/Copenhagen:20260801T180000
+SUMMARY:Hogager Kræmmermarked
+LOCATION:Langgade i Hogager\, Langgade Hogager\, 7500 Holstebro
+GEO:56.3764559;8.848509
+URL:https://loppefund.dk/marked/hogager-kraemmermarked-holstebro
+END:VEVENT
+BEGIN:VEVENT
+UID:hogager-kraemmermarked-holstebro-2026-08-02@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260802T093000
+DTEND;TZID=Europe/Copenhagen:20260802T160000
+SUMMARY:Hogager Kræmmermarked
+LOCATION:Langgade i Hogager\, Langgade Hogager\, 7500 Holstebro
+GEO:56.3764559;8.848509
+URL:https://loppefund.dk/marked/hogager-kraemmermarked-holstebro
+END:VEVENT
+END:VCALENDAR

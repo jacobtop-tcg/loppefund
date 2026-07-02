@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:vbc-loppemarked-14-nov-2026-viborg-2026-11-14@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20261114
+SUMMARY:VBC Loppemarked 14. nov 2026
+LOCATION:Viborg Banko Center- VBC\, Vævervej 4\, Viborg
+GEO:56.4611;9.39911
+URL:https://loppefund.dk/marked/vbc-loppemarked-14-nov-2026-viborg
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:vestegnens-kraemmermarked-ishoej-2026-08-14@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260814T140000
+DTEND;TZID=Europe/Copenhagen:20260814T200000
+SUMMARY:Vestegnens Kræmmermarked
+LOCATION:Hjørnet af Brentevej og Ishøj Stationsvej\, Brentevej\, 2635 Ishøj
+GEO:55.622069;12.3366566
+URL:https://loppefund.dk/marked/vestegnens-kraemmermarked-ishoej
+END:VEVENT
+BEGIN:VEVENT
+UID:vestegnens-kraemmermarked-ishoej-2026-08-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260815T100000
+DTEND;TZID=Europe/Copenhagen:20260815T200000
+SUMMARY:Vestegnens Kræmmermarked
+LOCATION:Hjørnet af Brentevej og Ishøj Stationsvej\, Brentevej\, 2635 Ishøj
+GEO:55.622069;12.3366566
+URL:https://loppefund.dk/marked/vestegnens-kraemmermarked-ishoej
+END:VEVENT
+BEGIN:VEVENT
+UID:vestegnens-kraemmermarked-ishoej-2026-08-16@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260816T100000
+DTEND;TZID=Europe/Copenhagen:20260816T170000
+SUMMARY:Vestegnens Kræmmermarked
+LOCATION:Hjørnet af Brentevej og Ishøj Stationsvej\, Brentevej\, 2635 Ishøj
+GEO:55.622069;12.3366566
+URL:https://loppefund.dk/marked/vestegnens-kraemmermarked-ishoej
+END:VEVENT
+END:VCALENDAR

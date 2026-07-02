@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-noeddeboparken-i-vallensbaek-strand-vallensbaek-strand-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260906T100000
+DTEND;TZID=Europe/Copenhagen:20260906T150000
+SUMMARY:Loppemarked - Nøddeboparken i Vallensbæk Strand
+LOCATION:Nøddeboparken i Vallensbæk Strand\, Nøddebo allé 1\, 2665 Vallensbæk Strand
+GEO:55.61964832;12.38841202
+URL:https://loppefund.dk/marked/loppemarked-noeddeboparken-i-vallensbaek-strand-vallensbaek-strand
+END:VEVENT
+END:VCALENDAR

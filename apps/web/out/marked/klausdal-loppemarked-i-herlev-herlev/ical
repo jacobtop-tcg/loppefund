@@ -1,0 +1,104 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:klausdal-loppemarked-i-herlev-herlev-2026-08-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260808T100000
+DTEND;TZID=Europe/Copenhagen:20260808T140000
+SUMMARY:Klausdal Loppemarked i Herlev
+LOCATION:Klausdalsbrovej\, Klausdalsbrovej 336\, 2730 Herlev
+GEO:55.745763;12.441374
+URL:https://loppefund.dk/marked/klausdal-loppemarked-i-herlev-herlev
+END:VEVENT
+BEGIN:VEVENT
+UID:klausdal-loppemarked-i-herlev-herlev-2026-08-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260822T100000
+DTEND;TZID=Europe/Copenhagen:20260822T140000
+SUMMARY:Klausdal Loppemarked i Herlev
+LOCATION:Klausdalsbrovej\, Klausdalsbrovej 336\, 2730 Herlev
+GEO:55.745763;12.441374
+URL:https://loppefund.dk/marked/klausdal-loppemarked-i-herlev-herlev
+END:VEVENT
+BEGIN:VEVENT
+UID:klausdal-loppemarked-i-herlev-herlev-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T100000
+DTEND;TZID=Europe/Copenhagen:20260905T140000
+SUMMARY:Klausdal Loppemarked i Herlev
+LOCATION:Klausdalsbrovej\, Klausdalsbrovej 336\, 2730 Herlev
+GEO:55.745763;12.441374
+URL:https://loppefund.dk/marked/klausdal-loppemarked-i-herlev-herlev
+END:VEVENT
+BEGIN:VEVENT
+UID:klausdal-loppemarked-i-herlev-herlev-2026-09-19@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260919T100000
+DTEND;TZID=Europe/Copenhagen:20260919T140000
+SUMMARY:Klausdal Loppemarked i Herlev
+LOCATION:Klausdalsbrovej\, Klausdalsbrovej 336\, 2730 Herlev
+GEO:55.745763;12.441374
+URL:https://loppefund.dk/marked/klausdal-loppemarked-i-herlev-herlev
+END:VEVENT
+BEGIN:VEVENT
+UID:klausdal-loppemarked-i-herlev-herlev-2026-10-03@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261003T100000
+DTEND;TZID=Europe/Copenhagen:20261003T140000
+SUMMARY:Klausdal Loppemarked i Herlev
+LOCATION:Klausdalsbrovej\, Klausdalsbrovej 336\, 2730 Herlev
+GEO:55.745763;12.441374
+URL:https://loppefund.dk/marked/klausdal-loppemarked-i-herlev-herlev
+END:VEVENT
+BEGIN:VEVENT
+UID:klausdal-loppemarked-i-herlev-herlev-2026-10-17@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261017T100000
+DTEND;TZID=Europe/Copenhagen:20261017T140000
+SUMMARY:Klausdal Loppemarked i Herlev
+LOCATION:Klausdalsbrovej\, Klausdalsbrovej 336\, 2730 Herlev
+GEO:55.745763;12.441374
+URL:https://loppefund.dk/marked/klausdal-loppemarked-i-herlev-herlev
+END:VEVENT
+BEGIN:VEVENT
+UID:klausdal-loppemarked-i-herlev-herlev-2026-10-31@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261031T100000
+DTEND;TZID=Europe/Copenhagen:20261031T140000
+SUMMARY:Klausdal Loppemarked i Herlev
+LOCATION:Klausdalsbrovej\, Klausdalsbrovej 336\, 2730 Herlev
+GEO:55.745763;12.441374
+URL:https://loppefund.dk/marked/klausdal-loppemarked-i-herlev-herlev
+END:VEVENT
+BEGIN:VEVENT
+UID:klausdal-loppemarked-i-herlev-herlev-2026-11-14@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261114T100000
+DTEND;TZID=Europe/Copenhagen:20261114T140000
+SUMMARY:Klausdal Loppemarked i Herlev
+LOCATION:Klausdalsbrovej\, Klausdalsbrovej 336\, 2730 Herlev
+GEO:55.745763;12.441374
+URL:https://loppefund.dk/marked/klausdal-loppemarked-i-herlev-herlev
+END:VEVENT
+BEGIN:VEVENT
+UID:klausdal-loppemarked-i-herlev-herlev-2026-11-28@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261128T100000
+DTEND;TZID=Europe/Copenhagen:20261128T140000
+SUMMARY:Klausdal Loppemarked i Herlev
+LOCATION:Klausdalsbrovej\, Klausdalsbrovej 336\, 2730 Herlev
+GEO:55.745763;12.441374
+URL:https://loppefund.dk/marked/klausdal-loppemarked-i-herlev-herlev
+END:VEVENT
+BEGIN:VEVENT
+UID:klausdal-loppemarked-i-herlev-herlev-2026-12-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261212T100000
+DTEND;TZID=Europe/Copenhagen:20261212T140000
+SUMMARY:Klausdal Loppemarked i Herlev
+LOCATION:Klausdalsbrovej\, Klausdalsbrovej 336\, 2730 Herlev
+GEO:55.745763;12.441374
+URL:https://loppefund.dk/marked/klausdal-loppemarked-i-herlev-herlev
+END:VEVENT
+END:VCALENDAR

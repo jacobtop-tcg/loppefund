@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:hf-proevestenens-store-loppemarkeder-koebenhavn-s-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T160000
+SUMMARY:HF PRØVESTENENS STORE LOPPEMARKEDER
+LOCATION:Loppemarkederne foregår på vores store fællesplæne midt i haveforeningen. Vi har også to store festtelte\, hvis vejret svigter.\, Kardinalgangen 3\, 2300 København S
+GEO:55.65;12.55
+URL:https://loppefund.dk/marked/hf-proevestenens-store-loppemarkeder-koebenhavn-s
+END:VEVENT
+END:VCALENDAR

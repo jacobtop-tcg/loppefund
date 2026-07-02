@@ -1,0 +1,104 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:fredensborg-kokkedal-loppemarked-kokkedal-2026-07-02@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260702T100000
+DTEND;TZID=Europe/Copenhagen:20260702T160000
+SUMMARY:Fredensborg Kokkedal Loppemarked
+LOCATION:P-Pladsen ved Rådhuset og Føtex i Kokkedal\, Egevangen 3B\, 2980 Kokkedal
+GEO:55.90508;12.474074
+URL:https://loppefund.dk/marked/fredensborg-kokkedal-loppemarked-kokkedal
+END:VEVENT
+BEGIN:VEVENT
+UID:fredensborg-kokkedal-loppemarked-kokkedal-2026-07-05@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260705T090000
+DTEND;TZID=Europe/Copenhagen:20260705T140000
+SUMMARY:Fredensborg Kokkedal Loppemarked
+LOCATION:P-Pladsen ved Rådhuset og Føtex i Kokkedal\, Egevangen 3B\, 2980 Kokkedal
+GEO:55.90508;12.474074
+URL:https://loppefund.dk/marked/fredensborg-kokkedal-loppemarked-kokkedal
+END:VEVENT
+BEGIN:VEVENT
+UID:fredensborg-kokkedal-loppemarked-kokkedal-2026-07-12@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260712T090000
+DTEND;TZID=Europe/Copenhagen:20260712T140000
+SUMMARY:Fredensborg Kokkedal Loppemarked
+LOCATION:P-Pladsen ved Rådhuset og Føtex i Kokkedal\, Egevangen 3B\, 2980 Kokkedal
+GEO:55.90508;12.474074
+URL:https://loppefund.dk/marked/fredensborg-kokkedal-loppemarked-kokkedal
+END:VEVENT
+BEGIN:VEVENT
+UID:fredensborg-kokkedal-loppemarked-kokkedal-2026-07-19@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260719T090000
+DTEND;TZID=Europe/Copenhagen:20260719T140000
+SUMMARY:Fredensborg Kokkedal Loppemarked
+LOCATION:P-Pladsen ved Rådhuset og Føtex i Kokkedal\, Egevangen 3B\, 2980 Kokkedal
+GEO:55.90508;12.474074
+URL:https://loppefund.dk/marked/fredensborg-kokkedal-loppemarked-kokkedal
+END:VEVENT
+BEGIN:VEVENT
+UID:fredensborg-kokkedal-loppemarked-kokkedal-2026-07-26@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260726T090000
+DTEND;TZID=Europe/Copenhagen:20260726T140000
+SUMMARY:Fredensborg Kokkedal Loppemarked
+LOCATION:P-Pladsen ved Rådhuset og Føtex i Kokkedal\, Egevangen 3B\, 2980 Kokkedal
+GEO:55.90508;12.474074
+URL:https://loppefund.dk/marked/fredensborg-kokkedal-loppemarked-kokkedal
+END:VEVENT
+BEGIN:VEVENT
+UID:fredensborg-kokkedal-loppemarked-kokkedal-2026-08-02@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260802T090000
+DTEND;TZID=Europe/Copenhagen:20260802T140000
+SUMMARY:Fredensborg Kokkedal Loppemarked
+LOCATION:P-Pladsen ved Rådhuset og Føtex i Kokkedal\, Egevangen 3B\, 2980 Kokkedal
+GEO:55.90508;12.474074
+URL:https://loppefund.dk/marked/fredensborg-kokkedal-loppemarked-kokkedal
+END:VEVENT
+BEGIN:VEVENT
+UID:fredensborg-kokkedal-loppemarked-kokkedal-2026-08-09@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260809T090000
+DTEND;TZID=Europe/Copenhagen:20260809T140000
+SUMMARY:Fredensborg Kokkedal Loppemarked
+LOCATION:P-Pladsen ved Rådhuset og Føtex i Kokkedal\, Egevangen 3B\, 2980 Kokkedal
+GEO:55.90508;12.474074
+URL:https://loppefund.dk/marked/fredensborg-kokkedal-loppemarked-kokkedal
+END:VEVENT
+BEGIN:VEVENT
+UID:fredensborg-kokkedal-loppemarked-kokkedal-2026-08-16@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260816T090000
+DTEND;TZID=Europe/Copenhagen:20260816T140000
+SUMMARY:Fredensborg Kokkedal Loppemarked
+LOCATION:P-Pladsen ved Rådhuset og Føtex i Kokkedal\, Egevangen 3B\, 2980 Kokkedal
+GEO:55.90508;12.474074
+URL:https://loppefund.dk/marked/fredensborg-kokkedal-loppemarked-kokkedal
+END:VEVENT
+BEGIN:VEVENT
+UID:fredensborg-kokkedal-loppemarked-kokkedal-2026-08-23@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260823T090000
+DTEND;TZID=Europe/Copenhagen:20260823T140000
+SUMMARY:Fredensborg Kokkedal Loppemarked
+LOCATION:P-Pladsen ved Rådhuset og Føtex i Kokkedal\, Egevangen 3B\, 2980 Kokkedal
+GEO:55.90508;12.474074
+URL:https://loppefund.dk/marked/fredensborg-kokkedal-loppemarked-kokkedal
+END:VEVENT
+BEGIN:VEVENT
+UID:fredensborg-kokkedal-loppemarked-kokkedal-2026-08-30@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260830T090000
+DTEND;TZID=Europe/Copenhagen:20260830T140000
+SUMMARY:Fredensborg Kokkedal Loppemarked
+LOCATION:P-Pladsen ved Rådhuset og Føtex i Kokkedal\, Egevangen 3B\, 2980 Kokkedal
+GEO:55.90508;12.474074
+URL:https://loppefund.dk/marked/fredensborg-kokkedal-loppemarked-kokkedal
+END:VEVENT
+END:VCALENDAR

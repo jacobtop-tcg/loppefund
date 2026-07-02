@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:lions-antik-og-kraemmermarked-koege-4600-koege-2026-08-23@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260823T090000
+DTEND;TZID=Europe/Copenhagen:20260823T150000
+SUMMARY:Lions Antik- og Kræmmermarked
+LOCATION:Kræmmermarked og Børneloppemarked på Torvet.\, Torvet\, 4600 Køge\, 4600 Køge
+GEO:55.4568488;12.1813647
+URL:https://loppefund.dk/marked/lions-antik-og-kraemmermarked-koege-4600-koege
+END:VEVENT
+END:VCALENDAR

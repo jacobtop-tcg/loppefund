@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:torvedag-madmarked-birkeroed-2026-08-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260822T100000
+DTEND;TZID=Europe/Copenhagen:20260822T140000
+SUMMARY:Torvedag - Madmarked
+LOCATION:Birkerød Hovedgade\, Hovedgaden\, Birkerød
+GEO:55.8437;12.4343
+URL:https://loppefund.dk/marked/torvedag-madmarked-birkeroed
+END:VEVENT
+END:VCALENDAR

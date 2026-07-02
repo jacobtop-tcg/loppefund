@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:houlkaer-indendoers-bagagerumsmarked-viborg-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260906
+SUMMARY:Houlkær Indendørs Bagagerumsmarked
+LOCATION:Viborg Idrætscenter Øst / Houlkærhallen\, Odshøjvej 65\, Viborg
+GEO:56.4631;9.44853
+URL:https://loppefund.dk/marked/houlkaer-indendoers-bagagerumsmarked-viborg
+END:VEVENT
+END:VCALENDAR

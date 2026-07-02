@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:haughus-gods-foedselsdagsweekend-10-aars-foedselsdag-jelling-2026-10-10@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261010T100000
+DTEND;TZID=Europe/Copenhagen:20261010T160000
+SUMMARY:Haughus Gods Fødselsdagsweekend ( 10 års fødselsdag)
+LOCATION:Vejlevej 50\, 7300 Jelling\, 7300 Jelling
+GEO:55.753214;9.443931
+URL:https://loppefund.dk/marked/haughus-gods-foedselsdagsweekend-10-aars-foedselsdag-jelling
+END:VEVENT
+END:VCALENDAR

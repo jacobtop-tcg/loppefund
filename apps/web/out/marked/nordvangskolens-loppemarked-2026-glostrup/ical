@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:nordvangskolens-loppemarked-2026-glostrup-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T100000
+DTEND;TZID=Europe/Copenhagen:20260905T130000
+SUMMARY:Nordvangskolens Loppemarked 2026
+LOCATION:Sofielundsvej 120\, 2600 Glostrup
+GEO:55.67728316;12.40055703
+URL:https://loppefund.dk/marked/nordvangskolens-loppemarked-2026-glostrup
+END:VEVENT
+END:VCALENDAR

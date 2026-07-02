@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:stort-indendoers-loppe-kraemmermarked-i-haderslev-haderslev-2026-10-18@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20261018
+SUMMARY:Stort indendørs loppe- kræmmermarked i Haderslev
+LOCATION:Haderslev Idrætscenter\, Stadionvej 5\, Haderslev
+GEO:55.2615;9.48929
+URL:https://loppefund.dk/marked/stort-indendoers-loppe-kraemmermarked-i-haderslev-haderslev
+END:VEVENT
+END:VCALENDAR

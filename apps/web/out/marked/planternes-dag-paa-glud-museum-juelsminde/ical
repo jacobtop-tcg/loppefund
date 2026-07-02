@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:planternes-dag-paa-glud-museum-juelsminde-2026-09-20@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260920T100000
+DTEND;TZID=Europe/Copenhagen:20260920T150000
+SUMMARY:Planternes dag på Glud Museum
+LOCATION:Glud Museum\, Museumsvej 44\, Juelsminde
+GEO:55.8067;9.99425
+URL:https://loppefund.dk/marked/planternes-dag-paa-glud-museum-juelsminde
+END:VEVENT
+END:VCALENDAR

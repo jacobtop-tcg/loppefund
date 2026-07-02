@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kerteminde-kraemmermarked-2026-kerteminde-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260704T090000
+DTEND;TZID=Europe/Copenhagen:20260704T150000
+SUMMARY:Kerteminde Kræmmermarked 2026
+LOCATION:Kerteminde Kræmmermarked arrangeres af Kerteminde Vandskiklub på vegne af Kerteminde Cityforening. Det foregår i midtbyen af Kerteminde\, nærmere betegnet Langegade\, Vestergade og Trollegade. Selve arrangementet foregår den 4. juli 2026 fra kl. 9.00 - 15.00.\, Langegade\, 5300 Kerteminde
+GEO:55.449859;10.6578095
+URL:https://loppefund.dk/marked/kerteminde-kraemmermarked-2026-kerteminde
+END:VEVENT
+END:VCALENDAR

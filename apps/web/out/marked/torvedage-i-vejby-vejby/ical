@@ -1,0 +1,64 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:torvedage-i-vejby-vejby-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T130000
+SUMMARY:Torvedage i Vejby
+LOCATION:Præstens Mark v/Konfirmandhuset\, Kirkebakken\, Vejby
+GEO:56.0646;12.1404
+URL:https://loppefund.dk/marked/torvedage-i-vejby-vejby
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedage-i-vejby-vejby-2026-07-11@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260711T100000
+DTEND;TZID=Europe/Copenhagen:20260711T130000
+SUMMARY:Torvedage i Vejby
+LOCATION:Præstens Mark v/Konfirmandhuset\, Kirkebakken\, Vejby
+GEO:56.0646;12.1404
+URL:https://loppefund.dk/marked/torvedage-i-vejby-vejby
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedage-i-vejby-vejby-2026-07-18@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260718T100000
+DTEND;TZID=Europe/Copenhagen:20260718T130000
+SUMMARY:Torvedage i Vejby
+LOCATION:Præstens Mark v/Konfirmandhuset\, Kirkebakken\, Vejby
+GEO:56.0646;12.1404
+URL:https://loppefund.dk/marked/torvedage-i-vejby-vejby
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedage-i-vejby-vejby-2026-07-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260725T100000
+DTEND;TZID=Europe/Copenhagen:20260725T130000
+SUMMARY:Torvedage i Vejby
+LOCATION:Præstens Mark v/Konfirmandhuset\, Kirkebakken\, Vejby
+GEO:56.0646;12.1404
+URL:https://loppefund.dk/marked/torvedage-i-vejby-vejby
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedage-i-vejby-vejby-2026-08-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260801T100000
+DTEND;TZID=Europe/Copenhagen:20260801T130000
+SUMMARY:Torvedage i Vejby
+LOCATION:Præstens Mark v/Konfirmandhuset\, Kirkebakken\, Vejby
+GEO:56.0646;12.1404
+URL:https://loppefund.dk/marked/torvedage-i-vejby-vejby
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedage-i-vejby-vejby-2026-08-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260808T100000
+DTEND;TZID=Europe/Copenhagen:20260808T130000
+SUMMARY:Torvedage i Vejby
+LOCATION:Præstens Mark v/Konfirmandhuset\, Kirkebakken\, Vejby
+GEO:56.0646;12.1404
+URL:https://loppefund.dk/marked/torvedage-i-vejby-vejby
+END:VEVENT
+END:VCALENDAR

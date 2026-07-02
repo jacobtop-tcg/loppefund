@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:bagagerumsmarked-aarhus-bispetorvet-private-16-saeson-rask-event-ole-s-rask-aarh-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260704T103000
+DTEND;TZID=Europe/Copenhagen:20260704T153000
+SUMMARY:Bagagerumsmarked Aarhus Bispetorvet private 16. sæson Rask Event\, Ole S. Rask
+LOCATION:Bispetorvet/Store Torv\, ved Aarhus Domkirke\, Teatergaden 1\, DK-8000 Aarhus C. Parker eventuelt bilen DOKK1/Navitas og gå det sidste korte stykke til markedet.\, Teatergaden 1\, 8000 Aarhus C
+GEO:56.15612156;10.21081521
+URL:https://loppefund.dk/marked/bagagerumsmarked-aarhus-bispetorvet-private-16-saeson-rask-event-ole-s-rask-aarh
+END:VEVENT
+BEGIN:VEVENT
+UID:bagagerumsmarked-aarhus-bispetorvet-private-16-saeson-rask-event-ole-s-rask-aarh-2026-08-01@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260801T103000
+DTEND;TZID=Europe/Copenhagen:20260801T153000
+SUMMARY:Bagagerumsmarked Aarhus Bispetorvet private 16. sæson Rask Event\, Ole S. Rask
+LOCATION:Bispetorvet/Store Torv\, ved Aarhus Domkirke\, Teatergaden 1\, DK-8000 Aarhus C. Parker eventuelt bilen DOKK1/Navitas og gå det sidste korte stykke til markedet.\, Teatergaden 1\, 8000 Aarhus C
+GEO:56.15612156;10.21081521
+URL:https://loppefund.dk/marked/bagagerumsmarked-aarhus-bispetorvet-private-16-saeson-rask-event-ole-s-rask-aarh
+END:VEVENT
+BEGIN:VEVENT
+UID:bagagerumsmarked-aarhus-bispetorvet-private-16-saeson-rask-event-ole-s-rask-aarh-2026-09-13@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260913T103000
+DTEND;TZID=Europe/Copenhagen:20260913T153000
+SUMMARY:Bagagerumsmarked Aarhus Bispetorvet private 16. sæson Rask Event\, Ole S. Rask
+LOCATION:Bispetorvet/Store Torv\, ved Aarhus Domkirke\, Teatergaden 1\, DK-8000 Aarhus C. Parker eventuelt bilen DOKK1/Navitas og gå det sidste korte stykke til markedet.\, Teatergaden 1\, 8000 Aarhus C
+GEO:56.15612156;10.21081521
+URL:https://loppefund.dk/marked/bagagerumsmarked-aarhus-bispetorvet-private-16-saeson-rask-event-ole-s-rask-aarh
+END:VEVENT
+END:VCALENDAR

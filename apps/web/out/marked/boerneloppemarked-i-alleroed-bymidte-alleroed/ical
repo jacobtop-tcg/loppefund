@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:boerneloppemarked-i-alleroed-bymidte-alleroed-2026-09-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260912T100000
+DTEND;TZID=Europe/Copenhagen:20260912T140000
+SUMMARY:Børneloppemarked i Allerød Bymidte
+LOCATION:Allerød Bymidte\, Gågaden\, Allerød
+GEO:55.8756;12.3408
+URL:https://loppefund.dk/marked/boerneloppemarked-i-alleroed-bymidte-alleroed
+END:VEVENT
+END:VCALENDAR

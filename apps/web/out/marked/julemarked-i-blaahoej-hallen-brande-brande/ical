@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:julemarked-i-blaahoej-hallen-brande-brande-2026-11-14@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261114T100000
+DTEND;TZID=Europe/Copenhagen:20261114T150000
+SUMMARY:Julemarked i Blåhøj Hallen\, Brande
+LOCATION:Indendørs julemarked i hallen.\, Blåhøj Skolevej 1\, 7330 Brande
+GEO:55.862676;9.009151
+URL:https://loppefund.dk/marked/julemarked-i-blaahoej-hallen-brande-brande
+END:VEVENT
+END:VCALENDAR

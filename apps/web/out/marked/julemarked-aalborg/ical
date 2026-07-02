@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:julemarked-aalborg-2026-11-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20261108
+SUMMARY:Julemarked
+LOCATION:Vesterkær Kirke\, Skydebanevej 2\, Aalborg
+GEO:57.056;9.89205
+URL:https://loppefund.dk/marked/julemarked-aalborg
+END:VEVENT
+END:VCALENDAR

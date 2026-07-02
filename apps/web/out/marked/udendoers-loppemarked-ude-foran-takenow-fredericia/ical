@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:udendoers-loppemarked-ude-foran-takenow-fredericia-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T140000
+SUMMARY:Udendørs loppemarked\, ude foran TakeNOW *
+LOCATION:TakeNOW\, Fuglsang Allé 12\, Fredericia
+GEO:55.5674;9.70123
+URL:https://loppefund.dk/marked/udendoers-loppemarked-ude-foran-takenow-fredericia
+END:VEVENT
+END:VCALENDAR

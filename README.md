@@ -95,21 +95,36 @@ the promote threshold are adapter-ready — the funnel is
   times stay unknown rather than being invented; geocodes below DAWA
   quality B fall back to explicit postcode-centroid approximation.
 
-## Production
+## Free deployment (GitHub Pages + Actions)
+
+The consumer app only *reads* the database, so it static-exports to plain
+HTML/JS and hosts for free — all filtering, search, map and trip-planning
+already run client-side.
 
 ```bash
-# Verified production build (First Load JS ~113 kB)
-npm run build --workspace @loppefund/web
-npm run start --workspace @loppefund/web   # serves on :3000
+# Static export -> apps/web/out/ (every event page + .ics pre-rendered)
+LOPPEFUND_STATIC=1 LOPPEFUND_BASE_URL=https://<user>.github.io \
+  npm run build --workspace @loppefund/web
 ```
 
-Deployment needs a Node host with a persistent disk for `data/loppefund.db`
-(a small VPS or Fly.io/Railway volume — Vercel's ephemeral filesystem won't
-fit the SQLite architecture without moving the db to LiteFS/Turso). Set
-`LOPPEFUND_BASE_URL` for correct sitemap/robots URLs and schedule the
-pipeline (below). Facebook-group ingestion activates by setting
-`LOPPEFUND_FB_FEED_URLS` to a scraping-vendor dataset URL (e.g. an Apify
-actor scheduled vendor-side).
+`.github/workflows/deploy.yml` is the free continuous-update engine: on a
+twice-daily cron (and on demand) it crawls every source, rebuilds the
+canonical layer, static-exports the app and publishes to GitHub Pages. The
+SQLite database is cached between runs (incremental crawl, persistent
+geocode cache). To go live:
+
+1. Repo **Settings → Pages → Source: GitHub Actions**.
+2. For a project page, set repo **variable** `LOPPEFUND_BASE_PATH=/<repo>`
+   and `LOPPEFUND_BASE_URL=https://<user>.github.io/<repo>`.
+3. (Optional) repo **secret** `NEXT_PUBLIC_WEB3FORMS_KEY` — a free
+   [Web3Forms](https://web3forms.com) access key routes tips to your inbox;
+   without it the /tip form falls back to a `mailto:` link (zero setup).
+4. (Optional) repo **secret** `LOPPEFUND_FB_FEED_URLS` to ingest Facebook
+   groups from a scraping-vendor dataset.
+
+Everything above runs on free tiers. For a **self-hosted dynamic** server
+instead, use the Dockerfile (Node host + persistent disk for the db); tips
+then land in the `tips` table for `cli.ts tips` to process.
 
 ## Keeping data fresh
 

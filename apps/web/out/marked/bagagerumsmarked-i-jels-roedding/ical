@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:bagagerumsmarked-i-jels-roedding-2026-09-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260912T090000
+DTEND;TZID=Europe/Copenhagen:20260912T140000
+SUMMARY:Bagagerumsmarked i Jels
+LOCATION:Søvej 5C\, 6630 Rødding\, 6630 Rødding
+GEO:55.35856;9.211285
+URL:https://loppefund.dk/marked/bagagerumsmarked-i-jels-roedding
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,164 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T090000
+DTEND;TZID=Europe/Copenhagen:20260704T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-07-11@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260711T090000
+DTEND;TZID=Europe/Copenhagen:20260711T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-07-18@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260718T090000
+DTEND;TZID=Europe/Copenhagen:20260718T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-07-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260725T090000
+DTEND;TZID=Europe/Copenhagen:20260725T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-08-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260801T090000
+DTEND;TZID=Europe/Copenhagen:20260801T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-08-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260808T090000
+DTEND;TZID=Europe/Copenhagen:20260808T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-08-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260815T090000
+DTEND;TZID=Europe/Copenhagen:20260815T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-08-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260822T090000
+DTEND;TZID=Europe/Copenhagen:20260822T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260829T090000
+DTEND;TZID=Europe/Copenhagen:20260829T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T090000
+DTEND;TZID=Europe/Copenhagen:20260905T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-09-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260912T090000
+DTEND;TZID=Europe/Copenhagen:20260912T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-09-19@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260919T090000
+DTEND;TZID=Europe/Copenhagen:20260919T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-09-26@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260926T090000
+DTEND;TZID=Europe/Copenhagen:20260926T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-10-03@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261003T090000
+DTEND;TZID=Europe/Copenhagen:20261003T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-10-10@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261010T090000
+DTEND;TZID=Europe/Copenhagen:20261010T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+BEGIN:VEVENT
+UID:havnsoe-kraemmer-og-loppemarked-foellenslev-2026-10-17@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261017T090000
+DTEND;TZID=Europe/Copenhagen:20261017T150000
+SUMMARY:Havnsø Kræmmer- og Loppemarked
+LOCATION:Havnepladsen 3\, 4591 Føllenslev
+GEO:55.7833;11.45
+URL:https://loppefund.dk/marked/havnsoe-kraemmer-og-loppemarked-foellenslev
+END:VEVENT
+END:VCALENDAR

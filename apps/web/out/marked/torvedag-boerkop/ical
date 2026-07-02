@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:torvedag-boerkop-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T130000
+SUMMARY:Torvedag
+LOCATION:Børkop Handels- og Erhvervsforening\, Ny Boder 8-10\, Børkop
+GEO:55.6414;9.65019
+URL:https://loppefund.dk/marked/torvedag-boerkop
+END:VEVENT
+BEGIN:VEVENT
+UID:torvedag-boerkop-2026-08-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260801T100000
+DTEND;TZID=Europe/Copenhagen:20260801T130000
+SUMMARY:Torvedag
+LOCATION:Børkop Handels- og Erhvervsforening\, Ny Boder 8-10\, Børkop
+GEO:55.6414;9.65019
+URL:https://loppefund.dk/marked/torvedag-boerkop
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-med-fdf-naesby-v-sognegaarden-odense-n-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260829T110000
+DTEND;TZID=Europe/Copenhagen:20260829T140000
+SUMMARY:Loppemarked med FDF Næsby v/ sognegården
+LOCATION:Næsby Kirke\, Bogensevej 94A\, Odense N
+GEO:55.4184;10.3532
+URL:https://loppefund.dk/marked/loppemarked-med-fdf-naesby-v-sognegaarden-odense-n
+END:VEVENT
+END:VCALENDAR

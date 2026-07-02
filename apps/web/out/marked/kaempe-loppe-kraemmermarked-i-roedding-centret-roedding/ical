@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kaempe-loppe-kraemmermarked-i-roedding-centret-roedding-2026-11-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261122T100000
+DTEND;TZID=Europe/Copenhagen:20261122T140000
+SUMMARY:KÆMPE loppe & kræmmermarked i Rødding Centret
+LOCATION:Rødding Centret\, Søndergyden 15\, 6630 Rødding
+GEO:55.3658;9.05324
+URL:https://loppefund.dk/marked/kaempe-loppe-kraemmermarked-i-roedding-centret-roedding
+END:VEVENT
+END:VCALENDAR

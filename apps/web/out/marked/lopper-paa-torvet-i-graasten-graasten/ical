@@ -1,0 +1,114 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-07-03@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260703T100000
+DTEND;TZID=Europe/Copenhagen:20260703T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-07-10@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260710T100000
+DTEND;TZID=Europe/Copenhagen:20260710T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-07-17@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260717T100000
+DTEND;TZID=Europe/Copenhagen:20260717T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-07-24@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260724T100000
+DTEND;TZID=Europe/Copenhagen:20260724T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-08-07@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260807T100000
+DTEND;TZID=Europe/Copenhagen:20260807T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-08-14@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260814T100000
+DTEND;TZID=Europe/Copenhagen:20260814T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-08-21@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260821T100000
+DTEND;TZID=Europe/Copenhagen:20260821T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-08-28@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260828T100000
+DTEND;TZID=Europe/Copenhagen:20260828T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-09-04@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260904T100000
+DTEND;TZID=Europe/Copenhagen:20260904T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-09-11@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260911T100000
+DTEND;TZID=Europe/Copenhagen:20260911T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+BEGIN:VEVENT
+UID:lopper-paa-torvet-i-graasten-graasten-2026-09-18@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260918T100000
+DTEND;TZID=Europe/Copenhagen:20260918T160000
+SUMMARY:Lopper på Torvet i Gråsten
+LOCATION:Torvet\, Torvet\, Gråsten
+GEO:54.9216;9.59319
+URL:https://loppefund.dk/marked/lopper-paa-torvet-i-graasten-graasten
+END:VEVENT
+END:VCALENDAR

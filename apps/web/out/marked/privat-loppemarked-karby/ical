@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:privat-loppemarked-karby-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;VALUE=DATE:20260704
+SUMMARY:Privat loppemarked
+LOCATION:Overfor Karby kirke\, Næssundvej 451\, 7960 Karby
+GEO:56.75369647;8.5596584
+URL:https://loppefund.dk/marked/privat-loppemarked-karby
+END:VEVENT
+BEGIN:VEVENT
+UID:privat-loppemarked-karby-2026-07-05@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;VALUE=DATE:20260705
+SUMMARY:Privat loppemarked
+LOCATION:Overfor Karby kirke\, Næssundvej 451\, 7960 Karby
+GEO:56.75369647;8.5596584
+URL:https://loppefund.dk/marked/privat-loppemarked-karby
+END:VEVENT
+END:VCALENDAR

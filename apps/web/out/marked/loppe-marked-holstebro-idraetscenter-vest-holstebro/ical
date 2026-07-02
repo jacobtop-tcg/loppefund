@@ -1,0 +1,44 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppe-marked-holstebro-idraetscenter-vest-holstebro-2026-11-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261108T100000
+DTEND;TZID=Europe/Copenhagen:20261108T160000
+SUMMARY:Loppe marked Holstebro Idrætscenter Vest
+LOCATION:Idrætscenter Vest\, Mozartsvej 5\, Holstebro
+GEO:56.3894;8.57838
+URL:https://loppefund.dk/marked/loppe-marked-holstebro-idraetscenter-vest-holstebro
+END:VEVENT
+BEGIN:VEVENT
+UID:loppe-marked-holstebro-idraetscenter-vest-holstebro-2027-02-14@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20270214T100000
+DTEND;TZID=Europe/Copenhagen:20270214T160000
+SUMMARY:Loppe marked Holstebro Idrætscenter Vest
+LOCATION:Idrætscenter Vest\, Mozartsvej 5\, Holstebro
+GEO:56.3894;8.57838
+URL:https://loppefund.dk/marked/loppe-marked-holstebro-idraetscenter-vest-holstebro
+END:VEVENT
+BEGIN:VEVENT
+UID:loppe-marked-holstebro-idraetscenter-vest-holstebro-2027-04-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20270425T100000
+DTEND;TZID=Europe/Copenhagen:20270425T160000
+SUMMARY:Loppe marked Holstebro Idrætscenter Vest
+LOCATION:Idrætscenter Vest\, Mozartsvej 5\, Holstebro
+GEO:56.3894;8.57838
+URL:https://loppefund.dk/marked/loppe-marked-holstebro-idraetscenter-vest-holstebro
+END:VEVENT
+BEGIN:VEVENT
+UID:loppe-marked-holstebro-idraetscenter-vest-holstebro-2027-10-30@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20271030T100000
+DTEND;TZID=Europe/Copenhagen:20271030T160000
+SUMMARY:Loppe marked Holstebro Idrætscenter Vest
+LOCATION:Idrætscenter Vest\, Mozartsvej 5\, Holstebro
+GEO:56.3894;8.57838
+URL:https://loppefund.dk/marked/loppe-marked-holstebro-idraetscenter-vest-holstebro
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kaempe-loppemarked-i-lejboelle-tranekaer-2026-08-30@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260830T100000
+DTEND;TZID=Europe/Copenhagen:20260830T130000
+SUMMARY:Kæmpe loppemarked i Lejbølle
+LOCATION:Lejbøllegårdvej 22\, Lejbøllegårdvej 22\, Tranekær
+GEO:55.0282;10.8813
+URL:https://loppefund.dk/marked/kaempe-loppemarked-i-lejboelle-tranekaer
+END:VEVENT
+END:VCALENDAR

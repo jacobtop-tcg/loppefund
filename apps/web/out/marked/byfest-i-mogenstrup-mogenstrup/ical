@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:byfest-i-mogenstrup-mogenstrup-2026-08-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260815T100000
+DTEND;TZID=Europe/Copenhagen:20260815T160000
+SUMMARY:Byfest i Mogenstrup
+LOCATION:Mogenstrup Parkvej 10\, 4700 Mogenstrup
+GEO:55.17842992;11.87015896
+URL:https://loppefund.dk/marked/byfest-i-mogenstrup-mogenstrup
+END:VEVENT
+END:VCALENDAR

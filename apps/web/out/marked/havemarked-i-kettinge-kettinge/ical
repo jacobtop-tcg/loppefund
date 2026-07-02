@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:havemarked-i-kettinge-kettinge-2026-08-09@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260809T110000
+DTEND;TZID=Europe/Copenhagen:20260809T140000
+SUMMARY:Havemarked i Kettinge
+LOCATION:Kildevejens Frugt\, Kildevej 5\, Kettinge
+GEO:54.7149;11.7817
+URL:https://loppefund.dk/marked/havemarked-i-kettinge-kettinge
+END:VEVENT
+END:VCALENDAR

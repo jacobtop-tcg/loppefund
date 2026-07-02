@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-stiftelsen-gammel-kloster-koebenhavn-oe-2026-08-23@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260823T100000
+DTEND;TZID=Europe/Copenhagen:20260823T150000
+SUMMARY:Loppemarked i Stiftelsen Gammel Kloster
+LOCATION:Du finder loppemarkedet via Lersø Parkalle 28 eller via Klostervænget ved Aldersrogade. Du kan også komme ind via lågerne i Biskop Krags vænge. Følg skiltene.\, Lersø Parkalle 28 X\, 2100 København Ø
+GEO:55.706125;12.558873
+URL:https://loppefund.dk/marked/loppemarked-i-stiftelsen-gammel-kloster-koebenhavn-oe
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,84 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:jul-paa-ryegaard-kr-saaby-2026-11-28@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261128T100000
+DTEND;TZID=Europe/Copenhagen:20261128T160000
+SUMMARY:Jul på Ryegaard
+LOCATION:Munkholmvej 377\, 4060 Kr. Såby
+GEO:55.67381517;11.86470017
+URL:https://loppefund.dk/marked/jul-paa-ryegaard-kr-saaby
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-ryegaard-kr-saaby-2026-11-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261129T100000
+DTEND;TZID=Europe/Copenhagen:20261129T160000
+SUMMARY:Jul på Ryegaard
+LOCATION:Munkholmvej 377\, 4060 Kr. Såby
+GEO:55.67381517;11.86470017
+URL:https://loppefund.dk/marked/jul-paa-ryegaard-kr-saaby
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-ryegaard-kr-saaby-2026-12-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261205T100000
+DTEND;TZID=Europe/Copenhagen:20261205T160000
+SUMMARY:Jul på Ryegaard
+LOCATION:Munkholmvej 377\, 4060 Kr. Såby
+GEO:55.67381517;11.86470017
+URL:https://loppefund.dk/marked/jul-paa-ryegaard-kr-saaby
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-ryegaard-kr-saaby-2026-12-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261206T100000
+DTEND;TZID=Europe/Copenhagen:20261206T160000
+SUMMARY:Jul på Ryegaard
+LOCATION:Munkholmvej 377\, 4060 Kr. Såby
+GEO:55.67381517;11.86470017
+URL:https://loppefund.dk/marked/jul-paa-ryegaard-kr-saaby
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-ryegaard-kr-saaby-2026-12-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261212T100000
+DTEND;TZID=Europe/Copenhagen:20261212T160000
+SUMMARY:Jul på Ryegaard
+LOCATION:Munkholmvej 377\, 4060 Kr. Såby
+GEO:55.67381517;11.86470017
+URL:https://loppefund.dk/marked/jul-paa-ryegaard-kr-saaby
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-ryegaard-kr-saaby-2026-12-13@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261213T100000
+DTEND;TZID=Europe/Copenhagen:20261213T160000
+SUMMARY:Jul på Ryegaard
+LOCATION:Munkholmvej 377\, 4060 Kr. Såby
+GEO:55.67381517;11.86470017
+URL:https://loppefund.dk/marked/jul-paa-ryegaard-kr-saaby
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-ryegaard-kr-saaby-2026-12-19@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261219T100000
+DTEND;TZID=Europe/Copenhagen:20261219T160000
+SUMMARY:Jul på Ryegaard
+LOCATION:Munkholmvej 377\, 4060 Kr. Såby
+GEO:55.67381517;11.86470017
+URL:https://loppefund.dk/marked/jul-paa-ryegaard-kr-saaby
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-ryegaard-kr-saaby-2026-12-20@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261220T100000
+DTEND;TZID=Europe/Copenhagen:20261220T160000
+SUMMARY:Jul på Ryegaard
+LOCATION:Munkholmvej 377\, 4060 Kr. Såby
+GEO:55.67381517;11.86470017
+URL:https://loppefund.dk/marked/jul-paa-ryegaard-kr-saaby
+END:VEVENT
+END:VCALENDAR

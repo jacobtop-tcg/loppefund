@@ -1,0 +1,88 @@
+name: Refresh data & deploy
+
+# Free continuous-update engine: on a schedule (and on demand / on push to
+# main) crawl every source, rebuild the canonical layer, static-export the
+# consumer app and publish it to GitHub Pages. All on GitHub's free tier.
+on:
+  schedule:
+    - cron: '17 4,16 * * *' # twice daily, off the top of the hour
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two deploys at once; let a running one finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Persist the SQLite database across runs so the geocode cache and the
+      # immutable raw layer survive — each run is an incremental crawl, not a
+      # cold start. The rotating key + restore-keys fallback loads the newest.
+      - name: Restore database
+        uses: actions/cache/restore@v4
+        with:
+          path: data
+          key: loppefund-db-${{ github.run_id }}
+          restore-keys: |
+            loppefund-db-
+
+      - run: npm install --no-audit --no-fund
+
+      - name: Crawl sources & rebuild canonical layer
+        env:
+          LOPPEFUND_FB_FEED_URLS: ${{ secrets.LOPPEFUND_FB_FEED_URLS }}
+        run: |
+          node packages/pipeline/src/cli.ts run
+          node packages/pipeline/src/cli.ts tips || true
+          node packages/pipeline/src/cli.ts stats
+
+      - name: Save database
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: data
+          key: loppefund-db-${{ github.run_id }}
+
+      - name: Static export
+        env:
+          LOPPEFUND_STATIC: '1'
+          LOPPEFUND_BASE_URL: ${{ vars.LOPPEFUND_BASE_URL }}
+          LOPPEFUND_BASE_PATH: ${{ vars.LOPPEFUND_BASE_PATH }}
+          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.NEXT_PUBLIC_WEB3FORMS_KEY }}
+          NEXT_PUBLIC_TIP_EMAIL: ${{ vars.NEXT_PUBLIC_TIP_EMAIL }}
+        run: npm run build --workspace @loppefund/web
+
+      # Jekyll would eat the _next/ directory otherwise.
+      - run: touch apps/web/out/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

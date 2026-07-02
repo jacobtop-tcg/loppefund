@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:lions-loppemarked-den-9-maj-i-toelloese-2026-07-11@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260711T100000
+DTEND;TZID=Europe/Copenhagen:20260711T140000
+SUMMARY:LIONS LOPPEMARKED DEN 9 MAJ I TØLLØSE
+LOCATION:SuperBrugsen Tølløse
+URL:https://loppefund.dk/marked/lions-loppemarked-den-9-maj-i-toelloese
+END:VEVENT
+END:VCALENDAR

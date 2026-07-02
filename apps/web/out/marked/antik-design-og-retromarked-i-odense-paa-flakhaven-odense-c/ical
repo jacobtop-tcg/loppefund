@@ -1,0 +1,43 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:antik-design-og-retromarked-i-odense-paa-flakhaven-odense-c-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260704
+SUMMARY:Antik\, design og retromarked i Odense\, på Flakhaven
+LOCATION:Flakhaven\, Flakhaven 2\, Odense C
+GEO:55.396;10.3886
+URL:https://loppefund.dk/marked/antik-design-og-retromarked-i-odense-paa-flakhaven-odense-c
+END:VEVENT
+BEGIN:VEVENT
+UID:antik-design-og-retromarked-i-odense-paa-flakhaven-odense-c-2026-07-18@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260718T100000
+DTEND;TZID=Europe/Copenhagen:20260718T160000
+SUMMARY:Antik\, design og retromarked i Odense\, på Flakhaven
+LOCATION:Flakhaven\, Flakhaven 2\, Odense C
+GEO:55.396;10.3886
+URL:https://loppefund.dk/marked/antik-design-og-retromarked-i-odense-paa-flakhaven-odense-c
+END:VEVENT
+BEGIN:VEVENT
+UID:antik-design-og-retromarked-i-odense-paa-flakhaven-odense-c-2026-07-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260725T100000
+DTEND;TZID=Europe/Copenhagen:20260725T160000
+SUMMARY:Antik\, design og retromarked i Odense\, på Flakhaven
+LOCATION:Flakhaven\, Flakhaven 2\, Odense C
+GEO:55.396;10.3886
+URL:https://loppefund.dk/marked/antik-design-og-retromarked-i-odense-paa-flakhaven-odense-c
+END:VEVENT
+BEGIN:VEVENT
+UID:antik-design-og-retromarked-i-odense-paa-flakhaven-odense-c-2026-08-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260801T100000
+DTEND;TZID=Europe/Copenhagen:20260801T160000
+SUMMARY:Antik\, design og retromarked i Odense\, på Flakhaven
+LOCATION:Flakhaven\, Flakhaven 2\, Odense C
+GEO:55.396;10.3886
+URL:https://loppefund.dk/marked/antik-design-og-retromarked-i-odense-paa-flakhaven-odense-c
+END:VEVENT
+END:VCALENDAR

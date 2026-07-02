@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-paa-torvet-i-svendborg-kom-og-goer-et-kup-svendborg-2026-07-23@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260723T100000
+DTEND;TZID=Europe/Copenhagen:20260723T150000
+SUMMARY:Loppemarked på Torvet i Svendborg - kom og gør et kup!
+LOCATION:Torvet\, Torvet 12\, Svendborg
+GEO:55.06;10.6097
+URL:https://loppefund.dk/marked/loppemarked-paa-torvet-i-svendborg-kom-og-goer-et-kup-svendborg
+END:VEVENT
+END:VCALENDAR

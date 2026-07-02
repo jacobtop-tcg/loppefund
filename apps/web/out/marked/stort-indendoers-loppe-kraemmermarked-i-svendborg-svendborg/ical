@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:stort-indendoers-loppe-kraemmermarked-i-svendborg-svendborg-2026-10-31@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261031T100000
+DTEND;TZID=Europe/Copenhagen:20261031T150000
+SUMMARY:Stort indendørs loppe- kræmmermarked i Svendborg
+LOCATION:Arena Svendborg\, Ryttervej 70\, 5700 Svendborg
+GEO:55.0571;10.5766
+URL:https://loppefund.dk/marked/stort-indendoers-loppe-kraemmermarked-i-svendborg-svendborg
+END:VEVENT
+BEGIN:VEVENT
+UID:stort-indendoers-loppe-kraemmermarked-i-svendborg-svendborg-2026-11-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261101T100000
+DTEND;TZID=Europe/Copenhagen:20261101T150000
+SUMMARY:Stort indendørs loppe- kræmmermarked i Svendborg
+LOCATION:Arena Svendborg\, Ryttervej 70\, 5700 Svendborg
+GEO:55.0571;10.5766
+URL:https://loppefund.dk/marked/stort-indendoers-loppe-kraemmermarked-i-svendborg-svendborg
+END:VEVENT
+BEGIN:VEVENT
+UID:stort-indendoers-loppe-kraemmermarked-i-svendborg-svendborg-2027-02-28@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20270228T100000
+DTEND;TZID=Europe/Copenhagen:20270228T160000
+SUMMARY:Stort indendørs loppe- kræmmermarked i Svendborg
+LOCATION:Arena Svendborg\, Ryttervej 70\, 5700 Svendborg
+GEO:55.0571;10.5766
+URL:https://loppefund.dk/marked/stort-indendoers-loppe-kraemmermarked-i-svendborg-svendborg
+END:VEVENT
+END:VCALENDAR

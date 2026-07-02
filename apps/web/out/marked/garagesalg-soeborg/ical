@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:garagesalg-soeborg-2026-07-02@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260702T100000
+DTEND;TZID=Europe/Copenhagen:20260702T160000
+SUMMARY:Garagesalg
+LOCATION:Christopher Boecks Alle 107\, 2860 Søborg
+GEO:55.737054;12.497862
+URL:https://loppefund.dk/marked/garagesalg-soeborg
+END:VEVENT
+END:VCALENDAR

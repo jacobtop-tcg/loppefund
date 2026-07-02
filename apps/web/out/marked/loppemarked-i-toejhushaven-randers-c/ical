@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-toejhushaven-randers-c-2026-08-23@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260823T100000
+DTEND;TZID=Europe/Copenhagen:20260823T160000
+SUMMARY:Loppemarked i tøjhushaven
+LOCATION:Remisen\, J.V. Martins Plads 3\, Randers C
+GEO:56.4633;10.0505
+URL:https://loppefund.dk/marked/loppemarked-i-toejhushaven-randers-c
+END:VEVENT
+END:VCALENDAR

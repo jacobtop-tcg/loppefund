@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:vi-bytter-froe-og-planter-med-efterfoelgende-lotteri-og-havefremvisning-aakirkeb-2026-08-30@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260830T130000
+DTEND;TZID=Europe/Copenhagen:20260830T150000
+SUMMARY:Vi bytter frø og planter med efterfølgende lotteri og havefremvisning
+LOCATION:Klintevej 10\, Klintevej 10\, Aakirkeby
+GEO:55.0811;14.8417
+URL:https://loppefund.dk/marked/vi-bytter-froe-og-planter-med-efterfoelgende-lotteri-og-havefremvisning-aakirkeb
+END:VEVENT
+END:VCALENDAR

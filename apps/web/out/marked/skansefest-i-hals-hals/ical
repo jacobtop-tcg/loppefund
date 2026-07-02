@@ -1,0 +1,41 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:skansefest-i-hals-hals-2026-07-09@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260709T100000
+DTEND;TZID=Europe/Copenhagen:20260709T160000
+SUMMARY:Skansefest i Hals
+LOCATION:Skansen\, 9370 Hals\, Skansen\, 9370 Hals
+GEO:56.9935326;10.3093684
+URL:https://loppefund.dk/marked/skansefest-i-hals-hals
+END:VEVENT
+BEGIN:VEVENT
+UID:skansefest-i-hals-hals-2026-07-10@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260710
+SUMMARY:Skansefest i Hals
+LOCATION:Skansen\, 9370 Hals\, Skansen\, 9370 Hals
+GEO:56.9935326;10.3093684
+URL:https://loppefund.dk/marked/skansefest-i-hals-hals
+END:VEVENT
+BEGIN:VEVENT
+UID:skansefest-i-hals-hals-2026-07-11@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260711
+SUMMARY:Skansefest i Hals
+LOCATION:Skansen\, 9370 Hals\, Skansen\, 9370 Hals
+GEO:56.9935326;10.3093684
+URL:https://loppefund.dk/marked/skansefest-i-hals-hals
+END:VEVENT
+BEGIN:VEVENT
+UID:skansefest-i-hals-hals-2026-07-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260712
+SUMMARY:Skansefest i Hals
+LOCATION:Skansen\, 9370 Hals\, Skansen\, 9370 Hals
+GEO:56.9935326;10.3093684
+URL:https://loppefund.dk/marked/skansefest-i-hals-hals
+END:VEVENT
+END:VCALENDAR

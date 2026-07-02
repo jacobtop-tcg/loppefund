@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:smoerum-julemarked-2026-smoerumnedre-2026-11-28@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261128T100000
+DTEND;TZID=Europe/Copenhagen:20261128T160000
+SUMMARY:Smørum Julemarked 2026
+LOCATION:Flodvej 62\, Smørumnedre
+URL:https://loppefund.dk/marked/smoerum-julemarked-2026-smoerumnedre
+END:VEVENT
+BEGIN:VEVENT
+UID:smoerum-julemarked-2026-smoerumnedre-2026-11-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261129T100000
+DTEND;TZID=Europe/Copenhagen:20261129T160000
+SUMMARY:Smørum Julemarked 2026
+LOCATION:Flodvej 62\, Smørumnedre
+URL:https://loppefund.dk/marked/smoerum-julemarked-2026-smoerumnedre
+END:VEVENT
+END:VCALENDAR

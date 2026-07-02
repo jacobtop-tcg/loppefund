@@ -1,6 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { listUpcomingEvents } from '../lib/data.ts';
 
+export const dynamic = 'force-static';
+
 const BASE = process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk';
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-soenderroed-jyderup-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260704T090000
+DTEND;TZID=Europe/Copenhagen:20260704T170000
+SUMMARY:Loppemarked i Sønderrød
+LOCATION:Kongevej 2 Sønderød Aflyst ved regn\, Kongevej 2\, 4450 Jyderup
+GEO:55.57938725;11.37165104
+URL:https://loppefund.dk/marked/loppemarked-i-soenderroed-jyderup
+END:VEVENT
+BEGIN:VEVENT
+UID:loppemarked-i-soenderroed-jyderup-2026-07-05@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260705T090000
+DTEND;TZID=Europe/Copenhagen:20260705T170000
+SUMMARY:Loppemarked i Sønderrød
+LOCATION:Kongevej 2 Sønderød Aflyst ved regn\, Kongevej 2\, 4450 Jyderup
+GEO:55.57938725;11.37165104
+URL:https://loppefund.dk/marked/loppemarked-i-soenderroed-jyderup
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-foreningsdag-birkeroed-2026-08-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260815T090000
+DTEND;TZID=Europe/Copenhagen:20260815T133000
+SUMMARY:Loppemarked & Foreningsdag
+LOCATION:Birkerød Hovedgade\, Hovedgaden\, Birkerød
+GEO:55.8437;12.4343
+URL:https://loppefund.dk/marked/loppemarked-foreningsdag-birkeroed
+END:VEVENT
+END:VCALENDAR

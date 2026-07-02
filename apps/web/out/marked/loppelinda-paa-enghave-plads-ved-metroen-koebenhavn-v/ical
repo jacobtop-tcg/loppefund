@@ -1,0 +1,44 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppelinda-paa-enghave-plads-ved-metroen-koebenhavn-v-2026-07-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260712T100000
+DTEND;TZID=Europe/Copenhagen:20260712T150000
+SUMMARY:LOPPELINDA på ENGHAVE PLADS ved METROEN
+LOCATION:LoppeLinda forvandler Enghave Plads til et LoppeMekka - midt i hjertet af Vesterbro! Her hvor metroen åbner direkte op til pladsen\, caféerne summer og kvarteret mødes. Du finder os på selve pladsen omgivet af byliv\, kaffe og loppe-addicts! METRO: Enghave Plads St. (Cityringen) - udgang direkte til markedet. BUS: Linje 7A & 1A stopper få minutters gang fra pladsen.\, ENGHAVE PLADS\, 1670 København V
+GEO:55.6672;12.5447
+URL:https://loppefund.dk/marked/loppelinda-paa-enghave-plads-ved-metroen-koebenhavn-v
+END:VEVENT
+BEGIN:VEVENT
+UID:loppelinda-paa-enghave-plads-ved-metroen-koebenhavn-v-2026-08-16@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260816T100000
+DTEND;TZID=Europe/Copenhagen:20260816T150000
+SUMMARY:LOPPELINDA på ENGHAVE PLADS ved METROEN
+LOCATION:LoppeLinda forvandler Enghave Plads til et LoppeMekka - midt i hjertet af Vesterbro! Her hvor metroen åbner direkte op til pladsen\, caféerne summer og kvarteret mødes. Du finder os på selve pladsen omgivet af byliv\, kaffe og loppe-addicts! METRO: Enghave Plads St. (Cityringen) - udgang direkte til markedet. BUS: Linje 7A & 1A stopper få minutters gang fra pladsen.\, ENGHAVE PLADS\, 1670 København V
+GEO:55.6672;12.5447
+URL:https://loppefund.dk/marked/loppelinda-paa-enghave-plads-ved-metroen-koebenhavn-v
+END:VEVENT
+BEGIN:VEVENT
+UID:loppelinda-paa-enghave-plads-ved-metroen-koebenhavn-v-2026-09-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260912T100000
+DTEND;TZID=Europe/Copenhagen:20260912T150000
+SUMMARY:LOPPELINDA på ENGHAVE PLADS ved METROEN
+LOCATION:LoppeLinda forvandler Enghave Plads til et LoppeMekka - midt i hjertet af Vesterbro! Her hvor metroen åbner direkte op til pladsen\, caféerne summer og kvarteret mødes. Du finder os på selve pladsen omgivet af byliv\, kaffe og loppe-addicts! METRO: Enghave Plads St. (Cityringen) - udgang direkte til markedet. BUS: Linje 7A & 1A stopper få minutters gang fra pladsen.\, ENGHAVE PLADS\, 1670 København V
+GEO:55.6672;12.5447
+URL:https://loppefund.dk/marked/loppelinda-paa-enghave-plads-ved-metroen-koebenhavn-v
+END:VEVENT
+BEGIN:VEVENT
+UID:loppelinda-paa-enghave-plads-ved-metroen-koebenhavn-v-2026-10-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261004T100000
+DTEND;TZID=Europe/Copenhagen:20261004T150000
+SUMMARY:LOPPELINDA på ENGHAVE PLADS ved METROEN
+LOCATION:LoppeLinda forvandler Enghave Plads til et LoppeMekka - midt i hjertet af Vesterbro! Her hvor metroen åbner direkte op til pladsen\, caféerne summer og kvarteret mødes. Du finder os på selve pladsen omgivet af byliv\, kaffe og loppe-addicts! METRO: Enghave Plads St. (Cityringen) - udgang direkte til markedet. BUS: Linje 7A & 1A stopper få minutters gang fra pladsen.\, ENGHAVE PLADS\, 1670 København V
+GEO:55.6672;12.5447
+URL:https://loppefund.dk/marked/loppelinda-paa-enghave-plads-ved-metroen-koebenhavn-v
+END:VEVENT
+END:VCALENDAR

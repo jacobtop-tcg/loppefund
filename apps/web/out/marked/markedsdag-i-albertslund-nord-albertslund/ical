@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:markedsdag-i-albertslund-nord-albertslund-2026-08-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260822T110000
+DTEND;TZID=Europe/Copenhagen:20260822T160000
+SUMMARY:Markedsdag i Albertslund Nord
+LOCATION:Foregår på det grønne område mellem Bækgården/Fosgården og Damgården/Kildegården/Kærgården.\, Bækgården 17\, 2620 Albertslund
+GEO:55.665153;12.351954
+URL:https://loppefund.dk/marked/markedsdag-i-albertslund-nord-albertslund
+END:VEVENT
+END:VCALENDAR

@@ -2,8 +2,8 @@ import { copenhagenNow } from '@loppefund/core';
 import { listUpcomingEvents, todayIso } from '../lib/data.ts';
 import { Explorer } from '../components/Explorer.tsx';
 
-export const dynamic = 'force-dynamic';
-
+// Statically generated at build; a scheduled rebuild refreshes the data.
+// `next dev` always re-renders, so local development still sees live data.
 export default function HomePage() {
   const events = listUpcomingEvents();
   const today = todayIso();

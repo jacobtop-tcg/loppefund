@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:toejbyttemarked-fjordformidling-aabent-skib-i-holbaek-holbaek-2026-07-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260708T110000
+DTEND;TZID=Europe/Copenhagen:20260708T150000
+SUMMARY:Tøjbyttemarked\, fjordformidling & åbent skib i holbæk
+LOCATION:Holbæk Havn\, Krags Brygge\, Holbæk
+GEO:55.72;11.7214
+URL:https://loppefund.dk/marked/toejbyttemarked-fjordformidling-aabent-skib-i-holbaek-holbaek
+END:VEVENT
+END:VCALENDAR

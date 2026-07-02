@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:tureby-loppemarked-2026-2026-08-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260815T100000
+DTEND;TZID=Europe/Copenhagen:20260815T150000
+SUMMARY:Tureby Loppemarked 2026
+LOCATION:Tureby
+URL:https://loppefund.dk/marked/tureby-loppemarked-2026
+END:VEVENT
+END:VCALENDAR

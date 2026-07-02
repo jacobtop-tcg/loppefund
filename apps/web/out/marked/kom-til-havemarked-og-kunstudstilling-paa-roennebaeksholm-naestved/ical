@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kom-til-havemarked-og-kunstudstilling-paa-roennebaeksholm-naestved-2026-08-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260822T100000
+DTEND;TZID=Europe/Copenhagen:20260822T140000
+SUMMARY:Kom til havemarked og kunstudstilling på Rønnebæksholm
+LOCATION:Rønnebæksholm Gods\, Rønnebæksholm 1\, Næstved
+GEO:55.2201;11.7944
+URL:https://loppefund.dk/marked/kom-til-havemarked-og-kunstudstilling-paa-roennebaeksholm-naestved
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:amagerloppernes-loppemarked-koebenhavn-s-2026-08-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260808T100000
+DTEND;TZID=Europe/Copenhagen:20260808T150000
+SUMMARY:Amagerloppernes loppemarked
+LOCATION:Sundbyvester Plads\, Sundbyvester Plads 6\, København S
+GEO:55.6468;12.6124
+URL:https://loppefund.dk/marked/amagerloppernes-loppemarked-koebenhavn-s
+END:VEVENT
+BEGIN:VEVENT
+UID:amagerloppernes-loppemarked-koebenhavn-s-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260829T100000
+DTEND;TZID=Europe/Copenhagen:20260829T150000
+SUMMARY:Amagerloppernes loppemarked
+LOCATION:Sundbyvester Plads\, Sundbyvester Plads 6\, København S
+GEO:55.6468;12.6124
+URL:https://loppefund.dk/marked/amagerloppernes-loppemarked-koebenhavn-s
+END:VEVENT
+BEGIN:VEVENT
+UID:amagerloppernes-loppemarked-koebenhavn-s-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T100000
+DTEND;TZID=Europe/Copenhagen:20260905T150000
+SUMMARY:Amagerloppernes loppemarked
+LOCATION:Sundbyvester Plads\, Sundbyvester Plads 6\, København S
+GEO:55.6468;12.6124
+URL:https://loppefund.dk/marked/amagerloppernes-loppemarked-koebenhavn-s
+END:VEVENT
+END:VCALENDAR

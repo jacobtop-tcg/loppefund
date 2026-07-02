@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:bagagerumsmarked-ebeltoft-kun-for-private-23-saeson-rask-event-v-ole-s-rask-ebel-2026-07-19@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260719T100000
+DTEND;TZID=Europe/Copenhagen:20260719T150000
+SUMMARY:Bagagerumsmarked Ebeltoft (kun for private) 23. sæson. Rask Event v/ Ole S. Rask
+LOCATION:Ved Rådhuset\; Lundbergsvej 2\, 8400 Ebeltoft\, Lundbergsvej 2\, 8400 Ebeltoft
+GEO:56.179;10.675
+URL:https://loppefund.dk/marked/bagagerumsmarked-ebeltoft-kun-for-private-23-saeson-rask-event-v-ole-s-rask-ebel
+END:VEVENT
+BEGIN:VEVENT
+UID:bagagerumsmarked-ebeltoft-kun-for-private-23-saeson-rask-event-v-ole-s-rask-ebel-2026-08-16@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260816T100000
+DTEND;TZID=Europe/Copenhagen:20260816T150000
+SUMMARY:Bagagerumsmarked Ebeltoft (kun for private) 23. sæson. Rask Event v/ Ole S. Rask
+LOCATION:Ved Rådhuset\; Lundbergsvej 2\, 8400 Ebeltoft\, Lundbergsvej 2\, 8400 Ebeltoft
+GEO:56.179;10.675
+URL:https://loppefund.dk/marked/bagagerumsmarked-ebeltoft-kun-for-private-23-saeson-rask-event-v-ole-s-rask-ebel
+END:VEVENT
+END:VCALENDAR

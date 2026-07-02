@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:byttemarked-genbrug-med-omtanke-vordingborg-2026-09-19@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260919T100000
+DTEND;TZID=Europe/Copenhagen:20260919T130000
+SUMMARY:Byttemarked -genbrug med omtanke
+LOCATION:Vordingborg Bibliotekerne\, Sydhavnsvej 6\, Vordingborg
+GEO:54.9974;11.8917
+URL:https://loppefund.dk/marked/byttemarked-genbrug-med-omtanke-vordingborg
+END:VEVENT
+END:VCALENDAR

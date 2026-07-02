@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kraemmermarked-i-kerteminde-kerteminde-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260704
+SUMMARY:Kræmmermarked i Kerteminde
+LOCATION:Kerteminde Cityforening\, Langegade\, Kerteminde
+GEO:55.4481;10.6577
+URL:https://loppefund.dk/marked/kraemmermarked-i-kerteminde-kerteminde
+END:VEVENT
+END:VCALENDAR

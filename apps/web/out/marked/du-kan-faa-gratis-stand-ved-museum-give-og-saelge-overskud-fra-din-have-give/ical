@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:du-kan-faa-gratis-stand-ved-museum-give-og-saelge-overskud-fra-din-have-give-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T100000
+DTEND;TZID=Europe/Copenhagen:20260905T160000
+SUMMARY:Du kan få gratis stand ved Museum Give og sælge overskud fra din have
+LOCATION:Museum Give\, Donneruplundvej 2\, Give
+GEO:55.8478;9.25129
+URL:https://loppefund.dk/marked/du-kan-faa-gratis-stand-ved-museum-give-og-saelge-overskud-fra-din-have-give
+END:VEVENT
+END:VCALENDAR

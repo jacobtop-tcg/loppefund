@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:hoestmarked-i-ribe-ribe-2026-10-03@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261003T090000
+DTEND;TZID=Europe/Copenhagen:20261003T160000
+SUMMARY:Høstmarked i Ribe
+LOCATION:Overdammen\, Overdammen\, Ribe
+GEO:55.3288;8.76302
+URL:https://loppefund.dk/marked/hoestmarked-i-ribe-ribe
+END:VEVENT
+END:VCALENDAR

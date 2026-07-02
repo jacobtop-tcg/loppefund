@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-loejtevaenge-2026-kastrup-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260829T100000
+DTEND;TZID=Europe/Copenhagen:20260829T160000
+SUMMARY:Loppemarked løjtevænge 2026 ☀️
+LOCATION:Børkop alle\, Kastrup
+URL:https://loppefund.dk/marked/loppemarked-loejtevaenge-2026-kastrup
+END:VEVENT
+END:VCALENDAR

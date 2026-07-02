@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:markedsdag-paa-hovgaardsvej-hos-moen-is-stege-2026-07-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260705T110000
+DTEND;TZID=Europe/Copenhagen:20260705T170000
+SUMMARY:Markedsdag på Hovgårdsvej hos MØN IS :)
+LOCATION:Hovgårdsvej 4\, 4780 Stege
+GEO:54.96886975;12.36838947
+URL:https://loppefund.dk/marked/markedsdag-paa-hovgaardsvej-hos-moen-is-stege
+END:VEVENT
+END:VCALENDAR

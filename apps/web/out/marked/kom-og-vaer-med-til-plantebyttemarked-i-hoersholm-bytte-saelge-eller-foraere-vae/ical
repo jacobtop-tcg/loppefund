@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kom-og-vaer-med-til-plantebyttemarked-i-hoersholm-bytte-saelge-eller-foraere-vae-2026-09-13@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260913T100000
+DTEND;TZID=Europe/Copenhagen:20260913T130000
+SUMMARY:Kom og vær med til plantebyttemarked i Hørsholm - bytte\, sælge eller forære væk
+LOCATION:Arboretet i Hørsholm\, Kirkegårdsvej 3A\, Hørsholm
+GEO:55.8698;12.5037
+URL:https://loppefund.dk/marked/kom-og-vaer-med-til-plantebyttemarked-i-hoersholm-bytte-saelge-eller-foraere-vae
+END:VEVENT
+END:VCALENDAR

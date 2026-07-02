@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-saeby-ved-gadekaeret-2026-kirke-hyllinge-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260906T110000
+DTEND;TZID=Europe/Copenhagen:20260906T150000
+SUMMARY:Loppemarked i Sæby ved gadekæret\, 2026
+LOCATION:Rundt om gadekæret og i haven foran Sæby Gamle Skole. Parkering ved kirken eller på parkeringsområder anvist ved skiltning.\, Tingstedet 6\, 4070 Kirke Hyllinge
+GEO:55.7053;11.9444
+URL:https://loppefund.dk/marked/loppemarked-i-saeby-ved-gadekaeret-2026-kirke-hyllinge
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarkede-til-familiefesten-2026-padborg-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260829
+SUMMARY:Loppemarkede til Familiefesten 2026
+LOCATION:Padborg Torvecenter\, Torvegade 23\, Padborg
+GEO:54.8255;9.35987
+URL:https://loppefund.dk/marked/loppemarkede-til-familiefesten-2026-padborg
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:hf-rugholm-viby-j-viby-j-2026-07-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260725T110000
+DTEND;TZID=Europe/Copenhagen:20260725T150000
+SUMMARY:Hf. Rugholm\, Viby J.
+LOCATION:Ved fælleshuset\, Nr. 265\, Haveforeningen Rugholm 265\, 8260 Viby J
+GEO:56.13752332;10.14395102
+URL:https://loppefund.dk/marked/hf-rugholm-viby-j-viby-j
+END:VEVENT
+END:VCALENDAR

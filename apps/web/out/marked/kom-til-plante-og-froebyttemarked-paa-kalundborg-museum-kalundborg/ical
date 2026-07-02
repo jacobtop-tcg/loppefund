@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kom-til-plante-og-froebyttemarked-paa-kalundborg-museum-kalundborg-2026-09-19@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260919T110000
+DTEND;TZID=Europe/Copenhagen:20260919T130000
+SUMMARY:Kom til plante- og frøbyttemarked på Kalundborg Museum
+LOCATION:Kalundborg Museum - en del af Museum Vestsjælland\, Adelgade 23\, Kalundborg
+GEO:55.6808;11.0791
+URL:https://loppefund.dk/marked/kom-til-plante-og-froebyttemarked-paa-kalundborg-museum-kalundborg
+END:VEVENT
+END:VCALENDAR

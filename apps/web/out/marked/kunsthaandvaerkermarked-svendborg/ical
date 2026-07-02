@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kunsthaandvaerkermarked-svendborg-2026-07-19@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260719
+SUMMARY:Kunsthåndværkermarked
+LOCATION:Rundbuehallen\, Frederiksø 16E\, Svendborg
+GEO:55.0586;10.6169
+URL:https://loppefund.dk/marked/kunsthaandvaerkermarked-svendborg
+END:VEVENT
+END:VCALENDAR

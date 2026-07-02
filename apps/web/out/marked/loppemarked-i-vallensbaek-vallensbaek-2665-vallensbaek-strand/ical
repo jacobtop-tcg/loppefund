@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-vallensbaek-vallensbaek-2665-vallensbaek-strand-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T100000
+DTEND;TZID=Europe/Copenhagen:20260905T150000
+SUMMARY:Loppemarked i Vallensbæk
+LOCATION:Vallensbæk Idræts center hal 1 og 2\, Til info er der gode forhold for handicappede da der er god plads til at komme rundt og ingen trapper så det er derfor meget handicapvenligt.\, Idræts Alle 2\, 2665 Vallensbæk\, 2665 Vallensbæk Strand
+GEO:55.61964832;12.38841202
+URL:https://loppefund.dk/marked/loppemarked-i-vallensbaek-vallensbaek-2665-vallensbaek-strand
+END:VEVENT
+END:VCALENDAR

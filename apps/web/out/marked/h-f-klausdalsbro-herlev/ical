@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:h-f-klausdalsbro-herlev-2026-07-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260705
+SUMMARY:H/F Klausdalsbro
+LOCATION:Haveforeningen Klausdalsbro\, vores festplads ca. 50 meter fra indgangen. Bus 164 går lige dertil.\, Klausdalsbrovej 309\, 2730 Herlev
+GEO:55.7449169;12.444555
+URL:https://loppefund.dk/marked/h-f-klausdalsbro-herlev
+END:VEVENT
+END:VCALENDAR

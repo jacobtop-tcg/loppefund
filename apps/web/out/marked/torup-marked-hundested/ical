@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:torup-marked-hundested-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T150000
+SUMMARY:Torup Marked
+LOCATION:Stationsvej 1\, Torup\, 3390 Hundested\, 3390 Hundested
+GEO:55.985208;11.942362
+URL:https://loppefund.dk/marked/torup-marked-hundested
+END:VEVENT
+END:VCALENDAR

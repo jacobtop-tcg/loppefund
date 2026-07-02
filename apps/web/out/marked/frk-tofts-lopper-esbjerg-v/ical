@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:frk-tofts-lopper-esbjerg-v-2026-07-02@loppefund.dk
+DTSTAMP:20260702T162537Z
+DTSTART;TZID=Europe/Copenhagen:20260702T100000
+DTEND;TZID=Europe/Copenhagen:20260702T160000
+SUMMARY:Frk. Tofts lopper
+LOCATION:Stenhuggervej 3 \, 6710 Esbjerg V
+GEO:55.509893;8.407214
+URL:https://loppefund.dk/marked/frk-tofts-lopper-esbjerg-v
+END:VEVENT
+END:VCALENDAR

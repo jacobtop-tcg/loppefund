@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import type { EventSummary } from '../lib/data.ts';
+import { useFavorites } from '../lib/favorites.ts';
 import {
   CATEGORY_LABELS,
   dayOfMonth,
@@ -29,6 +32,8 @@ export function EventCard({
   selected?: boolean;
   onToggleTrip?: (slug: string) => void;
 }) {
+  const { isFavorite, toggle } = useFavorites();
+  const saved = isFavorite(event.slug);
   const next = event.occurrences.find((o) => o.date === event.nextDate)!;
   const hours = formatHours(next.startTime, next.endTime);
   const isToday = event.nextDate === today;
@@ -50,6 +55,24 @@ export function EventCard({
             <path d="m4 12 5 5 11-11" />
           </svg>
         </span>
+      )}
+      {!tripMode && (
+        <button
+          type="button"
+          className={`fav-btn${saved ? ' saved' : ''}`}
+          aria-pressed={saved}
+          aria-label={saved ? 'Fjern fra gemte' : 'Gem marked'}
+          title={saved ? 'Fjern fra gemte' : 'Gem marked'}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle(event.slug);
+          }}
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill={saved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2">
+            <path d="M12 21s-7-4.35-9.5-8.5C.5 9 2.5 5.5 6 5.5c2 0 3.2 1.2 4 2.3.8-1.1 2-2.3 4-2.3 3.5 0 5.5 3.5 3.5 7-2.5 4.15-9.5 8.5-9.5 8.5z" />
+          </svg>
+        </button>
       )}
       <CardBody />
     </article>

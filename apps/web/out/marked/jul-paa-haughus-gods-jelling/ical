@@ -1,0 +1,64 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:jul-paa-haughus-gods-jelling-2026-11-14@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261114T100000
+DTEND;TZID=Europe/Copenhagen:20261114T160000
+SUMMARY:Jul på Haughus Gods
+LOCATION:Lige før rundkørelsen når du kommer til Jelling fra Vejle.\, Vejlevej 50\, 7300 Jelling
+GEO:55.753214;9.443931
+URL:https://loppefund.dk/marked/jul-paa-haughus-gods-jelling
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-haughus-gods-jelling-2026-11-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261115T100000
+DTEND;TZID=Europe/Copenhagen:20261115T160000
+SUMMARY:Jul på Haughus Gods
+LOCATION:Lige før rundkørelsen når du kommer til Jelling fra Vejle.\, Vejlevej 50\, 7300 Jelling
+GEO:55.753214;9.443931
+URL:https://loppefund.dk/marked/jul-paa-haughus-gods-jelling
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-haughus-gods-jelling-2026-11-21@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261121T100000
+DTEND;TZID=Europe/Copenhagen:20261121T160000
+SUMMARY:Jul på Haughus Gods
+LOCATION:Lige før rundkørelsen når du kommer til Jelling fra Vejle.\, Vejlevej 50\, 7300 Jelling
+GEO:55.753214;9.443931
+URL:https://loppefund.dk/marked/jul-paa-haughus-gods-jelling
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-haughus-gods-jelling-2026-11-22@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261122T100000
+DTEND;TZID=Europe/Copenhagen:20261122T160000
+SUMMARY:Jul på Haughus Gods
+LOCATION:Lige før rundkørelsen når du kommer til Jelling fra Vejle.\, Vejlevej 50\, 7300 Jelling
+GEO:55.753214;9.443931
+URL:https://loppefund.dk/marked/jul-paa-haughus-gods-jelling
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-haughus-gods-jelling-2026-11-28@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261128T100000
+DTEND;TZID=Europe/Copenhagen:20261128T160000
+SUMMARY:Jul på Haughus Gods
+LOCATION:Lige før rundkørelsen når du kommer til Jelling fra Vejle.\, Vejlevej 50\, 7300 Jelling
+GEO:55.753214;9.443931
+URL:https://loppefund.dk/marked/jul-paa-haughus-gods-jelling
+END:VEVENT
+BEGIN:VEVENT
+UID:jul-paa-haughus-gods-jelling-2026-11-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261129T100000
+DTEND;TZID=Europe/Copenhagen:20261129T160000
+SUMMARY:Jul på Haughus Gods
+LOCATION:Lige før rundkørelsen når du kommer til Jelling fra Vejle.\, Vejlevej 50\, 7300 Jelling
+GEO:55.753214;9.443931
+URL:https://loppefund.dk/marked/jul-paa-haughus-gods-jelling
+END:VEVENT
+END:VCALENDAR

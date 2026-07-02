@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:haasum-marked-spoettrup-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T090000
+DTEND;TZID=Europe/Copenhagen:20260905T180000
+SUMMARY:Håsum Marked
+LOCATION:Håsum - gl. sportsplads GRATIS PARKERING 👍\, Landevejen 33A\, 7860 Spøttrup
+GEO:56.574469;8.85765
+URL:https://loppefund.dk/marked/haasum-marked-spoettrup
+END:VEVENT
+BEGIN:VEVENT
+UID:haasum-marked-spoettrup-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260906T090000
+DTEND;TZID=Europe/Copenhagen:20260906T160000
+SUMMARY:Håsum Marked
+LOCATION:Håsum - gl. sportsplads GRATIS PARKERING 👍\, Landevejen 33A\, 7860 Spøttrup
+GEO:56.574469;8.85765
+URL:https://loppefund.dk/marked/haasum-marked-spoettrup
+END:VEVENT
+END:VCALENDAR

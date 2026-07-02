@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kroens-store-udendoers-loppemarked-klemensker-2026-07-15@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260715T110000
+DTEND;TZID=Europe/Copenhagen:20260715T143000
+SUMMARY:Kroens store udendørs loppemarked
+LOCATION:Klemens Storegade 12\, 3782 Klemensker
+GEO:55.17455721;14.8019137
+URL:https://loppefund.dk/marked/kroens-store-udendoers-loppemarked-klemensker
+END:VEVENT
+END:VCALENDAR

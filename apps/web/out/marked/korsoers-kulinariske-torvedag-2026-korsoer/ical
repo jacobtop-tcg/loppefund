@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:korsoers-kulinariske-torvedag-2026-korsoer-2026-08-29@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;VALUE=DATE:20260829
+SUMMARY:Korsørs Kulinariske Torvedag - 2026
+LOCATION:Torvet i Korsør\, Torvet 1\, Korsør
+GEO:55.3295;11.1369
+URL:https://loppefund.dk/marked/korsoers-kulinariske-torvedag-2026-korsoer
+END:VEVENT
+END:VCALENDAR

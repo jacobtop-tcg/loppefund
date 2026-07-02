@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:havemarked-country-fayre-efter-engelsk-forbillede-med-diverse-stande-med-haverel-2026-08-08@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260808T090000
+DTEND;TZID=Europe/Copenhagen:20260808T140000
+SUMMARY:Havemarked ' Country Fayre' efter engelsk forbillede med diverse stande med haverelaterede varer
+LOCATION:Birkerød Gl. Præstegård\, Stationsvej 32\, Birkerød
+GEO:55.8399;12.4292
+URL:https://loppefund.dk/marked/havemarked-country-fayre-efter-engelsk-forbillede-med-diverse-stande-med-haverel
+END:VEVENT
+END:VCALENDAR

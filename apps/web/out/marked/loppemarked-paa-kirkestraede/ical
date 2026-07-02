@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-paa-kirkestraede-2026-08-23@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260823T090000
+DTEND;TZID=Europe/Copenhagen:20260823T150000
+SUMMARY:Loppemarked på Kirkestræde
+LOCATION:Kirkestræde
+URL:https://loppefund.dk/marked/loppemarked-paa-kirkestraede
+END:VEVENT
+END:VCALENDAR

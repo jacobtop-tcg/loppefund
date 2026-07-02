@@ -1,0 +1,84 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:broens-lopper-koebenhavn-k-2026-07-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260705T120000
+DTEND;TZID=Europe/Copenhagen:20260705T170000
+SUMMARY:Broens Lopper
+LOCATION:Broens Street Food\, på kajen\, Strandgade 95\, 1401 København K
+GEO:55.677858;12.596816
+URL:https://loppefund.dk/marked/broens-lopper-koebenhavn-k
+END:VEVENT
+BEGIN:VEVENT
+UID:broens-lopper-koebenhavn-k-2026-07-19@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260719T120000
+DTEND;TZID=Europe/Copenhagen:20260719T170000
+SUMMARY:Broens Lopper
+LOCATION:Broens Street Food\, på kajen\, Strandgade 95\, 1401 København K
+GEO:55.677858;12.596816
+URL:https://loppefund.dk/marked/broens-lopper-koebenhavn-k
+END:VEVENT
+BEGIN:VEVENT
+UID:broens-lopper-koebenhavn-k-2026-08-02@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260802T120000
+DTEND;TZID=Europe/Copenhagen:20260802T170000
+SUMMARY:Broens Lopper
+LOCATION:Broens Street Food\, på kajen\, Strandgade 95\, 1401 København K
+GEO:55.677858;12.596816
+URL:https://loppefund.dk/marked/broens-lopper-koebenhavn-k
+END:VEVENT
+BEGIN:VEVENT
+UID:broens-lopper-koebenhavn-k-2026-08-16@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260816T120000
+DTEND;TZID=Europe/Copenhagen:20260816T170000
+SUMMARY:Broens Lopper
+LOCATION:Broens Street Food\, på kajen\, Strandgade 95\, 1401 København K
+GEO:55.677858;12.596816
+URL:https://loppefund.dk/marked/broens-lopper-koebenhavn-k
+END:VEVENT
+BEGIN:VEVENT
+UID:broens-lopper-koebenhavn-k-2026-08-30@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260830T120000
+DTEND;TZID=Europe/Copenhagen:20260830T170000
+SUMMARY:Broens Lopper
+LOCATION:Broens Street Food\, på kajen\, Strandgade 95\, 1401 København K
+GEO:55.677858;12.596816
+URL:https://loppefund.dk/marked/broens-lopper-koebenhavn-k
+END:VEVENT
+BEGIN:VEVENT
+UID:broens-lopper-koebenhavn-k-2026-09-13@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260913T120000
+DTEND;TZID=Europe/Copenhagen:20260913T170000
+SUMMARY:Broens Lopper
+LOCATION:Broens Street Food\, på kajen\, Strandgade 95\, 1401 København K
+GEO:55.677858;12.596816
+URL:https://loppefund.dk/marked/broens-lopper-koebenhavn-k
+END:VEVENT
+BEGIN:VEVENT
+UID:broens-lopper-koebenhavn-k-2026-09-27@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260927T120000
+DTEND;TZID=Europe/Copenhagen:20260927T170000
+SUMMARY:Broens Lopper
+LOCATION:Broens Street Food\, på kajen\, Strandgade 95\, 1401 København K
+GEO:55.677858;12.596816
+URL:https://loppefund.dk/marked/broens-lopper-koebenhavn-k
+END:VEVENT
+BEGIN:VEVENT
+UID:broens-lopper-koebenhavn-k-2026-10-11@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261011T120000
+DTEND;TZID=Europe/Copenhagen:20261011T170000
+SUMMARY:Broens Lopper
+LOCATION:Broens Street Food\, på kajen\, Strandgade 95\, 1401 København K
+GEO:55.677858;12.596816
+URL:https://loppefund.dk/marked/broens-lopper-koebenhavn-k
+END:VEVENT
+END:VCALENDAR

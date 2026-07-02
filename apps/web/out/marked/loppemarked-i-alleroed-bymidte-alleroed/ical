@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-alleroed-bymidte-alleroed-2026-09-19@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260919T100000
+DTEND;TZID=Europe/Copenhagen:20260919T140000
+SUMMARY:Loppemarked i Allerød Bymidte
+LOCATION:Øen i Allerød Bymidte\, M. D. Madsensvej 2\, Allerød
+GEO:55.8712;12.3552
+URL:https://loppefund.dk/marked/loppemarked-i-alleroed-bymidte-alleroed
+END:VEVENT
+END:VCALENDAR

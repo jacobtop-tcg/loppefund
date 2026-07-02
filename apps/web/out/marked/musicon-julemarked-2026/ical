@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:musicon-julemarked-2026-2026-12-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261212T100000
+DTEND;TZID=Europe/Copenhagen:20261212T170000
+SUMMARY:Musicon Julemarked 2026
+LOCATION:4000 Roskilde\, 4000
+URL:https://loppefund.dk/marked/musicon-julemarked-2026
+END:VEVENT
+BEGIN:VEVENT
+UID:musicon-julemarked-2026-2026-12-13@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20261213T100000
+DTEND;TZID=Europe/Copenhagen:20261213T170000
+SUMMARY:Musicon Julemarked 2026
+LOCATION:4000 Roskilde\, 4000
+URL:https://loppefund.dk/marked/musicon-julemarked-2026
+END:VEVENT
+END:VCALENDAR

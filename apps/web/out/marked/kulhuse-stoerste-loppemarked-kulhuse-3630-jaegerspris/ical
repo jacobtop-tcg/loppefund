@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kulhuse-stoerste-loppemarked-kulhuse-3630-jaegerspris-2026-07-11@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260711T100000
+DTEND;TZID=Europe/Copenhagen:20260711T150000
+SUMMARY:Kulhuse største Loppemarked
+LOCATION:På Cirkuspladsen / fodboldbanen tæt på Kulhuse havn\, Lanternevej 1\, 3630 Kulhuse\, 3630 Jægerspris
+GEO:55.931024;11.909335
+URL:https://loppefund.dk/marked/kulhuse-stoerste-loppemarked-kulhuse-3630-jaegerspris
+END:VEVENT
+END:VCALENDAR

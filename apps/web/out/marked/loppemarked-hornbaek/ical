@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-hornbaek-2026-07-12@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260712T120000
+DTEND;TZID=Europe/Copenhagen:20260712T160000
+SUMMARY:Loppemarked
+LOCATION:Hotel Villa Strand\, Kystvej 12\, Hornbæk
+GEO:56.0917;12.45
+URL:https://loppefund.dk/marked/loppemarked-hornbaek
+END:VEVENT
+END:VCALENDAR

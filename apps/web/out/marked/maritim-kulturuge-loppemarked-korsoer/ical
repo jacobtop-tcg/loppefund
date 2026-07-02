@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:maritim-kulturuge-loppemarked-korsoer-2026-08-21@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260821T100000
+DTEND;TZID=Europe/Copenhagen:20260821T160000
+SUMMARY:Maritim Kulturuge - Loppemarked
+LOCATION:Søbatteriet\, 4220 Korsør\, 4220 Korsør
+GEO:55.33264615;11.13703965
+URL:https://loppefund.dk/marked/maritim-kulturuge-loppemarked-korsoer
+END:VEVENT
+END:VCALENDAR

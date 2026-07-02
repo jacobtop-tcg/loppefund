@@ -1,0 +1,44 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:haughus-gods-bagagerumsmarked-jelling-2026-07-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260725T100000
+DTEND;TZID=Europe/Copenhagen:20260725T160000
+SUMMARY:Haughus Gods Bagagerumsmarked
+LOCATION:Vi ligger lige før rundkørelsen når du kommer fra Vejle mod Jelling.\, Vejlevej 50\, 7300 Jelling
+GEO:55.7538;9.44329
+URL:https://loppefund.dk/marked/haughus-gods-bagagerumsmarked-jelling
+END:VEVENT
+BEGIN:VEVENT
+UID:haughus-gods-bagagerumsmarked-jelling-2026-07-26@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260726T100000
+DTEND;TZID=Europe/Copenhagen:20260726T160000
+SUMMARY:Haughus Gods Bagagerumsmarked
+LOCATION:Vi ligger lige før rundkørelsen når du kommer fra Vejle mod Jelling.\, Vejlevej 50\, 7300 Jelling
+GEO:55.7538;9.44329
+URL:https://loppefund.dk/marked/haughus-gods-bagagerumsmarked-jelling
+END:VEVENT
+BEGIN:VEVENT
+UID:haughus-gods-bagagerumsmarked-jelling-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T100000
+DTEND;TZID=Europe/Copenhagen:20260905T160000
+SUMMARY:Haughus Gods Bagagerumsmarked
+LOCATION:Vi ligger lige før rundkørelsen når du kommer fra Vejle mod Jelling.\, Vejlevej 50\, 7300 Jelling
+GEO:55.7538;9.44329
+URL:https://loppefund.dk/marked/haughus-gods-bagagerumsmarked-jelling
+END:VEVENT
+BEGIN:VEVENT
+UID:haughus-gods-bagagerumsmarked-jelling-2026-09-06@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260906T100000
+DTEND;TZID=Europe/Copenhagen:20260906T160000
+SUMMARY:Haughus Gods Bagagerumsmarked
+LOCATION:Vi ligger lige før rundkørelsen når du kommer fra Vejle mod Jelling.\, Vejlevej 50\, 7300 Jelling
+GEO:55.7538;9.44329
+URL:https://loppefund.dk/marked/haughus-gods-bagagerumsmarked-jelling
+END:VEVENT
+END:VCALENDAR

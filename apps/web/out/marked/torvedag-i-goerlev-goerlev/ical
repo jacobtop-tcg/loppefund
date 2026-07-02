@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:torvedag-i-goerlev-goerlev-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T130000
+SUMMARY:Torvedag i Gørlev
+LOCATION:Gørlev Bytorv\, Algade\, Gørlev
+GEO:55.5403;11.2258
+URL:https://loppefund.dk/marked/torvedag-i-goerlev-goerlev
+END:VEVENT
+END:VCALENDAR

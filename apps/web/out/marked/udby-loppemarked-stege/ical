@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:udby-loppemarked-stege-2026-07-26@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260726T110000
+DTEND;TZID=Europe/Copenhagen:20260726T140000
+SUMMARY:Udby Loppemarked
+LOCATION:Landsbyen Udby på Møn\, ca. 2 km øst for Stege. Husstande på Udbyvej\, Udbygade og tilstødende sidegader. Se skiltene ved Klintevej og Ulvshalevej.\, Udbygade 16\, 4780 Stege
+GEO:54.9833;11.9
+URL:https://loppefund.dk/marked/udby-loppemarked-stege
+END:VEVENT
+END:VCALENDAR

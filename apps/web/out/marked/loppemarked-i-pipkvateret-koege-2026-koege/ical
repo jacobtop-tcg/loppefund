@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-pipkvateret-koege-2026-koege-2026-08-02@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260802T100000
+DTEND;TZID=Europe/Copenhagen:20260802T150000
+SUMMARY:Loppemarked i pipkvateret Køge – 2026 🐦
+LOCATION:Glentevej\, 4600 Køge
+URL:https://loppefund.dk/marked/loppemarked-i-pipkvateret-koege-2026-koege
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-i-vaabensted-sakskoebing-2026-08-01@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260801T100000
+DTEND;TZID=Europe/Copenhagen:20260801T160000
+SUMMARY:LOPPEMARKED I VÅBENSTED
+LOCATION:Maribovej 116\, 4990 Sakskøbing
+URL:https://loppefund.dk/marked/loppemarked-i-vaabensted-sakskoebing
+END:VEVENT
+BEGIN:VEVENT
+UID:loppemarked-i-vaabensted-sakskoebing-2026-08-02@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260802T100000
+DTEND;TZID=Europe/Copenhagen:20260802T160000
+SUMMARY:LOPPEMARKED I VÅBENSTED
+LOCATION:Maribovej 116\, 4990 Sakskøbing
+URL:https://loppefund.dk/marked/loppemarked-i-vaabensted-sakskoebing
+END:VEVENT
+END:VCALENDAR

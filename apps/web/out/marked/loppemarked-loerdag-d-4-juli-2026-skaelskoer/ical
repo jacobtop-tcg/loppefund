@@ -1,0 +1,40 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-loerdag-d-4-juli-2026-skaelskoer-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T130000
+SUMMARY:🛍️ Loppemarked – Lørdag d. 25 juli 2026
+LOCATION:Svanetorvet\, 4230 Skælskør
+URL:https://loppefund.dk/marked/loppemarked-loerdag-d-4-juli-2026-skaelskoer
+END:VEVENT
+BEGIN:VEVENT
+UID:loppemarked-loerdag-d-4-juli-2026-skaelskoer-2026-07-11@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260711T100000
+DTEND;TZID=Europe/Copenhagen:20260711T130000
+SUMMARY:🛍️ Loppemarked – Lørdag d. 25 juli 2026
+LOCATION:Svanetorvet\, 4230 Skælskør
+URL:https://loppefund.dk/marked/loppemarked-loerdag-d-4-juli-2026-skaelskoer
+END:VEVENT
+BEGIN:VEVENT
+UID:loppemarked-loerdag-d-4-juli-2026-skaelskoer-2026-07-18@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260718T100000
+DTEND;TZID=Europe/Copenhagen:20260718T130000
+SUMMARY:🛍️ Loppemarked – Lørdag d. 25 juli 2026
+LOCATION:Svanetorvet\, 4230 Skælskør
+URL:https://loppefund.dk/marked/loppemarked-loerdag-d-4-juli-2026-skaelskoer
+END:VEVENT
+BEGIN:VEVENT
+UID:loppemarked-loerdag-d-4-juli-2026-skaelskoer-2026-07-25@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260725T100000
+DTEND;TZID=Europe/Copenhagen:20260725T130000
+SUMMARY:🛍️ Loppemarked – Lørdag d. 25 juli 2026
+LOCATION:Svanetorvet\, 4230 Skælskør
+URL:https://loppefund.dk/marked/loppemarked-loerdag-d-4-juli-2026-skaelskoer
+END:VEVENT
+END:VCALENDAR

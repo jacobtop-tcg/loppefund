@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:kraemmermarked-hos-ny-form-hjoerring-2026-07-10@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260710T100000
+DTEND;TZID=Europe/Copenhagen:20260710T170000
+SUMMARY:Kræmmermarked Hos Ny Form
+LOCATION:Ny Form\, Strandvejen 128E\, Hjørring
+GEO:57.4758;9.79717
+URL:https://loppefund.dk/marked/kraemmermarked-hos-ny-form-hjoerring
+END:VEVENT
+BEGIN:VEVENT
+UID:kraemmermarked-hos-ny-form-hjoerring-2026-07-17@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260717T100000
+DTEND;TZID=Europe/Copenhagen:20260717T170000
+SUMMARY:Kræmmermarked Hos Ny Form
+LOCATION:Ny Form\, Strandvejen 128E\, Hjørring
+GEO:57.4758;9.79717
+URL:https://loppefund.dk/marked/kraemmermarked-hos-ny-form-hjoerring
+END:VEVENT
+BEGIN:VEVENT
+UID:kraemmermarked-hos-ny-form-hjoerring-2026-07-24@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260724T100000
+DTEND;TZID=Europe/Copenhagen:20260724T170000
+SUMMARY:Kræmmermarked Hos Ny Form
+LOCATION:Ny Form\, Strandvejen 128E\, Hjørring
+GEO:57.4758;9.79717
+URL:https://loppefund.dk/marked/kraemmermarked-hos-ny-form-hjoerring
+END:VEVENT
+END:VCALENDAR

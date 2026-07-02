@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:loppemarked-hf-nordrevang-kastrup-2026-07-04@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260704T100000
+DTEND;TZID=Europe/Copenhagen:20260704T160000
+SUMMARY:LOPPEMARKED HF NORDREVANG
+LOCATION:Viberupstræde 5\, 2770 Kastrup
+GEO:55.59944918;12.5948484
+URL:https://loppefund.dk/marked/loppemarked-hf-nordrevang-kastrup
+END:VEVENT
+END:VCALENDAR

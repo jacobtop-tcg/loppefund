@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Loppefund//DA
+BEGIN:VEVENT
+UID:foraarsloppemarked-i-elmegadekvarteret-copenhagen-2026-09-05@loppefund.dk
+DTSTAMP:20260702T162536Z
+DTSTART;TZID=Europe/Copenhagen:20260905T100000
+DTEND;TZID=Europe/Copenhagen:20260905T160000
+SUMMARY:Forårsloppemarked i Elmegadekvarteret
+LOCATION:Elmegade\, 2200 Copenhagen
+URL:https://loppefund.dk/marked/foraarsloppemarked-i-elmegadekvarteret-copenhagen
+END:VEVENT
+END:VCALENDAR

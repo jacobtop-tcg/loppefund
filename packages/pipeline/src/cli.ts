@@ -56,6 +56,7 @@ if (command === 'stats') {
   console.log('occurrences:       ', q(`SELECT COUNT(*) c FROM occurrences`));
   console.log('raw events:        ', q(`SELECT COUNT(*) c FROM raw_events`));
   console.log('geocode cache:     ', q(`SELECT COUNT(*) c FROM geocode_cache`));
+  console.log('tips (nye):        ', q(`SELECT COUNT(*) c FROM tips WHERE status='new'`));
   const runs = db
     .prepare(`SELECT source_key, started_at, finished_at, stats FROM pipeline_runs ORDER BY id DESC LIMIT 5`)
     .all();

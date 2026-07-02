@@ -22,7 +22,10 @@ export default function HomePage() {
       <footer className="site-footer">
         <div className="container">
           Loppefund samler markeder automatisk fra offentlige kilder og viser altid, hvor
-          oplysningerne kommer fra. Fandt du en fejl? Kilderne er linket på hvert marked.
+          oplysningerne kommer fra. Fandt du en fejl? Kilderne er linket på hvert marked.{' '}
+          <a href="/tip" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
+            Mangler vi et marked? Tip os →
+          </a>
         </div>
       </footer>
     </>

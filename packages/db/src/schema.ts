@@ -121,6 +121,15 @@ export function migrate(db: DatabaseSync): void {
     );
     CREATE INDEX IF NOT EXISTS idx_source_candidates_status ON source_candidates(status);
 
+    CREATE TABLE IF NOT EXISTS tips (
+      id INTEGER PRIMARY KEY,
+      url TEXT,                 -- e.g. a facebook.com/events link
+      text TEXT,                -- pasted announcement text
+      contact TEXT,             -- optional submitter contact
+      submitted_at TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'new'  -- new | processed | rejected
+    );
+
     CREATE TABLE IF NOT EXISTS pipeline_runs (
       id INTEGER PRIMARY KEY,
       source_key TEXT,

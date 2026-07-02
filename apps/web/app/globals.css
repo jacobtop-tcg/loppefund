@@ -792,6 +792,49 @@ h1, h2, h3 {
   color: var(--accent-deep);
 }
 
+/* ---------- tip form ---------- */
+
+.tip-form {
+  display: grid;
+  gap: 16px;
+}
+
+.tip-form label {
+  display: grid;
+  gap: 6px;
+}
+
+.tip-form label span {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.tip-form input,
+.tip-form textarea {
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  resize: vertical;
+}
+
+.tip-form input:focus,
+.tip-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-wash);
+}
+
+.tip-error {
+  color: #b3352b;
+  font-size: 14px;
+  margin: 0;
+}
+
 /* ---------- footer ---------- */
 
 .site-footer {

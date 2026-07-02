@@ -345,6 +345,37 @@ export function cacheGeocode(db: DatabaseSync, query: string, r: GeocodeResult):
   ).run(query, r.lat, r.lng, r.quality, r.resolvedCity, r.resolvedPostcode, new Date().toISOString());
 }
 
+// --- community tips (the bridge from closed Facebook groups etc.) ---
+
+export function insertTip(
+  db: DatabaseSync,
+  tip: { url?: string; text?: string; contact?: string },
+): number {
+  const res = db
+    .prepare(`INSERT INTO tips(url, text, contact, submitted_at) VALUES (?, ?, ?, ?)`)
+    .run(tip.url ?? null, tip.text ?? null, tip.contact ?? null, new Date().toISOString());
+  return Number(res.lastInsertRowid);
+}
+
+export interface TipRow {
+  id: number;
+  url: string | null;
+  text: string | null;
+  contact: string | null;
+  submitted_at: string;
+  status: string;
+}
+
+export function listTips(db: DatabaseSync, status = 'new'): TipRow[] {
+  return db
+    .prepare(`SELECT * FROM tips WHERE status = ? ORDER BY submitted_at DESC`)
+    .all(status) as unknown as TipRow[];
+}
+
+export function setTipStatus(db: DatabaseSync, id: number, status: 'processed' | 'rejected'): void {
+  db.prepare(`UPDATE tips SET status = ? WHERE id = ?`).run(status, id);
+}
+
 // --- source candidates (auto-discovery funnel) ---
 
 export interface SourceCandidateRow {

@@ -127,13 +127,16 @@ const BOOKING_CONTEXT = /(?<![a-z0-9æøå])(?:book|tilmeld|lej|bestil|stade|sta
 // ("https://sif-fodbold.nemtilmeld.dk/81/", "www.gentofteloppemarked.dk"),
 // then bare domains after booking keywords ("Book på ksmarked.dk", "tilmeld
 // dig på hadstenkulturhus.dk", "book din stand via boerneloppen.dk/book").
+// The bare-domain lookbehind also blocks "-" and "." so an email like
+// "jul@two-socks.com" cannot re-match from inside its own local/domain part.
 const BOOKING_URL =
-  /(?:https?:\/\/|www\.)[^\s"'<>()]+|(?<![@\w.])[a-z0-9æøå][a-z0-9æøå-]*(?:\.[a-z0-9æøå-]+)*\.(?:dk|com|net|org|nu|eu|gle|info)\b(?:\/[^\s"'<>()]*)?/i;
+  /(?:https?:\/\/|www\.)[^\s"'<>()]+|(?<![@\w.-])[a-z0-9æøå][a-z0-9æøå-]*(?:\.[a-z0-9æøå-]+)*\.(?:dk|com|net|org|nu|eu|gle|info)\b(?:\/[^\s"'<>()]*)?/i;
 
 // Sentence split that survives URLs (dots inside URLs are not followed by
-// whitespace) and common abbreviations ("kl. 10", "ca. 50 stande").
+// whitespace) and common abbreviations ("kl. 10", "ca. 50 stande",
+// "195 DKK (ekskl. billetgebyr)").
 const SENTENCE_SPLIT =
-  /(?<!(?:^|[^a-zæøå])(?:kl|ca|evt|nr|tlf|bl\.a))(?<=[a-zæøå])[.!?](?=\s)|\n+/i;
+  /(?<!(?:^|[^a-zæøå])(?:kl|ca|evt|nr|tlf|bl\.a|ekskl|inkl))(?<=[a-zæøå])[.!?](?=\s)|\n+/i;
 
 /** Was the mention at [start, end) explicitly negated? */
 function isNegated(lower: string, start: number, end: number): boolean {
@@ -177,7 +180,7 @@ function detectWeatherDependent(lower: string): boolean | null {
 
 /** Prefix https:// on schemeless URLs and strip trailing punctuation. */
 function normalizeUrl(raw: string): string {
-  const trimmed = raw.replace(/[.,;:!?»"'…]+$/, '');
+  const trimmed = raw.replace(/[.,;:!?»«"'“”‘’…]+$/, '');
   return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
 }
 

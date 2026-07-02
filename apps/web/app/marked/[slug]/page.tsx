@@ -161,6 +161,19 @@ export default async function EventPage({
           <aside>
             <section className="panel">
               <h2>Praktisk</h2>
+              {event.amenities && (
+                <div className="badge-row" style={{ marginBottom: 12 }}>
+                  {event.amenities.parking === true && <span className="badge free">P Parkering</span>}
+                  {event.amenities.parking === false && <span className="badge cancelled">Ingen parkering</span>}
+                  {event.amenities.food === true && <span className="badge free">Mad & drikke</span>}
+                  {event.amenities.toilets === true && <span className="badge free">Toiletter</span>}
+                  {event.amenities.kidsActivities === true && <span className="badge free">Børneaktiviteter</span>}
+                  {event.amenities.accessibility === true && <span className="badge free">Kørestolsvenligt</span>}
+                  {event.amenities.mobilepay === true && <span className="badge">MobilePay</span>}
+                  {event.amenities.cashOnly === true && <span className="badge unverified">Kun kontanter</span>}
+                  {event.amenities.weatherDependent === true && <span className="badge unverified">Vejrafhængigt</span>}
+                </div>
+              )}
               <ul className="info-list">
                 {event.priceText && (
                   <li>
@@ -210,6 +223,16 @@ export default async function EventPage({
                   <li>
                     <span className="k">Telefon</span>
                     <span className="v">{event.contactPhone}</span>
+                  </li>
+                )}
+                {event.amenities?.bookingUrl && (
+                  <li>
+                    <span className="k">Lej en stand</span>
+                    <span className="v">
+                      <a href={event.amenities.bookingUrl} target="_blank" rel="noopener noreferrer">
+                        Book stadeplads
+                      </a>
+                    </span>
                   </li>
                 )}
               </ul>

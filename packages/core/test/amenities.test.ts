@@ -207,9 +207,26 @@ describe('extractAmenities — bookingUrl', () => {
     expect(a.bookingUrl).toBe('https://madbillet.dk/show/event/broens-lopper16');
   });
 
+  it('survives "(ekskl. …)" between the booking keyword and the URL (verbatim live Broens text)', () => {
+    const a = extractAmenities(
+      'Book din stand for 195 DKK (ekskl. billetgebyr) lige her: madbillet.dk/show/event/broens-lopper16. \n En stand består af et 2 meter langt bord.',
+    );
+    expect(a.bookingUrl).toBe('https://madbillet.dk/show/event/broens-lopper16');
+  });
+
   it('handles bare domains without a path (real "Book på ksmarked.dk")', () => {
     const a = extractAmenities('Ønsker du selv en stand? Book på ksmarked.dk.');
     expect(a.bookingUrl).toBe('https://ksmarked.dk');
+  });
+
+  it('does not mistake an email address for a bare booking domain (real corpus case)', () => {
+    const a = extractAmenities('Kontakt jul@two-socks.com for at booke en stand.');
+    expect(a.bookingUrl).toBe(null);
+  });
+
+  it('strips trailing curly quotes (real corpus case)', () => {
+    const a = extractAmenities('Book en stand på “www.lilleaamarked.dk” under fanen tilmelding.');
+    expect(a.bookingUrl).toBe('https://www.lilleaamarked.dk');
   });
 
   it('ignores URLs outside a booking context', () => {

@@ -159,6 +159,15 @@ export function migrate(db: DatabaseSync): void {
       VALUES (new.id, new.title, new.venue_name, new.city, new.description, new.search_text);
     END;
   `);
+  // Columns added after v1 shipped: CREATE TABLE IF NOT EXISTS won't add
+  // them to existing databases, so patch them in explicitly.
+  const eventColumns = new Set(
+    (db.prepare(`PRAGMA table_info(events)`).all() as Array<{ name: string }>).map((c) => c.name),
+  );
+  if (!eventColumns.has('amenities')) {
+    db.exec(`ALTER TABLE events ADD COLUMN amenities TEXT`);
+  }
+
   db.prepare(
     `INSERT INTO meta(key, value) VALUES ('schema_version', ?)
      ON CONFLICT(key) DO UPDATE SET value = excluded.value`,

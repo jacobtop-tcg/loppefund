@@ -5,6 +5,7 @@
 import type { DatabaseSync } from 'node:sqlite';
 import {
   computeConfidence,
+  extractAmenities,
   matchEvents,
   normalizeCategory,
   resolveSchedule,
@@ -251,6 +252,11 @@ export async function canonicalizeRawEvent(
       firstSeenAt: e.first_seen_at,
       lastSeenAt: now,
     };
+    // Amenities always derive from the canonical description on display,
+    // so recompute from whatever description won the merge.
+    const mergedAmenities = merged.description
+      ? JSON.stringify(extractAmenities(merged.description))
+      : null;
     merged.confidence = computeConfidence({
       maxSourceTrust: Math.max(trust, ...Object.keys(provenance).map((f) => currentTrust(f))),
       sourceCount,
@@ -259,7 +265,7 @@ export async function canonicalizeRawEvent(
       hasGoodLocation: merged.lat !== null && !['C', 'P'].includes(merged.geocodeQuality ?? ''),
       hasConcreteDates: occurrences.length > 0,
     });
-    updateEvent(db, e.id, merged);
+    updateEvent(db, e.id, { ...merged, amenities: mergedAmenities });
 
     // Occurrences: union of existing future dates and this source's dates.
     const existing = db
@@ -321,6 +327,7 @@ export async function canonicalizeRawEvent(
     fieldProvenance: provenance,
     firstSeenAt: now,
     lastSeenAt: now,
+    amenities: raw.description ? JSON.stringify(extractAmenities(raw.description)) : null,
   });
   replaceOccurrences(db, id, occurrences);
   linkEventSource(db, id, rawId);

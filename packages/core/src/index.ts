@@ -6,3 +6,4 @@ export * from './dedupe.ts';
 export * from './confidence.ts';
 export * from './open-now.ts';
 export * from './gems.ts';
+export * from './amenities.ts';

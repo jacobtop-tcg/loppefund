@@ -74,6 +74,7 @@ export function Explorer({
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<string | null>(null);
   const [freeOnly, setFreeOnly] = useState(false);
+  const [familyOnly, setFamilyOnly] = useState(false);
   const [inOut, setInOut] = useState<'indoor' | 'outdoor' | null>(null);
   const [view, setView] = useState<'list' | 'map'>('list');
   const [pos, setPos] = useState<{ lat: number; lng: number } | null>(null);
@@ -106,6 +107,7 @@ export function Explorer({
       if (dateFilter === 'aabent-nu' && !openNow) continue;
       if (category && e.category !== category) continue;
       if (freeOnly && e.isFree !== true) continue;
+      if (familyOnly && !e.familyFriendly) continue;
       if (inOut && e.indoorOutdoor !== inOut && e.indoorOutdoor !== 'mixed') continue;
       if (q) {
         const haystack =
@@ -144,7 +146,7 @@ export function Explorer({
     }
     if (gemsFirst) result.sort((a, b) => Number(b.gem) - Number(a.gem));
     return result;
-  }, [events, from, to, query, category, freeOnly, inOut, pos, radius, dateFilter, now, gemsFirst]);
+  }, [events, from, to, query, category, freeOnly, familyOnly, inOut, pos, radius, dateFilter, now, gemsFirst]);
 
   // Trip selection is keyed by slug against the full list, so filter changes
   // never drop chosen stops.
@@ -232,6 +234,9 @@ export function Explorer({
           <span className="chip-sep" aria-hidden />
           <button className={`chip ${freeOnly ? 'active' : ''}`} onClick={() => setFreeOnly(!freeOnly)}>
             Gratis entré
+          </button>
+          <button className={`chip ${familyOnly ? 'active' : ''}`} onClick={() => setFamilyOnly(!familyOnly)}>
+            Børnevenligt
           </button>
           <button
             className={`chip ${inOut === 'indoor' ? 'active' : ''}`}

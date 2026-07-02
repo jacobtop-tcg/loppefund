@@ -2,7 +2,7 @@ import 'server-only';
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import type { DatabaseSync } from 'node:sqlite';
-import { addDays, isHiddenGem, searchFold } from '@loppefund/core';
+import { addDays, isHiddenGem, searchFold, type Amenities } from '@loppefund/core';
 import { getEventBySlug, listEventsBetween, openDb } from '@loppefund/db';
 
 let db: DatabaseSync | null = null;
@@ -41,6 +41,8 @@ export interface EventSummary {
   confidence: number;
   /** Hidden-gem heuristic — see @loppefund/core gems.ts. */
   gem: boolean;
+  /** From extracted amenities: kids activities mentioned in the description. */
+  familyFriendly: boolean;
   /** Folded description snippet so client search can match e.g. "vintage". */
   searchText: string;
   occurrences: Array<{ date: string; startTime: string | null; endTime: string | null }>;
@@ -81,6 +83,9 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
         hasVenueName: e.venue_name !== null,
         hasOrganizerOrWebsite: e.organizer !== null || e.contact_website !== null,
       }),
+      familyFriendly: e.amenities
+        ? (JSON.parse(e.amenities) as Amenities).familyFriendly === true
+        : false,
       searchText: e.description ? searchFold(e.description).slice(0, 400) : '',
       // Cap the serialized occurrence list — always-open venues have one per
       // day, which bloats the payload without changing filter results.
@@ -121,6 +126,7 @@ export function loadEventDetail(slug: string) {
     status: e.status,
     confidence: e.confidence,
     lastSeenAt: e.last_seen_at,
+    amenities: e.amenities ? (JSON.parse(e.amenities) as Amenities) : null,
     occurrences: e.occurrences.map((o) => ({
       date: o.date,
       startTime: o.start_time,

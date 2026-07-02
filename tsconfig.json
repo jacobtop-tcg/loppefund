@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "packages/core/src/**/*.ts",
+    "packages/core/test/**/*.ts",
+    "packages/db/src/**/*.ts",
+    "packages/db/test/**/*.ts",
+    "packages/pipeline/src/**/*.ts",
+    "packages/pipeline/test/**/*.ts"
+  ]
+}

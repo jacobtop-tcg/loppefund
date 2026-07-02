@@ -340,7 +340,7 @@ export function startRun(db: DatabaseSync, sourceKey: string | null): number {
   return Number(res.lastInsertRowid);
 }
 
-export function finishRun(db: DatabaseSync, runId: number, stats: Record<string, number>): void {
+export function finishRun(db: DatabaseSync, runId: number, stats: object): void {
   db.prepare(`UPDATE pipeline_runs SET finished_at = ?, stats = ? WHERE id = ?`).run(
     new Date().toISOString(),
     JSON.stringify(stats),

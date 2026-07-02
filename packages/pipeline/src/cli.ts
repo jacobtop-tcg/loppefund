@@ -88,9 +88,12 @@ for (const adapter of selected) {
     trust: adapter.trust,
   });
   const runId = startRun(db, adapter.key);
-  const stats: CanonicalizeStats & Record<string, number> = {
+  const stats: CanonicalizeStats & {
+    discovered: number; fetched: number; fetchErrors: number;
+    extracted: number; expired: number;
+  } = {
     discovered: 0, fetched: 0, fetchErrors: 0, extracted: 0,
-    created: 0, merged: 0, unchanged: 0, skippedNoDates: 0,
+    created: 0, merged: 0, unchanged: 0, skippedNoDates: 0, expired: 0,
   };
   // API-shaped sources return raw events in bulk.
   if (adapter.fetchRawEvents) {

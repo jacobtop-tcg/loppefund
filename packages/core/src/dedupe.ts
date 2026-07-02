@@ -130,9 +130,10 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   // Distinctive identical titles merge even without location or date overlap —
   // recurring series often publish each date as a separate entry with no
   // address data. Generic titles ("Loppemarked") never qualify.
+  // (Contradicting locations already returned above.)
   const na = normalizeTitle(a.title);
   const distinctive = na.length >= 15 || na.split(' ').length >= 3;
-  if (sim >= 0.95 && distinctive && colocated !== false && !streetsDiffer) {
+  if (sim >= 0.95 && distinctive && !streetsDiffer) {
     return { isMatch: true, score: sim, reason: 'identical distinctive title' };
   }
   return { isMatch: false, score: sim, reason: 'insufficient evidence' };

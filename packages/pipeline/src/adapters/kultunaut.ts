@@ -150,9 +150,13 @@ export const kultunaut: SourceAdapter = {
     if (!looksLikeMarket(title, description)) return null;
 
     // The genre is a catch-all ("Loppemarked/Torvedag/Genbrug"); the title
-    // is more specific, so let it decide first.
+    // is more specific, so let it decide first. When the title says nothing
+    // and the genre is the catch-all, stay honest with 'andet' rather than
+    // picking an arbitrary sub-category.
     let category = normalizeCategory(title);
-    if (category === 'andet') category = normalizeCategory(genre);
+    if (category === 'andet' && genre && !/\//.test(genre)) {
+      category = normalizeCategory(genre);
+    }
 
     return {
       sourceKey: 'kultunaut',

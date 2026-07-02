@@ -79,12 +79,18 @@ const NEAR_METERS = 500;
  * safe because it demands both location and date corroboration.
  */
 export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
+  // Sources categorize the same market inconsistently (loppemarked vs
+  // kræmmermarked vs genbrugsmarked are near-synonyms across taxonomies),
+  // so category mismatch alone must not block a merge. The exception is
+  // julemarked: a Christmas market at the same venue as a summer flea
+  // market is genuinely a different event.
   if (
     a.category && b.category &&
     a.category !== 'andet' && b.category !== 'andet' &&
-    a.category !== b.category
+    a.category !== b.category &&
+    (a.category === 'julemarked' || b.category === 'julemarked')
   ) {
-    return { isMatch: false, score: 0, reason: 'different categories' };
+    return { isMatch: false, score: 0, reason: 'julemarked vs non-julemarked' };
   }
 
   const sim = titleSimilarity(a.title, b.title);

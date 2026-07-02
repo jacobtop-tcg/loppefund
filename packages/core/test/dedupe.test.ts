@@ -56,6 +56,18 @@ describe('matchEvents', () => {
     expect(matchEvents(broens, other).isMatch).toBe(false);
   });
 
+  it('vetoes julemarked vs loppemarked at the same venue', () => {
+    const a = { ...broens, title: 'Marked på Broens', category: 'loppemarked' };
+    const b = { ...broens, title: 'Marked på Broens', category: 'julemarked' };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
+  it('does not let near-synonym categories block a merge', () => {
+    const a = { ...broens, category: 'loppemarked' };
+    const b = { ...broens, title: 'Broens Lopper', category: 'genbrugsmarked' };
+    expect(matchEvents(a, b).isMatch).toBe(true);
+  });
+
   it('requires date overlap when only weak title + location', () => {
     const weak = {
       title: 'Loppemarked på kajen Broens',

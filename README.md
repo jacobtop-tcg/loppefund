@@ -29,6 +29,11 @@ node packages/pipeline/src/cli.ts stats
 # Re-derive all canonical events from the raw layer (offline, fast)
 node packages/pipeline/src/cli.ts rebuild
 
+# Self-discover new sources: mine the raw layer for recurring domains and
+# probe them for event signals (JSON-LD, iCal, RSS, WP events API)
+node packages/pipeline/src/cli.ts discover-sources --probe-limit 10
+node packages/pipeline/src/cli.ts discover-sources --promote example.dk
+
 # Start the app on http://localhost:3000
 npm run web
 
@@ -71,6 +76,13 @@ verbatim, and the canonical layer can be rebuilt from it at any time
 
 All crawling respects robots.txt, uses a descriptive User-Agent
 (`LoppefundBot`), and waits ≥1.5s between requests per host.
+
+**Self-discovery**: `discover-sources` mines every stored raw event for
+external domains (organizer sites, market calendars), aggregates how often
+and across how many distinct markets each domain appears, then politely
+probes candidates for machine-readable event signals. Domains scoring above
+the promote threshold are adapter-ready — the funnel is
+`candidate → probed → promoted → hand-written adapter`.
 
 ### Trust model
 

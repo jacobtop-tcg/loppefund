@@ -13,7 +13,7 @@ import { DetailMap } from '../../../components/DetailMap.tsx';
 import { ShareButton } from '../../../components/ShareButton.tsx';
 import { ReportEventForm } from '../../../components/ReportEventForm.tsx';
 import { ConfirmEventForm } from '../../../components/ConfirmEventForm.tsx';
-import { listUpcomingEvents } from '../../../lib/data.ts';
+import { listCancelledUpcomingSlugs, listUpcomingEvents } from '../../../lib/data.ts';
 import { distanceKm } from '../../../lib/client-utils.ts';
 
 // Only known event slugs render; unknowns 404. generateStaticParams reads the
@@ -21,7 +21,14 @@ import { distanceKm } from '../../../lib/client-utils.ts';
 export const dynamicParams = false;
 
 export function generateStaticParams(): Array<{ slug: string }> {
-  return listUpcomingEvents(180).map((e) => ({ slug: e.slug }));
+  // Active upcoming markets — the browsable set. Plus markets that were
+  // cancelled but whose date hasn't passed: their pages must render (as clear
+  // "AFLYST" pages) rather than 404, so a link shared before the cancellation
+  // still tells a visitor not to go. A slug is only ever in one list (single
+  // status), but dedupe defensively.
+  const slugs = new Set<string>(listUpcomingEvents(180).map((e) => e.slug));
+  for (const slug of listCancelledUpcomingSlugs(180)) slugs.add(slug);
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -173,6 +180,12 @@ export default async function EventPage({
         <Link href="/" className="back-link">
           ← Alle markeder
         </Link>
+        {event.status === 'cancelled' && (
+          <div className="cancelled-banner" role="alert">
+            <strong>Aflyst.</strong> Dette marked er meldt aflyst. Tag ikke afsted —
+            arrangøren har trukket det tilbage, eller det er ikke længere bekræftet.
+          </div>
+        )}
         <header className="detail-header">
           <div className="detail-category">
             {CATEGORY_LABELS[event.category] ?? 'Marked'}

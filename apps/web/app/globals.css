@@ -669,6 +669,24 @@ a:focus-visible .event-card {
   color: #b3352b;
 }
 
+/* Unmissable at the top of a cancelled market's page — a family may be about
+   to drive an hour, so the cancellation must read before anything else. */
+.cancelled-banner {
+  margin: 4px 0 18px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: #fbe3e3;
+  border: 1px solid #f0b6b1;
+  color: #7f2019;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.cancelled-banner strong {
+  color: #b3352b;
+  letter-spacing: 0.02em;
+}
+
 .badge.unverified {
   background: var(--amber-wash);
   color: #8a6d1d;

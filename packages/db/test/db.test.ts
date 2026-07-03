@@ -6,6 +6,7 @@ import {
   getEventBySlug,
   insertEvent,
   linkEventSource,
+  listCancelledSlugsBetween,
   listEventsBetween,
   openDb,
   replaceOccurrences,
@@ -107,6 +108,22 @@ describe('db round trip', () => {
     // Multi-word queries must join FTS groups with AND, not a bare space.
     expect(searchEvents(db, 'broens lopper')).toEqual([id]);
     expect(searchEvents(db, 'broens aarhus')).toEqual([]);
+  });
+
+  it('lists cancelled slugs only while their date is upcoming, never active ones', () => {
+    const db = openDb(':memory:');
+    // Active upcoming — must NOT appear (it belongs in the browsable list).
+    const active = insertEvent(db, testEvent({ slug: 'active-mkt' }));
+    replaceOccurrences(db, active, [{ date: '2026-07-20', startTime: null, endTime: null }]);
+    // Cancelled but still upcoming — MUST appear so its shared link renders AFLYST.
+    const soon = insertEvent(db, testEvent({ slug: 'cancelled-soon', status: 'cancelled' }));
+    replaceOccurrences(db, soon, [{ date: '2026-07-20', startTime: null, endTime: null }]);
+    // Cancelled and already past — must NOT appear (no one is driving to it).
+    const past = insertEvent(db, testEvent({ slug: 'cancelled-past', status: 'cancelled' }));
+    replaceOccurrences(db, past, [{ date: '2026-06-01', startTime: null, endTime: null }]);
+
+    const slugs = listCancelledSlugsBetween(db, '2026-07-03', '2026-12-31');
+    expect(slugs).toEqual(['cancelled-soon']);
   });
 
   it('expires events with no future occurrences', () => {

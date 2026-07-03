@@ -3,7 +3,13 @@ import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import type { DatabaseSync } from 'node:sqlite';
 import { addDays, isHiddenGem, searchFold, type Amenities } from '@loppefund/core';
-import { getEventBySlug, listEventsBetween, openDb, openDbReadOnly } from '@loppefund/db';
+import {
+  getEventBySlug,
+  listCancelledSlugsBetween,
+  listEventsBetween,
+  openDb,
+  openDbReadOnly,
+} from '@loppefund/db';
 
 let db: DatabaseSync | null = null;
 
@@ -121,6 +127,17 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       })),
     }))
     .sort((a, b) => (a.occurrences[0]?.date ?? '').localeCompare(b.occurrences[0]?.date ?? ''));
+}
+
+/**
+ * Slugs of cancelled markets whose date hasn't passed yet. Browsing surfaces
+ * stay active-only; these exist so a shared/bookmarked link to a market that
+ * was cancelled after sharing still resolves to a clear "AFLYST" page instead
+ * of a 404 that hides the cancellation. Fed into generateStaticParams.
+ */
+export function listCancelledUpcomingSlugs(horizonDays = 180): string[] {
+  const from = todayIso();
+  return listCancelledSlugsBetween(getDb(), from, addDays(from, horizonDays));
 }
 
 export interface CityInfo {

@@ -241,6 +241,32 @@ export function listEventsBetween(
   }));
 }
 
+/**
+ * Slugs of CANCELLED events that still have an occurrence in [from, to].
+ *
+ * Discovery surfaces (list, map, counts, recommendations) stay active-only via
+ * listEventsBetween — a cancelled market must never appear in browsing. But a
+ * market can be cancelled *after* its page was shared in a Facebook group or
+ * bookmarked. If that page then 404s, the visitor loses the cancellation signal
+ * and may still drive there. So a directly-navigated cancelled market must
+ * resolve to a clear "AFLYST" page — this feeds those slugs into static
+ * generation. Past-cancelled markets are excluded (no one is driving to them).
+ */
+export function listCancelledSlugsBetween(
+  db: DatabaseSync,
+  from: string,
+  to: string,
+): string[] {
+  const rows = db
+    .prepare(
+      `SELECT DISTINCT e.slug FROM events e
+       JOIN occurrences o ON o.event_id = e.id
+       WHERE e.status = 'cancelled' AND o.date >= ? AND o.date <= ?`,
+    )
+    .all(from, to) as unknown as Array<{ slug: string }>;
+  return rows.map((r) => r.slug);
+}
+
 export function getEventBySlug(
   db: DatabaseSync,
   slug: string,

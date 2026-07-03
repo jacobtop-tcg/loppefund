@@ -4,6 +4,7 @@ import { dirname, join } from 'node:path';
 import type { DatabaseSync } from 'node:sqlite';
 import { addDays, isHiddenGem, searchFold, type Amenities } from '@loppefund/core';
 import { summarizeReviews, type ReviewSummary } from './reviews.ts';
+import { summarizePhotos, type Photo } from './photos.ts';
 import {
   getEventBySlug,
   listCancelledSlugsBetween,
@@ -39,32 +40,39 @@ function getDb(): DatabaseSync {
   return db;
 }
 
-// Curated community reviews live in data/reviews.json (slug -> raw review[]),
-// read once at build time. A missing/broken file just means "no reviews yet".
-let reviewsBySlug: Record<string, unknown> | null = null;
-function allReviews(): Record<string, unknown> {
-  if (reviewsBySlug) return reviewsBySlug;
+// Curated community content lives in data/<name>.json (slug -> raw[]), read once
+// at build time. A missing/broken file just means "nothing curated yet".
+const jsonCache = new Map<string, Record<string, unknown>>();
+function readRepoJson(name: string): Record<string, unknown> {
+  const cached = jsonCache.get(name);
+  if (cached) return cached;
+  let out: Record<string, unknown> = {};
   let dir = process.cwd();
   for (let i = 0; i < 6; i++) {
-    const candidate = join(dir, 'data', 'reviews.json');
+    const candidate = join(dir, 'data', `${name}.json`);
     if (existsSync(candidate)) {
       try {
         const parsed: unknown = JSON.parse(readFileSync(candidate, 'utf8'));
-        reviewsBySlug = parsed && typeof parsed === 'object' ? (parsed as Record<string, unknown>) : {};
+        if (parsed && typeof parsed === 'object') out = parsed as Record<string, unknown>;
       } catch {
-        reviewsBySlug = {};
+        /* malformed — treat as empty */
       }
-      return reviewsBySlug;
+      break;
     }
     dir = dirname(dir);
   }
-  reviewsBySlug = {};
-  return reviewsBySlug;
+  jsonCache.set(name, out);
+  return out;
 }
 
 /** Aggregated community reviews for one market (empty when none are curated). */
 export function loadReviews(slug: string): ReviewSummary {
-  return summarizeReviews(allReviews()[slug]);
+  return summarizeReviews(readRepoJson('reviews')[slug]);
+}
+
+/** Curated community photos for one market (empty when none are curated). */
+export function loadPhotos(slug: string): Photo[] {
+  return summarizePhotos(readRepoJson('photos')[slug]);
 }
 
 /**

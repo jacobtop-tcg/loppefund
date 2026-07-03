@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { loadEventDetail, loadReviews, todayIso } from '../../../lib/data.ts';
+import { loadEventDetail, loadPhotos, loadReviews, todayIso } from '../../../lib/data.ts';
 import {
   CATEGORY_LABELS,
   displayPlace,
@@ -14,6 +14,7 @@ import { ShareButton } from '../../../components/ShareButton.tsx';
 import { ReportEventForm } from '../../../components/ReportEventForm.tsx';
 import { ConfirmEventForm } from '../../../components/ConfirmEventForm.tsx';
 import { ReviewForm } from '../../../components/ReviewForm.tsx';
+import { PhotoForm } from '../../../components/PhotoForm.tsx';
 import { starGlyphs } from '../../../lib/reviews.ts';
 import { listCancelledUpcomingSlugs, listUpcomingEvents } from '../../../lib/data.ts';
 import { distanceKm } from '../../../lib/client-utils.ts';
@@ -146,6 +147,7 @@ export default async function EventPage({
   const event = loadEventDetail(slug);
   if (!event) notFound();
   const reviews = loadReviews(slug);
+  const photos = loadPhotos(slug);
   const today = todayIso();
   const upcoming = event.occurrences.filter((o) => o.date >= today);
   const shownDates = upcoming.slice(0, 10);
@@ -261,6 +263,35 @@ export default async function EventPage({
                 <p className="description">{event.description}</p>
               </section>
             )}
+
+            <section className="panel">
+              <h2>Billeder</h2>
+              {photos.length > 0 && (
+                <ul className="photo-grid">
+                  {photos.map((p) => (
+                    <li key={p.file}>
+                      <img
+                        src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/market-photos/${p.file}`}
+                        alt={`Foto fra ${displayTitle(event.title)}${p.credit ? ` — ${p.credit}` : ''}`}
+                        loading="lazy"
+                        className="photo-thumb"
+                      />
+                      {p.credit && <span className="photo-credit">📷 {p.credit}</span>}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {photos.length === 0 && (
+                <p style={{ color: 'var(--ink-soft)', marginTop: 0 }}>
+                  Ingen billeder endnu — har du været her? Del et, så andre kan se markedet.
+                </p>
+              )}
+              <PhotoForm
+                slug={event.slug}
+                title={displayTitle(event.title)}
+                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`}
+              />
+            </section>
 
             <section className="panel">
               <h2>

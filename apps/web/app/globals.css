@@ -1420,6 +1420,42 @@ body:has(.is-map-view) {
   color: var(--ink-soft);
 }
 
+/* Community photos */
+.photo-grid {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+.photo-grid li {
+  position: relative;
+  margin: 0;
+}
+.photo-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  background: var(--paper-sunken);
+}
+.photo-credit {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 62%, transparent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+.photo-cta {
+  margin: 4px 0 2px;
+}
+
 /* Community reviews */
 .review-summary {
   display: inline-flex;

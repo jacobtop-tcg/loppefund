@@ -1546,5 +1546,301 @@
       "address": "Blegdamsvej 132, 2100 København Ø"
     },
     "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Loppemarked ved Haraldskirken (Høje Gladsaxe Torv)",
+    "startDate": "2026-07-04T09:00:00+02:00",
+    "endDate": "2026-07-04T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Loppemarked ved Haraldskirken (Høje Gladsaxe Torv)",
+    "startDate": "2026-07-11T09:00:00+02:00",
+    "endDate": "2026-07-11T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Loppemarked ved Haraldskirken (Høje Gladsaxe Torv)",
+    "startDate": "2026-07-18T09:00:00+02:00",
+    "endDate": "2026-07-18T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Loppemarked ved Haraldskirken (Høje Gladsaxe Torv)",
+    "startDate": "2026-07-25T09:00:00+02:00",
+    "endDate": "2026-07-25T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Loppemarked på Nødebo Kro",
+    "startDate": "2026-08-23T10:00:00+02:00",
+    "endDate": "2026-08-23T15:00:00+02:00",
+    "location": {
+      "address": "Nødebo Kro, Nødebo"
+    },
+    "url": "https://www.facebook.com/groups/362315834415/"
+  },
+  {
+    "name": "Bagklapmarkedet",
+    "startDate": "2026-07-05T10:00:00+02:00",
+    "endDate": "2026-07-05T15:00:00+02:00",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Bagklapmarkedet",
+    "startDate": "2026-07-12T10:00:00+02:00",
+    "endDate": "2026-07-12T15:00:00+02:00",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Bagklapmarkedet",
+    "startDate": "2026-07-19T10:00:00+02:00",
+    "endDate": "2026-07-19T15:00:00+02:00",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Bagklapmarkedet",
+    "startDate": "2026-07-26T10:00:00+02:00",
+    "endDate": "2026-07-26T15:00:00+02:00",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Bagklapmarkedet",
+    "startDate": "2026-08-02T10:00:00+02:00",
+    "endDate": "2026-08-02T15:00:00+02:00",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Bagklapmarkedet",
+    "startDate": "2026-08-09T10:00:00+02:00",
+    "endDate": "2026-08-09T15:00:00+02:00",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Bagklapmarkedet",
+    "startDate": "2026-08-16T10:00:00+02:00",
+    "endDate": "2026-08-16T15:00:00+02:00",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Søndagsmarked Greve Midtby Center",
+    "startDate": "2026-07-05T09:00:00+02:00",
+    "endDate": "2026-07-05T14:00:00+02:00",
+    "location": {
+      "address": "Greve Midtby Center, P-plads nord, Greve"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Søndagsmarked Greve Midtby Center",
+    "startDate": "2026-07-12T09:00:00+02:00",
+    "endDate": "2026-07-12T14:00:00+02:00",
+    "location": {
+      "address": "Greve Midtby Center, P-plads nord, Greve"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Søndagsmarked Greve Midtby Center",
+    "startDate": "2026-07-19T09:00:00+02:00",
+    "endDate": "2026-07-19T14:00:00+02:00",
+    "location": {
+      "address": "Greve Midtby Center, P-plads nord, Greve"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Søndagsmarked Greve Midtby Center",
+    "startDate": "2026-07-26T09:00:00+02:00",
+    "endDate": "2026-07-26T14:00:00+02:00",
+    "location": {
+      "address": "Greve Midtby Center, P-plads nord, Greve"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Indendørs markeder i Viborg (VBC)",
+    "startDate": "2026-09-06",
+    "location": {
+      "address": "Viborg"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Indendørs markeder i Viborg (VBC)",
+    "startDate": "2026-09-12",
+    "location": {
+      "address": "Viborg"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Indendørs markeder i Viborg (VBC)",
+    "startDate": "2026-10-10",
+    "location": {
+      "address": "Viborg"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Indendørs markeder i Viborg (VBC)",
+    "startDate": "2026-11-14",
+    "location": {
+      "address": "Viborg"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Bagagerumsmarked / Citymarked Aarhus",
+    "startDate": "2026-10-03T10:30:00+02:00",
+    "location": {
+      "address": "Teatergaden 1, 8000 Aarhus C"
+    },
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "name": "Loppemarked Gråsten",
+    "startDate": "2026-07-10T10:00:00+02:00",
+    "endDate": "2026-07-10T16:00:00+02:00",
+    "location": {
+      "address": "Gråsten"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Loppemarked Gråsten",
+    "startDate": "2026-07-17T10:00:00+02:00",
+    "endDate": "2026-07-17T16:00:00+02:00",
+    "location": {
+      "address": "Gråsten"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Loppemarked Gråsten",
+    "startDate": "2026-07-24T10:00:00+02:00",
+    "endDate": "2026-07-24T16:00:00+02:00",
+    "location": {
+      "address": "Gråsten"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Loppemarked Gråsten",
+    "startDate": "2026-07-31T10:00:00+02:00",
+    "endDate": "2026-07-31T16:00:00+02:00",
+    "location": {
+      "address": "Gråsten"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Loppemarked Gråsten",
+    "startDate": "2026-08-01T10:00:00+02:00",
+    "endDate": "2026-08-01T16:00:00+02:00",
+    "location": {
+      "address": "Gråsten"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Vanløse Torv Loppemarked",
+    "startDate": "2026-07-04T10:00:00+02:00",
+    "location": {
+      "address": "Vanløse Torv, 2720 Vanløse"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Ryesgades loppemarked",
+    "startDate": "2026-08-30T10:00:00+02:00",
+    "location": {
+      "address": "Ryesgade, 2100 København Ø"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Saxogades Loppemarked",
+    "startDate": "2026-07-25T10:00:00+02:00",
+    "location": {
+      "address": "Saxogade, 1662 Copenhagen"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Loppemarked i Blågårdsgade",
+    "startDate": "2026-07-05T10:00:00+02:00",
+    "location": {
+      "address": "Blågårdsgade 12, 2200 Copenhagen"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Loppelørdage ved springvandet på Brønshøj Torv",
+    "startDate": "2026-07-25T09:00:00+02:00",
+    "location": {
+      "address": "Brønshøj Torv, 2700 København"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Ørestad loppemarked",
+    "startDate": "2026-08-01T10:00:00+02:00",
+    "location": {
+      "address": "Ørestads Boulevard 68, Copenhagen"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Københavns Længste Loppemarked",
+    "startDate": "2026-08-29T08:00:00+02:00",
+    "location": {
+      "address": "Ørestads Boulevard 68, Copenhagen"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Loppemarked & Livemusik i Grønlandsgården",
+    "startDate": "2026-08-15T10:00:00+02:00",
+    "location": {
+      "address": "Englandsvej 8, 2300 København S"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Loppemarked i Grøndalsvænge",
+    "startDate": "2026-08-15T10:00:00+02:00",
+    "location": {
+      "address": "Mirabellevej, 2400 København NV"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Loppemarked at VAB-13",
+    "startDate": "2026-08-08T11:00:00+02:00",
+    "location": {
+      "address": "Ved Amagerbanen 13, 2300 København S"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Loppemarked på Bispebjerg Bakke",
+    "startDate": "2026-08-22T10:00:00+02:00",
+    "location": {
+      "address": "Legepladsen ved Bispebjerg Bakke 18A til 26D, København"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
   }
 ]

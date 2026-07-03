@@ -85,6 +85,11 @@ const SAMPLE_CONFIG = {
     // Facebook's own event search casts a wider net once you are logged in:
     { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked', scrolls: 4, note: 'FB events: loppemarked' },
     { type: 'search', url: 'https://www.facebook.com/events/search?q=kr%C3%A6mmermarked', scrolls: 4, note: 'FB events: kræmmermarked' },
+    // Marketplace: mostly single items, but occasional market flyers slip in —
+    // OCR + the date filter keep only genuine markets. Lower yield than groups.
+    { type: 'marketplace', url: 'https://www.facebook.com/marketplace/search?query=loppemarked', scrolls: 3, note: 'Marketplace: loppemarked' },
+    { type: 'marketplace', url: 'https://www.facebook.com/marketplace/search?query=kr%C3%A6mmermarked', scrolls: 3, note: 'Marketplace: kræmmermarked' },
+    { type: 'marketplace', url: 'https://www.facebook.com/marketplace/search?query=bagagerumsmarked', scrolls: 2, note: 'Marketplace: bagagerumsmarked' },
   ],
   // Only keep posts that look market-related, to keep the feed clean.
   keywords: ['loppemarked', 'kræmmermarked', 'kraemmermarked', 'bagagerumsmarked', 'genbrugsmarked', 'antikmarked', 'stadeplads', 'stadeleje', 'kræmmer'],
@@ -142,56 +147,77 @@ async function main() {
 
   const items = [];
   const seen = new Set();
+
+  // Screenshot the biggest image in an element and OCR it (the poster/flyer,
+  // where FB posts AND Marketplace listings hide the date/place). '' if none.
+  async function ocrOf(handle, idHint) {
+    if (!OCR_ENABLED) return '';
+    try {
+      const img = await handle.$('img');
+      const box = img && (await img.boundingBox());
+      if (!box || box.width < 200 || box.height < 200) return '';
+      const tmp = join(tmpdir(), `fbimg-${idHint.replace(/\W+/g, '').slice(0, 40)}.png`);
+      try {
+        await img.screenshot({ path: tmp });
+        return ocrImage(tmp);
+      } finally {
+        try { unlinkSync(tmp); } catch { /* already gone */ }
+      }
+    } catch {
+      return ''; // detached node / no image — text-only
+    }
+  }
+
+  // Keep an item only if it mentions a market keyword and has usable text.
+  function keep(id, text, url, iso) {
+    if (seen.has(id) || !text || text.replace(/\s+/g, ' ').trim().length < 15) return;
+    if (!keywords.some((k) => text.toLowerCase().includes(k))) return;
+    seen.add(id);
+    items.push({ id: id.replace(/\W+/g, '').slice(0, 32), text, url, startDate: iso ?? undefined });
+  }
+
   for (const t of cfg.targets ?? []) {
     if (/REPLACE_WITH/.test(t.url)) continue;
     try {
-      console.log(`[harvest] ${t.url}`);
+      console.log(`[harvest] ${t.type ?? 'group'}: ${t.url}`);
       await page.goto(t.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
       await sleep(3000);
       for (let s = 0; s < (t.scrolls ?? 5); s++) {
-        // Iterate post element handles (not a pure evaluate) so we can also
-        // screenshot the poster image and OCR it — that is where market posts
-        // hide their date/place.
-        for (const art of await page.$$('[role="article"]')) {
-          const d = await art.evaluate((el) => {
-            const text = (el.innerText || '').trim();
-            let url = null;
-            for (const a of el.querySelectorAll('a[href*="/posts/"],a[href*="/events/"],a[href*="permalink"]')) {
-              if (a.href) { url = a.href.split('?')[0]; break; }
-            }
-            const tm = el.querySelector('abbr[data-utime],[data-visualcompletion] time,time');
-            return { text, url, iso: tm?.getAttribute('datetime') || null };
-          });
-          const id = (d.url ?? d.text).slice(0, 200);
-          if (!d.text || d.text.length < 15 || seen.has(id)) continue;
-
-          // OCR the largest image in the post, if any (the poster).
-          let ocrText = '';
-          if (OCR_ENABLED) {
-            try {
-              const img = await art.$('img');
-              const box = img && (await img.boundingBox());
-              if (box && box.width >= 220 && box.height >= 220) {
-                const tmp = join(tmpdir(), `fbposter-${id.replace(/\W+/g, '')}.png`);
-                try {
-                  await img.screenshot({ path: tmp });
-                  ocrText = ocrImage(tmp);
-                } finally {
-                  try { unlinkSync(tmp); } catch { /* already gone */ }
-                }
-              }
-            } catch { /* no image / detached node — text-only for this post */ }
+        if (t.type === 'marketplace') {
+          // Marketplace listings are /marketplace/item/ links with a photo. The
+          // few that are actually market announcements (not single items) carry
+          // the date/place in a flyer image, so OCR it; parseTip then drops any
+          // listing without a real date, keeping only genuine markets.
+          for (const card of await page.$$('a[href*="/marketplace/item/"]')) {
+            const d = await card.evaluate((el) => ({
+              url: el.href.split('?')[0],
+              text: (el.innerText || '').trim(),
+            }));
+            const id = 'mp' + (d.url.match(/item\/(\d+)/)?.[1] ?? d.url);
+            if (seen.has(id)) continue;
+            // Drop the leading price token ("Free", "DKK50", "$200", "50 kr")
+            // so a passing listing's title isn't "Free Loppemarked …".
+            const title = d.text.replace(/^(?:Free|Gratis|DKK[\d.,]+|\$[\d.,]+|[\d.,]+\s*kr\.?)\s+/i, '');
+            const ocr = await ocrOf(card, id);
+            keep(id, ocr ? `${title}\n${ocr}` : title, d.url, null);
           }
-
-          const combined = ocrText ? `${d.text}\n${ocrText}` : d.text;
-          if (!keywords.some((k) => combined.toLowerCase().includes(k))) continue;
-          seen.add(id);
-          items.push({
-            id: id.replace(/\W+/g, '').slice(0, 32),
-            text: combined,
-            url: d.url ?? t.url,
-            startDate: d.iso ?? undefined,
-          });
+        } else {
+          // Group/page/search posts: read the caption + OCR the poster image.
+          for (const art of await page.$$('[role="article"]')) {
+            const d = await art.evaluate((el) => {
+              const text = (el.innerText || '').trim();
+              let url = null;
+              for (const a of el.querySelectorAll('a[href*="/posts/"],a[href*="/events/"],a[href*="permalink"]')) {
+                if (a.href) { url = a.href.split('?')[0]; break; }
+              }
+              const tm = el.querySelector('abbr[data-utime],[data-visualcompletion] time,time');
+              return { text, url, iso: tm?.getAttribute('datetime') || null };
+            });
+            const id = (d.url ?? d.text).slice(0, 200);
+            if (!d.text || seen.has(id)) continue;
+            const ocr = await ocrOf(art, id);
+            keep(id, ocr ? `${d.text}\n${ocr}` : d.text, d.url ?? t.url, d.iso);
+          }
         }
         await page.mouse.wheel(0, 2400);
         await sleep(2500 + Math.random() * 1500); // polite, human-ish pacing

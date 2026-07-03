@@ -9,6 +9,7 @@
 import { parseArgs } from 'node:util';
 import { readFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
+import { normalizeTitle } from '@loppefund/core';
 import type { RawEvent } from '@loppefund/core';
 import {
   anyLinkedPayload,
@@ -31,7 +32,7 @@ import {
   recomputeConfidence,
   type CanonicalizeStats,
 } from './canonicalize.ts';
-import { formatReport, mineDomains, probeDomain } from './discovery.ts';
+import { formatReport, mineDomains, netNewCandidates, probeDomain } from './discovery.ts';
 import { parseTip } from './tip-parser.ts';
 import { adapters } from './adapters/index.ts';
 
@@ -175,7 +176,16 @@ if (command === 'discover-sources') {
   const raws = (
     db.prepare(`SELECT payload FROM raw_events`).all() as unknown as Array<{ payload: string }>
   ).map((r) => JSON.parse(r.payload) as RawEvent);
-  const mined = mineDomains(raws, ownDomains);
+  // Titles we already have canonically — lets mining flag candidates whose
+  // markets are already in the database (an operator link, not a new source).
+  const canonicalTitles = new Set(
+    (
+      db
+        .prepare(`SELECT title FROM events WHERE status = 'active'`)
+        .all() as unknown as Array<{ title: string }>
+    ).map((r) => normalizeTitle(r.title)),
+  );
+  const mined = mineDomains(raws, ownDomains, canonicalTitles);
   const now = new Date().toISOString();
   for (const m of mined) {
     upsertSourceCandidate(db, { ...m, seenAt: now });
@@ -199,6 +209,28 @@ if (command === 'discover-sources') {
     strong: rows.filter((r) => (r.probe_score ?? 0) >= 6).length,
   });
   console.log(values.json ? JSON.stringify(rows, null, 2) : formatReport(rows));
+
+  // The actionable shortlist: candidates referencing at least one market whose
+  // title we can't match to an existing event. Most high-mention domains are
+  // operator links for markets we already have (verified: olg.dk 1/1 covered,
+  // gentofteloppemarked.dk 2/2), so ranking by mentions alone sends an operator
+  // re-checking known markets. This cuts the list to the ones worth a look —
+  // an exact-title heuristic, so it over-includes rather than drops (see
+  // netNewCandidates). Each line shows how many titles look new of the total.
+  const netNew = netNewCandidates(mined).slice(0, 20);
+  if (!values.json) {
+    console.log(
+      netNew.length === 0
+        ? '\nNet-new candidates: none — every mined domain matches markets we already have.'
+        : `\nNet-new candidates (reference a market whose title isn't in the database yet — look here first):\n` +
+            netNew
+              .map(
+                (m) =>
+                  `  ${m.domain}  ~${m.distinctTitles - (m.coveredTitles ?? 0)} maybe-new of ${m.distinctTitles} titles · ${m.mentions} mentions`,
+              )
+              .join('\n'),
+    );
+  }
   process.exit(0);
 }
 

@@ -19,6 +19,7 @@
  * Everything here is pure except probeDomain, which takes a FetchFn so the
  * polite fetcher (rate limits, robots.txt) stays in charge of all network I/O.
  */
+import { normalizeTitle } from '@loppefund/core';
 import type { RawEvent } from '@loppefund/core';
 import type { FetchFn } from './adapters/types.ts';
 
@@ -145,6 +146,15 @@ export interface DomainMention {
   mentions: number;
   /** Distinct raw event titles — many titles suggests a calendar site. */
   distinctTitles: number;
+  /**
+   * How many of those distinct titles are ALREADY canonical events, set only
+   * when mineDomains is given the canonical title set. Discovery mines domains
+   * out of raw events we already crawled, so a domain is usually the operator's
+   * own link for markets we already have — coveredTitles == distinctTitles means
+   * "nothing new here". distinctTitles - coveredTitles is the net-new signal
+   * that actually justifies writing an adapter. Undefined when not computed.
+   */
+  coveredTitles?: number;
   /** Distinct source keys the mentions came from. */
   sources: string[];
   /** Union of fields the domain was seen in. */
@@ -154,8 +164,17 @@ export interface DomainMention {
 /**
  * Aggregate domain mentions across raw events into candidates, dropping our
  * own domains and the stoplist. Sorted by mentions desc, then domain asc.
+ *
+ * When `canonicalTitles` (a set of normalizeTitle()'d canonical event titles)
+ * is given, each candidate also gets coveredTitles — how many of its titles we
+ * already have — so callers can tell an operator's link for known markets apart
+ * from a genuinely new source.
  */
-export function mineDomains(raws: RawEvent[], ownDomains: Set<string>): DomainMention[] {
+export function mineDomains(
+  raws: RawEvent[],
+  ownDomains: Set<string>,
+  canonicalTitles?: ReadonlySet<string>,
+): DomainMention[] {
   const agg = new Map<
     string,
     { mentions: number; titles: Set<string>; sources: Set<string>; fields: Set<string> }
@@ -179,10 +198,43 @@ export function mineDomains(raws: RawEvent[], ownDomains: Set<string>): DomainMe
       domain,
       mentions: entry.mentions,
       distinctTitles: entry.titles.size,
+      ...(canonicalTitles
+        ? {
+            coveredTitles: [...entry.titles].filter((t) =>
+              canonicalTitles.has(normalizeTitle(t)),
+            ).length,
+          }
+        : {}),
       sources: [...entry.sources],
       fields: [...entry.fields],
     }))
     .sort((a, b) => b.mentions - a.mentions || a.domain.localeCompare(b.domain));
+}
+
+/**
+ * Candidates that reference at least one market whose title we can't match to
+ * an existing event — the shortlist actually worth a hand-written adapter. A
+ * domain whose every title is already canonical (its markets reach us via other
+ * sources) drops out, however many times it is mentioned. Requires mineDomains
+ * to have run with canonicalTitles. Ranked by net-new title count, then mentions.
+ *
+ * Matching is exact on normalizeTitle, so it errs toward INCLUSION: the same
+ * market phrased differently across sources ("LoppeLinda på Enghave Plads" vs a
+ * generic "Loppemarked") can look net-new when it is in fact covered. That is
+ * the safe direction for a triage hint — a covered domain shown for a second
+ * look wastes a glance; a genuinely new source dropped is lost coverage.
+ */
+export function netNewCandidates(mined: DomainMention[]): DomainMention[] {
+  const netNew = (m: DomainMention): number =>
+    m.coveredTitles === undefined ? 0 : m.distinctTitles - m.coveredTitles;
+  return mined
+    .filter((m) => netNew(m) >= 1)
+    .sort(
+      (a, b) =>
+        netNew(b) - netNew(a) ||
+        b.mentions - a.mentions ||
+        a.domain.localeCompare(b.domain),
+    );
 }
 
 /** Machine-readable signals found when probing a candidate's homepage. */

@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import type { RawEvent } from '@loppefund/core';
 import type { FetchFn, FetchResult } from '../src/adapters/types.ts';
+import { normalizeTitle } from '@loppefund/core';
 import {
   analyzeHomepage,
   domainsFromRawEvent,
   isExcludedDomain,
   mineDomains,
+  netNewCandidates,
   normalizeDomain,
   probeDomain,
   PROMOTE_THRESHOLD,
@@ -165,6 +167,50 @@ describe('mineDomains', () => {
     ];
     const domains = mineDomains(extra, OWN_DOMAINS).map((m) => m.domain);
     expect(domains).toEqual(['holte-loppemarked.dk', 'aa-marked.dk', 'olg.dk', 'zz-marked.dk']);
+  });
+
+  it('leaves coveredTitles undefined when no canonical titles are given', () => {
+    for (const m of mineDomains(raws, OWN_DOMAINS)) {
+      expect(m.coveredTitles).toBeUndefined();
+    }
+  });
+
+  it('counts how many of a candidate title set is already canonical (normalized)', () => {
+    // Only "Loppemarked i Holte" is in the database, not "Kræmmermarked Ølgod".
+    const canonical = new Set([normalizeTitle('Loppemarked i Holte')]);
+    const mined = mineDomains(raws, OWN_DOMAINS, canonical);
+    // holte's two titles: Holte (covered) + Ølgod (new) -> 1 covered.
+    expect(mined.find((m) => m.domain === 'holte-loppemarked.dk')!.coveredTitles).toBe(1);
+    // olg's only title is Ølgod -> 0 covered.
+    expect(mined.find((m) => m.domain === 'olg.dk')!.coveredTitles).toBe(0);
+  });
+});
+
+describe('netNewCandidates', () => {
+  const raws: RawEvent[] = [
+    rawEvent({ title: 'Loppemarked i Holte', contactWebsite: 'https://holte-loppemarked.dk' }),
+    rawEvent({
+      title: 'Kræmmermarked Ølgod',
+      sourceEventId: '2',
+      contactWebsite: 'https://olg.dk',
+    }),
+  ];
+
+  it('drops domains whose every market is already covered', () => {
+    const allCovered = new Set(
+      ['Loppemarked i Holte', 'Kræmmermarked Ølgod'].map(normalizeTitle),
+    );
+    expect(netNewCandidates(mineDomains(raws, OWN_DOMAINS, allCovered))).toHaveLength(0);
+  });
+
+  it('keeps and ranks domains that reference a not-yet-canonical market', () => {
+    const partial = new Set([normalizeTitle('Loppemarked i Holte')]);
+    const netNew = netNewCandidates(mineDomains(raws, OWN_DOMAINS, partial));
+    expect(netNew.map((m) => m.domain)).toEqual(['olg.dk']);
+  });
+
+  it('returns nothing when coverage was never computed', () => {
+    expect(netNewCandidates(mineDomains(raws, OWN_DOMAINS))).toHaveLength(0);
   });
 });
 

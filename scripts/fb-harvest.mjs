@@ -271,22 +271,31 @@ async function main() {
       if (blocked) { console.warn('[harvest] checkpoint/throttle detected — backing off, ending run.'); aborted = true; break; }
       for (let s = 0; s < (t.scrolls ?? 5); s++) {
         if (t.type === 'marketplace') {
-          // Marketplace listings are /marketplace/item/ links with a photo. The
-          // few that are actually market announcements (not single items) carry
-          // the date/place in a flyer image, so OCR it; parseTip then drops any
-          // listing without a real date, keeping only genuine markets.
-          for (const card of await page.$$('a[href*="/marketplace/item/"]')) {
-            const d = await card.evaluate((el) => ({
-              url: el.href.split('?')[0],
-              text: (el.innerText || '').trim(),
-            }));
-            const id = 'mp' + (d.url.match(/item\/(\d+)/)?.[1] ?? d.url);
+          // Read EVERY listing card in ONE pass. Marketplace virtualizes hard, so
+          // per-card awaits (the old approach) raced with node recycling — a
+          // detached node threw and aborted the whole target, which is why
+          // Marketplace silently yielded nothing. The aria-label carries the clean
+          // "<title>, <price>, <location>, listing <id>"; strip price + the
+          // "listing N" tail. No OCR here (thumbnails are cropped and were the
+          // detachment source); parseTip drops the many undated single-item/shop
+          // listings and keeps only ones whose title states a real date.
+          const listings = await page.evaluate(() => {
+            const out = [];
+            for (const a of document.querySelectorAll('a[href*="/marketplace/item/"]')) {
+              const m = a.href.match(/item\/(\d+)/);
+              if (!m) continue;
+              out.push({ id: m[1], url: a.href.split('?')[0], text: (a.getAttribute('aria-label') || a.innerText || '').trim() });
+            }
+            return out;
+          });
+          for (const l of listings) {
+            const id = 'mp' + l.id;
             if (seen.has(id)) continue;
-            // Drop the leading price token ("Free", "DKK50", "$200", "50 kr")
-            // so a passing listing's title isn't "Free Loppemarked …".
-            const title = d.text.replace(/^(?:Free|Gratis|DKK[\d.,]+|\$[\d.,]+|[\d.,]+\s*kr\.?)\s+/i, '');
-            const ocr = await ocrOf(card, id);
-            keep(id, ocr ? `${title}\n${ocr}` : title, d.url, null);
+            const cleaned = l.text
+              .replace(/(?:Free|Gratis|DKK[\d.,]+|\$[\d.,]+|[\d.,]+\s*kr\.?)/gi, '')
+              .replace(/,?\s*listing\s+\d+\s*$/i, '')
+              .split(',').map((x) => x.trim()).filter(Boolean).join(', ');
+            keep(id, cleaned, l.url, null);
           }
         } else {
           // Group/page/search posts: clean captions (event cards, some posts) via

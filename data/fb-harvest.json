@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Loppemarked ved Sankt Nicolai Apotek",
+    "startDate": "2026-07-04T10:00:00+02:00",
+    "endDate": "2026-07-04T14:00:00+02:00",
+    "location": { "address": "Sankt Nicolai Gade 2a, 5700 Svendborg" },
+    "url": "https://www.facebook.com/groups/1575345569157850/",
+    "description": "I gården bag Sankt Nicolai Apotek, lige over for kirken. Blandede ting til hjemmet, tøj, små møbler."
+  },
+  {
+    "name": "Loppemarked i Skårup",
+    "startDate": "2026-09-06T10:00:00+02:00",
+    "endDate": "2026-09-06T15:00:00+02:00",
+    "location": { "name": "Skårup By", "address": "Skårup By, 5881 Skårup" },
+    "url": "https://www.facebook.com/groups/1575345569157850/events"
+  },
+  {
+    "name": "Sommermarked i Humble",
+    "startDate": "2026-07-04T10:00:00+02:00",
+    "endDate": "2026-07-04T15:00:00+02:00",
+    "location": { "address": "Hovedgaden 51, 5932 Humble" },
+    "url": "https://www.facebook.com/groups/1575345569157850/"
+  },
+  {
+    "name": "Sommermarked i Humble",
+    "startDate": "2026-07-11T10:00:00+02:00",
+    "endDate": "2026-07-11T15:00:00+02:00",
+    "location": { "address": "Hovedgaden 51, 5932 Humble" },
+    "url": "https://www.facebook.com/groups/1575345569157850/"
+  },
+  {
+    "name": "Sommermarked i Humble",
+    "startDate": "2026-07-18T10:00:00+02:00",
+    "endDate": "2026-07-18T15:00:00+02:00",
+    "location": { "address": "Hovedgaden 51, 5932 Humble" },
+    "url": "https://www.facebook.com/groups/1575345569157850/"
+  },
+  {
+    "name": "Sommermarked i Humble",
+    "startDate": "2026-07-25T10:00:00+02:00",
+    "endDate": "2026-07-25T15:00:00+02:00",
+    "location": { "address": "Hovedgaden 51, 5932 Humble" },
+    "url": "https://www.facebook.com/groups/1575345569157850/"
+  }
+]

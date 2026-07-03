@@ -33,13 +33,31 @@
  * can already see; it never posts, messages, or scrapes private data.
  */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { existsSync, unlinkSync } from 'node:fs';
+import { dirname, resolve, join } from 'node:path';
+import { tmpdir } from 'node:os';
+import { execFileSync } from 'node:child_process';
 
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), '..');
 const CONFIG = resolve(ROOT, 'scripts/fb-harvest.config.json');
 const SESSION_DIR = resolve(ROOT, '.fb-session'); // persistent login, gitignored
 const OUT = resolve(ROOT, 'data/fb-harvest.json');
+const OCR_SCRIPT = resolve(ROOT, 'scripts/ocr.swift');
+
+// Most loppe-group market announcements are POSTER IMAGES — the date/place/name
+// live in the picture, not the caption. On a Mac, Apple's Vision framework OCRs
+// them for free (excellent Danish) via scripts/ocr.swift. Verified end-to-end:
+// a real "Loppemarked lørdag d. 4.7 kl. 10-14 … Sankt Nicolai Gade 2a" poster
+// OCRs cleanly and the pipeline turns it into a dated, located event. Returns
+// '' on any platform without Swift/Vision, so the harvester degrades to text.
+const OCR_ENABLED = existsSync(OCR_SCRIPT);
+function ocrImage(pngPath) {
+  try {
+    return execFileSync('swift', [OCR_SCRIPT, pngPath], { encoding: 'utf8', timeout: 30000 }).trim();
+  } catch {
+    return '';
+  }
+}
 
 const SAMPLE_CONFIG = {
   // Real Danish loppe-groups to start from (your dedicated account must JOIN
@@ -120,29 +138,49 @@ async function main() {
       await page.goto(t.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
       await sleep(3000);
       for (let s = 0; s < (t.scrolls ?? 5); s++) {
-        // Collect post text + a permalink + any datetime attribute currently in the DOM.
-        const found = await page.evaluate(() => {
-          const out = [];
-          for (const art of document.querySelectorAll('[role="article"]')) {
-            const text = (art.innerText || '').trim();
-            if (text.length < 20) continue;
+        // Iterate post element handles (not a pure evaluate) so we can also
+        // screenshot the poster image and OCR it — that is where market posts
+        // hide their date/place.
+        for (const art of await page.$$('[role="article"]')) {
+          const d = await art.evaluate((el) => {
+            const text = (el.innerText || '').trim();
             let url = null;
-            for (const a of art.querySelectorAll('a[href*="/posts/"],a[href*="/events/"],a[href*="permalink"]')) {
+            for (const a of el.querySelectorAll('a[href*="/posts/"],a[href*="/events/"],a[href*="permalink"]')) {
               if (a.href) { url = a.href.split('?')[0]; break; }
             }
-            const t = art.querySelector('abbr[data-utime],[data-visualcompletion] time,time');
-            const iso = t?.getAttribute('datetime') || null;
-            out.push({ text, url, iso });
+            const tm = el.querySelector('abbr[data-utime],[data-visualcompletion] time,time');
+            return { text, url, iso: tm?.getAttribute('datetime') || null };
+          });
+          const id = (d.url ?? d.text).slice(0, 200);
+          if (!d.text || d.text.length < 15 || seen.has(id)) continue;
+
+          // OCR the largest image in the post, if any (the poster).
+          let ocrText = '';
+          if (OCR_ENABLED) {
+            try {
+              const img = await art.$('img');
+              const box = img && (await img.boundingBox());
+              if (box && box.width >= 220 && box.height >= 220) {
+                const tmp = join(tmpdir(), `fbposter-${id.replace(/\W+/g, '')}.png`);
+                try {
+                  await img.screenshot({ path: tmp });
+                  ocrText = ocrImage(tmp);
+                } finally {
+                  try { unlinkSync(tmp); } catch { /* already gone */ }
+                }
+              }
+            } catch { /* no image / detached node — text-only for this post */ }
           }
-          return out;
-        });
-        for (const f of found) {
-          const lower = f.text.toLowerCase();
-          if (!keywords.some((k) => lower.includes(k))) continue;
-          const id = (f.url ?? f.text).slice(0, 200);
-          if (seen.has(id)) continue;
+
+          const combined = ocrText ? `${d.text}\n${ocrText}` : d.text;
+          if (!keywords.some((k) => combined.toLowerCase().includes(k))) continue;
           seen.add(id);
-          items.push({ id: id.replace(/\W+/g, '').slice(0, 32), text: f.text, url: f.url ?? t.url, startDate: f.iso ?? undefined });
+          items.push({
+            id: id.replace(/\W+/g, '').slice(0, 32),
+            text: combined,
+            url: d.url ?? t.url,
+            startDate: d.iso ?? undefined,
+          });
         }
         await page.mouse.wheel(0, 2400);
         await sleep(2500 + Math.random() * 1500); // polite, human-ish pacing

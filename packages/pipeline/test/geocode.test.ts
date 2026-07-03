@@ -43,22 +43,33 @@ describe('geocode negative-cache handling', () => {
     expect(getCachedGeocode(db, '1200, København K')?.lat).toBeCloseTo(55.678, 2);
   });
 
-  it('trusts a null-cached address with no postcode (does not re-hit DAWA)', async () => {
+  it('re-geocodes a null-cached town name — e.g. a bare "Faaborg" now resolves', async () => {
+    // The exact Facebook-feed case: a post whose only place was "Faaborg" was
+    // cached as a miss before the town-centroid fallback existed. It must not
+    // stay pinned nowhere — re-geocode and heal it.
     const db = openDb(':memory:');
-    cacheGeocode(db, 'Et sted, En by', NULL_RESULT);
-    const fetchMock = stubDawa();
+    cacheGeocode(db, 'Faaborg', NULL_RESULT);
+    const fetchMock = vi.fn(async (url: string) => ({
+      ok: true,
+      json: async () =>
+        String(url).includes('/postnumre?navn=')
+          ? [{ nr: '5600', navn: 'Faaborg', visueltcenter: [10.24, 55.1] }]
+          : { kategori: 'C', resultater: [] }, // datavask finds no street address
+    }));
+    vi.stubGlobal('fetch', fetchMock);
 
-    const r = await geocode(db, { street: 'Et sted', city: 'En by' });
+    const r = await geocode(db, { street: 'Faaborg' });
 
-    expect(r.lat).toBeNull();
-    expect(fetchMock).not.toHaveBeenCalled(); // a genuine miss stays cached
+    expect(r.lat).not.toBeNull();
+    expect(r.resolvedPostcode).toBe('5600');
+    expect(fetchMock).toHaveBeenCalled(); // the stale null was bypassed
   });
 
-  it('does not cache a null result when the address has a postcode', async () => {
+  it('never caches a null result (misses stay retryable)', async () => {
     const db = openDb(':memory:');
     vi.stubGlobal(
       'fetch',
-      vi.fn(async () => ({ ok: true, json: async () => ({}) })), // no centroid comes back
+      vi.fn(async () => ({ ok: true, json: async () => ({}) })), // nothing resolves
     );
 
     const r = await geocode(db, { postcode: '9999' });

@@ -54,12 +54,15 @@ export async function geocode(
   if (query.length < 4) return NO_MATCH;
 
   const cached = getCachedGeocode(db, query);
-  // A cached MISS is only trustworthy when nothing better was available to try.
-  // If the address carries a postcode, a null is stale — every real postcode has
-  // a visual-centre centroid, so the postcode fallback below WILL resolve it.
-  // (Negative entries cached before that fallback existed were permanently
-  // hiding ~dozens of postcode-bearing markets from the map.) Re-geocode those.
-  if (cached && (cached.lat !== null || !address.postcode)) return cached;
+  // Only POSITIVE geocodes are trustworthy to cache. The geocoder keeps gaining
+  // ways to resolve an address (postcode + city centroids, English-exonym
+  // normalisation), so a past miss is usually just stale — e.g. a Facebook post
+  // that only says "Faaborg" resolves to the 5600 centroid now, but an old null
+  // entry would pin it nowhere forever, splitting the market off the map. So a
+  // null cache hit is treated as a miss and re-geocoded. The cost is bounded:
+  // truly hopeless queries (no resolvable token) exit above via the length guard
+  // before any network call, so only plausible addresses re-hit DAWA.
+  if (cached && cached.lat !== null) return cached;
 
   let result = NO_MATCH;
   try {
@@ -101,13 +104,18 @@ export async function geocode(
         };
       }
     }
-    // Last fallback: city-name centroid via the postal-district register.
-    if (result.lat === null && city) {
+    // Town-name centroid via the postal-district register. The `city` field is
+    // the obvious candidate; but Facebook posts routinely put a bare town in the
+    // address line (parsed as `street`, e.g. just "Faaborg") with no city or
+    // postcode — so when nothing else resolved, try the street as a town too.
+    // Ambiguous names (several districts) stay unresolved — honesty first.
+    const townCandidate =
+      city ?? (result.lat === null && street && !address.postcode ? street : undefined);
+    if (result.lat === null && townCandidate) {
       const districts = (await politeDawaFetch(
-        `${DAWA}/postnumre?navn=${encodeURIComponent(city)}`,
+        `${DAWA}/postnumre?navn=${encodeURIComponent(townCandidate)}`,
       )) as Array<{ nr: string; navn: string; visueltcenter: [number, number] }>;
       const hit = districts[0];
-      // Ambiguous city names (several districts) stay unresolved — honesty first.
       if (hit?.visueltcenter && districts.length === 1) {
         result = {
           lat: hit.visueltcenter[1],
@@ -123,10 +131,8 @@ export async function geocode(
     // so the next run retries.
     return NO_MATCH;
   }
-  // Don't poison the cache with a miss for an address that should resolve: a
-  // postcode always has a centroid, so a null here is transient (a hiccup mid
-  // fallback) — leave it uncached so the next run retries instead of caching a
-  // permanent lie. Genuine misses (no postcode) are cached to avoid re-hitting.
-  if (result.lat !== null || !address.postcode) cacheGeocode(db, query, result);
+  // Only cache a hit. A miss is left uncached so the next run — possibly with a
+  // smarter geocoder — retries instead of inheriting a stale "nowhere".
+  if (result.lat !== null) cacheGeocode(db, query, result);
   return result;
 }

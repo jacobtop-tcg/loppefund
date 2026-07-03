@@ -54,7 +54,12 @@ export async function geocode(
   if (query.length < 4) return NO_MATCH;
 
   const cached = getCachedGeocode(db, query);
-  if (cached) return cached;
+  // A cached MISS is only trustworthy when nothing better was available to try.
+  // If the address carries a postcode, a null is stale — every real postcode has
+  // a visual-centre centroid, so the postcode fallback below WILL resolve it.
+  // (Negative entries cached before that fallback existed were permanently
+  // hiding ~dozens of postcode-bearing markets from the map.) Re-geocode those.
+  if (cached && (cached.lat !== null || !address.postcode)) return cached;
 
   let result = NO_MATCH;
   try {
@@ -118,6 +123,10 @@ export async function geocode(
     // so the next run retries.
     return NO_MATCH;
   }
-  cacheGeocode(db, query, result);
+  // Don't poison the cache with a miss for an address that should resolve: a
+  // postcode always has a centroid, so a null here is transient (a hiccup mid
+  // fallback) — leave it uncached so the next run retries instead of caching a
+  // permanent lie. Genuine misses (no postcode) are cached to avoid re-hitting.
+  if (result.lat !== null || !address.postcode) cacheGeocode(db, query, result);
   return result;
 }

@@ -26,13 +26,31 @@ const NO_MATCH: GeocodeResult = {
   lat: null, lng: null, quality: null, resolvedCity: null, resolvedPostcode: null,
 };
 
+// The Danish address register (DAWA) only matches Danish. Sources sometimes
+// anglicize places ("Copenhagen"), which fails datavask AND the city-centroid
+// fallback — normalize the common exonyms to their Danish forms first.
+const EXONYMS: Array<[RegExp, string]> = [
+  [/\bcopenhagen\b/gi, 'København'],
+  [/\belsinore\b/gi, 'Helsingør'],
+  [/\bfunen\b/gi, 'Fyn'],
+  [/\bjutland\b/gi, 'Jylland'],
+  [/\bzealand\b/gi, 'Sjælland'],
+  [/\baarhus\b/gi, 'Aarhus'],
+];
+function daNormalize(s?: string): string | undefined {
+  if (!s) return s;
+  let out = s;
+  for (const [re, da] of EXONYMS) out = out.replace(re, da);
+  return out;
+}
+
 export async function geocode(
   db: DatabaseSync,
   address: { street?: string; postcode?: string; city?: string },
 ): Promise<GeocodeResult> {
-  const query = [address.street, address.postcode, address.city]
-    .filter(Boolean)
-    .join(', ');
+  const street = daNormalize(address.street);
+  const city = daNormalize(address.city);
+  const query = [street, address.postcode, city].filter(Boolean).join(', ');
   if (query.length < 4) return NO_MATCH;
 
   const cached = getCachedGeocode(db, query);
@@ -40,7 +58,7 @@ export async function geocode(
 
   let result = NO_MATCH;
   try {
-    if (address.street) {
+    if (street) {
       const wash = (await politeDawaFetch(
         `${DAWA}/datavask/adgangsadresser?betegnelse=${encodeURIComponent(query)}`,
       )) as {
@@ -79,9 +97,9 @@ export async function geocode(
       }
     }
     // Last fallback: city-name centroid via the postal-district register.
-    if (result.lat === null && address.city) {
+    if (result.lat === null && city) {
       const districts = (await politeDawaFetch(
-        `${DAWA}/postnumre?navn=${encodeURIComponent(address.city)}`,
+        `${DAWA}/postnumre?navn=${encodeURIComponent(city)}`,
       )) as Array<{ nr: string; navn: string; visueltcenter: [number, number] }>;
       const hit = districts[0];
       // Ambiguous city names (several districts) stay unresolved — honesty first.

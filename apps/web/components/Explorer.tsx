@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { copenhagenNow, isOpenAt, type CphNow } from '@loppefund/core';
 import type { EventSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
+import { useOutdoorWeather } from '../lib/weather.ts';
 import { FilterBar, type DateFilter } from './FilterBar.tsx';
 import { ResultsList } from './ResultsList.tsx';
 import {
@@ -252,6 +253,10 @@ export function Explorer({
   // three suggestions the empty state offers as list cards.
   const mapEvents = filtered.length > 0 ? filtered : suggestions;
 
+  // Weekend weather for the OUTDOOR markets on show — the big "worth driving
+  // to?" signal. Client-only, non-blocking; empty until it resolves.
+  const weather = useOutdoorWeather(mapEvents);
+
   // Trip selection is keyed by slug against the full list, so filter changes
   // never drop chosen stops.
   const eventsBySlug = useMemo(() => new Map(events.map((e) => [e.slug, e])), [events]);
@@ -346,6 +351,7 @@ export function Explorer({
             tripSlugs={tripSlugs}
             onToggleTrip={toggleTrip}
             onHoverSlug={setHoveredSlug}
+            weather={weather}
           />
         </section>
         <aside className="map-pane" aria-label="Kort over markeder">

@@ -4,6 +4,7 @@ import { memo } from 'react';
 import type { EventSummary } from '../lib/data.ts';
 import { EventCard } from './EventCard.tsx';
 import type { DateFilter } from './FilterBar.tsx';
+import type { DayWeather } from '../lib/weather.ts';
 
 type Row = EventSummary & { nextDate: string; distanceKm: number | null; openNow: boolean };
 
@@ -24,6 +25,7 @@ export const ResultsList = memo(function ResultsList({
   tripSlugs,
   onToggleTrip,
   onHoverSlug,
+  weather,
 }: {
   filtered: Row[];
   suggestions: Row[];
@@ -36,6 +38,7 @@ export const ResultsList = memo(function ResultsList({
   tripSlugs: string[];
   onToggleTrip: (slug: string) => void;
   onHoverSlug: (slug: string | null) => void;
+  weather: Map<string, DayWeather>;
 }) {
   return (
     <>
@@ -87,6 +90,7 @@ export const ResultsList = memo(function ResultsList({
               today={today}
               index={i}
               openNow={e.openNow}
+              weather={weather.get(e.slug)}
               tripMode={tripMode}
               selected={tripSlugs.includes(e.slug)}
               onToggleTrip={onToggleTrip}

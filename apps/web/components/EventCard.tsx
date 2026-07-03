@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import type { EventSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
+import { weatherGlyph, type DayWeather } from '../lib/weather.ts';
 import {
   CATEGORY_LABELS,
   dayOfMonth,
@@ -17,7 +18,7 @@ const UNVERIFIED_THRESHOLD = 0.45;
 
 type CardEvent = EventSummary & { nextDate: string; distanceKm: number | null };
 
-function cardBody(event: CardEvent, today: string, openNow: boolean) {
+function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: DayWeather) {
   const next = event.occurrences.find((o) => o.date === event.nextDate)!;
   const hours = formatHours(next.startTime, next.endTime);
   const isToday = event.nextDate === today;
@@ -55,6 +56,14 @@ function cardBody(event: CardEvent, today: string, openNow: boolean) {
           {event.isFree === true && <span className="badge free">Gratis</span>}
           {event.indoorOutdoor === 'indoor' && <span className="badge">Indendørs</span>}
           {event.indoorOutdoor === 'outdoor' && <span className="badge">Udendørs</span>}
+          {weather && (event.indoorOutdoor === 'outdoor' || event.indoorOutdoor === 'mixed') && (
+            <span
+              className={`badge weather${weather.popPct >= 50 ? ' wet' : ''}`}
+              title={`${weatherGlyph(weather.code).label}${weather.popPct >= 30 ? ` · ${weather.popPct}% regn` : ''}`}
+            >
+              {weatherGlyph(weather.code).emoji} {weather.tmaxC}°{weather.popPct >= 50 ? ` · ${weather.popPct}%` : ''}
+            </span>
+          )}
           {event.distanceKm !== null && (
             <span className="badge distance">{Math.round(event.distanceKm)} km</span>
           )}
@@ -73,6 +82,7 @@ export function EventCard({
   today,
   index,
   openNow = false,
+  weather,
   tripMode = false,
   selected = false,
   onToggleTrip,
@@ -82,6 +92,7 @@ export function EventCard({
   today: string;
   index: number;
   openNow?: boolean;
+  weather?: DayWeather;
   tripMode?: boolean;
   selected?: boolean;
   onToggleTrip?: (slug: string) => void;
@@ -113,7 +124,7 @@ export function EventCard({
           </svg>
         </span>
       )}
-      {cardBody(event, today, openNow)}
+      {cardBody(event, today, openNow, weather)}
     </article>
   );
 

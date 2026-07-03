@@ -680,6 +680,18 @@ a:focus-visible .event-card {
   font-variant-numeric: tabular-nums;
 }
 
+/* Weekend weather for outdoor markets — calm sky tone; "wet" leans cool to
+   quietly warn a rained-out open-air market. */
+.badge.weather {
+  background: #e7eef2;
+  color: #3f5763;
+  font-variant-numeric: tabular-nums;
+}
+.badge.weather.wet {
+  background: #dbe6ee;
+  color: #355a72;
+}
+
 .badge.open-now {
   background: var(--green-wash);
   color: var(--green);

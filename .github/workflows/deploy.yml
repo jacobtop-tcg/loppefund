@@ -1,8 +1,14 @@
 name: Refresh data & deploy
 
-# Free continuous-update engine: on a schedule (and on demand / on push to
-# main) crawl every source, rebuild the canonical layer, static-export the
-# consumer app and publish it to GitHub Pages. All on GitHub's free tier.
+# Free continuous-update engine on GitHub's free tier. Two speeds, on purpose:
+#   • schedule / manual dispatch → CRAWL every source (~40 min), rebuild the
+#     canonical layer, then export + publish. This is what keeps data fresh.
+#   • push to main (a code change) → SKIP the crawl and build from the cached
+#     database, so a code deploy is ~2 min instead of ~40. The data is already
+#     canonical from the last scheduled crawl, and the site filters to
+#     today-onward at build time, so nothing stale slips through.
+# Net: code ships fast AND data stays current — without a 40-min crawl gating
+# every commit (which had the site lagging ~40 min behind reality).
 on:
   schedule:
     - cron: '17 4,16 * * *' # twice daily, off the top of the hour
@@ -55,7 +61,10 @@ jobs:
 
       - run: npm install --no-audit --no-fund
 
+      # Only crawl on a schedule or manual dispatch — never on a plain code push,
+      # so commits deploy fast from the cached DB (see the header note).
       - name: Crawl sources & rebuild canonical layer
+        if: github.event_name != 'push'
         env:
           # Default: the local committed feed from scripts/fb-harvest.mjs, read
           # straight from the checkout (no network, no CDN lag). A repo var/secret
@@ -77,9 +86,11 @@ jobs:
           node packages/pipeline/src/cli.ts discover-sources --probe-limit 8 || true
           node packages/pipeline/src/cli.ts stats
 
+      # Persist only when we actually crawled — a push reuses the restored cache
+      # unchanged, so there's nothing new to save.
       - name: Save database
         uses: actions/cache/save@v4
-        if: always()
+        if: always() && github.event_name != 'push'
         with:
           path: data
           key: loppefund-db-${{ github.run_id }}

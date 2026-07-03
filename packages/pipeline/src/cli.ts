@@ -7,6 +7,8 @@
  *       [--json] [--promote domain | --reject domain [--note text]]
  */
 import { parseArgs } from 'node:util';
+import { readFileSync, existsSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import type { RawEvent } from '@loppefund/core';
 import {
   anyLinkedPayload,
@@ -47,6 +49,29 @@ const { values, positionals } = parseArgs({
     note: { type: 'string' },
   },
 });
+
+/**
+ * Community confirmations: a committed {slug: count} map (data/confirmations.json,
+ * alongside the db) that bridges the "Bekræft marked" taps — collected via the
+ * form inbox — into the trust model. Empty by default; a quorum of confirmations
+ * corroborates an otherwise-uncorroborated low-trust market (see computeConfidence).
+ */
+function loadConfirmations(dbPath: string): Record<string, number> {
+  const file = join(dirname(dbPath), 'confirmations.json');
+  if (!existsSync(file)) return {};
+  try {
+    const parsed = JSON.parse(readFileSync(file, 'utf8')) as Record<string, unknown>;
+    const out: Record<string, number> = {};
+    for (const [slug, v] of Object.entries(parsed)) {
+      const n = typeof v === 'number' ? v : Number((v as { count?: number } | null)?.count);
+      if (Number.isFinite(n) && n > 0) out[slug] = Math.floor(n);
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}
+const confirmations = loadConfirmations(values.db);
 
 const command = positionals[0] ?? 'run';
 const db = openDb(values.db!);
@@ -103,7 +128,7 @@ if (command === 'rebuild') {
   }
   const rebuildToday = new Date().toISOString().slice(0, 10);
   expirePastEvents(db, rebuildToday);
-  recomputeConfidence(db, trustRows, rebuildToday);
+  recomputeConfidence(db, trustRows, rebuildToday, confirmations);
   console.log('rebuild done:', JSON.stringify(stats));
   process.exit(0);
 }
@@ -306,4 +331,4 @@ if (healthySources.length > 0) {
 }
 
 // Freshness decay only works if scores are actually recomputed after crawls.
-recomputeConfidence(db, trustMap, new Date().toISOString().slice(0, 10));
+recomputeConfidence(db, trustMap, new Date().toISOString().slice(0, 10), confirmations);

@@ -79,10 +79,11 @@ export function recomputeConfidence(
   db: DatabaseSync,
   sourceTrust: Record<string, number>,
   today: string,
+  confirmations: Record<string, number> = {},
 ): number {
   const rows = db
     .prepare(
-      `SELECT e.id, e.lat, e.geocode_quality,
+      `SELECT e.id, e.slug, e.lat, e.geocode_quality,
          (SELECT COUNT(DISTINCT r.source_key) FROM event_sources es
           JOIN raw_events r ON r.id = es.raw_event_id WHERE es.event_id = e.id) AS source_count,
          (SELECT MAX(es.last_confirmed_at) FROM event_sources es WHERE es.event_id = e.id) AS last_confirmed,
@@ -93,6 +94,7 @@ export function recomputeConfidence(
     )
     .all(today) as unknown as Array<{
     id: number;
+    slug: string;
     lat: number | null;
     geocode_quality: string | null;
     source_count: number;
@@ -116,6 +118,7 @@ export function recomputeConfidence(
       daysSinceVerified: daysSince,
       hasGoodLocation: r.lat !== null && !['C', 'P'].includes(r.geocode_quality ?? ''),
       hasConcreteDates: r.has_dates === 1,
+      communityConfirmations: confirmations[r.slug] ?? 0,
     });
     upd.run(confidence, r.id);
     changed++;

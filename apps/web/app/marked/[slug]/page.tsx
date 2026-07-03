@@ -34,20 +34,32 @@ export async function generateMetadata({
     event.description?.slice(0, 155) ??
     `${CATEGORY_LABELS[event.category] ?? 'Marked'}${place ? ` i ${place}` : ''} — datoer, åbningstider og praktisk info på Loppefund.`;
   const title = `${event.title}${place ? ` i ${place}` : ''} — Loppefund`;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+  // Shares in Facebook groups are the primary adoption channel — each event
+  // page must carry its OWN card, not the generic site-wide one. The
+  // file-convention auto-wiring (opengraph-image.tsx in this segment) proved
+  // non-deterministic under basePath + static export — the deployed HTML
+  // sometimes fell back to the root card — so point at the per-event image
+  // explicitly. It resolves against the origin-only metadataBase.
+  const ogImage = {
+    url: `${basePath}/marked/${slug}/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: title,
+  };
   return {
     title,
     description,
-    // Shares in Facebook groups are the primary adoption channel — each event
-    // page must carry its own card, not the generic site-wide one.
     openGraph: {
       title,
       description,
-      url: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${slug}`,
+      url: `${basePath}/marked/${slug}`,
       type: 'website',
       siteName: 'Loppefund',
       locale: 'da_DK',
+      images: [ogImage],
     },
-    twitter: { card: 'summary_large_image' },
+    twitter: { card: 'summary_large_image', images: [ogImage] },
   };
 }
 

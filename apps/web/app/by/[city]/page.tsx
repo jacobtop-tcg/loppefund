@@ -22,19 +22,30 @@ export async function generateMetadata({
   const name = displayPlace(info.city);
   const title = `Loppemarkeder i ${name} — Loppefund`;
   const description = `${info.count} kommende loppemarkeder, kræmmermarkeder og bagagerumsmarkeder i ${name}. Datoer, åbningstider og adresser — altid opdateret.`;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+  // Per-city share cards for Facebook groups, not the site-wide fallback.
+  // Referenced explicitly (not via file-convention auto-wiring) because that
+  // proved non-deterministic under basePath + static export — see the event
+  // page's generateMetadata for the same fix.
+  const ogImage = {
+    url: `${basePath}/by/${info.slug}/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: title,
+  };
   return {
     title,
     description,
-    // Per-city share cards for Facebook groups, not the site-wide fallback.
     openGraph: {
       title,
       description,
-      url: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/by/${info.slug}`,
+      url: `${basePath}/by/${info.slug}`,
       type: 'website',
       siteName: 'Loppefund',
       locale: 'da_DK',
+      images: [ogImage],
     },
-    twitter: { card: 'summary_large_image' },
+    twitter: { card: 'summary_large_image', images: [ogImage] },
   };
 }
 

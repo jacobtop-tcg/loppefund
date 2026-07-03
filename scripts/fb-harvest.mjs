@@ -70,6 +70,10 @@ const SAMPLE_CONFIG = {
     { type: 'group', url: 'https://www.facebook.com/groups/849539698483803/', scrolls: 8, note: 'Små og store loppemarkeder på Fyn' },
     { type: 'group', url: 'https://www.facebook.com/groups/1434236776796925/', scrolls: 6, note: 'Loppemarked På Fyn' },
     { type: 'group', url: 'https://www.facebook.com/groups/363166350422631/', scrolls: 6, note: 'Private og offentlige loppemarkeder på Fyn' },
+    // Area-specific (Faaborg / Langeland) — where the very local markets live:
+    { type: 'group', url: 'https://www.facebook.com/groups/317275305707909/', scrolls: 6, note: 'Horne Kræmmermarked (Faaborg)' },
+    { type: 'group', url: 'https://www.facebook.com/groups/2750518275077822/', scrolls: 6, note: 'Lopper og flittige hænder på Langeland' },
+    { type: 'page', url: 'https://www.facebook.com/LoppeladenFaaborg', scrolls: 4, note: 'Loppeladen Faaborg (page)' },
     { type: 'group', url: 'https://www.facebook.com/groups/362315834415/', scrolls: 6, note: 'Loppemarkeder i Danmark (landsdækkende)' },
     // Facebook's own event search casts a wider net once you are logged in:
     { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked', scrolls: 4, note: 'FB events: loppemarked' },

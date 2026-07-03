@@ -71,9 +71,12 @@ export function scanDates(text: string, refDate: string): string[] {
   return [...found].sort();
 }
 
-/** Street + house number, e.g. "Byvej 12", "Søndre Alle 3B". */
+// Street + house number, e.g. "Byvej 12", "Søndre Alle 3B". Uses [ \t] (not \s)
+// between words so a multi-line OCR'd poster ("… Sankt Nicolai Apotek.\nSankt
+// Nicolai Gade 2a …") doesn't let the match span the line break and swallow the
+// previous line — the street must stay on its own line.
 const STREET_RE =
-  /([A-ZÆØÅ][a-zæøåé.]+(?:\s+[A-ZÆØÅa-zæøåé.]+){0,3}\s+\d{1,3}[a-zA-Z]?)(?=[\s,.]|$)/;
+  /([A-ZÆØÅ][a-zæøåé.]+(?:[ \t]+[A-ZÆØÅa-zæøåé.]+){0,3}[ \t]+\d{1,3}[a-zA-Z]?)(?=[\s,.]|$)/;
 
 // First boundary between a market's NAME and its when/where detail: a weekday,
 // "den 5."/"d. 5.", a numeric date "5/7", "kl. 10", or a sentence terminator.

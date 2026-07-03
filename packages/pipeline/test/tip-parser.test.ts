@@ -90,6 +90,24 @@ describe('parseTip', () => {
     expect(raw!.city).toBe('Skovlunde');
   });
 
+  it('extracts a clean street from a multi-line OCR\'d poster', () => {
+    // Real "Loppemarked Sydfyn" poster text (via Vision OCR). The street must
+    // not span the line break and swallow "…Apotek." from the line above.
+    const raw = parseTip(
+      {
+        id: 'ocr',
+        url: null,
+        text:
+          'LOPPEMARKED\nlørdag d. 4.7 kl. 10-14\ni gården bag Sankt Nicolai Apotek.\n' +
+          'Sankt Nicolai Gade 2a, lige over for kirken.\nBlandede ting til hjemmet, tøj, små møbler etc.',
+      },
+      REF,
+    );
+    expect(raw).not.toBeNull();
+    expect(raw!.street).toBe('Sankt Nicolai Gade 2a');
+    expect((raw!.occurrences ?? []).map((o) => o.date)).toContain('2026-07-04');
+  });
+
   it('rejects tips without a resolvable date', () => {
     expect(
       parseTip({ id: 1, url: null, text: 'Kom til loppemarked snart i Valby!' }, REF),

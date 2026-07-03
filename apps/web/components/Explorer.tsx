@@ -8,6 +8,8 @@ import { useFavorites } from '../lib/favorites.ts';
 import { useOutdoorWeather } from '../lib/weather.ts';
 import { FilterBar, type DateFilter } from './FilterBar.tsx';
 import { ResultsList } from './ResultsList.tsx';
+import { Recommendations } from './Recommendations.tsx';
+import { recommend } from '../lib/recommend.ts';
 import {
   clearSavedLocation,
   readSavedLocation,
@@ -216,6 +218,13 @@ export function Explorer({
     return result;
   }, [events, from, to, query, category, freeOnly, familyOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
 
+  // "Til dig": personalized top picks from the full upcoming set (independent of
+  // the active filter). Shown only when the visitor is browsing, not searching.
+  const recs = useMemo(
+    () => recommend(events, pos, today, { distanceKm, limit: 4 }),
+    [events, pos, today],
+  );
+
   // The empty state must always help onward: when filters yield nothing,
   // relax date/radius (keep category & search) and suggest the nearest
   // upcoming alternatives instead of a dead end.
@@ -339,6 +348,7 @@ export function Explorer({
       />
       <div className="explorer-split">
         <section className="results-pane">
+          {!query.trim() && <Recommendations recs={recs} />}
           <ResultsList
             filtered={filtered}
             suggestions={suggestions}

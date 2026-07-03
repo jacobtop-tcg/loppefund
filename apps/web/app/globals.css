@@ -1401,6 +1401,70 @@ body:has(.is-map-view) {
   font-weight: 600;
   color: var(--ink-soft);
 }
+
+/* "Til dig" personalized recommendation strip */
+.reco {
+  margin: 0 0 20px;
+}
+.reco-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.reco-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+.reco-card {
+  flex: 0 0 auto;
+  width: 208px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  text-decoration: none;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: transform 0.08s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.reco-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.09);
+  border-color: color-mix(in srgb, var(--accent-deep) 35%, transparent);
+}
+.reco-name {
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.reco-city {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+.reco-reasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+.reco-chip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-deep) 8%, transparent);
+  color: var(--accent-deep);
+}
+.reco-chip.when {
+  background: var(--accent-wash);
+}
 .report-form {
   display: grid;
   gap: 12px;

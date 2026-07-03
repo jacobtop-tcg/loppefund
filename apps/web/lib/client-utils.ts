@@ -53,6 +53,67 @@ export function distanceKm(lat1: number, lng1: number, lat2: number, lng2: numbe
   return 2 * R * Math.asin(Math.sqrt(a));
 }
 
+/**
+ * Order trip stops into an efficient drive instead of the arbitrary order the
+ * user tapped them in. Greedy nearest-neighbour: from `start` (the user's
+ * location) repeatedly hop to the closest unvisited stop. Google's Maps URL
+ * API visits waypoints in the given order and won't re-optimise, so ordering
+ * them ourselves is what makes the actual route sane. With no known start we
+ * anchor on the northernmost stop for a stable, deterministic top-down chain.
+ *
+ * Nearest-neighbour is not the optimal TSP tour, but for the <=10 stops a
+ * weekend loppetur allows it is within a few km of optimal and, crucially,
+ * deterministic and instant — far better than raw click order.
+ */
+export function optimizeTripOrder<T extends TripStop>(
+  stops: readonly T[],
+  start?: TripStop | null,
+): T[] {
+  if (stops.length <= 1) return [...stops];
+  const remaining = [...stops];
+  const ordered: T[] = [];
+  let cursor: TripStop;
+  if (start) {
+    cursor = start;
+  } else {
+    remaining.sort((a, b) => b.lat - a.lat); // northernmost first
+    ordered.push(remaining.shift()!);
+    cursor = ordered[0]!;
+  }
+  while (remaining.length) {
+    let bestIdx = 0;
+    let bestD = Infinity;
+    for (let i = 0; i < remaining.length; i++) {
+      const d = distanceKm(cursor.lat, cursor.lng, remaining[i]!.lat, remaining[i]!.lng);
+      if (d < bestD) {
+        bestD = d;
+        bestIdx = i;
+      }
+    }
+    const next = remaining.splice(bestIdx, 1)[0]!;
+    ordered.push(next);
+    cursor = next;
+  }
+  return ordered;
+}
+
+/**
+ * Total driving-ish distance (km, great-circle) along the ordered stops,
+ * counting the leg from `start` (the user's location) to the first stop when
+ * known. An honest info-scent for "is this weekend worth the drive?".
+ */
+export function tripDistanceKm(stops: readonly TripStop[], start?: TripStop | null): number {
+  if (stops.length === 0) return 0;
+  let total = 0;
+  let cursor = start ?? stops[0]!;
+  const legs = start ? stops : stops.slice(1);
+  for (const s of legs) {
+    total += distanceKm(cursor.lat, cursor.lng, s.lat, s.lng);
+    cursor = s;
+  }
+  return total;
+}
+
 /* ------------------------------------------------------------------ *
  * Shareable filter state <-> URL query string.
  *

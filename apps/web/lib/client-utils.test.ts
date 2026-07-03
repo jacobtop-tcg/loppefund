@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest';
 import {
   buildTripUrl,
   DEFAULT_EXPLORER_PARAMS,
+  optimizeTripOrder,
   parseExplorerParams,
   serializeExplorerParams,
+  tripDistanceKm,
   type ExplorerParams,
 } from './client-utils.ts';
 
@@ -66,6 +68,67 @@ describe('buildTripUrl', () => {
       '55.100000,12.100000|55.200000,12.200000',
     );
     expect(url).toContain('%7C');
+  });
+});
+
+describe('optimizeTripOrder', () => {
+  // Four stops roughly on a NE Zealand line; scrambled input order.
+  const A = { id: 'A', lat: 55.40, lng: 12.30 }; // south
+  const B = { id: 'B', lat: 55.60, lng: 12.35 };
+  const C = { id: 'C', lat: 55.80, lng: 12.40 };
+  const D = { id: 'D', lat: 56.00, lng: 12.45 }; // north
+  const scrambled = [C, A, D, B];
+
+  it('returns <=1 stop unchanged', () => {
+    expect(optimizeTripOrder([])).toEqual([]);
+    expect(optimizeTripOrder([A])).toEqual([A]);
+  });
+
+  it('keeps exactly the same set of stops (no drops or dupes)', () => {
+    const out = optimizeTripOrder(scrambled, { lat: 55.35, lng: 12.28 });
+    expect(out).toHaveLength(4);
+    expect(new Set(out.map((s) => s.id))).toEqual(new Set(['A', 'B', 'C', 'D']));
+  });
+
+  it('orders nearest-first from the user start (S->A->B->C->D)', () => {
+    const out = optimizeTripOrder(scrambled, { lat: 55.35, lng: 12.28 });
+    expect(out.map((s) => s.id)).toEqual(['A', 'B', 'C', 'D']);
+  });
+
+  it('anchors on the northernmost stop and chains south when start is unknown', () => {
+    const out = optimizeTripOrder(scrambled);
+    expect(out.map((s) => s.id)).toEqual(['D', 'C', 'B', 'A']);
+  });
+
+  it('never produces a longer route than the raw scrambled order', () => {
+    const start = { lat: 55.35, lng: 12.28 };
+    const optimized = tripDistanceKm(optimizeTripOrder(scrambled, start), start);
+    const raw = tripDistanceKm(scrambled, start);
+    expect(optimized).toBeLessThanOrEqual(raw);
+  });
+});
+
+describe('tripDistanceKm', () => {
+  it('is 0 for zero or one stop without a start', () => {
+    expect(tripDistanceKm([])).toBe(0);
+    expect(tripDistanceKm([{ lat: 55.6, lng: 12.5 }])).toBe(0);
+  });
+
+  it('counts the start->first leg when a start is given', () => {
+    const stops = [{ lat: 55.5, lng: 12.5 }];
+    const withStart = tripDistanceKm(stops, { lat: 55.0, lng: 12.5 });
+    expect(withStart).toBeGreaterThan(50); // ~55.6 km per half-degree lat
+  });
+
+  it('sums consecutive legs in order', () => {
+    const stops = [
+      { lat: 55.0, lng: 12.0 },
+      { lat: 55.5, lng: 12.0 },
+      { lat: 56.0, lng: 12.0 },
+    ];
+    // Two half-degree-lat legs, ~55.6 km each.
+    expect(tripDistanceKm(stops)).toBeGreaterThan(105);
+    expect(tripDistanceKm(stops)).toBeLessThan(115);
   });
 });
 

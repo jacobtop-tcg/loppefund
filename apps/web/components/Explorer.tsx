@@ -13,8 +13,10 @@ import {
   distanceKm,
   foldForSearch,
   MAX_TRIP_STOPS,
+  optimizeTripOrder,
   parseExplorerParams,
   serializeExplorerParams,
+  tripDistanceKm,
 } from '../lib/client-utils.ts';
 
 const MapView = dynamic(() => import('./MapView.tsx').then((m) => m.MapView), {
@@ -236,7 +238,16 @@ export function Explorer({
   const tripStops = tripSlugs
     .map((s) => eventsBySlug.get(s))
     .filter((e): e is EventSummary => !!e && e.lat != null && e.lng != null);
-  const tripUrl = buildTripUrl(tripStops.map((e) => ({ lat: e.lat!, lng: e.lng! })));
+  // Order the stops into an efficient drive — from the user's location when we
+  // have it — instead of the arbitrary order they were tapped, then hand Google
+  // Maps the sane sequence (its URL API won't re-optimise waypoints itself).
+  // The total distance is an honest "is this weekend worth the drive?" scent.
+  const orderedTrip = optimizeTripOrder(
+    tripStops.map((e) => ({ lat: e.lat!, lng: e.lng! })),
+    pos,
+  );
+  const tripUrl = buildTripUrl(orderedTrip);
+  const tripKm = tripDistanceKm(orderedTrip, pos);
 
   // Handlers passed to the memoized FilterBar/ResultsList must be referentially
   // stable, or every hoveredSlug change re-renders 600+ cards.
@@ -357,6 +368,11 @@ export function Explorer({
               <>
                 <strong>{tripSlugs.length}</strong> stop
                 {tripSlugs.length >= MAX_TRIP_STOPS && ' (maks)'}
+                {tripKm > 0 && (
+                  <span style={{ color: 'var(--ink-soft)', fontWeight: 400 }}>
+                    {' · '}~{Math.round(tripKm)} km{pos ? ' fra dig' : ''}
+                  </span>
+                )}
               </>
             )}
           </span>

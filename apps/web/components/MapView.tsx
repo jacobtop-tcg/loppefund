@@ -18,6 +18,18 @@ const DENMARK_CENTER: [number, number] = [10.6, 56.05];
 const DENMARK_ZOOM = 6.1;
 const FIT_DEBOUNCE_MS = 350;
 
+// Danish translations for maplibre's built-in UI strings (gesture overlay,
+// control tooltips) so nothing renders in English on this lang="da" site.
+export const MAP_LOCALE: Record<string, string> = {
+  'ScrollZoomBlocker.CtrlMessage': 'Brug ctrl + scroll for at zoome',
+  'ScrollZoomBlocker.CmdMessage': 'Brug ⌘ + scroll for at zoome',
+  'TouchPanBlocker.Message': 'Brug to fingre for at flytte kortet',
+  'NavigationControl.ZoomIn': 'Zoom ind',
+  'NavigationControl.ZoomOut': 'Zoom ud',
+  'GeolocateControl.FindMyLocation': 'Find min placering',
+  'GeolocateControl.LocationNotAvailable': 'Placering ikke tilgængelig',
+};
+
 type MapEvent = EventSummary & { nextDate: string; openNow?: boolean };
 
 function toGeoJson(events: MapEvent[], today: string): GeoJSON.FeatureCollection {
@@ -101,11 +113,16 @@ export function MapView({
 
   function syncData(map: maplibregl.Map, evts: MapEvent[], animate: boolean) {
     const data = toGeoJson(evts, today);
-    (map.getSource('events') as maplibregl.GeoJSONSource | undefined)?.setData(data);
-    const sig = data.features.map((f) => f.properties!.slug as string).join(',');
+    // Order-independent signature: pure re-orderings (gemsFirst, distance sort)
+    // don't change the set, so they must not push GeoJSON or trigger a refit.
+    const sig = data.features
+      .map((f) => f.properties!.slug as string)
+      .sort()
+      .join(',');
     if (sig === lastSigRef.current) return;
     const first = lastSigRef.current === null;
     lastSigRef.current = sig;
+    (map.getSource('events') as maplibregl.GeoJSONSource | undefined)?.setData(data);
     if (fitTimerRef.current) {
       clearTimeout(fitTimerRef.current);
       fitTimerRef.current = null;
@@ -145,15 +162,15 @@ export function MapView({
         style,
         center: DENMARK_CENTER,
         zoom: DENMARK_ZOOM,
+        locale: MAP_LOCALE,
         attributionControl: { compact: true },
-        // Only the mobile hero sits in the page scroll flow; the desktop
-        // split map is sticky and never fights one-finger scrolling.
         cooperativeGestures:
           typeof window !== 'undefined' && window.matchMedia('(max-width: 899px)').matches,
       });
       mapRef.current = map;
-      // Hero -> fullscreen -> sticky-pane size changes, handled without
-      // trusting maplibre's own container observer.
+      // Keep maplibre's canvas sized to its container across the mobile
+      // hero <-> fullscreen toggle (the desktop pane is a fixed sticky size).
+      // resize() is a no-op when dimensions are unchanged, so this is cheap.
       ro = new ResizeObserver(() => map?.resize());
       ro.observe(container);
       map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');

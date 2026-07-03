@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { loadMapStyle } from '../lib/map-style.ts';
+import { MAP_LOCALE } from './MapView.tsx';
 
 const PIN_SVG =
   '<svg width="34" height="44" viewBox="0 0 34 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
@@ -26,6 +27,7 @@ export function DetailMapInner({ lat, lng }: { lat: number; lng: number }) {
         center: [lng, lat],
         zoom: 13.6,
         interactive: false,
+        locale: MAP_LOCALE,
         attributionControl: { compact: true },
       });
       const el = document.createElement('div');

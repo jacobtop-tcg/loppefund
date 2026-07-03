@@ -13,6 +13,8 @@ import {
   distanceKm,
   foldForSearch,
   MAX_TRIP_STOPS,
+  parseExplorerParams,
+  serializeExplorerParams,
 } from '../lib/client-utils.ts';
 
 const MapView = dynamic(() => import('./MapView.tsx').then((m) => m.MapView), {
@@ -66,6 +68,7 @@ export function Explorer({
   const [pos, setPos] = useState<{ lat: number; lng: number } | null>(null);
   const [radius, setRadius] = useState<number | null>(null);
   const [locating, setLocating] = useState(false);
+  const [geoError, setGeoError] = useState<string | null>(null);
   const [now, setNow] = useState<CphNow>(initialNow);
   const [gemsFirst, setGemsFirst] = useState(false);
   const [tripMode, setTripMode] = useState(false);
@@ -74,13 +77,54 @@ export function Explorer({
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
   const { favorites, count: favCount } = useFavorites();
 
-  // Live clock only while the "Åbent nu" filter is active.
+  // The `now` prop is baked into the static HTML at build time, so on the
+  // deployed site open-now state would otherwise be computed against build
+  // time, not the visitor's. Refresh to the real clock on mount and keep it
+  // ticking every minute regardless of which date filter is active.
   useEffect(() => {
-    if (dateFilter !== 'aabent-nu') return;
     setNow(copenhagenNow());
-    const id = setInterval(() => setNow(copenhagenNow()), 30_000);
+    const id = setInterval(() => setNow(copenhagenNow()), 60_000);
     return () => clearInterval(id);
-  }, [dateFilter]);
+  }, []);
+
+  // Shareable filter URLs. We read window.location.search in a mount effect
+  // (never a useState initializer — the pre-rendered static HTML must match
+  // the first client render or hydration mismatches). `hydrated` gates the
+  // write-back effect so it can't clobber the URL with defaults before the
+  // read has applied the shared state.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    const parsed = parseExplorerParams(window.location.search);
+    setDateFilter(parsed.dateFilter);
+    setCategory(parsed.category);
+    setQuery(parsed.query);
+    setFreeOnly(parsed.freeOnly);
+    setFamilyOnly(parsed.familyOnly);
+    setInOut(parsed.inOut);
+    setSavedOnly(parsed.savedOnly);
+    setGemsFirst(parsed.gemsFirst);
+    setView(parsed.view);
+    setHydrated(true);
+  }, []);
+
+  // On any relevant filter change, keep the URL in sync via replaceState so
+  // refresh/back restore state without polluting history. SSR-guarded.
+  useEffect(() => {
+    if (!hydrated || typeof window === 'undefined') return;
+    const qs = serializeExplorerParams({
+      dateFilter,
+      category,
+      query,
+      freeOnly,
+      familyOnly,
+      inOut,
+      savedOnly,
+      gemsFirst,
+      view,
+    });
+    const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+    window.history.replaceState(null, '', url);
+  }, [hydrated, dateFilter, category, query, freeOnly, familyOnly, inOut, savedOnly, gemsFirst, view]);
 
   const [from, to] = dateRangeFor(dateFilter, today);
 
@@ -210,14 +254,21 @@ export function Explorer({
   );
 
   const locate = useCallback(() => {
-    if (!navigator.geolocation) return;
+    if (!navigator.geolocation) {
+      setGeoError('Kunne ikke finde din placering');
+      return;
+    }
     setLocating(true);
+    setGeoError(null); // clear any prior error when re-attempting
     navigator.geolocation.getCurrentPosition(
       (p) => {
         setPos({ lat: p.coords.latitude, lng: p.coords.longitude });
         setLocating(false);
       },
-      () => setLocating(false),
+      () => {
+        setLocating(false);
+        setGeoError('Kunne ikke finde din placering');
+      },
       { timeout: 8000 },
     );
   }, []);
@@ -238,6 +289,7 @@ export function Explorer({
         inOut={inOut} onInOut={setInOut}
         savedOnly={savedOnly} onSavedOnly={setSavedOnly} favCount={favCount}
         pos={pos} locating={locating} onLocate={locate} onClearPos={clearPos}
+        geoError={geoError}
         radius={radius} onRadius={setRadius}
         tripMode={tripMode} onToggleTripMode={toggleTripMode}
       />

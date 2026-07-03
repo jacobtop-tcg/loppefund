@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Fraunces, Instrument_Sans } from 'next/font/google';
 import './globals.css';
 
@@ -16,7 +16,11 @@ const body = Instrument_Sans({
 const BASE_URL = process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  // Origin only — never the basePath. Next auto-prefixes basePath onto the
+  // generated opengraph-image asset path, so a metadataBase that also carried
+  // "/loppefund" would double it (…/loppefund/loppefund/…). Relative og:url
+  // values below therefore carry the basePath explicitly.
+  metadataBase: new URL(new URL(BASE_URL).origin),
   appleWebApp: { capable: true, title: 'Loppefund', statusBarStyle: 'default' },
   icons: {
     apple: `${process.env.LOPPEFUND_BASE_PATH ?? ''}/apple-touch-icon.png`,
@@ -36,9 +40,22 @@ export const metadata: Metadata = {
   },
 };
 
+// viewport-fit=cover is required for the env(safe-area-inset-*) offsets on the
+// floating view-pill and trip-bar to resolve on notched devices.
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="da" className={`${display.variable} ${body.variable}`}>
+      {/* Next's App Router hoists <link> elements rendered in a Server
+          Component into <head>, so these preconnect hints warm up the map
+          tile origin before the first tile request. */}
+      <link rel="preconnect" href="https://tiles.openfreemap.org" crossOrigin="anonymous" />
+      <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
       <body>{children}</body>
     </html>
   );

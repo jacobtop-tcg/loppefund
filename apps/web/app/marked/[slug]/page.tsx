@@ -30,11 +30,24 @@ export async function generateMetadata({
   const event = loadEventDetail(slug);
   if (!event) return { title: 'Marked ikke fundet — Loppefund' };
   const place = [event.city ?? event.municipality].filter(Boolean).join(', ');
+  const description =
+    event.description?.slice(0, 155) ??
+    `${CATEGORY_LABELS[event.category] ?? 'Marked'}${place ? ` i ${place}` : ''} — datoer, åbningstider og praktisk info på Loppefund.`;
+  const title = `${event.title}${place ? ` i ${place}` : ''} — Loppefund`;
   return {
-    title: `${event.title}${place ? ` i ${place}` : ''} — Loppefund`,
-    description:
-      event.description?.slice(0, 155) ??
-      `${CATEGORY_LABELS[event.category] ?? 'Marked'}${place ? ` i ${place}` : ''} — datoer, åbningstider og praktisk info på Loppefund.`,
+    title,
+    description,
+    // Shares in Facebook groups are the primary adoption channel — each event
+    // page must carry its own card, not the generic site-wide one.
+    openGraph: {
+      title,
+      description,
+      url: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${slug}`,
+      type: 'website',
+      siteName: 'Loppefund',
+      locale: 'da_DK',
+    },
+    twitter: { card: 'summary_large_image' },
   };
 }
 
@@ -123,6 +136,8 @@ export default async function EventPage({
     event.confidence >= 0.75 ? 'Godt bekræftet' : event.confidence >= 0.45 ? 'Bekræftet' : 'Ubekræftet';
   const jsonLd = eventJsonLd(event, today);
   const safeWebsite = safeExternalUrl(event.contactWebsite);
+  // The booking link is crawled too — validate its scheme like the website.
+  const safeBooking = safeExternalUrl(event.amenities?.bookingUrl ?? null);
 
   return (
     <>
@@ -279,11 +294,11 @@ export default async function EventPage({
                     <span className="v">{event.contactPhone}</span>
                   </li>
                 )}
-                {event.amenities?.bookingUrl && (
+                {safeBooking && (
                   <li>
                     <span className="k">Lej en stand</span>
                     <span className="v">
-                      <a href={event.amenities.bookingUrl} target="_blank" rel="noopener noreferrer">
+                      <a href={safeBooking.href} target="_blank" rel="noopener noreferrer">
                         Book stadeplads
                       </a>
                     </span>
@@ -291,9 +306,21 @@ export default async function EventPage({
                 )}
               </ul>
               {event.lat != null && event.lng != null && (
-                <div className="detail-map">
-                  <DetailMap lat={event.lat} lng={event.lng} />
-                </div>
+                <>
+                  <div className="detail-map">
+                    <DetailMap lat={event.lat} lng={event.lng} />
+                  </div>
+                  <p style={{ marginTop: 10, marginBottom: 0 }}>
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${event.lat},${event.lng}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--accent-deep)' }}
+                    >
+                      🧭 Find vej
+                    </a>
+                  </p>
+                </>
               )}
             </section>
 

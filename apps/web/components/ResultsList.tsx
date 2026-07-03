@@ -40,7 +40,7 @@ export const ResultsList = memo(function ResultsList({
   return (
     <>
       <div className="result-meta">
-        <span className="result-count">
+        <span className="result-count" aria-live="polite">
           <strong>{filtered.length}</strong>{' '}
           {filtered.length === 1 ? 'marked' : 'markeder'}
           {dateFilter === 'weekend' && ' i weekenden'}

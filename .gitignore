@@ -8,3 +8,4 @@ data/cache/
 *.log
 .DS_Store
 apps/web/out/
+*.tsbuildinfo

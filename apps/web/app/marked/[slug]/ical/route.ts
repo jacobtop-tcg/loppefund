@@ -21,7 +21,14 @@ export async function GET(
   const location = [event.venueName, event.street, [event.postcode, event.city].filter(Boolean).join(' ')]
     .filter(Boolean)
     .join(', ');
-  const esc = (s: string) => s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+  const esc = (s: string) =>
+    s
+      .replace(/\\/g, '\\\\')
+      .replace(/;/g, '\\;')
+      .replace(/,/g, '\\,')
+      // Collapse CR, LF, and CRLF to a single escaped newline so a raw \r from a
+      // crawled/Facebook field can't corrupt the .ics line structure.
+      .replace(/\r\n|\r|\n/g, '\\n');
   const stamp = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
 
   const vevents = upcoming.map((o) => {

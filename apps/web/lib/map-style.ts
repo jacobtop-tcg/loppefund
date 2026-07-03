@@ -158,17 +158,48 @@ function writeSession(style: StyleSpecification): void {
   }
 }
 
-let pending: Promise<LoadedMapStyle> | null = null;
-
-/** One style fetch per page load, shared by MapView and every DetailMap. */
-export function loadMapStyle(): Promise<LoadedMapStyle> {
-  pending ??= load();
-  return pending;
+function clearSession(): void {
+  try {
+    sessionStorage.removeItem(SESSION_KEY);
+  } catch {
+    // Private mode — nothing to clear.
+  }
 }
 
-async function load(): Promise<LoadedMapStyle> {
+interface RawStyle {
+  raw: StyleSpecification | null; // null => use the raster fallback
+  vector: boolean;
+  fonts: { regular: string[]; bold: string[] };
+}
+
+let rawPending: Promise<RawStyle> | null = null;
+
+/**
+ * One style FETCH per page load, but a FRESH re-themed style object per call.
+ *
+ * maplibre mutates the style object it is handed while loading it (sources and
+ * layers are transformed in place), so two map instances must never share one
+ * object — the second would receive a half-consumed style and silently stall
+ * with a blank canvas. We therefore cache only the raw fetch and clone it
+ * (retheme runs structuredClone) on every call.
+ */
+export function loadMapStyle(): Promise<LoadedMapStyle> {
+  rawPending ??= loadRaw();
+  return rawPending.then(({ raw, vector, fonts }) => {
+    if (raw) {
+      try {
+        return { style: retheme(raw), vector, fonts };
+      } catch {
+        clearSession(); // corrupt cached raw — drop it and use the raster base
+      }
+    }
+    return { style: structuredClone(RASTER_FALLBACK), vector: raw ? vector : false, fonts: raw ? fonts : RASTER_FONTS };
+  });
+}
+
+async function loadRaw(): Promise<RawStyle> {
   const cached = readSession();
-  if (cached) return { style: retheme(cached), vector: true, fonts: VECTOR_FONTS };
+  if (cached) return { raw: cached, vector: true, fonts: VECTOR_FONTS };
   try {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
@@ -176,10 +207,11 @@ async function load(): Promise<LoadedMapStyle> {
     clearTimeout(timer);
     if (!res.ok) throw new Error(`style ${res.status}`);
     const raw = (await res.json()) as StyleSpecification;
+    retheme(raw); // validate the shape before caching (throws => fall back)
     writeSession(raw); // cache the RAW style so retheme tweaks apply without cache-busting
-    return { style: retheme(raw), vector: true, fonts: VECTOR_FONTS };
+    return { raw, vector: true, fonts: VECTOR_FONTS };
   } catch {
-    pending = null; // a later map mount retries OpenFreeMap
-    return { style: RASTER_FALLBACK, vector: false, fonts: RASTER_FONTS };
+    rawPending = null; // a later map mount retries OpenFreeMap
+    return { raw: null, vector: false, fonts: RASTER_FONTS };
   }
 }

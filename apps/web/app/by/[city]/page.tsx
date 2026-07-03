@@ -20,9 +20,21 @@ export async function generateMetadata({
   const info = listCities().find((c) => c.slug === city);
   if (!info) return { title: 'By ikke fundet — Loppefund' };
   const name = displayPlace(info.city);
+  const title = `Loppemarkeder i ${name} — Loppefund`;
+  const description = `${info.count} kommende loppemarkeder, kræmmermarkeder og bagagerumsmarkeder i ${name}. Datoer, åbningstider og adresser — altid opdateret.`;
   return {
-    title: `Loppemarkeder i ${name} — Loppefund`,
-    description: `${info.count} kommende loppemarkeder, kræmmermarkeder og bagagerumsmarkeder i ${name}. Datoer, åbningstider og adresser — altid opdateret.`,
+    title,
+    description,
+    // Per-city share cards for Facebook groups, not the site-wide fallback.
+    openGraph: {
+      title,
+      description,
+      url: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/by/${info.slug}`,
+      type: 'website',
+      siteName: 'Loppefund',
+      locale: 'da_DK',
+    },
+    twitter: { card: 'summary_large_image' },
   };
 }
 

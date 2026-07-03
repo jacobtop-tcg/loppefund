@@ -5,7 +5,7 @@
   --paper-sunken: #f1ead9;
   --ink: #241f19;
   --ink-soft: #6b6157;
-  --ink-faint: #a2988c;
+  --ink-faint: #787060;
   --line: #e4dbc9;
   --accent: #e4572e;      /* signal orange — treasure! */
   --accent-deep: #c73e18;
@@ -71,6 +71,26 @@ button {
 .tip-form input:focus-visible,
 .tip-form textarea:focus-visible {
   outline: none; /* their containers already show the focus wash */
+}
+
+/* Skip link — off-screen until keyboard focus, then pinned top-left */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow-card-hover);
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 8px;
 }
 
 /* card focus is drawn on the card itself — avoid a doubled ring */
@@ -794,6 +814,33 @@ body:has(.is-map-view) {
   .view-pill {
     display: none;
   }
+
+  /* A shared URL can carry ?visning=kort onto a desktop viewport, but the
+     desktop split always shows both panes — neutralize the mobile-only
+     fullscreen map here so the list never disappears behind a fixed map. */
+  .is-map-view .results-pane {
+    display: block;
+  }
+
+  .is-map-view .map-pane {
+    position: sticky;
+    inset: auto;
+    z-index: auto;
+    top: var(--bar-h);
+    height: calc(100vh - var(--bar-h) - 16px);
+    height: calc(100dvh - var(--bar-h) - 16px);
+    margin: 0;
+  }
+
+  .is-map-view .controls {
+    position: sticky;
+    z-index: 40;
+    padding: 0;
+  }
+
+  body:has(.is-map-view) {
+    overflow: auto;
+  }
 }
 
 /* ---------- map ---------- */
@@ -805,6 +852,9 @@ body:has(.is-map-view) {
   border: 1px solid var(--line);
   box-shadow: var(--shadow-card);
   background: var(--paper-sunken); /* no white flash while the style loads */
+  /* No `transform: translateZ(0)` / `isolation` here: maplibre's canvas is
+     already its own compositing layer, so forcing an extra one on the shell
+     buys nothing and only adds a stacking context to reason about. */
 }
 
 /* MapLibre controls, re-skinned to the card system */
@@ -1381,6 +1431,32 @@ body:has(.is-map-view) {
     bottom: calc(12px + env(safe-area-inset-bottom));
     animation-name: bar-in-mobile;
   }
+
+  /* Touch targets — grow hit areas to >=44px without changing the resting look.
+     Extra height is absorbed by centering existing content; backgrounds stay put. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .sort-gems {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 2px 8px;
+  }
+
+  .fav-btn {
+    top: 4px;
+    right: 4px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .view-pill {
+    min-height: 44px;
+  }
 }
 
 @keyframes bar-in-mobile {
@@ -1400,6 +1476,14 @@ body:has(.is-map-view) {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* EventCard sets a staggered animation-delay up to 420ms; with duration zeroed
+     the card would linger at the keyframe's opacity:0. Force the final state. */
+  .event-card {
+    animation: none !important;
+    opacity: 1 !important;
   }
 }

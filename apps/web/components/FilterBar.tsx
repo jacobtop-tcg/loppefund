@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useCallback, useRef } from 'react';
 
 export type DateFilter = 'aabent-nu' | 'idag' | 'imorgen' | 'weekend' | 'naeste-weekend' | 'alle';
 
@@ -48,11 +48,23 @@ export const FilterBar = memo(function FilterBar(props: {
   locating: boolean;
   onLocate: () => void;
   onClearPos: () => void;
+  geoError: string | null;
   radius: number | null;
   onRadius: (v: number | null) => void;
   tripMode: boolean;
   onToggleTripMode: () => void;
 }) {
+  const popRef = useRef<HTMLDetailsElement>(null);
+  const summaryRef = useRef<HTMLElement>(null);
+
+  // Escape closes the Filtre popover and returns focus to its summary.
+  const onPopKeyDown = useCallback((e: React.KeyboardEvent<HTMLDetailsElement>) => {
+    if (e.key === 'Escape' && popRef.current?.open) {
+      popRef.current.open = false;
+      summaryRef.current?.focus();
+    }
+  }, []);
+
   const secondaryCount =
     (props.category ? 1 : 0) +
     (props.freeOnly ? 1 : 0) +
@@ -75,8 +87,8 @@ export const FilterBar = memo(function FilterBar(props: {
             aria-label="Søg"
           />
         </label>
-        <details className="filter-pop">
-          <summary className={`chip${secondaryCount > 0 ? ' has-active' : ''}`}>
+        <details className="filter-pop" ref={popRef} onKeyDown={onPopKeyDown}>
+          <summary ref={summaryRef} className={`chip${secondaryCount > 0 ? ' has-active' : ''}`}>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
               <path d="M4 6h16M7 12h10M10 18h4" />
             </svg>
@@ -91,6 +103,7 @@ export const FilterBar = memo(function FilterBar(props: {
                   <button
                     key={c.key}
                     className={`chip ${props.category === c.key ? 'active' : ''}`}
+                    aria-pressed={props.category === c.key}
                     onClick={() => props.onCategory(props.category === c.key ? null : c.key)}
                   >
                     {c.label}
@@ -103,24 +116,28 @@ export const FilterBar = memo(function FilterBar(props: {
               <div className="chips">
                 <button
                   className={`chip ${props.freeOnly ? 'active' : ''}`}
+                  aria-pressed={props.freeOnly}
                   onClick={() => props.onFreeOnly(!props.freeOnly)}
                 >
                   Gratis entré
                 </button>
                 <button
                   className={`chip ${props.familyOnly ? 'active' : ''}`}
+                  aria-pressed={props.familyOnly}
                   onClick={() => props.onFamilyOnly(!props.familyOnly)}
                 >
                   Børnevenligt
                 </button>
                 <button
                   className={`chip ${props.inOut === 'indoor' ? 'active' : ''}`}
+                  aria-pressed={props.inOut === 'indoor'}
                   onClick={() => props.onInOut(props.inOut === 'indoor' ? null : 'indoor')}
                 >
                   Indendørs
                 </button>
                 <button
                   className={`chip ${props.inOut === 'outdoor' ? 'active' : ''}`}
+                  aria-pressed={props.inOut === 'outdoor'}
                   onClick={() => props.onInOut(props.inOut === 'outdoor' ? null : 'outdoor')}
                 >
                   Udendørs
@@ -135,6 +152,7 @@ export const FilterBar = memo(function FilterBar(props: {
           <button
             key={c.key}
             className={`chip ${props.dateFilter === c.key ? 'active' : ''}`}
+            aria-pressed={props.dateFilter === c.key}
             onClick={() => props.onDateFilter(c.key)}
           >
             {c.key === 'aabent-nu' && <span className="live-dot" aria-hidden />}
@@ -144,15 +162,22 @@ export const FilterBar = memo(function FilterBar(props: {
         <span className="chip-sep" aria-hidden />
         <button
           className={`chip accent ${props.pos ? 'active' : ''}`}
+          aria-pressed={props.pos !== null}
           onClick={() => (props.pos ? props.onClearPos() : props.onLocate())}
         >
           {props.locating ? 'Finder dig…' : props.pos ? '✓ Nær mig' : '◎ Nær mig'}
         </button>
+        {props.geoError && !props.pos && (
+          <span role="status" style={{ fontSize: '0.8rem', color: 'var(--ink-faint)', alignSelf: 'center' }}>
+            {props.geoError}
+          </span>
+        )}
         {props.pos &&
           RADIUS_CHIPS.map((r) => (
             <button
               key={r}
               className={`chip ${props.radius === r ? 'active' : ''}`}
+              aria-pressed={props.radius === r}
               onClick={() => props.onRadius(props.radius === r ? null : r)}
             >
               {r} km
@@ -162,6 +187,7 @@ export const FilterBar = memo(function FilterBar(props: {
         {props.favCount > 0 && (
           <button
             className={`chip accent ${props.savedOnly ? 'active' : ''}`}
+            aria-pressed={props.savedOnly}
             onClick={() => props.onSavedOnly(!props.savedOnly)}
           >
             ♥ Gemte ({props.favCount})
@@ -169,6 +195,7 @@ export const FilterBar = memo(function FilterBar(props: {
         )}
         <button
           className={`chip accent ${props.tripMode ? 'active' : ''}`}
+          aria-pressed={props.tripMode}
           onClick={props.onToggleTripMode}
         >
           {props.tripMode ? '✓ Loppetur' : 'Lav en loppetur'}

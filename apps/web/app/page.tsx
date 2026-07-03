@@ -11,15 +11,18 @@ export default function HomePage() {
   const now = copenhagenNow();
   return (
     <>
+      <a className="skip-link" href="#markeder">
+        Spring til markederne
+      </a>
       <header className="site-header explorer-main">
         <div className="brand-row">
-          <div className="wordmark">
+          <h1 className="wordmark">
             Loppefund<span className="dot">.</span>
-          </div>
+          </h1>
           <p className="tagline">Alle loppemarkeder i Danmark. Ét sted, altid opdateret.</p>
         </div>
       </header>
-      <main className="explorer-main">
+      <main id="markeder" className="explorer-main">
         <Explorer events={events} today={today} now={now} />
       </main>
       <footer className="site-footer">

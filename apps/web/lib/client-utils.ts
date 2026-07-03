@@ -52,3 +52,106 @@ export function distanceKm(lat1: number, lng1: number, lat2: number, lng2: numbe
     Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(a));
 }
+
+/* ------------------------------------------------------------------ *
+ * Shareable filter state <-> URL query string.
+ *
+ * Danish query keys, all defaults omitted so a pristine view has a
+ * clean URL. Geolocation (pos/radius) and trip selection are session
+ * state and intentionally excluded — they are not shareable.
+ * ------------------------------------------------------------------ */
+
+export type ExplorerDateFilter =
+  | 'aabent-nu'
+  | 'idag'
+  | 'imorgen'
+  | 'weekend'
+  | 'naeste-weekend'
+  | 'alle';
+
+const DATE_FILTERS: readonly ExplorerDateFilter[] = [
+  'aabent-nu',
+  'idag',
+  'imorgen',
+  'weekend',
+  'naeste-weekend',
+  'alle',
+];
+
+const DEFAULT_DATE_FILTER: ExplorerDateFilter = 'weekend';
+
+export interface ExplorerParams {
+  dateFilter: ExplorerDateFilter;
+  category: string | null;
+  query: string;
+  freeOnly: boolean;
+  familyOnly: boolean;
+  inOut: 'indoor' | 'outdoor' | null;
+  savedOnly: boolean;
+  gemsFirst: boolean;
+  view: 'list' | 'map';
+}
+
+export const DEFAULT_EXPLORER_PARAMS: ExplorerParams = {
+  dateFilter: DEFAULT_DATE_FILTER,
+  category: null,
+  query: '',
+  freeOnly: false,
+  familyOnly: false,
+  inOut: null,
+  savedOnly: false,
+  gemsFirst: false,
+  view: 'list',
+};
+
+/**
+ * Parse a `window.location.search` string into filter state. Unknown or
+ * malformed values fall back to defaults, so a hand-edited URL never throws.
+ */
+export function parseExplorerParams(search: string): ExplorerParams {
+  const p = new URLSearchParams(search);
+  const dato = p.get('dato');
+  const dateFilter =
+    dato && (DATE_FILTERS as readonly string[]).includes(dato)
+      ? (dato as ExplorerDateFilter)
+      : DEFAULT_DATE_FILTER;
+
+  const category = p.get('kat') || null;
+  const query = p.get('q') ?? '';
+
+  let inOut: 'indoor' | 'outdoor' | null = null;
+  if (p.get('inde') === '1') inOut = 'indoor';
+  else if (p.get('ude') === '1') inOut = 'outdoor';
+
+  return {
+    dateFilter,
+    category,
+    query,
+    freeOnly: p.get('gratis') === '1',
+    familyOnly: p.get('familie') === '1',
+    inOut,
+    savedOnly: p.get('gemt') === '1',
+    gemsFirst: p.get('perler') === '1',
+    view: p.get('visning') === 'kort' ? 'map' : 'list',
+  };
+}
+
+/**
+ * Serialize filter state to a query string (no leading `?`). Defaults are
+ * omitted, so the pristine weekend/list view serializes to the empty string.
+ */
+export function serializeExplorerParams(state: ExplorerParams): string {
+  const p = new URLSearchParams();
+  if (state.dateFilter !== DEFAULT_DATE_FILTER) p.set('dato', state.dateFilter);
+  if (state.category) p.set('kat', state.category);
+  const q = state.query.trim();
+  if (q) p.set('q', q);
+  if (state.freeOnly) p.set('gratis', '1');
+  if (state.familyOnly) p.set('familie', '1');
+  if (state.inOut === 'indoor') p.set('inde', '1');
+  else if (state.inOut === 'outdoor') p.set('ude', '1');
+  if (state.savedOnly) p.set('gemt', '1');
+  if (state.gemsFirst) p.set('perler', '1');
+  if (state.view === 'map') p.set('visning', 'kort');
+  return p.toString();
+}

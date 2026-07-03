@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { buildTripUrl } from './client-utils.ts';
+import {
+  buildTripUrl,
+  DEFAULT_EXPLORER_PARAMS,
+  parseExplorerParams,
+  serializeExplorerParams,
+  type ExplorerParams,
+} from './client-utils.ts';
 
 // Mirror of Explorer's dateRangeFor to pin the Sunday "næste weekend" bug.
 function addDaysIso(isoDate: string, days: number): string {
@@ -60,5 +66,108 @@ describe('buildTripUrl', () => {
       '55.100000,12.100000|55.200000,12.200000',
     );
     expect(url).toContain('%7C');
+  });
+});
+
+describe('parseExplorerParams', () => {
+  it('returns all defaults for an empty query string', () => {
+    expect(parseExplorerParams('')).toEqual(DEFAULT_EXPLORER_PARAMS);
+    expect(parseExplorerParams('?')).toEqual(DEFAULT_EXPLORER_PARAMS);
+  });
+
+  it('parses each key from a fully-populated URL', () => {
+    const parsed = parseExplorerParams(
+      '?dato=idag&kat=antikmarked&q=aarhus&gratis=1&familie=1&inde=1&gemt=1&perler=1&visning=kort',
+    );
+    expect(parsed).toEqual<ExplorerParams>({
+      dateFilter: 'idag',
+      category: 'antikmarked',
+      query: 'aarhus',
+      freeOnly: true,
+      familyOnly: true,
+      inOut: 'indoor',
+      savedOnly: true,
+      gemsFirst: true,
+      view: 'map',
+    });
+  });
+
+  it('accepts a leading ? or none', () => {
+    expect(parseExplorerParams('dato=alle')).toEqual(
+      parseExplorerParams('?dato=alle'),
+    );
+  });
+
+  it('maps ude=1 to outdoor and ignores inde when both present (inde wins)', () => {
+    expect(parseExplorerParams('?ude=1').inOut).toBe('outdoor');
+    expect(parseExplorerParams('?inde=1&ude=1').inOut).toBe('indoor');
+  });
+
+  it('falls back to the default date filter for unknown values', () => {
+    expect(parseExplorerParams('?dato=nonsense').dateFilter).toBe('weekend');
+    expect(parseExplorerParams('?dato=').dateFilter).toBe('weekend');
+  });
+
+  it('treats non-"1" flag values as false', () => {
+    const parsed = parseExplorerParams('?gratis=0&familie=true&gemt=yes&perler=');
+    expect(parsed.freeOnly).toBe(false);
+    expect(parsed.familyOnly).toBe(false);
+    expect(parsed.savedOnly).toBe(false);
+    expect(parsed.gemsFirst).toBe(false);
+  });
+
+  it('treats an empty category as null', () => {
+    expect(parseExplorerParams('?kat=').category).toBeNull();
+  });
+
+  it('only treats visning=kort as the map view', () => {
+    expect(parseExplorerParams('?visning=kort').view).toBe('map');
+    expect(parseExplorerParams('?visning=liste').view).toBe('list');
+    expect(parseExplorerParams('').view).toBe('list');
+  });
+});
+
+describe('serializeExplorerParams', () => {
+  it('serializes the default state to the empty string', () => {
+    expect(serializeExplorerParams(DEFAULT_EXPLORER_PARAMS)).toBe('');
+  });
+
+  it('omits the default weekend date filter but keeps others', () => {
+    expect(serializeExplorerParams({ ...DEFAULT_EXPLORER_PARAMS, dateFilter: 'weekend' })).toBe('');
+    expect(serializeExplorerParams({ ...DEFAULT_EXPLORER_PARAMS, dateFilter: 'idag' })).toBe('dato=idag');
+  });
+
+  it('trims whitespace and omits an empty query', () => {
+    expect(serializeExplorerParams({ ...DEFAULT_EXPLORER_PARAMS, query: '   ' })).toBe('');
+    expect(serializeExplorerParams({ ...DEFAULT_EXPLORER_PARAMS, query: '  loppe  ' })).toBe('q=loppe');
+  });
+
+  it('encodes inOut as inde or ude', () => {
+    expect(serializeExplorerParams({ ...DEFAULT_EXPLORER_PARAMS, inOut: 'indoor' })).toBe('inde=1');
+    expect(serializeExplorerParams({ ...DEFAULT_EXPLORER_PARAMS, inOut: 'outdoor' })).toBe('ude=1');
+  });
+
+  it('round-trips a fully-populated state', () => {
+    const state: ExplorerParams = {
+      dateFilter: 'naeste-weekend',
+      category: 'kraemmermarked',
+      query: 'København',
+      freeOnly: true,
+      familyOnly: true,
+      inOut: 'outdoor',
+      savedOnly: true,
+      gemsFirst: true,
+      view: 'map',
+    };
+    expect(parseExplorerParams('?' + serializeExplorerParams(state))).toEqual(state);
+  });
+
+  it('round-trips a partially-populated state', () => {
+    const state: ExplorerParams = {
+      ...DEFAULT_EXPLORER_PARAMS,
+      dateFilter: 'aabent-nu',
+      freeOnly: true,
+    };
+    expect(parseExplorerParams('?' + serializeExplorerParams(state))).toEqual(state);
   });
 });

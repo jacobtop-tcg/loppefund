@@ -8,6 +8,8 @@ import { useCallback, useSyncExternalStore } from 'react';
 const KEY = 'loppefund:favorites';
 const EVENT = 'loppefund:favorites-changed';
 
+const SERVER_SNAPSHOT: string[] = [];
+
 function read(): Set<string> {
   if (typeof window === 'undefined') return new Set();
   try {
@@ -20,33 +22,40 @@ function read(): Set<string> {
 
 function write(set: Set<string>): void {
   window.localStorage.setItem(KEY, JSON.stringify([...set]));
+  snapshot = [...set].sort();
   window.dispatchEvent(new Event(EVENT));
 }
 
-let cache: Set<string> | null = null;
-let snapshot: string[] = [];
+// Cached parsed snapshot: 499 subscribed cards each call getSnapshot on every
+// render, so we parse localStorage only on an actual change (toggle via write,
+// or a cross-tab 'storage' event) and hand back the same array reference in
+// between — useSyncExternalStore must not see a fresh identity each render.
+let snapshot: string[] | null = null;
 
 function getSnapshot(): string[] {
-  const current = read();
-  // Stable reference unless contents changed — useSyncExternalStore needs it.
-  if (!cache || cache.size !== current.size || [...current].some((s) => !cache!.has(s))) {
-    cache = current;
-    snapshot = [...current].sort();
-  }
+  snapshot ??= [...read()].sort();
   return snapshot;
 }
 
+function refresh(): void {
+  snapshot = [...read()].sort();
+}
+
 function subscribe(cb: () => void): () => void {
-  window.addEventListener('storage', cb);
+  const onStorage = () => {
+    refresh();
+    cb();
+  };
+  window.addEventListener('storage', onStorage);
   window.addEventListener(EVENT, cb);
   return () => {
-    window.removeEventListener('storage', cb);
+    window.removeEventListener('storage', onStorage);
     window.removeEventListener(EVENT, cb);
   };
 }
 
 export function useFavorites() {
-  const slugs = useSyncExternalStore(subscribe, getSnapshot, () => snapshot);
+  const slugs = useSyncExternalStore(subscribe, getSnapshot, () => SERVER_SNAPSHOT);
   const toggle = useCallback((slug: string) => {
     const set = read();
     if (set.has(slug)) set.delete(slug);

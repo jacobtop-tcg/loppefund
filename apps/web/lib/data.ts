@@ -94,7 +94,12 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       familyFriendly: e.amenities
         ? (JSON.parse(e.amenities) as Amenities).familyFriendly === true
         : false,
-      searchText: e.description ? searchFold(e.description).slice(0, 400) : '',
+      // Enough folded description signal for keyword matches ('vintage',
+      // 'børneloppemarked') without bloating the homepage payload — title,
+      // city, venue, municipality and postcode are searched separately.
+      searchText: e.description
+        ? searchFold(e.description).replace(/\s+/g, ' ').trim().slice(0, 140)
+        : '',
       // Cap the serialized occurrence list — always-open venues have one per
       // day, which bloats the payload without changing filter results.
       occurrences: e.occurrences.slice(0, 40).map((o) => ({

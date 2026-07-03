@@ -88,9 +88,17 @@ const SAMPLE_CONFIG = {
     { type: 'group', url: 'https://www.facebook.com/groups/785478073645748/', scrolls: 6, note: 'Loppemarkeder i København' },
     { type: 'group', url: 'https://www.facebook.com/groups/259660774155532/', scrolls: 6, note: 'Loppemarkeder på Fyn (privat — afventer godkendelse)' },
     { type: 'group', url: 'https://www.facebook.com/groups/1674550122762082/', scrolls: 6, note: 'Loppemarked oversigt Sjælland (privat — afventer godkendelse)' },
-    // Facebook's own event search casts a wider net once you are logged in:
-    { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked', scrolls: 4, note: 'FB events: loppemarked' },
-    { type: 'search', url: 'https://www.facebook.com/events/search?q=kr%C3%A6mmermarked', scrolls: 4, note: 'FB events: kræmmermarked' },
+    // Facebook EVENT SEARCH is by far the richest, best-structured source — clean
+    // dates + addresses. Proven: one broad run yielded 130 verified markets. Cast
+    // wide by market type AND by region (q accepts "loppemarked <by>"):
+    { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked', scrolls: 5, note: 'FB events: loppemarked' },
+    { type: 'search', url: 'https://www.facebook.com/events/search?q=kr%C3%A6mmermarked', scrolls: 5, note: 'FB events: kræmmermarked' },
+    { type: 'search', url: 'https://www.facebook.com/events/search?q=bagagerumsmarked', scrolls: 4, note: 'FB events: bagagerumsmarked' },
+    { type: 'search', url: 'https://www.facebook.com/events/search?q=genbrugsmarked', scrolls: 3, note: 'FB events: genbrugsmarked' },
+    { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn', scrolls: 4, note: 'FB events: loppemarked København' },
+    { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked%20aarhus', scrolls: 4, note: 'FB events: loppemarked Aarhus' },
+    { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked%20odense', scrolls: 4, note: 'FB events: loppemarked Odense' },
+    { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked%20aalborg', scrolls: 4, note: 'FB events: loppemarked Aalborg' },
     // Marketplace: mostly single items, but occasional market flyers slip in —
     // OCR + the date filter keep only genuine markets. Lower yield than groups.
     { type: 'marketplace', url: 'https://www.facebook.com/marketplace/search?query=loppemarked', scrolls: 3, note: 'Marketplace: loppemarked' },

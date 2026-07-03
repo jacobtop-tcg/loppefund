@@ -74,7 +74,14 @@ const SAMPLE_CONFIG = {
     { type: 'group', url: 'https://www.facebook.com/groups/317275305707909/', scrolls: 6, note: 'Horne Kræmmermarked (Faaborg)' },
     { type: 'group', url: 'https://www.facebook.com/groups/2750518275077822/', scrolls: 6, note: 'Lopper og flittige hænder på Langeland' },
     { type: 'page', url: 'https://www.facebook.com/LoppeladenFaaborg', scrolls: 4, note: 'Loppeladen Faaborg (page)' },
-    { type: 'group', url: 'https://www.facebook.com/groups/362315834415/', scrolls: 6, note: 'Loppemarkeder i Danmark (landsdækkende)' },
+    // Nationwide/regional groups joined 2026-07-03 (biggest reach):
+    { type: 'group', url: 'https://www.facebook.com/groups/362315834415/', scrolls: 8, note: 'Loppemarkeder i Danmark (44k)' },
+    { type: 'group', url: 'https://www.facebook.com/groups/607762852587305/', scrolls: 8, note: 'Loppemarked FYN (27k, 90+ posts/dag)' },
+    { type: 'group', url: 'https://www.facebook.com/groups/721174666810053/', scrolls: 8, note: 'MarkedsKALENDEREN (30k)' },
+    { type: 'group', url: 'https://www.facebook.com/groups/1484631705148044/', scrolls: 6, note: 'Loppemarkeder i Sønderjylland' },
+    { type: 'group', url: 'https://www.facebook.com/groups/785478073645748/', scrolls: 6, note: 'Loppemarkeder i København' },
+    { type: 'group', url: 'https://www.facebook.com/groups/259660774155532/', scrolls: 6, note: 'Loppemarkeder på Fyn (privat — afventer godkendelse)' },
+    { type: 'group', url: 'https://www.facebook.com/groups/1674550122762082/', scrolls: 6, note: 'Loppemarked oversigt Sjælland (privat — afventer godkendelse)' },
     // Facebook's own event search casts a wider net once you are logged in:
     { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked', scrolls: 4, note: 'FB events: loppemarked' },
     { type: 'search', url: 'https://www.facebook.com/events/search?q=kr%C3%A6mmermarked', scrolls: 4, note: 'FB events: kræmmermarked' },

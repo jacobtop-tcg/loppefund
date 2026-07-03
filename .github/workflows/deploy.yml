@@ -26,6 +26,11 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # The crawl politely fetches ~1500 source pages, so a full run is ~35 min.
+    # Bound it so a genuinely stuck source (or a runaway loop) fails fast instead
+    # of holding the pages-deploy lock for GitHub's 6-hour default and starving
+    # every later deploy — "continuously updated" depends on the queue draining.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 

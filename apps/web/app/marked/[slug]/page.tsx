@@ -11,6 +11,7 @@ import {
 } from '../../../lib/format.ts';
 import { DetailMap } from '../../../components/DetailMap.tsx';
 import { ShareButton } from '../../../components/ShareButton.tsx';
+import { ReportEventForm } from '../../../components/ReportEventForm.tsx';
 import { listUpcomingEvents } from '../../../lib/data.ts';
 import { distanceKm } from '../../../lib/client-utils.ts';
 
@@ -367,14 +368,10 @@ export default async function EventPage({
                 Loppefund samler automatisk oplysninger fra offentlige kilder og viser altid
                 hvor de kommer fra. Tag forbehold for ændringer hos arrangøren.
               </p>
-              <p className="trust-note">
-                <a
-                  href={`mailto:${process.env.NEXT_PUBLIC_TIP_EMAIL ?? 'hej@loppefund.dk'}?subject=${encodeURIComponent(`Fejl i "${event.title}"`)}&body=${encodeURIComponent(`Vedrører: ${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}\n\nHvad er forkert?\n`)}`}
-                  style={{ color: 'var(--accent-deep)', fontWeight: 600 }}
-                >
-                  Fejl i oplysningerne? Skriv til os
-                </a>
-              </p>
+              <ReportEventForm
+                title={event.title}
+                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`}
+              />
             </section>
 
             {nearby.length > 0 && (

@@ -9,3 +9,7 @@ data/cache/
 .DS_Store
 apps/web/out/
 *.tsbuildinfo
+
+# Self-hosted Facebook harvester: login session (cookies!) — never commit
+.fb-session/
+scripts/fb-harvest.config.json

@@ -526,3 +526,73 @@ export function expirePastEvents(db: DatabaseSync, today: string): number {
     .run(today);
   return Number(res.changes);
 }
+
+export interface VanishedReconciliation {
+  prunedRawEvents: number;
+  expiredEvents: number;
+  /** Events that lost this source but still have others — the caller must
+   *  re-derive their occurrences to drop the vanished source's dates. */
+  survivingEventIds: number[];
+}
+
+/**
+ * Reconcile a source that was just fully and successfully crawled: remove its
+ * raw_events not seen since `sinceIso` (the source is up but no longer lists
+ * them — cancelled/removed) and expire any event left with no sources at all.
+ *
+ * Trust safety: `extracted_at` is refreshed on every re-crawl (even unchanged
+ * payloads), so `< sinceIso` means "the source was crawled this run but did
+ * NOT re-list this event". Expiry is reversible — a re-listed event is restored
+ * to 'active' on its next canonicalization (canonicalize.ts) — and listings
+ * already show only status='active', so a wrongly-expired event self-heals on
+ * the next crawl. The CALLER must gate this on a healthy full crawl (no limit,
+ * events discovered, no fetch errors) so a source outage never triggers it.
+ */
+export function reconcileVanishedSourceEvents(
+  db: DatabaseSync,
+  sourceKey: string,
+  sinceIso: string,
+): VanishedReconciliation {
+  const vanished = db
+    .prepare(`SELECT id FROM raw_events WHERE source_key = ? AND extracted_at < ?`)
+    .all(sourceKey, sinceIso) as unknown as Array<{ id: number }>;
+  if (vanished.length === 0) {
+    return { prunedRawEvents: 0, expiredEvents: 0, survivingEventIds: [] };
+  }
+  const rawIds = vanished.map((r) => r.id);
+  const ph = rawIds.map(() => '?').join(',');
+  const affected = db
+    .prepare(`SELECT DISTINCT event_id FROM event_sources WHERE raw_event_id IN (${ph})`)
+    .all(...rawIds) as unknown as Array<{ event_id: number }>;
+  const affectedIds = affected.map((r) => r.event_id);
+  db.prepare(`DELETE FROM event_sources WHERE raw_event_id IN (${ph})`).run(...rawIds);
+  db.prepare(`DELETE FROM raw_events WHERE id IN (${ph})`).run(...rawIds);
+  const survivingEventIds: number[] = [];
+  let expiredEvents = 0;
+  for (const id of affectedIds) {
+    const remaining = db
+      .prepare(`SELECT COUNT(*) AS c FROM event_sources WHERE event_id = ?`)
+      .get(id) as unknown as { c: number };
+    if (remaining.c === 0) {
+      const res = db
+        .prepare(`UPDATE events SET status = 'expired' WHERE id = ? AND status = 'active'`)
+        .run(id);
+      if (Number(res.changes) > 0) expiredEvents++;
+    } else {
+      survivingEventIds.push(id);
+    }
+  }
+  return { prunedRawEvents: rawIds.length, expiredEvents, survivingEventIds };
+}
+
+/** A payload still linked to an event, for re-deriving its occurrences. */
+export function anyLinkedPayload(db: DatabaseSync, eventId: number): string | null {
+  const row = db
+    .prepare(
+      `SELECT r.payload FROM event_sources es
+       JOIN raw_events r ON r.id = es.raw_event_id
+       WHERE es.event_id = ? LIMIT 1`,
+    )
+    .get(eventId) as unknown as { payload: string } | undefined;
+  return row?.payload ?? null;
+}

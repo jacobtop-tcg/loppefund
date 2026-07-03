@@ -9,12 +9,14 @@
 import { parseArgs } from 'node:util';
 import type { RawEvent } from '@loppefund/core';
 import {
+  anyLinkedPayload,
   expirePastEvents,
   finishRun,
   listSourceCandidates,
   markCandidateProbed,
   openDb,
   recordDocument,
+  reconcileVanishedSourceEvents,
   setCandidateStatus,
   startRun,
   upsertSource,
@@ -187,6 +189,13 @@ if (selected.length === 0) {
 const fetcher = new PoliteFetcher();
 const trustMap = Object.fromEntries(adapters.map((a) => [a.key, a.trust]));
 
+// Captured before any crawling: raw_events whose extracted_at predates this
+// stamp were NOT re-seen this run. Used after the loop to expire events a
+// healthily-crawled source has stopped listing.
+const runStart = new Date().toISOString();
+const fullCrawl = limit === Infinity;
+const healthySources: string[] = [];
+
 for (const adapter of selected) {
   upsertSource(db, {
     key: adapter.key,
@@ -218,6 +227,8 @@ for (const adapter of selected) {
     }
     const expiredApi = expirePastEvents(db, new Date().toISOString().slice(0, 10));
     stats.expired = expiredApi;
+    // A clean full API pull is trustworthy enough to reconcile disappearances.
+    if (fullCrawl && stats.discovered > 0) healthySources.push(adapter.key);
     finishRun(db, runId, stats);
     console.log(`[${adapter.key}] done:`, JSON.stringify(stats));
     continue;
@@ -253,8 +264,45 @@ for (const adapter of selected) {
   }
   const expired = expirePastEvents(db, new Date().toISOString().slice(0, 10));
   stats.expired = expired;
+  // Only a complete crawl with zero fetch errors is safe to reconcile against —
+  // a partial or flaky crawl would look like events "vanished" when they didn't.
+  if (fullCrawl && stats.discovered > 0 && stats.fetchErrors === 0) {
+    healthySources.push(adapter.key);
+  }
   finishRun(db, runId, stats);
   console.log(`[${adapter.key}] done:`, JSON.stringify(stats));
+}
+
+// Cancellation detection: for each source that was just fully and cleanly
+// crawled, expire the events it has stopped listing (present last run, absent
+// now = cancelled/removed). Reversible — a re-listed event is restored to
+// 'active' on its next crawl — and gated on a healthy full crawl so a source
+// outage never mass-expires. Events that merely lost ONE of several sources are
+// re-derived so the vanished source's dates drop out. "Incorrect over missing."
+if (healthySources.length > 0) {
+  const reconcileStats: CanonicalizeStats = {
+    created: 0, merged: 0, unchanged: 0, skippedNoDates: 0,
+  };
+  let pruned = 0;
+  let expired = 0;
+  const survivors = new Set<number>();
+  for (const key of healthySources) {
+    const r = reconcileVanishedSourceEvents(db, key, runStart);
+    pruned += r.prunedRawEvents;
+    expired += r.expiredEvents;
+    r.survivingEventIds.forEach((id) => survivors.add(id));
+  }
+  for (const eventId of survivors) {
+    const payload = anyLinkedPayload(db, eventId);
+    if (payload) {
+      await canonicalizeRawEvent(db, JSON.parse(payload) as RawEvent, trustMap, reconcileStats, {
+        touch: false,
+      });
+    }
+  }
+  console.log(
+    `reconcile vanished: pruned ${pruned} raw events, expired ${expired} events, re-derived ${survivors.size}`,
+  );
 }
 
 // Freshness decay only works if scores are actually recomputed after crawls.

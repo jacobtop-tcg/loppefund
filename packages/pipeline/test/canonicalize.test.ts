@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { openDb, getEventBySlug, upsertSource } from '@loppefund/db';
+import {
+  openDb,
+  getEventBySlug,
+  upsertSource,
+  reconcileVanishedSourceEvents,
+} from '@loppefund/db';
 import type { RawEvent } from '@loppefund/core';
 import { canonicalizeRawEvent, type CanonicalizeStats } from '../src/canonicalize.ts';
 
@@ -210,6 +215,118 @@ describe('canonicalizeRawEvent', () => {
       trust,
       stats,
     );
+    expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.status).toBe('active');
+  });
+});
+
+// A clearly-distinct second event so it never dedups with rawA().
+function rawB(): RawEvent {
+  return {
+    sourceKey: 'markedskalenderen',
+    sourceUrl: 'https://markedskalenderen.dk/marked/show/svendborgmarked',
+    sourceEventId: 'svendborgmarked',
+    title: 'Vinterloppemarked i Svendborg',
+    category: 'loppemarked',
+    street: 'Møllergade 5',
+    postcode: '5700',
+    city: 'Svendborg',
+    lat: 55.06,
+    lng: 10.61,
+    dateRanges: [{ start: future, end: future }],
+    openingHoursText: '10-16',
+  };
+}
+
+const setExtractedAt = (db: ReturnType<typeof openDb>, sourceEventId: string, iso: string) =>
+  db
+    .prepare(`UPDATE raw_events SET extracted_at = ? WHERE source_event_id = ?`)
+    .run(iso, sourceEventId);
+
+describe('reconcileVanishedSourceEvents', () => {
+  const OLD = '2026-07-01T00:00:00.000Z';
+  const FRESH = '2026-07-03T12:00:00.000Z';
+  const runStart = '2026-07-03T00:00:00.000Z';
+
+  it('expires an event a re-crawled source has stopped listing, keeps the re-listed one', async () => {
+    const db = openDb(':memory:');
+    upsertSource(db, { key: 'markedskalenderen', name: 'MK', baseUrl: 'x', trust: 0.7 });
+    const stats = newStats();
+    await canonicalizeRawEvent(db, rawA(), trust, stats);
+    await canonicalizeRawEvent(db, rawB(), trust, stats);
+    // Simulate this run: the source re-listed B but not A.
+    setExtractedAt(db, 'testmarked', OLD);
+    setExtractedAt(db, 'svendborgmarked', FRESH);
+
+    const r = reconcileVanishedSourceEvents(db, 'markedskalenderen', runStart);
+    expect(r.prunedRawEvents).toBe(1);
+    expect(r.expiredEvents).toBe(1);
+    expect(r.survivingEventIds).toEqual([]);
+    expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.status).toBe('expired');
+    expect(getEventBySlug(db, 'vinterloppemarked-i-svendborg-svendborg')!.status).toBe('active');
+  });
+
+  it('prunes nothing when every raw event was re-seen this run', async () => {
+    const db = openDb(':memory:');
+    upsertSource(db, { key: 'markedskalenderen', name: 'MK', baseUrl: 'x', trust: 0.7 });
+    const stats = newStats();
+    await canonicalizeRawEvent(db, rawA(), trust, stats);
+    await canonicalizeRawEvent(db, rawB(), trust, stats);
+    setExtractedAt(db, 'testmarked', FRESH);
+    setExtractedAt(db, 'svendborgmarked', FRESH);
+
+    const r = reconcileVanishedSourceEvents(db, 'markedskalenderen', runStart);
+    expect(r.prunedRawEvents).toBe(0);
+    expect(r.expiredEvents).toBe(0);
+    expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.status).toBe('active');
+  });
+
+  it('does not expire an event that lost one source but kept another (survivor)', async () => {
+    const db = openDb(':memory:');
+    upsertSource(db, { key: 'markedskalenderen', name: 'MK', baseUrl: 'x', trust: 0.7 });
+    upsertSource(db, { key: 'kultunaut', name: 'KN', baseUrl: 'x', trust: 0.6 });
+    const stats = newStats();
+    await canonicalizeRawEvent(db, rawA(), trust, stats);
+    // Second source merges into the same event.
+    await canonicalizeRawEvent(
+      db,
+      {
+        sourceKey: 'kultunaut',
+        sourceUrl: 'https://kultunaut.dk/arr/9',
+        sourceEventId: 'kn9',
+        title: 'Testmarked på havnen i Odense',
+        lat: 55.4001,
+        lng: 10.3801,
+        postcode: '5000',
+        occurrences: [{ date: future, startTime: null, endTime: null }],
+      },
+      trust,
+      stats,
+    );
+    expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.sources).toHaveLength(2);
+    // markedskalenderen stops listing it; kultunaut still does.
+    setExtractedAt(db, 'testmarked', OLD);
+    setExtractedAt(db, 'kn9', FRESH);
+
+    const r = reconcileVanishedSourceEvents(db, 'markedskalenderen', runStart);
+    expect(r.prunedRawEvents).toBe(1);
+    expect(r.expiredEvents).toBe(0);
+    expect(r.survivingEventIds).toHaveLength(1);
+    const e = getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!;
+    expect(e.status).toBe('active');
+    expect(e.sources).toHaveLength(1); // only kultunaut remains
+  });
+
+  it('is reversible: a re-listed event is restored to active on its next crawl', async () => {
+    const db = openDb(':memory:');
+    upsertSource(db, { key: 'markedskalenderen', name: 'MK', baseUrl: 'x', trust: 0.7 });
+    const stats = newStats();
+    await canonicalizeRawEvent(db, rawA(), trust, stats);
+    setExtractedAt(db, 'testmarked', OLD);
+    reconcileVanishedSourceEvents(db, 'markedskalenderen', runStart);
+    expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.status).toBe('expired');
+
+    // The source lists it again next crawl → self-heals back to active.
+    await canonicalizeRawEvent(db, rawA(), trust, stats);
     expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.status).toBe('active');
   });
 });

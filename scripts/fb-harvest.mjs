@@ -37,11 +37,17 @@ import { existsSync, unlinkSync } from 'node:fs';
 import { dirname, resolve, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = resolve(dirname(new URL(import.meta.url).pathname), '..');
+// fileURLToPath (not URL.pathname) so a repo path with spaces/special chars —
+// e.g. ".../Loppemarkeder i DK" — is decoded, not left percent-encoded (%20).
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CONFIG = resolve(ROOT, 'scripts/fb-harvest.config.json');
 const SESSION_DIR = resolve(ROOT, '.fb-session'); // persistent login, gitignored
-const OUT = resolve(ROOT, 'data/fb-harvest.json');
+// Output path. Defaults to the committed feed the pipeline ingests, but can be
+// redirected (FB_HARVEST_OUT) to a scratch file so a raw run doesn't clobber a
+// hand-curated feed before its markets have been verified and merged back in.
+const OUT = resolve(ROOT, process.env.FB_HARVEST_OUT ?? 'data/fb-harvest.json');
 const OCR_SCRIPT = resolve(ROOT, 'scripts/ocr.swift');
 
 // Most loppe-group market announcements are POSTER IMAGES — the date/place/name
@@ -105,6 +111,9 @@ async function loadConfig() {
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// Human-ish randomness (no fixed cadence — constant timing is a bot tell).
+const rand = (min, max) => Math.floor(min + Math.random() * (max - min));
+const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
 async function main() {
   const login = process.argv.includes('--login');
@@ -120,17 +129,31 @@ async function main() {
   }
 
   // Persistent context = the login survives between runs (like a real browser).
-  // The stealth touches (real UA, no AutomationControlled flag, hidden
-  // navigator.webdriver) are the same trick paid scrapers use — on your own
-  // residential IP they make an ordinary logged-in session look ordinary.
-  const ctx = await chromium.launchPersistentContext(SESSION_DIR, {
-    headless: !login,
+  // Anti-detection is mostly BEHAVIOURAL (see the harvest loop: shuffled order,
+  // long randomized gaps between groups, human-ish scrolling, checkpoint backoff).
+  // The launch touches just make the browser itself look ordinary:
+  //  - channel 'chrome' = your real installed Chrome (best fingerprint), not the
+  //    bundled "Chrome for Testing"; falls back to bundled chromium if absent.
+  //  - HEADED by default for harvest too — a real, visible Chrome window is far
+  //    less bot-like than headless (set FB_HARVEST_HEADLESS=1 to override).
+  //  - real UA, Europe/Copenhagen tz, da-DK locale, no AutomationControlled flag,
+  //    hidden navigator.webdriver.
+  const headless = login ? false : process.env.FB_HARVEST_HEADLESS === '1';
+  const launchOpts = {
+    headless,
     viewport: { width: 1280, height: 900 },
     locale: 'da-DK',
+    timezoneId: 'Europe/Copenhagen',
     userAgent:
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
     args: ['--disable-blink-features=AutomationControlled'],
-  });
+  };
+  let ctx;
+  try {
+    ctx = await chromium.launchPersistentContext(SESSION_DIR, { ...launchOpts, channel: 'chrome' });
+  } catch {
+    ctx = await chromium.launchPersistentContext(SESSION_DIR, launchOpts); // bundled chromium fallback
+  }
   await ctx.addInitScript(() => {
     Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
   });
@@ -138,10 +161,23 @@ async function main() {
 
   if (login) {
     await page.goto('https://www.facebook.com/');
-    console.log('Log in with your DEDICATED account in the opened window, then press Enter here…');
-    await new Promise((r) => process.stdin.once('data', r));
+    console.log('Opened Facebook — log in in the window. I detect the session automatically (no Enter needed).');
+    // Facebook sets a `c_user` cookie (your numeric account id) once you are
+    // authenticated. Poll for it so login works UNATTENDED — no interactive
+    // stdin/Enter needed, which lets this run in the background while you log in
+    // by hand in the popped-up window. Give up after 6 minutes.
+    const deadline = Date.now() + 6 * 60 * 1000;
+    let ok = false;
+    while (Date.now() < deadline) {
+      await sleep(2500);
+      const cookies = await ctx.cookies('https://www.facebook.com');
+      if (cookies.some((c) => c.name === 'c_user' && c.value)) { ok = true; break; }
+    }
+    if (ok) await sleep(1500); // let FB finish writing session cookies to disk
     await ctx.close();
-    console.log('Session saved. Re-run without --login to harvest.');
+    console.log(ok
+      ? 'Login detected — session saved to .fb-session. Re-run without --login to harvest.'
+      : 'Timed out waiting for login; no session saved.');
     return;
   }
 
@@ -168,6 +204,31 @@ async function main() {
     }
   }
 
+  // OCR one image element directly. Poster-first harvesting: FB obfuscates post
+  // text (per-character reordered spans) and [role=article] is unreliable, so the
+  // FLYER IMAGE is the dependable carrier of date/place/name. Size + aspect gate
+  // skips avatars/reactions (too small) and full-viewport overlay imgs / banners
+  // (too big or too wide) that would otherwise OCR the page chrome.
+  async function ocrImgHandle(img, idHint) {
+    if (!OCR_ENABLED) return '';
+    try {
+      const box = await img.boundingBox();
+      if (!box || box.width < 260 || box.height < 260) return '';
+      const area = box.width * box.height;
+      const ar = box.width / box.height;
+      if (area > 1_000_000 || ar > 2.2 || ar < 0.45) return '';
+      const tmp = join(tmpdir(), `fbimg-${idHint.replace(/\W+/g, '').slice(0, 40)}.png`);
+      try {
+        await img.screenshot({ path: tmp });
+        return ocrImage(tmp);
+      } finally {
+        try { unlinkSync(tmp); } catch { /* already gone */ }
+      }
+    } catch {
+      return '';
+    }
+  }
+
   // Keep an item only if it mentions a market keyword and has usable text.
   function keep(id, text, url, iso) {
     if (seen.has(id) || !text || text.replace(/\s+/g, ' ').trim().length < 15) return;
@@ -176,12 +237,30 @@ async function main() {
     items.push({ id: id.replace(/\W+/g, '').slice(0, 32), text, url, startDate: iso ?? undefined });
   }
 
-  for (const t of cfg.targets ?? []) {
-    if (/REPLACE_WITH/.test(t.url)) continue;
+  // Anti-bot: warm up like a real session before touching any group.
+  const RUN_BUDGET_MS = Number(process.env.FB_HARVEST_BUDGET_MS ?? 25 * 60 * 1000);
+  const startedAt = Date.now();
+  try { await page.goto('https://www.facebook.com/', { waitUntil: 'domcontentloaded', timeout: 30000 }); } catch { /* ignore */ }
+  await sleep(rand(4000, 8000));
+
+  // Visit targets in RANDOM order with long human gaps between them (the single
+  // most important anti-bot measure) and stop at a per-run wall-clock budget.
+  let aborted = false;
+  for (const t of shuffle([...(cfg.targets ?? [])].filter((x) => !/REPLACE_WITH/.test(x.url)))) {
+    if (aborted || Date.now() - startedAt > RUN_BUDGET_MS) {
+      console.log('[harvest] stopping (time budget reached or backed off).');
+      break;
+    }
     try {
       console.log(`[harvest] ${t.type ?? 'group'}: ${t.url}`);
       await page.goto(t.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-      await sleep(3000);
+      await sleep(rand(2500, 4500));
+      // Checkpoint / rate-limit wall → back off immediately (never hammer).
+      const blocked = await page.evaluate(() => {
+        const b = (document.body.innerText || '').toLowerCase().slice(0, 500);
+        return /checkpoint|you're temporarily blocked|going too fast|confirm your identity|log ind for at forts/.test(location.href.toLowerCase() + ' ' + b);
+      }).catch(() => false);
+      if (blocked) { console.warn('[harvest] checkpoint/throttle detected — backing off, ending run.'); aborted = true; break; }
       for (let s = 0; s < (t.scrolls ?? 5); s++) {
         if (t.type === 'marketplace') {
           // Marketplace listings are /marketplace/item/ links with a photo. The
@@ -202,7 +281,8 @@ async function main() {
             keep(id, ocr ? `${title}\n${ocr}` : title, d.url, null);
           }
         } else {
-          // Group/page/search posts: read the caption + OCR the poster image.
+          // Group/page/search posts: clean captions (event cards, some posts) via
+          // [role=article] text — a cheap supplement when FB isn't obfuscating.
           for (const art of await page.$$('[role="article"]')) {
             const d = await art.evaluate((el) => {
               const text = (el.innerText || '').trim();
@@ -215,16 +295,46 @@ async function main() {
             });
             const id = (d.url ?? d.text).slice(0, 200);
             if (!d.text || seen.has(id)) continue;
-            const ocr = await ocrOf(art, id);
-            keep(id, ocr ? `${d.text}\n${ocr}` : d.text, d.url ?? t.url, d.iso);
+            keep(id, d.text, d.url ?? t.url, d.iso);
+          }
+          // PRIMARY path — OCR every poster-sized image on the page. This is what
+          // actually surfaces the markets: the flyer picture carries the date,
+          // place and name in a form OCR reads cleanly, regardless of FB's text
+          // obfuscation or article structure. parseTip drops any without a date.
+          for (const img of await page.$$('img')) {
+            let src;
+            try { src = await img.evaluate((el) => (el.currentSrc || el.src || '').split('?')[0]); } catch { continue; }
+            if (!src) continue;
+            const id = 'fbimg' + src.slice(-64);
+            if (seen.has(id)) continue;
+            // Attach the nearest post/photo permalink if one is in an ancestor.
+            let url = t.url;
+            try {
+              url = (await img.evaluate((el) => {
+                for (let n = el, i = 0; n && i < 12; i++, n = n.parentElement) {
+                  const a = n.querySelector?.('a[href*="/posts/"],a[href*="/permalink/"],a[href*="/photo"]');
+                  if (a?.href) return a.href.split('?')[0];
+                }
+                return null;
+              })) || t.url;
+            } catch { /* keep target url */ }
+            const ocr = await ocrImgHandle(img, id);
+            keep(id, ocr, url, null);
+            seen.add(id); // processed — never OCR this image again this run
           }
         }
-        await page.mouse.wheel(0, 2400);
-        await sleep(2500 + Math.random() * 1500); // polite, human-ish pacing
+        // human-ish scroll: variable distance, small mouse move, and an
+        // occasional longer "reading" pause. FB lazy-loads on real scroll events.
+        await page.mouse.move(rand(300, 1000), rand(300, 800)).catch(() => {});
+        await page.evaluate((dy) => window.scrollBy(0, dy), rand(1200, 2200)).catch(() => {});
+        await page.mouse.wheel(0, rand(1000, 1800));
+        await sleep(rand(2800, 6000) + (Math.random() < 0.15 ? rand(3000, 7000) : 0));
       }
     } catch (e) {
       console.warn(`[harvest] ${t.url} failed: ${e.message}`);
     }
+    // Long, randomized gap BETWEEN groups — the key behavioural anti-bot measure.
+    await sleep(rand(12000, 25000));
   }
 
   await ctx.close();

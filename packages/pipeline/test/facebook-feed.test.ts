@@ -1,4 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { writeFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { facebookFeed, feedUrls, itemToRaw } from '../src/adapters/facebook-feed.ts';
 import type { FetchResult } from '../src/adapters/types.ts';
 
@@ -149,6 +152,44 @@ describe('facebook-feed adapter', () => {
       expect(raws[0]!.occurrences?.[0]?.date).toBe('2026-07-18');
     } finally {
       delete process.env.LOPPEFUND_FB_FEED_URLS;
+    }
+  });
+
+  it('keeps time null for a date-only structured event (no fabricated/DST-shifted hour)', () => {
+    const raw = itemToRaw(
+      { name: 'Marked i VBC Houlkær', startDate: '2026-11-14', location: { address: 'Viborg' } },
+      '2026-07-03',
+    );
+    expect(raw).not.toBeNull();
+    expect(raw!.occurrences[0]!.date).toBe('2026-11-14');
+    expect(raw!.occurrences[0]!.startTime).toBeNull();
+    expect(raw!.occurrences[0]!.endTime).toBeNull();
+  });
+
+  it('reads a local committed feed file without any HTTP fetch', async () => {
+    const tmp = join(tmpdir(), `fb-feed-local-${process.pid}-${Math.random().toString(36).slice(2)}.json`);
+    await writeFile(
+      tmp,
+      JSON.stringify([
+        {
+          name: 'Loppemarked i Skårup',
+          startDate: '2026-09-06T10:00:00+02:00',
+          location: { address: 'Skårup By, 5881 Skårup' },
+        },
+      ]),
+    );
+    process.env.LOPPEFUND_FB_FEED_URLS = tmp;
+    try {
+      // A local path must be read from disk — fetch must never be called for it.
+      const stub = async (): Promise<FetchResult> => {
+        throw new Error('fetch must not be called for a local feed path');
+      };
+      const raws = await facebookFeed.fetchRawEvents!(stub);
+      expect(raws).toHaveLength(1);
+      expect(raws[0]!.occurrences?.[0]?.date).toBe('2026-09-06');
+    } finally {
+      delete process.env.LOPPEFUND_FB_FEED_URLS;
+      await rm(tmp, { force: true });
     }
   });
 });

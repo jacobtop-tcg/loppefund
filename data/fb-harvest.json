@@ -3,7 +3,9 @@
     "name": "Loppemarked ved Sankt Nicolai Apotek",
     "startDate": "2026-07-04T10:00:00+02:00",
     "endDate": "2026-07-04T14:00:00+02:00",
-    "location": { "address": "Sankt Nicolai Gade 2a, 5700 Svendborg" },
+    "location": {
+      "address": "Sankt Nicolai Gade 2a, 5700 Svendborg"
+    },
     "url": "https://www.facebook.com/groups/1575345569157850/",
     "description": "I gården bag Sankt Nicolai Apotek, lige over for kirken. Blandede ting til hjemmet, tøj, små møbler."
   },
@@ -11,35 +13,256 @@
     "name": "Loppemarked i Skårup",
     "startDate": "2026-09-06T10:00:00+02:00",
     "endDate": "2026-09-06T15:00:00+02:00",
-    "location": { "name": "Skårup By", "address": "Skårup By, 5881 Skårup" },
+    "location": {
+      "name": "Skårup By",
+      "address": "Skårup By, 5881 Skårup"
+    },
     "url": "https://www.facebook.com/groups/1575345569157850/events"
   },
   {
     "name": "Sommermarked i Humble",
     "startDate": "2026-07-04T10:00:00+02:00",
     "endDate": "2026-07-04T15:00:00+02:00",
-    "location": { "address": "Hovedgaden 51, 5932 Humble" },
+    "location": {
+      "address": "Hovedgaden 51, 5932 Humble"
+    },
     "url": "https://www.facebook.com/groups/1575345569157850/"
   },
   {
     "name": "Sommermarked i Humble",
     "startDate": "2026-07-11T10:00:00+02:00",
     "endDate": "2026-07-11T15:00:00+02:00",
-    "location": { "address": "Hovedgaden 51, 5932 Humble" },
+    "location": {
+      "address": "Hovedgaden 51, 5932 Humble"
+    },
     "url": "https://www.facebook.com/groups/1575345569157850/"
   },
   {
     "name": "Sommermarked i Humble",
     "startDate": "2026-07-18T10:00:00+02:00",
     "endDate": "2026-07-18T15:00:00+02:00",
-    "location": { "address": "Hovedgaden 51, 5932 Humble" },
+    "location": {
+      "address": "Hovedgaden 51, 5932 Humble"
+    },
     "url": "https://www.facebook.com/groups/1575345569157850/"
   },
   {
     "name": "Sommermarked i Humble",
     "startDate": "2026-07-25T10:00:00+02:00",
     "endDate": "2026-07-25T15:00:00+02:00",
-    "location": { "address": "Hovedgaden 51, 5932 Humble" },
+    "location": {
+      "address": "Hovedgaden 51, 5932 Humble"
+    },
     "url": "https://www.facebook.com/groups/1575345569157850/"
+  },
+  {
+    "name": "Loppemarked på Nødebo Kro",
+    "startDate": "2026-08-23T10:00:00+02:00",
+    "endDate": "2026-08-23T15:00:00+02:00",
+    "location": {
+      "address": "Nødebo Kro"
+    },
+    "url": "https://www.facebook.com/groups/362315834415/"
+  },
+  {
+    "name": "Marked i VBC Houlkær, Viborg",
+    "startDate": "2026-09-06",
+    "location": {
+      "address": "Viborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Efterårets indendørs markeder i VBC Houlkær (bagagerums-, loppe- og julemarked)."
+  },
+  {
+    "name": "Marked i VBC Houlkær, Viborg",
+    "startDate": "2026-09-12",
+    "location": {
+      "address": "Viborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Efterårets indendørs markeder i VBC Houlkær (bagagerums-, loppe- og julemarked)."
+  },
+  {
+    "name": "Marked i VBC Houlkær, Viborg",
+    "startDate": "2026-10-10",
+    "location": {
+      "address": "Viborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Efterårets indendørs markeder i VBC Houlkær (bagagerums-, loppe- og julemarked)."
+  },
+  {
+    "name": "Marked i VBC Houlkær, Viborg",
+    "startDate": "2026-11-14",
+    "location": {
+      "address": "Viborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Efterårets indendørs markeder i VBC Houlkær (bagagerums-, loppe- og julemarked)."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-07-04T09:00:00+02:00",
+    "endDate": "2026-07-04T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-07-11T09:00:00+02:00",
+    "endDate": "2026-07-11T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-07-18T09:00:00+02:00",
+    "endDate": "2026-07-18T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-07-25T09:00:00+02:00",
+    "endDate": "2026-07-25T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-08-01T09:00:00+02:00",
+    "endDate": "2026-08-01T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-08-08T09:00:00+02:00",
+    "endDate": "2026-08-08T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-08-15T09:00:00+02:00",
+    "endDate": "2026-08-15T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-08-22T09:00:00+02:00",
+    "endDate": "2026-08-22T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-08-29T09:00:00+02:00",
+    "endDate": "2026-08-29T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-09-05T09:00:00+02:00",
+    "endDate": "2026-09-05T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-09-12T09:00:00+02:00",
+    "endDate": "2026-09-12T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-09-19T09:00:00+02:00",
+    "endDate": "2026-09-19T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked på Kirketorvet",
+    "startDate": "2026-09-26T09:00:00+02:00",
+    "endDate": "2026-09-26T14:00:00+02:00",
+    "location": {
+      "address": "Høje Gladsaxe Torv 2, Søborg"
+    },
+    "url": "https://www.facebook.com/photo/",
+    "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
+  },
+  {
+    "name": "Loppemarked Harte Hallen",
+    "startDate": "2026-11-01T10:00:00+01:00",
+    "endDate": "2026-11-01T14:00:00+01:00",
+    "location": {
+      "address": "Stubdrupvej 44, 6000 Kolding"
+    },
+    "url": "https://www.facebook.com/groups/1484631705148044/"
+  },
+  {
+    "name": "Loppemarked Horsebækvej, Otterup",
+    "startDate": "2026-07-03T10:00:00+02:00",
+    "endDate": "2026-07-03T19:00:00+02:00",
+    "location": {
+      "address": "Horsebækvej 127, 5450 Otterup"
+    },
+    "url": "https://www.facebook.com/marketplace/item/1241606154628007/"
+  },
+  {
+    "name": "Loppemarked Horsebækvej, Otterup",
+    "startDate": "2026-07-04T10:00:00+02:00",
+    "endDate": "2026-07-04T15:00:00+02:00",
+    "location": {
+      "address": "Horsebækvej 127, 5450 Otterup"
+    },
+    "url": "https://www.facebook.com/marketplace/item/1241606154628007/"
+  },
+  {
+    "name": "Loppemarked på Faaborg Havn",
+    "startDate": "2026-07-04",
+    "location": {
+      "address": "Faaborg Havn, Faaborg"
+    },
+    "url": "https://www.facebook.com/marketplace/item/1548953293303356/"
   }
 ]

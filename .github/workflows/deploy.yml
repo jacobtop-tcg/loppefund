@@ -52,7 +52,12 @@ jobs:
 
       - name: Crawl sources & rebuild canonical layer
         env:
-          LOPPEFUND_FB_FEED_URLS: ${{ secrets.LOPPEFUND_FB_FEED_URLS }}
+          # Default: the local committed feed from scripts/fb-harvest.mjs, read
+          # straight from the checkout (no network, no CDN lag). A repo var/secret
+          # can override with a vendor dataset URL. (Was previously read only from
+          # `secrets.`, but the value lives in `vars.` — so it silently ingested
+          # nothing; hence this explicit fallback chain.)
+          LOPPEFUND_FB_FEED_URLS: ${{ vars.LOPPEFUND_FB_FEED_URLS || secrets.LOPPEFUND_FB_FEED_URLS || 'data/fb-harvest.json' }}
           # Sæt APIFY_TOKEN som repo-secret, så høstes Facebook-events/-grupper
           # automatisk fra actor'ens seneste kørsel (se apify/README.md).
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}

@@ -21,11 +21,14 @@
  *   APIFY_TOKEN + APIFY_ACTORS  derive last-run dataset URLs automatically:
  *     https://api.apify.com/v2/acts/<actor>/runs/last/dataset/items?...
  *     APIFY_ACTORS is a comma list, default covers the events+groups actors.
- *   LOPPEFUND_FB_FEED_URLS      explicit dataset URLs (any vendor).
+ *   LOPPEFUND_FB_FEED_URLS      comma list of feed sources — each either an
+ *     HTTP(S) dataset URL (any vendor) OR a local file path (e.g.
+ *     data/fb-harvest.json committed by the self-hosted scripts/fb-harvest.mjs).
  *
  * Ready-to-paste actor inputs (query × region matrices) live in apify/.
  */
 import { createHash } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
 import { copenhagenNow, extractPostcode, type Occurrence, type RawEvent } from '@loppefund/core';
 import type { FetchFn, SourceAdapter } from './types.ts';
 import { parseTip } from '../tip-parser.ts';
@@ -84,7 +87,13 @@ export function feedUrls(env: NodeJS.ProcessEnv = process.env): string[] {
   return [...explicit, ...derived];
 }
 
-function toDanishDateTime(item: { ts?: number; iso?: string }): { date: string; time: string } | null {
+function toDanishDateTime(item: { ts?: number; iso?: string }): { date: string; time: string | null } | null {
+  // A date-only value ("2026-11-01", no time) means the time is genuinely unknown.
+  // Keep it timeless instead of inventing midnight — which would also silently
+  // shift across a DST boundary (a Nov date tagged +02:00 would read an hour off).
+  if (item.iso && /^\d{4}-\d{2}-\d{2}$/.test(item.iso.trim())) {
+    return { date: item.iso.trim(), time: null };
+  }
   const d = item.ts ? new Date(item.ts * 1000) : item.iso ? new Date(item.iso) : null;
   if (!d || Number.isNaN(d.getTime())) return null;
   return copenhagenNow(d);
@@ -195,14 +204,30 @@ export const facebookFeed: SourceAdapter = {
     const refDate = new Date().toISOString().slice(0, 10);
     const out: RawEvent[] = [];
     for (const url of urls) {
-      const res = await fetch(url);
-      if (res.status !== 200) {
-        console.log(`[facebook-feed] feed svarede ${res.status}: ${url.split('?')[0]}`);
-        continue;
+      // A feed entry can be an HTTP(S) dataset URL (vendor/raw) OR a local file
+      // path. The local path is the robust CI default: the harvested JSON is
+      // committed to the repo, so the crawl reads it straight from the checkout —
+      // no network round-trip, no CDN cache lag, always in lock-step with what
+      // was just pushed.
+      let body: string;
+      if (/^https?:\/\//i.test(url)) {
+        const res = await fetch(url);
+        if (res.status !== 200) {
+          console.log(`[facebook-feed] feed svarede ${res.status}: ${url.split('?')[0]}`);
+          continue;
+        }
+        body = res.body;
+      } else {
+        try {
+          body = await readFile(url, 'utf8');
+        } catch {
+          console.log(`[facebook-feed] kunne ikke læse lokal feed-fil: ${url}`);
+          continue;
+        }
       }
       let items: FeedItem[];
       try {
-        const parsed = JSON.parse(res.body) as FeedItem[] | { items?: FeedItem[] };
+        const parsed = JSON.parse(body) as FeedItem[] | { items?: FeedItem[] };
         items = Array.isArray(parsed) ? parsed : (parsed.items ?? []);
       } catch {
         console.log(`[facebook-feed] ugyldig JSON fra ${url.split('?')[0]}`);

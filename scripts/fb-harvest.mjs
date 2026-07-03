@@ -42,14 +42,23 @@ const SESSION_DIR = resolve(ROOT, '.fb-session'); // persistent login, gitignore
 const OUT = resolve(ROOT, 'data/fb-harvest.json');
 
 const SAMPLE_CONFIG = {
-  // Public groups (member-only content still readable when logged in) and/or
-  // Facebook's own event search. Keep the list focused; harvest is polite/slow.
+  // Real Danish loppe-groups to start from (your dedicated account must JOIN
+  // each one first — group posts are only readable to members). Sydfyn-first,
+  // since that is the known coverage gap, plus the national group. Add/remove
+  // freely; harvest is polite/slow, so keep the list focused.
   targets: [
-    { type: 'group', url: 'https://www.facebook.com/groups/REPLACE_WITH_GROUP_ID', scrolls: 6 },
-    { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked%20fyn', scrolls: 4 },
+    { type: 'group', url: 'https://www.facebook.com/groups/1575345569157850/', scrolls: 8, note: 'Loppemarked Sydfyn' },
+    { type: 'group', url: 'https://www.facebook.com/groups/836925897344099/', scrolls: 8, note: 'Loppemarked Svendborg' },
+    { type: 'group', url: 'https://www.facebook.com/groups/849539698483803/', scrolls: 8, note: 'Små og store loppemarkeder på Fyn' },
+    { type: 'group', url: 'https://www.facebook.com/groups/1434236776796925/', scrolls: 6, note: 'Loppemarked På Fyn' },
+    { type: 'group', url: 'https://www.facebook.com/groups/363166350422631/', scrolls: 6, note: 'Private og offentlige loppemarkeder på Fyn' },
+    { type: 'group', url: 'https://www.facebook.com/groups/362315834415/', scrolls: 6, note: 'Loppemarkeder i Danmark (landsdækkende)' },
+    // Facebook's own event search casts a wider net once you are logged in:
+    { type: 'search', url: 'https://www.facebook.com/events/search?q=loppemarked', scrolls: 4, note: 'FB events: loppemarked' },
+    { type: 'search', url: 'https://www.facebook.com/events/search?q=kr%C3%A6mmermarked', scrolls: 4, note: 'FB events: kræmmermarked' },
   ],
   // Only keep posts that look market-related, to keep the feed clean.
-  keywords: ['loppemarked', 'kræmmermarked', 'bagagerumsmarked', 'genbrugsmarked', 'kræmmermarked', 'stadeplads'],
+  keywords: ['loppemarked', 'kræmmermarked', 'kraemmermarked', 'bagagerumsmarked', 'genbrugsmarked', 'antikmarked', 'stadeplads', 'stadeleje', 'kræmmer'],
 };
 
 async function loadConfig() {

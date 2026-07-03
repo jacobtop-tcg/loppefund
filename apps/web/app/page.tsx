@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { copenhagenNow } from '@loppefund/core';
-import { listUpcomingEvents } from '../lib/data.ts';
+import { latestUpdate, listUpcomingEvents } from '../lib/data.ts';
+import { formatUpdated } from '../lib/format.ts';
 import { Explorer } from '../components/Explorer.tsx';
 
 // Statically generated at build; a scheduled rebuild refreshes the data.
@@ -8,6 +9,7 @@ import { Explorer } from '../components/Explorer.tsx';
 export default function HomePage() {
   const events = listUpcomingEvents();
   const now = copenhagenNow();
+  const updated = latestUpdate();
   return (
     <>
       <a className="skip-link" href="#markeder">
@@ -37,6 +39,11 @@ export default function HomePage() {
           <Link href="/kilder" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
             · Se vores kilder →
           </Link>
+          {updated && (
+            <div className="data-freshness">
+              Data senest opdateret {formatUpdated(updated)}
+            </div>
+          )}
         </div>
       </footer>
     </>

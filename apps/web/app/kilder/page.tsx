@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { listActiveSources, listDiscoveredSources } from '../../lib/data.ts';
+import { latestUpdate, listActiveSources, listDiscoveredSources } from '../../lib/data.ts';
+import { formatUpdated } from '../../lib/format.ts';
 
 export const metadata = {
   title: 'Kilder — hvor Loppefund henter markederne',
@@ -41,6 +42,7 @@ export default function SourcesPage() {
   // have. Exact-title match, so it leans toward over-counting — hence "~".
   const netNew = (d: { distinctTitles: number; coveredTitles: number | null }) =>
     d.coveredTitles == null ? null : Math.max(0, d.distinctTitles - d.coveredTitles);
+  const updated = latestUpdate();
   const discovered = listDiscoveredSources()
     .map((d) => ({ ...d, added: isAdded(d.domain), net: netNew(d) }))
     // Added first, then most net-new markets, then most-mentioned.
@@ -66,6 +68,11 @@ export default function SourcesPage() {
           sammen og viser altid hvor hvert marked kommer fra. Motoren opdager også
           løbende nye kilder helt automatisk — herunder ser du begge dele.
         </p>
+        {updated && (
+          <p className="data-freshness" style={{ marginTop: 6 }}>
+            Kilderne blev senest tjekket {formatUpdated(updated)}
+          </p>
+        )}
       </header>
 
       <section className="panel" style={{ marginBottom: 20 }}>

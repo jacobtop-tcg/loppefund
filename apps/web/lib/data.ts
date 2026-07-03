@@ -75,6 +75,23 @@ export function loadPhotos(slug: string): Photo[] {
   return summarizePhotos(readRepoJson('photos')[slug]);
 }
 
+/**
+ * The date (YYYY-MM-DD) the data was last refreshed — the newest finished crawl,
+ * falling back to the freshest event we've seen. Powers the "Data opdateret …"
+ * trust signal. Null on an empty database.
+ */
+export function latestUpdate(): string | null {
+  const db = getDb();
+  const run = db
+    .prepare(`SELECT MAX(finished_at) AS t FROM pipeline_runs WHERE finished_at IS NOT NULL`)
+    .get() as { t: string | null };
+  const seen = db
+    .prepare(`SELECT MAX(last_seen_at) AS t FROM events WHERE status = 'active'`)
+    .get() as { t: string | null };
+  const iso = [run.t, seen.t].filter(Boolean).sort().at(-1);
+  return iso ? iso.slice(0, 10) : null;
+}
+
 export interface SourceInfo {
   key: string;
   name: string;

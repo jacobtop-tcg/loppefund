@@ -38,6 +38,12 @@ export function dayOfMonth(isoDate: string): number {
   return parts(isoDate).d;
 }
 
+/** "5. juli 2026" — with year, no weekday. For "data opdateret" labels. */
+export function formatUpdated(isoDate: string): string {
+  const p = parts(isoDate);
+  return `${p.d}. ${MONTHS_LONG[p.m - 1]} ${p.y}`;
+}
+
 /** "søndag 5. juli" */
 export function formatDateLong(isoDate: string): string {
   const p = parts(isoDate);

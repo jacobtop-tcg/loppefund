@@ -9,6 +9,7 @@ import { bagagerumsmarkedViborg } from './bagagerumsmarked-viborg.ts';
 import { kirkebyGamleMejeri } from './kirkeby-gamle-mejeri.ts';
 import { vorbasseMarked } from './vorbasse-marked.ts';
 import { goerlevMarked } from './goerlev-marked.ts';
+import { hgLoppemarked } from './hg-loppemarked.ts';
 
 /** Registered source adapters. Each is independent and replaceable. */
 export const adapters: SourceAdapter[] = [
@@ -22,4 +23,5 @@ export const adapters: SourceAdapter[] = [
   kirkebyGamleMejeri,
   vorbasseMarked,
   goerlevMarked,
+  hgLoppemarked,
 ];

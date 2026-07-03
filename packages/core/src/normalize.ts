@@ -47,7 +47,13 @@ export function cleanCity(
     (postcode ? segs.find((s) => s.startsWith(postcode)) : undefined) ??
     segs[segs.length - 1]!;
   const afterPc = pick.match(/^[1-9]\d{3}\s+(.+)$/);
-  const out = (afterPc ? afterPc[1]! : pick).trim();
+  // A Danish postal city never contains " på " — when it appears it is a venue/
+  // place descriptor that address parsing trailed onto the city ("Lyngby på
+  // Johannes Fogs Plads" -> "Lyngby"). Strip it, plus any dangling end period.
+  const out = (afterPc ? afterPc[1]! : pick)
+    .replace(/\s+på\s+.+$/i, '')
+    .replace(/\.\s*$/, '')
+    .trim();
   return out || null;
 }
 

@@ -67,6 +67,12 @@ describe('cleanCity', () => {
     expect(cleanCity('Aalborg SV', '9200')).toBe('Aalborg SV');
   });
 
+  it('strips a venue "på ..." descriptor and a dangling period from the city', () => {
+    expect(cleanCity('Lyngby på Johannes Fogs Plads.', '2800')).toBe('Lyngby');
+    expect(cleanCity('2800 Lyngby på Johannes Fogs Plads', '2800')).toBe('Lyngby');
+    expect(cleanCity('Ballerup.', '2750')).toBe('Ballerup');
+  });
+
   it('handles null/empty', () => {
     expect(cleanCity(null)).toBeNull();
     expect(cleanCity('', '5000')).toBeNull();

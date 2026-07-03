@@ -12,6 +12,9 @@ import { goerlevMarked } from './goerlev-marked.ts';
 import { hgLoppemarked } from './hg-loppemarked.ts';
 import { raskevent } from './raskevent.ts';
 import { jharrangementer } from './jharrangementer.ts';
+import { olg } from './olg.ts';
+import { gentofte } from './gentofte.ts';
+import { loppebjornen } from './loppebjornen.ts';
 
 /** Registered source adapters. Each is independent and replaceable. */
 export const adapters: SourceAdapter[] = [
@@ -28,4 +31,7 @@ export const adapters: SourceAdapter[] = [
   hgLoppemarked,
   raskevent,
   jharrangementer,
+  olg,
+  gentofte,
+  loppebjornen,
 ];

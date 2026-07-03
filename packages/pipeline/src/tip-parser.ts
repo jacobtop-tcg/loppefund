@@ -12,14 +12,49 @@ import {
   normalizeCategory,
   parseDanishDate,
   parseOpeningHours,
+  parseRecurrence,
+  resolveSchedule,
   type Occurrence,
   type RawEvent,
 } from '@loppefund/core';
 
-const MONTH = '(?:januar|februar|marts|april|maj|juni|juli|august|september|oktober|november|december)';
+const MONTHS_BY_NAME: Record<string, number> = {
+  januar: 1, februar: 2, marts: 3, april: 4, maj: 5, juni: 6,
+  juli: 7, august: 8, september: 9, oktober: 10, november: 11, december: 12,
+};
+const MONTH = `(?:${Object.keys(MONTHS_BY_NAME).join('|')})`;
 
 function iso(y: number, m: number, d: number): string {
   return `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+}
+
+/**
+ * A named month window from "i juli (måned)" — the span a recurring poster
+ * ("hver lørdag i juli måned") actually covers. Current calendar year only;
+ * a fully-past month returns null (we never guess into next year here).
+ */
+function monthWindow(text: string, refDate: string): { start: string; end: string } | null {
+  const m = text.toLowerCase().match(new RegExp(`\\bi\\s+(${MONTH})(?:\\s+m(å|aa)ned)?\\b`, 'i'));
+  if (!m) return null;
+  const mo = MONTHS_BY_NAME[m[1]!.toLowerCase()]!;
+  const [refY] = refDate.split('-').map(Number) as [number];
+  const start = iso(refY, mo, 1);
+  const end = iso(refY, mo, new Date(Date.UTC(refY, mo, 0)).getUTCDate());
+  return end < refDate ? null : { start, end };
+}
+
+/**
+ * Recurring markets with no concrete date but a named month ("hver lørdag i
+ * juli måned"). Bounded to that month so we never over-generate — a bare "hver
+ * lørdag" with no window yields nothing (trust: missing over incorrect).
+ */
+function resolveRecurringInMonth(text: string, refDate: string, timeStr: string): Occurrence[] {
+  const win = monthWindow(text, refDate);
+  if (!win || parseRecurrence(text).length === 0) return [];
+  const from = win.start > refDate ? win.start : refDate;
+  if (from > win.end) return [];
+  const horizonDays = Math.round((Date.parse(win.end) - Date.parse(from)) / 86_400_000);
+  return resolveSchedule({ scheduleText: text, openingHoursText: timeStr }, { from, horizonDays });
 }
 
 /**
@@ -104,14 +139,21 @@ export function parseTip(
   if (!text) return null; // URL-only tips need a human (or a fetcher) first.
 
   const dates = scanDates(text, refDate);
-  if (dates.length === 0) return null; // no date -> not yet an event
-
-  const hours = parseOpeningHours(text.match(/kl\.?\s*[\d.:]+\s*[-–]\s*[\d.:]+/i)?.[0] ?? '');
-  const occurrences: Occurrence[] = dates.map((date) => ({
-    date,
-    startTime: hours.generic?.start ?? null,
-    endTime: hours.generic?.end ?? null,
-  }));
+  const timeStr = text.match(/kl\.?\s*[\d.:]+\s*[-–]\s*[\d.:]+/i)?.[0] ?? '';
+  const hours = parseOpeningHours(timeStr);
+  let occurrences: Occurrence[];
+  if (dates.length > 0) {
+    occurrences = dates.map((date) => ({
+      date,
+      startTime: hours.generic?.start ?? null,
+      endTime: hours.generic?.end ?? null,
+    }));
+  } else {
+    // No concrete date, but a recurring poster bounded to a named month
+    // ("Sommermarked … hver lørdag i juli måned") resolves to real dates.
+    occurrences = resolveRecurringInMonth(text, refDate, timeStr);
+    if (occurrences.length === 0) return null; // still no date -> not an event
+  }
 
   // Title: the market's NAME, which precedes the date/time/price detail. FB
   // posts are often one run-on line ("Loppemarked ved Dyreborg lørdag den 5.

@@ -108,6 +108,31 @@ describe('parseTip', () => {
     expect((raw!.occurrences ?? []).map((o) => o.date)).toContain('2026-07-04');
   });
 
+  it('resolves a recurring poster bounded to a named month', () => {
+    // Real "Loppemarked Sydfyn" poster: recurring, no single date, but a month.
+    const raw = parseTip(
+      {
+        id: 'humble',
+        url: null,
+        text: 'Sommermarked i Humble\nHver lørdag fra kl. 10.00-15.00 i juli måned\nHovedgaden 51, 5932 Humble',
+      },
+      REF,
+    );
+    expect(raw).not.toBeNull();
+    // Saturdays in July 2026 on/after REF (2026-07-02): 4, 11, 18, 25.
+    expect((raw!.occurrences ?? []).map((o) => o.date)).toEqual([
+      '2026-07-04',
+      '2026-07-11',
+      '2026-07-18',
+      '2026-07-25',
+    ]);
+  });
+
+  it('does not invent dates from a month mention without a recurring phrase', () => {
+    // "loppemarked i juli" alone must NOT become every day / every Saturday.
+    expect(parseTip({ id: 2, url: null, text: 'Stort loppemarked i juli i Humble' }, REF)).toBeNull();
+  });
+
   it('rejects tips without a resolvable date', () => {
     expect(
       parseTip({ id: 1, url: null, text: 'Kom til loppemarked snart i Valby!' }, REF),

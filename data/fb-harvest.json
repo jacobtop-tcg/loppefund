@@ -261,8 +261,29 @@
     "name": "Loppemarked på Faaborg Havn",
     "startDate": "2026-07-04",
     "location": {
-      "address": "Faaborg Havn, Faaborg"
+      "name": "Faaborg Røgeri",
+      "address": "Vestkaj 3, 5600 Faaborg"
     },
     "url": "https://www.facebook.com/marketplace/item/1548953293303356/"
+  },
+  {
+    "name": "Kræmmer og Loppemarked i Allested-Vejle",
+    "startDate": "2026-11-07T10:00:00+01:00",
+    "location": {
+      "name": "Allested-Vejle Fritidscenter",
+      "address": "Allested-Vejle Fritidscenter, 5672 Broby"
+    },
+    "url": "https://www.facebook.com/events/search?q=Faaborg%20loppemarked",
+    "description": "Kræmmer- og loppemarked i Allested-Vejle Fritidscenter."
+  },
+  {
+    "name": "Kræmmer og Loppemarked i Allested-Vejle",
+    "startDate": "2026-11-08T10:00:00+01:00",
+    "location": {
+      "name": "Allested-Vejle Fritidscenter",
+      "address": "Allested-Vejle Fritidscenter, 5672 Broby"
+    },
+    "url": "https://www.facebook.com/events/search?q=Faaborg%20loppemarked",
+    "description": "Kræmmer- og loppemarked i Allested-Vejle Fritidscenter."
   }
 ]

@@ -108,6 +108,15 @@ describe('matchEvents', () => {
     expect(matchEvents(a, c).isMatch).toBe(false);
   });
 
+  it('merges when a placeholder street was cleaned to null on one side (Duedag case)', () => {
+    // "Duedag i Ejstrupholm" arrived from two sources, one addressed "Byens
+    // gader" (cleaned to null upstream), the other "Søndergade". A one-sided
+    // street must not veto the merge; identical title + postcode + date wins.
+    const a = { title: 'Duedag i Ejstrupholm', street: 'Søndergade', postcode: '7361', lat: 55.98, lng: 9.28, dates: ['2026-10-11'] };
+    const b = { title: 'Duedag i Ejstrupholm', street: null, postcode: '7361', lat: 56.02, lng: 9.25, dates: ['2026-10-11'] };
+    expect(matchEvents(a, b).isMatch).toBe(true);
+  });
+
   it('does not merge generic identical titles without location', () => {
     const a = { title: 'Loppemarked', dates: ['2026-07-04'] };
     const b = { title: 'Loppemarked', dates: ['2026-07-11'] };

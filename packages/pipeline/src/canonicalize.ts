@@ -6,6 +6,7 @@ import type { DatabaseSync } from 'node:sqlite';
 import {
   computeConfidence,
   cleanCity,
+  cleanStreet,
   cleanVenueName,
   extractAmenities,
   matchEvents,
@@ -156,6 +157,9 @@ export async function canonicalizeRawEvent(
   // use the stable name.
   const title = stripDateTokens(raw.title);
   const venueName = cleanVenueName(raw.venueName);
+  // Drop vague-locality "streets" ("Byens gader") up front so geocoding, dedup
+  // and display all use a real address or nothing — never a placeholder.
+  const street = cleanStreet(raw.street);
 
   // Resolve concrete occurrences. Events we cannot date are not shown to
   // consumers — a market without a date is a rumor, not an event.
@@ -186,9 +190,9 @@ export async function canonicalizeRawEvent(
   let geocodeQuality: string | null = raw.lat != null ? 'source' : null;
   let postcode = raw.postcode ?? null;
   let city = raw.city ?? null;
-  if (lat === null && (raw.street || raw.postcode)) {
+  if (lat === null && (street || raw.postcode)) {
     const g = await geocode(db, {
-      street: raw.street,
+      street: street ?? undefined,
       postcode: raw.postcode,
       city: raw.city,
     });
@@ -215,7 +219,7 @@ export async function canonicalizeRawEvent(
         postcode,
         dates: rawDates,
         category: rawCategory,
-        street: raw.street,
+        street,
       },
       {
         title: candidate.title,
@@ -313,7 +317,7 @@ export async function canonicalizeRawEvent(
         'category',
       ) ?? 'andet') as ReturnType<typeof normalizeCategory>,
       venueName: m(e.venue_name, venueName ?? undefined, 'venueName'),
-      street: m(e.street, raw.street, 'street'),
+      street: m(e.street, street ?? undefined, 'street'),
       postcode: m(e.postcode, postcode ?? undefined, 'postcode'),
       city: m(e.city, city ?? undefined, 'city'),
       municipality: m(e.municipality, raw.municipality, 'municipality'),
@@ -445,7 +449,7 @@ export async function canonicalizeRawEvent(
     description: raw.description ?? null,
     category: rawCategory ?? 'andet',
     venueName,
-    street: raw.street ?? null,
+    street,
     postcode,
     city,
     municipality: raw.municipality ?? null,

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cleanCity, cleanVenueName, stripDateTokens } from '../src/normalize.ts';
+import { cleanCity, cleanStreet, cleanVenueName, stripDateTokens } from '../src/normalize.ts';
 
 describe('cleanVenueName', () => {
   it('keeps a short place label', () => {
@@ -76,5 +76,22 @@ describe('cleanCity', () => {
   it('handles null/empty', () => {
     expect(cleanCity(null)).toBeNull();
     expect(cleanCity('', '5000')).toBeNull();
+  });
+});
+
+describe('cleanStreet', () => {
+  it('nulls vague-locality placeholders', () => {
+    expect(cleanStreet('Byens gader')).toBeNull();
+    expect(cleanStreet('byens gader.')).toBeNull();
+    expect(cleanStreet('Hele byen')).toBeNull();
+    expect(cleanStreet('Flere steder i byen')).toBeNull();
+    expect(cleanStreet(null)).toBeNull();
+    expect(cleanStreet('  ')).toBeNull();
+  });
+
+  it('keeps a real address or named square untouched', () => {
+    expect(cleanStreet('Søndergade 12')).toBe('Søndergade 12');
+    expect(cleanStreet('Torvet')).toBe('Torvet');
+    expect(cleanStreet('Svanetorvet')).toBe('Svanetorvet');
   });
 });

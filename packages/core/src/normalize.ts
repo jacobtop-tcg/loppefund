@@ -30,6 +30,28 @@ export function cleanVenueName(name: string | null | undefined): string | null {
 }
 
 /**
+ * Some sources put a vague locality where a street belongs — "Byens gader" (the
+ * town's streets), "hele byen", "flere steder". That is not an address: it must
+ * not render as one, and it must not count as a distinguishing street in dedup
+ * (two entries of the same market, one addressed "Byens gader" and one with the
+ * real street, would otherwise never merge). Returns the street unchanged, or
+ * null when it is one of these placeholders. A real address (with a house
+ * number, or a specific named square like "Torvet") passes through untouched.
+ */
+const VAGUE_STREETS: ReadonlySet<string> = new Set([
+  'byens gader', 'byens gade', 'hele byen', 'i hele byen', 'rundt i byen',
+  'flere steder', 'flere steder i byen', 'diverse', 'diverse steder',
+  'forskellige steder', 'hele området', 'ingen adresse',
+]);
+export function cleanStreet(street: string | null | undefined): string | null {
+  if (!street) return null;
+  const s = street.trim();
+  if (!s) return null;
+  const n = s.toLowerCase().replace(/[.,]/g, ' ').replace(/\s+/g, ' ').trim();
+  return VAGUE_STREETS.has(n) ? null : s;
+}
+
+/**
  * Sanitize a `city` an adapter over-stuffed with street/postcode fragments —
  * e.g. ", 6640 Lunderskov, 6640 Lunderskov, 6640 Lunderskov" or
  * "Kastaniehøjvej 6, 8600 Silkeborg" — down to a clean town name. Prefers the

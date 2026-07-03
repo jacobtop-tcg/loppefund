@@ -124,6 +124,10 @@ function timesFor(date: string, hours: OpeningHours): Pick<Occurrence, 'startTim
     : { startTime: null, endTime: null };
 }
 
+// Above this span, a date range is treated as a season/validity window (anchors
+// only) rather than consecutive event days, to avoid fabricating daily markets.
+const MAX_CONSECUTIVE_FILL = 6;
+
 /** Resolve a schedule into sorted, deduplicated occurrences within the window. */
 export function resolveSchedule(
   input: ScheduleInput,
@@ -134,10 +138,23 @@ export function resolveSchedule(
   const dates = new Set<string>();
 
   for (const range of input.dateRanges ?? []) {
-    // Cap runaway ranges (bad data) at one year
-    let d = range.start;
-    for (let i = 0; d <= range.end && i < 366; i++, d = addDays(d, 1)) {
-      if (d >= window.from && d <= to) dates.add(d);
+    const spanDays = Math.round(
+      (Date.parse(range.end) - Date.parse(range.start)) / 86_400_000,
+    );
+    if (spanDays <= MAX_CONSECUTIVE_FILL) {
+      // A genuine single- or multi-day event — materialize each day.
+      let d = range.start;
+      for (let i = 0; d <= range.end && i < 366; i++, d = addDays(d, 1)) {
+        if (d >= window.from && d <= to) dates.add(d);
+      }
+    } else {
+      // A WIDE span is almost always a season / validity window, not consecutive
+      // market days. Daily-filling it fabricates dozens of non-event days (a
+      // "24/7" private sale became 30 daily markets). Keep only the endpoints as
+      // anchors; a recurrence rule (below) fills the real days inside the span.
+      for (const d of [range.start, range.end]) {
+        if (d >= window.from && d <= to) dates.add(d);
+      }
     }
   }
 

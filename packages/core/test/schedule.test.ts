@@ -47,6 +47,23 @@ describe('resolveSchedule — explicit date ranges', () => {
     });
   });
 
+  it('does not daily-fill a wide range (season window) — keeps only endpoints', () => {
+    const occ = resolveSchedule(
+      { dateRanges: [{ start: '2026-07-05', end: '2026-08-05' }] },
+      { from: '2026-07-01', horizonDays: 60 },
+    );
+    // A 31-day span with no recurrence rule must NOT become 31 daily markets.
+    expect(occ.map((o) => o.date)).toEqual(['2026-07-05', '2026-08-05']);
+  });
+
+  it('still fills a genuine multi-day span (<= 6 days)', () => {
+    const occ = resolveSchedule(
+      { dateRanges: [{ start: '2026-07-04', end: '2026-07-06' }] },
+      { from: '2026-07-01', horizonDays: 30 },
+    );
+    expect(occ.map((o) => o.date)).toEqual(['2026-07-04', '2026-07-05', '2026-07-06']);
+  });
+
   it('drops days outside the window', () => {
     const occ = resolveSchedule(
       {

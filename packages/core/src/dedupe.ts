@@ -140,6 +140,17 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   const streetsAgree =
     !streetsDiffer && Boolean(a.street && b.street);
 
+  // Distinctiveness: after dropping stopwords, category vocabulary and common
+  // venue nouns, at least one proper token must remain ("Bagagerumsmarked på
+  // havnen" -> none; "Fredensborg Kokkedal Loppemarked" -> fredensborg,
+  // kokkedal). A generic title carries no identity of its own.
+  const na = normalizeTitle(a.title);
+  const properTokens = na
+    .split(' ')
+    .filter((w) => w.length > 1 && !GENERIC_TITLE_TOKENS.has(w));
+  const distinctive =
+    properTokens.length >= 1 && (na.length >= 15 || na.split(' ').length >= 3);
+
   // `colocated`: locations do not CONTRADICT (a shared postcode district
   // counts). `preciseColocation`: proven the SAME spot — coordinates within
   // NEAR_METERS, or agreeing postcode AND agreeing street. A shared postcode
@@ -162,23 +173,33 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
     preciseColocation = colocated === true && streetsAgree;
   }
 
+  // A mis-geocode must not split a clearly-identical recurring series: identical
+  // distinctive title + agreeing postcode + an identical occurrence-date list is
+  // a near-certain duplicate even when the coordinates disagree (one is usually a
+  // postcode centroid). Deliberately high bar — two different markets do not share
+  // the exact same multi-date list.
+  const datesIdentical =
+    Boolean(a.dates && b.dates) &&
+    a.dates!.length > 0 &&
+    a.dates!.length === b.dates!.length &&
+    a.dates!.every((d) => b.dates!.includes(d));
+  if (
+    sim >= 0.95 &&
+    distinctive &&
+    !streetsDiffer &&
+    a.postcode != null &&
+    a.postcode === b.postcode &&
+    datesIdentical
+  ) {
+    return { isMatch: true, score: sim, reason: 'identical title + postcode + date list' };
+  }
+
   if (colocated === false) {
     return { isMatch: false, score: sim, reason: 'different locations' };
   }
 
   const dateOverlap =
     a.dates && b.dates && a.dates.some((d) => b.dates!.includes(d));
-
-  // Distinctiveness: after dropping stopwords, category vocabulary and common
-  // venue nouns, at least one proper token must remain ("Bagagerumsmarked på
-  // havnen" -> none; "Fredensborg Kokkedal Loppemarked" -> fredensborg,
-  // kokkedal). A generic title carries no identity of its own.
-  const na = normalizeTitle(a.title);
-  const properTokens = na
-    .split(' ')
-    .filter((w) => w.length > 1 && !GENERIC_TITLE_TOKENS.has(w));
-  const distinctive =
-    properTokens.length >= 1 && (na.length >= 15 || na.split(' ').length >= 3);
 
   if (sim >= TITLE_STRONG && preciseColocation) {
     return { isMatch: true, score: sim, reason: 'strong title + same location' };

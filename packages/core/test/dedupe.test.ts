@@ -93,6 +93,21 @@ describe('matchEvents', () => {
     expect(matchEvents(a, b).isMatch).toBe(true);
   });
 
+  it('merges an identical recurring series split by a mis-geocode (same postcode + identical dates)', () => {
+    const a = {
+      title: 'Gentofte Loppemarked',
+      lat: 55.75,
+      lng: 12.55,
+      postcode: '2820',
+      dates: ['2026-07-04', '2026-07-11', '2026-07-18'],
+    };
+    const b = { ...a, lat: 55.78, lng: 12.58 }; // ~0.03° off — geocode disagreement
+    expect(matchEvents(a, b).isMatch).toBe(true);
+    // A different date list must NOT merge across the geocode gap.
+    const c = { ...b, dates: ['2026-08-01', '2026-08-08', '2026-08-15'] };
+    expect(matchEvents(a, c).isMatch).toBe(false);
+  });
+
   it('does not merge generic identical titles without location', () => {
     const a = { title: 'Loppemarked', dates: ['2026-07-04'] };
     const b = { title: 'Loppemarked', dates: ['2026-07-11'] };

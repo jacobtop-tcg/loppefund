@@ -464,19 +464,28 @@ export interface SourceCandidateRow {
  */
 export function upsertSourceCandidate(
   db: DatabaseSync,
-  c: { domain: string; mentions: number; distinctTitles: number; sources: string[]; fields: string[]; seenAt: string },
+  c: {
+    domain: string;
+    mentions: number;
+    distinctTitles: number;
+    coveredTitles?: number;
+    sources: string[];
+    fields: string[];
+    seenAt: string;
+  },
 ): void {
   db.prepare(
-    `INSERT INTO source_candidates(domain, mentions, distinct_titles, sources, fields, first_seen, last_seen)
-     VALUES (?, ?, ?, ?, ?, ?, ?)
+    `INSERT INTO source_candidates(domain, mentions, distinct_titles, covered_titles, sources, fields, first_seen, last_seen)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
      ON CONFLICT(domain) DO UPDATE SET
        mentions = excluded.mentions,
        distinct_titles = excluded.distinct_titles,
+       covered_titles = excluded.covered_titles,
        sources = excluded.sources,
        fields = excluded.fields,
        last_seen = excluded.last_seen`,
   ).run(
-    c.domain, c.mentions, c.distinctTitles,
+    c.domain, c.mentions, c.distinctTitles, c.coveredTitles ?? null,
     JSON.stringify(c.sources), JSON.stringify(c.fields), c.seenAt, c.seenAt,
   );
 }

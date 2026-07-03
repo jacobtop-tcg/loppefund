@@ -1491,6 +1491,10 @@ body:has(.is-map-view) {
 .source-domain {
   font-weight: 600;
 }
+.source-net {
+  font-weight: 700;
+  color: var(--green, #3f7d3a);
+}
 
 /* Community photos */
 .photo-grid {

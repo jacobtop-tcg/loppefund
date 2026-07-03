@@ -105,6 +105,9 @@ export interface DiscoveredSource {
   domain: string;
   mentions: number;
   distinctTitles: number;
+  /** Titles already in the database; distinctTitles - this ≈ genuinely new
+   *  markets. Null when discovery hasn't computed coverage for this DB yet. */
+  coveredTitles: number | null;
   status: string;
   probeScore: number | null;
 }
@@ -112,9 +115,20 @@ export interface DiscoveredSource {
 /** Domains the discovery engine has automatically surfaced from crawled data —
  *  the pipeline of candidate new sources. Social/search hosts are excluded. */
 export function listDiscoveredSources(): DiscoveredSource[] {
-  return getDb()
+  const db = getDb();
+  // covered_titles was added after v1; a read-only DB built before the migration
+  // ran won't have the column, so degrade gracefully instead of throwing.
+  const hasCovered =
+    (
+      db
+        .prepare(`SELECT COUNT(*) AS c FROM pragma_table_info('source_candidates') WHERE name = 'covered_titles'`)
+        .get() as { c: number }
+    ).c > 0;
+  const coveredExpr = hasCovered ? 'covered_titles' : 'NULL';
+  return db
     .prepare(
-      `SELECT domain, mentions, distinct_titles AS distinctTitles, status, probe_score AS probeScore
+      `SELECT domain, mentions, distinct_titles AS distinctTitles,
+              ${coveredExpr} AS coveredTitles, status, probe_score AS probeScore
        FROM source_candidates
        WHERE domain NOT LIKE '%facebook%' AND domain NOT LIKE '%google%'
          AND domain NOT LIKE '%instagram%' AND domain NOT LIKE '%youtube%'

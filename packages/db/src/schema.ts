@@ -168,6 +168,18 @@ export function migrate(db: DatabaseSync): void {
     db.exec(`ALTER TABLE events ADD COLUMN amenities TEXT`);
   }
 
+  // How many of a candidate's mined titles are already canonical — lets the
+  // discovery report and the /kilder page separate a link to markets we already
+  // have from a source that would add genuinely new ones.
+  const candidateColumns = new Set(
+    (db.prepare(`PRAGMA table_info(source_candidates)`).all() as Array<{ name: string }>).map(
+      (c) => c.name,
+    ),
+  );
+  if (!candidateColumns.has('covered_titles')) {
+    db.exec(`ALTER TABLE source_candidates ADD COLUMN covered_titles INTEGER`);
+  }
+
   db.prepare(
     `INSERT INTO meta(key, value) VALUES ('schema_version', ?)
      ON CONFLICT(key) DO UPDATE SET value = excluded.value`,

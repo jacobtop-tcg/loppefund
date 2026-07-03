@@ -37,8 +37,21 @@ export default function SourcesPage() {
   // has to be maintained by hand, so it's always accurate.
   const activeHosts = new Set(active.map((s) => hostname(s.baseUrl)));
   const isAdded = (domain: string) => activeHosts.has(domain);
-  const discovered = listDiscoveredSources();
-  const promoted = discovered.filter((d) => isAdded(d.domain) || d.status === 'promoted').length;
+  // Genuinely-new markets a candidate would add ≈ its titles we don't already
+  // have. Exact-title match, so it leans toward over-counting — hence "~".
+  const netNew = (d: { distinctTitles: number; coveredTitles: number | null }) =>
+    d.coveredTitles == null ? null : Math.max(0, d.distinctTitles - d.coveredTitles);
+  const discovered = listDiscoveredSources()
+    .map((d) => ({ ...d, added: isAdded(d.domain), net: netNew(d) }))
+    // Added first, then most net-new markets, then most-mentioned.
+    .sort(
+      (a, b) =>
+        Number(b.added) - Number(a.added) ||
+        (b.net ?? -1) - (a.net ?? -1) ||
+        b.mentions - a.mentions,
+    );
+  const promoted = discovered.filter((d) => d.added || d.status === 'promoted').length;
+  const haveCoverage = discovered.some((d) => d.net != null);
 
   return (
     <div className="container">
@@ -87,6 +100,7 @@ export default function SourcesPage() {
           Discovery-motoren udleder nye domæner fra de data, vi allerede har
           hentet, undersøger dem for markeds-signaler og rangerer dem. {discovered.length}{' '}
           kandidater fundet · {promoted} allerede tilføjet som kilde.
+          {haveCoverage && ' "Nye" er et skøn over hvor mange markeder kilden ville tilføje, som vi ikke allerede har.'}
         </p>
         <div className="source-table-wrap">
           <table className="source-table">
@@ -95,13 +109,14 @@ export default function SourcesPage() {
                 <th>Domæne</th>
                 <th className="num">Omtaler</th>
                 <th className="num">Titler</th>
+                {haveCoverage && <th className="num">Nye</th>}
                 <th className="num">Score</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {discovered.map((d) => {
-                const st = isAdded(d.domain)
+                const st = d.added
                   ? STATUS.promoted!
                   : (STATUS[d.status] ?? { label: d.status, cls: '' });
                 return (
@@ -109,6 +124,17 @@ export default function SourcesPage() {
                     <td className="source-domain">{d.domain}</td>
                     <td className="num">{d.mentions}</td>
                     <td className="num">{d.distinctTitles}</td>
+                    {haveCoverage && (
+                      <td className="num">
+                        {d.added || d.net == null ? (
+                          '–'
+                        ) : d.net > 0 ? (
+                          <span className="source-net">~{d.net}</span>
+                        ) : (
+                          '0'
+                        )}
+                      </td>
+                    )}
                     <td className="num">{d.probeScore == null ? '–' : d.probeScore}</td>
                     <td>
                       <span className={`badge ${st.cls}`}>{st.label}</span>

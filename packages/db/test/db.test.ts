@@ -183,6 +183,28 @@ describe('db round trip', () => {
     expect(listSourceCandidates(db, { status: 'promoted' })).toHaveLength(1);
   });
 
+  it('persists covered_titles (the net-new signal), null when omitted', async () => {
+    const { upsertSourceCandidate } = await import('../src/index.ts');
+    const db = openDb(':memory:');
+    upsertSourceCandidate(db, {
+      domain: 'loppelinda.dk', mentions: 7, distinctTitles: 6, coveredTitles: 2,
+      sources: ['facebook-feed'], fields: ['description'], seenAt: '2026-07-03T10:00:00Z',
+    });
+    const withCov = db
+      .prepare(`SELECT covered_titles FROM source_candidates WHERE domain = 'loppelinda.dk'`)
+      .get() as { covered_titles: number | null };
+    expect(withCov.covered_titles).toBe(2);
+
+    upsertSourceCandidate(db, {
+      domain: 'ukendt.dk', mentions: 1, distinctTitles: 1,
+      sources: [], fields: [], seenAt: '2026-07-03T10:00:00Z',
+    });
+    const noCov = db
+      .prepare(`SELECT covered_titles FROM source_candidates WHERE domain = 'ukendt.dk'`)
+      .get() as { covered_titles: number | null };
+    expect(noCov.covered_titles).toBeNull();
+  });
+
   it('caches geocodes', () => {
     const db = openDb(':memory:');
     expect(getCachedGeocode(db, 'Strandgade 95, 1401')).toBeNull();

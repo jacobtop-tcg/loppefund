@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { loadEventDetail, todayIso } from '../../../lib/data.ts';
+import { loadEventDetail, loadReviews, todayIso } from '../../../lib/data.ts';
 import {
   CATEGORY_LABELS,
   displayPlace,
@@ -13,6 +13,8 @@ import { DetailMap } from '../../../components/DetailMap.tsx';
 import { ShareButton } from '../../../components/ShareButton.tsx';
 import { ReportEventForm } from '../../../components/ReportEventForm.tsx';
 import { ConfirmEventForm } from '../../../components/ConfirmEventForm.tsx';
+import { ReviewForm } from '../../../components/ReviewForm.tsx';
+import { starGlyphs } from '../../../lib/reviews.ts';
 import { listCancelledUpcomingSlugs, listUpcomingEvents } from '../../../lib/data.ts';
 import { distanceKm } from '../../../lib/client-utils.ts';
 
@@ -143,6 +145,7 @@ export default async function EventPage({
   const { slug } = await params;
   const event = loadEventDetail(slug);
   if (!event) notFound();
+  const reviews = loadReviews(slug);
   const today = todayIso();
   const upcoming = event.occurrences.filter((o) => o.date >= today);
   const shownDates = upcoming.slice(0, 10);
@@ -258,6 +261,48 @@ export default async function EventPage({
                 <p className="description">{event.description}</p>
               </section>
             )}
+
+            <section className="panel">
+              <h2>
+                Anmeldelser
+                {reviews.count > 0 && (
+                  <span className="review-summary">
+                    <span className="review-stars" aria-hidden="true">
+                      {starGlyphs(reviews.average)}
+                    </span>
+                    <span className="review-avg">{reviews.average.toFixed(1)}</span>
+                    <span className="review-count">
+                      · {reviews.count} {reviews.count === 1 ? 'anmeldelse' : 'anmeldelser'}
+                    </span>
+                  </span>
+                )}
+              </h2>
+              {reviews.count === 0 ? (
+                <p style={{ color: 'var(--ink-soft)', marginTop: 0 }}>
+                  Ingen anmeldelser endnu — har du været her? Vær den første til at dele din oplevelse.
+                </p>
+              ) : (
+                <ul className="review-list">
+                  {reviews.reviews.slice(0, 8).map((r, i) => (
+                    <li key={i} className="review-item">
+                      <div className="review-head">
+                        <span className="review-stars" aria-label={`${r.rating} af 5 stjerner`}>
+                          {starGlyphs(r.rating)}
+                        </span>
+                        {r.author && <span className="review-author">{r.author}</span>}
+                        {r.date && <span className="review-date">{r.date}</span>}
+                      </div>
+                      {r.text && <p className="review-body">{r.text}</p>}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <ReviewForm
+                slug={event.slug}
+                title={displayTitle(event.title)}
+                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`}
+              />
+            </section>
           </div>
 
           <aside>

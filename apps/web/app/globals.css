@@ -1420,6 +1420,123 @@ body:has(.is-map-view) {
   color: var(--ink-soft);
 }
 
+/* Community reviews */
+.review-summary {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+.review-stars {
+  color: #e0a419;
+  letter-spacing: 1px;
+}
+.review-avg {
+  color: var(--ink);
+  font-weight: 700;
+}
+.review-count {
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.review-list {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.review-item {
+  border-top: 1px solid var(--paper-sunken);
+  padding-top: 12px;
+}
+.review-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.review-head {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.review-author {
+  font-weight: 650;
+  font-size: 14px;
+}
+.review-date {
+  color: var(--ink-faint);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+.review-body {
+  margin: 5px 0 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.review-form {
+  margin-top: 4px;
+  border-top: 1px solid var(--paper-sunken);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  align-items: flex-start;
+}
+.review-stars-input {
+  display: inline-flex;
+  gap: 2px;
+}
+.review-star {
+  background: none;
+  border: none;
+  padding: 0 1px;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--ink-faint);
+  transition: color 0.1s ease, transform 0.06s ease;
+}
+.review-star.on {
+  color: #e8a71c;
+}
+.review-star:hover {
+  transform: scale(1.12);
+}
+.review-text,
+.review-name {
+  width: 100%;
+  max-width: 420px;
+  padding: 9px 12px;
+  border: 1.5px solid var(--paper-sunken);
+  border-radius: 10px;
+  background: var(--paper-raised);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+.review-text:focus,
+.review-name:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-deep) 45%, transparent);
+}
+.review-actions {
+  margin: 2px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.review-hint {
+  color: var(--ink-faint);
+  font-size: 13px;
+}
+
 /* "Til dig" personalized recommendation strip */
 .reco {
   margin: 0 0 20px;

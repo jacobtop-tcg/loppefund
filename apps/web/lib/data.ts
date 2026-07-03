@@ -1,8 +1,9 @@
 import 'server-only';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import type { DatabaseSync } from 'node:sqlite';
 import { addDays, isHiddenGem, searchFold, type Amenities } from '@loppefund/core';
+import { summarizeReviews, type ReviewSummary } from './reviews.ts';
 import {
   getEventBySlug,
   listCancelledSlugsBetween,
@@ -36,6 +37,34 @@ function getDb(): DatabaseSync {
     db = openDbReadOnly(path);
   }
   return db;
+}
+
+// Curated community reviews live in data/reviews.json (slug -> raw review[]),
+// read once at build time. A missing/broken file just means "no reviews yet".
+let reviewsBySlug: Record<string, unknown> | null = null;
+function allReviews(): Record<string, unknown> {
+  if (reviewsBySlug) return reviewsBySlug;
+  let dir = process.cwd();
+  for (let i = 0; i < 6; i++) {
+    const candidate = join(dir, 'data', 'reviews.json');
+    if (existsSync(candidate)) {
+      try {
+        const parsed: unknown = JSON.parse(readFileSync(candidate, 'utf8'));
+        reviewsBySlug = parsed && typeof parsed === 'object' ? (parsed as Record<string, unknown>) : {};
+      } catch {
+        reviewsBySlug = {};
+      }
+      return reviewsBySlug;
+    }
+    dir = dirname(dir);
+  }
+  reviewsBySlug = {};
+  return reviewsBySlug;
+}
+
+/** Aggregated community reviews for one market (empty when none are curated). */
+export function loadReviews(slug: string): ReviewSummary {
+  return summarizeReviews(allReviews()[slug]);
 }
 
 /**

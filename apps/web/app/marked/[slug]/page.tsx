@@ -7,6 +7,7 @@ import {
   displayTitle,
   formatDateLong,
   formatHours,
+  truncateAtWord,
 } from '../../../lib/format.ts';
 import { DetailMap } from '../../../components/DetailMap.tsx';
 import { ShareButton } from '../../../components/ShareButton.tsx';
@@ -30,9 +31,9 @@ export async function generateMetadata({
   const event = loadEventDetail(slug);
   if (!event) return { title: 'Marked ikke fundet — Loppefund' };
   const place = [event.city ?? event.municipality].filter(Boolean).join(', ');
-  const description =
-    event.description?.slice(0, 155) ??
-    `${CATEGORY_LABELS[event.category] ?? 'Marked'}${place ? ` i ${place}` : ''} — datoer, åbningstider og praktisk info på Loppefund.`;
+  const description = event.description
+    ? truncateAtWord(event.description, 155)
+    : `${CATEGORY_LABELS[event.category] ?? 'Marked'}${place ? ` i ${place}` : ''} — datoer, åbningstider og praktisk info på Loppefund.`;
   const title = `${event.title}${place ? ` i ${place}` : ''} — Loppefund`;
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
   // Shares in Facebook groups are the primary adoption channel — each event
@@ -50,6 +51,11 @@ export async function generateMetadata({
   return {
     title,
     description,
+    // rel=canonical: GitHub Pages serves both trailing- and non-trailing-slash
+    // forms, and shared filter URLs add query strings — all must point back to
+    // the clean event URL so ranking signals don't split. Relative, so it
+    // resolves against the origin-only metadataBase like og:url.
+    alternates: { canonical: `${basePath}/marked/${slug}` },
     openGraph: {
       title,
       description,

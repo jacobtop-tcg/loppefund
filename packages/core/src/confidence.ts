@@ -29,8 +29,28 @@ export function computeConfidence(input: ConfidenceInput): number {
   if (input.hasGoodLocation) score += 0.1;
   if (input.hasConcreteDates) score += 0.1;
 
-  return Math.min(1, Math.max(0, Math.round(score * 100) / 100));
+  score = Math.min(1, Math.max(0, Math.round(score * 100) / 100));
+
+  // A single low-trust source is unverified by definition — one uncorroborated
+  // Facebook post or community tip (trust <= 0.4) must NOT be promoted past the
+  // "bekræftet" line by location/date/freshness bonuses alone. Corroboration
+  // (a second source) or a genuinely trustworthy sole source (a public calendar,
+  // trust >= 0.5) is required to clear the threshold. Keeps the label honest:
+  // "we found this in one low-trust place" reads as ubekræftet.
+  if (input.sourceCount <= 1 && input.maxSourceTrust < SINGLE_SOURCE_VERIFIED_TRUST) {
+    score = Math.min(score, UNVERIFIED_THRESHOLD - 0.01);
+  }
+
+  return score;
 }
 
 /** UI threshold below which events are labelled "ubekræftet". */
 export const UNVERIFIED_THRESHOLD = 0.45;
+
+/**
+ * Sole-source trust floor for clearing UNVERIFIED_THRESHOLD. Public calendars
+ * (markedskalenderen 0.7, kultunaut 0.65, loppemarkeder.nu 0.6, findmarked /
+ * sydfynskalenderen 0.55) sit above it; Facebook (0.4) and community tips
+ * (0.35) sit below and stay "ubekræftet" until a second source corroborates.
+ */
+export const SINGLE_SOURCE_VERIFIED_TRUST = 0.5;

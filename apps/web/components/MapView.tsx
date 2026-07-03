@@ -98,8 +98,12 @@ export function MapView({
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const readyRef = useRef(false);
-  // Signature of the last rendered result set — refit only when it changes.
-  const lastSigRef = useRef<string | null>(null);
+  // Two signatures of the last render. The SET signature (which markers) gates
+  // the fly-to refit; the STATE signature (marker colours/labels, which the
+  // live clock flips) gates the repaint. Splitting them lets an open/today
+  // state change repaint the markers without yanking the map.
+  const lastSetSigRef = useRef<string | null>(null);
+  const lastStateSigRef = useRef<string | null>(null);
   const fitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // The style fetch and 'load' handler run asynchronously; read the latest
   // events from a ref so filters applied before then aren't lost.
@@ -113,23 +117,32 @@ export function MapView({
 
   function syncData(map: maplibregl.Map, evts: MapEvent[], animate: boolean) {
     const data = toGeoJson(evts, today);
-    // Order-independent signature: pure re-orderings (gemsFirst, distance sort)
-    // don't change the set, so they must not push GeoJSON or trigger a refit.
-    const sig = data.features
+    // Order-independent SET signature: pure re-orderings (gemsFirst, distance
+    // sort) don't change the set, so they must not trigger a refit.
+    const setSig = data.features
       .map((f) => f.properties!.slug as string)
       .sort()
       .join(',');
-    if (sig === lastSigRef.current) return;
-    const first = lastSigRef.current === null;
-    lastSigRef.current = sig;
+    // STATE signature: the marker visuals the live clock flips (open/today
+    // colour + label) even when the set is unchanged. Repaint on any change.
+    const stateSig = data.features
+      .map((f) => `${f.properties!.slug}:${f.properties!.state}:${f.properties!.label}`)
+      .sort()
+      .join('|');
+    if (stateSig === lastStateSigRef.current) return; // nothing changed at all
+    const first = lastSetSigRef.current === null;
+    const setChanged = setSig !== lastSetSigRef.current;
+    lastStateSigRef.current = stateSig;
+    lastSetSigRef.current = setSig;
     (map.getSource('events') as maplibregl.GeoJSONSource | undefined)?.setData(data);
     if (fitTimerRef.current) {
       clearTimeout(fitTimerRef.current);
       fitTimerRef.current = null;
     }
-    // Fly to the filtered result set — but never on the initial Denmark frame
-    // and never into an empty set. Debounced so typing doesn't yank the map.
-    if (!animate || first || data.features.length === 0) return;
+    // Fly to the filtered result set — but only when the SET changed (never on a
+    // clock-driven state-only repaint), never on the initial Denmark frame, and
+    // never into an empty set. Debounced so typing doesn't yank the map.
+    if (!animate || first || !setChanged || data.features.length === 0) return;
     const coords = data.features.map(
       (f) => (f.geometry as GeoJSON.Point).coordinates as [number, number],
     );
@@ -368,7 +381,8 @@ export function MapView({
       map?.remove();
       mapRef.current = null;
       readyRef.current = false;
-      lastSigRef.current = null;
+      lastSetSigRef.current = null;
+      lastStateSigRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

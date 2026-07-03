@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   // "/loppefund" would double it (…/loppefund/loppefund/…). Relative og:url
   // values below therefore carry the basePath explicitly.
   metadataBase: new URL(new URL(BASE_URL).origin),
+  // Homepage canonical (basePath-prefixed, resolves against the origin-only
+  // metadataBase). Child routes override this in their own generateMetadata.
+  alternates: { canonical: `${process.env.LOPPEFUND_BASE_PATH ?? ''}/` },
   appleWebApp: { capable: true, title: 'Loppefund', statusBarStyle: 'default' },
   icons: {
     apple: `${process.env.LOPPEFUND_BASE_PATH ?? ''}/apple-touch-icon.png`,

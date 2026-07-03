@@ -103,14 +103,17 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   // Sources categorize the same market inconsistently (loppemarked vs
   // kræmmermarked vs genbrugsmarked are near-synonyms across taxonomies),
   // so category mismatch alone must not block a merge. The exception is
-  // julemarked: a Christmas market at the same venue as a summer flea
-  // market is genuinely a different event.
-  if (
-    a.category && b.category &&
-    a.category !== 'andet' && b.category !== 'andet' &&
-    a.category !== b.category &&
-    (a.category === 'julemarked' || b.category === 'julemarked')
-  ) {
+  // julemarked: a Christmas market at the same venue as a summer flea market
+  // is genuinely a different event. The veto must fire whenever EXACTLY ONE
+  // side is julemarked — including when the other side is merely uncategorized
+  // ('andet'), which is the common case (many sources omit the category).
+  // Otherwise a real Christmas market absorbs a different, uncategorized market
+  // at the same venue on the same December day. Legitimate same-market
+  // Christmas duplicates almost always carry "jul" in the title, which upstream
+  // upgrades to julemarked, so both sides read julemarked and still merge.
+  const aJul = a.category === 'julemarked';
+  const bJul = b.category === 'julemarked';
+  if (aJul !== bJul) {
     return { isMatch: false, score: 0, reason: 'julemarked vs non-julemarked' };
   }
 
@@ -137,17 +140,26 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   const streetsAgree =
     !streetsDiffer && Boolean(a.street && b.street);
 
+  // `colocated`: locations do not CONTRADICT (a shared postcode district
+  // counts). `preciseColocation`: proven the SAME spot — coordinates within
+  // NEAR_METERS, or agreeing postcode AND agreeing street. A shared postcode
+  // alone is a whole district that routinely hosts several markets on the same
+  // Saturday, so it is deliberately NOT precise.
   let colocated: boolean | null = null;
+  let preciseColocation = false;
   if (a.lat != null && a.lng != null && b.lat != null && b.lng != null) {
     colocated = distanceMeters(a.lat, a.lng, b.lat, b.lng) <= NEAR_METERS;
+    preciseColocation = colocated === true;
     // Geocodes are sometimes wrong (ambiguous street names, postcode
     // centroids). Agreeing postcode + agreeing street outranks distant
     // coordinates.
     if (!colocated && a.postcode && b.postcode && a.postcode === b.postcode && streetsAgree) {
       colocated = true;
+      preciseColocation = true;
     }
   } else if (a.postcode && b.postcode) {
     colocated = a.postcode === b.postcode;
+    preciseColocation = colocated === true && streetsAgree;
   }
 
   if (colocated === false) {
@@ -157,28 +169,37 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   const dateOverlap =
     a.dates && b.dates && a.dates.some((d) => b.dates!.includes(d));
 
-  if (sim >= TITLE_STRONG && colocated === true) {
-    return { isMatch: true, score: sim, reason: 'strong title + same location' };
-  }
-  if (sim >= TITLE_STRONG && colocated === null && dateOverlap) {
-    return { isMatch: true, score: sim, reason: 'strong title + same dates' };
-  }
-  if (sim >= TITLE_WEAK && colocated === true && dateOverlap) {
-    return { isMatch: true, score: sim, reason: 'title + location + dates' };
-  }
-  // Distinctive identical titles merge even without location or date overlap —
-  // recurring series often publish each date as a separate entry with no
-  // address data. Generic titles never qualify: after dropping stopwords,
-  // category vocabulary and common venue nouns, at least one proper token
-  // must remain ("Bagagerumsmarked på havnen" -> none; "Fredensborg
-  // Kokkedal Loppemarked" -> fredensborg, kokkedal).
-  // (Contradicting locations already returned above.)
+  // Distinctiveness: after dropping stopwords, category vocabulary and common
+  // venue nouns, at least one proper token must remain ("Bagagerumsmarked på
+  // havnen" -> none; "Fredensborg Kokkedal Loppemarked" -> fredensborg,
+  // kokkedal). A generic title carries no identity of its own.
   const na = normalizeTitle(a.title);
   const properTokens = na
     .split(' ')
     .filter((w) => w.length > 1 && !GENERIC_TITLE_TOKENS.has(w));
   const distinctive =
     properTokens.length >= 1 && (na.length >= 15 || na.split(' ').length >= 3);
+
+  if (sim >= TITLE_STRONG && preciseColocation) {
+    return { isMatch: true, score: sim, reason: 'strong title + same location' };
+  }
+  if (sim >= TITLE_STRONG && colocated === null && dateOverlap) {
+    return { isMatch: true, score: sim, reason: 'strong title + same dates' };
+  }
+  // Decent title + co-location + overlapping dates. When co-location is only a
+  // shared postcode district (not precise), a fully generic title cannot tell
+  // two same-day markets in that district apart — require a distinctive title.
+  if (
+    sim >= TITLE_WEAK &&
+    colocated === true &&
+    dateOverlap &&
+    (preciseColocation || distinctive)
+  ) {
+    return { isMatch: true, score: sim, reason: 'title + location + dates' };
+  }
+  // Distinctive identical titles merge even without location or date overlap —
+  // recurring series often publish each date as a separate entry with no
+  // address data. (Contradicting locations already returned above.)
   if (sim >= 0.95 && distinctive && !streetsDiffer) {
     return { isMatch: true, score: sim, reason: 'identical distinctive title' };
   }

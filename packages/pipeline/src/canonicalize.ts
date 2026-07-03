@@ -29,6 +29,12 @@ import { geocode } from './geocode.ts';
 
 const HORIZON_DAYS = 180;
 
+// A source below this trust cannot introduce a NEW occurrence date onto an
+// event that a more trusted source already describes (it can still refine
+// times). Matches the confidence "verified sole source" floor: public
+// calendars (>= 0.55) clear it; Facebook (0.4) and tips (0.35) do not.
+const DATE_TRUST_FLOOR = 0.5;
+
 export interface CanonicalizeStats {
   created: number;
   merged: number;
@@ -344,7 +350,17 @@ export async function canonicalizeRawEvent(
          JOIN raw_events r ON r.id = es.raw_event_id WHERE es.event_id = ?`,
       )
       .all(e.id) as unknown as Array<{ payload: string; source_key: string }>;
-    const byDate = new Map<string, { occ: Occurrence; trust: number }>();
+    // Per date, track the winning occurrence (whose TIMES win) AND the highest
+    // trust of any source that ASSERTS that date. `occTrust` gates times;
+    // `dateTrust` gates whether the date is allowed to exist at all.
+    const byDate = new Map<
+      string,
+      { occ: Occurrence; occTrust: number; dateTrust: number }
+    >();
+    const maxTrust = Math.max(
+      0,
+      ...linkedPayloads.map((lp) => sourceTrust[lp.source_key] ?? 0.5),
+    );
     for (const lp of linkedPayloads) {
       const p = JSON.parse(lp.payload) as RawEvent;
       const lpTrust = sourceTrust[lp.source_key] ?? 0.5;
@@ -366,14 +382,29 @@ export async function canonicalizeRawEvent(
         const better =
           !prior ||
           (o.startTime !== null && prior.occ.startTime === null) ||
-          (o.startTime !== null && prior.occ.startTime !== null && lpTrust > prior.trust);
-        if (better) byDate.set(o.date, { occ: o, trust: lpTrust });
+          (o.startTime !== null && prior.occ.startTime !== null && lpTrust > prior.occTrust);
+        byDate.set(o.date, {
+          occ: better ? o : prior!.occ,
+          occTrust: better ? lpTrust : prior!.occTrust,
+          dateTrust: Math.max(prior?.dateTrust ?? 0, lpTrust),
+        });
       }
     }
+    // A low-trust source must not INVENT event days on an event that a more
+    // trusted source describes: a family would travel on a day the market
+    // isn't held. A date is admitted only if a source at least as trusted as
+    // the DATE_TRUST_FLOOR (or, when no trusted source touches this event at
+    // all, the best source present) asserts it. Low-trust sources may still
+    // refine TIMES on dates a trusted source already asserts (occTrust logic
+    // above) — they just can't conjure new dates. "Missing over incorrect."
+    const admitFloor = Math.min(maxTrust, DATE_TRUST_FLOOR);
     replaceOccurrences(
       db,
       e.id,
-      [...byDate.values()].map((v) => v.occ).sort((a, b) => a.date.localeCompare(b.date)),
+      [...byDate.values()]
+        .filter((v) => v.dateTrust >= admitFloor)
+        .map((v) => v.occ)
+        .sort((a, b) => a.date.localeCompare(b.date)),
     );
     if (changed) stats.merged++;
     else stats.unchanged++;

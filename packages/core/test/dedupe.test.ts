@@ -148,6 +148,62 @@ describe('matchEvents', () => {
     expect(matchEvents(a, b).isMatch).toBe(false);
   });
 
+  it('vetoes julemarked against an uncategorized (andet) event at the same venue', () => {
+    // Common case: a real Christmas market vs a different, uncategorized market
+    // at the same harbour on the same December day must not collapse into one.
+    const a = { ...broens, title: 'Julemarked på Havnen', category: 'julemarked', dates: ['2026-12-05'] };
+    const b = { ...broens, title: 'Vintermarked på Havnen', category: 'andet', dates: ['2026-12-05'] };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
+  it('does not merge two generic same-day markets sharing only a postcode when one lacks coords', () => {
+    // Distinct kræmmermarkeder in the same postal district on the same Saturday;
+    // one source published no coordinates. Postcode district != same spot.
+    const a = {
+      title: 'Kræmmermarked',
+      category: 'kraemmermarked',
+      postcode: '4200',
+      lat: null,
+      lng: null,
+      street: null,
+      dates: ['2026-08-15'],
+    };
+    const b = {
+      title: 'Kræmmermarked',
+      category: 'kraemmermarked',
+      postcode: '4200',
+      lat: 55.44,
+      lng: 11.55,
+      street: 'Ringstedvej 9',
+      dates: ['2026-08-15'],
+    };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
+  it('still merges a DISTINCTIVE same-day market sharing a postcode when one lacks coords', () => {
+    // The postcode-only tightening must not break legitimate same-market merges:
+    // a distinctive title carries identity even without precise coordinates.
+    const a = {
+      title: 'Ringsted Kræmmermarked på Torvet',
+      category: 'kraemmermarked',
+      postcode: '4200',
+      lat: null,
+      lng: null,
+      street: null,
+      dates: ['2026-08-15'],
+    };
+    const b = {
+      title: 'Ringsted Kræmmermarked på Torvet',
+      category: 'kraemmermarked',
+      postcode: '4200',
+      lat: 55.44,
+      lng: 11.79,
+      street: null,
+      dates: ['2026-08-15'],
+    };
+    expect(matchEvents(a, b).isMatch).toBe(true);
+  });
+
   it('does not let a bare category title strong-match by containment', () => {
     // "Loppemarked" is contained in countless titles; different streets,
     // 270 m apart, disjoint dates -> must not merge.
@@ -263,5 +319,56 @@ describe('computeConfidence', () => {
         hasConcreteDates: false,
       }),
     ).toBeLessThan(0.45);
+  });
+
+  it('keeps a single low-trust source (Facebook 0.4) below the verified threshold despite good location + dates', () => {
+    // One uncorroborated Facebook post must read as "ubekræftet" — bonuses
+    // must not manufacture a confident label from a single low-trust source.
+    expect(
+      computeConfidence({
+        maxSourceTrust: 0.4,
+        sourceCount: 1,
+        daysSinceVerified: 0,
+        hasGoodLocation: true,
+        hasConcreteDates: true,
+      }),
+    ).toBeLessThan(0.45);
+  });
+
+  it('keeps a single community tip (0.35) below the verified threshold', () => {
+    expect(
+      computeConfidence({
+        maxSourceTrust: 0.35,
+        sourceCount: 1,
+        daysSinceVerified: 0,
+        hasGoodLocation: true,
+        hasConcreteDates: true,
+      }),
+    ).toBeLessThan(0.45);
+  });
+
+  it('lets a single trustworthy calendar source (0.6) clear the threshold', () => {
+    expect(
+      computeConfidence({
+        maxSourceTrust: 0.6,
+        sourceCount: 1,
+        daysSinceVerified: 0,
+        hasGoodLocation: true,
+        hasConcreteDates: true,
+      }),
+    ).toBeGreaterThanOrEqual(0.45);
+  });
+
+  it('lets two corroborating low-trust sources clear the threshold', () => {
+    // Corroboration is the escape hatch: a second source lifts the label.
+    expect(
+      computeConfidence({
+        maxSourceTrust: 0.4,
+        sourceCount: 2,
+        daysSinceVerified: 0,
+        hasGoodLocation: true,
+        hasConcreteDates: true,
+      }),
+    ).toBeGreaterThanOrEqual(0.45);
   });
 });

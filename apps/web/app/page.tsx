@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { copenhagenNow } from '@loppefund/core';
-import { listUpcomingEvents, todayIso } from '../lib/data.ts';
+import { listUpcomingEvents } from '../lib/data.ts';
 import { Explorer } from '../components/Explorer.tsx';
 
 // Statically generated at build; a scheduled rebuild refreshes the data.
 // `next dev` always re-renders, so local development still sees live data.
 export default function HomePage() {
   const events = listUpcomingEvents();
-  const today = todayIso();
   const now = copenhagenNow();
   return (
     <>
@@ -23,7 +22,7 @@ export default function HomePage() {
         </div>
       </header>
       <main id="markeder" className="explorer-main">
-        <Explorer events={events} today={today} now={now} />
+        <Explorer events={events} now={now} />
       </main>
       <footer className="site-footer">
         <div className="explorer-main">

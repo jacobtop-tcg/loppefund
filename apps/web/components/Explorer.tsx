@@ -51,11 +51,9 @@ function dateRangeFor(filter: DateFilter, today: string): [string, string] {
 
 export function Explorer({
   events,
-  today,
   now: initialNow,
 }: {
   events: EventSummary[];
-  today: string;
   now: CphNow;
 }) {
   const [dateFilter, setDateFilter] = useState<DateFilter>('weekend');
@@ -76,6 +74,15 @@ export function Explorer({
   const [savedOnly, setSavedOnly] = useState(false);
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
   const { favorites, count: favCount } = useFavorites();
+
+  // Today's date, derived from the LIVE clock — never a build-time constant.
+  // The static HTML bakes `now` at build; if "today" came from a frozen prop it
+  // would lag the visitor's real date every night between local midnight and
+  // the next scheduled rebuild, so 'I dag'/'Åbent nu' would filter to yesterday
+  // and 'i dag' labels would be wrong. `now.date` refreshes on mount + every
+  // 60s below, and equals the build date on the first render (server and client
+  // agree → no hydration mismatch).
+  const today = now.date;
 
   // The `now` prop is baked into the static HTML at build time, so on the
   // deployed site open-now state would otherwise be computed against build

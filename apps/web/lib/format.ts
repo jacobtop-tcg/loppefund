@@ -65,6 +65,21 @@ export function displayPlace(text: string): string {
     .join(' ');
 }
 
+/**
+ * Trim to at most `max` chars WITHOUT cutting a word in half, appending an
+ * ellipsis when shortened. Used for SEO/OG descriptions — a snippet ending in
+ * "…og de flotte r" reads as broken on a search result or a share card.
+ */
+export function truncateAtWord(text: string, max = 155): string {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (clean.length <= max) return clean;
+  // Leave room for the ellipsis, then back up to the last word boundary.
+  const slice = clean.slice(0, max - 1);
+  const lastSpace = slice.lastIndexOf(' ');
+  const head = (lastSpace > max * 0.6 ? slice.slice(0, lastSpace) : slice).replace(/[.,;:!?–-]+$/, '');
+  return `${head}…`;
+}
+
 /** "10–16" or "10.30–16" from HH:MM strings */
 export function formatHours(start: string | null, end: string | null): string | null {
   if (!start) return null;

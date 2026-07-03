@@ -21,9 +21,19 @@ function read(): Set<string> {
 }
 
 function write(set: Set<string>): void {
-  window.localStorage.setItem(KEY, JSON.stringify([...set]));
+  // Update the in-memory snapshot and notify listeners FIRST, so the toggle is
+  // reflected in the UI even if persistence fails. localStorage.setItem throws
+  // in Safari private mode and when the quota is exhausted — degrade to
+  // session-only rather than letting the heart-button click throw uncaught
+  // (read() is already guarded the same way).
   snapshot = [...set].sort();
   window.dispatchEvent(new Event(EVENT));
+  try {
+    window.localStorage.setItem(KEY, JSON.stringify([...set]));
+  } catch {
+    // Quota exceeded / private mode — the favorite won't survive a reload, but
+    // the current session stays fully interactive.
+  }
 }
 
 // Cached parsed snapshot: 499 subscribed cards each call getSnapshot on every

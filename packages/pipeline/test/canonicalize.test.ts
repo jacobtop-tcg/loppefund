@@ -151,6 +151,46 @@ describe('canonicalizeRawEvent', () => {
     expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.status).toBe('active');
   });
 
+  it('does not let a low-trust source inject a fabricated occurrence date onto a trusted event', async () => {
+    const db = openDb(':memory:');
+    upsertSource(db, { key: 'markedskalenderen', name: 'MK', baseUrl: 'x', trust: 0.7 });
+    upsertSource(db, { key: 'facebook', name: 'FB', baseUrl: 'x', trust: 0.4 });
+    const t2 = { ...trust, facebook: 0.4 };
+    const stats = newStats();
+    // A different day the market is NOT actually held, asserted only by FB.
+    const fabricated = (() => {
+      const d = new Date();
+      d.setDate(d.getDate() + 11);
+      return d.toISOString().slice(0, 10);
+    })();
+    await canonicalizeRawEvent(db, rawA(), t2, stats);
+    // Facebook post links to the same market (identical title + coords) but
+    // carries an extra, mis-parsed date.
+    await canonicalizeRawEvent(
+      db,
+      {
+        sourceKey: 'facebook',
+        sourceUrl: 'https://facebook.com/events/999',
+        sourceEventId: '999',
+        title: 'Testmarked på Havnen',
+        lat: 55.4001,
+        lng: 10.3801,
+        postcode: '5000',
+        occurrences: [
+          { date: future, startTime: null, endTime: null },
+          { date: fabricated, startTime: null, endTime: null },
+        ],
+      },
+      t2,
+      stats,
+    );
+    expect(stats.merged).toBe(1);
+    const e = getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!;
+    const dates = e.occurrences.map((o) => o.date);
+    expect(dates).toContain(future); // the real, trusted date survives
+    expect(dates).not.toContain(fabricated); // the FB-only fabricated date is dropped
+  });
+
   it('lets the dominant source restore a cancelled event it re-publishes', async () => {
     const db = openDb(':memory:');
     upsertSource(db, { key: 'markedskalenderen', name: 'MK', baseUrl: 'x', trust: 0.7 });

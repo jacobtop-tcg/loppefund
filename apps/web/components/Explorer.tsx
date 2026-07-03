@@ -8,6 +8,11 @@ import { useFavorites } from '../lib/favorites.ts';
 import { FilterBar, type DateFilter } from './FilterBar.tsx';
 import { ResultsList } from './ResultsList.tsx';
 import {
+  clearSavedLocation,
+  readSavedLocation,
+  writeSavedLocation,
+} from '../lib/saved-location.ts';
+import {
   addDaysIso,
   buildTripUrl,
   distanceKm,
@@ -113,8 +118,23 @@ export function Explorer({
     setSavedOnly(parsed.savedOnly);
     setGemsFirst(parsed.gemsFirst);
     setView(parsed.view);
+    // Land a returning visitor back in their own area (device-local, never a
+    // URL). A shared link (which carries no location) never triggers this,
+    // because its owner's browser has nothing saved.
+    const savedLoc = readSavedLocation();
+    if (savedLoc) {
+      setPos({ lat: savedLoc.lat, lng: savedLoc.lng });
+      if (savedLoc.radius !== null) setRadius(savedLoc.radius);
+    }
     setHydrated(true);
   }, []);
+
+  // Remember the location on this device whenever it changes, so the next visit
+  // restores it. Only persists a real position; clearing is handled in clearPos.
+  useEffect(() => {
+    if (!hydrated || !pos) return;
+    writeSavedLocation({ lat: pos.lat, lng: pos.lng, radius });
+  }, [hydrated, pos, radius]);
 
   // On any relevant filter change, keep the URL in sync via replaceState so
   // refresh/back restore state without polluting history. SSR-guarded.
@@ -294,6 +314,7 @@ export function Explorer({
   const clearPos = useCallback(() => {
     setPos(null);
     setRadius(null);
+    clearSavedLocation(); // forget the device-local location too
   }, []);
 
   return (

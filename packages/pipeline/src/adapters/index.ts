@@ -8,6 +8,7 @@ import { sydfynskalenderen } from './sydfynskalenderen.ts';
 import { bagagerumsmarkedViborg } from './bagagerumsmarked-viborg.ts';
 import { kirkebyGamleMejeri } from './kirkeby-gamle-mejeri.ts';
 import { vorbasseMarked } from './vorbasse-marked.ts';
+import { goerlevMarked } from './goerlev-marked.ts';
 
 /** Registered source adapters. Each is independent and replaceable. */
 export const adapters: SourceAdapter[] = [
@@ -20,4 +21,5 @@ export const adapters: SourceAdapter[] = [
   bagagerumsmarkedViborg,
   kirkebyGamleMejeri,
   vorbasseMarked,
+  goerlevMarked,
 ];

@@ -75,6 +75,54 @@ export function loadPhotos(slug: string): Photo[] {
   return summarizePhotos(readRepoJson('photos')[slug]);
 }
 
+export interface SourceInfo {
+  key: string;
+  name: string;
+  baseUrl: string;
+  trust: number;
+  eventCount: number;
+}
+
+/** Sources currently feeding the canonical database, with their live count of
+ *  active markets. The trust weight is why some sources can confirm a market on
+ *  their own while others need corroboration. */
+export function listActiveSources(): SourceInfo[] {
+  return getDb()
+    .prepare(
+      `SELECT s.key, s.name, s.base_url AS baseUrl, s.trust,
+        (SELECT COUNT(DISTINCT es.event_id)
+           FROM raw_events r
+           JOIN event_sources es ON es.raw_event_id = r.id
+           JOIN events e ON e.id = es.event_id AND e.status = 'active'
+          WHERE r.source_key = s.key) AS eventCount
+       FROM sources s
+       ORDER BY eventCount DESC, s.name`,
+    )
+    .all() as unknown as SourceInfo[];
+}
+
+export interface DiscoveredSource {
+  domain: string;
+  mentions: number;
+  distinctTitles: number;
+  status: string;
+  probeScore: number | null;
+}
+
+/** Domains the discovery engine has automatically surfaced from crawled data —
+ *  the pipeline of candidate new sources. Social/search hosts are excluded. */
+export function listDiscoveredSources(): DiscoveredSource[] {
+  return getDb()
+    .prepare(
+      `SELECT domain, mentions, distinct_titles AS distinctTitles, status, probe_score AS probeScore
+       FROM source_candidates
+       WHERE domain NOT LIKE '%facebook%' AND domain NOT LIKE '%google%'
+         AND domain NOT LIKE '%instagram%' AND domain NOT LIKE '%youtube%'
+       ORDER BY (probe_score IS NULL), probe_score DESC, mentions DESC`,
+    )
+    .all() as unknown as DiscoveredSource[];
+}
+
 /**
  * Coords from a postcode/city centroid (quality 'P'/'city') rather than an exact
  * street match ('source'/'A'/'B') — the pin is only roughly right, so the UI

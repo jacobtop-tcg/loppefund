@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: BASE, changeFrequency: 'daily', priority: 1 },
     { url: `${BASE}/byer`, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${BASE}/kilder`, changeFrequency: 'weekly', priority: 0.5 },
     ...listCities().map((c) => ({
       url: `${BASE}/by/${c.slug}`,
       changeFrequency: 'daily' as const,

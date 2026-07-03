@@ -1420,6 +1420,78 @@ body:has(.is-map-view) {
   color: var(--ink-soft);
 }
 
+/* Sources / provenance page */
+.source-cards {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+.source-card {
+  border: 1px solid var(--paper-sunken);
+  border-radius: 12px;
+  padding: 13px 15px;
+  background: var(--paper-raised);
+}
+.source-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.source-card-name {
+  font-weight: 700;
+  font-size: 15px;
+}
+.source-card-meta {
+  margin-top: 7px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+}
+.source-card-count {
+  color: var(--ink);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.source-card-meta a {
+  color: var(--accent-deep);
+}
+.source-table-wrap {
+  overflow-x: auto;
+  margin-top: 12px;
+}
+.source-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.source-table th,
+.source-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--paper-sunken);
+  white-space: nowrap;
+}
+.source-table th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  font-weight: 700;
+}
+.source-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.source-domain {
+  font-weight: 600;
+}
+
 /* Community photos */
 .photo-grid {
   list-style: none;

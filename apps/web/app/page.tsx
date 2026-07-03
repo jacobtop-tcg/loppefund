@@ -33,6 +33,9 @@ export default function HomePage() {
           </Link>{' '}
           <Link href="/byer" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
             · Find din by →
+          </Link>{' '}
+          <Link href="/kilder" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
+            · Se vores kilder →
           </Link>
         </div>
       </footer>

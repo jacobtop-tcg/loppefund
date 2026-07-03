@@ -161,9 +161,9 @@ describe('facebook-feed adapter', () => {
       '2026-07-03',
     );
     expect(raw).not.toBeNull();
-    expect(raw!.occurrences[0]!.date).toBe('2026-11-14');
-    expect(raw!.occurrences[0]!.startTime).toBeNull();
-    expect(raw!.occurrences[0]!.endTime).toBeNull();
+    expect(raw!.occurrences![0]!.date).toBe('2026-11-14');
+    expect(raw!.occurrences![0]!.startTime).toBeNull();
+    expect(raw!.occurrences![0]!.endTime).toBeNull();
   });
 
   it('reads a local committed feed file without any HTTP fetch', async () => {

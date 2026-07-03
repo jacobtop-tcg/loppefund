@@ -12,6 +12,7 @@ import {
   normalizeCategory,
   parseDanishDate,
   parseOpeningHours,
+  resolveSchedule,
   type Occurrence,
   type RawEvent,
 } from '@loppefund/core';
@@ -29,7 +30,7 @@ const MONTH = '(?:januar|februar|marts|april|maj|juni|juli|august|september|okto
  *   "Fre. d. 3. juli 2026, kl. 10-16."
  *   "Lør. d. 4. juli - søn. d. 5. juli 2026, kl. 10-15."
  */
-export function parseKultunautDate(text: string): Occurrence[] {
+export function parseKultunautDate(text: string, scheduleText = ''): Occurrence[] {
   const t = text.replace(/\s+/g, ' ').trim();
   const dateRe = new RegExp(`(\\d{1,2})\\.\\s*(${MONTH})(?:\\s*(\\d{4}))?`, 'gi');
   const found: Array<{ d: string; m: string; y?: string }> = [];
@@ -45,13 +46,33 @@ export function parseKultunautDate(text: string): Occurrence[] {
     .filter((d): d is string => d !== null);
   if (dates.length === 0) return [];
 
-  const hours = parseOpeningHours(t.match(/kl\.?\s*[\d.:]+\s*[-–]\s*[\d.:]+/i)?.[0] ?? '');
+  const hoursText = t.match(/kl\.?\s*[\d.:]+\s*[-–]\s*[\d.:]+/i)?.[0] ?? '';
+  const hours = parseOpeningHours(hoursText);
   const startTime = hours.generic?.start ?? null;
   const endTime = hours.generic?.end ?? null;
 
-  const out: Occurrence[] = [];
   const start = dates[0]!;
   const end = dates[dates.length - 1]!;
+  const spanDays = Math.round((Date.parse(end) - Date.parse(start)) / 86_400_000);
+
+  // A SHORT span is a genuine multi-day event (a weekend market) → fill each day.
+  // A LONG span is not consecutive market days: the date line is summarising a
+  // RECURRENCE ("hver mandag i uge 27-34") as first–last. Daily-filling it
+  // fabricates dozens of non-market days (and can make the app show the market
+  // open today when it isn't). So resolve the weekday rule from the description,
+  // bounded to the stated span; if no rule is recognizable, keep only the dates
+  // actually written — never the fill.
+  const MAX_CONSECUTIVE_DAYS = 6;
+  if (spanDays > MAX_CONSECUTIVE_DAYS) {
+    const bounded = resolveSchedule(
+      { scheduleText, openingHoursText: hoursText },
+      { from: start, horizonDays: spanDays },
+    );
+    if (bounded.length > 0) return bounded;
+    return [...new Set(dates)].sort().map((date) => ({ date, startTime, endTime }));
+  }
+
+  const out: Occurrence[] = [];
   let d = start;
   for (let i = 0; d <= end && i < 40; i++) {
     out.push({ date: d, startTime, endTime });
@@ -126,7 +147,6 @@ export const kultunaut: SourceAdapter = {
     }
 
     const dateText = root.querySelector('.event-date p')?.text ?? '';
-    const occurrences = parseKultunautDate(dateText);
 
     const lonlatText = root.querySelector('.lonlat')?.innerHTML ?? '';
     const latMatch = lonlatText.match(/Lat:\s*([\d.]+)/);
@@ -136,6 +156,10 @@ export const kultunaut: SourceAdapter = {
       .querySelector('article.event-description')
       ?.structuredText.replace(/\n{3,}/g, '\n\n')
       .trim();
+
+    // Pass the description so a recurrence range ("hver mandag i uge 27-34")
+    // resolves to its real weekdays instead of a fabricated daily fill.
+    const occurrences = parseKultunautDate(dateText, description ?? '');
 
     // Price appears inside the description text, e.g. "Fri entré" / "Entré: 20 kr."
     let priceText: string | undefined;

@@ -5,11 +5,13 @@
 import type { DatabaseSync } from 'node:sqlite';
 import {
   computeConfidence,
+  cleanCity,
   extractAmenities,
   matchEvents,
   normalizeCategory,
   resolveSchedule,
   slugify,
+  stripDateTokens,
   titleHasDateTokens,
   type IndoorOutdoor,
   type Occurrence,
@@ -144,6 +146,12 @@ export async function canonicalizeRawEvent(
   const rawCategory =
     normalizeCategory(raw.title) === 'julemarked' ? 'julemarked' : raw.category;
 
+  // A recurring market must not bake one occurrence's date into its name — it
+  // reads wrong next to the other dates and splits the market into un-mergeable
+  // per-date records. Clean the title up front so dedup, slug and display all
+  // use the stable name.
+  const title = stripDateTokens(raw.title);
+
   // Resolve concrete occurrences. Events we cannot date are not shown to
   // consumers — a market without a date is a rumor, not an event.
   const occurrences = resolveSchedule(
@@ -185,15 +193,18 @@ export async function canonicalizeRawEvent(
     postcode = postcode ?? g.resolvedPostcode;
     city = city ?? g.resolvedCity;
   }
+  // Some adapters leak "street, postcode city" (sometimes repeated) into city;
+  // clean it to a plain town name so both the location line and the slug are right.
+  city = cleanCity(city, postcode);
 
   // Find the canonical event this raw event belongs to.
-  const candidates = findCandidateEvents(db, { postcode, lat, lng, title: raw.title });
+  const candidates = findCandidateEvents(db, { postcode, lat, lng, title });
   const rawDates = occurrences.map((o) => o.date);
   let best: { event: EventRow; score: number } | null = null;
   for (const candidate of candidates) {
     const result = matchEvents(
       {
-        title: raw.title,
+        title,
         lat,
         lng,
         postcode,
@@ -281,12 +292,10 @@ export async function canonicalizeRawEvent(
       provenance.geocodeQuality = raw.sourceKey;
     }
 
-    // Per-date series titles ("Loppemarked lørdag d. 5. juli") must not
-    // replace a clean canonical title.
+    // Incoming title is already date-stripped; still guard against replacing a
+    // clean canonical title with a residual dated one from older data.
     const incomingTitle =
-      titleHasDateTokens(raw.title) && !titleHasDateTokens(e.title)
-        ? undefined
-        : raw.title;
+      titleHasDateTokens(title) && !titleHasDateTokens(e.title) ? undefined : title;
 
     const merged = {
       slug: e.slug,
@@ -420,14 +429,14 @@ export async function canonicalizeRawEvent(
   const baseSlug =
     hinted && !db.prepare(`SELECT 1 FROM events WHERE slug = ?`).get(hinted)
       ? hinted
-      : slugify(`${raw.title} ${city ?? raw.municipality ?? ''}`);
+      : slugify(`${title} ${city ?? raw.municipality ?? ''}`);
   let slug = baseSlug;
   for (let i = 2; db.prepare(`SELECT 1 FROM events WHERE slug = ?`).get(slug); i++) {
     slug = `${baseSlug}-${i}`;
   }
   const id = insertEvent(db, {
     slug,
-    title: raw.title,
+    title,
     description: raw.description ?? null,
     category: rawCategory ?? 'andet',
     venueName: raw.venueName ?? null,

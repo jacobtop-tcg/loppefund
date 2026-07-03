@@ -16,6 +16,28 @@ export function slugify(text: string): string {
   return normalizeTitle(text).replace(/ /g, '-').slice(0, 80);
 }
 
+/**
+ * Sanitize a `city` an adapter over-stuffed with street/postcode fragments —
+ * e.g. ", 6640 Lunderskov, 6640 Lunderskov, 6640 Lunderskov" or
+ * "Kastaniehøjvej 6, 8600 Silkeborg" — down to a clean town name. Prefers the
+ * comma-segment tied to the postcode, strips a leading 4-digit postcode, and
+ * de-duplicates repeats. A clean city ("Svendborg") passes through untouched.
+ */
+export function cleanCity(
+  city: string | null | undefined,
+  postcode?: string | null,
+): string | null {
+  if (!city) return null;
+  const segs = [...new Set(city.split(',').map((s) => s.trim()).filter(Boolean))];
+  if (segs.length === 0) return null;
+  const pick =
+    (postcode ? segs.find((s) => s.startsWith(postcode)) : undefined) ??
+    segs[segs.length - 1]!;
+  const afterPc = pick.match(/^[1-9]\d{3}\s+(.+)$/);
+  const out = (afterPc ? afterPc[1]! : pick).trim();
+  return out || null;
+}
+
 const CATEGORY_PATTERNS: Array<[RegExp, EventCategory]> = [
   // Jule first: "Julekræmmermarked" is seasonally a julemarked, and the
   // julemarked/non-julemarked distinction feeds the dedup veto.
@@ -85,6 +107,36 @@ const DATE_TOKEN =
 /** Does a title carry date tokens ("Loppemarked lørdag d. 5. juli")? */
 export function titleHasDateTokens(title: string): boolean {
   return DATE_TOKEN.test(title);
+}
+
+const MONTHS_RE = 'januar|februar|marts|april|maj|juni|juli|august|september|oktober|november|december';
+
+/**
+ * Strip date / weekday / time fragments from a title so a recurring market keeps
+ * a clean, stable name ("Loppemarked lørdag d. 4. juli 2026" -> "Loppemarked").
+ * A baked-in date is both wrong (it contradicts the other occurrences a user
+ * sees) and splits one market into many un-mergeable records. Conservative: only
+ * touches recognized fragments and falls back to the original if nothing
+ * meaningful would remain.
+ */
+export function stripDateTokens(title: string): string {
+  if (!titleHasDateTokens(title)) return title;
+  let s = title
+    .replace(/\bkl\.?\s*\d{1,2}(?:[.:]\d{2})?\s*[-–]\s*\d{1,2}(?:[.:]\d{2})?/gi, ' ')
+    .replace(new RegExp(`\\b(?:den|d)\\.?\\s*\\d{1,2}\\.?\\s*(?:${MONTHS_RE})(?:\\s*\\d{4})?`, 'gi'), ' ')
+    .replace(new RegExp(`\\b\\d{1,2}\\.?\\s*(?:${MONTHS_RE})(?:\\s*\\d{4})?`, 'gi'), ' ')
+    .replace(/\b\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?\b/g, ' ')
+    .replace(/\b(?:mandag|tirsdag|onsdag|torsdag|fredag|l(?:ø|oe)rdag|s(?:ø|oe)ndag)e?\b/gi, ' ')
+    .replace(/\b20\d{2}\b/g, ' ')
+    .replace(/\bd\.\s*/gi, ' ');
+  s = s
+    .replace(/\(\s*\)/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/\s+([,.])/g, '$1')
+    .replace(/[\s,–-]+$/, '')
+    .replace(/^[\s,–-]+/, '')
+    .trim();
+  return s.length >= 3 ? s : title;
 }
 
 /** Extract a Danish postcode (4 digits, 1000-9999) from text. */

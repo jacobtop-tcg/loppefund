@@ -31,6 +31,30 @@ describe('parseKultunautDate', () => {
   it('returns nothing for undated text', () => {
     expect(parseKultunautDate('Se hjemmesiden for datoer')).toEqual([]);
   });
+
+  it('resolves a long "hver mandag" span to only Mondays, never a daily fill', () => {
+    const occ = parseKultunautDate(
+      'Man. d. 6. juli - man. d. 3. august 2026, kl. 10-16.',
+      'Byen fyldes hver mandag i uge 27 til 34 med boder.',
+    );
+    expect(occ.map((o) => o.date)).toEqual([
+      '2026-07-06',
+      '2026-07-13',
+      '2026-07-20',
+      '2026-07-27',
+      '2026-08-03',
+    ]);
+    expect(occ.every((o) => o.startTime === '10:00' && o.endTime === '16:00')).toBe(true);
+  });
+
+  it('does not daily-fill a long span with no weekday rule (keeps only stated dates)', () => {
+    expect(
+      parseKultunautDate('D. 2. juli - d. 7. august 2026, kl. 10-16.', 'Kom forbi hen over sommeren.'),
+    ).toEqual([
+      { date: '2026-07-02', startTime: '10:00', endTime: '16:00' },
+      { date: '2026-08-07', startTime: '10:00', endTime: '16:00' },
+    ]);
+  });
 });
 
 describe('looksLikeMarket', () => {

@@ -60,6 +60,11 @@ jobs:
         run: |
           node packages/pipeline/src/cli.ts run
           node packages/pipeline/src/cli.ts tips || true
+          # Continuously discover new sources: mine domains mentioned in the
+          # crawled data, probe the strongest for event-schema signals, and
+          # keep the candidate list fresh for review/promotion. Never blocks
+          # the deploy. Cheap: reads existing raw events + politely probes a few.
+          node packages/pipeline/src/cli.ts discover-sources --probe-limit 8 || true
           node packages/pipeline/src/cli.ts stats
 
       - name: Save database

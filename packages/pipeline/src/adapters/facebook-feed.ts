@@ -164,17 +164,81 @@ export function eventToRaw(item: FeedItem, refDate: string): RawEvent | null {
   };
 }
 
+// Facebook/OCR "chrome": UI text and scrape artefacts that get glued onto a
+// poster's real words — the search bar, the author + timestamp line, group-nav
+// items, reaction counts, and OCR mis-reads of "Facebook" ("ebook"/"ook"). Left
+// in, they become the title or fool the date scanner (e.g. "8:11PM" → a date).
+// Stripped so the market text stands alone. Applied ONLY to Facebook posts;
+// community tips are pasted clean and go through the parser untouched.
+const FB_CHROME: readonly RegExp[] = [
+  /\bq?\s*search facebook\b/gi,
+  /\bgruppen\b/gi,
+  /\bpublic group\b/gi,
+  /\b[\d.,]+\s*k?\s*members\b/gi,
+  /\b(?:invite|ahout|about|discussion|people|media|files|joined)\b/gi,
+  /\brising contributor\b/gi,
+  /\b[A-Za-zÆØÅæøå]+\s+\d{1,2}\s+at\s+\d{1,2}[:.]\d{2}\s*[ap]m\b/gi, // "July 2 at 8:11PM"
+  /\b\d{1,2}[:.]\d{2}\s*[ap]m\b/gi,
+  /(?:^|\s)[·•*]\s*-?\s*\d+(?=\s|$)/g, // "• 0", "•0", "-0", "* 0" reaction counts
+  /(?:^|\s)\d{1,2}\s*[hdwm](?=\s*[·•\-o*])/gi, // "4h" before a bullet/reaction
+  /(?:^|\s)e?book(?=\s|$)/gi, // "ebook"/"book" — OCR of "Facebook"
+  /(?:^|\s)ook(?=\s)/gi, // "ook" OCR fragment
+  /[·•]\s*share\b/gi,
+];
+
+// A title that still reads as Facebook chrome after cleaning — never a market.
+const CHROME_TITLE = /contributor|facebook|public group|members|discussion|^search\b/i;
+
+export function stripFbChrome(text: string): string {
+  let t = ` ${text} `;
+  for (const re of FB_CHROME) t = t.replace(re, ' ');
+  t = t.replace(/\s+/g, ' ').trim();
+  return t.replace(/^[^\p{L}\p{N}]+/u, '').trim(); // drop leading emoji/symbols
+}
+
+// OCR of a poster routinely glues a weekday/date/year into what the parser
+// reads as the "street", and surfaces stray 4-digit numbers that look like
+// postcodes. On a low-trust source a wrong pin is worse than none, so keep
+// location only when it's clearly an address: drop a street carrying date/
+// weekday/year noise, and drop a postcode with no town name beside it (parseTip
+// leaves `city` unset in that case — a bare number, not a confirmed postal town).
+// A real street is "Navn <husnr>"; OCR instead hands us venue names with a date
+// fragment ("Nødebo Kro Den 23"), holidays ("Grundlovsdag 5") or the market word
+// itself ("Loppemarked d. 4"). Any of these tokens means it isn't an address.
+const STREET_NOISE =
+  /\b(?:mandag|tirsdag|onsdag|torsdag|fredag|lørdag|søndag)\b|\bden\b|\bd\.\s*\d|\bkl\.?\s*\d|\b\d{4}\b|\b(?:januar|februar|marts|april|maj|juni|juli|august|september|oktober|november|december)\b|(?:loppe|kr(?:æ|ae)mmer|genbrug|bazar|grundlovs|byfest|marked)/i;
+// A postal town is one or two capitalised words; guard against a 4-digit YEAR
+// read as a postcode next to an org name ("2026 Fyens Stiftstidende").
+const CITY_OK = /^[A-ZÆØÅ][a-zæøåé]+(?:[ -][A-ZÆØÅa-zæøå]+){0,2}$/;
+const CITY_BAD = /stiftstidende|avis|posten|tidende|nyheder|facebook/i;
+function sanitizeFbLocation(raw: RawEvent): RawEvent {
+  const street = raw.street && STREET_NOISE.test(raw.street) ? undefined : raw.street;
+  const cityOk = !!raw.city && CITY_OK.test(raw.city) && !CITY_BAD.test(raw.city);
+  const postcode = raw.postcode && cityOk ? raw.postcode : undefined;
+  return { ...raw, street, postcode, city: postcode ? raw.city : undefined };
+}
+
 export function itemToRaw(item: FeedItem, refDate: string): RawEvent | null {
   // Event-shaped items (machine dates) take the high-fidelity path.
   if (item.name && (item.startTimestamp || item.startDate || item.utcStartDate)) {
     return eventToRaw(item, refDate);
   }
-  const text = item.text ?? item.postText ?? item.message ?? null;
+  const rawText = item.text ?? item.postText ?? item.message ?? null;
+  const text = rawText ? stripFbChrome(rawText) : null;
   const url = item.url ?? item.postUrl ?? item.facebookUrl ?? null;
+  // Hash the ORIGINAL text so the id is stable regardless of cleaning tweaks.
   const id =
-    item.id ?? item.postId ?? (text ? createHash('sha256').update(text).digest('hex').slice(0, 16) : null);
+    item.id ?? item.postId ?? (rawText ? createHash('sha256').update(rawText).digest('hex').slice(0, 16) : null);
   if (!id) return null;
-  return parseTip({ id, url, text }, refDate, { key: 'facebook-feed', idPrefix: 'fb' });
+  // A post with no market vocabulary at all (a "who's coming?" comment or pure
+  // group navigation) is not an event — don't let the parser guess one.
+  if (text && !looksLikeMarket(text)) return null;
+  const raw = parseTip({ id, url, text }, refDate, { key: 'facebook-feed', idPrefix: 'fb' });
+  if (!raw) return null;
+  // Reject a draft whose title is still chrome the cleaner missed — better no
+  // event than "*Rising contributor" or "ebook" showing up as a market.
+  if (CHROME_TITLE.test(raw.title)) return null;
+  return sanitizeFbLocation(raw);
 }
 
 export const facebookFeed: SourceAdapter = {

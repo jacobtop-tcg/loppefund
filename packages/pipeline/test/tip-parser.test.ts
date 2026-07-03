@@ -37,8 +37,18 @@ describe('scanDates', () => {
   it('resolves year-less dates to the next occurrence', () => {
     expect(scanDates('Lørdag d. 11/7 kl. 10-15', REF)).toEqual(['2026-07-11']);
     expect(scanDates('vi ses den 11. juli!', REF)).toEqual(['2026-07-11']);
-    // A date already passed this year rolls to next year.
+    // A date well past this year rolls to next year.
     expect(scanDates('den 3/5 holder vi marked', REF)).toEqual(['2027-05-03']);
+  });
+
+  it('drops a JUST-passed date instead of fabricating a next-year one', () => {
+    // "fredag 3., 10., 17. juli" seen on the 4th: the 3rd is gone, the rest still
+    // upcoming. The 3rd must be dropped — NOT invented as 2027-07-03.
+    const ref = '2026-07-04';
+    expect(scanDates('Fredage 3. juli, 10. juli og 17. juli', ref)).toEqual([
+      '2026-07-10',
+      '2026-07-17',
+    ]);
   });
 
   it('collects multiple dates', () => {

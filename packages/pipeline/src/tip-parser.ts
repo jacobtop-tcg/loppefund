@@ -100,7 +100,17 @@ export function scanDates(text: string, refDate: string): string[] {
   }
   for (const { d, mo } of yearless) {
     const thisYear = iso(refY, mo, d);
-    found.add(thisYear >= refDate ? thisYear : iso(refY + 1, mo, d));
+    if (thisYear >= refDate) {
+      found.add(thisYear);
+      continue;
+    }
+    // Past this year. A date only JUST gone is almost always a passed instance in
+    // a list whose later dates are still upcoming ("fredag 3., 10., 17. juli" seen
+    // on the 4th) — drop it rather than fabricate a next-year occurrence. Only a
+    // date well in the past reads as next year's edition ("3/5" seen in July).
+    if ((Date.parse(refDate) - Date.parse(thisYear)) / 86_400_000 > 45) {
+      found.add(iso(refY + 1, mo, d));
+    }
   }
 
   return [...found].sort();

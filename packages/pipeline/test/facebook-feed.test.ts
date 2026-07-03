@@ -37,6 +37,51 @@ describe('facebook-feed adapter', () => {
     expect(itemToRaw({ text: 'Hvem skal med på loppemarked i weekenden? 😍' }, REF)).toBeNull();
   });
 
+  it('strips Facebook/OCR chrome so it never becomes the title', () => {
+    // Real harvest shape: author + timestamp + reaction count glued in front.
+    const raw = itemToRaw(
+      { text: '*Rising contributor • July 2 at 8:11PM • 0 Loppemarked d. 5. juli kl. 10-14 i Vejle' },
+      REF,
+    );
+    expect(raw).not.toBeNull();
+    expect(raw!.title).toBe('Loppemarked');
+    expect(raw!.title).not.toMatch(/contributor|July|PM/i);
+  });
+
+  it('drops group-navigation posts that are not a market', () => {
+    expect(
+      itemToRaw({ text: 'Q Search Facebook Gruppen Loppemarked Sydfyn Public group • 2.5K members Invite About Discussion People' }, REF),
+    ).toBeNull();
+  });
+
+  it('rejects a draft whose title is still chrome (OCR "ebook" = Facebook)', () => {
+    // No market words after cleaning + no date -> not an event.
+    expect(itemToRaw({ text: 'ebook · 0 4h Se mere her' }, REF)).toBeNull();
+  });
+
+  it('drops OCR-garbled street and a year misread as a postcode', () => {
+    const raw = itemToRaw(
+      { text: 'Stort kræmmermarked den 12. juli 2026. Fyens Stiftstidende. Godt marked.' },
+      REF,
+    );
+    // A concrete date makes it an event, but "2026 Fyens Stiftstidende" must not
+    // become a postcode/city, and no date-carrying string may become the street.
+    expect(raw).not.toBeNull();
+    expect(raw!.postcode).toBeUndefined();
+    expect(raw!.street).toBeUndefined();
+  });
+
+  it('keeps a clean postcode+town from a real OCR poster', () => {
+    const raw = itemToRaw(
+      { text: 'Q Search Facebook Loppemarked lørdag d. 4.7 kl. 10-14, Sankt Nicolai Gade 2a, 5700 Svendborg.' },
+      '2026-07-04',
+    );
+    expect(raw).not.toBeNull();
+    expect(raw!.postcode).toBe('5700');
+    expect(raw!.city).toBe('Svendborg');
+    expect(raw!.title).not.toMatch(/search|facebook/i);
+  });
+
   it('reads feed URLs from the environment', () => {
     expect(feedUrls({} as NodeJS.ProcessEnv)).toEqual([]);
     expect(

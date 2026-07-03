@@ -12,6 +12,7 @@ import {
 import { DetailMap } from '../../../components/DetailMap.tsx';
 import { ShareButton } from '../../../components/ShareButton.tsx';
 import { ReportEventForm } from '../../../components/ReportEventForm.tsx';
+import { ConfirmEventForm } from '../../../components/ConfirmEventForm.tsx';
 import { listUpcomingEvents } from '../../../lib/data.ts';
 import { distanceKm } from '../../../lib/client-utils.ts';
 
@@ -376,6 +377,11 @@ export default async function EventPage({
                 Loppefund samler automatisk oplysninger fra offentlige kilder og viser altid
                 hvor de kommer fra. Tag forbehold for ændringer hos arrangøren.
               </p>
+              <ConfirmEventForm
+                slug={event.slug}
+                title={event.title}
+                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`}
+              />
               <ReportEventForm
                 title={event.title}
                 url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`}

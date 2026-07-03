@@ -65,6 +65,22 @@ export function scanDates(text: string, refDate: string): string[] {
 const STREET_RE =
   /([A-ZÆØÅ][a-zæøåé.]+(?:\s+[A-ZÆØÅa-zæøåé.]+){0,3}\s+\d{1,3}[a-zA-Z]?)(?=[\s,.]|$)/;
 
+// First boundary between a market's NAME and its when/where detail: a weekday,
+// "den 5."/"d. 5.", a numeric date "5/7", "kl. 10", or a sentence terminator.
+// \b keeps weekday matches on whole words (so "Lørdagsloppemarked" is untouched).
+const TITLE_CUT =
+  /\b(?:mandag|tirsdag|onsdag|torsdag|fredag|lørdag|søndag)\b|\bd(?:en|\.)\s*\d|\b\d{1,2}[./]\d{1,2}\b|\bkl\.?\s*\d|[.!?](?=\s|$)/i;
+
+/** Trim a first line down to the market name; fall back to the line if unsure. */
+export function extractTitle(firstLine: string): string {
+  const at = firstLine.search(TITLE_CUT);
+  let title = at > 0 ? firstLine.slice(0, at) : firstLine;
+  title = title.replace(/[\s,–—-]+$/, '').trim();
+  // Too aggressive a cut (nothing meaningful left) — keep the original line.
+  if (title.length < 3) title = firstLine.trim();
+  return title.length > 90 ? `${title.slice(0, 87)}…` : title;
+}
+
 export function parseTip(
   tip: { id: number | string; url: string | null; text: string | null },
   refDate: string,
@@ -84,9 +100,13 @@ export function parseTip(
     endTime: hours.generic?.end ?? null,
   }));
 
-  // Title: first non-empty line, de-shouted, sensibly truncated.
+  // Title: the market's NAME, which precedes the date/time/price detail. FB
+  // posts are often one run-on line ("Loppemarked ved Dyreborg lørdag den 5.
+  // juli kl. 10-15. Kom og …"), so taking the whole first line makes a title
+  // that is really a paragraph. Cut at the first date/weekday/"kl."/sentence
+  // boundary and keep the name.
   const firstLine = text.split('\n').map((l) => l.trim()).find(Boolean) ?? 'Loppemarked';
-  const title = firstLine.length > 90 ? `${firstLine.slice(0, 87)}…` : firstLine;
+  const title = extractTitle(firstLine);
 
   const postcode = extractPostcode(text) ?? undefined;
   const street = text.match(STREET_RE)?.[1];

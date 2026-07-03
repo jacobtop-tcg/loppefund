@@ -1,7 +1,32 @@
 import { describe, expect, it } from 'vitest';
-import { parseTip, scanDates } from '../src/tip-parser.ts';
+import { parseTip, scanDates, extractTitle } from '../src/tip-parser.ts';
 
 const REF = '2026-07-02';
+
+describe('extractTitle', () => {
+  it('cuts a run-on Facebook post at the date/time so the title is the name', () => {
+    expect(
+      extractTitle('Loppemarked ved Dyreborg lørdag den 5. juli kl. 10-15. Kom og gør et godt fund!'),
+    ).toBe('Loppemarked ved Dyreborg');
+    expect(extractTitle('Månedligt loppemarked i Stenstrup søndag d. 13/7 fra 10 til 16')).toBe(
+      'Månedligt loppemarked i Stenstrup',
+    );
+    expect(extractTitle('Kræmmermarked i Horne 5/7 kl. 9-14')).toBe('Kræmmermarked i Horne');
+  });
+
+  it('leaves an already-clean title untouched', () => {
+    expect(extractTitle('STORT LOPPEMARKED I SKOVLUNDE 🌞')).toBe('STORT LOPPEMARKED I SKOVLUNDE 🌞');
+    expect(extractTitle('Gammel Strand Antikmarked')).toBe('Gammel Strand Antikmarked');
+  });
+
+  it('does not cut a weekday embedded in a word', () => {
+    expect(extractTitle('Lørdagsloppemarked i Valby')).toBe('Lørdagsloppemarked i Valby');
+  });
+
+  it('keeps the original line when a cut would leave almost nothing', () => {
+    expect(extractTitle('Den 5. juli holder vi loppemarked')).toBe('Den 5. juli holder vi loppemarked');
+  });
+});
 
 describe('scanDates', () => {
   it('parses full Danish dates', () => {

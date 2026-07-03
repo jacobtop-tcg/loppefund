@@ -327,8 +327,16 @@ export default async function EventPage({
               {event.lat != null && event.lng != null && (
                 <>
                   <div className="detail-map">
-                    <DetailMap lat={event.lat} lng={event.lng} />
+                    <DetailMap lat={event.lat} lng={event.lng} approximate={event.approximate} />
                   </div>
+                  {event.approximate && (
+                    <p
+                      style={{ margin: '8px 0 0', fontSize: 13, color: 'var(--ink-soft, #6b6257)' }}
+                    >
+                      ⓘ Omtrentlig placering (postnummer-område) — den præcise adresse er ikke
+                      bekræftet.
+                    </p>
+                  )}
                   <p style={{ marginTop: 10, marginBottom: 0 }}>
                     <a
                       href={`https://www.google.com/maps/dir/?api=1&destination=${event.lat},${event.lng}`}

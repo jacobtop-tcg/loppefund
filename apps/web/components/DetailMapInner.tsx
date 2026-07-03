@@ -12,7 +12,15 @@ const PIN_SVG =
   '<circle cx="17" cy="15.9" r="5" fill="#fffdf8"/>' +
   '</svg>';
 
-export function DetailMapInner({ lat, lng }: { lat: number; lng: number }) {
+export function DetailMapInner({
+  lat,
+  lng,
+  approximate = false,
+}: {
+  lat: number;
+  lng: number;
+  approximate?: boolean;
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,21 +33,31 @@ export function DetailMapInner({ lat, lng }: { lat: number; lng: number }) {
         container: ref.current,
         style,
         center: [lng, lat],
-        zoom: 13.6,
+        // Approximate points zoom out a touch so the soft circle reads as an area.
+        zoom: approximate ? 12 : 13.6,
         interactive: false,
         locale: MAP_LOCALE,
         attributionControl: { compact: true },
       });
       const el = document.createElement('div');
-      el.className = 'map-pin';
-      el.innerHTML = PIN_SVG;
-      new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat([lng, lat]).addTo(map);
+      if (approximate) {
+        // No sharp pin — a soft radius that honestly says "somewhere in here".
+        el.className = 'map-approx';
+        el.style.cssText =
+          'width:70px;height:70px;border-radius:50%;background:rgba(199,62,24,0.16);' +
+          'border:2px dashed rgba(199,62,24,0.6);box-sizing:border-box;';
+        new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat([lng, lat]).addTo(map);
+      } else {
+        el.className = 'map-pin';
+        el.innerHTML = PIN_SVG;
+        new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat([lng, lat]).addTo(map);
+      }
     });
     return () => {
       cancelled = true;
       map?.remove();
     };
-  }, [lat, lng]);
+  }, [lat, lng, approximate]);
 
   return <div ref={ref} style={{ height: '100%' }} />;
 }

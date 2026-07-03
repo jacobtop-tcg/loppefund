@@ -1,5 +1,21 @@
 import { describe, expect, it } from 'vitest';
-import { cleanCity, stripDateTokens } from '../src/normalize.ts';
+import { cleanCity, cleanVenueName, stripDateTokens } from '../src/normalize.ts';
+
+describe('cleanVenueName', () => {
+  it('keeps a short place label', () => {
+    expect(cleanVenueName('Sankt Nicolai Apotek')).toBe('Sankt Nicolai Apotek');
+  });
+  it('rejects a prose paragraph', () => {
+    expect(
+      cleanVenueName(
+        'Du kører ad hovedvejen mod Farum. Ved rundkørslen tager du første afgang. Herefter fortsætter du 2 km og drejer til højre ved kirken.',
+      ),
+    ).toBeNull();
+  });
+  it('handles null', () => {
+    expect(cleanVenueName(null)).toBeNull();
+  });
+});
 
 describe('stripDateTokens', () => {
   it('strips a trailing weekday + date + year', () => {

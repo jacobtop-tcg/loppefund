@@ -32,6 +32,15 @@ function getDb(): DatabaseSync {
   return db;
 }
 
+/**
+ * Coords from a postcode/city centroid (quality 'P'/'city') rather than an exact
+ * street match ('source'/'A'/'B') — the pin is only roughly right, so the UI
+ * flags it as "ca. placering" instead of implying street precision.
+ */
+export function isApproximateGeocode(quality: string | null | undefined): boolean {
+  return quality != null && !['source', 'A', 'B'].includes(quality);
+}
+
 export interface EventSummary {
   slug: string;
   title: string;
@@ -42,6 +51,8 @@ export interface EventSummary {
   municipality: string | null;
   lat: number | null;
   lng: number | null;
+  /** Coords are a postcode/city centroid, not a precise street pin. */
+  approximate: boolean;
   isFree: boolean | null;
   indoorOutdoor: string;
   stallCountText: string | null;
@@ -74,6 +85,7 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       municipality: e.municipality,
       lat: e.lat,
       lng: e.lng,
+      approximate: e.lat != null && isApproximateGeocode(e.geocode_quality),
       isFree: e.is_free === null ? null : e.is_free === 1,
       indoorOutdoor: e.indoor_outdoor,
       stallCountText: e.stall_count_text,
@@ -166,6 +178,7 @@ export function loadEventDetail(slug: string) {
     municipality: e.municipality,
     lat: e.lat,
     lng: e.lng,
+    approximate: e.lat != null && isApproximateGeocode(e.geocode_quality),
     organizer: e.organizer,
     contactWebsite: e.contact_website,
     contactEmail: e.contact_email,

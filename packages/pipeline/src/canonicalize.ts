@@ -6,6 +6,7 @@ import type { DatabaseSync } from 'node:sqlite';
 import {
   computeConfidence,
   cleanCity,
+  cleanVenueName,
   extractAmenities,
   matchEvents,
   normalizeCategory,
@@ -151,6 +152,7 @@ export async function canonicalizeRawEvent(
   // per-date records. Clean the title up front so dedup, slug and display all
   // use the stable name.
   const title = stripDateTokens(raw.title);
+  const venueName = cleanVenueName(raw.venueName);
 
   // Resolve concrete occurrences. Events we cannot date are not shown to
   // consumers — a market without a date is a rumor, not an event.
@@ -307,7 +309,7 @@ export async function canonicalizeRawEvent(
         rawCategory === 'andet' ? undefined : rawCategory,
         'category',
       ) ?? 'andet') as ReturnType<typeof normalizeCategory>,
-      venueName: m(e.venue_name, raw.venueName, 'venueName'),
+      venueName: m(e.venue_name, venueName ?? undefined, 'venueName'),
       street: m(e.street, raw.street, 'street'),
       postcode: m(e.postcode, postcode ?? undefined, 'postcode'),
       city: m(e.city, city ?? undefined, 'city'),
@@ -439,7 +441,7 @@ export async function canonicalizeRawEvent(
     title,
     description: raw.description ?? null,
     category: rawCategory ?? 'andet',
-    venueName: raw.venueName ?? null,
+    venueName,
     street: raw.street ?? null,
     postcode,
     city,

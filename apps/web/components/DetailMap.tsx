@@ -11,6 +11,6 @@ const Inner = dynamic(() => import('./DetailMapInner.tsx').then((m) => m.DetailM
   ),
 });
 
-export function DetailMap(props: { lat: number; lng: number }) {
+export function DetailMap(props: { lat: number; lng: number; approximate?: boolean }) {
   return <Inner {...props} />;
 }

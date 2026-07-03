@@ -17,6 +17,19 @@ export function slugify(text: string): string {
 }
 
 /**
+ * A venue label must be a short place name, not prose. Some sources dump a whole
+ * travel-directions paragraph into venue_name; it then renders as the location
+ * line. Reject anything too long or multi-sentence so display falls back to the
+ * clean street/city.
+ */
+export function cleanVenueName(name: string | null | undefined): string | null {
+  if (!name) return null;
+  const n = name.replace(/\s+/g, ' ').trim();
+  if (!n || n.length > 80 || /[.!?]\s+\S/.test(n)) return null;
+  return n;
+}
+
+/**
  * Sanitize a `city` an adapter over-stuffed with street/postcode fragments —
  * e.g. ", 6640 Lunderskov, 6640 Lunderskov, 6640 Lunderskov" or
  * "Kastaniehøjvej 6, 8600 Silkeborg" — down to a clean town name. Prefers the

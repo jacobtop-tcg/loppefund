@@ -51,6 +51,20 @@ describe('scanDates', () => {
     // reviews, but times must not become dates.
     expect(scanDates('kl. 10-15', REF)).toEqual([]);
   });
+
+  it('parses dot-separated dates with a Danish date marker', () => {
+    // The common Facebook-poster form "d. 4.7" / "den 4.7".
+    expect(scanDates('Loppemarked lørdag d. 4.7 kl. 10-14', REF)).toEqual(['2026-07-04']);
+    expect(scanDates('Vi holder marked den 12.7', REF)).toEqual(['2026-07-12']);
+    expect(scanDates('d. 4.7.2026 kl. 10', REF)).toEqual(['2026-07-04']);
+  });
+
+  it('does not misread a clock time as a dot-separated date', () => {
+    // "kl. 10.12" is 10:12, not the 10th of December — no date marker, so it
+    // must not become a date (incorrect dates are the cardinal sin).
+    expect(scanDates('Åbent kl. 10.12 hver dag', REF)).toEqual([]);
+    expect(scanDates('lørdag 10.12', REF)).toEqual([]); // bare, no "d."/"den" marker
+  });
 });
 
 describe('parseTip', () => {

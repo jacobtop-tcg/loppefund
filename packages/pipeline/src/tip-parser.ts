@@ -53,6 +53,16 @@ export function scanDates(text: string, refDate: string): string[] {
     const mo = Number(m[2]);
     if (d >= 1 && d <= 31 && mo >= 1 && mo <= 12) yearless.push({ d, mo });
   }
+  // Dot-separated day.month preceded by a Danish date marker ("d." = "den"):
+  // "lørdag d. 4.7", "den 4.7". The marker is REQUIRED — a bare "4.7" is
+  // indistinguishable from a clock time like "kl. 10.12", and the trust rule
+  // forbids guessing a date. Year-bearing "4.7.2026" is handled by the full-
+  // date pass above; the lookahead keeps this off it.
+  for (const m of text.matchAll(/\b(?:den|d\.)\s*(\d{1,2})\.(\d{1,2})(?![.\d/])/gi)) {
+    const d = Number(m[1]);
+    const mo = Number(m[2]);
+    if (d >= 1 && d <= 31 && mo >= 1 && mo <= 12) yearless.push({ d, mo });
+  }
   for (const { d, mo } of yearless) {
     const thisYear = iso(refY, mo, d);
     found.add(thisYear >= refDate ? thisYear : iso(refY + 1, mo, d));

@@ -77,10 +77,19 @@ async function main() {
   }
 
   // Persistent context = the login survives between runs (like a real browser).
+  // The stealth touches (real UA, no AutomationControlled flag, hidden
+  // navigator.webdriver) are the same trick paid scrapers use — on your own
+  // residential IP they make an ordinary logged-in session look ordinary.
   const ctx = await chromium.launchPersistentContext(SESSION_DIR, {
     headless: !login,
     viewport: { width: 1280, height: 900 },
     locale: 'da-DK',
+    userAgent:
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+    args: ['--disable-blink-features=AutomationControlled'],
+  });
+  await ctx.addInitScript(() => {
+    Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
   });
   const page = ctx.pages()[0] ?? (await ctx.newPage());
 

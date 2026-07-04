@@ -63,6 +63,13 @@ export const EXPLORE_SITES: ReadonlyArray<{ domain: string; name: string }> = [
   { domain: 'destinationtrekantomraadet.dk', name: 'Destination Trekantområdet' },
   { domain: 'visitnordvestkysten.dk', name: 'VisitNordvestkysten' },
   { domain: 'visitmors.dk', name: 'VisitMors' },
+  // Sjælland regions the national calendars cover thinly. (The Fyn destinations
+  // on this platform — Nyborg, Kerteminde, Assens, Ærø — were verified to work
+  // too, but VisitFyn already aggregates them, so by GuideDanmark-id dedup they
+  // add nothing; omitted to keep the crawl lean.)
+  { domain: 'visitkoege.dk', name: 'VisitKøge' },
+  { domain: 'visitodsherred.dk', name: 'VisitOdsherred' },
+  { domain: 'visitfjordlandet.dk', name: 'VisitFjordlandet' },
 ];
 
 interface ExploreItem {

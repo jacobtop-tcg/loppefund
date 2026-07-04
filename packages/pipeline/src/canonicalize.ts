@@ -277,6 +277,50 @@ export function mergeDuplicateEvents(db: DatabaseSync): number {
   return removed;
 }
 
+/**
+ * Backfill coordinates onto active events that have none but do carry an address
+ * (street/postcode/city). Incremental crawls only geocode an event the moment its
+ * raw is (re-)processed, so events created while the geocode cache was poisoned —
+ * or before a geocoder improvement — stay pinless on the map forever even though a
+ * fresh lookup would resolve them (at least to a postcode centroid). This heals
+ * them every run. Purely additive: it only ever fills a NULL coordinate, never
+ * overwrites a real one, and fills a missing postcode/town from the result.
+ * Returns how many events gained a location.
+ */
+export async function backfillGeocode(db: DatabaseSync): Promise<number> {
+  const rows = db
+    .prepare(
+      `SELECT id, street, postcode, city FROM events
+       WHERE status = 'active' AND lat IS NULL
+         AND (postcode IS NOT NULL OR street IS NOT NULL OR city IS NOT NULL)`,
+    )
+    .all() as unknown as Array<{
+    id: number;
+    street: string | null;
+    postcode: string | null;
+    city: string | null;
+  }>;
+  const upd = db.prepare(
+    `UPDATE events
+       SET lat = ?, lng = ?, geocode_quality = ?,
+           postcode = COALESCE(postcode, ?), city = COALESCE(city, ?)
+     WHERE id = ?`,
+  );
+  let filled = 0;
+  for (const r of rows) {
+    const g = await geocode(db, {
+      street: r.street ?? undefined,
+      postcode: r.postcode ?? undefined,
+      city: r.city ?? undefined,
+    });
+    if (g.lat !== null) {
+      upd.run(g.lat, g.lng, g.quality, g.resolvedPostcode, g.resolvedCity, r.id);
+      filled++;
+    }
+  }
+  return filled;
+}
+
 export async function canonicalizeRawEvent(
   db: DatabaseSync,
   raw: RawEvent,

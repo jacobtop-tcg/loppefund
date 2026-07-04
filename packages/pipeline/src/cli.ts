@@ -28,6 +28,7 @@ import {
 } from '@loppefund/db';
 import { PoliteFetcher } from './fetcher.ts';
 import {
+  backfillGeocode,
   canonicalizeRawEvent,
   mergeDuplicateEvents,
   recomputeConfidence,
@@ -132,9 +133,10 @@ if (command === 'rebuild') {
   // Union same-market rows that ingestion order split (a bridge raw joined one
   // and orphaned the other), before confidence is scored on the merged sources.
   const consolidated = mergeDuplicateEvents(db);
+  const pinned = await backfillGeocode(db);
   expirePastEvents(db, rebuildToday);
   recomputeConfidence(db, trustRows, rebuildToday, confirmations);
-  console.log('rebuild done:', JSON.stringify({ ...stats, consolidated }));
+  console.log('rebuild done:', JSON.stringify({ ...stats, consolidated, pinned }));
   process.exit(0);
 }
 
@@ -370,6 +372,11 @@ if (healthySources.length > 0) {
 // confidence is scored on the (now merged) source set.
 const consolidated = mergeDuplicateEvents(db);
 if (consolidated > 0) console.log(`consolidated ${consolidated} duplicate event(s)`);
+
+// Put pinless-but-addressable markets back on the map (heals events geocoded
+// while the cache was poisoned; a fresh lookup resolves them now).
+const pinned = await backfillGeocode(db);
+if (pinned > 0) console.log(`backfilled coordinates for ${pinned} event(s)`);
 
 // Freshness decay only works if scores are actually recomputed after crawls.
 recomputeConfidence(db, trustMap, new Date().toISOString().slice(0, 10), confirmations);

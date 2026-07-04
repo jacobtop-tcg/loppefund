@@ -29,6 +29,7 @@ import {
 import { PoliteFetcher } from './fetcher.ts';
 import {
   canonicalizeRawEvent,
+  mergeDuplicateEvents,
   recomputeConfidence,
   type CanonicalizeStats,
 } from './canonicalize.ts';
@@ -128,9 +129,12 @@ if (command === 'rebuild') {
     });
   }
   const rebuildToday = new Date().toISOString().slice(0, 10);
+  // Union same-market rows that ingestion order split (a bridge raw joined one
+  // and orphaned the other), before confidence is scored on the merged sources.
+  const consolidated = mergeDuplicateEvents(db);
   expirePastEvents(db, rebuildToday);
   recomputeConfidence(db, trustRows, rebuildToday, confirmations);
-  console.log('rebuild done:', JSON.stringify(stats));
+  console.log('rebuild done:', JSON.stringify({ ...stats, consolidated }));
   process.exit(0);
 }
 
@@ -361,6 +365,11 @@ if (healthySources.length > 0) {
     `reconcile vanished: pruned ${pruned} raw events, expired ${expired} events, re-derived ${survivors.size}`,
   );
 }
+
+// Fold same-market rows that ingestion order split into duplicates, before
+// confidence is scored on the (now merged) source set.
+const consolidated = mergeDuplicateEvents(db);
+if (consolidated > 0) console.log(`consolidated ${consolidated} duplicate event(s)`);
 
 // Freshness decay only works if scores are actually recomputed after crawls.
 recomputeConfidence(db, trustMap, new Date().toISOString().slice(0, 10), confirmations);

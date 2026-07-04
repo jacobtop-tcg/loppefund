@@ -10,7 +10,9 @@ import {
   cleanVenueName,
   extractAmenities,
   matchEvents,
+  type MatchCandidate,
   normalizeCategory,
+  normalizeTitle,
   resolveSchedule,
   slugify,
   stripDateTokens,
@@ -32,6 +34,15 @@ import {
 import { geocode } from './geocode.ts';
 
 const HORIZON_DAYS = 180;
+
+/**
+ * DAWA quality codes that denote a real point rather than a district centroid.
+ * 'P' (postcode centroid) and 'C' (uncertain datavask) are approximations that
+ * must not be read as precise locations during dedup; 'A'/'B'/'source' are real.
+ */
+function isPreciseQuality(q: string | null): boolean {
+  return q !== 'P' && q !== 'C';
+}
 
 // A source below this trust cannot introduce a NEW occurrence date onto an
 // event that a more trusted source already describes (it can still refine
@@ -127,6 +138,145 @@ export function recomputeConfidence(
   return changed;
 }
 
+/** A canonical event as a dedup MatchCandidate. */
+function eventToCandidate(db: DatabaseSync, e: EventRow): MatchCandidate {
+  // Ignore a "street" that is merely the town name (a source mis-parse, e.g.
+  // "Faaborg" in Faaborg) — so consolidation works on already-stored rows too,
+  // not only on freshly re-canonicalized ones. Mirrors the canonicalize cleanup.
+  const street =
+    e.street && !/\d/.test(e.street) && e.city && normalizeTitle(e.street) === normalizeTitle(e.city)
+      ? null
+      : e.street;
+  return {
+    title: e.title,
+    lat: e.lat,
+    lng: e.lng,
+    postcode: e.postcode,
+    dates: occurrenceDates(db, e.id),
+    category: e.category,
+    street,
+    coordsPrecise: isPreciseQuality(e.geocode_quality),
+  };
+}
+
+/** How much identifying information an event carries — the richer row survives a
+ *  merge so nothing useful is lost (precise location first, then address parts and
+ *  corroboration). Ties break on the lowest id to keep the oldest slug stable. */
+function survivorScore(db: DatabaseSync, e: EventRow): number {
+  let s = 0;
+  if (e.lat != null && isPreciseQuality(e.geocode_quality)) s += 100;
+  else if (e.lat != null) s += 20;
+  if (e.postcode) s += 10;
+  if (e.street) s += 10;
+  if (e.venue_name) s += 5;
+  if (e.description) s += 3;
+  s += Math.min(occurrenceDates(db, e.id).length, 20);
+  return s;
+}
+
+/** Fold the duplicate event `dropId` into `keepId`: move its occurrences and
+ *  source links, then delete it (cascade clears the rest). */
+function absorbEvent(db: DatabaseSync, keepId: number, dropId: number): void {
+  db.prepare(
+    `INSERT OR IGNORE INTO occurrences (event_id, date, start_time, end_time)
+     SELECT ?, date, start_time, end_time FROM occurrences WHERE event_id = ?`,
+  ).run(keepId, dropId);
+  db.prepare(
+    `UPDATE OR IGNORE event_sources SET event_id = ? WHERE event_id = ?`,
+  ).run(keepId, dropId);
+  db.prepare(`DELETE FROM events WHERE id = ?`).run(dropId);
+}
+
+/**
+ * Consolidate canonical events that are the SAME market but were split into
+ * separate rows by ingestion order. Incremental canonicalization links each raw
+ * to its single best match, so when a "bridge" raw matches two existing events
+ * (it shares a title with one source and a location with another) it joins one
+ * and orphans the other — a duplicate that no later raw ever reunites, and that a
+ * plain rebuild reproduces. This pass finds those pairs directly: for every event
+ * it re-runs the same candidate search + matchEvents used at ingestion and unions
+ * matched events, then folds each cluster into its richest member. Conservative by
+ * construction — it merges only pairs matchEvents already accepts. Idempotent:
+ * a second run finds nothing. Returns the number of events removed by merging.
+ */
+export function mergeDuplicateEvents(db: DatabaseSync): number {
+  const events = db
+    .prepare(`SELECT * FROM events WHERE status = 'active'`)
+    .all() as unknown as EventRow[];
+  const byId = new Map<number, EventRow>(events.map((e) => [e.id, e]));
+
+  // Union-find over event ids.
+  const parent = new Map<number, number>(events.map((e) => [e.id, e.id]));
+  const find = (x: number): number => {
+    let r = x;
+    while (parent.get(r) !== r) r = parent.get(r)!;
+    while (parent.get(x) !== r) {
+      const n = parent.get(x)!;
+      parent.set(x, r);
+      x = n;
+    }
+    return r;
+  };
+  const union = (a: number, b: number): void => {
+    const ra = find(a);
+    const rb = find(b);
+    if (ra !== rb) parent.set(ra, rb);
+  };
+
+  for (const e of events) {
+    const candidates = findCandidateEvents(db, {
+      postcode: e.postcode,
+      lat: e.lat,
+      lng: e.lng,
+      title: e.title,
+    });
+    const ce = eventToCandidate(db, e);
+    for (const c of candidates) {
+      // Only union within the active set (findCandidateEvents can surface expired
+      // rows, which aren't in the union-find map — never merge an active market
+      // into an expired one).
+      if (c.id === e.id || !byId.has(c.id) || find(c.id) === find(e.id)) continue;
+      const cc = eventToCandidate(db, byId.get(c.id)!);
+      // Bidirectional: matchEvents is asymmetric (distinctiveness is read from the
+      // first title), so a real duplicate where only ONE side carries the proper
+      // token — "Loppemarked på Havnen" vs "Loppemarked Faaborg Havn" — still unites.
+      if (matchEvents(ce, cc).isMatch || matchEvents(cc, ce).isMatch) {
+        union(e.id, c.id);
+      }
+    }
+  }
+
+  // Group into clusters and fold each into its richest member.
+  const clusters = new Map<number, EventRow[]>();
+  for (const e of events) {
+    const root = find(e.id);
+    const list = clusters.get(root) ?? [];
+    list.push(e);
+    clusters.set(root, list);
+  }
+  let removed = 0;
+  for (const members of clusters.values()) {
+    if (members.length < 2) continue;
+    const survivor = members.reduce((best, e) => {
+      const ds = survivorScore(db, e) - survivorScore(db, best);
+      if (ds > 0) return e;
+      if (ds === 0 && e.id < best.id) return e;
+      return best;
+    }, members[0]!);
+    if (members.length > 4) {
+      console.warn(
+        `[consolidate] large cluster of ${members.length} events merged into "${survivor.title}" (#${survivor.id}) — review: ${members.map((m) => m.id).join(',')}`,
+      );
+    }
+    for (const e of members) {
+      if (e.id === survivor.id) continue;
+      absorbEvent(db, survivor.id, e.id);
+      removed++;
+    }
+  }
+  return removed;
+}
+
 export async function canonicalizeRawEvent(
   db: DatabaseSync,
   raw: RawEvent,
@@ -159,7 +309,7 @@ export async function canonicalizeRawEvent(
   const venueName = cleanVenueName(raw.venueName);
   // Drop vague-locality "streets" ("Byens gader") up front so geocoding, dedup
   // and display all use a real address or nothing — never a placeholder.
-  const street = cleanStreet(raw.street);
+  let street = cleanStreet(raw.street);
 
   // Resolve concrete occurrences. Events we cannot date are not shown to
   // consumers — a market without a date is a rumor, not an event.
@@ -206,6 +356,21 @@ export async function canonicalizeRawEvent(
   // clean it to a plain town name so both the location line and the slug are right.
   city = cleanCity(city, postcode);
 
+  // A "street" that is merely the town name with no house number ("Faaborg" as the
+  // street in Faaborg) is a source mis-parse, not an address — it geocodes to the
+  // postcode centroid and, worse, triggers a false "different streets" dedup veto
+  // against the same market listed with a real street by another source. Drop it
+  // now (after geocoding used it to resolve the town) comparing against the
+  // resolved city, since such sources often omit an explicit city field.
+  if (
+    street &&
+    !/\d/.test(street) &&
+    ((city && normalizeTitle(street) === normalizeTitle(city)) ||
+      (raw.city && normalizeTitle(street) === normalizeTitle(raw.city)))
+  ) {
+    street = null;
+  }
+
   // Find the canonical event this raw event belongs to.
   const candidates = findCandidateEvents(db, { postcode, lat, lng, title });
   const rawDates = occurrences.map((o) => o.date);
@@ -220,6 +385,7 @@ export async function canonicalizeRawEvent(
         dates: rawDates,
         category: rawCategory,
         street,
+        coordsPrecise: isPreciseQuality(geocodeQuality),
       },
       {
         title: candidate.title,
@@ -229,6 +395,7 @@ export async function canonicalizeRawEvent(
         dates: occurrenceDates(db, candidate.id),
         category: candidate.category,
         street: candidate.street,
+        coordsPrecise: isPreciseQuality(candidate.geocode_quality),
       },
     );
     if (result.isMatch && (best === null || result.score > best.score)) {

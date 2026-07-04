@@ -172,6 +172,104 @@ describe('matchEvents', () => {
     expect(matchEvents(a, b).isMatch).toBe(false);
   });
 
+  it('merges a precise venue with the same market pinned to its postcode centroid (coordsPrecise=false)', () => {
+    // Faaborg case: one source has the real harbour address (quality A), the other
+    // only "Faaborg Havn" pinned to the 5600 postcode centroid ~5 km away. The
+    // centroid must not read as a location that contradicts the real point.
+    const centroid = {
+      title: 'Loppemarked Faaborg Havn',
+      street: null,
+      postcode: '5600',
+      lat: 55.112,
+      lng: 10.3095,
+      coordsPrecise: false,
+      dates: ['2026-07-04'],
+    };
+    const precise = {
+      title: 'Loppemarked på Havnen',
+      street: 'Vestkaj 3',
+      postcode: '5600',
+      lat: 55.095,
+      lng: 10.2377,
+      coordsPrecise: true,
+      dates: ['2026-07-04'],
+    };
+    // Distinctive title ("Faaborg") is on the centroid side, so match in that
+    // direction (mergeDuplicateEvents tries both).
+    expect(matchEvents(centroid, precise).isMatch).toBe(true);
+  });
+
+  it('still vetoes two PRECISE coordinates 5 km apart in the same postcode', () => {
+    // Same shape as above but both coordinates are real points — the distance is
+    // trustworthy, so they must stay separate (guards the coordsPrecise gate).
+    const a = {
+      title: 'Loppemarked Faaborg Havn',
+      postcode: '5600',
+      lat: 55.112,
+      lng: 10.3095,
+      dates: ['2026-07-04'],
+    };
+    const b = {
+      title: 'Loppemarked på Havnen',
+      street: 'Vestkaj 3',
+      postcode: '5600',
+      lat: 55.095,
+      lng: 10.2377,
+      dates: ['2026-07-04'],
+    };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
+  it('does not merge two DIFFERENT distinctive markets sharing a postcode district (weak title)', () => {
+    // Viborg case: an outdoor "Bagagerumsmarked i Viborg" (real venue) and vague
+    // Facebook "Indendørs markeder i Viborg (VBC)" (pinned to the town centroid)
+    // share postcode 8800 and a date. Both titles are distinctive, but they are
+    // only ~0.45 similar and are different markets — postcode+date must not merge.
+    const real = {
+      title: 'Bagagerumsmarked i Viborg',
+      postcode: '8800',
+      lat: 56.47,
+      lng: 9.407,
+      coordsPrecise: true,
+      street: 'Fabrikvej 19',
+      dates: ['2026-09-06'],
+    };
+    const vague = {
+      title: 'Indendørs markeder i Viborg (VBC)',
+      postcode: '8800',
+      lat: 56.417,
+      lng: 9.369,
+      coordsPrecise: false, // geocoded to the Viborg centroid
+      street: null,
+      dates: ['2026-09-06'],
+    };
+    expect(matchEvents(real, vague).isMatch).toBe(false);
+    expect(matchEvents(vague, real).isMatch).toBe(false);
+  });
+
+  it('does not merge two DIFFERENT markets in a postcode when one is a centroid and dates differ', () => {
+    // A centroid must not become a wildcard that swallows a genuinely different
+    // market: without overlapping dates and with a generic title, no merge.
+    const centroid = {
+      title: 'Loppemarked',
+      postcode: '4720',
+      lat: 55.0,
+      lng: 12.0,
+      coordsPrecise: false,
+      dates: ['2026-07-04'],
+    };
+    const precise = {
+      title: 'Loppemarked',
+      street: 'Møllevej 3',
+      postcode: '4720',
+      lat: 55.05,
+      lng: 12.0,
+      coordsPrecise: true,
+      dates: ['2026-08-01'],
+    };
+    expect(matchEvents(centroid, precise).isMatch).toBe(false);
+  });
+
   it('vetoes julemarked against an uncategorized (andet) event at the same venue', () => {
     // Common case: a real Christmas market vs a different, uncategorized market
     // at the same harbour on the same December day must not collapse into one.

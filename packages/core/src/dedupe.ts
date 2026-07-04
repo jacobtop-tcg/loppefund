@@ -71,6 +71,15 @@ export interface MatchCandidate {
   category?: string | null;
   /** Street address; two clearly different streets veto a weak-title merge. */
   street?: string | null;
+  /**
+   * False when this side's coordinates are only a postcode/town centroid (DAWA
+   * quality P, or an uncertain C match) — a whole-district approximation, not a
+   * real point. Such a coordinate must never be read as a precise location that
+   * "contradicts" a real one (a centroid sits kilometres from the actual venue),
+   * so matching falls back to postcode-district colocation for that side.
+   * Defaults to true (precise) when omitted.
+   */
+  coordsPrecise?: boolean;
 }
 
 export interface MatchResult {
@@ -81,6 +90,12 @@ export interface MatchResult {
 
 const TITLE_STRONG = 0.85;
 const TITLE_WEAK = 0.45;
+// Merging on a shared postcode DISTRICT alone (not a proven same spot) is weak
+// evidence — a district is a whole town. So that path demands a clearly-matching
+// title, above this bar: it separates a true split like "Loppemarked på Havnen" /
+// "Loppemarked Faaborg Havn" (0.73) from two different district markets like
+// "Bagagerumsmarked i Viborg" / "Indendørs markeder i Viborg (VBC)" (0.45).
+const TITLE_DISTRICT = 0.65;
 const NEAR_METERS = 500;
 
 /** Tokens that carry no identity: stopwords, category vocab, venue nouns. */
@@ -158,8 +173,13 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   // Saturday, so it is deliberately NOT precise.
   let colocated: boolean | null = null;
   let preciseColocation = false;
-  if (a.lat != null && a.lng != null && b.lat != null && b.lng != null) {
-    colocated = distanceMeters(a.lat, a.lng, b.lat, b.lng) <= NEAR_METERS;
+  // A centroid coordinate (postcode/town approximation) is NOT a real point, so
+  // the distance test only means something when BOTH sides have precise coords.
+  const preciseCoords =
+    a.lat != null && a.lng != null && b.lat != null && b.lng != null &&
+    a.coordsPrecise !== false && b.coordsPrecise !== false;
+  if (preciseCoords) {
+    colocated = distanceMeters(a.lat!, a.lng!, b.lat!, b.lng!) <= NEAR_METERS;
     preciseColocation = colocated === true;
     // Geocodes are sometimes wrong (ambiguous street names, postcode
     // centroids). Agreeing postcode + agreeing street outranks distant
@@ -169,6 +189,10 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
       preciseColocation = true;
     }
   } else if (a.postcode && b.postcode) {
+    // One side's coordinate is a centroid (or missing): a distance of "kilometres"
+    // would just be the centroid artefact, so ignore it and colocate by postcode
+    // district. This rescues the common "precise venue vs. postcode-centroid of the
+    // same market" split without inventing precise colocation.
     colocated = a.postcode === b.postcode;
     preciseColocation = colocated === true && streetsAgree;
   }
@@ -207,16 +231,21 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   if (sim >= TITLE_STRONG && colocated === null && dateOverlap) {
     return { isMatch: true, score: sim, reason: 'strong title + same dates' };
   }
-  // Decent title + co-location + overlapping dates. When co-location is only a
-  // shared postcode district (not precise), a fully generic title cannot tell
-  // two same-day markets in that district apart — require a distinctive title.
-  if (
-    sim >= TITLE_WEAK &&
-    colocated === true &&
-    dateOverlap &&
-    (preciseColocation || distinctive)
-  ) {
-    return { isMatch: true, score: sim, reason: 'title + location + dates' };
+  // Decent title + co-location + overlapping dates, split by how strong the
+  // co-location evidence is:
+  if (colocated === true && dateOverlap) {
+    // Proven the SAME spot (coords within NEAR_METERS, or postcode + agreeing
+    // street): a weak-but-real title match is enough.
+    if (preciseColocation && sim >= TITLE_WEAK) {
+      return { isMatch: true, score: sim, reason: 'title + location + dates' };
+    }
+    // Only a shared postcode DISTRICT (a whole town — e.g. one side is a
+    // postcode-centroid geocode with no usable street): demand a distinctive AND
+    // clearly-matching title, or two genuinely different markets in the district
+    // on the same day would merge on postcode + date alone.
+    if (!preciseColocation && distinctive && sim >= TITLE_DISTRICT) {
+      return { isMatch: true, score: sim, reason: 'title + postcode district + dates' };
+    }
   }
   // Distinctive identical titles merge even without location or date overlap —
   // recurring series often publish each date as a separate entry with no

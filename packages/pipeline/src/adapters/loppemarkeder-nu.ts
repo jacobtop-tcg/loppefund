@@ -28,7 +28,7 @@ export function decodeEntities(text: string): string {
     .replaceAll('&gt;', '>');
 }
 
-function stripHtml(html: string): string {
+export function stripHtml(html: string): string {
   return decodeEntities(
     html
       .replace(/<br\s*\/?>/gi, '\n')
@@ -40,7 +40,7 @@ function stripHtml(html: string): string {
     .trim();
 }
 
-interface TribeEvent {
+export interface TribeEvent {
   id: number;
   title: string;
   description?: string;
@@ -85,7 +85,7 @@ export function parseAddress(text: string | undefined): {
 }
 
 /** Per-day occurrences from local "YYYY-MM-DD HH:MM:SS" start/end. */
-function toOccurrences(e: TribeEvent): Occurrence[] {
+export function toOccurrences(e: TribeEvent): Occurrence[] {
   const startDate = e.start_date.slice(0, 10);
   const endDate = e.end_date?.slice(0, 10) || startDate;
   const startTime = e.all_day ? null : e.start_date.slice(11, 16);

@@ -9,6 +9,7 @@ import {
   cleanStreet,
   cleanVenueName,
   extractAmenities,
+  inferIndoorOutdoor,
   matchEvents,
   type MatchCandidate,
   normalizeCategory,
@@ -315,6 +316,38 @@ export async function backfillGeocode(db: DatabaseSync): Promise<number> {
     });
     if (g.lat !== null) {
       upd.run(g.lat, g.lng, g.quality, g.resolvedPostcode, g.resolvedCity, r.id);
+      filled++;
+    }
+  }
+  return filled;
+}
+
+/**
+ * Infer indoor/outdoor for active events left 'unknown' by their sources, from
+ * the title + venue + description. Most sources never state it (only ~23% did),
+ * yet it drives a consumer filter and the rain-cancellation warning. High-
+ * precision only (see inferIndoorOutdoor): a wrong "outdoor" would mislead a
+ * family, so it fires solely on unambiguous venue words. Returns how many gained
+ * a value. Idempotent — only ever fills 'unknown'.
+ */
+export function backfillIndoorOutdoor(db: DatabaseSync): number {
+  const rows = db
+    .prepare(
+      `SELECT id, title, venue_name, description FROM events
+       WHERE status = 'active' AND indoor_outdoor = 'unknown'`,
+    )
+    .all() as unknown as Array<{
+    id: number;
+    title: string;
+    venue_name: string | null;
+    description: string | null;
+  }>;
+  const upd = db.prepare(`UPDATE events SET indoor_outdoor = ? WHERE id = ?`);
+  let filled = 0;
+  for (const r of rows) {
+    const io = inferIndoorOutdoor(`${r.title} ${r.venue_name ?? ''} ${r.description ?? ''}`);
+    if (io !== 'unknown') {
+      upd.run(io, r.id);
       filled++;
     }
   }

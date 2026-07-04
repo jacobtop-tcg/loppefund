@@ -29,6 +29,7 @@ import {
 import { PoliteFetcher } from './fetcher.ts';
 import {
   backfillGeocode,
+  backfillIndoorOutdoor,
   canonicalizeRawEvent,
   mergeDuplicateEvents,
   recomputeConfidence,
@@ -134,9 +135,10 @@ if (command === 'rebuild') {
   // and orphaned the other), before confidence is scored on the merged sources.
   const consolidated = mergeDuplicateEvents(db);
   const pinned = await backfillGeocode(db);
+  const inout = backfillIndoorOutdoor(db);
   expirePastEvents(db, rebuildToday);
   recomputeConfidence(db, trustRows, rebuildToday, confirmations);
-  console.log('rebuild done:', JSON.stringify({ ...stats, consolidated, pinned }));
+  console.log('rebuild done:', JSON.stringify({ ...stats, consolidated, pinned, inout }));
   process.exit(0);
 }
 
@@ -377,6 +379,11 @@ if (consolidated > 0) console.log(`consolidated ${consolidated} duplicate event(
 // while the cache was poisoned; a fresh lookup resolves them now).
 const pinned = await backfillGeocode(db);
 if (pinned > 0) console.log(`backfilled coordinates for ${pinned} event(s)`);
+
+// Infer indoor/outdoor for events their sources left blank (powers the filter
+// and the rain warning). High-precision heuristic; only fills 'unknown'.
+const inout = backfillIndoorOutdoor(db);
+if (inout > 0) console.log(`inferred indoor/outdoor for ${inout} event(s)`);
 
 // Freshness decay only works if scores are actually recomputed after crawls.
 recomputeConfidence(db, trustMap, new Date().toISOString().slice(0, 10), confirmations);

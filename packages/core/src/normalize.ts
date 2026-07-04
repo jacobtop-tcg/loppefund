@@ -115,6 +115,30 @@ export function normalizeIndoorOutdoor(text: string | undefined): IndoorOutdoor 
   return 'unknown';
 }
 
+// Infer indoor/outdoor from FREE prose (title + venue + description). Unlike
+// normalizeIndoorOutdoor — which reads a labelled field value where the bare
+// "inden"/"uden" prefix is safe — free text is full of the prepositions "inden"
+// (before) and "uden" (without), so those would tag a market in a PARK as indoor.
+// This demands the full words plus venue types that are unambiguous: a "hal",
+// arena, forsamlingshus/kulturhus/sognegård is an indoor building; a cirkus-/
+// dyrskue-/festplads or boldbane is an open outdoor ground. Deliberately
+// high-precision (misses are fine, wrong pins are not) — "parkeringsplads" is
+// left out on purpose because it usually describes parking, not the market floor.
+const IO_INDOOR =
+  /indend(?:ø|o)rs|indoor|\b\w*hallen\b|\bidr(?:æ|ae)tshal\w*\b|\bsportshal\w*\b|\bridehal\w*\b|\bridehus\b|\barena\b|forsamlingshus|kulturhus|medborgerhus|sogneg(?:å|aa)rd/i;
+const IO_OUTDOOR =
+  /udend(?:ø|o)rs|outdoor|friluft|(?:å|aa)ben himmel|\bi det fri\b|cirkusplads|dyrskueplads|\bfestplads|boldbane/i;
+
+export function inferIndoorOutdoor(text: string | undefined): IndoorOutdoor {
+  if (!text) return 'unknown';
+  const indoor = IO_INDOOR.test(text);
+  const outdoor = IO_OUTDOOR.test(text);
+  if (indoor && outdoor) return 'mixed';
+  if (indoor) return 'indoor';
+  if (outdoor) return 'outdoor';
+  return 'unknown';
+}
+
 /** "Gratis" / "0 kr" -> true; explicit amounts -> false; unknown -> null. */
 export function parseIsFree(priceText: string | undefined): boolean | null {
   if (!priceText) return null;

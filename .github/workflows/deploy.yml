@@ -103,6 +103,17 @@ jobs:
           path: data
           key: loppefund-db-${{ github.run_id }}
 
+      # Next's static export renders hundreds of pages across parallel workers,
+      # each opening the SQLite file read-only. If a hot rollback journal is
+      # present (e.g. left in the restored cache), a read-only open can't roll it
+      # back and fails with "database is locked", sinking the whole deploy. A
+      # single read-write open+close here rolls back any hot journal cleanly (the
+      # safe SQLite recovery — it never discards committed data), so every worker
+      # then opens a clean file. No-op when the journal is already clean.
+      - name: Clear any hot SQLite journal before parallel export
+        run: |
+          node -e "const {DatabaseSync}=require('node:sqlite'); const fs=require('fs'); const p='data/loppefund.db'; if(fs.existsSync(p)){const db=new DatabaseSync(p); db.exec('PRAGMA journal_mode=DELETE; PRAGMA wal_checkpoint(TRUNCATE); SELECT 1;'); db.close(); console.log('sqlite journal clean');}"
+
       - name: Static export
         env:
           LOPPEFUND_STATIC: '1'

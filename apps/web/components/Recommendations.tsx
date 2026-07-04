@@ -18,7 +18,7 @@ export const Recommendations = memo(function Recommendations({
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
   return (
     <section className="reco" aria-label="Anbefalet til dig">
-      <h2 className="reco-title">✨ Til dig</h2>
+      <h2 className="reco-title">Til dig</h2>
       <div className="reco-row">
         {recs.map((r) => (
           <a key={r.event.slug} className="reco-card" href={`${base}/marked/${r.event.slug}`}>

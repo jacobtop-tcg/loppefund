@@ -48,11 +48,16 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body), 'Helvetica Neue', sans-serif;
-  font-size: 16px;
+  font-size: 15.75px;
   line-height: 1.55;
-  /* faint paper grain */
-  background-image: radial-gradient(rgba(120, 95, 60, 0.05) 1px, transparent 0);
-  background-size: 26px 26px;
+  letter-spacing: -0.006em;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* barely-there paper warmth — a wash, not a dot-grid */
+  background-image: radial-gradient(120% 80% at 50% -10%, #fbf6ec 0%, var(--paper) 46%);
+  background-attachment: fixed;
 }
 
 a {
@@ -105,7 +110,9 @@ button {
 h1, h2, h3 {
   font-family: var(--font-display), Georgia, serif;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.018em;
+  line-height: 1.12;
+  font-optical-sizing: auto;
   margin: 0;
 }
 
@@ -138,10 +145,11 @@ h1, h2, h3 {
 
 .wordmark {
   font-family: var(--font-display), Georgia, serif;
-  font-size: 30px;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-size: 29px;
+  font-weight: 640;
+  letter-spacing: -0.03em;
   color: var(--brand);
+  font-optical-sizing: auto;
 }
 
 .wordmark .dot {
@@ -153,6 +161,7 @@ h1, h2, h3 {
   font-size: 14px;
   margin: 0;
   font-weight: 450;
+  letter-spacing: -0.008em;
 }
 
 /* ---------- hero / controls ---------- */
@@ -218,13 +227,14 @@ h1, h2, h3 {
 }
 
 .chip {
-  border: 1.5px solid var(--line);
+  border: 1px solid var(--line);
   background: var(--paper-raised);
   color: var(--ink-soft);
   border-radius: 999px;
-  padding: 8px 14px;
+  padding: 7px 15px;
   font-size: 13.5px;
   font-weight: 500;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   flex: 0 0 auto;
   user-select: none;
@@ -243,14 +253,14 @@ h1, h2, h3 {
 .chip.active {
   background: var(--brand);
   border-color: var(--brand);
-  color: #f7f3e8;
-  box-shadow: 0 4px 12px -4px rgba(22, 58, 44, 0.5);
+  color: #f4efe2;
+  font-weight: 560;
 }
 
 .chip.accent.active {
   background: var(--accent);
   border-color: var(--accent);
-  box-shadow: 0 4px 12px -4px rgba(195, 63, 24, 0.5);
+  color: #fff;
 }
 
 .chip.active .live-dot {
@@ -381,8 +391,8 @@ h1, h2, h3 {
 }
 
 .result-count strong {
-  color: var(--ink);
-  font-weight: 600;
+  color: var(--brand);
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
@@ -556,9 +566,9 @@ a:focus-visible .event-card {
 }
 
 .event-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-card-hover);
-  border-color: #d9cdb6;
+  border-color: color-mix(in srgb, var(--brand) 24%, var(--line));
 }
 
 @keyframes card-in {
@@ -623,7 +633,10 @@ a:focus-visible .event-card {
   font-family: var(--font-display), Georgia, serif;
   font-size: 19px;
   font-weight: 600;
-  line-height: 1.22;
+  line-height: 1.18;
+  letter-spacing: -0.016em;
+  font-optical-sizing: auto;
+  color: var(--brand-deep);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -661,10 +674,11 @@ a:focus-visible .event-card {
 .badge {
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.03em;
-  border-radius: 6px;
-  padding: 3px 7px;
-  background: var(--paper-sunken);
+  letter-spacing: 0.01em;
+  border-radius: 7px;
+  padding: 3.5px 8px;
+  line-height: 1.35;
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
   color: var(--ink-soft);
 }
 
@@ -1715,10 +1729,12 @@ body:has(.is-map-view) {
   margin: 0 0 20px;
 }
 .reco-title {
-  font-size: 15px;
-  font-weight: 700;
-  margin: 0 0 10px;
-  color: var(--ink);
+  font-size: 11.5px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--brand);
+  margin: 0 0 12px;
 }
 .reco-row {
   display: flex;
@@ -1733,24 +1749,26 @@ body:has(.is-map-view) {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  padding: 12px 14px;
-  border-radius: 14px;
+  padding: 13px 15px;
+  border-radius: var(--radius);
   text-decoration: none;
   background: var(--paper-raised);
   border: 1px solid var(--line);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-  transition: transform 0.08s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.14s ease, box-shadow 0.16s ease, border-color 0.16s ease;
 }
 .reco-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.09);
-  border-color: color-mix(in srgb, var(--accent-deep) 35%, transparent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: color-mix(in srgb, var(--brand) 24%, var(--line));
 }
 .reco-name {
-  font-weight: 700;
-  font-size: 14.5px;
-  color: var(--ink);
-  line-height: 1.25;
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.014em;
+  color: var(--brand-deep);
+  line-height: 1.2;
 }
 .reco-city {
   font-size: 12.5px;
@@ -1763,15 +1781,19 @@ body:has(.is-map-view) {
   margin-top: 5px;
 }
 .reco-chip {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  padding: 2px 8px;
+  letter-spacing: 0.02em;
+  padding: 2.5px 8px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--accent-deep) 8%, transparent);
-  color: var(--accent-deep);
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  color: var(--ink-soft);
 }
+/* Only the temporal reason ("i dag", "på tirsdag") gets the accent — one
+   confident highlight per card reads calmer than three shouting pills. */
 .reco-chip.when {
   background: var(--accent-wash);
+  color: var(--accent-deep);
 }
 .report-form {
   display: grid;

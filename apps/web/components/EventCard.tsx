@@ -56,14 +56,27 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
           {event.isFree === true && <span className="badge free">Gratis</span>}
           {event.indoorOutdoor === 'indoor' && <span className="badge">Indendørs</span>}
           {event.indoorOutdoor === 'outdoor' && <span className="badge">Udendørs</span>}
-          {weather && (event.indoorOutdoor === 'outdoor' || event.indoorOutdoor === 'mixed') && (
+          {/* A market that says it cancels in rain, on a day with a real chance of
+              it, gets a warning instead of a plain forecast — the single most
+              trip-saving thing we can tell a family before they drive out. Such a
+              market is outdoors by definition, so the warning shows even when the
+              indoor/outdoor field was never filled in. */}
+          {weather && event.weatherDependent && weather.popPct >= 50 ? (
+            <span
+              className="badge weather-warn"
+              title={`Dette marked aflyses typisk ved regn — ${weather.popPct}% chance for regn (${weatherGlyph(weather.code).label})`}
+            >
+              ⚠️ Kan aflyses · {weather.popPct}% regn
+            </span>
+          ) : weather && (event.indoorOutdoor === 'outdoor' || event.indoorOutdoor === 'mixed') ? (
             <span
               className={`badge weather${weather.popPct >= 50 ? ' wet' : ''}`}
               title={`${weatherGlyph(weather.code).label}${weather.popPct >= 30 ? ` · ${weather.popPct}% regn` : ''}`}
             >
-              {weatherGlyph(weather.code).emoji} {weather.tmaxC}°{weather.popPct >= 50 ? ` · ${weather.popPct}%` : ''}
+              {weatherGlyph(weather.code).emoji} {weather.tmaxC}°
+              {weather.popPct >= 50 ? ` · ${weather.popPct}%` : ''}
             </span>
-          )}
+          ) : null}
           {event.distanceKm !== null && (
             <span className="badge distance">{Math.round(event.distanceKm)} km</span>
           )}

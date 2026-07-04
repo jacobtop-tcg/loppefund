@@ -80,6 +80,9 @@ interface WxEvent {
   lng: number | null;
   nextDate: string;
   indoorOutdoor: string;
+  /** A market that "aflyses ved regn" is by definition outdoor — fetch its
+   *  forecast even when the indoor/outdoor field was never filled in. */
+  weatherDependent?: boolean;
 }
 
 /**
@@ -93,7 +96,10 @@ export function useOutdoorWeather(events: WxEvent[]): Map<string, DayWeather> {
   // A cheap, stable signature so the effect only re-runs when the outdoor set
   // or its dates actually change (not on every hover-driven re-render).
   const outdoor = events.filter(
-    (e) => (e.indoorOutdoor === 'outdoor' || e.indoorOutdoor === 'mixed') && e.lat != null && e.lng != null,
+    (e) =>
+      (e.indoorOutdoor === 'outdoor' || e.indoorOutdoor === 'mixed' || e.weatherDependent === true) &&
+      e.lat != null &&
+      e.lng != null,
   );
   const sig = outdoor.map((e) => `${e.slug}:${e.nextDate}`).join(',');
 

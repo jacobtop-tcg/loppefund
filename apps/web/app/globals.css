@@ -709,6 +709,14 @@ a:focus-visible .event-card {
   background: #dbe6ee;
   color: #355a72;
 }
+/* Rain warning for a market that states it cancels in rain — deliberately louder
+   than a plain forecast, so it reads as "check before you drive out". */
+.badge.weather-warn {
+  background: #f4d9d0;
+  color: #a3341a;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
 
 .badge.open-now {
   background: var(--green-wash);

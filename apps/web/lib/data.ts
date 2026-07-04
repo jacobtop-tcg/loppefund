@@ -184,6 +184,9 @@ export interface EventSummary {
   gem: boolean;
   /** From extracted amenities: kids activities mentioned in the description. */
   familyFriendly: boolean;
+  /** From extracted amenities: the market states it's cancelled/affected by rain
+   *  ("aflyses ved regn"). Combined with an outdoor forecast to warn before a trip. */
+  weatherDependent: boolean;
   /** Folded description snippet so client search can match e.g. "vintage". */
   searchText: string;
   occurrences: Array<{ date: string; startTime: string | null; endTime: string | null }>;
@@ -227,6 +230,9 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       }),
       familyFriendly: e.amenities
         ? (JSON.parse(e.amenities) as Amenities).familyFriendly === true
+        : false,
+      weatherDependent: e.amenities
+        ? (JSON.parse(e.amenities) as Amenities).weatherDependent === true
         : false,
       // Enough folded description signal for keyword matches ('vintage',
       // 'børneloppemarked') without bloating the homepage payload — title,

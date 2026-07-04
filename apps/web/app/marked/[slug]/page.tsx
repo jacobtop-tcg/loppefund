@@ -85,16 +85,21 @@ export async function generateMetadata({
 function eventJsonLd(event: NonNullable<ReturnType<typeof loadEventDetail>>, today: string) {
   const next = event.occurrences.find((o) => o.date >= today);
   if (!next) return null;
+  const eventUrl = `${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`;
   return {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: event.title,
+    url: eventUrl,
     startDate: next.startTime ? `${next.date}T${next.startTime}:00` : next.date,
     ...(next.endTime ? { endDate: `${next.date}T${next.endTime}:00` } : {}),
     eventStatus:
       event.status === 'cancelled'
         ? 'https://schema.org/EventCancelled'
         : 'https://schema.org/EventScheduled',
+    // Every market is a physical, in-person event — Google warns on Event markup
+    // that omits the attendance mode, and it disambiguates from online listings.
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     location: {
       '@type': 'Place',
       name: event.venueName ?? event.title,
@@ -110,6 +115,20 @@ function eventJsonLd(event: NonNullable<ReturnType<typeof loadEventDetail>>, tod
         : {}),
     },
     ...(event.description ? { description: event.description.slice(0, 500) } : {}),
+    ...(event.organizer ? { organizer: { '@type': 'Organization', name: event.organizer } } : {}),
+    // Free entry is the single biggest draw — a proper Offer makes Google surface
+    // "Gratis" in the event rich result, not just bury it in the page.
+    ...(event.isFree === true
+      ? {
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'DKK',
+            availability: 'https://schema.org/InStock',
+            url: eventUrl,
+          },
+        }
+      : {}),
     ...(event.isFree !== null ? { isAccessibleForFree: event.isFree } : {}),
   };
 }

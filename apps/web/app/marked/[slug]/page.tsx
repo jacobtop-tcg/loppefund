@@ -16,6 +16,7 @@ import { ConfirmEventForm } from '../../../components/ConfirmEventForm.tsx';
 import { ReviewForm } from '../../../components/ReviewForm.tsx';
 import { PhotoForm } from '../../../components/PhotoForm.tsx';
 import { starGlyphs } from '../../../lib/reviews.ts';
+import { googleCalendarUrl } from '../../../lib/calendar.ts';
 import { listCancelledUpcomingSlugs, listUpcomingEvents } from '../../../lib/data.ts';
 import { distanceKm } from '../../../lib/client-utils.ts';
 
@@ -241,14 +242,38 @@ export default async function EventPage({
                 </ul>
               )}
               {upcoming.length > 0 && (
-                <p style={{ marginBottom: 0 }}>
+                <div className="add-to-cal">
                   <a
-                    href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${event.slug}/ical`}
-                    style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--accent-deep)' }}
+                    className="cal-btn primary"
+                    href={googleCalendarUrl({
+                      title: displayTitle(event.title),
+                      date: upcoming[0]!.date,
+                      startTime: upcoming[0]!.startTime,
+                      endTime: upcoming[0]!.endTime,
+                      location: [
+                        event.venueName && displayTitle(event.venueName),
+                        event.street,
+                        [event.postcode, event.city].filter(Boolean).join(' '),
+                      ]
+                        .filter(Boolean)
+                        .join(', '),
+                      details: `${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`,
+                    })}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    ↓ Føj til kalender (.ics)
+                    📅 Føj til Google Kalender
                   </a>
-                </p>
+                  <a
+                    className="cal-btn"
+                    href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${event.slug}/ical`}
+                  >
+                    Apple / Outlook (.ics)
+                  </a>
+                  {upcoming.length > 1 && (
+                    <span className="cal-note">Google tilføjer næste dato · .ics har alle</span>
+                  )}
+                </div>
               )}
               {event.scheduleText && (
                 <p style={{ color: 'var(--ink-soft)', fontSize: 13.5, marginBottom: 0 }}>

@@ -6,6 +6,63 @@ export function addDaysIso(isoDate: string, days: number): string {
   return date.toISOString().slice(0, 10);
 }
 
+/** ISO weekday for a YYYY-MM-DD date: 1 = Monday … 7 = Sunday. Timezone-free. */
+export function isoWeekday(isoDate: string): number {
+  const [y, m, d] = isoDate.split('-').map(Number) as [number, number, number];
+  const dow = new Date(Date.UTC(y, m - 1, d)).getUTCDay();
+  return dow === 0 ? 7 : dow;
+}
+
+/**
+ * The Saturday and Sunday of `today`'s weekend, as ISO dates. On a Sunday the
+ * Saturday is yesterday; callers wanting only the *remaining* weekend clamp the
+ * start to `today` themselves. Single source of truth for "this weekend",
+ * shared by the Explorer filter and the /i-weekenden landing page so the two
+ * definitions can never drift apart.
+ */
+export function weekendDates(today: string): { saturday: string; sunday: string } {
+  const wd = isoWeekday(today);
+  const saturday = wd === 7 ? addDaysIso(today, -1) : addDaysIso(today, (6 - wd + 7) % 7);
+  return { saturday, sunday: addDaysIso(saturday, 1) };
+}
+
+/**
+ * Today's date in Copenhagen (YYYY-MM-DD) from the live clock. The static HTML
+ * bakes a build-time date; reading the real date on the client is what keeps
+ * "i dag"/"i weekenden" honest days after a build — incorrect events are not
+ * acceptable, missing ones are.
+ */
+export function copenhagenToday(): string {
+  return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Copenhagen' }).format(new Date());
+}
+
+export type DateWindowKind = 'today' | 'weekend';
+
+/**
+ * Inclusive [from, to] ISO window for an intent landing page, relative to
+ * `today`. "weekend" is the *remaining* Saturday–Sunday (on Sunday, just
+ * today). Shared by the server pages (build-time render + JSON-LD) and the
+ * client island (live re-derivation) so the two never disagree.
+ */
+export function occurrenceWindow(kind: DateWindowKind, today: string): [string, string] {
+  if (kind === 'today') return [today, today];
+  const { saturday, sunday } = weekendDates(today);
+  return [today > saturday ? today : saturday, sunday];
+}
+
+/** The earliest occurrence date falling inside [from, to] inclusive, or null. */
+export function firstDateInWindow(
+  occurrences: ReadonlyArray<{ date: string }>,
+  from: string,
+  to: string,
+): string | null {
+  let best: string | null = null;
+  for (const o of occurrences) {
+    if (o.date >= from && o.date <= to && (best === null || o.date < best)) best = o.date;
+  }
+  return best;
+}
+
 /** Danish-aware fold for instant search: lowercase, ø->o, å->a, æ->ae. */
 export function foldForSearch(text: string): string {
   return text

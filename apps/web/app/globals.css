@@ -1075,6 +1075,38 @@ body:has(.is-map-view) {
   margin-bottom: 8px;
 }
 
+.empty-cta {
+  display: inline-block;
+  margin-top: 14px;
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+
+.empty-cta:hover {
+  text-decoration: underline;
+}
+
+/* Cross-links between the intent landing pages (/i-dag, /i-weekenden) and the
+   main views — a calm footer nav, not loud buttons. */
+.intent-crosslinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin: 40px 0 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 14.5px;
+}
+
+.intent-crosslinks a {
+  color: var(--brand);
+  font-weight: 560;
+}
+
+.intent-crosslinks a:hover {
+  color: var(--accent-deep);
+}
+
 /* ---------- detail page ---------- */
 
 .back-link {

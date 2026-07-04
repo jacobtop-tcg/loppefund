@@ -25,18 +25,13 @@ import {
   parseExplorerParams,
   serializeExplorerParams,
   tripDistanceKm,
+  weekendDates,
 } from '../lib/client-utils.ts';
 
 const MapView = dynamic(() => import('./MapView.tsx').then((m) => m.MapView), {
   ssr: false,
   loading: () => <div className="map-shell" style={{ display: 'grid', placeItems: 'center', color: 'var(--ink-faint)' }}>Indlæser kort…</div>,
 });
-
-function weekdayOfIso(date: string): number {
-  const [y, m, d] = date.split('-').map(Number) as [number, number, number];
-  const dow = new Date(Date.UTC(y, m - 1, d)).getUTCDay();
-  return dow === 0 ? 7 : dow;
-}
 
 /** [from, to] inclusive for each date filter. Weekend = Sat+Sun (or rest of it). */
 function dateRangeFor(filter: DateFilter, today: string): [string, string] {
@@ -46,10 +41,7 @@ function dateRangeFor(filter: DateFilter, today: string): [string, string] {
     return [tomorrow, tomorrow];
   }
   if (filter === 'alle') return [today, addDaysIso(today, 120)];
-  const wd = weekdayOfIso(today);
-  // This weekend's Saturday and Sunday. On Sunday the Saturday is yesterday.
-  const thisSat = wd === 7 ? addDaysIso(today, -1) : addDaysIso(today, (6 - wd + 7) % 7);
-  const thisSun = addDaysIso(thisSat, 1);
+  const { saturday: thisSat, sunday: thisSun } = weekendDates(today);
   if (filter === 'weekend') {
     // Show only the remaining part of the current weekend.
     const start = today > thisSat ? today : thisSat;

@@ -2,42 +2,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { listCities, listEventsForCity, todayIso } from '../../../lib/data.ts';
 import { displayPlace } from '../../../lib/format.ts';
+import { collectionJsonLd, safeJsonLd } from '../../../lib/jsonld.ts';
 import { EventCard } from '../../../components/EventCard.tsx';
 
 // SEO landing pages: "Loppemarkeder i <By>" is what Danish families google.
 export const dynamicParams = false;
-
-/** ItemList structured data so Google can present the city's markets as a rich
- *  list for the high-intent "loppemarked <by>" search — the surface that most
- *  drives a family to open this instead of scrolling Facebook. */
-function cityJsonLd(name: string, slug: string, events: Array<{ slug: string; title: string }>) {
-  const base = process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk';
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: `Loppemarkeder i ${name}`,
-    url: `${base}/by/${slug}`,
-    mainEntity: {
-      '@type': 'ItemList',
-      numberOfItems: events.length,
-      itemListElement: events.slice(0, 50).map((e, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        url: `${base}/marked/${e.slug}`,
-        name: e.title,
-      })),
-    },
-  };
-}
-
-// Event data is crawled from the public web, so a title with "</script>" or a
-// U+2028/U+2029 separator must be escaped or it breaks out of the script tag.
-function safeJsonLd(data: unknown): string {
-  return JSON.stringify(data)
-    .replace(/</g, '\\u003c')
-    .replace(/>/g, '\\u003e')
-    .replace(/[\u2028\u2029]/g, (c) => (c === '\u2028' ? '\\u2028' : '\\u2029'));
-}
 
 export function generateStaticParams(): Array<{ city: string }> {
   return listCities().map((c) => ({ city: c.slug }));
@@ -99,7 +68,15 @@ export default async function CityPage({
       {events.length > 0 && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: safeJsonLd(cityJsonLd(name, info.slug, events)) }}
+          dangerouslySetInnerHTML={{
+            __html: safeJsonLd(
+              collectionJsonLd({
+                name: `Loppemarkeder i ${name}`,
+                path: `/by/${info.slug}`,
+                items: events,
+              }),
+            ),
+          }}
         />
       )}
       <Link href="/" className="back-link">

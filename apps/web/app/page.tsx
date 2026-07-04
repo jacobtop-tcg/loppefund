@@ -30,11 +30,17 @@ export default function HomePage() {
         <div className="explorer-main">
           Loppefund samler markeder automatisk fra offentlige kilder og viser altid, hvor
           oplysningerne kommer fra. Fandt du en fejl? Kilderne er linket på hvert marked.{' '}
-          <Link href="/tip" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
-            Mangler vi et marked? Tip os →
+          <Link href="/i-dag" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
+            Loppemarkeder i dag →
+          </Link>{' '}
+          <Link href="/i-weekenden" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
+            · I weekenden →
           </Link>{' '}
           <Link href="/byer" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
             · Find din by →
+          </Link>{' '}
+          <Link href="/tip" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
+            · Tip os →
           </Link>{' '}
           <Link href="/kilder" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
             · Se vores kilder →

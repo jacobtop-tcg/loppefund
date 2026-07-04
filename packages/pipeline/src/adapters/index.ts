@@ -15,6 +15,7 @@ import { jharrangementer } from './jharrangementer.ts';
 import { olg } from './olg.ts';
 import { gentofte } from './gentofte.ts';
 import { loppebjornen } from './loppebjornen.ts';
+import { tippelsbjerggaard } from './tippelsbjerggaard.ts';
 
 /** Registered source adapters. Each is independent and replaceable. */
 export const adapters: SourceAdapter[] = [
@@ -34,4 +35,5 @@ export const adapters: SourceAdapter[] = [
   olg,
   gentofte,
   loppebjornen,
+  tippelsbjerggaard,
 ];

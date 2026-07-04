@@ -18,6 +18,7 @@ import { loppebjornen } from './loppebjornen.ts';
 import { tippelsbjerggaard } from './tippelsbjerggaard.ts';
 import { oplevelserKbh } from './oplevelser-kbh.ts';
 import { visitdenmark } from './visitdenmark.ts';
+import { bornholmermarked } from './bornholmermarked.ts';
 
 /** Registered source adapters. Each is independent and replaceable. */
 export const adapters: SourceAdapter[] = [
@@ -40,4 +41,5 @@ export const adapters: SourceAdapter[] = [
   tippelsbjerggaard,
   oplevelserKbh,
   visitdenmark,
+  bornholmermarked,
 ];

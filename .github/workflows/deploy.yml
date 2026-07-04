@@ -13,6 +13,12 @@ on:
   schedule:
     - cron: '17 4,16 * * *' # twice daily, off the top of the hour
   workflow_dispatch:
+    inputs:
+      db_source:
+        description: 'crawl = re-fetch every source (~40 min); committed = build the repo''s data/loppefund.db as-is (~3 min, for a locally-prepared DB)'
+        type: choice
+        options: [crawl, committed]
+        default: crawl
   push:
     branches: [main]
     paths-ignore:
@@ -51,7 +57,9 @@ jobs:
       # Persist the SQLite database across runs so the geocode cache and the
       # immutable raw layer survive — each run is an incremental crawl, not a
       # cold start. The rotating key + restore-keys fallback loads the newest.
+      # Skipped for a "committed" dispatch, which deploys the repo's DB verbatim.
       - name: Restore database
+        if: github.event.inputs.db_source != 'committed'
         uses: actions/cache/restore@v4
         with:
           path: data
@@ -62,9 +70,9 @@ jobs:
       - run: npm install --no-audit --no-fund
 
       # Only crawl on a schedule or manual dispatch — never on a plain code push,
-      # so commits deploy fast from the cached DB (see the header note).
+      # nor a "committed" dispatch — so those deploy fast from an existing DB.
       - name: Crawl sources & rebuild canonical layer
-        if: github.event_name != 'push'
+        if: github.event_name != 'push' && github.event.inputs.db_source != 'committed'
         env:
           # Default: the local committed feed from scripts/fb-harvest.mjs, read
           # straight from the checkout (no network, no CDN lag). A repo var/secret
@@ -90,7 +98,7 @@ jobs:
       # unchanged, so there's nothing new to save.
       - name: Save database
         uses: actions/cache/save@v4
-        if: always() && github.event_name != 'push'
+        if: always() && github.event_name != 'push' && github.event.inputs.db_source != 'committed'
         with:
           path: data
           key: loppefund-db-${{ github.run_id }}

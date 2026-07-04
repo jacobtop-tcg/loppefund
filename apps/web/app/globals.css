@@ -1,21 +1,24 @@
 :root {
-  /* Weekend paper — warm editorial Scandinavian */
-  --paper: #faf5ec;
-  --paper-raised: #fffdf8;
-  --paper-sunken: #f1ead9;
-  --ink: #241f19;
-  --ink-soft: #6b6157;
-  --ink-faint: #787060;
-  --line: #e4dbc9;
-  --accent: #e4572e;      /* signal orange — treasure! */
-  --accent-deep: #c73e18;
-  --accent-wash: #fbe9e2;
-  --green: #3e7a4e;       /* open now / free entry */
-  --green-wash: #e7f0e5;
-  --amber-wash: #f7edd4;
-  --radius: 14px;
-  --shadow-card: 0 1px 2px rgba(60, 45, 25, 0.05), 0 2px 8px -2px rgba(60, 45, 25, 0.06), 0 12px 24px -12px rgba(60, 45, 25, 0.10);
-  --shadow-card-hover: 0 2px 4px rgba(60, 45, 25, 0.07), 0 10px 20px -6px rgba(60, 45, 25, 0.14), 0 24px 44px -16px rgba(60, 45, 25, 0.18);
+  /* Deep Market — warm paper, pine-green brand, terracotta treasure accent */
+  --paper: #f5eee0;
+  --paper-raised: #fffdf9;
+  --paper-sunken: #ede4d1;
+  --ink: #201e19;
+  --ink-soft: #5d554a;
+  --ink-faint: #837a6a;
+  --line: #e6dcc6;
+  --brand: #1f4a39;       /* pine green — brand, structure, trust */
+  --brand-deep: #163a2c;
+  --brand-wash: #e1eae3;
+  --accent: #e0552b;      /* terracotta — treasure, today, CTAs */
+  --accent-deep: #c33f18;
+  --accent-wash: #fbe6dc;
+  --green: #2f7a4f;       /* open now / free entry */
+  --green-wash: #e4efe6;
+  --amber-wash: #f5ead0;
+  --radius: 16px;
+  --shadow-card: 0 1px 2px rgba(35, 50, 38, 0.05), 0 3px 10px -3px rgba(35, 48, 35, 0.08), 0 16px 30px -14px rgba(28, 44, 34, 0.14);
+  --shadow-card-hover: 0 2px 5px rgba(35, 50, 38, 0.09), 0 14px 26px -8px rgba(30, 45, 34, 0.17), 0 32px 56px -18px rgba(24, 40, 30, 0.24);
   /* 5-hue category palette — warm editorial, derived from paper/ink/accent */
   --cat-terracotta: #c73e18;
   --cat-terracotta-wash: #f9e4dc;
@@ -135,9 +138,10 @@ h1, h2, h3 {
 
 .wordmark {
   font-family: var(--font-display), Georgia, serif;
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  color: var(--brand);
 }
 
 .wordmark .dot {
@@ -146,8 +150,9 @@ h1, h2, h3 {
 
 .tagline {
   color: var(--ink-soft);
-  font-size: 13.5px;
+  font-size: 14px;
   margin: 0;
+  font-weight: 450;
 }
 
 /* ---------- hero / controls ---------- */
@@ -236,14 +241,20 @@ h1, h2, h3 {
 }
 
 .chip.active {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--paper);
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #f7f3e8;
+  box-shadow: 0 4px 12px -4px rgba(22, 58, 44, 0.5);
 }
 
 .chip.accent.active {
   background: var(--accent);
   border-color: var(--accent);
+  box-shadow: 0 4px 12px -4px rgba(195, 63, 24, 0.5);
+}
+
+.chip.active .live-dot {
+  background: #8fd0a6;
 }
 
 .chip-sep {
@@ -563,27 +574,30 @@ a:focus-visible .event-card {
 
 .date-block {
   flex: 0 0 auto;
-  width: 64px;
+  width: 62px;
   text-align: center;
-  border-radius: 12px;
-  background: var(--cat-wash);
-  padding: 10px 4px 8px;
+  border-radius: 13px;
+  /* A vivid category-coloured "ticket stub" — solid colour, cream ink. */
+  background: var(--cat-deep);
+  color: #fbf6ea;
+  padding: 11px 4px 9px;
   height: fit-content;
+  box-shadow: 0 3px 8px -3px rgba(30, 42, 32, 0.4);
 }
 
 .date-block .day {
   font-family: var(--font-display), Georgia, serif;
-  font-size: 26px;
+  font-size: 27px;
   font-weight: 700;
   line-height: 1;
-  color: var(--cat-deep);
+  color: #fff;
 }
 
 .date-block .month {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--ink-soft);
+  color: rgba(255, 255, 255, 0.85);
   margin-top: 3px;
 }
 
@@ -592,18 +606,13 @@ a:focus-visible .event-card {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: var(--ink-faint);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 /* keep AFTER the .cat-* tints so today's solid accent wins the cascade */
 .date-block.today {
   background: var(--accent);
-}
-
-.date-block.today .day,
-.date-block.today .month,
-.date-block.today .weekday {
-  color: #fff;
+  box-shadow: 0 3px 10px -3px rgba(195, 63, 24, 0.5);
 }
 
 .event-card-body {

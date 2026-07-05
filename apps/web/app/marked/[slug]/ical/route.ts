@@ -48,7 +48,7 @@ export async function GET(
       `SUMMARY:${esc(event.title)}`,
       location ? `LOCATION:${esc(location)}` : '',
       event.lat != null && event.lng != null ? `GEO:${event.lat};${event.lng}` : '',
-      `URL:${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${slug}`,
+      `URL:${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${slug}`,
       'END:VEVENT',
     );
     return lines.filter(Boolean).join('\r\n');

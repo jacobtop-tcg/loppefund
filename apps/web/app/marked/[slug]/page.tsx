@@ -85,7 +85,7 @@ export async function generateMetadata({
 function eventJsonLd(event: NonNullable<ReturnType<typeof loadEventDetail>>, today: string) {
   const next = event.occurrences.find((o) => o.date >= today);
   if (!next) return null;
-  const eventUrl = `${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`;
+  const eventUrl = `${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`;
   return {
     '@context': 'https://schema.org',
     '@type': 'Event',
@@ -276,7 +276,7 @@ export default async function EventPage({
                       ]
                         .filter(Boolean)
                         .join(', '),
-                      details: `${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`,
+                      details: `${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`,
                     })}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -333,7 +333,7 @@ export default async function EventPage({
               <PhotoForm
                 slug={event.slug}
                 title={displayTitle(event.title)}
-                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`}
+                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
               />
             </section>
 
@@ -375,7 +375,7 @@ export default async function EventPage({
               <ReviewForm
                 slug={event.slug}
                 title={displayTitle(event.title)}
-                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`}
+                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
               />
             </section>
           </div>
@@ -513,11 +513,11 @@ export default async function EventPage({
               <ConfirmEventForm
                 slug={event.slug}
                 title={event.title}
-                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`}
+                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
               />
               <ReportEventForm
                 title={event.title}
-                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk'}/marked/${event.slug}`}
+                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
               />
             </section>
 

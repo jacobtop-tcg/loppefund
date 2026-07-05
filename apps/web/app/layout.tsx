@@ -13,7 +13,7 @@ const body = Instrument_Sans({
   variable: '--font-body',
 });
 
-const BASE_URL = process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk';
+const BASE_URL = process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund';
 
 export const metadata: Metadata = {
   // Origin only — never the basePath. Next auto-prefixes basePath onto the

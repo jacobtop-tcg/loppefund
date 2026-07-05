@@ -152,7 +152,7 @@ if (command === 'rebuild') {
 if (command === 'tips') {
   // Parse community tips into draft events at LOW trust ("ubekræftet").
   const { listTips, setTipStatus } = await import('@loppefund/db');
-  upsertSource(db, { key: 'tip', name: 'Fællesskabstip', baseUrl: 'https://loppefund.dk/tip', trust: 0.35 });
+  upsertSource(db, { key: 'tip', name: 'Fællesskabstip', baseUrl: 'https://jacobtop-tcg.github.io/loppefund/tip', trust: 0.35 });
   const trustAll = { ...Object.fromEntries(adapters.map((a) => [a.key, a.trust])), tip: 0.35 };
   const today = new Date().toISOString().slice(0, 10);
   const tips = listTips(db, 'new');

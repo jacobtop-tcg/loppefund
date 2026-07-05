@@ -3,7 +3,7 @@ import { listCities, listUpcomingEvents } from '../lib/data.ts';
 
 export const dynamic = 'force-static';
 
-const BASE = process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk';
+const BASE = process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const events = listUpcomingEvents(180);

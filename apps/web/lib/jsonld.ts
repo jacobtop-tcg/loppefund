@@ -1,4 +1,4 @@
-const BASE = process.env.LOPPEFUND_BASE_URL ?? 'https://loppefund.dk';
+const BASE = process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund';
 
 // Chars that must be escaped when a JSON string is inlined into a <script>:
 //   <  >  can close the tag; U+2028 U+2029 are literal line breaks in JS strings.

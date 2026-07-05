@@ -723,13 +723,26 @@ export function markStaleVenuesGone(db: DatabaseSync, runStartIso: string): numb
   return Number(res.changes);
 }
 
+/** The consumer app opens the DB read-only (no migration), so a database built
+ *  before the venues table existed (schema < 3) has no `venues` table. Degrade
+ *  to "no venues" rather than throwing — they appear once a crawl populates a
+ *  migrated DB, exactly like the source_candidates.covered_titles guard. */
+function venuesTableExists(db: DatabaseSync): boolean {
+  const r = db
+    .prepare(`SELECT COUNT(*) AS c FROM sqlite_master WHERE type = 'table' AND name = 'venues'`)
+    .get() as { c: number };
+  return r.c > 0;
+}
+
 export function listVenues(db: DatabaseSync): VenueRow[] {
+  if (!venuesTableExists(db)) return [];
   return db
     .prepare(`SELECT * FROM venues WHERE status = 'active' ORDER BY category, title`)
     .all() as unknown as VenueRow[];
 }
 
 export function getVenueBySlug(db: DatabaseSync, slug: string): VenueRow | null {
+  if (!venuesTableExists(db)) return null;
   return (
     (db.prepare(`SELECT * FROM venues WHERE slug = ?`).get(slug) as VenueRow | undefined) ?? null
   );

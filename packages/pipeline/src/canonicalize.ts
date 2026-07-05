@@ -11,6 +11,7 @@ import {
   extractAmenities,
   extractStallCountText,
   inferIndoorOutdoor,
+  inferIsFreeFromText,
   matchEvents,
   type MatchCandidate,
   normalizeCategory,
@@ -376,6 +377,32 @@ export function backfillStallCount(db: DatabaseSync): number {
     const stalls = extractStallCountText(`${r.title} ${r.description ?? ''}`);
     if (stalls) {
       upd.run(stalls, r.id);
+      filled++;
+    }
+  }
+  return filled;
+}
+
+/**
+ * Backfill free/paid ENTRY from the description for markets whose source left
+ * the fee blank — "is it free?" is one of the first things a family asks. Only
+ * unambiguous, non-contradictory signals are used (see inferIsFreeFromText): a
+ * wrong "Gratis" badge is the kind of incorrectness the product must never
+ * show, so anything unclear stays unknown. Returns the number of events filled.
+ */
+export function backfillIsFree(db: DatabaseSync): number {
+  const rows = db
+    .prepare(
+      `SELECT id, title, description FROM events
+       WHERE status = 'active' AND is_free IS NULL`,
+    )
+    .all() as unknown as Array<{ id: number; title: string; description: string | null }>;
+  const upd = db.prepare(`UPDATE events SET is_free = ? WHERE id = ?`);
+  let filled = 0;
+  for (const r of rows) {
+    const free = inferIsFreeFromText(`${r.title} ${r.description ?? ''}`);
+    if (free !== null) {
+      upd.run(free ? 1 : 0, r.id);
       filled++;
     }
   }

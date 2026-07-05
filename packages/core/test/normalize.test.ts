@@ -170,3 +170,33 @@ describe('extractStallCountText', () => {
     expect(extractStallCountText('2 stande')).toBeNull();
   });
 });
+
+import { inferIsFreeFromText } from '../src/normalize.ts';
+
+describe('inferIsFreeFromText', () => {
+  it('reads a free-entry signal as free', () => {
+    expect(inferIsFreeFromText('Julemarked med gratis entré')).toBe(true);
+    expect(inferIsFreeFromText('Entré: gratis')).toBe(true);
+    expect(inferIsFreeFromText('Loppemarked på torvet — gratis adgang for alle')).toBe(true);
+    expect(inferIsFreeFromText('Ingen entré')).toBe(true);
+  });
+
+  it('reads a priced-entry signal as not free', () => {
+    expect(inferIsFreeFromText('Entré 20,- ved indgangen')).toBe(false);
+    expect(inferIsFreeFromText('Voksne 20 kr, børn gratis')).toBe(false);
+    expect(inferIsFreeFromText('entre 30 kr')).toBe(false);
+  });
+
+  it('never mistakes free PARKING or a free STALL for free entry', () => {
+    expect(inferIsFreeFromText('Loppemarked, gratis parkering ved hallen')).toBeNull();
+    expect(inferIsFreeFromText('Du kan få en gratis stand')).toBeNull();
+    expect(inferIsFreeFromText('Gratis kaffe til de første gæster')).toBeNull();
+  });
+
+  it('stays unknown when the signal is contradictory or absent', () => {
+    // free for kids, paid for adults -> genuinely ambiguous, must not guess
+    expect(inferIsFreeFromText('Gratis adgang for børn, voksne entré 30 kr')).toBeNull();
+    expect(inferIsFreeFromText('Hyggeligt loppemarked på havnen')).toBeNull();
+    expect(inferIsFreeFromText(null)).toBeNull();
+  });
+});

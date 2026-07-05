@@ -30,6 +30,7 @@ import { PoliteFetcher } from './fetcher.ts';
 import {
   backfillGeocode,
   backfillIndoorOutdoor,
+  backfillIsFree,
   backfillStallCount,
   canonicalizeRawEvent,
   mergeDuplicateEvents,
@@ -138,9 +139,13 @@ if (command === 'rebuild') {
   const pinned = await backfillGeocode(db);
   const inout = backfillIndoorOutdoor(db);
   const stalls = backfillStallCount(db);
+  const freeEntry = backfillIsFree(db);
   expirePastEvents(db, rebuildToday);
   recomputeConfidence(db, trustRows, rebuildToday, confirmations);
-  console.log('rebuild done:', JSON.stringify({ ...stats, consolidated, pinned, inout, stalls }));
+  console.log(
+    'rebuild done:',
+    JSON.stringify({ ...stats, consolidated, pinned, inout, stalls, freeEntry }),
+  );
   process.exit(0);
 }
 
@@ -392,6 +397,11 @@ if (inout > 0) console.log(`inferred indoor/outdoor for ${inout} event(s)`);
 // and hidden-gem signal.
 const stalls = backfillStallCount(db);
 if (stalls > 0) console.log(`extracted stall counts for ${stalls} event(s)`);
+
+// Infer free/paid entry stated in the description ("gratis entré"). Precision-
+// only and non-contradictory; a wrong "Gratis" badge is never worth the risk.
+const freeEntry = backfillIsFree(db);
+if (freeEntry > 0) console.log(`inferred entry fee for ${freeEntry} event(s)`);
 
 // Freshness decay only works if scores are actually recomputed after crawls.
 recomputeConfidence(db, trustMap, new Date().toISOString().slice(0, 10), confirmations);

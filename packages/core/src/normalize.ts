@@ -254,3 +254,27 @@ export function extractStallCountText(text: string | null | undefined): string |
   const noun = m[3]!.toLowerCase();
   return m[2] ? `${m[1]}–${m[2]} ${noun}` : `${m[1]} ${noun}`;
 }
+
+// "Fri/gratis" bound specifically to ENTRY words — never to "gratis parkering",
+// "gratis stand" (free stall for vendors) or "gratis kaffe", which are the
+// common traps that would flip a paid market to a false "Gratis" badge.
+const FREE_ENTRY =
+  /(?:gratis|fri)\s+(?:adgang|entr(?:é|e|ee)|indgang)|(?:adgang|entr(?:é|e|ee)|indgang)\s*:?\s*(?:gratis|fri)\b|ingen\s+entr(?:é|e|ee)/i;
+// An entry/ticket word bound to an amount ("entré 30 kr", "voksne 20,-").
+const PAID_ENTRY = /(?:entr(?:é|e|ee)|billet|voksne)\D{0,12}\d{1,4}\s*(?:kr|,-|dkk)/i;
+
+/**
+ * Infer free/paid ENTRY from free prose, for markets whose source left the fee
+ * blank. Precision-first and, above all, non-contradictory: a text that carries
+ * both a free and a paid signal (e.g. "gratis for børn, voksne 30 kr") returns
+ * null rather than guess. Only unambiguous cases yield true/false; everything
+ * else stays unknown — a wrong "Gratis" badge is exactly the incorrectness the
+ * product must never show.
+ */
+export function inferIsFreeFromText(text: string | null | undefined): boolean | null {
+  if (!text) return null;
+  const free = FREE_ENTRY.test(text);
+  const paid = PAID_ENTRY.test(text);
+  if (free === paid) return null; // neither signal, or contradictory -> unknown
+  return free;
+}

@@ -7,8 +7,10 @@ import { summarizeReviews, type ReviewSummary } from './reviews.ts';
 import { summarizePhotos, type Photo } from './photos.ts';
 import {
   getEventBySlug,
+  getVenueBySlug,
   listCancelledSlugsBetween,
   listEventsBetween,
+  listVenues as dbListVenues,
   openDb,
   openDbReadOnly,
 } from '@loppefund/db';
@@ -300,6 +302,60 @@ export function listEventsForCity(citySlug: string): EventSummary[] {
   return listUpcomingEvents(180).filter(
     (e) => e.city && slugifyCity(e.city) === citySlug,
   );
+}
+
+/** A permanent second-hand venue (from OpenStreetMap) for the consumer UI. */
+export interface VenueSummary {
+  slug: string;
+  title: string;
+  /** VenueCategory: genbrug | antik | loppebutik | reolmarked */
+  category: string;
+  street: string | null;
+  postcode: string | null;
+  city: string | null;
+  lat: number | null;
+  lng: number | null;
+  openingHoursText: string | null;
+  contactWebsite: string | null;
+  contactPhone: string | null;
+  searchText: string;
+}
+
+/** All active permanent venues. Shipped to the client for the toggleable layer. */
+export function listVenues(): VenueSummary[] {
+  return dbListVenues(getDb()).map((v) => ({
+    slug: v.slug,
+    title: v.title,
+    category: v.category,
+    street: v.street,
+    postcode: v.postcode,
+    city: v.city,
+    lat: v.lat,
+    lng: v.lng,
+    openingHoursText: v.opening_hours_text,
+    contactWebsite: v.contact_website,
+    contactPhone: v.contact_phone,
+    searchText: v.search_text,
+  }));
+}
+
+export function loadVenueDetail(slug: string): VenueSummary | null {
+  const v = getVenueBySlug(getDb(), slug);
+  if (!v) return null;
+  return {
+    slug: v.slug,
+    title: v.title,
+    category: v.category,
+    street: v.street,
+    postcode: v.postcode,
+    city: v.city,
+    lat: v.lat,
+    lng: v.lng,
+    openingHoursText: v.opening_hours_text,
+    contactWebsite: v.contact_website,
+    contactPhone: v.contact_phone,
+    searchText: v.search_text,
+  };
 }
 
 export function loadEventDetail(slug: string) {

@@ -39,6 +39,7 @@ import {
 } from './canonicalize.ts';
 import { formatReport, mineDomains, netNewCandidates, probeDomain } from './discovery.ts';
 import { parseTip } from './tip-parser.ts';
+import { ingestOsmVenues } from './venues.ts';
 import { adapters } from './adapters/index.ts';
 
 const { values, positionals } = parseArgs({
@@ -170,6 +171,21 @@ if (command === 'tips') {
     console.log(`[tip ${tip.id}] -> "${raw.title}" (${raw.occurrences?.[0]?.date})`);
   }
   console.log(`tips: ${tips.length} nye, ${stats.created} oprettet, ${stats.merged} matchede eksisterende, ${unparsed} kræver manuel behandling`);
+  process.exit(0);
+}
+
+if (command === 'venues') {
+  // Refresh the permanent-venue layer from OpenStreetMap (standalone).
+  upsertSource(db, {
+    key: 'osm',
+    name: 'OpenStreetMap',
+    baseUrl: 'https://www.openstreetmap.org',
+    trust: 0.6,
+  });
+  const runId = startRun(db, 'osm');
+  const stats = await ingestOsmVenues(db);
+  finishRun(db, runId, stats);
+  console.log('venues done:', JSON.stringify(stats));
   process.exit(0);
 }
 
@@ -405,3 +421,22 @@ if (freeEntry > 0) console.log(`inferred entry fee for ${freeEntry} event(s)`);
 
 // Freshness decay only works if scores are actually recomputed after crawls.
 recomputeConfidence(db, trustMap, new Date().toISOString().slice(0, 10), confirmations);
+
+// Refresh the permanent-venue layer (thrift/antique/flea shops) from
+// OpenStreetMap on a full crawl. Isolated in try/catch: Overpass is a
+// third-party API and an outage there must never fail the whole deploy — the
+// previously-ingested venues simply stay as they were.
+if (fullCrawl) {
+  try {
+    upsertSource(db, {
+      key: 'osm',
+      name: 'OpenStreetMap',
+      baseUrl: 'https://www.openstreetmap.org',
+      trust: 0.6,
+    });
+    const venueStats = await ingestOsmVenues(db);
+    console.log('osm venues:', JSON.stringify(venueStats));
+  } catch (e) {
+    console.error('osm venue ingest failed (kept existing venues):', (e as Error).message);
+  }
+}

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { copenhagenNow } from '@loppefund/core';
-import { latestUpdate, listUpcomingEvents } from '../lib/data.ts';
+import { latestUpdate, listUpcomingEvents, listVenues } from '../lib/data.ts';
 import { formatUpdated } from '../lib/format.ts';
 import { Explorer } from '../components/Explorer.tsx';
 
@@ -8,6 +8,7 @@ import { Explorer } from '../components/Explorer.tsx';
 // `next dev` always re-renders, so local development still sees live data.
 export default function HomePage() {
   const events = listUpcomingEvents();
+  const venues = listVenues();
   const now = copenhagenNow();
   const updated = latestUpdate();
   return (
@@ -24,7 +25,7 @@ export default function HomePage() {
         </div>
       </header>
       <main id="markeder" className="explorer-main">
-        <Explorer events={events} now={now} />
+        <Explorer events={events} venues={venues} now={now} />
       </main>
       <footer className="site-footer">
         <div className="explorer-main">
@@ -50,6 +51,18 @@ export default function HomePage() {
               Data senest opdateret {formatUpdated(updated)}
             </div>
           )}
+          <div className="data-freshness">
+            Faste butikker og åbningstider fra{' '}
+            <a
+              href="https://www.openstreetmap.org/copyright"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'inherit', textDecoration: 'underline' }}
+            >
+              © OpenStreetMap
+            </a>{' '}
+            bidragydere
+          </div>
         </div>
       </footer>
     </>

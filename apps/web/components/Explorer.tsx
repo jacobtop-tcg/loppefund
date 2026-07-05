@@ -3,8 +3,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { copenhagenNow, isOpenAt, type CphNow } from '@loppefund/core';
-import type { EventSummary } from '../lib/data.ts';
+import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
+import { venueOpenState, VENUE_TYPES, type VenueType } from '../lib/venue-client.ts';
 import { useOutdoorWeather } from '../lib/weather.ts';
 import { FilterBar, type DateFilter } from './FilterBar.tsx';
 import { ResultsList } from './ResultsList.tsx';
@@ -53,9 +54,11 @@ function dateRangeFor(filter: DateFilter, today: string): [string, string] {
 
 export function Explorer({
   events,
+  venues = [],
   now: initialNow,
 }: {
   events: EventSummary[];
+  venues?: VenueSummary[];
   now: CphNow;
 }) {
   const [dateFilter, setDateFilter] = useState<DateFilter>('weekend');
@@ -75,6 +78,10 @@ export function Explorer({
   const [tripSlugs, setTripSlugs] = useState<string[]>([]); // insertion order = route order
   const [savedOnly, setSavedOnly] = useState(false);
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
+  // Permanent-venue layer (thrift/antique/flea shops): off by default so the
+  // weekend-markets view stays clean; a master toggle + per-type toggles opt in.
+  const [venuesOn, setVenuesOn] = useState(false);
+  const [venueTypes, setVenueTypes] = useState<Set<VenueType>>(() => new Set(VENUE_TYPES));
   const { favorites, count: favCount } = useFavorites();
 
   // Today's date, derived from the LIVE clock — never a build-time constant.
@@ -210,6 +217,45 @@ export function Explorer({
     return result;
   }, [events, from, to, query, category, freeOnly, familyOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
 
+  // The permanent-venue layer, filtered in parallel with events (venues have no
+  // dates, so the date chips don't apply — except "Åbent nu", which narrows them
+  // to shops open right now). Respects type toggles, search and location.
+  const filteredVenues = useMemo(() => {
+    if (!venuesOn) return [];
+    const q = foldForSearch(query.trim());
+    const onlyOpen = dateFilter === 'aabent-nu';
+    const result: Array<VenueSummary & { distanceKm: number | null; open: boolean }> = [];
+    for (const v of venues) {
+      if (!venueTypes.has(v.category as VenueType)) continue;
+      const st = venueOpenState(v.openingHoursText, now);
+      if (onlyOpen && !st.open) continue;
+      if (q) {
+        const hay =
+          foldForSearch(`${v.title} ${v.city ?? ''} ${v.street ?? ''}`) + ` ${v.searchText}`;
+        if (!hay.includes(q)) continue;
+      }
+      const d =
+        pos && v.lat != null && v.lng != null ? distanceKm(pos.lat, pos.lng, v.lat, v.lng) : null;
+      if (pos && radius !== null && (d === null || d > radius)) continue;
+      result.push({ ...v, distanceKm: d, open: st.open });
+    }
+    result.sort((a, b) => {
+      if (pos && a.distanceKm !== null && b.distanceKm !== null) return a.distanceKm - b.distanceKm;
+      if (a.open !== b.open) return Number(b.open) - Number(a.open);
+      return a.title.localeCompare(b.title, 'da');
+    });
+    return result;
+  }, [venues, venuesOn, venueTypes, query, dateFilter, now, pos, radius]);
+
+  const toggleVenueType = useCallback((t: VenueType) => {
+    setVenueTypes((prev) => {
+      const next = new Set(prev);
+      if (next.has(t)) next.delete(t);
+      else next.add(t);
+      return next;
+    });
+  }, []);
+
   // "Til dig": personalized top picks from the full upcoming set (independent of
   // the active filter). Shown only when the visitor is browsing, not searching.
   const recs = useMemo(
@@ -337,6 +383,8 @@ export function Explorer({
         geoError={geoError}
         radius={radius} onRadius={setRadius}
         tripMode={tripMode} onToggleTripMode={toggleTripMode}
+        venuesOn={venuesOn} onVenuesOn={setVenuesOn}
+        venueTypes={venueTypes} onToggleVenueType={toggleVenueType}
       />
       <div className="explorer-split">
         <section className="results-pane">
@@ -344,6 +392,8 @@ export function Explorer({
           <ResultsList
             filtered={filtered}
             suggestions={suggestions}
+            venues={filteredVenues}
+            now={now}
             today={today}
             dateFilter={dateFilter}
             hasPos={pos !== null}
@@ -359,6 +409,7 @@ export function Explorer({
         <aside className="map-pane" aria-label="Kort over markeder">
           <MapView
             events={mapEvents}
+            venues={filteredVenues}
             today={today}
             highlightSlug={hoveredSlug}
             tripMode={tripMode}

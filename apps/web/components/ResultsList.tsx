@@ -1,12 +1,19 @@
 'use client';
 
 import { memo } from 'react';
-import type { EventSummary } from '../lib/data.ts';
+import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { EventCard } from './EventCard.tsx';
+import { VenueCard } from './VenueCard.tsx';
 import type { DateFilter } from './FilterBar.tsx';
 import type { DayWeather } from '../lib/weather.ts';
 
 type Row = EventSummary & { nextDate: string; distanceKm: number | null; openNow: boolean };
+type VenueRow = VenueSummary & { distanceKm: number | null; open: boolean };
+
+// The permanent-venue list is capped so a national "show everything" toggle
+// can't drop 1000 cards into the DOM; the map keeps all of them, and search /
+// "Nær mig" narrows the list to what's relevant.
+const VENUE_CAP = 48;
 
 /**
  * The list pane: result meta + cards (or the always-helpful empty state).
@@ -16,6 +23,8 @@ type Row = EventSummary & { nextDate: string; distanceKm: number | null; openNow
 export const ResultsList = memo(function ResultsList({
   filtered,
   suggestions,
+  venues,
+  now,
   today,
   dateFilter,
   hasPos,
@@ -29,6 +38,8 @@ export const ResultsList = memo(function ResultsList({
 }: {
   filtered: Row[];
   suggestions: Row[];
+  venues: VenueRow[];
+  now: { date: string; time: string };
   today: string;
   dateFilter: DateFilter;
   hasPos: boolean;
@@ -98,6 +109,28 @@ export const ResultsList = memo(function ResultsList({
             />
           ))}
         </div>
+      )}
+
+      {venues.length > 0 && (
+        <section className="venue-section" aria-label="Faste steder">
+          <div className="venue-section-head">
+            <h2 className="reco-title">Faste steder</h2>
+            <span className="venue-count">
+              <strong>{venues.length}</strong> genbrug, antik &amp; loppebutikker
+            </span>
+          </div>
+          <div className="event-grid">
+            {venues.slice(0, VENUE_CAP).map((v, i) => (
+              <VenueCard key={v.slug} venue={v} now={now} index={i} />
+            ))}
+          </div>
+          {venues.length > VENUE_CAP && (
+            <p className="venue-more">
+              Viser {VENUE_CAP} af {venues.length}. Søg eller vælg et område (◎ Nær mig) for at
+              indsnævre — eller zoom ind på kortet.
+            </p>
+          )}
+        </section>
       )}
     </>
   );

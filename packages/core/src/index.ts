@@ -7,3 +7,5 @@ export * from './confidence.ts';
 export * from './open-now.ts';
 export * from './gems.ts';
 export * from './amenities.ts';
+export * from './venue.ts';
+export * from './osm-hours.ts';

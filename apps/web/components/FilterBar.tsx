@@ -1,6 +1,7 @@
 'use client';
 
 import { memo, useCallback, useRef } from 'react';
+import { VENUE_TYPES, VENUE_LABELS, type VenueType } from '../lib/venue-client.ts';
 
 export type DateFilter = 'aabent-nu' | 'idag' | 'imorgen' | 'weekend' | 'naeste-weekend' | 'alle';
 
@@ -53,6 +54,10 @@ export const FilterBar = memo(function FilterBar(props: {
   onRadius: (v: number | null) => void;
   tripMode: boolean;
   onToggleTripMode: () => void;
+  venuesOn: boolean;
+  onVenuesOn: (v: boolean) => void;
+  venueTypes: Set<VenueType>;
+  onToggleVenueType: (t: VenueType) => void;
 }) {
   const popRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
@@ -200,6 +205,26 @@ export const FilterBar = memo(function FilterBar(props: {
         >
           {props.tripMode ? '✓ Loppetur' : 'Lav en loppetur'}
         </button>
+        <span className="chip-sep" aria-hidden />
+        <button
+          className={`chip venue-chip ${props.venuesOn ? 'active' : ''}`}
+          aria-pressed={props.venuesOn}
+          onClick={() => props.onVenuesOn(!props.venuesOn)}
+          title="Vis faste genbrugs-, antik- og loppebutikker med åbningstider"
+        >
+          {props.venuesOn ? '✓ Faste steder' : 'Faste steder'}
+        </button>
+        {props.venuesOn &&
+          VENUE_TYPES.map((t) => (
+            <button
+              key={t}
+              className={`chip venue-type ${props.venueTypes.has(t) ? 'active' : ''}`}
+              aria-pressed={props.venueTypes.has(t)}
+              onClick={() => props.onToggleVenueType(t)}
+            >
+              {VENUE_LABELS[t]}
+            </button>
+          ))}
       </div>
     </div>
   );

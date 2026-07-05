@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { listCities, listUpcomingEvents } from '../lib/data.ts';
+import { listCities, listUpcomingEvents, listVenues } from '../lib/data.ts';
 
 export const dynamic = 'force-static';
 
@@ -7,6 +7,7 @@ const BASE = process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/l
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const events = listUpcomingEvents(180);
+  const venues = listVenues();
   return [
     { url: BASE, changeFrequency: 'daily', priority: 1 },
     // The two highest-intent time-based searches get their own indexable pages.
@@ -23,6 +24,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE}/marked/${e.slug}`,
       changeFrequency: 'daily' as const,
       priority: 0.7,
+    })),
+    ...venues.map((v) => ({
+      url: `${BASE}/sted/${v.slug}`,
+      changeFrequency: 'weekly' as const,
+      priority: 0.5,
     })),
   ];
 }

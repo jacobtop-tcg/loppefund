@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import type { EventSummary } from '../lib/data.ts';
+import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import {
   CATEGORY_LABELS,
   dayOfMonth,
@@ -12,7 +12,35 @@ import {
   formatHours,
   weekdayShort,
 } from '../lib/format.ts';
+import { VENUE_LABELS } from '../lib/venue-client.ts';
 import { loadMapStyle, MAP } from '../lib/map-style.ts';
+
+// Permanent venues get their own petrol-teal palette so they read instantly as
+// a different layer from the terracotta market pins.
+const VENUE_COLOR = '#2f6f6a';
+const VENUE_OPEN = '#3e7a4e';
+const VENUE_HALO = 'rgba(47, 111, 106, 0.18)';
+
+type MapVenue = VenueSummary & { open?: boolean };
+
+function toVenueGeoJson(venues: MapVenue[]): GeoJSON.FeatureCollection {
+  return {
+    type: 'FeatureCollection',
+    features: venues
+      .filter((v) => v.lat != null && v.lng != null)
+      .map((v) => ({
+        type: 'Feature' as const,
+        geometry: { type: 'Point' as const, coordinates: [v.lng!, v.lat!] },
+        properties: {
+          slug: v.slug,
+          title: displayTitle(v.title),
+          city: v.city ?? '',
+          vtype: VENUE_LABELS[v.category] ?? 'Fast butik',
+          open: v.open ? 1 : 0,
+        },
+      })),
+  };
+}
 
 const DENMARK_CENTER: [number, number] = [10.6, 56.05];
 const DENMARK_ZOOM = 6.1;
@@ -80,6 +108,7 @@ function applySelected(map: maplibregl.Map, slugs: string[]): void {
 
 export function MapView({
   events,
+  venues = [],
   today,
   highlightSlug = null,
   tripMode = false,
@@ -88,6 +117,7 @@ export function MapView({
   fullscreen = false,
 }: {
   events: MapEvent[];
+  venues?: MapVenue[];
   today: string;
   highlightSlug?: string | null;
   tripMode?: boolean;
@@ -109,11 +139,25 @@ export function MapView({
   // events from a ref so filters applied before then aren't lost.
   const eventsRef = useRef(events);
   eventsRef.current = events;
+  const venuesRef = useRef(venues);
+  venuesRef.current = venues;
+  const lastVenueSigRef = useRef<string | null>(null);
   // The popup click handler is bound once at load — read live trip state here.
   const tripRef = useRef({ tripMode, tripSlugs, onToggleTrip });
   tripRef.current = { tripMode, tripSlugs, onToggleTrip };
   const highlightRef = useRef(highlightSlug);
   highlightRef.current = highlightSlug;
+
+  function syncVenues(map: maplibregl.Map, vns: MapVenue[]) {
+    const data = toVenueGeoJson(vns);
+    const sig = data.features
+      .map((f) => `${f.properties!.slug}:${f.properties!.open}`)
+      .sort()
+      .join(',');
+    if (sig === lastVenueSigRef.current) return;
+    lastVenueSigRef.current = sig;
+    (map.getSource('venues') as maplibregl.GeoJSONSource | undefined)?.setData(data);
+  }
 
   function syncData(map: maplibregl.Map, evts: MapEvent[], animate: boolean) {
     const data = toGeoJson(evts, today);
@@ -366,11 +410,91 @@ export function MapView({
           m.on('mouseenter', layer, () => (m.getCanvas().style.cursor = 'pointer'));
           m.on('mouseleave', layer, () => (m.getCanvas().style.cursor = ''));
         }
+
+        // Permanent-venue layer: its own petrol-teal source, clustered like the
+        // markets but visually distinct so the two never read as one thing.
+        m.addSource('venues', {
+          type: 'geojson',
+          data: toVenueGeoJson(venuesRef.current),
+          cluster: true,
+          clusterMaxZoom: 12,
+          clusterRadius: 44,
+        });
+        m.addLayer({
+          id: 'venue-cluster-halo',
+          type: 'circle',
+          source: 'venues',
+          filter: ['has', 'point_count'],
+          paint: {
+            'circle-color': VENUE_HALO,
+            'circle-radius': ['step', ['get', 'point_count'], 20, 10, 26, 40, 32],
+            'circle-blur': 0.4,
+          },
+        });
+        m.addLayer({
+          id: 'venue-clusters',
+          type: 'circle',
+          source: 'venues',
+          filter: ['has', 'point_count'],
+          paint: {
+            'circle-color': VENUE_COLOR,
+            'circle-radius': ['step', ['get', 'point_count'], 14, 10, 19, 40, 25],
+            'circle-stroke-width': 2.5,
+            'circle-stroke-color': MAP.paperRaised,
+          },
+        });
+        m.addLayer({
+          id: 'venue-cluster-count',
+          type: 'symbol',
+          source: 'venues',
+          filter: ['has', 'point_count'],
+          layout: {
+            'text-field': ['get', 'point_count_abbreviated'],
+            'text-size': 12,
+            'text-font': fonts.bold,
+            'text-allow-overlap': true,
+          },
+          paint: { 'text-color': MAP.paperRaised },
+        });
+        m.addLayer({
+          id: 'venue-points',
+          type: 'circle',
+          source: 'venues',
+          filter: ['!', ['has', 'point_count']],
+          paint: {
+            'circle-color': ['case', ['==', ['get', 'open'], 1], VENUE_OPEN, VENUE_COLOR],
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, 4, 10, 5.5, 14, 7],
+            'circle-stroke-width': 2,
+            'circle-stroke-color': MAP.paperRaised,
+          },
+        });
+        const openVenuePopup = (e: maplibregl.MapLayerMouseEvent) => {
+          const f = e.features?.[0];
+          if (!f) return;
+          new maplibregl.Popup({ offset: 14, className: 'map-popup', maxWidth: '260px' })
+            .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
+            .setHTML(venuePopupHtml(f.properties as Record<string, unknown>))
+            .addTo(m);
+        };
+        m.on('click', 'venue-points', openVenuePopup);
+        m.on('click', 'venue-clusters', async (e) => {
+          const feature = m.queryRenderedFeatures(e.point, { layers: ['venue-clusters'] })[0];
+          if (!feature) return;
+          const source = m.getSource('venues') as maplibregl.GeoJSONSource;
+          const zoom = await source.getClusterExpansionZoom(feature.properties!.cluster_id as number);
+          m.easeTo({ center: (feature.geometry as GeoJSON.Point).coordinates as [number, number], zoom, duration: 500 });
+        });
+        for (const layer of ['venue-points', 'venue-clusters']) {
+          m.on('mouseenter', layer, () => (m.getCanvas().style.cursor = 'pointer'));
+          m.on('mouseleave', layer, () => (m.getCanvas().style.cursor = ''));
+        }
+
         readyRef.current = true;
         // Props may have changed while the style loaded.
         applyHighlight(m, highlightRef.current);
         applySelected(m, tripRef.current.tripSlugs);
         syncData(m, eventsRef.current, false);
+        syncVenues(m, venuesRef.current);
       });
     });
     return () => {
@@ -383,6 +507,7 @@ export function MapView({
       readyRef.current = false;
       lastSetSigRef.current = null;
       lastStateSigRef.current = null;
+      lastVenueSigRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -394,6 +519,13 @@ export function MapView({
     syncData(map, events, true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [events]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !readyRef.current) return;
+    syncVenues(map, venues);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [venues]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -444,6 +576,23 @@ function popupHtml(
     `<div class="map-card-when${isToday ? ' today' : ''}">${when}${p.city ? ` · ${escapeHtml(String(p.city))}` : ''}</div>` +
     `<div class="badge-row">${badges}</div>` +
     cta +
+    `</div>`
+  );
+}
+
+/** Popup for a permanent venue — no date, an opening-hours state + a link out. */
+function venuePopupHtml(p: Record<string, unknown>): string {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+  const open = p.open === 1 || p.open === '1';
+  const badges =
+    (open ? '<span class="badge open-now"><span class="dot"></span>Åbent nu</span>' : '') +
+    `<span class="badge venue-badge">${escapeHtml(String(p.vtype))}</span>`;
+  return (
+    `<div class="map-card">` +
+    `<h3 class="map-card-title">${escapeHtml(String(p.title))}</h3>` +
+    `<div class="map-card-when">${p.city ? escapeHtml(String(p.city)) : 'Fast butik'}</div>` +
+    `<div class="badge-row">${badges}</div>` +
+    `<a class="map-card-cta" href="${base}/sted/${encodeURIComponent(String(p.slug))}">Se butik</a>` +
     `</div>`
   );
 }

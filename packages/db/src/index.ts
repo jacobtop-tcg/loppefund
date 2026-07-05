@@ -620,6 +620,121 @@ export function reconcileVanishedSourceEvents(
   return { prunedRawEvents: rawIds.length, expiredEvents, survivingEventIds };
 }
 
+// --- permanent venues (OpenStreetMap) ---
+
+export interface VenueRow {
+  id: number;
+  slug: string;
+  osm_type: string;
+  osm_id: number;
+  title: string;
+  category: string;
+  street: string | null;
+  postcode: string | null;
+  city: string | null;
+  municipality: string | null;
+  lat: number | null;
+  lng: number | null;
+  opening_hours_text: string | null;
+  contact_website: string | null;
+  contact_phone: string | null;
+  description: string | null;
+  status: string;
+  first_seen_at: string;
+  last_seen_at: string;
+  search_text: string;
+}
+
+export interface VenueValues {
+  slug: string;
+  osmType: string;
+  osmId: number;
+  title: string;
+  category: string;
+  street?: string | null;
+  postcode?: string | null;
+  city?: string | null;
+  municipality?: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  openingHoursText?: string | null;
+  contactWebsite?: string | null;
+  contactPhone?: string | null;
+  description?: string | null;
+}
+
+/**
+ * Upsert one OSM venue, keyed on (osm_type, osm_id). The slug is set on first
+ * insert and never changed on conflict, so a published /sted/<slug> URL stays
+ * stable even if the venue is renamed upstream. `last_seen_at` is bumped every
+ * run so a follow-up sweep can retire venues that vanished from OSM.
+ */
+export function upsertVenue(db: DatabaseSync, v: VenueValues): void {
+  const searchText = searchFold(
+    [v.title, v.city, v.municipality].filter(Boolean).join(' '),
+  );
+  const now = new Date().toISOString();
+  db.prepare(
+    `INSERT INTO venues(slug, osm_type, osm_id, title, category, street, postcode, city,
+       municipality, lat, lng, opening_hours_text, contact_website, contact_phone, description,
+       status, first_seen_at, last_seen_at, search_text)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?)
+     ON CONFLICT(osm_type, osm_id) DO UPDATE SET
+       title=excluded.title, category=excluded.category, street=excluded.street,
+       postcode=excluded.postcode, city=excluded.city, municipality=excluded.municipality,
+       lat=excluded.lat, lng=excluded.lng, opening_hours_text=excluded.opening_hours_text,
+       contact_website=excluded.contact_website, contact_phone=excluded.contact_phone,
+       description=excluded.description, status='active',
+       last_seen_at=excluded.last_seen_at, search_text=excluded.search_text`,
+  ).run(
+    v.slug, v.osmType, v.osmId, v.title, v.category, v.street ?? null, v.postcode ?? null,
+    v.city ?? null, v.municipality ?? null, v.lat ?? null, v.lng ?? null,
+    v.openingHoursText ?? null, v.contactWebsite ?? null, v.contactPhone ?? null,
+    v.description ?? null, now, now, searchText,
+  );
+}
+
+/** (osm_type/osm_id -> slug) for every venue, so an ingest reuses stable slugs
+ *  and computes collision-free ones for genuinely new objects. */
+export function existingVenueSlugs(db: DatabaseSync): {
+  byOsm: Map<string, string>;
+  used: Set<string>;
+} {
+  const rows = db
+    .prepare(`SELECT slug, osm_type, osm_id FROM venues`)
+    .all() as unknown as Array<{ slug: string; osm_type: string; osm_id: number }>;
+  const byOsm = new Map<string, string>();
+  const used = new Set<string>();
+  for (const r of rows) {
+    byOsm.set(`${r.osm_type}/${r.osm_id}`, r.slug);
+    used.add(r.slug);
+  }
+  return { byOsm, used };
+}
+
+/** Retire venues not seen since `runStartIso` (a full OSM sweep no longer lists
+ *  them — closed/removed). Reversible: a re-listed venue flips back to active. */
+export function markStaleVenuesGone(db: DatabaseSync, runStartIso: string): number {
+  const res = db
+    .prepare(
+      `UPDATE venues SET status = 'gone' WHERE status = 'active' AND last_seen_at < ?`,
+    )
+    .run(runStartIso);
+  return Number(res.changes);
+}
+
+export function listVenues(db: DatabaseSync): VenueRow[] {
+  return db
+    .prepare(`SELECT * FROM venues WHERE status = 'active' ORDER BY category, title`)
+    .all() as unknown as VenueRow[];
+}
+
+export function getVenueBySlug(db: DatabaseSync, slug: string): VenueRow | null {
+  return (
+    (db.prepare(`SELECT * FROM venues WHERE slug = ?`).get(slug) as VenueRow | undefined) ?? null
+  );
+}
+
 /** A payload still linked to an event, for re-deriving its occurrences. */
 export function anyLinkedPayload(db: DatabaseSync, eventId: number): string | null {
   const row = db

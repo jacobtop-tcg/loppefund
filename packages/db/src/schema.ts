@@ -1,6 +1,6 @@
 import type { DatabaseSync } from 'node:sqlite';
 
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;
 
 export function migrate(db: DatabaseSync): void {
   db.exec(`
@@ -94,6 +94,35 @@ export function migrate(db: DatabaseSync): void {
       last_confirmed_at TEXT NOT NULL,
       PRIMARY KEY (event_id, raw_event_id)
     );
+
+    -- Permanent second-hand venues (thrift/antique/flea shops) from OpenStreetMap.
+    -- Deliberately SEPARATE from events: they have opening hours, not dates, so
+    -- they must never enter the occurrence/confidence model. One row per OSM object.
+    CREATE TABLE IF NOT EXISTS venues (
+      id INTEGER PRIMARY KEY,
+      slug TEXT NOT NULL UNIQUE,
+      osm_type TEXT NOT NULL,             -- node | way | relation
+      osm_id INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      category TEXT NOT NULL DEFAULT 'genbrug',  -- genbrug | antik | loppebutik | reolmarked
+      street TEXT,
+      postcode TEXT,
+      city TEXT,
+      municipality TEXT,
+      lat REAL,
+      lng REAL,
+      opening_hours_text TEXT,            -- verbatim OSM opening_hours string
+      contact_website TEXT,
+      contact_phone TEXT,
+      description TEXT,
+      status TEXT NOT NULL DEFAULT 'active',  -- active | gone
+      first_seen_at TEXT NOT NULL,
+      last_seen_at TEXT NOT NULL,
+      search_text TEXT NOT NULL DEFAULT '',
+      UNIQUE(osm_type, osm_id)
+    );
+    CREATE INDEX IF NOT EXISTS idx_venues_status ON venues(status);
+    CREATE INDEX IF NOT EXISTS idx_venues_category ON venues(category);
 
     CREATE TABLE IF NOT EXISTS geocode_cache (
       query TEXT PRIMARY KEY,

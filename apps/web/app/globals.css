@@ -2015,3 +2015,132 @@ body:has(.is-map-view) {
     opacity: 1 !important;
   }
 }
+
+/* ---------- permanent venues (OpenStreetMap layer) ---------- */
+
+.venue-chip.active,
+.venue-type.active {
+  background: #2f6f6a;
+  color: #f4efe2;
+  border-color: #2f6f6a;
+  font-weight: 560;
+}
+.venue-type {
+  font-size: 13px;
+}
+
+/* Card: a type stub (petrol/green/plum/ochre) in place of the date block. */
+.venue-card .date-block.venue-stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: #2f6f6a;
+  color: #fbf6ea;
+}
+.venue-stub-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.venue-genbrug .date-block.venue-stub { background: #2f7a4f; }
+.venue-antik .date-block.venue-stub { background: #6d4b63; }
+.venue-loppebutik .date-block.venue-stub { background: #b07a2e; }
+.venue-reolmarked .date-block.venue-stub { background: #2f6f6a; }
+
+.event-time.venue-open-line { color: var(--green); font-weight: 600; }
+.badge.venue-badge {
+  background: color-mix(in srgb, #2f6f6a 12%, transparent);
+  color: #2c605c;
+}
+
+.venue-section {
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.venue-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.venue-count { font-size: 14px; color: var(--ink-soft); }
+.venue-count strong { color: #2c605c; font-weight: 700; }
+
+/* Detail page: opening hours + actions. */
+.venue-hours { margin-top: 20px; }
+.venue-hours-state {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.venue-hours-state.is-open { color: var(--green); }
+.venue-hours-state.is-open .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+}
+.venue-hours-state.is-unknown { color: var(--ink-faint); font-weight: 500; }
+.venue-hours-table {
+  width: 100%;
+  max-width: 360px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.venue-hours-table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--ink-soft);
+  padding: 7px 0;
+}
+.venue-hours-table td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  padding: 7px 0;
+}
+.venue-hours-table tr.is-today th,
+.venue-hours-table tr.is-today td {
+  color: var(--brand-deep);
+  font-weight: 700;
+}
+.venue-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+.venue-action {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 17px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #f4efe2;
+  font-weight: 560;
+  font-size: 14.5px;
+}
+.venue-action:hover { background: var(--brand-deep); }
+.venue-attrib {
+  margin-top: 30px;
+  font-size: 13px;
+  color: var(--ink-faint);
+  max-width: 52ch;
+}
+.venue-attrib a { color: var(--ink-soft); text-decoration: underline; }
+
+.venue-more {
+  margin-top: 16px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  text-align: center;
+}

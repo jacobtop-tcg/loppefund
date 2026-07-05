@@ -137,3 +137,36 @@ describe('inferIndoorOutdoor (free-text, precision-first)', () => {
     expect(inferIndoorOutdoor('Loppemarked i Odense')).toBe('unknown');
   });
 });
+
+import { extractStallCountText } from '../src/normalize.ts';
+
+describe('extractStallCountText', () => {
+  it('extracts a stall count bound to a stall/vendor noun', () => {
+    expect(extractStallCountText('med hele 216 stande fyldt til randen')).toBe('216 stande');
+    expect(extractStallCountText('Loppemarkeder med op til 150 stader.')).toBe('150 stader');
+    expect(extractStallCountText('78 stande a 3 x 3 meter')).toBe('78 stande');
+    expect(extractStallCountText('i alt 100 stadepladser.')).toBe('100 stadepladser');
+    expect(extractStallCountText('op mod 350 udstillere')).toBe('350 udstillere');
+    expect(extractStallCountText('der er 40 boder, gratis adgang')).toBe('40 boder');
+  });
+
+  it('normalizes a range to an en-dash', () => {
+    expect(extractStallCountText('ca. 15-20 stande')).toBe('15–20 stande');
+  });
+
+  it('ignores "pladser" — as often parking as stalls', () => {
+    expect(extractStallCountText('50 pladser')).toBeNull();
+    expect(extractStallCountText('gratis parkering, 200 pladser')).toBeNull();
+  });
+
+  it('does not mistake prices, times or stray numbers for stalls', () => {
+    expect(extractStallCountText('entré 50 kr for voksne')).toBeNull();
+    expect(extractStallCountText('åbent kl. 10 til 16')).toBeNull();
+    expect(extractStallCountText('Loppemarked på havnen')).toBeNull();
+    expect(extractStallCountText(null)).toBeNull();
+  });
+
+  it('rejects an implausibly small count', () => {
+    expect(extractStallCountText('2 stande')).toBeNull();
+  });
+});

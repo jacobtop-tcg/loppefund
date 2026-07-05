@@ -9,6 +9,7 @@ import {
   cleanStreet,
   cleanVenueName,
   extractAmenities,
+  extractStallCountText,
   inferIndoorOutdoor,
   matchEvents,
   type MatchCandidate,
@@ -348,6 +349,33 @@ export function backfillIndoorOutdoor(db: DatabaseSync): number {
     const io = inferIndoorOutdoor(`${r.title} ${r.venue_name ?? ''} ${r.description ?? ''}`);
     if (io !== 'unknown') {
       upd.run(io, r.id);
+      filled++;
+    }
+  }
+  return filled;
+}
+
+/**
+ * Backfill the stall count from free prose ("…med op til 150 stader") for the
+ * ~10% of markets that state it in the description but through a source with no
+ * dedicated stalls field. Stall count is a strong "worth driving to" and
+ * hidden-gem signal. Precision-only (see extractStallCountText): a number must
+ * bind to a stall/vendor noun, so a wrong count never lands. Returns the number
+ * of events filled.
+ */
+export function backfillStallCount(db: DatabaseSync): number {
+  const rows = db
+    .prepare(
+      `SELECT id, title, description FROM events
+       WHERE status = 'active' AND stall_count_text IS NULL`,
+    )
+    .all() as unknown as Array<{ id: number; title: string; description: string | null }>;
+  const upd = db.prepare(`UPDATE events SET stall_count_text = ? WHERE id = ?`);
+  let filled = 0;
+  for (const r of rows) {
+    const stalls = extractStallCountText(`${r.title} ${r.description ?? ''}`);
+    if (stalls) {
+      upd.run(stalls, r.id);
       filled++;
     }
   }

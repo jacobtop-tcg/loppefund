@@ -30,6 +30,7 @@ import { PoliteFetcher } from './fetcher.ts';
 import {
   backfillGeocode,
   backfillIndoorOutdoor,
+  backfillStallCount,
   canonicalizeRawEvent,
   mergeDuplicateEvents,
   recomputeConfidence,
@@ -136,9 +137,10 @@ if (command === 'rebuild') {
   const consolidated = mergeDuplicateEvents(db);
   const pinned = await backfillGeocode(db);
   const inout = backfillIndoorOutdoor(db);
+  const stalls = backfillStallCount(db);
   expirePastEvents(db, rebuildToday);
   recomputeConfidence(db, trustRows, rebuildToday, confirmations);
-  console.log('rebuild done:', JSON.stringify({ ...stats, consolidated, pinned, inout }));
+  console.log('rebuild done:', JSON.stringify({ ...stats, consolidated, pinned, inout, stalls }));
   process.exit(0);
 }
 
@@ -384,6 +386,12 @@ if (pinned > 0) console.log(`backfilled coordinates for ${pinned} event(s)`);
 // and the rain warning). High-precision heuristic; only fills 'unknown'.
 const inout = backfillIndoorOutdoor(db);
 if (inout > 0) console.log(`inferred indoor/outdoor for ${inout} event(s)`);
+
+// Recover a stall count stated in the description for sources with no stalls
+// field ("…med op til 150 stader"). Precision-only; a strong "worth driving to"
+// and hidden-gem signal.
+const stalls = backfillStallCount(db);
+if (stalls > 0) console.log(`extracted stall counts for ${stalls} event(s)`);
 
 // Freshness decay only works if scores are actually recomputed after crawls.
 recomputeConfidence(db, trustMap, new Date().toISOString().slice(0, 10), confirmations);

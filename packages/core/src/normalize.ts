@@ -230,3 +230,27 @@ export function extractPostcode(text: string): string | null {
   const m = text.match(/\b([1-9]\d{3})\b/);
   return m ? m[1]! : null;
 }
+
+// A number bound directly to an unambiguous stall/vendor noun. "pladser" is
+// left OUT on purpose — "50 pladser" is as often parking as stalls, and a wrong
+// count is worse than a missing one (missing is acceptable, incorrect is not).
+const STALL_PHRASE =
+  /(?:ca\.?\s*|over\s*|mere\s+end\s*|op\s+til\s*)?(\d{1,4})(?:\s*[-–til]+\s*(\d{1,4}))?\s+(stadepladser|standpladser|stader|stande|boder|kr(?:æ|ae)mmere|udstillere)\b/i;
+
+/**
+ * A stall-count phrase from free text ("over 150 stader", "78 stande", "50-60
+ * boder") normalized to "150 stader" / "50–60 boder". Precision-first: the
+ * number must bind directly to a stall/vendor noun, and the count must sit in a
+ * sane market range (3–5000), so stray numbers and parking "pladser" never
+ * masquerade as a stall count. Returns null when nothing qualifies. Feeds the
+ * "worth driving to" signal and hidden-gem scoring.
+ */
+export function extractStallCountText(text: string | null | undefined): string | null {
+  if (!text) return null;
+  const m = text.match(STALL_PHRASE);
+  if (!m) return null;
+  const lo = Number(m[1]);
+  if (!Number.isFinite(lo) || lo < 3 || lo > 5000) return null;
+  const noun = m[3]!.toLowerCase();
+  return m[2] ? `${m[1]}–${m[2]} ${noun}` : `${m[1]} ${noun}`;
+}

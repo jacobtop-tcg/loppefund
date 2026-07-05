@@ -494,3 +494,50 @@ describe('computeConfidence', () => {
     ).toBeGreaterThanOrEqual(0.45);
   });
 });
+
+describe('date-in-title deduplication', () => {
+  // Recurring markets are often published once per date with the date baked
+  // into the title ("VBC Loppemarked 12. sep 2026"). Matching must read those
+  // as one market, without letting a bare category word + date pass as a
+  // distinctive identity (which would over-merge two unrelated markets).
+
+  it('ignores an embedded date when comparing titles', () => {
+    expect(titleSimilarity('VBC Loppemarked 12. sep 2026', 'VBC Loppemarked 10. okt 2026')).toBe(1);
+    expect(titleSimilarity('Loppemarked Halmtorvet 16. august', 'Loppemarked Halmtorvet')).toBe(1);
+  });
+
+  it('keeps an edition number that is not a date ("3. sæson" != "4. sæson")', () => {
+    expect(
+      titleSimilarity('Bagagerumsmarked 3. sæson', 'Bagagerumsmarked 4. sæson'),
+    ).toBeLessThan(1);
+  });
+
+  it('merges a recurring market listed once per date at the same venue', () => {
+    const sep = {
+      title: 'VBC Loppemarked 12. sep 2026',
+      lat: 56.45, lng: 9.4, postcode: '8800', dates: ['2026-09-12'],
+    };
+    const okt = { ...sep, title: 'VBC Loppemarked 10. okt 2026', dates: ['2026-10-10'] };
+    expect(matchEvents(sep, okt).isMatch).toBe(true);
+  });
+
+  it('merges dated listings of a distinctively-named series with no coordinates', () => {
+    const a = { title: 'LOPPEMARKED HALMTORVET – 16 august', dates: ['2026-08-16'] };
+    const b = { title: 'LOPPEMARKED HALMTORVET – 30 august', dates: ['2026-08-30'] };
+    expect(matchEvents(a, b).isMatch).toBe(true);
+  });
+
+  it('does NOT merge two generic dated loppemarkeder with no shared location', () => {
+    const a = { title: 'Loppemarked 5. juli 2026', dates: ['2026-07-05'] };
+    const b = { title: 'Loppemarked 12. juli 2026', dates: ['2026-07-12'] };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
+  it('does NOT merge generic dated titles that only share a postcode district', () => {
+    // The critical guardrail: stripping the date must not let two different
+    // "Loppemarked <date>" listings in one town collapse into each other.
+    const a = { title: 'Loppemarked 5. juli 2026', postcode: '4230', dates: ['2026-07-05'] };
+    const b = { title: 'Loppemarked 12. juli 2026', postcode: '4230', dates: ['2026-07-12'] };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+});

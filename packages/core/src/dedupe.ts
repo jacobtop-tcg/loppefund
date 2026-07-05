@@ -3,16 +3,18 @@
  * Conservative by design: a missed merge is a minor annoyance,
  * a wrong merge destroys trust.
  */
-import { normalizeTitle } from './normalize.ts';
+import { normalizeTitle, normalizeTitleForMatch } from './normalize.ts';
 
 /**
  * Similarity of two titles: Sørensen–Dice over character bigrams of the
  * normalized forms, boosted when one title contains the other (a common
- * pattern when one source decorates the name with a subtitle).
+ * pattern when one source decorates the name with a subtitle). Dates embedded
+ * in the title are stripped first (see {@link normalizeTitleForMatch}) so a
+ * recurring market listed once per date reads as one title, not many.
  */
 export function titleSimilarity(a: string, b: string): number {
-  const na = normalizeTitle(a);
-  const nb = normalizeTitle(b);
+  const na = normalizeTitleForMatch(a);
+  const nb = normalizeTitleForMatch(b);
   if (!na || !nb) return 0;
   if (na === nb) return 1;
   const [shorter, longer] = na.length <= nb.length ? [na, nb] : [nb, na];
@@ -159,7 +161,10 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   // venue nouns, at least one proper token must remain ("Bagagerumsmarked på
   // havnen" -> none; "Fredensborg Kokkedal Loppemarked" -> fredensborg,
   // kokkedal). A generic title carries no identity of its own.
-  const na = normalizeTitle(a.title);
+  // Match-normalized so a title whose only "words" are a category noun plus a
+  // date ("Loppemarked 5. juli 2026") reads as generic, not distinctive — the
+  // date digits must never stand in for a real identity token.
+  const na = normalizeTitleForMatch(a.title);
   const properTokens = na
     .split(' ')
     .filter((w) => w.length > 1 && !GENERIC_TITLE_TOKENS.has(w));

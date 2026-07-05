@@ -17,6 +17,23 @@ export function slugify(text: string): string {
 }
 
 /**
+ * The dedup-matching form of a title: {@link stripDateTokens} to remove the
+ * date a recurring market carries in its title ("VBC Loppemarked 12. sep 2026",
+ * "Loppemarked Halmtorvet – 16 august"), then {@link normalizeTitle}. Used ONLY
+ * for duplicate matching — never for the stored/display title or the slug — so
+ * the several dated listings of one market collapse into a single canonical
+ * event with several occurrences instead of appearing as separate duplicates.
+ *
+ * It intentionally reuses the same date-fragment definition as display-title
+ * cleaning, so "what counts as a date" can never drift between the two. A lone
+ * non-date number (an edition like "3. sæson") is preserved by stripDateTokens,
+ * so it can still tell two genuinely different series apart.
+ */
+export function normalizeTitleForMatch(title: string): string {
+  return normalizeTitle(stripDateTokens(title));
+}
+
+/**
  * A venue label must be a short place name, not prose. Some sources dump a whole
  * travel-directions paragraph into venue_name; it then renders as the location
  * line. Reject anything too long or multi-sentence so display falls back to the
@@ -167,14 +184,18 @@ export function searchFold(text: string): string {
 }
 
 const DATE_TOKEN =
-  /\b(mandag|tirsdag|onsdag|torsdag|fredag|l(ø|oe)rdag|s(ø|oe)ndag|januar|februar|marts|april|maj|juni|juli|august|september|oktober|november|december)\b|\bd\.\s*\d|\d{1,2}[./-]\d{1,2}/i;
+  /\b(mandag|tirsdag|onsdag|torsdag|fredag|l(ø|oe)rdag|s(ø|oe)ndag|januar|februar|marts|april|maj|juni|juli|august|september|oktober|november|december|jan|feb|mar|apr|jun|jul|aug|sept|sep|okt|nov|dec)\b|\bd\.\s*\d|\d{1,2}[./-]\d{1,2}|\b(?:19|20)\d{2}\b/i;
 
 /** Does a title carry date tokens ("Loppemarked lørdag d. 5. juli")? */
 export function titleHasDateTokens(title: string): boolean {
   return DATE_TOKEN.test(title);
 }
 
-const MONTHS_RE = 'januar|februar|marts|april|maj|juni|juli|august|september|oktober|november|december';
+// Full month names first so ordered alternation prefers them over the
+// abbreviations (e.g. "september" wins before "sept"/"sep"; "sept" before
+// "sep"). Abbreviations are what recurring markets often use: "12. sep 2026".
+const MONTHS_RE =
+  'januar|februar|marts|april|maj|juni|juli|august|september|oktober|november|december|jan|feb|mar|apr|jun|jul|aug|sept|sep|okt|nov|dec';
 
 /**
  * Strip date / weekday / time fragments from a title so a recurring market keeps

@@ -10,7 +10,12 @@ import { VenueHours } from '../../../components/VenueHours.tsx';
 export const dynamicParams = false;
 
 export function generateStaticParams(): Array<{ slug: string }> {
-  return listVenues().map((v) => ({ slug: v.slug }));
+  const venues = listVenues();
+  // `output: export` rejects an EMPTY generateStaticParams for a dynamic route,
+  // and a push build restores a DB from cache that may predate any venue crawl.
+  // Keep the route exportable with a sentinel that resolves to notFound().
+  if (venues.length === 0) return [{ slug: '__none__' }];
+  return venues.map((v) => ({ slug: v.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

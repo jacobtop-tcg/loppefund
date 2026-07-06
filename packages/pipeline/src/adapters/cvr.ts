@@ -25,8 +25,11 @@ import { classifyVenue } from '@loppefund/core';
 import type { ChainVenue } from '../chain-venues.ts';
 import { stableId } from './danish-hours.ts';
 
-// 47.79.00 is the second-hand-retail code. Extendable (e.g. antikvariater).
-const SECONDHAND_BRANCHEKODER = ['479900'];
+// 47.79.00 "Detailhandel med brugte varer i forretninger" — the DB07 six-digit
+// form is 477900 (verified against real shops in CVR, e.g. Reolmarkedet Søndersø).
+// This one code cleanly captures genbrug/loppe/reol/antik that sell used goods;
+// broader retail/book codes would pull in NEW-goods shops (wrong data > missing).
+const SECONDHAND_BRANCHEKODER = ['477900'];
 const ES_URL = 'https://distribution.virk.dk/cvr-permanent/virksomhed/_search';
 const UA = 'Loppefund/1.0 (+https://jacobtop-tcg.github.io/loppefund; Danish flea-market directory)';
 const OPERATOR = 'CVR';

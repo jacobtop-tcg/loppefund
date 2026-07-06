@@ -12,7 +12,7 @@ const active = {
       postnummer: 5900,
       postdistrikt: 'Rudkøbing',
     },
-    nyesteHovedbranche: { branchekode: '479900', branchetekst: 'Detailhandel med brugte varer i forretninger' },
+    nyesteHovedbranche: { branchekode: '477900', branchetekst: 'Detailhandel med brugte varer i forretninger' },
     sammensatStatus: 'NORMAL',
   },
 };

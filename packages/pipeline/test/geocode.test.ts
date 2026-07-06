@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cacheGeocode, getCachedGeocode, openDb } from '@loppefund/db';
-import { geocode } from '../src/geocode.ts';
+import { geocode, inDenmark } from '../src/geocode.ts';
 
 const NULL_RESULT = {
   lat: null,
@@ -76,5 +76,70 @@ describe('geocode negative-cache handling', () => {
 
     expect(r.lat).toBeNull();
     expect(getCachedGeocode(db, '9999')).toBeNull(); // not poisoned — retried next run
+  });
+});
+
+describe('Denmark land-bounds guard (offshore visueltcenter)', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  it('accepts every corner of real Denmark and rejects sea/foreign points', () => {
+    // Real DK: Blåvand town, København, Skagen (N), Christiansø (far E), Esbjerg.
+    for (const [lat, lng] of [
+      [55.5548, 8.1261], [55.6761, 12.5683], [57.7364, 10.5806], [55.3225, 15.19], [55.4765, 8.4594],
+    ] as const) {
+      expect(inDenmark(lat, lng)).toBe(true);
+    }
+    // The exact 6857 Blåvand visueltcenter (in the North Sea), open sea, Germany.
+    for (const [lat, lng] of [[55.4521, 6.6069], [55.8, 6.0], [54.0, 9.9]] as const) {
+      expect(inDenmark(lat, lng)).toBe(false);
+    }
+  });
+
+  it('replaces an offshore postcode centre with the mean of real addresses', async () => {
+    const db = openDb(':memory:');
+    // /postnumre/6857 gives a visueltcenter in the SEA; the address list is on land.
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => ({
+        ok: true,
+        json: async () => {
+          const u = String(url);
+          if (u.includes('/postnumre/6857')) return { nr: '6857', navn: 'Blåvand', visueltcenter: [6.6069, 55.4521] };
+          if (u.includes('/adgangsadresser')) return [ { x: 8.12, y: 55.55 }, { x: 8.13, y: 55.56 } ];
+          return {};
+        },
+      })),
+    );
+
+    const r = await geocode(db, { postcode: '6857' });
+
+    expect(r.quality).toBe('P');
+    expect(inDenmark(r.lat!, r.lng!)).toBe(true); // no longer in the sea
+    expect(r.lng).toBeCloseTo(8.125, 2);
+    expect(r.lat).toBeCloseTo(55.555, 2);
+  });
+
+  it('bypasses a poisoned out-of-Denmark cached coordinate and re-geocodes', async () => {
+    const db = openDb(':memory:');
+    // A pre-guard poisoned entry: a real Blåvand address pinned in the sea.
+    cacheGeocode(db, '6857, Blåvand', {
+      lat: 55.4521, lng: 6.6069, quality: 'P', resolvedCity: 'Blåvand', resolvedPostcode: '6857',
+    });
+    const fetchMock = vi.fn(async (url: string) => ({
+      ok: true,
+      json: async () => {
+        const u = String(url);
+        if (u.includes('/postnumre/6857')) return { nr: '6857', navn: 'Blåvand', visueltcenter: [6.6069, 55.4521] };
+        if (u.includes('/adgangsadresser')) return [ { x: 8.12, y: 55.55 } ];
+        return {};
+      },
+    }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const r = await geocode(db, { postcode: '6857', city: 'Blåvand' });
+
+    expect(fetchMock).toHaveBeenCalled(); // the poisoned cache was bypassed
+    expect(inDenmark(r.lat!, r.lng!)).toBe(true);
+    expect(r.lng).toBeCloseTo(8.12, 2);
   });
 });

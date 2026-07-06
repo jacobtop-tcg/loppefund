@@ -26,6 +26,46 @@ const NO_MATCH: GeocodeResult = {
   lat: null, lng: null, quality: null, resolvedCity: null, resolvedPostcode: null,
 };
 
+// Denmark's land bounding box, with a small margin. Westernmost land is
+// Blåvandshuk (~8.07°E), east is Christiansø (~15.19°E), north Skagen (~57.75°N),
+// south Gedser (~54.55°N). Anything outside this is NOT a real Danish address —
+// used to reject geocodes that land in the sea. DAWA's postcode "visueltcenter"
+// is the visual centre of the postcode POLYGON, and for a coastal postcode with
+// a large offshore area (e.g. 6857 Blåvand, whose polygon spans 5.7–8.3°E) that
+// centre falls in the WATER, ~90 km from the town — a wrong pin. The guard turns
+// such a result into a correct one (address-mean fallback) or a missing one,
+// never a wrong one, per the iron rule "incorrect is worse than missing".
+const DK_LAND = { minLng: 7.8, maxLng: 15.3, minLat: 54.4, maxLat: 57.9 };
+export function inDenmark(lat: number, lng: number): boolean {
+  return lat >= DK_LAND.minLat && lat <= DK_LAND.maxLat && lng >= DK_LAND.minLng && lng <= DK_LAND.maxLng;
+}
+
+// Mean coordinate of real access addresses in a postcode — always on the
+// populated land where people live, so it's a sound centroid even when the
+// polygon's visual centre is offshore. Sampled (per_side) to keep it light.
+async function postcodeAddressCentroid(postcode: string): Promise<[number, number] | null> {
+  const addrs = (await politeDawaFetch(
+    `${DAWA}/adgangsadresser?postnr=${encodeURIComponent(postcode)}&struktur=mini&per_side=100`,
+  )) as Array<{ x?: number; y?: number }>;
+  const pts = addrs.filter((a) => typeof a.x === 'number' && typeof a.y === 'number');
+  if (pts.length === 0) return null;
+  const lng = pts.reduce((s, a) => s + a.x!, 0) / pts.length;
+  const lat = pts.reduce((s, a) => s + a.y!, 0) / pts.length;
+  return [lng, lat];
+}
+
+// Resolve a postcode "visual centre" to a trustworthy point: use it when it's on
+// Danish land, else fall back to the address mean, else give up (missing > sea).
+async function landCentroid(
+  postcode: string,
+  visueltcenter: [number, number] | undefined,
+): Promise<[number, number] | null> {
+  if (visueltcenter && inDenmark(visueltcenter[1], visueltcenter[0])) return visueltcenter;
+  const mean = await postcodeAddressCentroid(postcode);
+  if (mean && inDenmark(mean[1], mean[0])) return mean;
+  return null;
+}
+
 // The Danish address register (DAWA) only matches Danish. Sources sometimes
 // anglicize places ("Copenhagen"), which fails datavask AND the city-centroid
 // fallback — normalize the common exonyms to their Danish forms first.
@@ -62,7 +102,9 @@ export async function geocode(
   // null cache hit is treated as a miss and re-geocoded. The cost is bounded:
   // truly hopeless queries (no resolvable token) exit above via the length guard
   // before any network call, so only plausible addresses re-hit DAWA.
-  if (cached && cached.lat !== null) return cached;
+  // A cached hit is reused — UNLESS it lands outside Denmark (an old poisoned
+  // entry from the pre-guard sea-centroid bug); those re-geocode so they heal.
+  if (cached && cached.lat !== null && inDenmark(cached.lat, cached.lng!)) return cached;
 
   let result = NO_MATCH;
   try {
@@ -87,17 +129,19 @@ export async function geocode(
         };
       }
     }
-    // Fallback: postcode visual centre — approximate but honest (quality "P").
+    // Fallback: postcode centre — approximate but honest (quality "P"). Guarded
+    // against offshore visueltcenter values via landCentroid (address mean).
     if (result.lat === null && address.postcode) {
       const pn = (await politeDawaFetch(`${DAWA}/postnumre/${address.postcode}`)) as {
         nr: string;
         navn: string;
         visueltcenter: [number, number];
       };
-      if (pn.visueltcenter) {
+      const centre = await landCentroid(pn.nr, pn.visueltcenter);
+      if (centre) {
         result = {
-          lat: pn.visueltcenter[1],
-          lng: pn.visueltcenter[0],
+          lat: centre[1],
+          lng: centre[0],
           quality: 'P',
           resolvedCity: pn.navn,
           resolvedPostcode: pn.nr,
@@ -116,14 +160,17 @@ export async function geocode(
         `${DAWA}/postnumre?navn=${encodeURIComponent(townCandidate)}`,
       )) as Array<{ nr: string; navn: string; visueltcenter: [number, number] }>;
       const hit = districts[0];
-      if (hit?.visueltcenter && districts.length === 1) {
-        result = {
-          lat: hit.visueltcenter[1],
-          lng: hit.visueltcenter[0],
-          quality: 'P',
-          resolvedCity: hit.navn,
-          resolvedPostcode: hit.nr,
-        };
+      if (hit && districts.length === 1) {
+        const centre = await landCentroid(hit.nr, hit.visueltcenter);
+        if (centre) {
+          result = {
+            lat: centre[1],
+            lng: centre[0],
+            quality: 'P',
+            resolvedCity: hit.navn,
+            resolvedPostcode: hit.nr,
+          };
+        }
       }
     }
   } catch {

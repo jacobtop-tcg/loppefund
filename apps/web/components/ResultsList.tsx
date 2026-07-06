@@ -77,6 +77,14 @@ export const ResultsList = memo(function ResultsList({
 
       {filtered.length === 0 ? (
         <div className="empty-state">
+          <svg className="empty-illu" width="112" height="112" viewBox="0 0 96 96" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            {/* A little market stall with a striped awning — on-brand, warmer
+                than a generic "no results" glyph. */}
+            <path d="M20 40h56v34a2 2 0 0 1-2 2H22a2 2 0 0 1-2-2V40Z" />
+            <path d="M14 40l6-14h56l6 14" />
+            <path d="M20 40c0 3.4 2.7 6 6 6s6-2.6 6-6c0 3.4 2.7 6 6 6s6-2.6 6-6c0 3.4 2.7 6 6 6s6-2.6 6-6c0 3.4 2.7 6 6 6s6-2.6 6-6c0 3.4 2.7 6 6 6s6-2.6 6-6" />
+            <path d="M38 76V58a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v18" />
+          </svg>
           <h2>Ingen markeder fundet lige her</h2>
           <p>
             {suggestions.length > 0

@@ -2256,3 +2256,18 @@ body:has(.is-map-view) {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* Empty-state market-stall illustration — a warm, on-brand "let me help". */
+.empty-illu {
+  color: var(--ink-faint);
+  margin: 0 auto 10px;
+  display: block;
+  animation: empty-float 3.2s ease-in-out infinite;
+}
+@keyframes empty-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .empty-illu { animation: none; }
+}

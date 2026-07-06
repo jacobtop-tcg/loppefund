@@ -36,6 +36,7 @@ export const ResultsList = memo(function ResultsList({
   onToggleTrip,
   onHoverSlug,
   weather,
+  refinements = [],
 }: {
   filtered: Row[];
   suggestions: Row[];
@@ -51,6 +52,7 @@ export const ResultsList = memo(function ResultsList({
   onToggleTrip: (slug: string) => void;
   onHoverSlug: (slug: string | null) => void;
   weather: Map<string, DayWeather>;
+  refinements?: string[];
 }) {
   return (
     <>
@@ -61,8 +63,12 @@ export const ResultsList = memo(function ResultsList({
           {dateFilter === 'weekend' && ' i weekenden'}
           {dateFilter === 'idag' && ' i dag'}
           {dateFilter === 'imorgen' && ' i morgen'}
-          {dateFilter === 'aabent-nu' && ' åbne lige nu'}
+          {dateFilter === 'aabent-nu' &&
+            (filtered.length === 1 ? ' åbent lige nu' : ' åbne lige nu')}
           {dateFilter === 'naeste-weekend' && ' næste weekend'}
+          {refinements.length > 0 && (
+            <span className="result-refinements"> · {refinements.join(' · ')}</span>
+          )}
         </span>
         {filtered.some((e) => e.gem) && (
           <button
@@ -135,7 +141,7 @@ export const ResultsList = memo(function ResultsList({
           </div>
           {venues.length > VENUE_CAP && (
             <p className="venue-more">
-              Viser {VENUE_CAP} af {venues.length}. Søg eller vælg et område (◎ Nær mig) for at
+              Viser {VENUE_CAP} af {venues.length}. Søg eller vælg et område (Nær mig) for at
               indsnævre — eller zoom ind på kortet.
             </p>
           )}

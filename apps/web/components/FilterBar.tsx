@@ -3,6 +3,7 @@
 import { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { VENUE_TYPES, VENUE_LABELS, type VenueType } from '../lib/venue-client.ts';
 import { suggestFor, type Suggestion } from '../lib/search-index.ts';
+import { CheckIcon, HeartIcon, RouteIcon, TargetIcon } from './icons.tsx';
 
 const KIND_LABEL: Record<string, string> = { by: 'By', marked: 'Marked', butik: 'Butik' };
 
@@ -237,7 +238,17 @@ export const FilterBar = memo(function FilterBar(props: {
           aria-pressed={props.pos !== null}
           onClick={() => (props.pos ? props.onClearPos() : props.onLocate())}
         >
-          {props.locating ? 'Finder dig…' : props.pos ? '✓ Nær mig' : '◎ Nær mig'}
+          {props.locating ? (
+            'Finder dig…'
+          ) : props.pos ? (
+            <>
+              <CheckIcon size={14} /> Nær mig
+            </>
+          ) : (
+            <>
+              <TargetIcon size={14} /> Nær mig
+            </>
+          )}
         </button>
         {props.geoError && !props.pos && (
           <span role="status" style={{ fontSize: '0.8rem', color: 'var(--ink-faint)', alignSelf: 'center' }}>
@@ -262,7 +273,7 @@ export const FilterBar = memo(function FilterBar(props: {
             aria-pressed={props.savedOnly}
             onClick={() => props.onSavedOnly(!props.savedOnly)}
           >
-            ♥ Gemte ({props.favCount})
+            <HeartIcon size={14} /> Gemte ({props.favCount})
           </button>
         )}
         <button
@@ -270,7 +281,15 @@ export const FilterBar = memo(function FilterBar(props: {
           aria-pressed={props.tripMode}
           onClick={props.onToggleTripMode}
         >
-          {props.tripMode ? '✓ Loppetur' : 'Lav en loppetur'}
+          {props.tripMode ? (
+            <>
+              <CheckIcon size={14} /> Loppetur
+            </>
+          ) : (
+            <>
+              <RouteIcon size={14} /> Lav en loppetur
+            </>
+          )}
         </button>
         <span className="chip-sep" aria-hidden />
         <button
@@ -279,7 +298,7 @@ export const FilterBar = memo(function FilterBar(props: {
           onClick={() => props.onVenuesOn(!props.venuesOn)}
           title="Vis faste genbrugs-, antik- og loppebutikker med åbningstider"
         >
-          {props.venuesOn ? '✓ Faste steder' : 'Faste steder'}
+          {props.venuesOn && <CheckIcon size={14} />} Faste steder
         </button>
         {props.venuesOn &&
           VENUE_TYPES.map((t) => (

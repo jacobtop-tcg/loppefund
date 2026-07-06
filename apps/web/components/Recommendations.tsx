@@ -11,14 +11,19 @@ import { displayPlace, displayTitle } from '../lib/format.ts';
  */
 export const Recommendations = memo(function Recommendations({
   recs,
+  hasPos = false,
 }: {
   recs: Recommendation[];
+  hasPos?: boolean;
 }) {
   if (recs.length < 2) return null;
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+  // "Til dig" only rings true once we know where the visitor is; without a
+  // location the picks are curated, not personalized — so say so honestly.
+  const heading = hasPos ? 'Til dig' : 'Anbefalede markeder';
   return (
-    <section className="reco" aria-label="Anbefalet til dig">
-      <h2 className="reco-title">Til dig</h2>
+    <section className="reco" aria-label={heading}>
+      <h2 className="reco-title">{heading}</h2>
       <div className="reco-row">
         {recs.map((r) => (
           <a key={r.event.slug} className="reco-card" href={`${base}/marked/${r.event.slug}`}>

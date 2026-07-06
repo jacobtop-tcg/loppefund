@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { CameraIcon } from './icons.tsx';
 
 // Community PHOTO submission. A visitor picks an image from the market; it goes
 // to the operator inbox for vetting (never auto-published). When a Web3Forms key
@@ -74,7 +75,7 @@ export function PhotoForm({ slug, title, url }: { slug: string; title: string; u
   if (done) {
     return (
       <p className="confirm-done" role="status">
-        📷 Tak — dit billede er sendt til gennemsyn. Vi lægger det op, hvis det passer.
+        Tak — dit billede er sendt til gennemsyn. Vi lægger det op, hvis det passer.
       </p>
     );
   }
@@ -97,7 +98,13 @@ export function PhotoForm({ slug, title, url }: { slug: string; title: string; u
         onClick={() => inputRef.current?.click()}
         disabled={state === 'sending'}
       >
-        {state === 'sending' ? 'Sender…' : '📷 Del et billede fra markedet'}
+        {state === 'sending' ? (
+          'Sender…'
+        ) : (
+          <>
+            <CameraIcon size={14} /> Del et billede fra markedet
+          </>
+        )}
       </button>
       {state === 'toobig' && <span className="tip-error"> Billedet må højst fylde 5 MB.</span>}
       {state === 'error' && <span className="tip-error"> Noget gik galt — prøv igen.</span>}

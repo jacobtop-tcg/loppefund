@@ -74,6 +74,20 @@ export function foldForSearch(text: string): string {
     .replaceAll('aa', 'a');
 }
 
+/**
+ * Does an already-folded haystack match an already-folded query?
+ *
+ * The query is split on whitespace and EVERY token must appear somewhere in the
+ * haystack (AND-of-tokens), independent of order. A plain substring match would
+ * fail "odense loppemarked" against a haystack that reads "loppemarked … odense"
+ * — the exact multi-word case a family types. Empty query matches everything.
+ */
+export function matchesQuery(foldedHaystack: string, foldedQuery: string): boolean {
+  const tokens = foldedQuery.split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return true;
+  return tokens.every((t) => foldedHaystack.includes(t));
+}
+
 export interface TripStop {
   lat: number;
   lng: number;

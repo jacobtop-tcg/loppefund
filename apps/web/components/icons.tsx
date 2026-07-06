@@ -30,6 +30,87 @@ export function GemIcon({ size = 13, ...rest }: IconProps) {
   );
 }
 
+/** Calendar — add-to-calendar CTA. */
+export function CalendarIcon({ size = 15, ...rest }: IconProps) {
+  return (
+    <svg {...base(size)} {...rest}>
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+      <path d="M3.5 9.5h17M8 3v4M16 3v4" />
+    </svg>
+  );
+}
+
+/** Compass/navigation — "find vej" wayfinding CTA. */
+export function NavIcon({ size = 15, ...rest }: IconProps) {
+  return (
+    <svg {...base(size)} {...rest}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M15.6 8.4 13.4 13.4 8.4 15.6 10.6 10.6 15.6 8.4Z" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+/** Camera — photo contribution. */
+export function CameraIcon({ size = 15, ...rest }: IconProps) {
+  return (
+    <svg {...base(size)} {...rest}>
+      <path d="M4 8.5h3l1.4-2.2h7.2L17 8.5h3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1Z" />
+      <circle cx="12" cy="13" r="3.2" />
+    </svg>
+  );
+}
+
+/** Info — circled i, for the approximate-location note. */
+export function InfoIcon({ size = 14, ...rest }: IconProps) {
+  return (
+    <svg {...base(size)} {...rest}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v5" />
+      <path d="M12 7.6h.01" />
+    </svg>
+  );
+}
+
+/** Heart — the saved/favourites signal. */
+export function HeartIcon({ size = 14, ...rest }: IconProps) {
+  return (
+    <svg {...base(size)} {...rest}>
+      <path d="M12 20s-7-4.4-9.2-8.6C1.4 8.7 2.6 5.5 5.7 5.1c2-.26 3.4.9 4.3 2.2.9-1.3 2.3-2.46 4.3-2.2 3.1.4 4.3 3.6 2.9 6.3C19 15.6 12 20 12 20Z" />
+    </svg>
+  );
+}
+
+/** Target/crosshair — the "near me" geolocation control. */
+export function TargetIcon({ size = 14, ...rest }: IconProps) {
+  return (
+    <svg {...base(size)} {...rest}>
+      <circle cx="12" cy="12" r="7.5" />
+      <circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none" />
+      <path d="M12 1.8v3M12 19.2v3M1.8 12h3M19.2 12h3" />
+    </svg>
+  );
+}
+
+/** Check — the "on" state for toggle chips (trip, etc.). */
+export function CheckIcon({ size = 14, ...rest }: IconProps) {
+  return (
+    <svg {...base(size)} {...rest}>
+      <path d="M5 12.5 10 17.5 19 6.5" />
+    </svg>
+  );
+}
+
+/** Route — a two-pin trip line, for the loppetur chip. */
+export function RouteIcon({ size = 14, ...rest }: IconProps) {
+  return (
+    <svg {...base(size)} {...rest}>
+      <circle cx="6" cy="18" r="2.2" />
+      <circle cx="18" cy="6" r="2.2" />
+      <path d="M8 16.2c3-1 5.4-3.4 6.4-6.4" strokeDasharray="0.1 3" />
+    </svg>
+  );
+}
+
 /** Warning — rounded triangle with a stem+dot. */
 export function WarnIcon({ size = 13, ...rest }: IconProps) {
   return (

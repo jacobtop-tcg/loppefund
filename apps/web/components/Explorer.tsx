@@ -23,6 +23,7 @@ import {
   buildTripUrl,
   distanceKm,
   foldForSearch,
+  matchesQuery,
   MAX_TRIP_STOPS,
   optimizeTripOrder,
   parseExplorerParams,
@@ -213,7 +214,7 @@ export function Explorer({
           foldForSearch(
             `${e.title} ${e.city ?? ''} ${e.venueName ?? ''} ${e.municipality ?? ''} ${e.postcode ?? ''}`,
           ) + ` ${e.searchText}`;
-        if (!haystack.includes(q)) continue;
+        if (!matchesQuery(haystack, q)) continue;
       }
       const d =
         pos && e.lat != null && e.lng != null
@@ -266,7 +267,7 @@ export function Explorer({
       if (q) {
         const hay =
           foldForSearch(`${v.title} ${v.city ?? ''} ${v.street ?? ''}`) + ` ${v.searchText}`;
-        if (!hay.includes(q)) continue;
+        if (!matchesQuery(hay, q)) continue;
       }
       const d =
         pos && v.lat != null && v.lng != null ? distanceKm(pos.lat, pos.lng, v.lat, v.lng) : null;
@@ -302,6 +303,12 @@ export function Explorer({
   // upcoming alternatives instead of a dead end.
   const suggestions = useMemo(() => {
     if (filtered.length > 0) return [];
+    // Never suggest markets that contradict what the visitor explicitly asked
+    // for: honour the practical filters (free/family/indoor-outdoor) and, when
+    // they're browsing only their saved list, offer nothing rather than a
+    // stranger's market. Date/radius are intentionally relaxed — that's the
+    // point of the empty state ("nothing this weekend, but here's what's near").
+    if (savedOnly) return [];
     const q = foldForSearch(deferredQuery.trim());
     const horizon = addDaysIso(today, 45);
     const alt: Array<EventSummary & { nextDate: string; distanceKm: number | null; openNow: boolean }> = [];
@@ -309,11 +316,14 @@ export function Explorer({
       const upcoming = e.occurrences.filter((o) => o.date >= today && o.date <= horizon);
       if (upcoming.length === 0) continue;
       if (category && e.category !== category) continue;
+      if (freeOnly && e.isFree !== true) continue;
+      if (familyOnly && !e.familyFriendly) continue;
+      if (inOut && e.indoorOutdoor !== inOut && e.indoorOutdoor !== 'mixed') continue;
       if (q) {
         const haystack =
           foldForSearch(`${e.title} ${e.city ?? ''} ${e.venueName ?? ''} ${e.municipality ?? ''}`) +
           ` ${e.searchText}`;
-        if (!haystack.includes(q)) continue;
+        if (!matchesQuery(haystack, q)) continue;
       }
       const d =
         pos && e.lat != null && e.lng != null
@@ -328,7 +338,24 @@ export function Explorer({
       return a.nextDate.localeCompare(b.nextDate);
     });
     return alt.slice(0, 3);
-  }, [filtered.length, events, today, deferredQuery, category, pos]);
+  }, [filtered.length, events, today, deferredQuery, category, freeOnly, familyOnly, inOut, savedOnly, pos]);
+
+  // Echo the active refinements next to the result count, so the number always
+  // has context ("12 markeder i weekenden · gratis · inden 25 km · »odense«").
+  // Date filter is already spelled out by ResultsList; these are the extras.
+  const refinements = useMemo(() => {
+    const r: string[] = [];
+    if (freeOnly) r.push('gratis');
+    if (familyOnly) r.push('børnevenlige');
+    if (inOut === 'indoor') r.push('indendørs');
+    else if (inOut === 'outdoor') r.push('udendørs');
+    if (savedOnly) r.push('gemte');
+    if (pos && radius !== null) r.push(`inden ${radius} km`);
+    else if (pos) r.push('nær dig');
+    const q = query.trim();
+    if (q) r.push(`»${q}«`);
+    return r;
+  }, [freeOnly, familyOnly, inOut, savedOnly, pos, radius, query]);
 
   // The map never goes blank: when filters yield nothing it shows the same
   // three suggestions the empty state offers as list cards.
@@ -341,19 +368,20 @@ export function Explorer({
   // Trip selection is keyed by slug against the full list, so filter changes
   // never drop chosen stops.
   const eventsBySlug = useMemo(() => new Map(events.map((e) => [e.slug, e])), [events]);
-  const tripStops = tripSlugs
-    .map((s) => eventsBySlug.get(s))
-    .filter((e): e is EventSummary => !!e && e.lat != null && e.lng != null);
   // Order the stops into an efficient drive — from the user's location when we
   // have it — instead of the arbitrary order they were tapped, then hand Google
   // Maps the sane sequence (its URL API won't re-optimise waypoints itself).
   // The total distance is an honest "is this weekend worth the drive?" scent.
-  const orderedTrip = optimizeTripOrder(
-    tripStops.map((e) => ({ lat: e.lat!, lng: e.lng! })),
-    pos,
-  );
-  const tripUrl = buildTripUrl(orderedTrip);
-  const tripKm = tripDistanceKm(orderedTrip, pos);
+  // Memoised on the selection + location so it doesn't recompute on every hover
+  // or the 60s clock tick (which re-render this component with the same trip).
+  const { tripUrl, tripKm } = useMemo(() => {
+    const stops = tripSlugs
+      .map((s) => eventsBySlug.get(s))
+      .filter((e): e is EventSummary => !!e && e.lat != null && e.lng != null)
+      .map((e) => ({ lat: e.lat!, lng: e.lng! }));
+    const ordered = optimizeTripOrder(stops, pos);
+    return { tripUrl: buildTripUrl(ordered), tripKm: tripDistanceKm(ordered, pos) };
+  }, [tripSlugs, eventsBySlug, pos]);
 
   // Handlers passed to the memoized FilterBar/ResultsList must be referentially
   // stable, or every hoveredSlug change re-renders 600+ cards.
@@ -422,7 +450,7 @@ export function Explorer({
       />
       <div className="explorer-split">
         <section className="results-pane">
-          {!query.trim() && <Recommendations recs={recs} />}
+          {!query.trim() && <Recommendations recs={recs} hasPos={pos !== null} />}
           <ResultsList
             filtered={filtered}
             suggestions={suggestions}
@@ -438,6 +466,7 @@ export function Explorer({
             onToggleTrip={toggleTrip}
             onHoverSlug={setHoveredSlug}
             weather={weather}
+            refinements={refinements}
           />
         </section>
         <aside className="map-pane" aria-label="Kort over markeder">
@@ -485,7 +514,7 @@ export function Explorer({
                 {tripSlugs.length >= MAX_TRIP_STOPS && ' (maks)'}
                 {tripKm > 0 && (
                   <span style={{ color: 'var(--ink-soft)', fontWeight: 400 }}>
-                    {' · '}~{Math.round(tripKm)} km{pos ? ' fra dig' : ''}
+                    {' · '}~{Math.round(tripKm)} km i fugleflugt
                   </span>
                 )}
               </>

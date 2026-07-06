@@ -2,12 +2,35 @@ import { describe, expect, it } from 'vitest';
 import {
   buildTripUrl,
   DEFAULT_EXPLORER_PARAMS,
+  foldForSearch,
+  matchesQuery,
   optimizeTripOrder,
   parseExplorerParams,
   serializeExplorerParams,
   tripDistanceKm,
   type ExplorerParams,
 } from './client-utils.ts';
+
+describe('matchesQuery', () => {
+  const hay = foldForSearch('Stort Loppemarked i Odense C · Kræmmerhallen');
+  it('matches multi-word queries regardless of token order', () => {
+    // The bug: a plain substring match fails because "odense" precedes
+    // "loppemarked" in the query but follows it in the haystack.
+    expect(matchesQuery(hay, foldForSearch('odense loppemarked'))).toBe(true);
+    expect(matchesQuery(hay, foldForSearch('loppemarked odense'))).toBe(true);
+  });
+  it('still matches single-word and folded (æøå) queries', () => {
+    expect(matchesQuery(hay, foldForSearch('kræmmer'))).toBe(true);
+    expect(matchesQuery(hay, foldForSearch('ODENSE'))).toBe(true);
+  });
+  it('requires every token to be present (AND, not OR)', () => {
+    expect(matchesQuery(hay, foldForSearch('odense aarhus'))).toBe(false);
+  });
+  it('an empty query matches everything', () => {
+    expect(matchesQuery(hay, '')).toBe(true);
+    expect(matchesQuery(hay, '   ')).toBe(true);
+  });
+});
 
 // Mirror of Explorer's dateRangeFor to pin the Sunday "næste weekend" bug.
 function addDaysIso(isoDate: string, days: number): string {

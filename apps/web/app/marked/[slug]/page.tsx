@@ -10,6 +10,7 @@ import {
   truncateAtWord,
 } from '../../../lib/format.ts';
 import { DetailMap } from '../../../components/DetailMap.tsx';
+import { CalendarIcon, CameraIcon, InfoIcon, NavIcon } from '../../../components/icons.tsx';
 import { ShareButton } from '../../../components/ShareButton.tsx';
 import { ReportEventForm } from '../../../components/ReportEventForm.tsx';
 import { ConfirmEventForm } from '../../../components/ConfirmEventForm.tsx';
@@ -186,6 +187,24 @@ export default async function EventPage({
   const confidencePct = Math.round(event.confidence * 100);
   const trustLabel =
     event.confidence >= 0.75 ? 'Godt bekræftet' : event.confidence >= 0.45 ? 'Bekræftet' : 'Ubekræftet';
+  // Plain-Danish justification for the score, from data already loaded: how many
+  // sources corroborate it, how recently it was last seen, and whether the pin
+  // is only a postcode approximation. The score should never be a mystery bar.
+  const newestSeen = event.sources.reduce((m, s) => (s.lastConfirmedAt > m ? s.lastConfirmedAt : m), '');
+  const daysSinceSeen = newestSeen
+    ? Math.max(0, Math.round((Date.parse(today) - Date.parse(newestSeen.slice(0, 10))) / 86_400_000))
+    : null;
+  const freshnessText =
+    daysSinceSeen === null
+      ? null
+      : daysSinceSeen === 0
+        ? 'senest set i dag'
+        : daysSinceSeen === 1
+          ? 'senest set i går'
+          : `senest set for ${daysSinceSeen} dage siden`;
+  const trustParts = [`${event.sources.length} ${event.sources.length === 1 ? 'kilde' : 'kilder'}`];
+  if (freshnessText) trustParts.push(freshnessText);
+  if (event.approximate) trustParts.push('omtrentlig placering');
   const jsonLd = eventJsonLd(event, today);
   const safeWebsite = safeExternalUrl(event.contactWebsite);
   // The booking link is crawled too — validate its scheme like the website.
@@ -226,6 +245,22 @@ export default async function EventPage({
               .filter(Boolean)
               .join(' · ')}
           </p>
+          {event.status !== 'cancelled' && upcoming.length > 0 && (
+            <p className={`detail-when${upcoming[0]!.date === today ? ' today' : ''}`}>
+              <span className="detail-when-date">
+                {upcoming[0]!.date === today ? 'Åbent i dag' : formatDateLong(upcoming[0]!.date)}
+              </span>
+              {formatHours(upcoming[0]!.startTime, upcoming[0]!.endTime) && (
+                <span className="detail-when-hours">
+                  {' · '}
+                  {formatHours(upcoming[0]!.startTime, upcoming[0]!.endTime)}
+                </span>
+              )}
+              <span className={`detail-when-trust${event.confidence < 0.45 ? ' low' : ''}`}>
+                {trustLabel}
+              </span>
+            </p>
+          )}
           <p style={{ marginTop: 14 }}>
             <ShareButton
               title={displayTitle(event.title)}
@@ -281,7 +316,7 @@ export default async function EventPage({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    📅 Føj til Google Kalender
+                    <CalendarIcon /> Føj til Google Kalender
                   </a>
                   <a
                     className="cal-btn"
@@ -320,21 +355,29 @@ export default async function EventPage({
                         loading="lazy"
                         className="photo-thumb"
                       />
-                      {p.credit && <span className="photo-credit">📷 {p.credit}</span>}
+                      {p.credit && (
+                        <span className="photo-credit">
+                          <CameraIcon size={11} /> {p.credit}
+                        </span>
+                      )}
                     </li>
                   ))}
                 </ul>
               )}
               {photos.length === 0 && (
                 <p style={{ color: 'var(--ink-soft)', marginTop: 0 }}>
-                  Ingen billeder endnu — har du været her? Del et, så andre kan se markedet.
+                  {event.status === 'cancelled'
+                    ? 'Ingen billeder.'
+                    : 'Ingen billeder endnu — har du været her? Del et, så andre kan se markedet.'}
                 </p>
               )}
-              <PhotoForm
-                slug={event.slug}
-                title={displayTitle(event.title)}
-                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
-              />
+              {event.status !== 'cancelled' && (
+                <PhotoForm
+                  slug={event.slug}
+                  title={displayTitle(event.title)}
+                  url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
+                />
+              )}
             </section>
 
             <section className="panel">
@@ -354,7 +397,9 @@ export default async function EventPage({
               </h2>
               {reviews.count === 0 ? (
                 <p style={{ color: 'var(--ink-soft)', marginTop: 0 }}>
-                  Ingen anmeldelser endnu — har du været her? Vær den første til at dele din oplevelse.
+                  {event.status === 'cancelled'
+                    ? 'Ingen anmeldelser.'
+                    : 'Ingen anmeldelser endnu — har du været her? Vær den første til at dele din oplevelse.'}
                 </p>
               ) : (
                 <ul className="review-list">
@@ -372,11 +417,13 @@ export default async function EventPage({
                   ))}
                 </ul>
               )}
-              <ReviewForm
-                slug={event.slug}
-                title={displayTitle(event.title)}
-                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
-              />
+              {event.status !== 'cancelled' && (
+                <ReviewForm
+                  slug={event.slug}
+                  title={displayTitle(event.title)}
+                  url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
+                />
+              )}
             </section>
           </div>
 
@@ -465,10 +512,20 @@ export default async function EventPage({
                   </div>
                   {event.approximate && (
                     <p
-                      style={{ margin: '8px 0 0', fontSize: 13, color: 'var(--ink-soft, #6b6257)' }}
+                      style={{
+                        margin: '8px 0 0',
+                        fontSize: 13,
+                        color: 'var(--ink-soft, #6b6257)',
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        gap: 6,
+                      }}
                     >
-                      ⓘ Omtrentlig placering (postnummer-område) — den præcise adresse er ikke
-                      bekræftet.
+                      <InfoIcon size={14} style={{ flexShrink: 0, marginTop: 2 }} />
+                      <span>
+                        Omtrentlig placering (postnummer-område) — den præcise adresse er ikke
+                        bekræftet.
+                      </span>
                     </p>
                   )}
                   <p style={{ marginTop: 10, marginBottom: 0 }}>
@@ -476,9 +533,16 @@ export default async function EventPage({
                       href={`https://www.google.com/maps/dir/?api=1&destination=${event.lat},${event.lng}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--accent-deep)' }}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        fontSize: 13.5,
+                        fontWeight: 600,
+                        color: 'var(--accent-deep)',
+                      }}
                     >
-                      🧭 Find vej
+                      <NavIcon /> Find vej
                     </a>
                   </p>
                 </>
@@ -495,6 +559,7 @@ export default async function EventPage({
                   {trustLabel}
                 </span>
               </div>
+              <p className="trust-explain">{trustParts.join(' · ')}</p>
               <ul className="source-list">
                 {event.sources.map((s) => (
                   <li key={s.url}>
@@ -502,7 +567,7 @@ export default async function EventPage({
                     <a href={s.url} target="_blank" rel="noopener noreferrer">
                       {s.name}
                     </a>{' '}
-                    — bekræftet {s.lastConfirmedAt.slice(0, 10)}
+                    — senest set {s.lastConfirmedAt.slice(0, 10)}
                   </li>
                 ))}
               </ul>
@@ -510,15 +575,20 @@ export default async function EventPage({
                 Loppefund samler automatisk oplysninger fra offentlige kilder og viser altid
                 hvor de kommer fra. Tag forbehold for ændringer hos arrangøren.
               </p>
-              <ConfirmEventForm
-                slug={event.slug}
-                title={event.title}
-                url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
-              />
+              {/* Meld en fejl always comes first — correcting wrong data matters
+                  more than confirming right data. A cancelled market must never
+                  ask a visitor to "confirm it exists"; only reporting stays. */}
               <ReportEventForm
                 title={event.title}
                 url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
               />
+              {event.status !== 'cancelled' && (
+                <ConfirmEventForm
+                  slug={event.slug}
+                  title={event.title}
+                  url={`${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`}
+                />
+              )}
             </section>
 
             {nearby.length > 0 && (

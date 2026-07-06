@@ -48,6 +48,26 @@ describe('ingestOsmVenues', () => {
     expect(byTitle['Den Gamle Loppelade']!.lat).toBeCloseTo(56.1, 3); // way center
   });
 
+  it('recovers name-matched venues and refuses recycling facilities', async () => {
+    // These mirror what the widened Overpass NAME clause returns: antiquarian
+    // bookshops tagged shop=books (no second_hand), amenity=marketplace kræmmer-
+    // markeder (no shop tag), and municipal recycling yards that must stay out.
+    const db = openDb(':memory:');
+    const els = [
+      { type: 'node', id: 10, lat: 55.4, lon: 10.4, tags: { shop: 'books', name: 'Fyns Antikvariat' } },
+      { type: 'node', id: 11, lat: 55.9, lon: 12.3, tags: { amenity: 'marketplace', name: 'Vejby Kræmmermarked' } },
+      { type: 'node', id: 12, lat: 57.0, lon: 9.9, tags: { amenity: 'recycling', name: 'Thisted Genbrugscenter' } },
+    ];
+    const stats = await ingestOsmVenues(db, opts(els));
+    expect(stats.upserted).toBe(2);
+    expect(stats.skipped).toBe(1); // the recycling yard
+
+    const byTitle = Object.fromEntries(listVenues(db).map((v) => [v.title, v]));
+    expect(byTitle['Fyns Antikvariat']!.category).toBe('antik');
+    expect(byTitle['Vejby Kræmmermarked']!.category).toBe('loppebutik');
+    expect(byTitle['Thisted Genbrugscenter']).toBeUndefined();
+  });
+
   it('is idempotent and keeps slugs stable across runs', async () => {
     const db = openDb(':memory:');
     await ingestOsmVenues(db, opts(ELEMENTS));

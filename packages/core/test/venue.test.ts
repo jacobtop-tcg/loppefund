@@ -15,6 +15,13 @@ describe('classifyVenue', () => {
     expect(classifyVenue({ shop: 'books', name: 'Vangsgaards Antikvariat' })).toBe('antik');
   });
 
+  it('reads kræmmermarked as part of the loppe family, not genbrug', () => {
+    // amenity=marketplace kræmmermarkeder arrive with no shop tag; without the
+    // name signal they would wrongly default to genbrug.
+    expect(classifyVenue({ name: 'Vejby Kræmmermarked' })).toBe('loppebutik');
+    expect(classifyVenue({ name: 'Bogense kræmmermarked' })).toBe('loppebutik');
+  });
+
   it('maps charity shops and named genbrug operators to genbrug', () => {
     expect(classifyVenue({ shop: 'charity', name: 'Røde Kors Butik' })).toBe('genbrug');
     expect(classifyVenue({ shop: 'second_hand', name: 'Genbrug til Syd' })).toBe('genbrug');

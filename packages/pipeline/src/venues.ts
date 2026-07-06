@@ -53,6 +53,14 @@ const OVERPASS_ENDPOINTS = [
 // Denmark: charity/second-hand/antique/antiquarian premises with tags + a point.
 // loppemarked/loppelade/reolmarked have no distinct OSM tag — they arrive as
 // shop=second_hand and are recovered by name in classifyVenue().
+//
+// The final NAME clause recovers venues the tag clauses miss: antikvariater
+// tagged shop=books WITHOUT a second_hand tag, and recurring kræmmer-/loppe-
+// markeder tagged amenity=marketplace with no shop tag. Tokens are deliberately
+// tight — verified against live Overpass to add 12 real venues and zero false
+// positives. Bare "genbrug" is intentionally excluded: it would sweep in
+// municipal genbrugspladser/-centre (recycling yards, amenity=recycling), and
+// real genbrugsbutikker are already covered by shop=charity above.
 const OVERPASS_QUERY = `[out:json][timeout:180];
 area["ISO3166-1"="DK"][admin_level=2]->.dk;
 (
@@ -61,8 +69,14 @@ area["ISO3166-1"="DK"][admin_level=2]->.dk;
   nwr["shop"="antiques"](area.dk);
   nwr["shop"="books"]["second_hand"](area.dk);
   nwr["shop"]["second_hand"="only"](area.dk);
+  nwr["name"~"loppemarked|loppebutik|loppeland|loppekælder|reolmarked|kræmmermarked|antikvariat",i](area.dk);
 );
 out center tags;`;
+
+// Facilities that a name/tag match could still surface but that are NOT
+// second-hand shops. A recycling yard is not a place to hunt for treasures, so
+// keeping it out protects the "incorrect is worse than missing" bar.
+const NOT_A_VENUE_AMENITY = new Set(['recycling', 'waste_disposal', 'waste_transfer_station']);
 
 interface OsmElement {
   type: string;
@@ -135,6 +149,11 @@ export async function ingestOsmVenues(
     // A directory entry needs a name; unnamed premises are skipped (missing is
     // acceptable, a nameless pin is not).
     if (!title) {
+      stats.skipped++;
+      continue;
+    }
+    // Never let a recycling/waste facility into the directory, whatever its name.
+    if (tags.amenity && NOT_A_VENUE_AMENITY.has(tags.amenity)) {
       stats.skipped++;
       continue;
     }

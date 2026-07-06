@@ -68,9 +68,11 @@ export function classifyVenue(input: {
   const operator = fold(input.operator ?? '');
   const shop = (input.shop ?? '').toLowerCase();
 
-  // Name-first: these three types are indistinguishable by tag.
+  // Name-first: these three types are indistinguishable by tag. "kraemmer"
+  // (kræmmermarked — a peddlers'/flea market) belongs with the loppe family,
+  // not the default genbrug bucket. `name` is already æøå-folded.
   if (/\breol/.test(name)) return 'reolmarked';
-  if (/loppe(marked|torv|land|lade|hus|)?|flea/.test(name)) return 'loppebutik';
+  if (/loppe(marked|torv|land|lade|hus|)?|flea|kraemmer/.test(name)) return 'loppebutik';
 
   // Antique dealer or antiquarian (used) bookshop.
   if (shop === 'antiques' || shop === 'books') return 'antik';

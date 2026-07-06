@@ -49,6 +49,10 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
+  // Warm paper — tints the mobile browser chrome (status bar) to match the app
+  // rather than flashing white or a UA-dark bar. Light-only product.
+  themeColor: '#f5eee0',
+  colorScheme: 'light',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

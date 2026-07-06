@@ -9,6 +9,7 @@ import { venueOpenState, VENUE_TYPES, type VenueType } from '../lib/venue-client
 import { buildSearchIndex } from '../lib/search-index.ts';
 import { useOutdoorWeather } from '../lib/weather.ts';
 import { FilterBar, type DateFilter } from './FilterBar.tsx';
+import { MapSkeleton } from './MapSkeleton.tsx';
 import { ResultsList } from './ResultsList.tsx';
 import { Recommendations } from './Recommendations.tsx';
 import { recommend } from '../lib/recommend.ts';
@@ -32,7 +33,7 @@ import {
 
 const MapView = dynamic(() => import('./MapView.tsx').then((m) => m.MapView), {
   ssr: false,
-  loading: () => <div className="map-shell" style={{ display: 'grid', placeItems: 'center', color: 'var(--ink-faint)' }}>Indlæser kort…</div>,
+  loading: () => <MapSkeleton className="map-shell" />,
 });
 
 /** [from, to] inclusive for each date filter. Weekend = Sat+Sun (or rest of it). */

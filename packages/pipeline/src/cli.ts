@@ -43,6 +43,7 @@ import { ingestOsmVenues } from './venues.ts';
 import { ingestChainVenues } from './chain-venues.ts';
 import { fetchKirkensKorshaerVenues } from './adapters/kirkenskorshaer.ts';
 import { fetchFolkekirkensNoedhjaelpVenues } from './adapters/folkekirkensnoedhjaelp.ts';
+import { fetchRodekorsVenues } from './adapters/rodekors.ts';
 import { geocode } from './geocode.ts';
 import { adapters } from './adapters/index.ts';
 
@@ -459,6 +460,7 @@ if (fullCrawl) {
   const chains = [
     { key: 'kirkenskorshaer', name: 'Kirkens Korshær', baseUrl: 'https://kirkenskorshaer.dk', fetch: fetchKirkensKorshaerVenues },
     { key: 'folkekirkensnoedhjaelp', name: 'Folkekirkens Nødhjælp', baseUrl: 'https://www.noedhjaelp.dk', fetch: fetchFolkekirkensNoedhjaelpVenues },
+    { key: 'rodekors', name: 'Røde Kors', baseUrl: 'https://www.rodekors.dk', fetch: fetchRodekorsVenues },
   ];
   for (const chain of chains) {
     try {

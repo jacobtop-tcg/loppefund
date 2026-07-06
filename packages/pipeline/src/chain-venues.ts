@@ -34,6 +34,10 @@ export interface ChainVenue {
   city: string | null;
   openingHoursText: string | null;
   contactWebsite: string | null;
+  /** Coordinates when the source already provides them (e.g. Røde Kors); skips
+   *  the DAWA geocode. Omit to geocode from the address. */
+  lat?: number | null;
+  lng?: number | null;
 }
 
 export interface ChainIngestStats {
@@ -90,7 +94,12 @@ export async function ingestChainVenues(
   const existing = listVenues(db).filter((v) => v.lat != null && v.lng != null);
 
   for (const cv of venues) {
-    const geo = await opts.geocodeAddress({ street: cv.street, postcode: cv.postcode, city: cv.city });
+    // Use source-provided coordinates when present (Røde Kors ships them);
+    // otherwise forward-geocode the address.
+    const geo =
+      cv.lat != null && cv.lng != null
+        ? { lat: cv.lat, lng: cv.lng }
+        : await opts.geocodeAddress({ street: cv.street, postcode: cv.postcode, city: cv.city });
     // No trustworthy location → skip. Missing is acceptable; a mis-pinned shop
     // (e.g. dumped at a postcode centroid far from the street) is not.
     if (!geo) {

@@ -17,6 +17,7 @@ import { ConfirmEventForm } from '../../../components/ConfirmEventForm.tsx';
 import { ReviewForm } from '../../../components/ReviewForm.tsx';
 import { PhotoForm } from '../../../components/PhotoForm.tsx';
 import { starGlyphs } from '../../../lib/reviews.ts';
+import { isUnverified, trustLabel as trustLabelFor } from '../../../lib/trust.ts';
 import { googleCalendarUrl } from '../../../lib/calendar.ts';
 import { listCancelledUpcomingSlugs, listUpcomingEvents } from '../../../lib/data.ts';
 import { distanceKm } from '../../../lib/client-utils.ts';
@@ -188,8 +189,7 @@ export default async function EventPage({
       : [];
 
   const confidencePct = Math.round(event.confidence * 100);
-  const trustLabel =
-    event.confidence >= 0.75 ? 'Godt bekræftet' : event.confidence >= 0.45 ? 'Bekræftet' : 'Ubekræftet';
+  const trustLabel = trustLabelFor(event.confidence);
   // Plain-Danish justification for the score, from data already loaded: how many
   // sources corroborate it, how recently it was last seen, and whether the pin
   // is only a postcode approximation. The score should never be a mystery bar.
@@ -259,7 +259,7 @@ export default async function EventPage({
                   {formatHours(upcoming[0]!.startTime, upcoming[0]!.endTime)}
                 </span>
               )}
-              <span className={`detail-when-trust${event.confidence < 0.45 ? ' low' : ''}`}>
+              <span className={`detail-when-trust${isUnverified(event.confidence) ? ' low' : ''}`}>
                 {trustLabel}
               </span>
             </p>
@@ -562,7 +562,7 @@ export default async function EventPage({
                 <div className="trust-bar" title={`${confidencePct}% sikkerhed`}>
                   <span style={{ width: `${confidencePct}%` }} />
                 </div>
-                <span className={`trust-label ${event.confidence < 0.45 ? 'low' : ''}`}>
+                <span className={`trust-label ${isUnverified(event.confidence) ? 'low' : ''}`}>
                   {trustLabel}
                 </span>
               </div>

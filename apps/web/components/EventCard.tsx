@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { parseStallCount } from '@loppefund/core';
 import type { EventSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
+import { isUnverified } from '../lib/trust.ts';
 import { weatherGlyph, type DayWeather } from '../lib/weather.ts';
 import { GemIcon, WarnIcon, WeatherIcon } from './icons.tsx';
 import {
@@ -15,8 +16,6 @@ import {
   monthShort,
   weekdayShort,
 } from '../lib/format.ts';
-
-const UNVERIFIED_THRESHOLD = 0.45;
 
 type CardEvent = EventSummary & { nextDate: string; distanceKm: number | null };
 
@@ -101,7 +100,7 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
               Aflyst
             </span>
           )}
-          {event.status !== 'cancelled' && event.confidence < UNVERIFIED_THRESHOLD && (
+          {event.status !== 'cancelled' && isUnverified(event.confidence) && (
             <span
               className="badge unverified"
               title="Kun set ét sted og endnu ikke bekræftet — tjek datoen hos arrangøren, før du tager afsted."

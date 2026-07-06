@@ -38,11 +38,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # The crawl politely fetches ~1500 source pages, so a full run is ~35 min.
-    # Bound it so a genuinely stuck source (or a runaway loop) fails fast instead
-    # of holding the pages-deploy lock for GitHub's 6-hour default and starving
-    # every later deploy — "continuously updated" depends on the queue draining.
-    timeout-minutes: 60
+    # The crawl politely fetches ~1500 source pages plus seven charity chains
+    # (Mødrehjælpen alone is 46 sequential shop pages) and forward-geocodes the
+    # new chain addresses, so a full run now runs ~60–75 min — a 60-min cap
+    # killed it mid-crawl before it could deploy. 90 gives headroom while still
+    # bounding a genuinely stuck source well under GitHub's 6-hour default, so
+    # the pages-deploy queue keeps draining ("continuously updated").
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
 

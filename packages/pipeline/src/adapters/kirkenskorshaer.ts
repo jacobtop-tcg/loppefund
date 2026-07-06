@@ -89,7 +89,13 @@ export function parseKkShop(html: string, url: string): ChainVenue | null {
 }
 
 async function defaultFetchText(url: string): Promise<string> {
-  const res = await globalThis.fetch(url, { headers: { 'User-Agent': UA } });
+  // A hard per-request timeout is essential: hundreds of pages are fetched
+  // sequentially, and globalThis.fetch has no default timeout — one hung
+  // connection would otherwise stall the whole twice-daily crawl + deploy.
+  const res = await globalThis.fetch(url, {
+    headers: { 'User-Agent': UA },
+    signal: AbortSignal.timeout(15_000),
+  });
   if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
   return res.text();
 }

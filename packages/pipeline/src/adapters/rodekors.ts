@@ -86,7 +86,12 @@ export function parseRodekorsShops(html: string): ChainVenue[] {
 }
 
 async function defaultFetchText(url: string): Promise<string> {
-  const res = await globalThis.fetch(url, { headers: { 'User-Agent': UA } });
+  // Per-request timeout so a hung page can't stall the crawl (one page here,
+  // but consistent with the other chains and cheap insurance).
+  const res = await globalThis.fetch(url, {
+    headers: { 'User-Agent': UA },
+    signal: AbortSignal.timeout(15_000),
+  });
   if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
   return res.text();
 }

@@ -75,7 +75,11 @@ export function parseFnShop(html: string, url: string): ChainVenue | null {
 }
 
 async function defaultFetchText(url: string): Promise<string> {
-  const res = await globalThis.fetch(url, { headers: { 'User-Agent': UA } });
+  // Per-request timeout so one hung page can't stall the whole sequential crawl.
+  const res = await globalThis.fetch(url, {
+    headers: { 'User-Agent': UA },
+    signal: AbortSignal.timeout(15_000),
+  });
   if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
   return res.text();
 }

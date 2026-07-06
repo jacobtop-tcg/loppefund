@@ -88,6 +88,101 @@ export function parseCvrVirksomhed(v: Vrvirksomhed): ChainVenue | null {
   };
 }
 
+// ---------------------------------------------------------------------------
+// Backend B: cvr.dev — a modern REST wrapper over CVR. Signup is INSTANT (email,
+// no MitID) with a 30-day free trial that includes the segmentation endpoint, so
+// this is the fast path while the official system-adgang (2–3 week wait) is
+// pending. CVR data is open (public-sector), so rows fetched here are kept.
+// ---------------------------------------------------------------------------
+const CVRDEV_URL = 'https://api.cvr.dev/api/cvrdev/virksomhed/search';
+const CEASED = /ophør|opløs|konkurs|tvangs|slettet/i; // status values that mean "gone"
+
+interface CvrDevVirksomhed {
+  navn?: string;
+  cvr_nummer?: number;
+  status?: string;
+  adresse?: string; // "Vejnavn 12, 2900 Hellerup"
+}
+
+/** Parse a cvr.dev company (single-string address) into a venue, or null. */
+export function parseCvrDevVirksomhed(v: CvrDevVirksomhed): ChainVenue | null {
+  const title = v.navn?.trim();
+  if (!title) return null;
+  if (v.status && CEASED.test(v.status)) return null; // ceased -> skip (closure detection)
+  const am = (v.adresse ?? '').match(/^(.*?),\s*(\d{4})\s+(.+)$/);
+  if (!am) return null; // no parseable DK address -> skip (missing ok)
+  const street = am[1]!.trim();
+  const postcode = am[2]!;
+  const city = am[3]!.trim();
+  const idKey = v.cvr_nummer != null ? `cvr:${v.cvr_nummer}` : `${street}|${postcode}`;
+  return {
+    sourceType: 'cvr',
+    sourceId: stableId(idKey),
+    operatorToken: OPERATOR_TOKEN,
+    title,
+    category: classifyVenue({ name: title, operator: OPERATOR }),
+    street,
+    postcode,
+    city,
+    openingHoursText: null,
+    contactWebsite: null,
+  };
+}
+
+/** Find the array of companies in a cvr.dev response, defensively. */
+function extractCvrDevList(json: unknown): { list: CvrDevVirksomhed[]; token: string | number | null } {
+  const o = json as Record<string, unknown>;
+  const list =
+    (Array.isArray(o?.virksomheder) && o.virksomheder) ||
+    (Array.isArray(o?.data) && o.data) ||
+    (Array.isArray(o?.results) && o.results) ||
+    (Array.isArray(json) ? json : []) ||
+    [];
+  const token =
+    (o?.pagination_token as string | number | undefined) ??
+    (o?.næste_pagination_token as string | number | undefined) ??
+    (o?.next as string | number | undefined) ??
+    null;
+  return { list: list as CvrDevVirksomhed[], token: token ?? null };
+}
+
+async function defaultCvrDevFetch(url: string, key: string): Promise<unknown> {
+  const res = await globalThis.fetch(url, {
+    headers: { Authorization: `Bearer ${key}`, Accept: 'application/json', 'User-Agent': UA },
+    signal: AbortSignal.timeout(30_000),
+  });
+  if (!res.ok) throw new Error(`cvr.dev ${res.status}`);
+  return res.json();
+}
+
+export async function fetchCvrDevVenues(
+  opts: { apiKey?: string; fetchJson?: (url: string, key: string) => Promise<unknown>; maxPages?: number } = {},
+): Promise<ChainVenue[]> {
+  const key = opts.apiKey ?? process.env.CVR_DEV_KEY;
+  if (!key) return [];
+  const fetchJson = opts.fetchJson ?? defaultCvrDevFetch;
+  const out: ChainVenue[] = [];
+  const seen = new Set<number>();
+  let token: string | number | null = null;
+  const maxPages = opts.maxPages ?? 200; // 100/page, generous ceiling
+  for (let page = 0; page < maxPages; page++) {
+    const params = new URLSearchParams({ hovedbranchekoder: SECONDHAND_BRANCHEKODER.join(',') });
+    if (token != null) params.set('pagination_token', String(token));
+    const { list, token: next } = extractCvrDevList(await fetchJson(`${CVRDEV_URL}?${params}`, key));
+    if (list.length === 0) break;
+    for (const v of list) {
+      const venue = parseCvrDevVirksomhed(v);
+      if (venue && !seen.has(venue.sourceId)) {
+        seen.add(venue.sourceId);
+        out.push(venue);
+      }
+    }
+    if (next == null) break;
+    token = next;
+  }
+  return out;
+}
+
 async function defaultFetchPage(
   body: unknown,
   auth: string,
@@ -157,4 +252,15 @@ export async function fetchCvrSecondhandVenues(
     if (!scrollId) break;
   }
   return out;
+}
+
+/**
+ * The CVR entry point used by the crawl. Prefers the instant cvr.dev key
+ * (CVR_DEV_KEY) so coverage can go live today; falls back to the official
+ * Erhvervsstyrelsen ES credential (CVR_USER/CVR_PASS) once that arrives. A
+ * no-op with neither — never blocks a crawl.
+ */
+export async function fetchCvrVenues(): Promise<ChainVenue[]> {
+  if (process.env.CVR_DEV_KEY) return fetchCvrDevVenues();
+  return fetchCvrSecondhandVenues();
 }

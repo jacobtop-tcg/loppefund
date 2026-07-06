@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { parseCvrVirksomhed, fetchCvrSecondhandVenues } from '../src/adapters/cvr.ts';
+import {
+  parseCvrVirksomhed,
+  fetchCvrSecondhandVenues,
+  parseCvrDevVirksomhed,
+  fetchCvrDevVenues,
+} from '../src/adapters/cvr.ts';
 
 const active = {
   cvrNummer: 12345678,
@@ -37,6 +42,41 @@ describe('parseCvrVirksomhed', () => {
   it('skips a company with no usable address', () => {
     const noaddr = { ...active, virksomhedMetadata: { ...active.virksomhedMetadata, nyesteBeliggenhedsadresse: undefined } };
     expect(parseCvrVirksomhed(noaddr)).toBeNull();
+  });
+});
+
+describe('parseCvrDevVirksomhed (cvr.dev single-string address)', () => {
+  it('parses navn + "Vej 12, 5900 Rudkøbing" into a genbrug venue', () => {
+    expect(
+      parseCvrDevVirksomhed({
+        navn: 'Rudkøbing Genbrug',
+        cvr_nummer: 87654321,
+        status: 'NORMAL',
+        adresse: 'Ramsherred 12, 5900 Rudkøbing',
+      }),
+    ).toMatchObject({
+      sourceType: 'cvr', category: 'genbrug', title: 'Rudkøbing Genbrug',
+      street: 'Ramsherred 12', postcode: '5900', city: 'Rudkøbing',
+    });
+  });
+  it('skips a ceased (ophørt/konkurs) company', () => {
+    expect(parseCvrDevVirksomhed({ navn: 'X', status: 'OPHØRT', adresse: 'Vej 1, 1000 København' })).toBeNull();
+  });
+  it('skips an unparseable address', () => {
+    expect(parseCvrDevVirksomhed({ navn: 'X', status: 'NORMAL', adresse: 'Grønland' })).toBeNull();
+  });
+});
+
+describe('fetchCvrDevVenues', () => {
+  it('no-ops without a key, and paginates + parses with one (injected fetch)', async () => {
+    expect(await fetchCvrDevVenues({ apiKey: undefined })).toEqual([]);
+    const pages = [
+      { virksomheder: [{ navn: 'A Genbrug', cvr_nummer: 1, status: 'NORMAL', adresse: 'Vej 1, 8000 Aarhus C' }], pagination_token: 42 },
+      { virksomheder: [{ navn: 'B Loppe', cvr_nummer: 2, status: 'NORMAL', adresse: 'Gade 2, 5000 Odense C' }] },
+    ];
+    let i = 0;
+    const v = await fetchCvrDevVenues({ apiKey: 'k', fetchJson: async () => pages[i++]! });
+    expect(v.map((x) => x.title)).toEqual(['A Genbrug', 'B Loppe']);
   });
 });
 

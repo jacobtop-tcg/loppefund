@@ -48,7 +48,7 @@ import { fetchKraeftensBekaempelseVenues } from './adapters/kraeftensbekaempelse
 import { fetchDanmissionVenues } from './adapters/danmission.ts';
 import { fetchFrelsensHaerVenues } from './adapters/frelsenshaer.ts';
 import { fetchMoedrehjaelpenVenues } from './adapters/moedrehjaelpen.ts';
-import { fetchCvrSecondhandVenues } from './adapters/cvr.ts';
+import { fetchCvrVenues } from './adapters/cvr.ts';
 import { geocode } from './geocode.ts';
 import { adapters } from './adapters/index.ts';
 
@@ -471,8 +471,9 @@ if (fullCrawl) {
     { key: 'frelsenshaer', name: 'Frelsens Hær', baseUrl: 'https://www.frelsenshaer.dk', fetch: fetchFrelsensHaerVenues },
     { key: 'moedrehjaelpen', name: 'Mødrehjælpen', baseUrl: 'https://moedrehjaelpen.dk', fetch: fetchMoedrehjaelpenVenues },
     // CVR = every registered second-hand shop in DK (branchekode 47.79.00).
-    // No-op until CVR_USER/CVR_PASS secrets are set; then it's the coverage spine.
-    { key: 'cvr', name: 'CVR (brugtvareforretninger)', baseUrl: 'https://distribution.virk.dk', fetch: fetchCvrSecondhandVenues },
+    // Uses an instant cvr.dev key (CVR_DEV_KEY) or the official Erhvervsstyrelsen
+    // credential (CVR_USER/CVR_PASS); a no-op with neither, so never blocks.
+    { key: 'cvr', name: 'CVR (brugtvareforretninger)', baseUrl: 'https://api.cvr.dev', fetch: fetchCvrVenues },
   ];
   for (const chain of chains) {
     try {

@@ -86,9 +86,11 @@ jobs:
           # automatisk fra actor'ens seneste kørsel (se apify/README.md).
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           APIFY_ACTORS: ${{ vars.APIFY_ACTORS }}
-          # CVR: free system-til-system credential from datacvr.virk.dk. When
-          # both are set, the crawl pulls every registered second-hand shop in DK
-          # (branchekode 47.79.00); absent, the CVR adapter is a harmless no-op.
+          # CVR — every registered second-hand shop in DK (branchekode 47.79.00).
+          # CVR_DEV_KEY (cvr.dev; instant signup + 30-day free trial) is the fast
+          # path; CVR_USER/CVR_PASS is the official Erhvervsstyrelsen credential
+          # (2–3 week wait). Either activates the CVR spine; absent = no-op.
+          CVR_DEV_KEY: ${{ secrets.CVR_DEV_KEY }}
           CVR_USER: ${{ secrets.CVR_USER }}
           CVR_PASS: ${{ secrets.CVR_PASS }}
         run: |

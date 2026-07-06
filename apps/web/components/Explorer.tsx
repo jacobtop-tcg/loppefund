@@ -386,13 +386,21 @@ export function Explorer({
   // The total distance is an honest "is this weekend worth the drive?" scent.
   // Memoised on the selection + location so it doesn't recompute on every hover
   // or the 60s clock tick (which re-render this component with the same trip).
-  const { tripUrl, tripKm } = useMemo(() => {
+  // The optimized visit order, keeping each stop's id so the map can draw the
+  // route line and number the stops in the order Google Maps will drive them.
+  const tripRoute = useMemo(() => {
     const stops = tripSlugs
-      .map(coordForStop)
-      .filter((c): c is { lat: number; lng: number } => c !== null);
-    const ordered = optimizeTripOrder(stops, pos);
-    return { tripUrl: buildTripUrl(ordered), tripKm: tripDistanceKm(ordered, pos) };
+      .map((id) => {
+        const c = coordForStop(id);
+        return c ? { id, lat: c.lat, lng: c.lng } : null;
+      })
+      .filter((s): s is { id: string; lat: number; lng: number } => s !== null);
+    return optimizeTripOrder(stops, pos);
   }, [tripSlugs, coordForStop, pos]);
+  const { tripUrl, tripKm } = useMemo(
+    () => ({ tripUrl: buildTripUrl(tripRoute), tripKm: tripDistanceKm(tripRoute, pos) }),
+    [tripRoute, pos],
+  );
 
   // Handlers passed to the memoized FilterBar/ResultsList must be referentially
   // stable, or every hoveredSlug change re-renders 600+ cards.
@@ -493,6 +501,7 @@ export function Explorer({
             highlightSlug={hoveredSlug}
             tripMode={tripMode}
             tripSlugs={tripSlugs}
+            tripRoute={tripRoute}
             onToggleTrip={toggleTrip}
             fullscreen={view === 'map'}
           />

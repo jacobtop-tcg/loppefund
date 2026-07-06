@@ -14,6 +14,7 @@ import {
 } from '../lib/format.ts';
 import { VENUE_LABELS } from '../lib/venue-client.ts';
 import { loadMapStyle, MAP } from '../lib/map-style.ts';
+import { EMPTY_FC, toRouteGeoJson, type RouteStop } from '../lib/trip-route.ts';
 
 // Permanent venues get their own petrol-teal palette so they read instantly as
 // a different layer from the terracotta market pins.
@@ -45,6 +46,12 @@ function toVenueGeoJson(venues: MapVenue[]): GeoJSON.FeatureCollection {
 const DENMARK_CENTER: [number, number] = [10.6, 56.05];
 const DENMARK_ZOOM = 6.1;
 const FIT_DEBOUNCE_MS = 350;
+
+function syncRoute(map: maplibregl.Map, route: RouteStop[]): void {
+  const { line, stops } = toRouteGeoJson(route);
+  (map.getSource('route-line') as maplibregl.GeoJSONSource | undefined)?.setData(line);
+  (map.getSource('route-stops') as maplibregl.GeoJSONSource | undefined)?.setData(stops);
+}
 
 // Danish translations for maplibre's built-in UI strings (gesture overlay,
 // control tooltips) so nothing renders in English on this lang="da" site.
@@ -119,6 +126,7 @@ export function MapView({
   highlightSlug = null,
   tripMode = false,
   tripSlugs = [],
+  tripRoute = [],
   onToggleTrip,
   fullscreen = false,
 }: {
@@ -128,6 +136,7 @@ export function MapView({
   highlightSlug?: string | null;
   tripMode?: boolean;
   tripSlugs?: string[];
+  tripRoute?: RouteStop[];
   onToggleTrip?: (slug: string) => void;
   fullscreen?: boolean;
 }) {
@@ -151,6 +160,8 @@ export function MapView({
   // The popup click handler is bound once at load — read live trip state here.
   const tripRef = useRef({ tripMode, tripSlugs, onToggleTrip });
   tripRef.current = { tripMode, tripSlugs, onToggleTrip };
+  const tripRouteRef = useRef(tripRoute);
+  tripRouteRef.current = tripRoute;
   const highlightRef = useRef(highlightSlug);
   highlightRef.current = highlightSlug;
 
@@ -253,6 +264,23 @@ export function MapView({
           clusterMaxZoom: 12,
           clusterRadius: 46,
         });
+        // Loppetur route: a dashed line through the optimized visit order, drawn
+        // FIRST so it sits beneath every marker. The numbered stop badges are
+        // added last (on top). Both start empty; syncRoute fills them.
+        m.addSource('route-line', { type: 'geojson', data: EMPTY_FC });
+        m.addLayer({
+          id: 'route-line',
+          type: 'line',
+          source: 'route-line',
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: {
+            'line-color': MAP.accentDeep,
+            'line-width': ['interpolate', ['linear'], ['zoom'], 6, 2, 12, 3.5],
+            'line-dasharray': [1.6, 1.3],
+            'line-opacity': 0.85,
+          },
+        });
+        m.addSource('route-stops', { type: 'geojson', data: EMPTY_FC });
         // Soft warm glow behind clusters — reads as 'many markets here'.
         m.addLayer({
           id: 'cluster-halo',
@@ -520,12 +548,40 @@ export function MapView({
           m.on('mouseleave', layer, () => (m.getCanvas().style.cursor = ''));
         }
 
+        // Numbered stop badges — added LAST so the visit order reads on top of
+        // every marker and cluster. An ink disc + the order number.
+        m.addLayer({
+          id: 'route-stop-badge',
+          type: 'circle',
+          source: 'route-stops',
+          paint: {
+            'circle-color': MAP.ink,
+            'circle-radius': 11,
+            'circle-stroke-width': 2.5,
+            'circle-stroke-color': MAP.paper,
+          },
+        });
+        m.addLayer({
+          id: 'route-stop-number',
+          type: 'symbol',
+          source: 'route-stops',
+          layout: {
+            'text-field': ['get', 'n'],
+            'text-font': fonts.bold,
+            'text-size': 12.5,
+            'text-allow-overlap': true,
+            'text-ignore-placement': true,
+          },
+          paint: { 'text-color': MAP.paper },
+        });
+
         readyRef.current = true;
         // Props may have changed while the style loaded.
         applyHighlight(m, highlightRef.current);
         applySelected(m, tripRef.current.tripSlugs);
         syncData(m, eventsRef.current, false);
         syncVenues(m, venuesRef.current);
+        syncRoute(m, tripRouteRef.current);
       });
     });
     return () => {
@@ -569,6 +625,12 @@ export function MapView({
     if (!map || !readyRef.current) return;
     applySelected(map, tripSlugs);
   }, [tripSlugs]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !readyRef.current) return;
+    syncRoute(map, tripRoute);
+  }, [tripRoute]);
 
   // Fullscreen map is a deliberate mode switch — one-finger panning is expected.
   useEffect(() => {

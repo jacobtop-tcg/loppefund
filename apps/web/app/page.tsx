@@ -35,7 +35,7 @@ export default function HomePage() {
                 <span className="hero-dot" aria-hidden>
                   ·
                 </span>
-                opdateret {formatUpdated(updated)}
+                data opdateret {formatUpdated(updated)}
               </>
             )}
           </p>

@@ -1,6 +1,7 @@
 'use client';
 
 import { memo } from 'react';
+import Link from 'next/link';
 import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { EventCard } from './EventCard.tsx';
 import { VenueCard } from './VenueCard.tsx';
@@ -106,6 +107,10 @@ export const ResultsList = memo(function ResultsList({
               ))}
             </div>
           )}
+          <p className="empty-tip">
+            Mangler der et marked?{' '}
+            <Link href="/tip">Tip os, så tilføjer vi det →</Link>
+          </p>
         </div>
       ) : (
         <div className="event-grid">

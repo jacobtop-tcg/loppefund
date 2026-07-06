@@ -1216,6 +1216,21 @@ body:has(.is-map-view) {
   text-decoration: underline;
 }
 
+/* "Missing a market? Tip os →" — the empty state is the moment a visitor is
+   most motivated to fill a gap; make contributing one tap away. */
+.empty-tip {
+  margin-top: 30px;
+  font-size: 14px;
+  color: var(--ink-faint);
+}
+.empty-tip a {
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+.empty-tip a:hover {
+  text-decoration: underline;
+}
+
 /* Cross-links between the intent landing pages (/i-dag, /i-weekenden) and the
    main views — a calm footer nav, not loud buttons. */
 .intent-crosslinks {

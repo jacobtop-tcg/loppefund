@@ -530,7 +530,11 @@ export function Explorer({
               Åbn rute i Google Maps
             </a>
           ) : (
-            <button className="trip-go" disabled>
+            <button
+              className="trip-go"
+              disabled
+              title="Vælg mindst 2 markeder med kendt placering for at lave en rute"
+            >
               Åbn rute i Google Maps
             </button>
           )}

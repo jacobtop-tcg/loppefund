@@ -531,7 +531,15 @@ export default async function EventPage({
                       </span>
                     </p>
                   )}
-                  <p style={{ marginTop: 10, marginBottom: 0 }}>
+                  <p
+                    style={{
+                      marginTop: 10,
+                      marginBottom: 0,
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: 16,
+                    }}
+                  >
                     <a
                       href={`https://www.google.com/maps/dir/?api=1&destination=${event.lat},${event.lng}`}
                       target="_blank"
@@ -546,6 +554,20 @@ export default async function EventPage({
                       }}
                     >
                       <NavIcon /> Find vej
+                    </a>
+                    {/* Link out to the place on Google Maps for live hours/photos/
+                        reviews — we never store or re-display Google's data. */}
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                        [displayTitle(event.venueName ?? event.title), event.street, event.city]
+                          .filter(Boolean)
+                          .join(' '),
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--accent-deep)' }}
+                    >
+                      Se på Google Maps
                     </a>
                   </p>
                 </>

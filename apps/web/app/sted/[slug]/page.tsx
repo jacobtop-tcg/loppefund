@@ -125,6 +125,13 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
     v.lat != null && v.lng != null
       ? `https://www.google.com/maps/dir/?api=1&destination=${v.lat},${v.lng}`
       : null;
+  // Deep-link to the shop ON Google Maps (search by name + address) so a visitor
+  // can check live hours, photos and reviews. We link out — we never store or
+  // re-display Google's data (that would breach the Places terms); OpenStreetMap
+  // remains our own dataset.
+  const gmapsPlaceUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${displayTitle(v.title)} ${place}`.trim(),
+  )}`;
   const website = v.contactWebsite
     ? v.contactWebsite.startsWith('http')
       ? v.contactWebsite
@@ -155,6 +162,9 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
             Vis rute
           </a>
         )}
+        <a className="venue-action" href={gmapsPlaceUrl} target="_blank" rel="noopener noreferrer">
+          Se på Google Maps
+        </a>
         {website && (
           <a className="venue-action" href={website} target="_blank" rel="noopener noreferrer">
             Hjemmeside

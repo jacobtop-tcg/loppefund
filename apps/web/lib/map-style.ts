@@ -113,16 +113,89 @@ const LAYER_PAINT: Record<string, Record<string, unknown>> = {
 // the warm ink scale instead of positron's cold greys.
 const SYMBOL_DEFAULT = { 'text-color': MAP.inkSoft, 'text-halo-color': MAP.paper };
 
-function retheme(input: StyleSpecification): StyleSpecification {
+// Dark mirror of LAYER_PAINT — a warm charcoal-green map that harmonises with
+// the app's dark theme instead of glaring bright next to dark cards. Same layer
+// ids; land/water/roads darkened, labels lifted to a light warm ink with a dark
+// halo. Chosen at load time from prefers-color-scheme.
+const D_HALO = 'rgba(15, 19, 14, 0.85)';
+const D_LABEL = '#c7bfb0';
+const LAYER_PAINT_DARK: Record<string, Record<string, unknown>> = {
+  background: { 'background-color': '#161b17' },
+  park: { 'fill-color': '#1e2a20' },
+  landcover_wood: { 'fill-color': '#1e2a20' },
+  landcover_ice_shelf: { 'fill-color': '#1c221d' },
+  landcover_glacier: { 'fill-color': '#1c221d' },
+  landuse_residential: { 'fill-color': '#1d231e' },
+  building: { 'fill-color': '#232a24', 'fill-outline-color': '#30362c' },
+  water: { 'fill-color': '#152631' },
+  waterway: { 'line-color': '#1d3641' },
+  highway_path: { 'line-color': '#262c24' },
+  highway_minor: { 'line-color': '#2c322b' },
+  highway_major_casing: { 'line-color': '#20261f' },
+  highway_major_inner: { 'line-color': '#353b33' },
+  highway_major_subtle: { 'line-color': 'rgba(48, 54, 44, 0.6)' },
+  highway_motorway_casing: { 'line-color': '#20261f' },
+  highway_motorway_inner: {
+    'line-color': ['interpolate', ['linear'], ['zoom'], 5.8, 'rgba(48, 54, 44, 0.5)', 6, '#3a4038'],
+  },
+  highway_motorway_subtle: { 'line-color': 'rgba(48, 54, 44, 0.5)' },
+  highway_motorway_bridge_casing: { 'line-color': '#20261f' },
+  highway_motorway_bridge_inner: { 'line-color': '#3a4038' },
+  tunnel_motorway_casing: { 'line-color': '#242a22' },
+  tunnel_motorway_inner: { 'line-color': '#2c322b' },
+  road_area_pier: { 'fill-color': '#242a22' },
+  road_pier: { 'line-color': '#242a22' },
+  railway: { 'line-color': '#333a30' },
+  railway_dashline: { 'line-color': '#262c24' },
+  railway_transit: { 'line-color': '#333a30' },
+  railway_transit_dashline: { 'line-color': '#262c24' },
+  railway_service: { 'line-color': '#333a30' },
+  railway_service_dashline: { 'line-color': '#262c24' },
+  'aeroway-area': { 'fill-color': '#20261f' },
+  'aeroway-taxiway': { 'line-color': '#20261f' },
+  'aeroway-runway': { 'line-color': '#20261f' },
+  'aeroway-runway-casing': { 'line-color': '#242a22' },
+  boundary_2: { 'line-color': '#4a5343' },
+  boundary_3: { 'line-color': '#3f463a' },
+  boundary_disputed: { 'line-color': '#4a5343' },
+  waterway_line_label: { 'text-color': '#7d9aa8', 'text-halo-color': D_HALO },
+  water_name_point_label: { 'text-color': '#7d9aa8', 'text-halo-color': D_HALO },
+  water_name_line_label: { 'text-color': '#7d9aa8', 'text-halo-color': D_HALO },
+  'highway-name-path': { 'text-color': D_LABEL, 'text-halo-color': D_HALO },
+  'highway-name-minor': { 'text-color': D_LABEL, 'text-halo-color': D_HALO },
+  'highway-name-major': { 'text-color': D_LABEL, 'text-halo-color': D_HALO },
+  label_other: { 'text-color': D_LABEL, 'text-halo-color': D_HALO },
+  label_village: { 'text-color': '#a9a191', 'text-halo-color': D_HALO },
+  label_town: { 'text-color': '#c0b8a8', 'text-halo-color': D_HALO },
+  label_state: { 'text-color': '#8a8272', 'text-halo-color': D_HALO },
+  label_city: { 'text-color': '#e3dccd', 'text-halo-color': D_HALO },
+  label_city_capital: { 'text-color': '#efe9dc', 'text-halo-color': D_HALO },
+  label_country_3: { 'text-color': '#9a9282', 'text-halo-color': D_HALO },
+  label_country_2: { 'text-color': '#9a9282', 'text-halo-color': D_HALO },
+  label_country_1: { 'text-color': '#9a9282', 'text-halo-color': D_HALO },
+};
+const SYMBOL_DEFAULT_DARK = { 'text-color': D_LABEL, 'text-halo-color': D_HALO };
+
+function retheme(input: StyleSpecification, dark = false): StyleSpecification {
+  const paint = dark ? LAYER_PAINT_DARK : LAYER_PAINT;
+  const symbolDefault = dark ? SYMBOL_DEFAULT_DARK : SYMBOL_DEFAULT;
   const style = structuredClone(input);
   style.layers = style.layers.filter((l) => !HIDE.test(l.id));
   for (const layer of style.layers) {
-    const override = LAYER_PAINT[layer.id] ?? (layer.type === 'symbol' ? SYMBOL_DEFAULT : undefined);
+    const override = paint[layer.id] ?? (layer.type === 'symbol' ? symbolDefault : undefined);
     if (!override) continue;
     const l = layer as LayerSpecification & { paint?: Record<string, unknown> };
     l.paint = { ...l.paint, ...override };
   }
   return style;
+}
+
+function prefersDark(): boolean {
+  try {
+    return typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  } catch {
+    return false;
+  }
 }
 
 /** The pre-vector style, kept verbatim as graceful degradation. */
@@ -188,7 +261,7 @@ export function loadMapStyle(): Promise<LoadedMapStyle> {
   return rawPending.then(({ raw, vector, fonts }) => {
     if (raw) {
       try {
-        return { style: retheme(raw), vector, fonts };
+        return { style: retheme(raw, prefersDark()), vector, fonts };
       } catch {
         clearSession(); // corrupt cached raw — drop it and use the raster base
       }

@@ -2271,3 +2271,50 @@ body:has(.is-map-view) {
 @media (prefers-reduced-motion: reduce) {
   .empty-illu { animation: none; }
 }
+
+/* ---------- dark mode: "Deep Market at night" ---------- */
+/* Warm charcoal-green paper (never flat black), light warm ink, and accents
+   lifted so pine/terracotta stay vivid. Washes flip dark so tinted chips/badges
+   still read as subtle fills on dark cards. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #181d19;
+    --paper-raised: #212722;
+    --paper-sunken: #12160f;
+    --ink: #efe9dc;
+    --ink-soft: #b4ac9c;
+    --ink-faint: #8a8272;
+    --line: #333a30;
+    --brand: #58a483;
+    --brand-deep: #6fba97;
+    --brand-wash: #24352c;
+    --accent: #f26b41;
+    --accent-deep: #ff835c;
+    --accent-wash: #3a251d;
+    --green: #55b07e;
+    --green-wash: #1f3227;
+    --amber-wash: #332a19;
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 3px 10px -3px rgba(0, 0, 0, 0.42),
+      0 16px 30px -14px rgba(0, 0, 0, 0.55);
+    --shadow-card-hover: 0 2px 5px rgba(0, 0, 0, 0.42), 0 14px 26px -8px rgba(0, 0, 0, 0.55),
+      0 32px 56px -18px rgba(0, 0, 0, 0.65);
+    /* category deeps lifted for legibility; washes flipped dark */
+    --cat-terracotta: #ef7a4e;
+    --cat-terracotta-wash: #3a241c;
+    --cat-ochre: #d1a04a;
+    --cat-ochre-wash: #332a17;
+    --cat-slate: #8ba8d6;
+    --cat-slate-wash: #212836;
+    --cat-plum: #c78dba;
+    --cat-plum-wash: #322632;
+    --cat-petrol: #5faaa5;
+    --cat-petrol-wash: #1e2c2b;
+  }
+  /* Active chips use a light-ink label on the lifted brand/accent fills. */
+  .chip.active { color: #10231a; }
+  .chip.accent.active { color: #2a0f06; }
+  .venue-chip.active,
+  .venue-type.active { color: #06201e; }
+  /* The paper radial-gradient wash on <body> should darken too. */
+  body { background-image: radial-gradient(120% 80% at 50% -10%, #1e241f 0%, var(--paper) 46%); }
+}

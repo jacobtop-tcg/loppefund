@@ -3,6 +3,7 @@ import { danishHoursToOsm, splitPostcodeCity } from '../src/adapters/danish-hour
 import { parseKraeftensHits } from '../src/adapters/kraeftensbekaempelse.ts';
 import { parseDanmissionMarkers } from '../src/adapters/danmission.ts';
 import { parseFrelsensHaer } from '../src/adapters/frelsenshaer.ts';
+import { parseMoedreShop } from '../src/adapters/moedrehjaelpen.ts';
 
 describe('danishHoursToOsm', () => {
   it('parses abbreviated and full day ranges, dot/colon times, and HH-only', () => {
@@ -67,5 +68,21 @@ describe('parseFrelsensHaer', () => {
   });
   it('returns nothing when the blob is absent', () => {
     expect(parseFrelsensHaer('<html></html>')).toEqual([]);
+  });
+});
+
+describe('parseMoedreShop', () => {
+  it('reads the Adresse/Vejledende-åbningstider block with kl.-prefixed hours', () => {
+    const html = `<p><strong>Adresse:</strong><br /> Istedgade 86,<br /> 1650 København V</p>
+      <p><strong>Vejledende åbningstider:<br /> </strong>Tirsdag-fredag: kl. 10-17<br /> Lørdag: kl. 11-15</p>`;
+    const v = parseMoedreShop(html, 'https://moedrehjaelpen.dk/butikker/vesterbro/')!;
+    expect(v).toMatchObject({
+      sourceType: 'mh', operatorToken: 'moedrehjaelp', title: 'Mødrehjælpen, København V',
+      street: 'Istedgade 86', postcode: '1650', city: 'København V',
+      openingHoursText: 'Tu-Fr 10:00-17:00; Sa 11:00-15:00',
+    });
+  });
+  it('returns null without a parseable address', () => {
+    expect(parseMoedreShop('<p>no address</p>', 'https://moedrehjaelpen.dk/butikker/x/')).toBeNull();
   });
 });

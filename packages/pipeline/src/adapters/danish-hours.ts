@@ -39,7 +39,7 @@ const DAY_WORD =
 // A day label directly followed by a time range — anchoring on the time keeps
 // prefix noise ("Telefon: … Åbningstider:") out of the day label.
 const HOURS_RE = new RegExp(
-  `(${DAY_WORD}(?:\\s*(?:[-–—]|til|og)\\s*${DAY_WORD})?)\\s*:?\\s*` +
+  `(${DAY_WORD}(?:\\s*(?:[-–—]|til|og)\\s*${DAY_WORD})?)\\s*:?\\s*(?:kl\\.?\\s*)?` +
     '(\\d{1,2})(?:[.:](\\d{2}))?\\s*[-–—]\\s*(\\d{1,2})(?:[.:](\\d{2}))?',
   'gi',
 );

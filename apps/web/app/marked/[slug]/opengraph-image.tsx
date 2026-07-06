@@ -1,6 +1,12 @@
 import { ImageResponse } from 'next/og';
 import { loadEventDetail, listUpcomingEvents, todayIso } from '../../../lib/data.ts';
-import { CATEGORY_LABELS, displayPlace, displayTitle, formatDateLong } from '../../../lib/format.ts';
+import {
+  CATEGORY_LABELS,
+  displayPlace,
+  displayTitle,
+  formatDateLong,
+  formatHours,
+} from '../../../lib/format.ts';
 
 // One share card per event. Statically generated at build (nodejs runtime,
 // compatible with output:export — edge is not). Mirrors the page route so
@@ -34,6 +40,18 @@ export default async function EventOgImage({ params }: { params: Promise<{ slug:
   ]
     .filter(Boolean)
     .join(' · ');
+
+  // The details that make a shared link worth tapping — a scannable info row.
+  const chips: string[] = [];
+  const hours = next?.startTime ? formatHours(next.startTime, next.endTime) : null;
+  if (hours) chips.push(hours);
+  if (event?.isFree === true) chips.push('Gratis');
+  else if (event?.priceText && event.priceText.length <= 16) chips.push(event.priceText);
+  if (event?.indoorOutdoor === 'indoor') chips.push('Indendørs');
+  else if (event?.indoorOutdoor === 'outdoor') chips.push('Udendørs');
+  if (event?.amenities?.familyFriendly) chips.push('Børnevenligt');
+  if (event?.stallCountText) chips.push(event.stallCountText);
+  const shownChips = chips.slice(0, 4);
 
   return new ImageResponse(
     (
@@ -89,8 +107,39 @@ export default async function EventOgImage({ params }: { params: Promise<{ slug:
           </div>
         </div>
 
-        <div style={{ display: 'flex', fontSize: 40, fontWeight: 600, color: ACCENT_DEEP }}>
-          {dateLine || 'Se datoer og praktisk info'}
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div
+            style={{
+              display: 'flex',
+              fontSize: 40,
+              fontWeight: 600,
+              color: ACCENT_DEEP,
+              marginBottom: shownChips.length > 0 ? 22 : 0,
+            }}
+          >
+            {dateLine || 'Se datoer og praktisk info'}
+          </div>
+          {shownChips.length > 0 && (
+            <div style={{ display: 'flex' }}>
+              {shownChips.map((c, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: 'flex',
+                    background: 'rgba(36, 31, 25, 0.06)',
+                    color: INK,
+                    fontSize: 30,
+                    fontWeight: 600,
+                    padding: '9px 22px',
+                    borderRadius: 999,
+                    marginRight: 16,
+                  }}
+                >
+                  {c}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     ),

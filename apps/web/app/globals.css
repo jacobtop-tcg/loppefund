@@ -2197,3 +2197,62 @@ body:has(.is-map-view) {
   font-variant-numeric: tabular-nums;
 }
 .hero-dot { color: var(--ink-faint); }
+
+/* ---------- search autocomplete ---------- */
+
+.search-field {
+  position: relative;
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.search-field .search-box { width: 100%; }
+
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 40;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--paper-raised);
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card-hover);
+  max-height: 340px;
+  overflow-y: auto;
+}
+.suggestion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--ink);
+}
+.suggestion.active {
+  background: color-mix(in srgb, var(--brand) 10%, transparent);
+}
+.suggestion-kind {
+  flex: none;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  color: var(--ink-soft);
+}
+.suggestion-kind.kind-by {
+  background: color-mix(in srgb, var(--brand) 14%, transparent);
+  color: var(--brand);
+}
+.suggestion-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,7 +1,10 @@
 'use client';
 
-import { memo, useCallback, useRef } from 'react';
+import { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { VENUE_TYPES, VENUE_LABELS, type VenueType } from '../lib/venue-client.ts';
+import { suggestFor, type Suggestion } from '../lib/search-index.ts';
+
+const KIND_LABEL: Record<string, string> = { by: 'By', marked: 'Marked', butik: 'Butik' };
 
 export type DateFilter = 'aabent-nu' | 'idag' | 'imorgen' | 'weekend' | 'naeste-weekend' | 'alle';
 
@@ -32,6 +35,7 @@ const RADIUS_CHIPS = [10, 25, 50] as const;
 export const FilterBar = memo(function FilterBar(props: {
   query: string;
   onQuery: (v: string) => void;
+  searchIndex: Suggestion[];
   dateFilter: DateFilter;
   onDateFilter: (v: DateFilter) => void;
   category: string | null;
@@ -62,6 +66,36 @@ export const FilterBar = memo(function FilterBar(props: {
   const popRef = useRef<HTMLDetailsElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
 
+  // Search autocomplete: cities and market/venue names, prefix-ranked.
+  const [sugOpen, setSugOpen] = useState(false);
+  const [activeIdx, setActiveIdx] = useState(-1);
+  const suggestions = useMemo(
+    () => suggestFor(props.searchIndex, props.query),
+    [props.searchIndex, props.query],
+  );
+  const showSug = sugOpen && suggestions.length > 0;
+  const pickSuggestion = (s: Suggestion) => {
+    props.onQuery(s.value);
+    setSugOpen(false);
+    setActiveIdx(-1);
+  };
+  const onSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showSug) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActiveIdx((i) => Math.min(i + 1, suggestions.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveIdx((i) => Math.max(i - 1, 0));
+    } else if (e.key === 'Enter' && activeIdx >= 0) {
+      e.preventDefault();
+      pickSuggestion(suggestions[activeIdx]!);
+    } else if (e.key === 'Escape') {
+      setSugOpen(false);
+      setActiveIdx(-1);
+    }
+  };
+
   // Escape closes the Filtre popover and returns focus to its summary.
   const onPopKeyDown = useCallback((e: React.KeyboardEvent<HTMLDetailsElement>) => {
     if (e.key === 'Escape' && popRef.current?.open) {
@@ -79,19 +113,52 @@ export const FilterBar = memo(function FilterBar(props: {
   return (
     <div className="controls">
       <div className="search-row">
-        <label className="search-box">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
-            <circle cx="11" cy="11" r="7" />
-            <path d="m20 20-3.5-3.5" />
-          </svg>
-          <input
-            type="search"
-            placeholder="Søg marked, by eller sted…"
-            value={props.query}
-            onChange={(e) => props.onQuery(e.target.value)}
-            aria-label="Søg"
-          />
-        </label>
+        <div className="search-field">
+          <label className="search-box">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" />
+            </svg>
+            <input
+              type="search"
+              role="combobox"
+              aria-expanded={showSug}
+              aria-controls="search-suggestions"
+              aria-autocomplete="list"
+              placeholder="Søg marked, by eller sted…"
+              value={props.query}
+              onChange={(e) => {
+                props.onQuery(e.target.value);
+                setSugOpen(true);
+                setActiveIdx(-1);
+              }}
+              onFocus={() => setSugOpen(true)}
+              onBlur={() => setTimeout(() => setSugOpen(false), 120)}
+              onKeyDown={onSearchKeyDown}
+              aria-label="Søg"
+            />
+          </label>
+          {showSug && (
+            <ul className="search-suggestions" id="search-suggestions" role="listbox" aria-label="Forslag">
+              {suggestions.map((s, i) => (
+                <li
+                  key={`${s.kind}:${s.value}`}
+                  role="option"
+                  aria-selected={i === activeIdx}
+                  className={`suggestion${i === activeIdx ? ' active' : ''}`}
+                  onMouseDown={(e) => {
+                    e.preventDefault(); // keep focus; select before blur closes it
+                    pickSuggestion(s);
+                  }}
+                  onMouseEnter={() => setActiveIdx(i)}
+                >
+                  <span className={`suggestion-kind kind-${s.kind}`}>{KIND_LABEL[s.kind]}</span>
+                  <span className="suggestion-label">{s.label}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
         <details className="filter-pop" ref={popRef} onKeyDown={onPopKeyDown}>
           <summary ref={summaryRef} className={`chip${secondaryCount > 0 ? ' has-active' : ''}`}>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>

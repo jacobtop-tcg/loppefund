@@ -6,6 +6,7 @@ import { copenhagenNow, isOpenAt, type CphNow } from '@loppefund/core';
 import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
 import { venueOpenState, VENUE_TYPES, type VenueType } from '../lib/venue-client.ts';
+import { buildSearchIndex } from '../lib/search-index.ts';
 import { useOutdoorWeather } from '../lib/weather.ts';
 import { FilterBar, type DateFilter } from './FilterBar.tsx';
 import { ResultsList } from './ResultsList.tsx';
@@ -158,6 +159,9 @@ export function Explorer({
   }, [hydrated, dateFilter, category, query, freeOnly, familyOnly, inOut, savedOnly, gemsFirst, view]);
 
   const [from, to] = dateRangeFor(dateFilter, today);
+
+  // Autocomplete index (cities + market/venue names), built once from the data.
+  const searchIndex = useMemo(() => buildSearchIndex(events, venues), [events, venues]);
 
   // Typing stays instant (the input reads `query`), while the expensive filter
   // passes over ~700 events + ~1100 venues run against a deferred value — React
@@ -377,7 +381,7 @@ export function Explorer({
   return (
     <div className={`explorer${view === 'map' ? ' is-map-view' : ''}${tripMode ? ' has-trip' : ''}`}>
       <FilterBar
-        query={query} onQuery={setQuery}
+        query={query} onQuery={setQuery} searchIndex={searchIndex}
         dateFilter={dateFilter} onDateFilter={setDateFilter}
         category={category} onCategory={setCategory}
         freeOnly={freeOnly} onFreeOnly={setFreeOnly}

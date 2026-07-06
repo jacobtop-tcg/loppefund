@@ -86,6 +86,11 @@ jobs:
           # automatisk fra actor'ens seneste kørsel (se apify/README.md).
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           APIFY_ACTORS: ${{ vars.APIFY_ACTORS }}
+          # CVR: free system-til-system credential from datacvr.virk.dk. When
+          # both are set, the crawl pulls every registered second-hand shop in DK
+          # (branchekode 47.79.00); absent, the CVR adapter is a harmless no-op.
+          CVR_USER: ${{ secrets.CVR_USER }}
+          CVR_PASS: ${{ secrets.CVR_PASS }}
         run: |
           node packages/pipeline/src/cli.ts run
           node packages/pipeline/src/cli.ts tips || true

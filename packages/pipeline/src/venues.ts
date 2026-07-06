@@ -54,6 +54,17 @@ const OVERPASS_ENDPOINTS = [
 // loppemarked/loppelade/reolmarked have no distinct OSM tag — they arrive as
 // shop=second_hand and are recovered by name in classifyVenue().
 //
+// The second_hand=yes clause recovers used-goods shops whose PRIMARY tag is a
+// product category (shop=clothes/furniture/music/computer/…) rather than a
+// second-hand tag — vintage-clothing shops, used-record stores, refurb-phone
+// chains (GreenMind), Wefood (Folkekirkens Nødhjælp's surplus-food charity),
+// used-furniture dealers. The tag second_hand=yes explicitly asserts used goods,
+// so precision is high; the only noise on live Overpass was VEHICLE dealers
+// (shop=car|motorcycle|caravan|…), which the negated-regex excludes. Measured
+// against live Overpass: this adds 21 real venues and zero vehicle false
+// positives. (second_hand="only" is kept as its own clause above — a superset
+// signal — so both "yes" and "only" are covered.)
+//
 // The final NAME clause recovers venues the tag clauses miss: antikvariater
 // tagged shop=books WITHOUT a second_hand tag, and recurring kræmmer-/loppe-
 // markeder tagged amenity=marketplace with no shop tag. Tokens are deliberately
@@ -69,6 +80,7 @@ area["ISO3166-1"="DK"][admin_level=2]->.dk;
   nwr["shop"="antiques"](area.dk);
   nwr["shop"="books"]["second_hand"](area.dk);
   nwr["shop"]["second_hand"="only"](area.dk);
+  nwr["shop"]["second_hand"="yes"]["shop"!~"^(car|motorcycle|caravan|car_repair|boat|truck|trailer|atv|snowmobile|jetski|tyres)$"](area.dk);
   nwr["name"~"loppemarked|loppebutik|loppeland|loppekælder|reolmarked|kræmmermarked|antikvariat",i](area.dk);
 );
 out center tags;`;

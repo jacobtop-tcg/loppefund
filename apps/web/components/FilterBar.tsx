@@ -126,6 +126,9 @@ export const FilterBar = memo(function FilterBar(props: {
               aria-expanded={showSug}
               aria-controls="search-suggestions"
               aria-autocomplete="list"
+              aria-activedescendant={
+                showSug && activeIdx >= 0 ? `search-opt-${activeIdx}` : undefined
+              }
               placeholder="Søg marked, by eller sted…"
               value={props.query}
               onChange={(e) => {
@@ -144,6 +147,7 @@ export const FilterBar = memo(function FilterBar(props: {
               {suggestions.map((s, i) => (
                 <li
                   key={`${s.kind}:${s.value}`}
+                  id={`search-opt-${i}`}
                   role="option"
                   aria-selected={i === activeIdx}
                   className={`suggestion${i === activeIdx ? ' active' : ''}`}

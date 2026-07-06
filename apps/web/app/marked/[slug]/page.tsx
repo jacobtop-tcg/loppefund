@@ -90,7 +90,10 @@ function eventJsonLd(event: NonNullable<ReturnType<typeof loadEventDetail>>, tod
   return {
     '@context': 'https://schema.org',
     '@type': 'Event',
-    name: event.title,
+    // Match the rendered H1 (which de-shouts ALL-CAPS crawled titles). Google
+    // suppresses Event rich results when the marked-up name and the visible
+    // heading disagree.
+    name: displayTitle(event.title),
     url: eventUrl,
     startDate: next.startTime ? `${next.date}T${next.startTime}:00` : next.date,
     ...(next.endTime ? { endDate: `${next.date}T${next.endTime}:00` } : {}),
@@ -103,7 +106,7 @@ function eventJsonLd(event: NonNullable<ReturnType<typeof loadEventDetail>>, tod
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     location: {
       '@type': 'Place',
-      name: event.venueName ?? event.title,
+      name: displayTitle(event.venueName ?? event.title),
       address: {
         '@type': 'PostalAddress',
         streetAddress: event.street ?? undefined,
@@ -551,8 +554,12 @@ export default async function EventPage({
 
             <section className="panel trust-panel">
               <h2>Kan du stole på det her?</h2>
-              <div className="trust-meter">
-                <div className="trust-bar">
+              <div
+                className="trust-meter"
+                role="img"
+                aria-label={`Sikkerhed: ${trustLabel} (${confidencePct}%)`}
+              >
+                <div className="trust-bar" title={`${confidencePct}% sikkerhed`}>
                   <span style={{ width: `${confidencePct}%` }} />
                 </div>
                 <span className={`trust-label ${event.confidence < 0.45 ? 'low' : ''}`}>

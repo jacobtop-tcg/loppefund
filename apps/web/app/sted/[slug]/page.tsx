@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { copenhagenNow } from '@loppefund/core';
+import { copenhagenNow, parseOsmHours } from '@loppefund/core';
 import { listVenues, loadVenueDetail } from '../../../lib/data.ts';
 import { displayPlace, displayTitle } from '../../../lib/format.ts';
 import { VENUE_LABELS } from '../../../lib/venue-client.ts';
@@ -8,6 +8,75 @@ import { VenueHours } from '../../../components/VenueHours.tsx';
 
 // Permanent-venue pages: "<butik> åbningstider" is what people google for a shop.
 export const dynamicParams = false;
+
+const SITE_URL = process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund';
+const SCHEMA_DAYS = [
+  'https://schema.org/Monday',
+  'https://schema.org/Tuesday',
+  'https://schema.org/Wednesday',
+  'https://schema.org/Thursday',
+  'https://schema.org/Friday',
+  'https://schema.org/Saturday',
+  'https://schema.org/Sunday',
+];
+const pad2 = (n: number) => String(n).padStart(2, '0');
+const fmtMin = (m: number) => {
+  const c = Math.min(m, 1439); // schema Time has no "24:00"; clamp an all-day close
+  return `${pad2(Math.floor(c / 60))}:${pad2(c % 60)}`;
+};
+
+/** Escape a JSON-LD payload for safe inline injection (OSM names are crawled). */
+function safeJsonLd(data: unknown): string {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(new RegExp(String.fromCharCode(0x2028), 'g'), '\\u2028')
+    .replace(new RegExp(String.fromCharCode(0x2029), 'g'), '\\u2029');
+}
+
+/**
+ * Store JSON-LD for a permanent venue — the ~1100 /sted pages carried zero
+ * structured data. Opening hours are reconstructed from the VALIDATED parse
+ * (never the raw OSM string, which can carry PH/month selectors schema rejects);
+ * unparseable hours are simply omitted. Missing is fine, malformed markup is not.
+ */
+function venueJsonLd(v: NonNullable<ReturnType<typeof loadVenueDetail>>, website: string | null) {
+  const week = parseOsmHours(v.openingHoursText);
+  const spec = week
+    ? week.flatMap((ranges, day) =>
+        ranges.map(([s, e]) => ({
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: SCHEMA_DAYS[day],
+          opens: fmtMin(s),
+          closes: fmtMin(e),
+        })),
+      )
+    : [];
+  const hasAddress = v.street || v.city || v.postcode;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Store',
+    name: displayTitle(v.title),
+    url: `${SITE_URL}/sted/${v.slug}`,
+    ...(hasAddress
+      ? {
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: v.street ?? undefined,
+            postalCode: v.postcode ?? undefined,
+            addressLocality: v.city ?? undefined,
+            addressCountry: 'DK',
+          },
+        }
+      : {}),
+    ...(v.lat != null && v.lng != null
+      ? { geo: { '@type': 'GeoCoordinates', latitude: v.lat, longitude: v.lng } }
+      : {}),
+    ...(v.contactPhone ? { telephone: v.contactPhone } : {}),
+    ...(website ? { sameAs: [website] } : {}),
+    ...(spec.length ? { openingHoursSpecification: spec } : {}),
+  };
+}
 
 export function generateStaticParams(): Array<{ slug: string }> {
   const venues = listVenues();
@@ -28,7 +97,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const title = `${name} — ${kind}${place} | Loppefund`;
   const description = `Åbningstider, adresse og rute for ${name}${place}. ${kind} — altid opdateret.`;
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
-  return { title, description, alternates: { canonical: `${basePath}/sted/${v.slug}` } };
+  const ogImage = { url: `${basePath}/opengraph-image`, width: 1200, height: 630, alt: title };
+  return {
+    title,
+    description,
+    alternates: { canonical: `${basePath}/sted/${v.slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `${basePath}/sted/${v.slug}`,
+      type: 'website',
+      siteName: 'Loppefund',
+      locale: 'da_DK',
+      images: [ogImage],
+    },
+    twitter: { card: 'summary_large_image', images: [ogImage] },
+  };
 }
 
 export default async function VenuePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -46,9 +130,14 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
       ? v.contactWebsite
       : `https://${v.contactWebsite}`
     : null;
+  const jsonLd = venueJsonLd(v, website);
 
   return (
     <div className="container">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
+      />
       <Link href="/" className="back-link">
         ← Alle steder
       </Link>

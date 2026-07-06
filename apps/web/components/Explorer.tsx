@@ -471,6 +471,10 @@ export function Explorer({
           />
         </section>
         <aside className="map-pane" aria-label="Kort over markeder">
+          <p className="sr-only">
+            Kortet viser de samme markeder som listen ovenfor. Listen er fuldt
+            tilgængelig uden kortet.
+          </p>
           <MapView
             events={mapEvents}
             venues={filteredVenues}

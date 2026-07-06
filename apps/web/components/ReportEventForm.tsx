@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Per-event community correction: the lowest-friction way for a visitor to flag
 // an INCORRECT event (the one thing the trust model must never tolerate). Reuses
@@ -22,12 +22,50 @@ export function ReportEventForm({ title, url }: { title: string; url: string }) 
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState('');
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle');
+  // Remember on this device that a report was sent, so a returning visitor sees
+  // the acknowledgement instead of being nudged to report the same thing again.
+  // Read after mount (never in the useState initializer) so the static HTML and
+  // first client render agree — no hydration mismatch.
+  const storageKey = `lf:reported:${url}`;
+  const [reportedBefore, setReportedBefore] = useState(false);
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(storageKey)) setReportedBefore(true);
+    } catch {
+      // private mode / disabled storage — just don't restore the flag
+    }
+  }, [storageKey]);
+  const remember = () => {
+    try {
+      localStorage.setItem(storageKey, '1');
+    } catch {
+      // quota / private mode — the in-session 'done' state still acknowledges it
+    }
+  };
 
   if (state === 'done') {
     return (
       <p className="trust-note" role="status">
         Tak for hjælpen! 🧡 Vi tjekker det hurtigst muligt — sådan holder vi Loppefund
         troværdig.
+      </p>
+    );
+  }
+
+  if (reportedBefore && !open) {
+    return (
+      <p className="trust-note" role="status">
+        Du har meldt en fejl her — tak!{' '}
+        <button
+          type="button"
+          className="report-link"
+          onClick={() => {
+            setReportedBefore(false);
+            setOpen(true);
+          }}
+        >
+          Meld en ny fejl
+        </button>
       </p>
     );
   }
@@ -67,6 +105,7 @@ export function ReportEventForm({ title, url }: { title: string; url: string }) 
             contact,
           }),
         });
+        if (res.ok) remember();
         setState(res.ok ? 'done' : 'error');
       } catch {
         setState('error');
@@ -79,6 +118,7 @@ export function ReportEventForm({ title, url }: { title: string; url: string }) 
     window.location.href = `mailto:${TIP_EMAIL}?subject=${encodeURIComponent(
       `Rettelse: ${title}`,
     )}&body=${encodeURIComponent(body)}`;
+    remember();
     setState('done');
   }
 

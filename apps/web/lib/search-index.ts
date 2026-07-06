@@ -19,6 +19,14 @@ export interface Suggestion {
  * and folded so typo-tolerant matching is a cheap substring test. Runs once,
  * memoized in the Explorer.
  */
+// City nicknames people actually type into search. Each alias resolves to the
+// canonical city name, which then substring-matches all of its districts
+// (København K / NV / …). Only emitted when the canonical city is in the data,
+// so an alias never leads to an empty result.
+const CITY_ALIASES: Array<{ canonical: string; aliases: string[] }> = [
+  { canonical: 'København', aliases: ['kbh', 'cph', 'copenhagen'] },
+];
+
 export function buildSearchIndex(events: EventSummary[], venues: VenueSummary[]): Suggestion[] {
   const cityCount = new Map<string, number>();
   const add = (m: Map<string, number>, key: string | null | undefined) => {
@@ -32,6 +40,13 @@ export function buildSearchIndex(events: EventSummary[], venues: VenueSummary[])
   const out: Suggestion[] = [];
   for (const [city, n] of cityCount) {
     out.push({ label: city, value: city, kind: 'by', fold: foldForSearch(city), weight: 1000 + n });
+  }
+  for (const { canonical, aliases } of CITY_ALIASES) {
+    const cf = foldForSearch(canonical);
+    if (![...cityCount.keys()].some((c) => foldForSearch(c).startsWith(cf))) continue;
+    for (const a of aliases) {
+      out.push({ label: canonical, value: canonical, kind: 'by', fold: foldForSearch(a), weight: 1400 });
+    }
   }
   const seenTitle = new Set<string>();
   for (const e of events) {

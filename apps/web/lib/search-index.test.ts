@@ -50,4 +50,17 @@ describe('suggestFor', () => {
   it('matches mid-string market names', () => {
     expect(suggestFor(idx, 'torvet').some((s) => s.label === 'Loppemarked på Torvet')).toBe(true);
   });
+
+  it('resolves city nicknames (kbh/cph/copenhagen) to København, only when present', () => {
+    const kbhIdx = buildSearchIndex(
+      [ev('Loppemarked på Israels Plads', 'København K')],
+      [],
+    );
+    for (const alias of ['kbh', 'cph', 'copenhagen']) {
+      const hit = suggestFor(kbhIdx, alias);
+      expect(hit.some((s) => s.label === 'København')).toBe(true);
+    }
+    // No København in the data -> no dead alias suggestions.
+    expect(suggestFor(idx, 'cph')).toEqual([]);
+  });
 });

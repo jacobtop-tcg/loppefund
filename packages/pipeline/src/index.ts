@@ -14,3 +14,4 @@ export * from './adapters/kraeftensbekaempelse.ts';
 export * from './adapters/danmission.ts';
 export * from './adapters/frelsenshaer.ts';
 export * from './adapters/moedrehjaelpen.ts';
+export * from './adapters/cvr.ts';

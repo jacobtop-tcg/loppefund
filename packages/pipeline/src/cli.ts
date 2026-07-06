@@ -42,6 +42,7 @@ import { parseTip } from './tip-parser.ts';
 import { ingestOsmVenues } from './venues.ts';
 import { ingestChainVenues } from './chain-venues.ts';
 import { fetchKirkensKorshaerVenues } from './adapters/kirkenskorshaer.ts';
+import { fetchFolkekirkensNoedhjaelpVenues } from './adapters/folkekirkensnoedhjaelp.ts';
 import { geocode } from './geocode.ts';
 import { adapters } from './adapters/index.ts';
 
@@ -445,23 +446,28 @@ if (fullCrawl) {
 
   // Authoritative charity-chain shops (with the opening hours OSM lacks). Runs
   // AFTER the OSM ingest so a chain shop can enrich the OSM venue it matches.
-  // Isolated in try/catch: a chain site outage must never fail the deploy.
-  try {
-    upsertSource(db, {
-      key: 'kirkenskorshaer',
-      name: 'Kirkens Korshær',
-      baseUrl: 'https://kirkenskorshaer.dk',
-      trust: 0.8, // the operator's own store list — highly authoritative
+  // Each chain is isolated: one site's outage never fails the deploy or the
+  // others. The operator's own store list is highly authoritative (trust 0.8).
+  const geocodeAddress = async (a: { street?: string | null; postcode?: string | null; city?: string | null }) => {
+    const g = await geocode(db, {
+      street: a.street ?? undefined,
+      postcode: a.postcode ?? undefined,
+      city: a.city ?? undefined,
     });
-    const kk = await fetchKirkensKorshaerVenues();
-    const chainStats = await ingestChainVenues(db, kk, {
-      geocodeAddress: async (a) => {
-        const g = await geocode(db, { street: a.street ?? undefined, postcode: a.postcode ?? undefined, city: a.city ?? undefined });
-        return g.lat != null && g.lng != null ? { lat: g.lat, lng: g.lng } : null;
-      },
-    });
-    console.log('kirkens korshær venues:', JSON.stringify(chainStats));
-  } catch (e) {
-    console.error('chain venue ingest failed (kept existing venues):', (e as Error).message);
+    return g.lat != null && g.lng != null ? { lat: g.lat, lng: g.lng } : null;
+  };
+  const chains = [
+    { key: 'kirkenskorshaer', name: 'Kirkens Korshær', baseUrl: 'https://kirkenskorshaer.dk', fetch: fetchKirkensKorshaerVenues },
+    { key: 'folkekirkensnoedhjaelp', name: 'Folkekirkens Nødhjælp', baseUrl: 'https://www.noedhjaelp.dk', fetch: fetchFolkekirkensNoedhjaelpVenues },
+  ];
+  for (const chain of chains) {
+    try {
+      upsertSource(db, { key: chain.key, name: chain.name, baseUrl: chain.baseUrl, trust: 0.8 });
+      const shops = await chain.fetch();
+      const chainStats = await ingestChainVenues(db, shops, { geocodeAddress });
+      console.log(`${chain.name} venues:`, JSON.stringify(chainStats));
+    } catch (e) {
+      console.error(`${chain.name} venue ingest failed (kept existing venues):`, (e as Error).message);
+    }
   }
 }

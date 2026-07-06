@@ -7,3 +7,4 @@ export * from './discovery.ts';
 export * from './venues.ts';
 export * from './chain-venues.ts';
 export * from './adapters/kirkenskorshaer.ts';
+export * from './adapters/folkekirkensnoedhjaelp.ts';

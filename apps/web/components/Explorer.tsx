@@ -55,11 +55,9 @@ function dateRangeFor(filter: DateFilter, today: string): [string, string] {
 
 export function Explorer({
   events,
-  venues = [],
   now: initialNow,
 }: {
   events: EventSummary[];
-  venues?: VenueSummary[];
   now: CphNow;
 }) {
   const [dateFilter, setDateFilter] = useState<DateFilter>('weekend');
@@ -83,7 +81,33 @@ export function Explorer({
   // weekend-markets view stays clean; a master toggle + per-type toggles opt in.
   const [venuesOn, setVenuesOn] = useState(false);
   const [venueTypes, setVenueTypes] = useState<Set<VenueType>>(() => new Set(VENUE_TYPES));
+  // Lazy-loaded so ~1,000 venues never sit in the initial HTML: fetched from the
+  // static /venues.json the first time the "Faste steder" layer is opened.
+  const [venues, setVenues] = useState<VenueSummary[]>([]);
+  const [venuesLoaded, setVenuesLoaded] = useState(false);
   const { favorites, count: favCount } = useFavorites();
+
+  useEffect(() => {
+    if (!venuesOn || venuesLoaded) return;
+    let cancelled = false;
+    const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+    fetch(`${base}/venues.json`)
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data: VenueSummary[]) => {
+        if (!cancelled) {
+          setVenues(Array.isArray(data) ? data : []);
+          setVenuesLoaded(true);
+        }
+      })
+      .catch(() => {
+        // A failed fetch just means no venues this session — the map/markets
+        // are unaffected. Retry on the next toggle.
+        if (!cancelled) setVenuesLoaded(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [venuesOn, venuesLoaded]);
 
   // Today's date, derived from the LIVE clock — never a build-time constant.
   // The static HTML bakes `now` at build; if "today" came from a frozen prop it

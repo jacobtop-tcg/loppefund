@@ -8,7 +8,9 @@ import { Explorer } from '../components/Explorer.tsx';
 // `next dev` always re-renders, so local development still sees live data.
 export default function HomePage() {
   const events = listUpcomingEvents();
-  const venues = listVenues();
+  // Only the COUNT is needed here (for the hero); the full venue list is
+  // lazy-loaded client-side from /venues.json when the layer is opened.
+  const venueCount = listVenues().length;
   const now = copenhagenNow();
   const updated = latestUpdate();
   return (
@@ -27,7 +29,7 @@ export default function HomePage() {
             <span className="hero-dot" aria-hidden>
               ·
             </span>
-            <strong>{venues.length.toLocaleString('da-DK')}</strong> faste steder
+            <strong>{venueCount.toLocaleString('da-DK')}</strong> faste steder
             {updated && (
               <>
                 <span className="hero-dot" aria-hidden>
@@ -40,7 +42,7 @@ export default function HomePage() {
         </div>
       </header>
       <main id="markeder" className="explorer-main">
-        <Explorer events={events} venues={venues} now={now} />
+        <Explorer events={events} now={now} />
       </main>
       <footer className="site-footer">
         <div className="explorer-main">

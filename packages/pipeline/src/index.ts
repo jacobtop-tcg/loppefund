@@ -4,3 +4,6 @@ export * from './fetcher.ts';
 export * from './geocode.ts';
 export * from './canonicalize.ts';
 export * from './discovery.ts';
+export * from './venues.ts';
+export * from './chain-venues.ts';
+export * from './adapters/kirkenskorshaer.ts';

@@ -40,6 +40,9 @@ import {
 import { formatReport, mineDomains, netNewCandidates, probeDomain } from './discovery.ts';
 import { parseTip } from './tip-parser.ts';
 import { ingestOsmVenues } from './venues.ts';
+import { ingestChainVenues } from './chain-venues.ts';
+import { fetchKirkensKorshaerVenues } from './adapters/kirkenskorshaer.ts';
+import { geocode } from './geocode.ts';
 import { adapters } from './adapters/index.ts';
 
 const { values, positionals } = parseArgs({
@@ -438,5 +441,27 @@ if (fullCrawl) {
     console.log('osm venues:', JSON.stringify(venueStats));
   } catch (e) {
     console.error('osm venue ingest failed (kept existing venues):', (e as Error).message);
+  }
+
+  // Authoritative charity-chain shops (with the opening hours OSM lacks). Runs
+  // AFTER the OSM ingest so a chain shop can enrich the OSM venue it matches.
+  // Isolated in try/catch: a chain site outage must never fail the deploy.
+  try {
+    upsertSource(db, {
+      key: 'kirkenskorshaer',
+      name: 'Kirkens Korshær',
+      baseUrl: 'https://kirkenskorshaer.dk',
+      trust: 0.8, // the operator's own store list — highly authoritative
+    });
+    const kk = await fetchKirkensKorshaerVenues();
+    const chainStats = await ingestChainVenues(db, kk, {
+      geocodeAddress: async (a) => {
+        const g = await geocode(db, { street: a.street ?? undefined, postcode: a.postcode ?? undefined, city: a.city ?? undefined });
+        return g.lat != null && g.lng != null ? { lat: g.lat, lng: g.lng } : null;
+      },
+    });
+    console.log('kirkens korshær venues:', JSON.stringify(chainStats));
+  } catch (e) {
+    console.error('chain venue ingest failed (kept existing venues):', (e as Error).message);
   }
 }

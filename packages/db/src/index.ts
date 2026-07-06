@@ -712,14 +712,24 @@ export function existingVenueSlugs(db: DatabaseSync): {
   return { byOsm, used };
 }
 
-/** Retire venues not seen since `runStartIso` (a full OSM sweep no longer lists
- *  them — closed/removed). Reversible: a re-listed venue flips back to active. */
-export function markStaleVenuesGone(db: DatabaseSync, runStartIso: string): number {
+/** Retire venues not seen since `runStartIso` (a full sweep no longer lists them
+ *  — closed/removed). Reversible: a re-listed venue flips back to active.
+ *
+ *  `osmTypes` scopes the sweep to ONE source (venues are namespaced by osm_type:
+ *  'node'/'way'/'relation' = OpenStreetMap, 'kk' = Kirkens Korshær, …). Each
+ *  source must retire only its OWN stale venues — an unscoped sweep after the
+ *  OSM ingest would wrongly retire every chain venue (last seen in a different
+ *  ingest), and vice-versa. Omitting `osmTypes` sweeps all sources (legacy). */
+export function markStaleVenuesGone(
+  db: DatabaseSync,
+  runStartIso: string,
+  osmTypes?: readonly string[],
+): number {
+  if (osmTypes && osmTypes.length === 0) return 0;
+  const scope = osmTypes ? ` AND osm_type IN (${osmTypes.map(() => '?').join(',')})` : '';
   const res = db
-    .prepare(
-      `UPDATE venues SET status = 'gone' WHERE status = 'active' AND last_seen_at < ?`,
-    )
-    .run(runStartIso);
+    .prepare(`UPDATE venues SET status = 'gone' WHERE status = 'active' AND last_seen_at < ?${scope}`)
+    .run(runStartIso, ...(osmTypes ?? []));
   return Number(res.changes);
 }
 

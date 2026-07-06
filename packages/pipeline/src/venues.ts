@@ -206,6 +206,8 @@ export async function ingestOsmVenues(
     stats.byCategory[category] = (stats.byCategory[category] ?? 0) + 1;
   }
 
-  stats.gone = markStaleVenuesGone(db, runStart);
+  // Scope the stale-sweep to OSM-sourced venues only — chain venues (osm_type
+  // 'kk' etc.) are retired by their own ingest, not this one.
+  stats.gone = markStaleVenuesGone(db, runStart, ['node', 'way', 'relation']);
   return stats;
 }

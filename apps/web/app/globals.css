@@ -785,6 +785,20 @@ a:focus-visible .event-card {
   color: var(--accent-deep);
 }
 
+/* Market size — a "worth driving to?" scan signal. Neutral-strong so it reads
+   as a fact, not a promo. */
+.badge.stalls {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Family-friendly — answers one of the six core questions at a glance. */
+.badge.family {
+  background: var(--brand-wash);
+  color: var(--brand-deep);
+}
+
 /* ---------- explorer split (list + persistent map) ---------- */
 
 .explorer-split {
@@ -796,11 +810,13 @@ a:focus-visible .event-card {
   min-width: 0;
 }
 
-/* Mobile: full-bleed 45dvh map hero above the list (cards stay first in DOM). */
+/* Mobile: full-bleed map hero above the list (cards stay first in DOM). Kept to
+   ~36dvh so at least one full event card sits above the fold on first load —
+   spatial context, not a wall of map. The Kort pill opens the fullscreen map. */
 .map-pane {
   order: -1;
-  height: 45vh;
-  height: 45dvh;
+  height: 36vh;
+  height: 36dvh;
   margin: 0 -20px 18px;
 }
 
@@ -2076,6 +2092,15 @@ body:has(.is-map-view) {
 
   .tagline {
     display: none;
+  }
+
+  /* The sticky bar must be fully opaque on mobile: the desktop gradient fades to
+     transparent at its lower edge, so cards and the map hero bled through it
+     while scrolling. Mirror the >=900px opaque treatment. */
+  .controls {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8px;
   }
 
   .event-grid {

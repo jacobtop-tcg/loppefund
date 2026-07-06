@@ -21,7 +21,9 @@ export function VenueCard({
 }) {
   const state = venueOpenState(venue.openingHoursText, now);
   const label = openLabel(state, now);
-  const place = venue.city ?? venue.street ?? 'Fast butik';
+  // Omit the place line entirely when we have no real location — printing the
+  // type word "Fast butik" as if it were a town read as a bug.
+  const place = venue.city ?? venue.street ?? null;
   return (
     <div className="event-card-shell" style={{ position: 'relative', display: 'block' }}>
       <Link href={`/sted/${venue.slug}`} prefetch={false} style={{ display: 'block' }}>
@@ -39,7 +41,7 @@ export function VenueCard({
           </div>
           <div className="event-card-body">
             <h3 className="event-title">{displayTitle(venue.title)}</h3>
-            <div className="event-place">{displayPlace(place)}</div>
+            {place && <div className="event-place">{displayPlace(place)}</div>}
             <div className={`event-time${label?.open ? ' venue-open-line' : ''}`}>
               {label ? label.text : 'Åbningstider ikke oplyst'}
             </div>

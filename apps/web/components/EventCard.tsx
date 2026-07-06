@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { parseStallCount } from '@loppefund/core';
 import type { EventSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
 import { weatherGlyph, type DayWeather } from '../lib/weather.ts';
@@ -24,6 +25,10 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
   const hours = formatHours(next.startTime, next.endTime);
   const isToday = event.nextDate === today;
   const moreDates = event.occurrences.filter((o) => o.date > event.nextDate).length;
+  // Size is a strong "worth driving to?" signal and family-friendliness answers
+  // one of the six core questions — both computed by the pipeline but never
+  // shown on the card until now. A big number sells the trip at a glance.
+  const stalls = parseStallCount(event.stallCountText);
   return (
     <>
       <div className={`date-block ${isToday ? 'today' : ''}`}>
@@ -57,6 +62,12 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
               <GemIcon /> Skjult perle
             </span>
           )}
+          {stalls !== null && stalls >= 15 && (
+            <span className="badge stalls" title={event.stallCountText ?? undefined}>
+              ~{stalls} stande
+            </span>
+          )}
+          {event.familyFriendly && <span className="badge family">Børnevenligt</span>}
           <span className="badge">{CATEGORY_LABELS[event.category] ?? 'Marked'}</span>
           {event.isFree === true && <span className="badge free">Gratis</span>}
           {event.indoorOutdoor === 'indoor' && <span className="badge">Indendørs</span>}

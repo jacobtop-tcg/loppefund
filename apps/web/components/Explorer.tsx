@@ -407,7 +407,7 @@ export function Explorer({
 
   const locate = useCallback(() => {
     if (!navigator.geolocation) {
-      setGeoError('Kunne ikke finde din placering');
+      setGeoError('Din browser deler ikke placering — søg på en by i stedet.');
       return;
     }
     setLocating(true);
@@ -416,10 +416,11 @@ export function Explorer({
       (p) => {
         setPos({ lat: p.coords.latitude, lng: p.coords.longitude });
         setLocating(false);
+        setGeoError(null); // a later success must wipe an earlier failure
       },
       () => {
         setLocating(false);
-        setGeoError('Kunne ikke finde din placering');
+        setGeoError('Kunne ikke hente din placering — tjek tilladelser, eller søg på en by.');
       },
       { timeout: 8000 },
     );

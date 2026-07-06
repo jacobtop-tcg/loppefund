@@ -9,3 +9,7 @@ export * from './chain-venues.ts';
 export * from './adapters/kirkenskorshaer.ts';
 export * from './adapters/folkekirkensnoedhjaelp.ts';
 export * from './adapters/rodekors.ts';
+export * from './adapters/danish-hours.ts';
+export * from './adapters/kraeftensbekaempelse.ts';
+export * from './adapters/danmission.ts';
+export * from './adapters/frelsenshaer.ts';

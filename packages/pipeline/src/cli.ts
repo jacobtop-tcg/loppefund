@@ -44,6 +44,9 @@ import { ingestChainVenues } from './chain-venues.ts';
 import { fetchKirkensKorshaerVenues } from './adapters/kirkenskorshaer.ts';
 import { fetchFolkekirkensNoedhjaelpVenues } from './adapters/folkekirkensnoedhjaelp.ts';
 import { fetchRodekorsVenues } from './adapters/rodekors.ts';
+import { fetchKraeftensBekaempelseVenues } from './adapters/kraeftensbekaempelse.ts';
+import { fetchDanmissionVenues } from './adapters/danmission.ts';
+import { fetchFrelsensHaerVenues } from './adapters/frelsenshaer.ts';
 import { geocode } from './geocode.ts';
 import { adapters } from './adapters/index.ts';
 
@@ -461,6 +464,9 @@ if (fullCrawl) {
     { key: 'kirkenskorshaer', name: 'Kirkens Korshær', baseUrl: 'https://kirkenskorshaer.dk', fetch: fetchKirkensKorshaerVenues },
     { key: 'folkekirkensnoedhjaelp', name: 'Folkekirkens Nødhjælp', baseUrl: 'https://www.noedhjaelp.dk', fetch: fetchFolkekirkensNoedhjaelpVenues },
     { key: 'rodekors', name: 'Røde Kors', baseUrl: 'https://www.rodekors.dk', fetch: fetchRodekorsVenues },
+    { key: 'kraeftensbekaempelse', name: 'Kræftens Bekæmpelse', baseUrl: 'https://www.cancer.dk', fetch: fetchKraeftensBekaempelseVenues },
+    { key: 'danmission', name: 'Danmission', baseUrl: 'https://danmission.dk', fetch: fetchDanmissionVenues },
+    { key: 'frelsenshaer', name: 'Frelsens Hær', baseUrl: 'https://www.frelsenshaer.dk', fetch: fetchFrelsensHaerVenues },
   ];
   for (const chain of chains) {
     try {

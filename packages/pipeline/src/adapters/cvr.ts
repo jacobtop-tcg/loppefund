@@ -97,17 +97,32 @@ export function parseCvrVirksomhed(v: Vrvirksomhed): ChainVenue | null {
 const CVRDEV_URL = 'https://api.cvr.dev/api/cvrdev/virksomhed/search';
 const CEASED = /ophør|opløs|konkurs|tvangs|slettet/i; // status values that mean "gone"
 
+// Response item schema VERIFIED against the authoritative OpenAPI spec
+// (docs.cvr.dev/cvrdev_openapi.yml, checked 2026-07-07): the /virksomhed/search
+// ("Segmentering") endpoint returns FLAT items — navn, cvr_nummer, status,
+// adresse ("Tuborg Havnevej 19, 2900 Hellerup"), reklamebeskyttet — wrapped as
+// { pagination_token, virksomheder: [...] }. (The nested virksomhedMetadata /
+// nyesteNavn shape belongs to the SINGLE-company /virksomhed endpoint, a
+// different response — don't conflate them.)
 interface CvrDevVirksomhed {
   navn?: string;
   cvr_nummer?: number;
   status?: string;
   adresse?: string; // "Vejnavn 12, 2900 Hellerup"
+  /** true = company has opted out of marketing use of its CVR data. */
+  reklamebeskyttet?: boolean;
 }
 
 /** Parse a cvr.dev company (single-string address) into a venue, or null. */
 export function parseCvrDevVirksomhed(v: CvrDevVirksomhed): ChainVenue | null {
   const title = v.navn?.trim();
   if (!title) return null;
+  // Honour reklamebeskyttelse. cvr.dev's terms flag this segmentation endpoint as
+  // subject to "loven om reklamebeskyttelse" (a lovkrav), so we skip companies
+  // that have opted out rather than risk a marketing-use interpretation of the
+  // directory. Missing is acceptable (iron rule); this is the trust-first default
+  // and a one-line change to relax if a listing is later deemed non-marketing.
+  if (v.reklamebeskyttet === true) return null;
   if (v.status && CEASED.test(v.status)) return null; // ceased -> skip (closure detection)
   const am = (v.adresse ?? '').match(/^(.*?),\s*(\d{4})\s+(.+)$/);
   if (!am) return null; // no parseable DK address -> skip (missing ok)
@@ -166,7 +181,8 @@ export async function fetchCvrDevVenues(
   let token: string | number | null = null;
   const maxPages = opts.maxPages ?? 200; // 100/page, generous ceiling
   for (let page = 0; page < maxPages; page++) {
-    const params = new URLSearchParams({ hovedbranchekoder: SECONDHAND_BRANCHEKODER.join(',') });
+    // limit=100 is the endpoint's documented max per page (fewer round-trips).
+    const params = new URLSearchParams({ hovedbranchekoder: SECONDHAND_BRANCHEKODER.join(','), limit: '100' });
     if (token != null) params.set('pagination_token', String(token));
     const { list, token: next } = extractCvrDevList(await fetchJson(`${CVRDEV_URL}?${params}`, key));
     if (list.length === 0) break;

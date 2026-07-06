@@ -65,6 +65,28 @@ describe('parseCvrDevVirksomhed (cvr.dev single-string address)', () => {
   it('skips an unparseable address', () => {
     expect(parseCvrDevVirksomhed({ navn: 'X', status: 'NORMAL', adresse: 'Grønland' })).toBeNull();
   });
+  it('honours reklamebeskyttelse (skips an advertising-protected company)', () => {
+    expect(
+      parseCvrDevVirksomhed({
+        navn: 'Beskyttet Genbrug',
+        status: 'NORMAL',
+        adresse: 'Vej 1, 5000 Odense C',
+        reklamebeskyttet: true,
+      }),
+    ).toBeNull();
+  });
+  it('parses the authoritative OpenAPI example address shape', () => {
+    // Exact example from docs.cvr.dev/cvrdev_openapi.yml — locks the contract.
+    expect(
+      parseCvrDevVirksomhed({
+        navn: 'Genbrug ApS',
+        cvr_nummer: 10582989,
+        status: 'NORMAL',
+        adresse: 'Tuborg Havnevej 19, 2900 Hellerup',
+        reklamebeskyttet: false,
+      }),
+    ).toMatchObject({ street: 'Tuborg Havnevej 19', postcode: '2900', city: 'Hellerup' });
+  });
 });
 
 describe('fetchCvrDevVenues', () => {

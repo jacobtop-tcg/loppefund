@@ -368,6 +368,18 @@ export function Explorer({
   // Trip selection is keyed by slug against the full list, so filter changes
   // never drop chosen stops.
   const eventsBySlug = useMemo(() => new Map(events.map((e) => [e.slug, e])), [events]);
+  const venuesBySlug = useMemo(() => new Map(venues.map((v) => [v.slug, v])), [venues]);
+  // A loppetur can mix one-off markets AND permanent shops (genbrug/antik/…), so
+  // stops are namespaced 'e:<slug>' / 'v:<slug>' — a market and a shop can share
+  // a slug string, and the route/highlight logic must tell them apart.
+  const coordForStop = useCallback(
+    (id: string): { lat: number; lng: number } | null => {
+      const [kind, slug] = [id.slice(0, 1), id.slice(2)];
+      const row = kind === 'v' ? venuesBySlug.get(slug) : eventsBySlug.get(slug);
+      return row && row.lat != null && row.lng != null ? { lat: row.lat, lng: row.lng } : null;
+    },
+    [eventsBySlug, venuesBySlug],
+  );
   // Order the stops into an efficient drive — from the user's location when we
   // have it — instead of the arbitrary order they were tapped, then hand Google
   // Maps the sane sequence (its URL API won't re-optimise waypoints itself).
@@ -376,12 +388,11 @@ export function Explorer({
   // or the 60s clock tick (which re-render this component with the same trip).
   const { tripUrl, tripKm } = useMemo(() => {
     const stops = tripSlugs
-      .map((s) => eventsBySlug.get(s))
-      .filter((e): e is EventSummary => !!e && e.lat != null && e.lng != null)
-      .map((e) => ({ lat: e.lat!, lng: e.lng! }));
+      .map(coordForStop)
+      .filter((c): c is { lat: number; lng: number } => c !== null);
     const ordered = optimizeTripOrder(stops, pos);
     return { tripUrl: buildTripUrl(ordered), tripKm: tripDistanceKm(ordered, pos) };
-  }, [tripSlugs, eventsBySlug, pos]);
+  }, [tripSlugs, coordForStop, pos]);
 
   // Handlers passed to the memoized FilterBar/ResultsList must be referentially
   // stable, or every hoveredSlug change re-renders 600+ cards.
@@ -510,7 +521,7 @@ export function Explorer({
         <div className="trip-bar" role="region" aria-label="Loppetur">
           <span className="trip-count">
             {tripSlugs.length === 0 ? (
-              'Vælg markeder til din tur'
+              'Vælg markeder og faste steder til din tur'
             ) : tripSlugs.length === 1 ? (
               '1 stop — vælg mindst 2'
             ) : (

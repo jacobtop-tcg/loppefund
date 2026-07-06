@@ -97,13 +97,19 @@ function applyHighlight(map: maplibregl.Map, slug: string | null): void {
   );
 }
 
-function applySelected(map: maplibregl.Map, slugs: string[]): void {
-  map.setFilter(
-    'points-selected',
-    slugs.length
-      ? ['all', ['!', ['has', 'point_count']], ['in', ['get', 'slug'], ['literal', slugs]]]
-      : ['boolean', false],
-  );
+function applySelected(map: maplibregl.Map, tripSlugs: string[]): void {
+  // Trip stops are namespaced 'e:<slug>' (markets) / 'v:<slug>' (venues); split
+  // them to light up the right source's selected layer.
+  const bySlug = (ids: string[]) =>
+    ids.length
+      ? (['all', ['!', ['has', 'point_count']], ['in', ['get', 'slug'], ['literal', ids]]] as unknown)
+      : (['boolean', false] as unknown);
+  const eventSlugs = tripSlugs.filter((s) => s.startsWith('e:')).map((s) => s.slice(2));
+  const venueSlugs = tripSlugs.filter((s) => s.startsWith('v:')).map((s) => s.slice(2));
+  map.setFilter('points-selected', bySlug(eventSlugs) as maplibregl.FilterSpecification);
+  if (map.getLayer('venue-points-selected')) {
+    map.setFilter('venue-points-selected', bySlug(venueSlugs) as maplibregl.FilterSpecification);
+  }
 }
 
 export function MapView({
@@ -393,14 +399,14 @@ export function MapView({
           const { tripMode: inTrip, tripSlugs: selectedSlugs } = tripRef.current;
           const popup = new maplibregl.Popup({ offset: 16, className: 'map-popup', maxWidth: '272px' })
             .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
-            .setHTML(popupHtml(p, { active: inTrip, selected: selectedSlugs.includes(slug) }))
+            .setHTML(popupHtml(p, { active: inTrip, selected: selectedSlugs.includes(`e:${slug}`) }))
             .addTo(m);
           // Popup removal on toggle keeps the button label trivially correct.
           popup
             .getElement()
             ?.querySelector('.map-popup-add')
             ?.addEventListener('click', () => {
-              tripRef.current.onToggleTrip?.(slug);
+              tripRef.current.onToggleTrip?.(`e:${slug}`);
               popup.remove();
             });
         };
@@ -468,13 +474,38 @@ export function MapView({
             'circle-stroke-color': MAP.paperRaised,
           },
         });
+        // Trip-mode selected venues — ink dots matching the market selection.
+        m.addLayer({
+          id: 'venue-points-selected',
+          type: 'circle',
+          source: 'venues',
+          filter: ['boolean', false],
+          paint: {
+            'circle-color': MAP.ink,
+            'circle-radius': 8,
+            'circle-stroke-width': 2.5,
+            'circle-stroke-color': MAP.paper,
+          },
+        });
         const openVenuePopup = (e: maplibregl.MapLayerMouseEvent) => {
           const f = e.features?.[0];
           if (!f) return;
-          new maplibregl.Popup({ offset: 14, className: 'map-popup', maxWidth: '260px' })
+          const p = f.properties as Record<string, unknown>;
+          const slug = String(p.slug);
+          const { tripMode: inTrip, tripSlugs: selectedSlugs } = tripRef.current;
+          const popup = new maplibregl.Popup({ offset: 14, className: 'map-popup', maxWidth: '260px' })
             .setLngLat((f.geometry as GeoJSON.Point).coordinates as [number, number])
-            .setHTML(venuePopupHtml(f.properties as Record<string, unknown>))
+            .setHTML(
+              venuePopupHtml(p, { active: inTrip, selected: selectedSlugs.includes(`v:${slug}`) }),
+            )
             .addTo(m);
+          popup
+            .getElement()
+            ?.querySelector('.map-popup-add')
+            ?.addEventListener('click', () => {
+              tripRef.current.onToggleTrip?.(`v:${slug}`);
+              popup.remove();
+            });
         };
         m.on('click', 'venue-points', openVenuePopup);
         m.on('click', 'venue-clusters', async (e) => {
@@ -580,19 +611,23 @@ function popupHtml(
   );
 }
 
-/** Popup for a permanent venue — no date, an opening-hours state + a link out. */
-function venuePopupHtml(p: Record<string, unknown>): string {
+/** Popup for a permanent venue — no date, an opening-hours state + a link out.
+ *  In trip mode it toggles the shop as a stop instead of linking away. */
+function venuePopupHtml(p: Record<string, unknown>, trip: { active: boolean; selected: boolean }): string {
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
   const open = p.open === 1 || p.open === '1';
   const badges =
     (open ? '<span class="badge open-now"><span class="dot"></span>Åbent nu</span>' : '') +
     `<span class="badge venue-badge">${escapeHtml(String(p.vtype))}</span>`;
+  const cta = trip.active
+    ? `<button type="button" class="map-popup-add" data-slug="${escapeHtml(String(p.slug))}">${trip.selected ? 'Fjern fra turen' : 'Tilføj til turen'}</button>`
+    : `<a class="map-card-cta" href="${base}/sted/${encodeURIComponent(String(p.slug))}">Se butik</a>`;
   return (
     `<div class="map-card">` +
     `<h3 class="map-card-title">${escapeHtml(String(p.title))}</h3>` +
     `<div class="map-card-when">${p.city ? escapeHtml(String(p.city)) : 'Fast butik'}</div>` +
     `<div class="badge-row">${badges}</div>` +
-    `<a class="map-card-cta" href="${base}/sted/${encodeURIComponent(String(p.slug))}">Se butik</a>` +
+    cta +
     `</div>`
   );
 }

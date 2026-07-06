@@ -175,7 +175,7 @@ export function EventCard({
         className="card-button"
         aria-pressed={selectable ? selected : undefined}
         disabled={!selectable}
-        onClick={() => selectable && onToggleTrip?.(event.slug)}
+        onClick={() => selectable && onToggleTrip?.(`e:${event.slug}`)}
         {...hoverProps}
       >
         {article}

@@ -123,7 +123,7 @@ export const ResultsList = memo(function ResultsList({
               openNow={e.openNow}
               weather={weather.get(e.slug)}
               tripMode={tripMode}
-              selected={tripSlugs.includes(e.slug)}
+              selected={tripSlugs.includes(`e:${e.slug}`)}
               onToggleTrip={onToggleTrip}
               onHoverChange={onHoverSlug}
             />
@@ -141,7 +141,15 @@ export const ResultsList = memo(function ResultsList({
           </div>
           <div className="event-grid">
             {venues.slice(0, VENUE_CAP).map((v, i) => (
-              <VenueCard key={v.slug} venue={v} now={now} index={i} />
+              <VenueCard
+                key={v.slug}
+                venue={v}
+                now={now}
+                index={i}
+                tripMode={tripMode}
+                selected={tripSlugs.includes(`v:${v.slug}`)}
+                onToggleTrip={onToggleTrip}
+              />
             ))}
           </div>
           {venues.length > VENUE_CAP && (

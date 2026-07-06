@@ -96,9 +96,18 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
           {event.distanceKm !== null && (
             <span className="badge distance">{Math.round(event.distanceKm)} km</span>
           )}
-          {event.status === 'cancelled' && <span className="badge cancelled">Aflyst</span>}
+          {event.status === 'cancelled' && (
+            <span className="badge cancelled" title="Meldt aflyst — tag ikke afsted uden at tjekke hos arrangøren.">
+              Aflyst
+            </span>
+          )}
           {event.status !== 'cancelled' && event.confidence < UNVERIFIED_THRESHOLD && (
-            <span className="badge unverified">Ubekræftet</span>
+            <span
+              className="badge unverified"
+              title="Kun set ét sted og endnu ikke bekræftet — tjek datoen hos arrangøren, før du tager afsted."
+            >
+              Ubekræftet
+            </span>
           )}
         </div>
       </div>

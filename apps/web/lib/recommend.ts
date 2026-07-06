@@ -60,26 +60,22 @@ export function recommend(
       pos && dist && e.lat != null && e.lng != null ? dist(pos.lat, pos.lng, e.lat, e.lng) : null;
 
     let score = e.confidence * 0.3; // trust first
-    const quality: string[] = [];
-
-    if (d != null) {
-      score += Math.max(0, 1 - d / 60) * 0.35;
-      if (d <= 30) quality.push(`kun ${Math.round(d)} km væk`);
-    }
+    if (d != null) score += Math.max(0, 1 - d / 60) * 0.35;
     if (daysBetween(today, next.date) <= 7) score += 0.2; // this-weekend bias
-    if (e.gem) {
-      score += 0.3;
-      quality.push('skjult perle');
-    }
-    if (e.familyFriendly) {
-      score += 0.12;
-      quality.push('familievenlig');
-    }
-    if (e.isFree) {
-      score += 0.08;
-      quality.push('gratis');
-    }
-    if (e.confidence >= 0.75) quality.push('godt bekræftet');
+    if (e.gem) score += 0.3;
+    if (e.familyFriendly) score += 0.12;
+    if (e.isFree) score += 0.08;
+
+    // Reason chips in priority order — the enticing, specific signals first.
+    // "godt bekræftet" is generic reassurance, so it only appears as a fallback
+    // when the market has fewer than two real features to show, never crowding
+    // out "skjult perle" / "familievenlig" / "gratis".
+    const quality: string[] = [];
+    if (e.gem) quality.push('skjult perle');
+    if (d != null && d <= 30) quality.push(`kun ${Math.round(d)} km væk`);
+    if (e.familyFriendly) quality.push('familievenlig');
+    if (e.isFree) quality.push('gratis');
+    if (e.confidence >= 0.75 && quality.length < 2) quality.push('godt bekræftet');
 
     const reasons = [timingLabel(today, next.date), ...quality].slice(0, 3);
     out.push({ event: e, nextDate: next.date, distanceKm: d, score, reasons });

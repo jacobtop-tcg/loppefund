@@ -30,6 +30,18 @@ describe('recommend', () => {
     expect(r!.reasons.join(' ')).toContain('skjult perle');
   });
 
+  it('keeps generic "godt bekræftet" from crowding out real feature chips', () => {
+    // A market rich in real signals must not spend a chip slot on reassurance.
+    const rich = base({ slug: 'r', gem: true, familyFriendly: true, isFree: true, confidence: 0.9,
+      lat: 55.705, lng: 12.505 });
+    const [r] = recommend([rich], pos, today, { distanceKm: dist });
+    expect(r!.reasons).not.toContain('godt bekræftet');
+    // A market whose only distinction is high confidence may still show it.
+    const plain = base({ slug: 'p', confidence: 0.9, lat: 57, lng: 9.9 });
+    const [p] = recommend([plain], null, today, {});
+    expect(p!.reasons).toContain('godt bekræftet');
+  });
+
   it('skips events with no upcoming occurrence and caps the list', () => {
     const past = base({ slug: 'p', occurrences: [{ date: '2026-06-01', startTime: null, endTime: null }] });
     const many = Array.from({ length: 8 }, (_, i) => base({ slug: `m${i}` }));

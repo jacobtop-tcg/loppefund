@@ -672,6 +672,9 @@ a:focus-visible .event-card {
 }
 
 .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -680,6 +683,10 @@ a:focus-visible .event-card {
   line-height: 1.35;
   background: color-mix(in srgb, var(--ink) 5%, transparent);
   color: var(--ink-soft);
+}
+.badge svg {
+  flex: none;
+  margin-left: -1px;
 }
 
 .badge.free {
@@ -2144,3 +2151,49 @@ body:has(.is-map-view) {
   color: var(--ink-soft);
   text-align: center;
 }
+
+/* ---------- polish: bespoke-icon alignment + micro-interactions ---------- */
+
+.sort-gems { display: inline-flex; align-items: center; gap: 5px; }
+.sort-gems svg { flex: none; }
+
+/* The date block tilts forward as the card lifts — it reads as a physical
+   ticket, not a flat rectangle. Self-contained perspective, no parent needed. */
+.event-card .date-block {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.event-card:hover .date-block,
+.card-button:hover .event-card .date-block {
+  transform: perspective(600px) rotateY(-4deg) translateZ(6px);
+  box-shadow: 0 7px 15px -7px rgba(30, 42, 32, 0.5);
+}
+
+/* Live "Åbent nu" quietly broadcasts that the data is real-time. */
+@keyframes open-now-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(47, 122, 79, 0); }
+  50% { box-shadow: 0 0 8px 0 rgba(47, 122, 79, 0.22); }
+}
+.badge.open-now { animation: open-now-glow 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .event-card:hover .date-block,
+  .card-button:hover .event-card .date-block { transform: none; }
+  .badge.open-now { animation: none; }
+}
+
+/* Homepage value-prop line: live scale + freshness at a glance. */
+.hero-stats {
+  margin-top: 7px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+}
+.hero-stats strong {
+  color: var(--brand);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.hero-dot { color: var(--ink-faint); }

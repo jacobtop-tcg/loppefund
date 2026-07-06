@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { EventSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
 import { weatherGlyph, type DayWeather } from '../lib/weather.ts';
+import { GemIcon, WarnIcon, WeatherIcon } from './icons.tsx';
 import {
   CATEGORY_LABELS,
   dayOfMonth,
@@ -51,7 +52,11 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
               Åbent nu
             </span>
           )}
-          {event.gem && <span className="badge gem">✦ Skjult perle</span>}
+          {event.gem && (
+            <span className="badge gem">
+              <GemIcon /> Skjult perle
+            </span>
+          )}
           <span className="badge">{CATEGORY_LABELS[event.category] ?? 'Marked'}</span>
           {event.isFree === true && <span className="badge free">Gratis</span>}
           {event.indoorOutdoor === 'indoor' && <span className="badge">Indendørs</span>}
@@ -66,14 +71,14 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
               className="badge weather-warn"
               title={`Dette marked aflyses typisk ved regn — ${weather.popPct}% chance for regn (${weatherGlyph(weather.code).label})`}
             >
-              ⚠️ Kan aflyses · {weather.popPct}% regn
+              <WarnIcon /> Kan aflyses · {weather.popPct}% regn
             </span>
           ) : weather && (event.indoorOutdoor === 'outdoor' || event.indoorOutdoor === 'mixed') ? (
             <span
               className={`badge weather${weather.popPct >= 50 ? ' wet' : ''}`}
               title={`${weatherGlyph(weather.code).label}${weather.popPct >= 30 ? ` · ${weather.popPct}% regn` : ''}`}
             >
-              {weatherGlyph(weather.code).emoji} {weather.tmaxC}°
+              <WeatherIcon code={weather.code} /> {weather.tmaxC}°
               {weather.popPct >= 50 ? ` · ${weather.popPct}%` : ''}
             </span>
           ) : null}

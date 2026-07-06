@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { copenhagenNow, isOpenAt, type CphNow } from '@loppefund/core';
 import type { EventSummary, VenueSummary } from '../lib/data.ts';
@@ -159,8 +159,13 @@ export function Explorer({
 
   const [from, to] = dateRangeFor(dateFilter, today);
 
+  // Typing stays instant (the input reads `query`), while the expensive filter
+  // passes over ~700 events + ~1100 venues run against a deferred value — React
+  // keeps the last result on screen and recomputes off the critical path.
+  const deferredQuery = useDeferredValue(query);
+
   const filtered = useMemo(() => {
-    const q = foldForSearch(query.trim());
+    const q = foldForSearch(deferredQuery.trim());
     const result: Array<
       EventSummary & { nextDate: string; distanceKm: number | null; openNow: boolean }
     > = [];
@@ -215,14 +220,14 @@ export function Explorer({
     }
     if (gemsFirst) result.sort((a, b) => Number(b.gem) - Number(a.gem));
     return result;
-  }, [events, from, to, query, category, freeOnly, familyOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
+  }, [events, from, to, deferredQuery, category, freeOnly, familyOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
 
   // The permanent-venue layer, filtered in parallel with events (venues have no
   // dates, so the date chips don't apply — except "Åbent nu", which narrows them
   // to shops open right now). Respects type toggles, search and location.
   const filteredVenues = useMemo(() => {
     if (!venuesOn) return [];
-    const q = foldForSearch(query.trim());
+    const q = foldForSearch(deferredQuery.trim());
     const onlyOpen = dateFilter === 'aabent-nu';
     const result: Array<VenueSummary & { distanceKm: number | null; open: boolean }> = [];
     for (const v of venues) {
@@ -245,7 +250,7 @@ export function Explorer({
       return a.title.localeCompare(b.title, 'da');
     });
     return result;
-  }, [venues, venuesOn, venueTypes, query, dateFilter, now, pos, radius]);
+  }, [venues, venuesOn, venueTypes, deferredQuery, dateFilter, now, pos, radius]);
 
   const toggleVenueType = useCallback((t: VenueType) => {
     setVenueTypes((prev) => {
@@ -268,7 +273,7 @@ export function Explorer({
   // upcoming alternatives instead of a dead end.
   const suggestions = useMemo(() => {
     if (filtered.length > 0) return [];
-    const q = foldForSearch(query.trim());
+    const q = foldForSearch(deferredQuery.trim());
     const horizon = addDaysIso(today, 45);
     const alt: Array<EventSummary & { nextDate: string; distanceKm: number | null; openNow: boolean }> = [];
     for (const e of events) {
@@ -294,7 +299,7 @@ export function Explorer({
       return a.nextDate.localeCompare(b.nextDate);
     });
     return alt.slice(0, 3);
-  }, [filtered.length, events, today, query, category, pos]);
+  }, [filtered.length, events, today, deferredQuery, category, pos]);
 
   // The map never goes blank: when filters yield nothing it shows the same
   // three suggestions the empty state offers as list cards.
@@ -422,6 +427,7 @@ export function Explorer({
       <button
         className="view-pill"
         aria-pressed={view === 'map'}
+        aria-label={view === 'list' ? 'Skift til kortvisning' : 'Skift til listevisning'}
         onClick={() => setView(view === 'list' ? 'map' : 'list')}
       >
         {view === 'list' ? (

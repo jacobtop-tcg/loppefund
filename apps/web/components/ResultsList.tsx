@@ -4,6 +4,7 @@ import { memo } from 'react';
 import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { EventCard } from './EventCard.tsx';
 import { VenueCard } from './VenueCard.tsx';
+import { GemIcon } from './icons.tsx';
 import type { DateFilter } from './FilterBar.tsx';
 import type { DayWeather } from '../lib/weather.ts';
 
@@ -69,7 +70,7 @@ export const ResultsList = memo(function ResultsList({
             onClick={() => onGemsFirst(!gemsFirst)}
             aria-pressed={gemsFirst}
           >
-            ✦ Perler først
+            <GemIcon /> Perler først
           </button>
         )}
       </div>

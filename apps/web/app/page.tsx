@@ -22,6 +22,21 @@ export default function HomePage() {
             Loppefund<span className="dot">.</span>
           </h1>
           <p className="tagline">Alle loppemarkeder i Danmark. Ét sted, altid opdateret.</p>
+          <p className="hero-stats">
+            <strong>{events.length.toLocaleString('da-DK')}</strong> markeder
+            <span className="hero-dot" aria-hidden>
+              ·
+            </span>
+            <strong>{venues.length.toLocaleString('da-DK')}</strong> faste steder
+            {updated && (
+              <>
+                <span className="hero-dot" aria-hidden>
+                  ·
+                </span>
+                opdateret {formatUpdated(updated)}
+              </>
+            )}
+          </p>
         </div>
       </header>
       <main id="markeder" className="explorer-main">

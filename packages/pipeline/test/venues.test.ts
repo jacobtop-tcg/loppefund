@@ -68,6 +68,23 @@ describe('ingestOsmVenues', () => {
     expect(byTitle['Thisted Genbrugscenter']).toBeUndefined();
   });
 
+  it('refuses vehicle dealers even when they tag themselves second_hand', async () => {
+    // Real audit data: used-car lots tag shop=car + second_hand=only|yes and
+    // must never appear in a flea-market/genbrug directory.
+    const db = openDb(':memory:');
+    const els = [
+      { type: 'node', id: 20, lat: 55.5, lon: 8.5, tags: { shop: 'car', second_hand: 'only', name: 'MP Biler' } },
+      { type: 'way', id: 21, lat: 56.0, lon: 8.7, tags: { shop: 'car', second_hand: 'yes', name: 'Vestjysk Bilhus' } },
+      { type: 'node', id: 22, lat: 55.4, lon: 10.4, tags: { shop: 'motorcycle', second_hand: 'only', name: 'Carstens MC' } },
+      { type: 'node', id: 23, lat: 55.6, lon: 12.5, tags: { shop: 'second_hand', name: 'Ægte Genbrug' } },
+    ];
+    const stats = await ingestOsmVenues(db, opts(els));
+    expect(stats.upserted).toBe(1); // only the real second-hand shop
+    expect(stats.skipped).toBe(3); // the three vehicle dealers
+    const titles = listVenues(db).map((v) => v.title);
+    expect(titles).toEqual(['Ægte Genbrug']);
+  });
+
   it('is idempotent and keeps slugs stable across runs', async () => {
     const db = openDb(':memory:');
     await ingestOsmVenues(db, opts(ELEMENTS));

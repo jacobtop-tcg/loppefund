@@ -79,7 +79,7 @@ area["ISO3166-1"="DK"][admin_level=2]->.dk;
   nwr["shop"="second_hand"](area.dk);
   nwr["shop"="antiques"](area.dk);
   nwr["shop"="books"]["second_hand"](area.dk);
-  nwr["shop"]["second_hand"="only"](area.dk);
+  nwr["shop"]["second_hand"="only"]["shop"!~"^(car|motorcycle|caravan|car_repair|boat|truck|trailer|atv|snowmobile|jetski|tyres)$"](area.dk);
   nwr["shop"]["second_hand"="yes"]["shop"!~"^(car|motorcycle|caravan|car_repair|boat|truck|trailer|atv|snowmobile|jetski|tyres)$"](area.dk);
   nwr["name"~"loppemarked|loppebutik|loppeland|loppekælder|reolmarked|kræmmermarked|antikvariat",i](area.dk);
 );
@@ -89,6 +89,18 @@ out center tags;`;
 // second-hand shops. A recycling yard is not a place to hunt for treasures, so
 // keeping it out protects the "incorrect is worse than missing" bar.
 const NOT_A_VENUE_AMENITY = new Set(['recycling', 'waste_disposal', 'waste_transfer_station']);
+
+// Vehicle dealers are the one big source of FALSE second-hand venues: a used-car
+// lot legitimately tags itself shop=car + second_hand=only|yes, which matches the
+// second_hand clauses and lands in the genbrug directory (audit found 39 — "MP
+// Biler", "Vestjysk Bilhus", …). A family hunting loppemarkeder must never see a
+// car dealer, so drop these shop types outright, whatever their second_hand tag.
+// (Authoritative guard: the Overpass query also excludes them, but this catches
+// any that slip through another clause/source — belt and suspenders.)
+const NOT_A_VENUE_SHOP = new Set([
+  'car', 'car_repair', 'motorcycle', 'motorcycle_repair', 'caravan', 'boat',
+  'truck', 'trailer', 'atv', 'snowmobile', 'jetski', 'tyres', 'car_parts',
+]);
 
 interface OsmElement {
   type: string;
@@ -166,6 +178,11 @@ export async function ingestOsmVenues(
     }
     // Never let a recycling/waste facility into the directory, whatever its name.
     if (tags.amenity && NOT_A_VENUE_AMENITY.has(tags.amenity)) {
+      stats.skipped++;
+      continue;
+    }
+    // Never let a vehicle dealer in, even if it tags itself second_hand.
+    if (tags.shop && NOT_A_VENUE_SHOP.has(tags.shop)) {
       stats.skipped++;
       continue;
     }

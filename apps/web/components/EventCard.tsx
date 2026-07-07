@@ -49,88 +49,115 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
           {hours ?? 'Tidspunkt ikke oplyst'}
           {moreDates > 0 && ` · +${moreDates} ${moreDates === 1 ? 'dato' : 'datoer'}`}
         </div>
-        {event.recurrence && <div className="event-recurrence">↻ {event.recurrence}</div>}
-        <div className="badge-row">
-          {event.newlyAdded && event.status !== 'cancelled' && (
-            <span className="badge new" title="Fundet hos Loppefund inden for de sidste par uger">
-              Nyt
-            </span>
-          )}
-          {openNow && event.status !== 'cancelled' && (
-            <span className="badge open-now">
-              <span className="dot" aria-hidden />
-              Åbent nu
-            </span>
-          )}
-          {event.gem && (
-            <span className="badge gem">
-              <GemIcon /> Skjult perle
-            </span>
-          )}
-          {stalls !== null && stalls >= 15 && (
-            <span className="badge stalls" title={event.stallCountText ?? undefined}>
-              ~{stalls} stande
-            </span>
-          )}
-          {event.familyFriendly && <span className="badge family">Børnevenligt</span>}
-          <span className="badge">{CATEGORY_LABELS[event.category] ?? 'Marked'}</span>
-          {event.isFree === true && <span className="badge free">Gratis</span>}
-          {event.indoorOutdoor === 'indoor' && <span className="badge">Indendørs</span>}
-          {event.indoorOutdoor === 'outdoor' && <span className="badge">Udendørs</span>}
-          {event.accessible && <span className="badge">Kørestolsvenligt</span>}
-          {event.cashOnly && (
-            <span className="badge cash" title="Tag kontanter med — markedet tager kun kontant betaling.">
-              Kun kontanter
-            </span>
-          )}
-          {/* A market that says it cancels in rain, on a day with a real chance of
-              it, gets a warning instead of a plain forecast — the single most
-              trip-saving thing we can tell a family before they drive out. Such a
-              market is outdoors by definition, so the warning shows even when the
-              indoor/outdoor field was never filled in. */}
-          {weather && event.weatherDependent && weather.popPct >= 50 ? (
-            <span
-              className="badge weather-warn"
-              title={`Dette marked aflyses typisk ved regn — ${weather.popPct}% chance for regn (${weatherGlyph(weather.code).label})`}
-            >
-              <WarnIcon /> Kan aflyses · {weather.popPct}% regn
-            </span>
-          ) : weather && (event.indoorOutdoor === 'outdoor' || event.indoorOutdoor === 'mixed') ? (
-            <span
-              className={`badge weather${weather.popPct >= 50 ? ' wet' : ''}`}
-              title={`${weatherGlyph(weather.code).label}${weather.popPct >= 30 ? ` · ${weather.popPct}% regn` : ''}`}
-            >
-              <WeatherIcon code={weather.code} /> {weather.tmaxC}°
-              {weather.popPct >= 50 ? ` · ${weather.popPct}%` : ''}
-            </span>
-          ) : null}
-          {event.distanceKm !== null && (
-            <span className="badge distance">{Math.round(event.distanceKm)} km</span>
-          )}
-          {event.status === 'cancelled' && (
-            <span className="badge cancelled" title="Meldt aflyst — tag ikke afsted uden at tjekke hos arrangøren.">
-              Aflyst
-            </span>
-          )}
-          {event.status !== 'cancelled' && isUnverified(event.confidence) ? (
-            <span
-              className="badge unverified"
-              title="Kun set ét sted og endnu ikke bekræftet — tjek datoen hos arrangøren, før du tager afsted."
-            >
-              Ubekræftet
-            </span>
-          ) : (
-            event.status !== 'cancelled' &&
-            event.sourceCount >= 2 && (
-              <span
-                className="badge verified"
-                title={`Bekræftet på tværs af ${event.sourceCount} offentlige kilder`}
-              >
-                ✓ {event.sourceCount} kilder
-              </span>
-            )
-          )}
-        </div>
+        {event.recurrence && (
+          <div className="event-recurrence">
+            <span className="rec-glyph" aria-hidden>↻</span> {event.recurrence}
+          </div>
+        )}
+        {/* TIER 1 — act-now signals only, naturally 0-2 per card. Everything
+            else lives in the quiet meta line below, so identity (title, place,
+            terracotta date) always out-weighs metadata — no more pill-soup. */}
+        {(() => {
+          const cancelled = event.status === 'cancelled';
+          const unverified = !cancelled && isUnverified(event.confidence);
+          // Rain-cancellation risk is the single most trip-saving warning we can
+          // give a family before they drive out — it stays a loud pill.
+          const weatherWarn = !!weather && event.weatherDependent && weather.popPct >= 50;
+          const hasSignals =
+            (event.newlyAdded && !cancelled) ||
+            (openNow && !cancelled) ||
+            event.gem ||
+            weatherWarn ||
+            cancelled ||
+            unverified;
+          return (
+            <>
+              {hasSignals && (
+                <div className="badge-row">
+                  {event.newlyAdded && !cancelled && (
+                    <span className="badge new" title="Fundet hos Loppefund inden for de sidste par uger">
+                      Nyt
+                    </span>
+                  )}
+                  {openNow && !cancelled && (
+                    <span className="badge open-now">
+                      <span className="dot" aria-hidden />
+                      Åbent nu
+                    </span>
+                  )}
+                  {event.gem && (
+                    <span className="badge gem">
+                      <GemIcon /> Skjult perle
+                    </span>
+                  )}
+                  {weatherWarn && (
+                    <span
+                      className="badge weather-warn"
+                      title={`Dette marked aflyses typisk ved regn — ${weather!.popPct}% chance for regn (${weatherGlyph(weather!.code).label})`}
+                    >
+                      <WarnIcon /> Kan aflyses · {weather!.popPct}% regn
+                    </span>
+                  )}
+                  {cancelled && (
+                    <span className="badge cancelled" title="Meldt aflyst — tag ikke afsted uden at tjekke hos arrangøren.">
+                      Aflyst
+                    </span>
+                  )}
+                  {unverified && (
+                    <span
+                      className="badge unverified"
+                      title="Kun set ét sted og endnu ikke bekræftet — tjek datoen hos arrangøren, før du tager afsted."
+                    >
+                      Ubekræftet
+                    </span>
+                  )}
+                </div>
+              )}
+              {/* TIER 2 — one calm dot-separated line; the drive-decision fact
+                  (distance) leads, trust closes. */}
+              <div className="card-meta">
+                {event.distanceKm !== null && (
+                  <span className="meta-item meta-dist">{Math.round(event.distanceKm)} km</span>
+                )}
+                <span className="meta-item">{CATEGORY_LABELS[event.category] ?? 'Marked'}</span>
+                {stalls !== null && stalls >= 15 && (
+                  <span className="meta-item" title={event.stallCountText ?? undefined}>
+                    ~{stalls} stande
+                  </span>
+                )}
+                {event.indoorOutdoor === 'indoor' && <span className="meta-item">Indendørs</span>}
+                {event.indoorOutdoor === 'outdoor' && <span className="meta-item">Udendørs</span>}
+                {event.familyFriendly && <span className="meta-item">Børnevenligt</span>}
+                {event.isFree === true && <span className="meta-item meta-free">Gratis</span>}
+                {event.accessible && <span className="meta-item">Kørestolsvenligt</span>}
+                {event.cashOnly && (
+                  <span className="meta-item meta-cash" title="Tag kontanter med — markedet tager kun kontant betaling.">
+                    Kun kontanter
+                  </span>
+                )}
+                {!weatherWarn &&
+                  weather &&
+                  (event.indoorOutdoor === 'outdoor' || event.indoorOutdoor === 'mixed') && (
+                    <span
+                      className="meta-item"
+                      title={`${weatherGlyph(weather.code).label}${weather.popPct >= 30 ? ` · ${weather.popPct}% regn` : ''}`}
+                    >
+                      <WeatherIcon code={weather.code} /> {weather.tmaxC}°
+                      {weather.popPct >= 50 ? ` · ${weather.popPct}%` : ''}
+                    </span>
+                  )}
+                {!cancelled && !unverified && event.sourceCount >= 2 && (
+                  <span
+                    className="meta-item meta-verified"
+                    title={`Bekræftet på tværs af ${event.sourceCount} offentlige kilder`}
+                  >
+                    ✓ {event.sourceCount} kilder
+                  </span>
+                )}
+              </div>
+            </>
+          );
+        })()}
       </div>
     </>
   );

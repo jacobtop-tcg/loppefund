@@ -509,7 +509,7 @@ a:focus-visible .event-card {
 .event-card {
   position: relative;
   display: flex;
-  gap: 14px;
+  gap: 15px;
   background: var(--paper-raised);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -658,9 +658,13 @@ a:focus-visible .event-card {
 
 .date-block .day {
   font-family: var(--font-display), Georgia, serif;
-  font-size: 27px;
+  font-size: 30px;
   font-weight: 700;
   line-height: 1;
+  letter-spacing: -0.02em;
+  /* tabular lining figures: '11' and '30' share a width, so the date column
+     aligns down the whole list like a printed programme */
+  font-variant-numeric: tabular-nums lining-nums;
   color: #fff;
 }
 
@@ -692,9 +696,9 @@ a:focus-visible .event-card {
 
 .event-title {
   font-family: var(--font-display), Georgia, serif;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 600;
-  line-height: 1.18;
+  line-height: 1.16;
   letter-spacing: -0.016em;
   font-optical-sizing: auto;
   color: var(--brand-deep);
@@ -717,24 +721,29 @@ a:focus-visible .event-card {
 
 .event-time {
   font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
   color: var(--ink-soft);
   margin-top: 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-variant-numeric: tabular-nums;
 }
 
 /* Recurring-fixture cue ("↻ Hver søndag") — a quiet accent line that tells a
    family this market is a dependable regular, not a one-off. */
 .event-recurrence {
   font-size: 12.5px;
-  font-weight: 600;
-  color: var(--accent-deep);
+  font-weight: 550;
+  color: var(--ink-soft);
   margin-top: 3px;
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+/* Only the ↻ keeps the accent — the fixture cue whispers, it doesn't shout. */
+.rec-glyph {
+  color: var(--accent-deep);
 }
 
 .badge-row {
@@ -742,6 +751,45 @@ a:focus-visible .event-card {
   gap: 6px;
   flex-wrap: wrap;
   margin-top: 10px;
+}
+
+/* TIER 2 metadata: one quiet dot-separated line under the signals. Colored
+   pills are rationed to act-now signals; facts read as calm text so the title
+   and terracotta date always dominate the card. */
+.card-meta {
+  margin-top: 8px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+.card-meta .meta-item {
+  display: inline;
+  white-space: nowrap;
+}
+.card-meta .meta-item:not(:first-child)::before {
+  content: '·';
+  margin: 0 6px;
+  color: var(--line);
+  font-weight: 700;
+  white-space: normal;
+}
+.meta-dist {
+  color: var(--accent-deep);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.meta-free,
+.meta-verified {
+  color: var(--green);
+  font-weight: 600;
+}
+.meta-cash {
+  color: #8a6d1d;
+  font-weight: 600;
+}
+.card-meta svg {
+  vertical-align: -2px;
+  margin-right: 2px;
 }
 
 .badge {

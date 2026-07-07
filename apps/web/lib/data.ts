@@ -212,6 +212,14 @@ export function todayIso(): string {
   return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Copenhagen' }).format(new Date());
 }
 
+// Denmark land bounds — mirror of the pipeline's geocode guard (DK_LAND). A
+// coordinate outside this box is a bad geocode or bad source pin — the "dots in
+// the sea" — so we refuse to emit it to the client. This hides such a pin on the
+// map on the next DEPLOY, without waiting for the next crawl to heal the data.
+function inDkBounds(lat: number | null, lng: number | null): boolean {
+  return lat != null && lng != null && lat >= 54.4 && lat <= 57.9 && lng >= 7.8 && lng <= 15.3;
+}
+
 export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
   const from = todayIso();
   const to = addDays(from, horizonDays);
@@ -219,6 +227,8 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
   const summaries = listEventsBetween(getDb(), from, to)
     .map((e) => {
       const am = e.amenities ? (JSON.parse(e.amenities) as Amenities) : null;
+      // Never emit an out-of-Denmark coordinate — it plots as a "dot in the sea".
+      const okCoords = inDkBounds(e.lat, e.lng);
       return {
       slug: e.slug,
       title: e.title,
@@ -227,9 +237,9 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       city: e.city,
       postcode: e.postcode,
       municipality: e.municipality,
-      lat: e.lat,
-      lng: e.lng,
-      approximate: e.lat != null && isApproximateGeocode(e.geocode_quality),
+      lat: okCoords ? e.lat : null,
+      lng: okCoords ? e.lng : null,
+      approximate: okCoords && isApproximateGeocode(e.geocode_quality),
       isFree: e.is_free === null ? null : e.is_free === 1,
       indoorOutdoor: e.indoor_outdoor,
       stallCountText: e.stall_count_text,
@@ -361,8 +371,10 @@ export function listVenues(): VenueSummary[] {
     street: v.street,
     postcode: v.postcode,
     city: v.city,
-    lat: v.lat,
-    lng: v.lng,
+    // Drop any out-of-Denmark pin so it never plots in the sea (belt-and-braces
+    // over the pipeline guard; heals the live map on the next deploy).
+    lat: inDkBounds(v.lat, v.lng) ? v.lat : null,
+    lng: inDkBounds(v.lat, v.lng) ? v.lng : null,
     openingHoursText: v.opening_hours_text,
     contactWebsite: v.contact_website,
     contactPhone: v.contact_phone,

@@ -388,6 +388,77 @@ describe('matchEvents', () => {
   });
 });
 
+describe('town name in the street field (junk address data)', () => {
+  // Real production pair: "Ørbæk Marked" from an aggregator (precise venue
+  // coords, "Svendborgvej 31") vs the same market from a Facebook feed whose
+  // "street" is just the town name and whose coordinate is a town centroid
+  // 3.7 km away. Identical title, postcode and full 3-date list — the split
+  // the mis-geocode rescue rule exists for, blocked only by the junk street
+  // and by "oerbaek marked" (14 chars) grazing the 15-char distinctiveness bar.
+  const precise = {
+    title: 'Ørbæk Marked',
+    street: 'Svendborgvej 31',
+    city: 'Ørbæk',
+    postcode: '5853',
+    lat: 55.251217,
+    lng: 10.677419,
+    dates: ['2026-07-10', '2026-07-11', '2026-07-12'],
+  };
+  const centroid = {
+    title: 'Ørbæk Marked',
+    street: 'Ørbæk', // the town name dumped in the street field — not an address
+    city: 'Ørbæk',
+    postcode: '5853',
+    lat: 55.2661035,
+    lng: 10.63473931,
+    coordsPrecise: false,
+    dates: ['2026-07-10', '2026-07-11', '2026-07-12'],
+  };
+
+  it('merges an identical multi-date series despite a junk street + short title', () => {
+    expect(matchEvents(precise, centroid).isMatch).toBe(true);
+    expect(matchEvents(centroid, precise).isMatch).toBe(true);
+  });
+
+  it('does NOT extend the rescue to single-date lists', () => {
+    // Two different short-titled markets CAN share one Saturday in a postcode;
+    // only an identical MULTI-date list is near-certain identity.
+    const a = { ...precise, dates: ['2026-07-10'] };
+    const b = { ...centroid, dates: ['2026-07-10'] };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+  });
+
+  it('two junk streets must not fake same-spot co-location (over-merge guard)', () => {
+    // Both sides carry the town name as "street". Before the guard, the equal
+    // junk strings read as streetsAgree -> "proven same spot" -> two DIFFERENT
+    // markets in the same town on the same day merged at a weak title match.
+    const mk = (title: string) => ({
+      title,
+      street: 'Ørbæk',
+      city: 'Ørbæk',
+      postcode: '5853',
+      lat: 55.26,
+      lng: 10.63,
+      coordsPrecise: false,
+      dates: ['2026-07-10'],
+    });
+    expect(matchEvents(mk('Loppemarked i byen'), mk('Loppemarked på torvet')).isMatch).toBe(false);
+    expect(matchEvents(mk('Sommermarked i hallen'), mk('Sommermarked ved kirken')).isMatch).toBe(false);
+  });
+
+  it('a REAL street still vetoes, and generic single-date pairs still stay apart', () => {
+    // Unchanged behaviour: genuinely different streets veto a weak-title merge…
+    const a = { ...precise, title: 'Loppemarked', dates: ['2026-07-10'] };
+    const b = { ...centroid, title: 'Loppemarked i Ørbæk', street: 'Havnegade 2', dates: ['2026-07-10'] };
+    expect(matchEvents(a, b).isMatch).toBe(false);
+    // …and identical GENERIC titles sharing a postcode + one date never merge
+    // (no identity token to hang the rescue on).
+    const g1 = { title: 'Loppemarked', postcode: '5853', dates: ['2026-07-10', '2026-07-17'] };
+    const g2 = { title: 'Loppemarked', postcode: '5853', dates: ['2026-07-10', '2026-07-17'] };
+    expect(matchEvents(g1, g2).isMatch).toBe(false);
+  });
+});
+
 describe('normalize helpers', () => {
   it('slugifies Danish text', () => {
     expect(slugify('Høje Gladsaxe Loppemarked')).toBe(

@@ -74,6 +74,14 @@ export interface MatchCandidate {
   /** Street address; two clearly different streets veto a weak-title merge. */
   street?: string | null;
   /**
+   * Town/city. Only used to spot junk address data: some sources dump the town
+   * name into the street field ("street: Ørbæk, city: Ørbæk"), which is not an
+   * address. Such a "street" must neither VETO a merge (it doesn't contradict a
+   * real street) nor CORROBORATE one (two equal town names are not a proven
+   * same spot).
+   */
+  city?: string | null;
+  /**
    * False when this side's coordinates are only a postcode/town centroid (DAWA
    * quality P, or an uncertain C match) — a whole-district approximation, not a
    * real point. Such a coordinate must never be read as a precise location that
@@ -139,12 +147,22 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
     return { isMatch: false, score: sim, reason: 'titles differ' };
   }
 
+  // A digit-less "street" that is just the event's own town name is junk
+  // address data (a Facebook feed pattern), not an address — treat it as absent
+  // so it can neither veto a merge nor fake same-spot agreement.
+  const realStreet = (street?: string | null, city?: string | null) =>
+    street && !(city && !/\d/.test(street) && normalizeTitle(street) === normalizeTitle(city))
+      ? street
+      : null;
+  const aStreet = realStreet(a.street, a.city);
+  const bStreet = realStreet(b.street, b.city);
+
   // Two different street addresses is strong evidence of different events —
   // e.g. two garage sales in the same postcode on the same Saturday.
   let streetsDiffer = false;
-  if (a.street && b.street) {
-    const sa = normalizeTitle(a.street);
-    const sb = normalizeTitle(b.street);
+  if (aStreet && bStreet) {
+    const sa = normalizeTitle(aStreet);
+    const sb = normalizeTitle(bStreet);
     streetsDiffer = sa !== sb && !sa.includes(sb) && !sb.includes(sa);
   }
   if (streetsDiffer && sim < TITLE_STRONG) {
@@ -155,7 +173,7 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   // one-sided street is zero evidence of co-location and must not override
   // coordinates that prove the events are far apart.
   const streetsAgree =
-    !streetsDiffer && Boolean(a.street && b.street);
+    !streetsDiffer && Boolean(aStreet && bStreet);
 
   // Distinctiveness: after dropping stopwords, category vocabulary and common
   // venue nouns, at least one proper token must remain ("Bagagerumsmarked på
@@ -171,6 +189,12 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   const distinctive =
     properTokens.length >= 1 && (na.length >= 15 || na.split(' ').length >= 3);
 
+  // A centroid coordinate (postcode/town approximation) is NOT a real point, so
+  // the distance test only means something when BOTH sides have precise coords.
+  const preciseCoords =
+    a.lat != null && a.lng != null && b.lat != null && b.lng != null &&
+    a.coordsPrecise !== false && b.coordsPrecise !== false;
+
   // `colocated`: locations do not CONTRADICT (a shared postcode district
   // counts). `preciseColocation`: proven the SAME spot — coordinates within
   // NEAR_METERS, or agreeing postcode AND agreeing street. A shared postcode
@@ -178,11 +202,6 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   // Saturday, so it is deliberately NOT precise.
   let colocated: boolean | null = null;
   let preciseColocation = false;
-  // A centroid coordinate (postcode/town approximation) is NOT a real point, so
-  // the distance test only means something when BOTH sides have precise coords.
-  const preciseCoords =
-    a.lat != null && a.lng != null && b.lat != null && b.lng != null &&
-    a.coordsPrecise !== false && b.coordsPrecise !== false;
   if (preciseCoords) {
     colocated = distanceMeters(a.lat!, a.lng!, b.lat!, b.lng!) <= NEAR_METERS;
     preciseColocation = colocated === true;
@@ -203,10 +222,16 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
   }
 
   // A mis-geocode must not split a clearly-identical recurring series: identical
-  // distinctive title + agreeing postcode + an identical occurrence-date list is
-  // a near-certain duplicate even when the coordinates disagree (one is usually a
-  // postcode centroid). Deliberately high bar — two different markets do not share
-  // the exact same multi-date list.
+  // title + agreeing postcode + an identical occurrence-date list is a
+  // near-certain duplicate even when the coordinates disagree (one is usually a
+  // postcode centroid). Two tiers:
+  //  - a DISTINCTIVE title keeps its established override power as-is;
+  //  - a short title with a real identity token ("Ørbæk Marked" — 14 chars grazes
+  //    the 15-char distinctiveness gate, yet "oerbaek" identifies it perfectly)
+  //    qualifies only in the actual mis-geocode shape: an identical MULTI-date
+  //    list (two markets can share one Saturday, not a whole series) and at
+  //    least one side a centroid/missing coordinate. Two genuinely PRECISE pins
+  //    far apart stay apart on a short title.
   const datesIdentical =
     Boolean(a.dates && b.dates) &&
     a.dates!.length > 0 &&
@@ -214,11 +239,11 @@ export function matchEvents(a: MatchCandidate, b: MatchCandidate): MatchResult {
     a.dates!.every((d) => b.dates!.includes(d));
   if (
     sim >= 0.95 &&
-    distinctive &&
     !streetsDiffer &&
     a.postcode != null &&
     a.postcode === b.postcode &&
-    datesIdentical
+    datesIdentical &&
+    (distinctive || (properTokens.length >= 1 && a.dates!.length >= 2 && !preciseCoords))
   ) {
     return { isMatch: true, score: sim, reason: 'identical title + postcode + date list' };
   }

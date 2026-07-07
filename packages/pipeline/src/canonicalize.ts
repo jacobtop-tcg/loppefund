@@ -144,13 +144,6 @@ export function recomputeConfidence(
 
 /** A canonical event as a dedup MatchCandidate. */
 function eventToCandidate(db: DatabaseSync, e: EventRow): MatchCandidate {
-  // Ignore a "street" that is merely the town name (a source mis-parse, e.g.
-  // "Faaborg" in Faaborg) — so consolidation works on already-stored rows too,
-  // not only on freshly re-canonicalized ones. Mirrors the canonicalize cleanup.
-  const street =
-    e.street && !/\d/.test(e.street) && e.city && normalizeTitle(e.street) === normalizeTitle(e.city)
-      ? null
-      : e.street;
   return {
     title: e.title,
     lat: e.lat,
@@ -158,7 +151,10 @@ function eventToCandidate(db: DatabaseSync, e: EventRow): MatchCandidate {
     postcode: e.postcode,
     dates: occurrenceDates(db, e.id),
     category: e.category,
-    street,
+    // matchEvents itself discards a "street" that is merely the town name
+    // (junk address data) when city is provided — one rule, one place.
+    street: e.street,
+    city: e.city,
     coordsPrecise: isPreciseQuality(e.geocode_quality),
   };
 }
@@ -544,6 +540,7 @@ export async function canonicalizeRawEvent(
         dates: rawDates,
         category: rawCategory,
         street,
+        city,
         coordsPrecise: isPreciseQuality(geocodeQuality),
       },
       {
@@ -554,6 +551,7 @@ export async function canonicalizeRawEvent(
         dates: occurrenceDates(db, candidate.id),
         category: candidate.category,
         street: candidate.street,
+        city: candidate.city,
         coordsPrecise: isPreciseQuality(candidate.geocode_quality),
       },
     );

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { openDb, listVenues } from '@loppefund/db';
+import { openDb, listVenues, applyVenueHours } from '@loppefund/db';
 import { ingestOsmVenues } from '../src/venues.ts';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -83,6 +83,26 @@ describe('ingestOsmVenues', () => {
     expect(stats.skipped).toBe(3); // the three vehicle dealers
     const titles = listVenues(db).map((v) => v.title);
     expect(titles).toEqual(['Ægte Genbrug']);
+  });
+
+  it('applies community hours to hours-less venues, never overriding a source', async () => {
+    const db = openDb(':memory:');
+    await ingestOsmVenues(db, opts(ELEMENTS));
+    const bySlug = () => Object.fromEntries(listVenues(db).map((v) => [v.slug, v]));
+    const before = bySlug();
+    const withHours = Object.values(before).find((v) => v.title === 'Røde Kors Butik')!; // has OSM hours
+    const noHours = Object.values(before).find((v) => v.title === 'Antikgården')!; // no hours
+
+    const filled = applyVenueHours(db, {
+      [noHours.slug]: 'Mo-Fr 10:00-17:00; Sa 10:00-14:00',
+      [withHours.slug]: 'Mo-Su 00:00-23:59', // must NOT override a source value
+      'does-not-exist': 'Mo 10:00-12:00',
+    });
+
+    expect(filled).toBe(1); // only the hours-less venue
+    const after = bySlug();
+    expect(after[noHours.slug]!.opening_hours_text).toBe('Mo-Fr 10:00-17:00; Sa 10:00-14:00');
+    expect(after[withHours.slug]!.opening_hours_text).toContain('Mo-Fr'); // original OSM hours intact
   });
 
   it('is idempotent and keeps slugs stable across runs', async () => {

@@ -5,6 +5,7 @@ import { listVenues, loadVenueDetail } from '../../../lib/data.ts';
 import { displayPlace, displayTitle } from '../../../lib/format.ts';
 import { VENUE_LABELS } from '../../../lib/venue-client.ts';
 import { VenueHours } from '../../../components/VenueHours.tsx';
+import { VenueHoursForm } from '../../../components/VenueHoursForm.tsx';
 
 // Permanent-venue pages: "<butik> åbningstider" is what people google for a shop.
 export const dynamicParams = false;
@@ -155,6 +156,9 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
       </header>
 
       <VenueHours hoursText={v.openingHoursText} buildNow={now} />
+      {!v.openingHoursText && (
+        <VenueHoursForm slug={v.slug} title={v.title} url={`${SITE_URL}/sted/${v.slug}`} />
+      )}
 
       <div className="venue-actions">
         {mapsUrl && (

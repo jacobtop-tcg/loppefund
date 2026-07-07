@@ -13,6 +13,7 @@ import { normalizeTitle } from '@loppefund/core';
 import type { RawEvent } from '@loppefund/core';
 import {
   anyLinkedPayload,
+  applyVenueHours,
   expirePastEvents,
   finishRun,
   listSourceCandidates,
@@ -89,6 +90,29 @@ function loadConfirmations(dbPath: string): Record<string, number> {
   }
 }
 const confirmations = loadConfirmations(values.db);
+
+/**
+ * Community opening hours: a committed {slug: osmHoursString} map
+ * (data/venue-hours.json) bridging the "Tilføj åbningstider" submissions —
+ * collected via the form inbox, operator-vetted — into the venue layer. Most
+ * sources (CVR, Røde Kors, many OSM rows) carry no hours, yet "hvad er åbent i
+ * dag?" needs them; this is the only lever to fill the gap. Applied AFTER the
+ * OSM/chain ingest (which resets hours-less rows), filling gaps only.
+ */
+function loadVenueHours(dbPath: string): Record<string, string> {
+  const file = join(dirname(dbPath), 'venue-hours.json');
+  if (!existsSync(file)) return {};
+  try {
+    const parsed = JSON.parse(readFileSync(file, 'utf8')) as Record<string, unknown>;
+    const out: Record<string, string> = {};
+    for (const [slug, v] of Object.entries(parsed)) {
+      if (typeof v === 'string' && v.trim()) out[slug] = v.trim();
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}
 
 const command = positionals[0] ?? 'run';
 const db = openDb(values.db!);
@@ -485,4 +509,10 @@ if (fullCrawl) {
       console.error(`${chain.name} venue ingest failed (kept existing venues):`, (e as Error).message);
     }
   }
+
+  // Community-submitted opening hours (operator-vetted). Runs last so it fills
+  // the gaps the OSM/chain ingest just (re)opened — never overrides a source's
+  // hours. This is the realistic lever to lift "hvad er åbent i dag?" coverage.
+  const hoursFilled = applyVenueHours(db, loadVenueHours(values.db));
+  if (hoursFilled > 0) console.log(`community hours applied to ${hoursFilled} venue(s)`);
 }

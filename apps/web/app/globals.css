@@ -2314,6 +2314,120 @@ body:has(.is-map-view) {
   color: var(--brand-deep);
   font-weight: 700;
 }
+
+/* Community "tilføj åbningstider" — closes the hours gap CVR/OSM leave. */
+.hours-add-cta {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: var(--paper-raised);
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.hours-add-cta:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  color: var(--accent-deep);
+}
+.hours-add {
+  margin-top: 12px;
+  max-width: 380px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+}
+.hours-add-intro {
+  margin: 0 0 8px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+.hours-add-grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.hours-add-grid th {
+  text-align: left;
+  font-weight: 500;
+  padding: 5px 0;
+}
+.hours-add-grid th label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+.hours-add-grid td {
+  text-align: right;
+  padding: 5px 0;
+}
+.hours-add-grid tr.is-closed th {
+  color: var(--ink-faint);
+}
+.hours-add-times {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.hours-add-times input[type='time'] {
+  padding: 4px 6px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+}
+.hours-add-shut {
+  color: var(--ink-faint);
+  font-size: 14px;
+}
+.hours-add-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 12px;
+}
+.hours-add-submit {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.hours-add-submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.hours-add-cancel {
+  padding: 9px 12px;
+  border: none;
+  background: none;
+  color: var(--ink-faint);
+  font-size: 14px;
+  cursor: pointer;
+}
+.hours-add-hint {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+.hours-add-done {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
 .venue-actions {
   display: flex;
   flex-wrap: wrap;

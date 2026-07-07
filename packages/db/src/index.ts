@@ -744,6 +744,27 @@ function venuesTableExists(db: DatabaseSync): boolean {
   return r.c > 0;
 }
 
+/** Fill opening hours for venues that currently have NONE, from an operator-
+ *  vetted {slug: osmHoursString} map (community "tilføj åbningstider" submissions
+ *  in data/venue-hours.json). Only ever FILLS a gap — a source-provided
+ *  opening_hours is never overwritten by community data — so it can only improve
+ *  "hvad er åbent i dag?" coverage, never corrupt a crawled value. Idempotent;
+ *  re-applies each crawl (which resets hours-less OSM rows to null). Returns the
+ *  number of venues filled. */
+export function applyVenueHours(db: DatabaseSync, hoursBySlug: Record<string, string>): number {
+  if (!venuesTableExists(db)) return 0;
+  const stmt = db.prepare(
+    `UPDATE venues SET opening_hours_text = ?
+     WHERE slug = ? AND status = 'active' AND (opening_hours_text IS NULL OR opening_hours_text = '')`,
+  );
+  let filled = 0;
+  for (const [slug, hours] of Object.entries(hoursBySlug)) {
+    if (typeof hours !== 'string' || !hours.trim()) continue;
+    filled += Number(stmt.run(hours.trim(), slug).changes);
+  }
+  return filled;
+}
+
 export function listVenues(db: DatabaseSync): VenueRow[] {
   if (!venuesTableExists(db)) return [];
   return db

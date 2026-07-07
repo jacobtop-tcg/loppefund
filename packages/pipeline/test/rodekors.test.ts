@@ -12,6 +12,7 @@ const settings = {
         type: { type: 'Røde Kors Butik' },
         location: { lat: '54.93626', lng: '10.71436' },
         address: ['Ørstedgade 6', '5900 Rudkøbing', 'Tlf nr.: 22371418'],
+        url: '/afdelinger/langeland',
       },
     ],
     [
@@ -26,7 +27,7 @@ const settings = {
 const PAGE = `<html><head><script type="application/json" data-drupal-selector="drupal-settings-json">${JSON.stringify(settings)}</script></head><body></body></html>`;
 
 describe('parseRodekorsShops', () => {
-  it('parses stores with coordinates and excludes clothing containers', () => {
+  it('parses stores with coordinates + dept URL and excludes clothing containers', () => {
     const shops = parseRodekorsShops(PAGE);
     expect(shops).toHaveLength(1);
     expect(shops[0]).toMatchObject({
@@ -39,6 +40,11 @@ describe('parseRodekorsShops', () => {
       category: 'genbrug',
       lat: 54.93626,
       lng: 10.71436,
+      // contactWebsite points at the shop's OWN page, not the national list.
+      contactWebsite: 'https://www.rodekors.dk/afdelinger/langeland',
+      // RK publishes no trustworthy per-shop hours (dept page shows national
+      // office hours), so hours are deliberately left unset — never invented.
+      openingHoursText: null,
     });
   });
 

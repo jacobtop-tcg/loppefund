@@ -1,18 +1,26 @@
 /**
- * Røde Kors genbrug — ~260 charity shops. Unlike the other chains, the national
- * genbrug page embeds EVERY shop in one drupal-settings-json blob (`rk_maps`),
- * each with coordinates and a full address (no per-page crawl, no geocoding).
- * Clothing containers (category "container") are excluded — only "store".
+ * Røde Kors genbrug — ~260 charity shops. The national genbrug page embeds EVERY
+ * shop in one drupal-settings-json blob (`rk_maps`), each with coordinates, a
+ * full address AND its own department-page URL (`/afdelinger/<slug>`). Clothing
+ * containers (category "container") are excluded — only "store".
  *
- * Feeds ingestChainVenues like the other chains; the shared dedup enriches an
- * OSM "Røde Kors" venue nearby rather than cloning it. Opening hours aren't in
- * the national blob (they live on per-department pages), so RK shops arrive
- * without hours — name/address/location is still a real coverage win.
+ * OPENING HOURS: NOT available per shop. Verified against live pages (2026-07):
+ * a department page's only "<h4>Åbningstider:</h4>" block sits inside the shared
+ * national <address> (CVR 20700211) and is BYTE-IDENTICAL across every shop —
+ * "Man-tors 8.30-16.00; Fredag 8.30-15.00; Lørdag Lukket". Those are the national
+ * contact-centre hours, not the individual shop's (a genbrugsbutik is open
+ * Saturdays; the office isn't). So we deliberately do NOT scrape them: stamping
+ * identical office hours onto 260 shops would be wrong data, and "missing is
+ * acceptable, incorrect is not". RK shops therefore arrive without hours (the
+ * shared dedup can still enrich a matched OSM "Røde Kors" venue that has them).
+ * contactWebsite points at the shop's OWN department page, which is more useful
+ * than the national list.
  */
 import { classifyVenue } from '@loppefund/core';
 import type { ChainVenue } from '../chain-venues.ts';
 
-const PAGE = 'https://www.rodekors.dk/genbrug/genbrugsbutikker';
+const ORIGIN = 'https://www.rodekors.dk';
+const PAGE = `${ORIGIN}/genbrug/genbrugsbutikker`;
 const UA = 'Loppefund/1.0 (+https://jacobtop-tcg.github.io/loppefund; Danish flea-market directory)';
 const OPERATOR = 'Røde Kors';
 const OPERATOR_TOKEN = 'roede kors'; // folded "Røde Kors"
@@ -22,6 +30,8 @@ interface RkStore {
   department?: string;
   location?: { lat?: string; lng?: string };
   address?: string[];
+  /** "/afdelinger/<slug>" — the shop's own page. */
+  url?: string;
 }
 
 /** Stable numeric id from the shop's street+postcode (no id in the source). */
@@ -66,6 +76,10 @@ export function parseRodekorsShops(html: string): ChainVenue[] {
     if (seen.has(sourceId)) continue; // guard duplicate rows
     seen.add(sourceId);
 
+    // Link the shop's OWN department page when present — more useful than the
+    // national list. (Hours aren't scraped from it — see the file header.)
+    const deptUrl =
+      typeof store.url === 'string' && store.url.startsWith('/') ? `${ORIGIN}${store.url}` : null;
     const title = `${OPERATOR} Butik, ${city}`;
     out.push({
       sourceType: 'rk',
@@ -76,8 +90,8 @@ export function parseRodekorsShops(html: string): ChainVenue[] {
       street,
       postcode,
       city,
-      openingHoursText: null, // not in the national blob
-      contactWebsite: PAGE,
+      openingHoursText: null, // RK publishes no trustworthy per-shop hours
+      contactWebsite: deptUrl ?? PAGE,
       lat,
       lng,
     });

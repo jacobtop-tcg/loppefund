@@ -901,6 +901,14 @@ a:focus-visible .event-card {
   letter-spacing: 0.02em;
 }
 
+/* "Del turen" joins the trip bar as a quiet secondary next to the route CTA. */
+.trip-bar .share-btn {
+  padding: 8px 14px;
+  font-size: 13.5px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
 /* Source-vanished: advisory amber, softer than the AFLYST red — we know the
    source dropped it, we don't know why, and the copy must not over-claim. */
 .vanished-banner {

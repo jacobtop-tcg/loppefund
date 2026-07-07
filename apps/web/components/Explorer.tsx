@@ -10,6 +10,7 @@ import { venueOpenState, VENUE_TYPES, type VenueType } from '../lib/venue-client
 import { buildSearchIndex } from '../lib/search-index.ts';
 import { useOutdoorWeather } from '../lib/weather.ts';
 import { FilterBar, type DateFilter } from './FilterBar.tsx';
+import { ShareButton } from './ShareButton.tsx';
 import { MapSkeleton } from './MapSkeleton.tsx';
 import { ResultsList } from './ResultsList.tsx';
 import { Recommendations } from './Recommendations.tsx';
@@ -163,6 +164,18 @@ export function Explorer({
     setSavedOnly(parsed.savedOnly);
     setGemsFirst(parsed.gemsFirst);
     setView(parsed.view);
+    // A shared loppetur link recreates the whole trip. Event stops are
+    // validated against the baked event list (a stale link never injects junk);
+    // venue stops pass through — the venue layer lazy-loads and unknown venue
+    // slugs simply never render as stops.
+    if (parsed.trip.length > 0) {
+      const known = new Set(events.map((e) => `e:${e.slug}`));
+      const valid = parsed.trip.filter((t) => t.startsWith('v:') || known.has(t));
+      if (valid.length > 0) {
+        setTripSlugs(valid);
+        setTripMode(true);
+      }
+    }
     // Land a returning visitor back in their own area (device-local, never a
     // URL). A shared link (which carries no location) never triggers this,
     // because its owner's browser has nothing saved.
@@ -198,10 +211,13 @@ export function Explorer({
       savedOnly,
       gemsFirst,
       view,
+      // The trip only lives in the URL while trip mode is on — leaving the
+      // mode leaves a clean, shareable filter URL behind.
+      trip: tripMode ? tripSlugs : [],
     });
     const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
     window.history.replaceState(null, '', url);
-  }, [hydrated, dateFilter, category, query, freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, savedOnly, gemsFirst, view]);
+  }, [hydrated, dateFilter, category, query, freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, savedOnly, gemsFirst, view, tripMode, tripSlugs]);
 
   const [from, to] = dateRangeFor(dateFilter, today);
 
@@ -623,6 +639,15 @@ export function Explorer({
             >
               Åbn rute i Google Maps
             </button>
+          )}
+          {tripSlugs.length >= 2 && (
+            // Share the LOPPEFUND trip, not just the Google route — the link
+            // recreates the whole plan for the rest of the family.
+            <ShareButton
+              title="Vores loppetur"
+              path={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/?tur=${tripSlugs.join(',')}`}
+              label="Del turen"
+            />
           )}
           {tripSlugs.length > 0 && (
             <button className="trip-clear" onClick={() => setTripSlugs([])}>

@@ -260,6 +260,9 @@ export interface ExplorerParams {
   savedOnly: boolean;
   gemsFirst: boolean;
   view: 'list' | 'map';
+  /** Shared loppetur stops ('e:slug' / 'v:slug'), in route order. A shared
+   *  link recreates the whole trip — "her er vores lørdag" in one URL. */
+  trip: string[];
 }
 
 export const DEFAULT_EXPLORER_PARAMS: ExplorerParams = {
@@ -275,6 +278,7 @@ export const DEFAULT_EXPLORER_PARAMS: ExplorerParams = {
   savedOnly: false,
   gemsFirst: false,
   view: 'list',
+  trip: [],
 };
 
 /**
@@ -308,6 +312,10 @@ export function parseExplorerParams(search: string): ExplorerParams {
     inOut,
     savedOnly: p.get('gemt') === '1',
     gemsFirst: p.get('perler') === '1',
+    trip: (p.get('tur') ?? '')
+      .split(',')
+      .filter((t) => /^[ev]:[a-z0-9-]+$/.test(t))
+      .slice(0, 10),
     view: p.get('visning') === 'kort' ? 'map' : 'list',
   };
 }
@@ -331,6 +339,7 @@ export function serializeExplorerParams(state: ExplorerParams): string {
   else if (state.inOut === 'outdoor') p.set('ude', '1');
   if (state.savedOnly) p.set('gemt', '1');
   if (state.gemsFirst) p.set('perler', '1');
+  if (state.trip.length > 0) p.set('tur', state.trip.join(','));
   if (state.view === 'map') p.set('visning', 'kort');
   return p.toString();
 }

@@ -172,7 +172,7 @@ describe('parseExplorerParams', () => {
 
   it('parses each key from a fully-populated URL', () => {
     const parsed = parseExplorerParams(
-      '?dato=idag&kat=antikmarked&q=aarhus&gratis=1&familie=1&stor=1&handicap=1&bekr=1&inde=1&gemt=1&perler=1&visning=kort',
+      '?dato=idag&kat=antikmarked&q=aarhus&gratis=1&familie=1&stor=1&handicap=1&bekr=1&inde=1&gemt=1&perler=1&visning=kort&tur=e:broens-lopper,v:antik-2b',
     );
     expect(parsed).toEqual<ExplorerParams>({
       dateFilter: 'idag',
@@ -187,7 +187,13 @@ describe('parseExplorerParams', () => {
       savedOnly: true,
       gemsFirst: true,
       view: 'map',
+      trip: ['e:broens-lopper', 'v:antik-2b'],
     });
+  });
+
+  it('drops malformed trip tokens (never injects junk state from a mangled URL)', () => {
+    const parsed = parseExplorerParams('?tur=e:ok-slug,junk,x:bad,e:UPPER,v:also-ok');
+    expect(parsed.trip).toEqual(['e:ok-slug', 'v:also-ok']);
   });
 
   it('accepts a leading ? or none', () => {
@@ -259,6 +265,7 @@ describe('serializeExplorerParams', () => {
       savedOnly: true,
       gemsFirst: true,
       view: 'map',
+      trip: ['e:kbh-laengste', 'e:vanloese-torv'],
     };
     expect(parseExplorerParams('?' + serializeExplorerParams(state))).toEqual(state);
   });

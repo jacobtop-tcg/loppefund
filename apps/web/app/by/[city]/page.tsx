@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { BackLink } from '../../../components/BackLink.tsx';
 import { notFound } from 'next/navigation';
 import {
   listCities,
@@ -90,9 +91,9 @@ export default async function CityPage({
           }}
         />
       )}
-      <Link href="/" className="back-link">
+      <BackLink href="/">
         ← Alle markeder
-      </Link>
+      </BackLink>
       <header className="detail-header">
         <div className="detail-category">By-guide</div>
         <h1 className="detail-title">Loppemarkeder i {name}</h1>

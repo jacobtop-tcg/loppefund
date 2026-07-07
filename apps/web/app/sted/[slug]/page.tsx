@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { BackLink } from '../../../components/BackLink.tsx';
 import { notFound } from 'next/navigation';
 import { copenhagenNow, parseOsmHours } from '@loppefund/core';
 import { listVenues, loadVenueDetail } from '../../../lib/data.ts';
@@ -158,9 +159,9 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
-      <Link href="/" className="back-link">
+      <BackLink href="/">
         ← Alle steder
-      </Link>
+      </BackLink>
       <header className="detail-header">
         <div className="detail-category">{VENUE_LABELS[v.category] ?? 'Fast butik'}</div>
         <h1 className="detail-title">{displayTitle(v.title)}</h1>

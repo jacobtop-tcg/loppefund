@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { BackLink } from '../../../components/BackLink.tsx';
 import { notFound } from 'next/navigation';
 import { describeRecurrence } from '@loppefund/core';
 import { loadEventDetail, loadPhotos, loadReviews, todayIso } from '../../../lib/data.ts';
@@ -251,9 +252,9 @@ export default async function EventPage({
         />
       )}
       <div className="container">
-        <Link href="/" className="back-link">
+        <BackLink href="/">
           ← Alle markeder
-        </Link>
+        </BackLink>
         {event.status === 'cancelled' && (
           <div className="cancelled-banner" role="alert">
             <strong>Aflyst.</strong> Dette marked er meldt aflyst. Tag ikke afsted —

@@ -10,6 +10,7 @@ import { venueOpenState, VENUE_TYPES, type VenueType } from '../lib/venue-client
 import { buildSearchIndex } from '../lib/search-index.ts';
 import { useOutdoorWeather } from '../lib/weather.ts';
 import { FilterBar, type DateFilter } from './FilterBar.tsx';
+import { NAV_FLAG } from './BackLink.tsx';
 import { ShareButton } from './ShareButton.tsx';
 import { MapSkeleton } from './MapSkeleton.tsx';
 import { ResultsList } from './ResultsList.tsx';
@@ -185,6 +186,13 @@ export function Explorer({
       if (savedLoc.radius !== null) setRadius(savedLoc.radius);
     }
     setHydrated(true);
+    // Mark that the visitor has browsed the list this session — detail pages'
+    // back-links then use real history-back so filters + scroll survive.
+    try {
+      sessionStorage.setItem(NAV_FLAG, '1');
+    } catch {
+      /* private-mode edge — back-links just use their href fallback */
+    }
   }, []);
 
   // Remember the location on this device whenever it changes, so the next visit

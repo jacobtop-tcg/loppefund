@@ -1,3 +1,4 @@
+import { parseStallCount } from '@loppefund/core';
 import type { EventSummary } from './data.ts';
 
 /**
@@ -13,6 +14,7 @@ export interface Recommendation {
   distanceKm: number | null;
   score: number;
   reasons: string[];
+  isFavorite: boolean;
 }
 
 const WEEKDAYS = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'];
@@ -45,10 +47,13 @@ export function recommend(
     horizonDays?: number;
     limit?: number;
     distanceKm?: (aLat: number, aLng: number, bLat: number, bLng: number) => number;
+    /** Slugs the visitor has saved — a strong intent signal, boosted + labelled. */
+    favorites?: Set<string>;
   } = {},
 ): Recommendation[] {
   const horizon = addDaysIso(today, opts.horizonDays ?? 21);
   const dist = opts.distanceKm;
+  const favorites = opts.favorites;
   const out: Recommendation[] = [];
 
   for (const e of events) {
@@ -58,27 +63,34 @@ export function recommend(
 
     const d =
       pos && dist && e.lat != null && e.lng != null ? dist(pos.lat, pos.lng, e.lat, e.lng) : null;
+    const isFavorite = favorites?.has(e.slug) ?? false;
+    const stalls = parseStallCount(e.stallCountText);
+    // A market big/gem/well-corroborated enough that a real drive pays off.
+    const worthTheDrive = e.gem || e.confidence >= 0.8 || (stalls ?? 0) >= 30;
 
     let score = e.confidence * 0.3; // trust first
     if (d != null) score += Math.max(0, 1 - d / 60) * 0.35;
-    if (daysBetween(today, next.date) <= 7) score += 0.2; // this-weekend bias
+    if (daysBetween(today, next.date) <= 7) score += 0.25; // this-weekend bias
     if (e.gem) score += 0.3;
+    if (isFavorite) score += 0.35; // you saved it — a genuine "til dig" signal
     if (e.familyFriendly) score += 0.12;
     if (e.isFree) score += 0.08;
 
     // Reason chips in priority order — the enticing, specific signals first.
     // "godt bekræftet" is generic reassurance, so it only appears as a fallback
     // when the market has fewer than two real features to show, never crowding
-    // out "skjult perle" / "familievenlig" / "gratis".
+    // out "gemt af dig" / "skjult perle" / "familievenlig" / "gratis".
     const quality: string[] = [];
+    if (isFavorite) quality.push('gemt af dig');
     if (e.gem) quality.push('skjult perle');
-    if (d != null && d <= 30) quality.push(`kun ${Math.round(d)} km væk`);
+    if (d != null && d <= 15) quality.push(`kun ${Math.round(d)} km væk`);
+    else if (d != null && d <= 60 && worthTheDrive) quality.push(`${Math.round(d)} km — værd at køre`);
     if (e.familyFriendly) quality.push('familievenlig');
     if (e.isFree) quality.push('gratis');
     if (e.confidence >= 0.75 && quality.length < 2) quality.push('godt bekræftet');
 
     const reasons = [timingLabel(today, next.date), ...quality].slice(0, 3);
-    out.push({ event: e, nextDate: next.date, distanceKm: d, score, reasons });
+    out.push({ event: e, nextDate: next.date, distanceKm: d, score, reasons, isFavorite });
   }
 
   out.sort((a, b) => b.score - a.score || a.nextDate.localeCompare(b.nextDate));

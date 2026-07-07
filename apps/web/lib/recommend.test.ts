@@ -42,6 +42,31 @@ describe('recommend', () => {
     expect(p!.reasons).toContain('godt bekræftet');
   });
 
+  it('boosts a saved favorite and labels it "gemt af dig"', () => {
+    // Two otherwise-identical far markets; the saved one must win + be flagged.
+    const saved = base({ slug: 'saved', lat: 57, lng: 9.9, confidence: 0.6 });
+    const other = base({ slug: 'other', lat: 57, lng: 9.9, confidence: 0.6 });
+    const recs = recommend([other, saved], pos, today, {
+      distanceKm: dist,
+      favorites: new Set(['saved']),
+    });
+    expect(recs[0]!.event.slug).toBe('saved');
+    expect(recs[0]!.isFavorite).toBe(true);
+    expect(recs[0]!.reasons).toContain('gemt af dig');
+    expect(recs.find((r) => r.event.slug === 'other')!.isFavorite).toBe(false);
+  });
+
+  it('labels a far-but-worthwhile market "værd at køre" and a near one "km væk"', () => {
+    const near = base({ slug: 'near', lat: 55.705, lng: 12.505 }); // ~0.8 km
+    // ~40 km gem — worth the drive
+    const farGem = base({ slug: 'fargem', gem: true, lat: 56.06, lng: 12.5 });
+    const recs = recommend([near, farGem], pos, today, { distanceKm: dist });
+    const nearR = recs.find((r) => r.event.slug === 'near')!;
+    const farR = recs.find((r) => r.event.slug === 'fargem')!;
+    expect(nearR.reasons.some((x) => /km væk/.test(x))).toBe(true);
+    expect(farR.reasons.some((x) => /værd at køre/.test(x))).toBe(true);
+  });
+
   it('skips events with no upcoming occurrence and caps the list', () => {
     const past = base({ slug: 'p', occurrences: [{ date: '2026-06-01', startTime: null, endTime: null }] });
     const many = Array.from({ length: 8 }, (_, i) => base({ slug: `m${i}` }));

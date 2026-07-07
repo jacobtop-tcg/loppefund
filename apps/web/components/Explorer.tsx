@@ -304,8 +304,8 @@ export function Explorer({
   // "Til dig": personalized top picks from the full upcoming set (independent of
   // the active filter). Shown only when the visitor is browsing, not searching.
   const recs = useMemo(
-    () => recommend(events, pos, today, { distanceKm, limit: 4 }),
-    [events, pos, today],
+    () => recommend(events, pos, today, { distanceKm, limit: 4, favorites: new Set(favorites) }),
+    [events, pos, today, favorites],
   );
 
   // The empty state must always help onward: when filters yield nothing,

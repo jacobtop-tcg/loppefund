@@ -7,6 +7,7 @@ import {
   insertEvent,
   linkEventSource,
   listCancelledSlugsBetween,
+  listVanishedSlugsBetween,
   listEventsBetween,
   openDb,
   replaceOccurrences,
@@ -124,6 +125,23 @@ describe('db round trip', () => {
 
     const slugs = listCancelledSlugsBetween(db, '2026-07-03', '2026-12-31');
     expect(slugs).toEqual(['cancelled-soon']);
+  });
+
+  it('lists vanished (expired) slugs only while their date is still ahead', () => {
+    const db = openDb(':memory:');
+    // Active upcoming — browsable, must NOT get a tombstone.
+    const active = insertEvent(db, testEvent({ slug: 'active-mkt' }));
+    replaceOccurrences(db, active, [{ date: '2026-07-20', startTime: null, endTime: null }]);
+    // Source stopped listing it but the date is ahead — shared links deserve a
+    // soft "ikke længere annonceret" page instead of a silent 404.
+    const vanished = insertEvent(db, testEvent({ slug: 'vanished-soon', status: 'expired' }));
+    replaceOccurrences(db, vanished, [{ date: '2026-07-20', startTime: null, endTime: null }]);
+    // Expired with only past dates — a plain 404 is honest (nothing to warn about).
+    const past = insertEvent(db, testEvent({ slug: 'expired-past', status: 'expired' }));
+    replaceOccurrences(db, past, [{ date: '2026-06-01', startTime: null, endTime: null }]);
+
+    const slugs = listVanishedSlugsBetween(db, '2026-07-03', '2026-12-31');
+    expect(slugs).toEqual(['vanished-soon']);
   });
 
   it('expires events with no future occurrences', () => {

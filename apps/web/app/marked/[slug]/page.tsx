@@ -23,7 +23,11 @@ import { PhotoForm } from '../../../components/PhotoForm.tsx';
 import { starGlyphs } from '../../../lib/reviews.ts';
 import { isUnverified, trustLabel as trustLabelFor } from '../../../lib/trust.ts';
 import { googleCalendarUrl } from '../../../lib/calendar.ts';
-import { listCancelledUpcomingSlugs, listUpcomingEvents } from '../../../lib/data.ts';
+import {
+  listCancelledUpcomingSlugs,
+  listUpcomingEvents,
+  listVanishedUpcomingSlugs,
+} from '../../../lib/data.ts';
 import { distanceKm } from '../../../lib/client-utils.ts';
 
 // Only known event slugs render; unknowns 404. generateStaticParams reads the
@@ -34,10 +38,14 @@ export function generateStaticParams(): Array<{ slug: string }> {
   // Active upcoming markets — the browsable set. Plus markets that were
   // cancelled but whose date hasn't passed: their pages must render (as clear
   // "AFLYST" pages) rather than 404, so a link shared before the cancellation
-  // still tells a visitor not to go. A slug is only ever in one list (single
-  // status), but dedupe defensively.
+  // still tells a visitor not to go. Plus source-vanished (expired) markets
+  // with dates still ahead — e.g. a Facebook event that rotated out of the
+  // feed: their shared links get a soft "ikke længere annonceret" page, not a
+  // silent 404. A slug is only ever in one list (single status), but dedupe
+  // defensively.
   const slugs = new Set<string>(listUpcomingEvents(180).map((e) => e.slug));
   for (const slug of listCancelledUpcomingSlugs(180)) slugs.add(slug);
+  for (const slug of listVanishedUpcomingSlugs(180)) slugs.add(slug);
   return [...slugs].map((slug) => ({ slug }));
 }
 
@@ -250,6 +258,16 @@ export default async function EventPage({
           <div className="cancelled-banner" role="alert">
             <strong>Aflyst.</strong> Dette marked er meldt aflyst. Tag ikke afsted —
             arrangøren har trukket det tilbage, eller det er ikke længere bekræftet.
+          </div>
+        )}
+        {/* Source-vanished (not cancelled): softer language — we KNOW the source
+            stopped listing it, we DON'T know why. Never over-claim. */}
+        {event.status === 'expired' && (
+          <div className="vanished-banner" role="status">
+            <strong>Annonceres ikke længere.</strong> Kilden viser ikke længere dette
+            marked — det kan være aflyst, flyttet eller blot fjernet fra kalenderen.
+            Tjek hos arrangøren, før du tager afsted. Senest set{' '}
+            {event.lastSeenAt.slice(0, 10)}.
           </div>
         )}
         <header className="detail-header">

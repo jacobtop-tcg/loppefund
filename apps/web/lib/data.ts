@@ -9,6 +9,7 @@ import {
   getEventBySlug,
   getVenueBySlug,
   listCancelledSlugsBetween,
+  listVanishedSlugsBetween,
   listEventsBetween,
   listVenues as dbListVenues,
   openDb,
@@ -303,6 +304,14 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
 export function listCancelledUpcomingSlugs(horizonDays = 180): string[] {
   const from = todayIso();
   return listCancelledSlugsBetween(getDb(), from, addDays(from, horizonDays));
+}
+
+/** Slugs of source-vanished (expired) markets whose dates are still ahead —
+ *  their shared/bookmarked links render a soft "ikke længere annonceret" page
+ *  instead of a silent 404. Browsing surfaces stay active-only. */
+export function listVanishedUpcomingSlugs(horizonDays = 180): string[] {
+  const from = todayIso();
+  return listVanishedSlugsBetween(getDb(), from, addDays(from, horizonDays));
 }
 
 export interface CityInfo {

@@ -901,6 +901,23 @@ a:focus-visible .event-card {
   letter-spacing: 0.02em;
 }
 
+/* Source-vanished: advisory amber, softer than the AFLYST red — we know the
+   source dropped it, we don't know why, and the copy must not over-claim. */
+.vanished-banner {
+  margin: 4px 0 18px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: var(--amber-wash);
+  border: 1px solid #e5d5a6;
+  color: #6d5615;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.vanished-banner strong {
+  color: #8a6d1d;
+  letter-spacing: 0.02em;
+}
+
 .badge.unverified {
   background: var(--amber-wash);
   color: #8a6d1d;

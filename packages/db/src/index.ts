@@ -267,6 +267,26 @@ export function listCancelledSlugsBetween(
   return rows.map((r) => r.slug);
 }
 
+/** Events the pipeline retired because their source stopped listing them
+ *  (status 'expired' via reconcileVanishedSourceEvents) but whose dates are
+ *  still ahead — e.g. a Facebook event that rotated out of the feed. Their
+ *  shared/bookmarked links deserve a soft "no longer advertised" page, not a
+ *  silent 404. Browsing surfaces stay active-only. */
+export function listVanishedSlugsBetween(
+  db: DatabaseSync,
+  from: string,
+  to: string,
+): string[] {
+  const rows = db
+    .prepare(
+      `SELECT DISTINCT e.slug FROM events e
+       JOIN occurrences o ON o.event_id = e.id
+       WHERE e.status = 'expired' AND o.date >= ? AND o.date <= ?`,
+    )
+    .all(from, to) as unknown as Array<{ slug: string }>;
+  return rows.map((r) => r.slug);
+}
+
 export function getEventBySlug(
   db: DatabaseSync,
   slug: string,

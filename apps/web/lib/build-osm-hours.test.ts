@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { parseOsmHours } from '@loppefund/core';
 import { buildOsmHours, type DayHours } from './build-osm-hours.ts';
 
 const open = (from: string, to: string): DayHours => ({ open: true, from, to });
@@ -38,5 +39,21 @@ describe('buildOsmHours', () => {
   it('handles a single Sunday-only market', () => {
     const w = week(shut, shut, shut, shut, shut, shut, open('08:00', '15:00'));
     expect(buildOsmHours(w)).toBe('Su 08:00-15:00');
+  });
+
+  // The integration contract: a community submission must render on the venue
+  // page, which parses it with parseOsmHours. If either format drifts, a
+  // submission would silently fail to display — so lock the round-trip.
+  it('emits a string that parseOsmHours reads back to the same week', () => {
+    const w = week(
+      open('10:00', '17:00'), open('10:00', '17:00'), open('10:00', '17:00'),
+      open('10:00', '17:00'), open('10:00', '17:00'), open('10:00', '14:00'), shut,
+    );
+    const parsed = parseOsmHours(buildOsmHours(w));
+    expect(parsed).not.toBeNull();
+    expect(parsed!).toHaveLength(7);
+    expect(parsed![0]).toEqual([[600, 1020]]); // Mon 10:00-17:00 in minutes
+    expect(parsed![5]).toEqual([[600, 840]]); // Sat 10:00-14:00
+    expect(parsed![6]).toEqual([]); // Sun closed
   });
 });

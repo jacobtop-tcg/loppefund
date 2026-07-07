@@ -6,6 +6,7 @@ import { displayPlace, displayTitle } from '../../../lib/format.ts';
 import { VENUE_LABELS } from '../../../lib/venue-client.ts';
 import { VenueHours } from '../../../components/VenueHours.tsx';
 import { VenueHoursForm } from '../../../components/VenueHoursForm.tsx';
+import { distanceKm } from '../../../lib/client-utils.ts';
 
 // Permanent-venue pages: "<butik> åbningstider" is what people google for a shop.
 export const dynamicParams = false;
@@ -121,6 +122,17 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
   const v = loadVenueDetail(slug);
   if (!v) notFound();
   const now = copenhagenNow();
+  // Same-visit discovery: the three nearest OTHER shops (~5 km — shops cluster in
+  // town, unlike the 40 km used for markets). Mirrors the event page's "I nærheden".
+  const nearby =
+    v.lat != null && v.lng != null
+      ? listVenues()
+          .filter((o) => o.slug !== v.slug && o.lat != null && o.lng != null)
+          .map((o) => ({ ...o, km: distanceKm(v.lat!, v.lng!, o.lat!, o.lng!) }))
+          .filter((o) => o.km <= 5)
+          .sort((a, b) => a.km - b.km)
+          .slice(0, 3)
+      : [];
   const place = [v.street, v.city].filter(Boolean).join(', ');
   const mapsUrl =
     v.lat != null && v.lng != null
@@ -180,6 +192,25 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
           </a>
         )}
       </div>
+
+      {nearby.length > 0 && (
+        <section className="panel venue-nearby">
+          <h2>I nærheden</h2>
+          <ul className="occurrence-list">
+            {nearby.map((n) => (
+              <li key={n.slug}>
+                <span className="when">
+                  <Link href={`/sted/${n.slug}`} style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
+                    {displayTitle(n.title)}
+                  </Link>
+                  <span className="venue-nearby-kind"> · {VENUE_LABELS[n.category] ?? 'Butik'}</span>
+                </span>
+                <span className="hours">{n.km < 1 ? '<1' : Math.round(n.km)} km</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <p className="venue-attrib">
         Butiks- og åbningstidsdata fra{' '}

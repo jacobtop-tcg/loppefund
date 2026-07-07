@@ -2290,6 +2290,8 @@ body:has(.is-map-view) {
 .venue-count strong { color: #2c605c; font-weight: 700; }
 
 /* Detail page: opening hours + actions. */
+.venue-nearby { margin-top: 22px; }
+.venue-nearby-kind { color: var(--ink-faint); font-weight: 500; }
 .venue-hours {
   margin-top: 20px;
   /* Hours are THE reason to open a shop page — give them a real card. */

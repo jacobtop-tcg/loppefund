@@ -163,7 +163,7 @@ describe('parseExplorerParams', () => {
 
   it('parses each key from a fully-populated URL', () => {
     const parsed = parseExplorerParams(
-      '?dato=idag&kat=antikmarked&q=aarhus&gratis=1&familie=1&inde=1&gemt=1&perler=1&visning=kort',
+      '?dato=idag&kat=antikmarked&q=aarhus&gratis=1&familie=1&stor=1&inde=1&gemt=1&perler=1&visning=kort',
     );
     expect(parsed).toEqual<ExplorerParams>({
       dateFilter: 'idag',
@@ -171,6 +171,7 @@ describe('parseExplorerParams', () => {
       query: 'aarhus',
       freeOnly: true,
       familyOnly: true,
+      biggerOnly: true,
       inOut: 'indoor',
       savedOnly: true,
       gemsFirst: true,
@@ -240,6 +241,7 @@ describe('serializeExplorerParams', () => {
       query: 'København',
       freeOnly: true,
       familyOnly: true,
+      biggerOnly: true,
       inOut: 'outdoor',
       savedOnly: true,
       gemsFirst: true,

@@ -2,7 +2,7 @@
 
 import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { copenhagenNow, isOpenAt, type CphNow } from '@loppefund/core';
+import { copenhagenNow, isOpenAt, parseStallCount, type CphNow } from '@loppefund/core';
 import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
 import { venueOpenState, VENUE_TYPES, type VenueType } from '../lib/venue-client.ts';
@@ -37,6 +37,10 @@ const MapView = dynamic(() => import('./MapView.tsx').then((m) => m.MapView), {
   loading: () => <MapSkeleton className="map-shell" />,
 });
 
+// "Større markeder" bar: a known stall count at/above this is a substantial
+// market worth driving to. ~113 of the events clear it — a useful, honest set.
+const BIGGER_STALLS = 15;
+
 /** [from, to] inclusive for each date filter. Weekend = Sat+Sun (or rest of it). */
 function dateRangeFor(filter: DateFilter, today: string): [string, string] {
   if (filter === 'idag' || filter === 'aabent-nu') return [today, today];
@@ -67,6 +71,9 @@ export function Explorer({
   const [category, setCategory] = useState<string | null>(null);
   const [freeOnly, setFreeOnly] = useState(false);
   const [familyOnly, setFamilyOnly] = useState(false);
+  // "Større markeder" — answers the mandate's "which are worth driving to?".
+  // A market with a known stall count at/above this bar is a substantial one.
+  const [biggerOnly, setBiggerOnly] = useState(false);
   const [inOut, setInOut] = useState<'indoor' | 'outdoor' | null>(null);
   const [view, setView] = useState<'list' | 'map'>('list');
   const [pos, setPos] = useState<{ lat: number; lng: number } | null>(null);
@@ -143,6 +150,7 @@ export function Explorer({
     setQuery(parsed.query);
     setFreeOnly(parsed.freeOnly);
     setFamilyOnly(parsed.familyOnly);
+    setBiggerOnly(parsed.biggerOnly);
     setInOut(parsed.inOut);
     setSavedOnly(parsed.savedOnly);
     setGemsFirst(parsed.gemsFirst);
@@ -175,6 +183,7 @@ export function Explorer({
       query,
       freeOnly,
       familyOnly,
+      biggerOnly,
       inOut,
       savedOnly,
       gemsFirst,
@@ -182,7 +191,7 @@ export function Explorer({
     });
     const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
     window.history.replaceState(null, '', url);
-  }, [hydrated, dateFilter, category, query, freeOnly, familyOnly, inOut, savedOnly, gemsFirst, view]);
+  }, [hydrated, dateFilter, category, query, freeOnly, familyOnly, biggerOnly, inOut, savedOnly, gemsFirst, view]);
 
   const [from, to] = dateRangeFor(dateFilter, today);
 
@@ -208,6 +217,7 @@ export function Explorer({
       if (category && e.category !== category) continue;
       if (freeOnly && e.isFree !== true) continue;
       if (familyOnly && !e.familyFriendly) continue;
+      if (biggerOnly && (parseStallCount(e.stallCountText) ?? 0) < BIGGER_STALLS) continue;
       if (inOut && e.indoorOutdoor !== inOut && e.indoorOutdoor !== 'mixed') continue;
       if (q) {
         const haystack =
@@ -250,7 +260,7 @@ export function Explorer({
     }
     if (gemsFirst) result.sort((a, b) => Number(b.gem) - Number(a.gem));
     return result;
-  }, [events, from, to, deferredQuery, category, freeOnly, familyOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
+  }, [events, from, to, deferredQuery, category, freeOnly, familyOnly, biggerOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
 
   // The permanent-venue layer, filtered in parallel with events (venues have no
   // dates, so the date chips don't apply — except "Åbent nu", which narrows them
@@ -318,6 +328,7 @@ export function Explorer({
       if (category && e.category !== category) continue;
       if (freeOnly && e.isFree !== true) continue;
       if (familyOnly && !e.familyFriendly) continue;
+      if (biggerOnly && (parseStallCount(e.stallCountText) ?? 0) < BIGGER_STALLS) continue;
       if (inOut && e.indoorOutdoor !== inOut && e.indoorOutdoor !== 'mixed') continue;
       if (q) {
         const haystack =
@@ -338,7 +349,7 @@ export function Explorer({
       return a.nextDate.localeCompare(b.nextDate);
     });
     return alt.slice(0, 3);
-  }, [filtered.length, events, today, deferredQuery, category, freeOnly, familyOnly, inOut, savedOnly, pos]);
+  }, [filtered.length, events, today, deferredQuery, category, freeOnly, familyOnly, biggerOnly, inOut, savedOnly, pos]);
 
   // Echo the active refinements next to the result count, so the number always
   // has context ("12 markeder i weekenden · gratis · inden 25 km · »odense«").
@@ -347,6 +358,7 @@ export function Explorer({
     const r: string[] = [];
     if (freeOnly) r.push('gratis');
     if (familyOnly) r.push('børnevenlige');
+    if (biggerOnly) r.push('større markeder');
     if (inOut === 'indoor') r.push('indendørs');
     else if (inOut === 'outdoor') r.push('udendørs');
     if (savedOnly) r.push('gemte');
@@ -459,6 +471,7 @@ export function Explorer({
         category={category} onCategory={setCategory}
         freeOnly={freeOnly} onFreeOnly={setFreeOnly}
         familyOnly={familyOnly} onFamilyOnly={setFamilyOnly}
+        biggerOnly={biggerOnly} onBiggerOnly={setBiggerOnly}
         inOut={inOut} onInOut={setInOut}
         savedOnly={savedOnly} onSavedOnly={setSavedOnly} favCount={favCount}
         pos={pos} locating={locating} onLocate={locate} onClearPos={clearPos}

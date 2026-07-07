@@ -45,6 +45,8 @@ export const FilterBar = memo(function FilterBar(props: {
   onFreeOnly: (v: boolean) => void;
   familyOnly: boolean;
   onFamilyOnly: (v: boolean) => void;
+  biggerOnly: boolean;
+  onBiggerOnly: (v: boolean) => void;
   inOut: 'indoor' | 'outdoor' | null;
   onInOut: (v: 'indoor' | 'outdoor' | null) => void;
   savedOnly: boolean;
@@ -108,7 +110,6 @@ export const FilterBar = memo(function FilterBar(props: {
   const secondaryCount =
     (props.category ? 1 : 0) +
     (props.freeOnly ? 1 : 0) +
-    (props.familyOnly ? 1 : 0) +
     (props.inOut ? 1 : 0);
 
   return (
@@ -199,13 +200,6 @@ export const FilterBar = memo(function FilterBar(props: {
                   Gratis entré
                 </button>
                 <button
-                  className={`chip ${props.familyOnly ? 'active' : ''}`}
-                  aria-pressed={props.familyOnly}
-                  onClick={() => props.onFamilyOnly(!props.familyOnly)}
-                >
-                  Børnevenligt
-                </button>
-                <button
                   className={`chip ${props.inOut === 'indoor' ? 'active' : ''}`}
                   aria-pressed={props.inOut === 'indoor'}
                   onClick={() => props.onInOut(props.inOut === 'indoor' ? null : 'indoor')}
@@ -236,6 +230,23 @@ export const FilterBar = memo(function FilterBar(props: {
             {c.label}
           </button>
         ))}
+        <span className="chip-sep" aria-hidden />
+        {/* Two mandate questions, one tap each: "worth the drive?" + "family-friendly?" */}
+        <button
+          className={`chip ${props.biggerOnly ? 'active' : ''}`}
+          aria-pressed={props.biggerOnly}
+          onClick={() => props.onBiggerOnly(!props.biggerOnly)}
+          title="Store markeder med mange stande — værd at køre efter"
+        >
+          Større markeder
+        </button>
+        <button
+          className={`chip ${props.familyOnly ? 'active' : ''}`}
+          aria-pressed={props.familyOnly}
+          onClick={() => props.onFamilyOnly(!props.familyOnly)}
+        >
+          Børnevenligt
+        </button>
         <span className="chip-sep" aria-hidden />
         <button
           className={`chip accent ${props.pos ? 'active' : ''}`}

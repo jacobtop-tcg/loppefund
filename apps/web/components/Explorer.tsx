@@ -541,7 +541,7 @@ export function Explorer({
 
       {tripMode && (
         <div className="trip-bar" role="region" aria-label="Loppetur">
-          <span className="trip-count">
+          <span className="trip-count" aria-live="polite">
             {tripSlugs.length === 0 ? (
               'Vælg markeder og faste steder til din tur'
             ) : tripSlugs.length === 1 ? (

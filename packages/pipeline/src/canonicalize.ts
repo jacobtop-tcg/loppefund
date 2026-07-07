@@ -20,6 +20,7 @@ import {
   slugify,
   stripDateTokens,
   titleHasDateTokens,
+  titleSignalsCancelled,
   type IndoorOutdoor,
   type Occurrence,
   type RawEvent,
@@ -535,7 +536,10 @@ export async function canonicalizeRawEvent(
     }
   }
 
-  const cancelled = raw.cancelled === true;
+  // A source's structured cancelled flag OR an "AFLYST"-marked title (some
+  // sources only signal cancellation in the title) — both flow through the same
+  // trust-gated, reversible cancellation logic below.
+  const cancelled = raw.cancelled === true || titleSignalsCancelled(raw.title);
 
   if (best) {
     const e = best.event;

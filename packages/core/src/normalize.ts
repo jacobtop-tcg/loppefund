@@ -17,6 +17,22 @@ export function slugify(text: string): string {
 }
 
 /**
+ * True when an event TITLE flags the market as cancelled. Some sources signal a
+ * cancellation only by marking the title ("AFLYST – Loppelinda …") rather than a
+ * structured status field, so the pipeline would otherwise keep showing a
+ * cancelled market as active — the worst kind of wrong data. Matched on the
+ * TITLE only and guarded against "aflyses ikke" (= NOT cancelled), so the common
+ * weather-policy prose "aflyses ved regn" — which lives in DESCRIPTIONS, never
+ * the title — can't trigger a false cancellation. Feeds the existing
+ * trust-gated, reversible cancellation flow in canonicalize.
+ */
+export function titleSignalsCancelled(title: string | null | undefined): boolean {
+  if (!title) return false;
+  if (/\baflys\w*\s+ikke\b/i.test(title)) return false; // "aflyses ikke" = not cancelled
+  return /\b(aflyst|aflyses|cancelled|canceled)\b/i.test(title);
+}
+
+/**
  * The dedup-matching form of a title: {@link stripDateTokens} to remove the
  * date a recurring market carries in its title ("VBC Loppemarked 12. sep 2026",
  * "Loppemarked Halmtorvet – 16 august"), then {@link normalizeTitle}. Used ONLY

@@ -1,5 +1,35 @@
 import { describe, expect, it } from 'vitest';
-import { cleanCity, cleanStreet, cleanVenueName, stripDateTokens } from '../src/normalize.ts';
+import {
+  cleanCity,
+  cleanStreet,
+  cleanVenueName,
+  stripDateTokens,
+  titleSignalsCancelled,
+} from '../src/normalize.ts';
+
+describe('titleSignalsCancelled', () => {
+  it('flags an AFLYST-prefixed title as cancelled', () => {
+    expect(titleSignalsCancelled('AFLYST – Loppelinda – Dronning Louises Bro')).toBe(true);
+  });
+  it('flags AFLYST/CANCELLED markers anywhere in the title', () => {
+    expect(titleSignalsCancelled('Loppemarked på Torvet (AFLYST)')).toBe(true);
+    expect(titleSignalsCancelled('Summer flea market — CANCELLED')).toBe(true);
+    expect(titleSignalsCancelled('Markedet aflyses')).toBe(true);
+  });
+  it('does NOT flag a normal market title', () => {
+    expect(titleSignalsCancelled('Stort Loppemarked på Godsbanen')).toBe(false);
+    expect(titleSignalsCancelled('Ørbæk Marked')).toBe(false);
+  });
+  it('does NOT flag weather-policy phrasing ("aflyses ikke")', () => {
+    // Defensive: the real weather text lives in descriptions, but a title saying
+    // "markedet aflyses ikke ved regn" must never read as cancelled.
+    expect(titleSignalsCancelled('Loppemarked — aflyses ikke ved regn')).toBe(false);
+  });
+  it('handles null/undefined', () => {
+    expect(titleSignalsCancelled(null)).toBe(false);
+    expect(titleSignalsCancelled(undefined)).toBe(false);
+  });
+});
 
 describe('cleanVenueName', () => {
   it('keeps a short place label', () => {

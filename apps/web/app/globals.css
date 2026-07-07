@@ -2612,6 +2612,10 @@ body:has(.is-map-view) {
   color: var(--ink-faint);
   font-variant-numeric: tabular-nums;
 }
+.hero-new {
+  color: var(--accent-deep);
+  font-weight: 600;
+}
 
 /* ---------- search autocomplete ---------- */
 

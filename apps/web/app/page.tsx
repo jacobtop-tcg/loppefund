@@ -13,6 +13,10 @@ export default function HomePage() {
   const venueCount = listVenues().length;
   const now = copenhagenNow();
   const updated = latestUpdate();
+  // "Continuously updated" made visible: markets first discovered in the last
+  // ~10 days. Reuses the guarded `newlyAdded` signal (self-suppresses after an
+  // offline rebuild), so this only ever shows a real, honest discovery count.
+  const newCount = events.filter((e) => e.newlyAdded).length;
   return (
     <>
       <a className="skip-link" href="#markeder">
@@ -32,7 +36,15 @@ export default function HomePage() {
             <strong>{venueCount.toLocaleString('da-DK')}</strong> faste steder
           </p>
           {updated && (
-            <p className="hero-updated">Data opdateret {formatUpdated(updated)}</p>
+            <p className="hero-updated">
+              Data opdateret {formatUpdated(updated)}
+              {newCount > 0 && (
+                <span className="hero-new">
+                  {' · '}
+                  {newCount} {newCount === 1 ? 'nyt marked' : 'nye markeder'} for nylig
+                </span>
+              )}
+            </p>
           )}
         </div>
       </header>

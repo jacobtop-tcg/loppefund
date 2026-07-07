@@ -497,6 +497,14 @@ export default async function EventPage({
                     <span className="v">{event.contactPhone}</span>
                   </li>
                 )}
+                {event.contactEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(event.contactEmail) && (
+                  <li>
+                    <span className="k">E-mail</span>
+                    <span className="v">
+                      <a href={`mailto:${event.contactEmail}`}>{event.contactEmail}</a>
+                    </span>
+                  </li>
+                )}
                 {safeBooking && (
                   <li>
                     <span className="k">Lej en stand</span>

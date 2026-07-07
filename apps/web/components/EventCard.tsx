@@ -50,6 +50,11 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
           {moreDates > 0 && ` · +${moreDates} ${moreDates === 1 ? 'dato' : 'datoer'}`}
         </div>
         <div className="badge-row">
+          {event.newlyAdded && event.status !== 'cancelled' && (
+            <span className="badge new" title="Fundet hos Loppefund inden for de sidste par uger">
+              Nyt
+            </span>
+          )}
           {openNow && event.status !== 'cancelled' && (
             <span className="badge open-now">
               <span className="dot" aria-hidden />
@@ -71,6 +76,12 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
           {event.isFree === true && <span className="badge free">Gratis</span>}
           {event.indoorOutdoor === 'indoor' && <span className="badge">Indendørs</span>}
           {event.indoorOutdoor === 'outdoor' && <span className="badge">Udendørs</span>}
+          {event.accessible && <span className="badge">Kørestolsvenligt</span>}
+          {event.cashOnly && (
+            <span className="badge cash" title="Tag kontanter med — markedet tager kun kontant betaling.">
+              Kun kontanter
+            </span>
+          )}
           {/* A market that says it cancels in rain, on a day with a real chance of
               it, gets a warning instead of a plain forecast — the single most
               trip-saving thing we can tell a family before they drive out. Such a
@@ -100,13 +111,23 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
               Aflyst
             </span>
           )}
-          {event.status !== 'cancelled' && isUnverified(event.confidence) && (
+          {event.status !== 'cancelled' && isUnverified(event.confidence) ? (
             <span
               className="badge unverified"
               title="Kun set ét sted og endnu ikke bekræftet — tjek datoen hos arrangøren, før du tager afsted."
             >
               Ubekræftet
             </span>
+          ) : (
+            event.status !== 'cancelled' &&
+            event.sourceCount >= 2 && (
+              <span
+                className="badge verified"
+                title={`Bekræftet på tværs af ${event.sourceCount} offentlige kilder`}
+              >
+                ✓ {event.sourceCount} kilder
+              </span>
+            )
           )}
         </div>
       </div>

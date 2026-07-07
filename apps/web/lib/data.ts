@@ -182,10 +182,21 @@ export interface EventSummary {
   stallCountText: string | null;
   status: string;
   confidence: number;
+  /** Distinct public sources that corroborate this event — the trust signal a
+   *  lone Facebook post or Google listing structurally can't show. */
+  sourceCount: number;
+  /** First discovered by Loppefund within the last ~10 days (freshness/discovery
+   *  signal). Trustworthy in production (incremental crawl preserves first_seen). */
+  newlyAdded: boolean;
   /** Hidden-gem heuristic — see @loppefund/core gems.ts. */
   gem: boolean;
   /** From extracted amenities: kids activities mentioned in the description. */
   familyFriendly: boolean;
+  /** From extracted amenities (tri-state → only true when the source states it). */
+  accessible: boolean;
+  /** From extracted amenities: the market states it's cash-only ("kun kontanter")
+   *  — a bring-cash pre-trip warning. */
+  cashOnly: boolean;
   /** From extracted amenities: the market states it's cancelled/affected by rain
    *  ("aflyses ved regn"). Combined with an outdoor forecast to warn before a trip. */
   weatherDependent: boolean;
@@ -201,8 +212,11 @@ export function todayIso(): string {
 export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
   const from = todayIso();
   const to = addDays(from, horizonDays);
-  return listEventsBetween(getDb(), from, to)
-    .map((e) => ({
+  const nowMs = Date.now();
+  const summaries = listEventsBetween(getDb(), from, to)
+    .map((e) => {
+      const am = e.amenities ? (JSON.parse(e.amenities) as Amenities) : null;
+      return {
       slug: e.slug,
       title: e.title,
       category: e.category,
@@ -218,6 +232,10 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       stallCountText: e.stall_count_text,
       status: e.status,
       confidence: e.confidence,
+      sourceCount: e.source_count,
+      // ~10-day discovery window. Guarded against the offline full-rebuild (which
+      // resets first_seen_at) never running in production's incremental crawl.
+      newlyAdded: nowMs - Date.parse(e.first_seen_at) < 10 * 86_400_000,
       gem: isHiddenGem({
         confidence: e.confidence,
         sourceCount: e.source_count,
@@ -230,12 +248,12 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
         hasVenueName: e.venue_name !== null,
         hasOrganizerOrWebsite: e.organizer !== null || e.contact_website !== null,
       }),
-      familyFriendly: e.amenities
-        ? (JSON.parse(e.amenities) as Amenities).familyFriendly === true
-        : false,
-      weatherDependent: e.amenities
-        ? (JSON.parse(e.amenities) as Amenities).weatherDependent === true
-        : false,
+      familyFriendly: am?.familyFriendly === true,
+      weatherDependent: am?.weatherDependent === true,
+      // Tri-state amenities: true ONLY when the source explicitly states it, so
+      // nothing is invented (a null/unknown reads as false = "not claimed").
+      accessible: am?.accessibility === true,
+      cashOnly: am?.cashOnly === true,
       // Enough folded description signal for keyword matches ('vintage',
       // 'børneloppemarked') without bloating the homepage payload — title,
       // city, venue, municipality and postcode are searched separately.
@@ -249,8 +267,17 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
         startTime: o.start_time,
         endTime: o.end_time,
       })),
-    }))
+      };
+    })
     .sort((a, b) => (a.occurrences[0]?.date ?? '').localeCompare(b.occurrences[0]?.date ?? ''));
+  // "Nyt" self-protection: if an offline full-rebuild reset first_seen_at, the
+  // badge would light up on nearly everything — meaningless clutter AND wrong
+  // (they aren't all new). When an implausible share looks new (>40%), the
+  // signal is untrustworthy, so drop it entirely. Production's INCREMENTAL crawl
+  // preserves first_seen_at and never trips this, so real "Nyt" survives there.
+  const newShare = summaries.filter((e) => e.newlyAdded).length / (summaries.length || 1);
+  if (newShare > 0.4) for (const e of summaries) e.newlyAdded = false;
+  return summaries;
 }
 
 /**

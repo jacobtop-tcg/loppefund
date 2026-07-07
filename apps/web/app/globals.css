@@ -726,6 +726,29 @@ a:focus-visible .event-card {
   color: var(--green);
 }
 
+/* Positive trust signal — multi-source corroboration, the edge over a lone FB
+   post. Calm green, never louder than the market's own name. */
+.badge.verified {
+  background: var(--green-wash);
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Discovery/freshness — a filled accent pill so recently-found markets catch
+   the eye (a signal a static Google result or FB group can't surface). */
+.badge.new {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+/* Bring-cash pre-trip note — advisory amber, not an alarm. */
+.badge.cash {
+  background: var(--amber-wash);
+  color: #8a6d1d;
+}
+
 .badge.cancelled {
   background: #fbe3e3;
   color: #b3352b;

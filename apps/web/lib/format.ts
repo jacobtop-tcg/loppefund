@@ -1,4 +1,5 @@
 /** Danish date/label formatting shared by server and client components. */
+import { stripPromoCruft } from '@loppefund/core';
 
 export const CATEGORY_LABELS: Record<string, string> = {
   loppemarked: 'Loppemarked',
@@ -51,16 +52,18 @@ export function formatDateLong(isoDate: string): string {
 }
 
 /**
- * Tame shouting user-submitted titles: if a string is mostly uppercase,
- * convert to sentence case for display. Raw data is never altered.
+ * Clean a title for DISPLAY (raw data is never altered): drop promotional/operator
+ * cruft ("… 16. sæson Rask Event v/ Ole S. Rask"), tame ALL-CAPS shouting to
+ * sentence case, and capitalize a lowercase first letter ("loppemarked – Sorø").
  */
 export function displayTitle(text: string): string {
-  const letters = text.replace(/[^a-zA-ZæøåÆØÅ]/g, '');
-  if (letters.length < 4) return text;
-  const upper = letters.replace(/[^A-ZÆØÅ]/g, '').length;
-  if (upper / letters.length <= 0.7) return text;
-  const lowered = text.toLowerCase();
-  return lowered.charAt(0).toUpperCase() + lowered.slice(1);
+  let t = stripPromoCruft(text);
+  const letters = t.replace(/[^a-zA-ZæøåÆØÅ]/g, '');
+  if (letters.length >= 4) {
+    const upper = letters.replace(/[^A-ZÆØÅ]/g, '').length;
+    if (upper / letters.length > 0.7) t = t.toLowerCase(); // de-shout ALL-CAPS
+  }
+  return /^[a-zæøå]/.test(t) ? t.charAt(0).toUpperCase() + t.slice(1) : t;
 }
 
 /** Capitalize each word — for city names that arrive lowercase. */

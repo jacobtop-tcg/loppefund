@@ -4,8 +4,26 @@ import {
   cleanStreet,
   cleanVenueName,
   stripDateTokens,
+  stripPromoCruft,
   titleSignalsCancelled,
 } from '../src/normalize.ts';
+
+describe('stripPromoCruft', () => {
+  it('strips season-edition markers and operator credits from real aggregator titles', () => {
+    expect(stripPromoCruft('Bagagerumsmarked Aarhus Bispetorvet private 16. sæson Rask Event, Ole S. Rask')).toBe(
+      'Bagagerumsmarked Aarhus Bispetorvet',
+    );
+    expect(stripPromoCruft('Bagagerumsmarked Aalborg (kun for private) 23. sæson  Rask Event v/ Ole S. Rask')).toBe(
+      'Bagagerumsmarked Aalborg',
+    );
+  });
+  it('never mangles a legitimate title (leading "Privat", generic names, all-cruft)', () => {
+    expect(stripPromoCruft('Privat loppemarked')).toBe('Privat loppemarked');
+    expect(stripPromoCruft('STORT Loppemarked på Godsbanen')).toBe('STORT Loppemarked på Godsbanen');
+    expect(stripPromoCruft('Ørbæk Marked')).toBe('Ørbæk Marked');
+    expect(stripPromoCruft('3. sæson')).toBe('3. sæson'); // would empty out -> fallback to original
+  });
+});
 
 describe('titleSignalsCancelled', () => {
   it('flags an AFLYST-prefixed title as cancelled', () => {

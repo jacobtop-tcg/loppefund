@@ -241,6 +241,24 @@ export function stripDateTokens(title: string): string {
   return s.length >= 3 ? s : title;
 }
 
+/**
+ * Strip promotional/operator cruft from a DISPLAY title — a season-edition marker
+ * and everything after it ("… 16. sæson Rask Event v/ Ole S. Rask"), and audience
+ * parentheticals ("(kun for private)"). These are never part of a market's real
+ * name; several aggregators bake the organiser's full promo line into the title.
+ * Conservative: falls back to the original if stripping would leave < 3 chars, and
+ * only removes a trailing "private" audience marker (never a leading "Privat …").
+ * Display-only — the stored title, slug and dedup key are left untouched.
+ */
+export function stripPromoCruft(title: string): string {
+  let s = title
+    .replace(/\s*\(\s*(?:kun\s+)?for\s+privat[e]?\s*\)/gi, ' ') // "(kun for private)"
+    .replace(/\s*[·,–-]?\s*\d{1,2}\.?\s*s(?:æ|ae)son\b.*$/i, ' ') // "16. sæson …operator"
+    .replace(/\s+(?:kun\s+for\s+)?privat[e]?\s*$/i, ' '); // trailing " private"
+  s = s.replace(/\s{2,}/g, ' ').replace(/[\s,·–-]+$/, '').trim();
+  return s.length >= 3 ? s : title;
+}
+
 /** Extract a Danish postcode (4 digits, 1000-9999) from text. */
 export function extractPostcode(text: string): string | null {
   const m = text.match(/\b([1-9]\d{3})\b/);

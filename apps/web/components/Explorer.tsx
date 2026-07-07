@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { copenhagenNow, isOpenAt, parseStallCount, type CphNow } from '@loppefund/core';
 import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
+import { isUnverified } from '../lib/trust.ts';
 import { venueOpenState, VENUE_TYPES, type VenueType } from '../lib/venue-client.ts';
 import { buildSearchIndex } from '../lib/search-index.ts';
 import { useOutdoorWeather } from '../lib/weather.ts';
@@ -74,6 +75,11 @@ export function Explorer({
   // "Større markeder" — answers the mandate's "which are worth driving to?".
   // A market with a known stall count at/above this bar is a substantial one.
   const [biggerOnly, setBiggerOnly] = useState(false);
+  // "Kørestolsvenligt" — wheelchair-accessible only (from stated amenities).
+  const [accessibleOnly, setAccessibleOnly] = useState(false);
+  // "Bekræftet" — trust-first browse: only markets corroborated by ≥2 sources
+  // and above the confidence bar. The mode only Loppefund's provenance can power.
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [inOut, setInOut] = useState<'indoor' | 'outdoor' | null>(null);
   const [view, setView] = useState<'list' | 'map'>('list');
   const [pos, setPos] = useState<{ lat: number; lng: number } | null>(null);
@@ -151,6 +157,8 @@ export function Explorer({
     setFreeOnly(parsed.freeOnly);
     setFamilyOnly(parsed.familyOnly);
     setBiggerOnly(parsed.biggerOnly);
+    setAccessibleOnly(parsed.accessibleOnly);
+    setVerifiedOnly(parsed.verifiedOnly);
     setInOut(parsed.inOut);
     setSavedOnly(parsed.savedOnly);
     setGemsFirst(parsed.gemsFirst);
@@ -184,6 +192,8 @@ export function Explorer({
       freeOnly,
       familyOnly,
       biggerOnly,
+      accessibleOnly,
+      verifiedOnly,
       inOut,
       savedOnly,
       gemsFirst,
@@ -191,7 +201,7 @@ export function Explorer({
     });
     const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
     window.history.replaceState(null, '', url);
-  }, [hydrated, dateFilter, category, query, freeOnly, familyOnly, biggerOnly, inOut, savedOnly, gemsFirst, view]);
+  }, [hydrated, dateFilter, category, query, freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, savedOnly, gemsFirst, view]);
 
   const [from, to] = dateRangeFor(dateFilter, today);
 
@@ -218,6 +228,8 @@ export function Explorer({
       if (freeOnly && e.isFree !== true) continue;
       if (familyOnly && !e.familyFriendly) continue;
       if (biggerOnly && (parseStallCount(e.stallCountText) ?? 0) < BIGGER_STALLS) continue;
+      if (accessibleOnly && !e.accessible) continue;
+      if (verifiedOnly && (isUnverified(e.confidence) || e.sourceCount < 2)) continue;
       if (inOut && e.indoorOutdoor !== inOut && e.indoorOutdoor !== 'mixed') continue;
       if (q) {
         const haystack =
@@ -260,7 +272,7 @@ export function Explorer({
     }
     if (gemsFirst) result.sort((a, b) => Number(b.gem) - Number(a.gem));
     return result;
-  }, [events, from, to, deferredQuery, category, freeOnly, familyOnly, biggerOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
+  }, [events, from, to, deferredQuery, category, freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
 
   // The permanent-venue layer, filtered in parallel with events (venues have no
   // dates, so the date chips don't apply — except "Åbent nu", which narrows them
@@ -329,6 +341,8 @@ export function Explorer({
       if (freeOnly && e.isFree !== true) continue;
       if (familyOnly && !e.familyFriendly) continue;
       if (biggerOnly && (parseStallCount(e.stallCountText) ?? 0) < BIGGER_STALLS) continue;
+      if (accessibleOnly && !e.accessible) continue;
+      if (verifiedOnly && (isUnverified(e.confidence) || e.sourceCount < 2)) continue;
       if (inOut && e.indoorOutdoor !== inOut && e.indoorOutdoor !== 'mixed') continue;
       if (q) {
         const haystack =
@@ -349,7 +363,7 @@ export function Explorer({
       return a.nextDate.localeCompare(b.nextDate);
     });
     return alt.slice(0, 3);
-  }, [filtered.length, events, today, deferredQuery, category, freeOnly, familyOnly, biggerOnly, inOut, savedOnly, pos]);
+  }, [filtered.length, events, today, deferredQuery, category, freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, savedOnly, pos]);
 
   // Echo the active refinements next to the result count, so the number always
   // has context ("12 markeder i weekenden · gratis · inden 25 km · »odense«").
@@ -359,6 +373,8 @@ export function Explorer({
     if (freeOnly) r.push('gratis');
     if (familyOnly) r.push('børnevenlige');
     if (biggerOnly) r.push('større markeder');
+    if (accessibleOnly) r.push('kørestolsvenlige');
+    if (verifiedOnly) r.push('bekræftede');
     if (inOut === 'indoor') r.push('indendørs');
     else if (inOut === 'outdoor') r.push('udendørs');
     if (savedOnly) r.push('gemte');
@@ -367,7 +383,7 @@ export function Explorer({
     const q = query.trim();
     if (q) r.push(`»${q}«`);
     return r;
-  }, [freeOnly, familyOnly, inOut, savedOnly, pos, radius, query]);
+  }, [freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, savedOnly, pos, radius, query]);
 
   // The map never goes blank: when filters yield nothing it shows the same
   // three suggestions the empty state offers as list cards.
@@ -472,6 +488,8 @@ export function Explorer({
         freeOnly={freeOnly} onFreeOnly={setFreeOnly}
         familyOnly={familyOnly} onFamilyOnly={setFamilyOnly}
         biggerOnly={biggerOnly} onBiggerOnly={setBiggerOnly}
+        accessibleOnly={accessibleOnly} onAccessibleOnly={setAccessibleOnly}
+        verifiedOnly={verifiedOnly} onVerifiedOnly={setVerifiedOnly}
         inOut={inOut} onInOut={setInOut}
         savedOnly={savedOnly} onSavedOnly={setSavedOnly} favCount={favCount}
         pos={pos} locating={locating} onLocate={locate} onClearPos={clearPos}

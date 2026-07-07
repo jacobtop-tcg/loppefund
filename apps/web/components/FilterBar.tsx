@@ -47,6 +47,10 @@ export const FilterBar = memo(function FilterBar(props: {
   onFamilyOnly: (v: boolean) => void;
   biggerOnly: boolean;
   onBiggerOnly: (v: boolean) => void;
+  accessibleOnly: boolean;
+  onAccessibleOnly: (v: boolean) => void;
+  verifiedOnly: boolean;
+  onVerifiedOnly: (v: boolean) => void;
   inOut: 'indoor' | 'outdoor' | null;
   onInOut: (v: 'indoor' | 'outdoor' | null) => void;
   savedOnly: boolean;
@@ -110,6 +114,7 @@ export const FilterBar = memo(function FilterBar(props: {
   const secondaryCount =
     (props.category ? 1 : 0) +
     (props.freeOnly ? 1 : 0) +
+    (props.accessibleOnly ? 1 : 0) +
     (props.inOut ? 1 : 0);
 
   return (
@@ -213,6 +218,13 @@ export const FilterBar = memo(function FilterBar(props: {
                 >
                   Udendørs
                 </button>
+                <button
+                  className={`chip ${props.accessibleOnly ? 'active' : ''}`}
+                  aria-pressed={props.accessibleOnly}
+                  onClick={() => props.onAccessibleOnly(!props.accessibleOnly)}
+                >
+                  Kørestolsvenligt
+                </button>
               </div>
             </div>
           </div>
@@ -246,6 +258,14 @@ export const FilterBar = memo(function FilterBar(props: {
           onClick={() => props.onFamilyOnly(!props.familyOnly)}
         >
           Børnevenligt
+        </button>
+        <button
+          className={`chip ${props.verifiedOnly ? 'active' : ''}`}
+          aria-pressed={props.verifiedOnly}
+          onClick={() => props.onVerifiedOnly(!props.verifiedOnly)}
+          title="Kun markeder bekræftet af mindst to offentlige kilder"
+        >
+          Bekræftet
         </button>
         <span className="chip-sep" aria-hidden />
         <button

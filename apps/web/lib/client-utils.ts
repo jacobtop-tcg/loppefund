@@ -219,6 +219,8 @@ export interface ExplorerParams {
   freeOnly: boolean;
   familyOnly: boolean;
   biggerOnly: boolean;
+  accessibleOnly: boolean;
+  verifiedOnly: boolean;
   inOut: 'indoor' | 'outdoor' | null;
   savedOnly: boolean;
   gemsFirst: boolean;
@@ -232,6 +234,8 @@ export const DEFAULT_EXPLORER_PARAMS: ExplorerParams = {
   freeOnly: false,
   familyOnly: false,
   biggerOnly: false,
+  accessibleOnly: false,
+  verifiedOnly: false,
   inOut: null,
   savedOnly: false,
   gemsFirst: false,
@@ -264,6 +268,8 @@ export function parseExplorerParams(search: string): ExplorerParams {
     freeOnly: p.get('gratis') === '1',
     familyOnly: p.get('familie') === '1',
     biggerOnly: p.get('stor') === '1',
+    accessibleOnly: p.get('handicap') === '1',
+    verifiedOnly: p.get('bekr') === '1',
     inOut,
     savedOnly: p.get('gemt') === '1',
     gemsFirst: p.get('perler') === '1',
@@ -284,6 +290,8 @@ export function serializeExplorerParams(state: ExplorerParams): string {
   if (state.freeOnly) p.set('gratis', '1');
   if (state.familyOnly) p.set('familie', '1');
   if (state.biggerOnly) p.set('stor', '1');
+  if (state.accessibleOnly) p.set('handicap', '1');
+  if (state.verifiedOnly) p.set('bekr', '1');
   if (state.inOut === 'indoor') p.set('inde', '1');
   else if (state.inOut === 'outdoor') p.set('ude', '1');
   if (state.savedOnly) p.set('gemt', '1');

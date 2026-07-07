@@ -425,9 +425,13 @@ export function loadEventDetail(slug: string) {
       endTime: o.end_time,
     })),
     sources: e.sources.map((s) => ({
+      key: s.source_key,
       name: s.name,
       url: s.source_url,
       lastConfirmedAt: s.last_confirmed_at,
     })),
+    // Which source supplied each winning field ({ field: sourceKey }) — the
+    // "complete provenance" the mandate asks for. Column is NOT NULL DEFAULT '{}'.
+    fieldProvenance: JSON.parse(e.field_provenance) as Record<string, string>,
   };
 }

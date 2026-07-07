@@ -209,6 +209,26 @@ export default async function EventPage({
   const trustParts = [`${event.sources.length} ${event.sources.length === 1 ? 'kilde' : 'kilder'}`];
   if (freshnessText) trustParts.push(freshnessText);
   if (event.approximate) trustParts.push('omtrentlig placering');
+  // Complete provenance: invert { field: sourceKey } → { sourceKey: [labels] } so
+  // each source lists which decision-relevant facts it supplied. Keys are the
+  // canonicalizer's camelCase field names; only a curated, user-meaningful subset
+  // is labelled (unmapped fields drop, never a raw name). One opaque blob on
+  // FB/Google vs. field-by-field attribution here. Capped so the line stays calm.
+  const FIELD_LABELS: Record<string, string> = {
+    scheduleText: 'datoer', street: 'adresse', priceText: 'pris', isFree: 'entré',
+    stallCountText: 'antal stande', organizer: 'arrangør', contactWebsite: 'website',
+    openingHoursText: 'åbningstider', indoorOutdoor: 'inde/ude', venueName: 'sted',
+  };
+  const contribBySource: Record<string, string[]> = {};
+  for (const [field, key] of Object.entries(event.fieldProvenance)) {
+    const label = FIELD_LABELS[field];
+    if (label && !(contribBySource[key] ??= []).includes(label)) contribBySource[key]!.push(label);
+  }
+  const contribLine = (key: string): string | null => {
+    const l = contribBySource[key];
+    if (!l?.length) return null;
+    return l.length > 5 ? `${l.slice(0, 5).join(' · ')} m.m.` : l.join(' · ');
+  };
   const jsonLd = eventJsonLd(event, today);
   const safeWebsite = safeExternalUrl(event.contactWebsite);
   // The booking link is crawled too — validate its scheme like the website.
@@ -606,6 +626,9 @@ export default async function EventPage({
                       {s.name}
                     </a>{' '}
                     — senest set {s.lastConfirmedAt.slice(0, 10)}
+                    {contribLine(s.key) && (
+                      <span className="source-contrib">bidrog med: {contribLine(s.key)}</span>
+                    )}
                   </li>
                 ))}
               </ul>

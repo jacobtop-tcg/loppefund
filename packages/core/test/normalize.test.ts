@@ -49,6 +49,21 @@ describe('titleSignalsCancelled', () => {
   });
 });
 
+describe('cleanCity — Danish forms for exonyms/abbreviations', () => {
+  it('normalizes English exonyms and ascii-mangled forms', () => {
+    expect(cleanCity('Copenhagen')).toBe('København');
+    expect(cleanCity('Copenhagen.')).toBe('København');
+    expect(cleanCity('Kobenhavn')).toBe('København');
+    expect(cleanCity('Kbh K')).toBe('København K');
+    expect(cleanCity('Arhus C')).toBe('Aarhus C');
+  });
+  it('leaves correct Danish forms untouched', () => {
+    expect(cleanCity('København V')).toBe('København V');
+    expect(cleanCity('Helsingør')).toBe('Helsingør');
+    expect(cleanCity('Odense C')).toBe('Odense C');
+  });
+});
+
 describe('cleanVenueName — filler is not a venue', () => {
   it('rejects "På adressen"-style filler (Facebook-feed pattern)', () => {
     expect(cleanVenueName('På adressen')).toBeNull();

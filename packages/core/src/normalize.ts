@@ -108,12 +108,26 @@ export function cleanCity(
   // A Danish postal city never contains " på " — when it appears it is a venue/
   // place descriptor that address parsing trailed onto the city ("Lyngby på
   // Johannes Fogs Plads" -> "Lyngby"). Strip it, plus any dangling end period.
-  const out = (afterPc ? afterPc[1]! : pick)
+  let out = (afterPc ? afterPc[1]! : pick)
     .replace(/\s+på\s+.+$/i, '')
     .replace(/\.\s*$/, '')
     .trim();
-  return out || null;
+  // English exonyms and ascii-mangled forms split one city into several on
+  // /byer and in search ("Copenhagen" ×12 sat beside København in production).
+  // The geocoder normalizes these for DAWA lookups, but sources that ship their
+  // own coordinates skip the geocoder — so the canonical field must do it too.
+  for (const [re, da] of CITY_DA_FORMS) out = out.replace(re, da);
+  return out.trim() || null;
 }
+
+// Danish forms for the exonyms/abbreviations sources actually use.
+const CITY_DA_FORMS: Array<[RegExp, string]> = [
+  [/\bcopenhagen\b/gi, 'København'],
+  [/\bkobenhavn\b/gi, 'København'], // ascii-mangled æøå
+  [/^kbh\.?\b/i, 'København'], // "Kbh K" -> "København K"
+  [/\belsinore\b/gi, 'Helsingør'],
+  [/\barhus\b/gi, 'Aarhus'],
+];
 
 const CATEGORY_PATTERNS: Array<[RegExp, EventCategory]> = [
   // Jule first: "Julekræmmermarked" is seasonally a julemarked, and the

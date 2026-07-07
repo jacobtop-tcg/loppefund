@@ -2,7 +2,7 @@ import 'server-only';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import type { DatabaseSync } from 'node:sqlite';
-import { addDays, cleanVenueName, describeRecurrence, isHiddenGem, searchFold, type Amenities } from '@loppefund/core';
+import { addDays, cleanCity, cleanVenueName, describeRecurrence, isHiddenGem, searchFold, type Amenities } from '@loppefund/core';
 import { summarizeReviews, type ReviewSummary } from './reviews.ts';
 import { summarizePhotos, type Photo } from './photos.ts';
 import {
@@ -234,7 +234,7 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       title: e.title,
       category: e.category,
       venueName: cleanVenueName(e.venue_name),
-      city: e.city,
+      city: cleanCity(e.city, e.postcode),
       postcode: e.postcode,
       municipality: e.municipality,
       lat: okCoords ? e.lat : null,
@@ -412,7 +412,7 @@ export function loadEventDetail(slug: string) {
     venueName: cleanVenueName(e.venue_name),
     street: e.street,
     postcode: e.postcode,
-    city: e.city,
+    city: cleanCity(e.city, e.postcode),
     municipality: e.municipality,
     lat: e.lat,
     lng: e.lng,

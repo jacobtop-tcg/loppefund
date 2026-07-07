@@ -30,6 +30,15 @@ describe('matchesQuery', () => {
     expect(matchesQuery(hay, '')).toBe(true);
     expect(matchesQuery(hay, '   ')).toBe(true);
   });
+  it('forgives a single fumbled letter (edit distance 1) on 4+ char tokens', () => {
+    expect(matchesQuery(hay, foldForSearch('loppmarked'))).toBe(true); // missing 'e'
+    expect(matchesQuery(foldForSearch('Aarhus C'), foldForSearch('arhus'))).toBe(true);
+  });
+  it('does not fuzzy-match short tokens or two-error typos (never invents matches)', () => {
+    expect(matchesQuery(hay, foldForSearch('ode'))).toBe(true); // substring, fast path
+    expect(matchesQuery(hay, foldForSearch('xyz'))).toBe(false); // <4 chars, no fuzzy
+    expect(matchesQuery(hay, foldForSearch('loppomarkat'))).toBe(false); // >1 edit away
+  });
 });
 
 // Mirror of Explorer's dateRangeFor to pin the Sunday "næste weekend" bug.

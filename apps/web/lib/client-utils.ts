@@ -85,7 +85,42 @@ export function foldForSearch(text: string): string {
 export function matchesQuery(foldedHaystack: string, foldedQuery: string): boolean {
   const tokens = foldedQuery.split(/\s+/).filter(Boolean);
   if (tokens.length === 0) return true;
-  return tokens.every((t) => foldedHaystack.includes(t));
+  return tokens.every((t) => tokenMatchesFuzzy(foldedHaystack, t));
+}
+
+/** Levenshtein distance, bailing out early once it exceeds `max`. */
+function boundedLevenshtein(a: string, b: string, max: number): number {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    let rowMin = i;
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      const v = Math.min(prev[j]! + 1, cur[j - 1]! + 1, prev[j - 1]! + cost);
+      cur[j] = v;
+      if (v < rowMin) rowMin = v;
+    }
+    if (rowMin > max) return max + 1; // whole row already too far — stop
+    prev = cur;
+  }
+  return prev[b.length]!;
+}
+
+/**
+ * A query token matches the haystack if it's a substring (the fast, common
+ * path) OR — for tokens of 4+ chars — is within one edit of some haystack word.
+ * That forgives the single fumbled letter Danish compound terms invite
+ * ("loppmarked" → loppemarked, "arhus" → aarhus) instead of the zero-results
+ * dead-end. Kept tight (len ≥ 4, distance ≤ 1) so it never invents matches.
+ */
+export function tokenMatchesFuzzy(foldedHaystack: string, token: string): boolean {
+  if (foldedHaystack.includes(token)) return true;
+  if (token.length < 4) return false;
+  for (const word of foldedHaystack.split(/[^a-z0-9]+/)) {
+    if (word.length >= 3 && boundedLevenshtein(word, token, 1) <= 1) return true;
+  }
+  return false;
 }
 
 export interface TripStop {

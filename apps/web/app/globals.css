@@ -1339,6 +1339,25 @@ body:has(.is-map-view) {
   font-size: 16px;
 }
 
+/* Subscribe-to-city-calendar CTA — auto-updating loppetur dates in the family's
+   own calendar, the "continuous monitoring" promise delivered to the consumer. */
+.cal-subscribe {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.cal-subscribe:hover {
+  background: var(--brand-deep);
+}
+
 /* Above-the-fold "when + trust" anchor — the two facts a family arriving from a
    Facebook share needs first: the next date/hours and how sure we are. */
 .detail-when {

@@ -89,6 +89,22 @@ export default async function CityPage({
           {events.length} kommende {events.length === 1 ? 'marked' : 'markeder'} — opdateret
           automatisk fra offentlige kilder.
         </p>
+        {events.length > 0 &&
+          (() => {
+            const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+            const baseUrl = process.env.LOPPEFUND_BASE_URL ?? '';
+            const icsHref = `${basePath}/by/${info.slug}/ical`;
+            // webcal:// makes it a one-click SUBSCRIBE (auto-updating) in the OS
+            // calendar; falls back to the plain .ics when no absolute host is set.
+            const href = baseUrl
+              ? `webcal://${baseUrl.replace(/^https?:\/\//, '')}/by/${info.slug}/ical`
+              : icsHref;
+            return (
+              <a className="cal-subscribe" href={href}>
+                <span aria-hidden>📅</span> Abonnér i kalender
+              </a>
+            );
+          })()}
       </header>
       <div className="event-grid" style={{ marginTop: 18 }}>
         {events.map((e, i) => (

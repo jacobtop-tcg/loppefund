@@ -30,15 +30,10 @@ export default function HomePage() {
               ·
             </span>
             <strong>{venueCount.toLocaleString('da-DK')}</strong> faste steder
-            {updated && (
-              <>
-                <span className="hero-dot" aria-hidden>
-                  ·
-                </span>
-                data opdateret {formatUpdated(updated)}
-              </>
-            )}
           </p>
+          {updated && (
+            <p className="hero-updated">Data opdateret {formatUpdated(updated)}</p>
+          )}
         </div>
       </header>
       <main id="markeder" className="explorer-main">

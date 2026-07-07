@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useCallback, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { VENUE_TYPES, VENUE_LABELS, type VenueType } from '../lib/venue-client.ts';
 import { suggestFor, type Suggestion } from '../lib/search-index.ts';
 import { CheckIcon, HeartIcon, RouteIcon, TargetIcon } from './icons.tsx';
@@ -81,6 +81,14 @@ export const FilterBar = memo(function FilterBar(props: {
     [props.searchIndex, props.query],
   );
   const showSug = sugOpen && suggestions.length > 0;
+  // The list scrolls (max-height 340px) — keep the keyboard-active suggestion
+  // in view, or arrow-key navigation walks right out of the visible window.
+  useEffect(() => {
+    if (activeIdx < 0) return;
+    document
+      .getElementById(`search-opt-${activeIdx}`)
+      ?.scrollIntoView({ block: 'nearest' });
+  }, [activeIdx]);
   const pickSuggestion = (s: Suggestion) => {
     props.onQuery(s.value);
     setSugOpen(false);

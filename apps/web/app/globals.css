@@ -3238,6 +3238,19 @@ body:has(.is-map-view) {
   box-shadow: var(--shadow-card-hover);
   max-height: 340px;
   overflow-y: auto;
+  /* Soft entrance — search is the primary mobile entry point. */
+  animation: sug-in 0.16s var(--ease);
+}
+@keyframes sug-in {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-suggestions {
+    animation: none;
+  }
 }
 .suggestion {
   display: flex;

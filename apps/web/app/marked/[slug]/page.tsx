@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { BackLink } from '../../../components/BackLink.tsx';
 import { DistanceFromYou } from '../../../components/DistanceFromYou.tsx';
+import { DetailWeather } from '../../../components/DetailWeather.tsx';
 import { notFound } from 'next/navigation';
 import { describeRecurrence } from '@loppefund/core';
 import { loadEventDetail, loadPhotos, loadReviews, todayIso } from '../../../lib/data.ts';
@@ -279,12 +280,15 @@ export default async function EventPage({
           </div>
           <h1 className="detail-title">{displayTitle(event.title)}</h1>
           <p className="detail-place">
+            {/* Dedupe case-insensitively: venueName and street are often the
+                same crawled string ("Svanetorvet · Svanetorvet · Skælskør"). */}
             {[
               event.venueName && displayTitle(event.venueName),
               event.street,
               [event.postcode, event.city && displayPlace(event.city)].filter(Boolean).join(' '),
             ]
-              .filter(Boolean)
+              .filter((p): p is string => Boolean(p))
+              .filter((p, i, arr) => arr.findIndex((q) => q.toLowerCase() === p.toLowerCase()) === i)
               .join(' · ')}
             {event.lat != null && event.lng != null && (
               <DistanceFromYou lat={event.lat} lng={event.lng} />
@@ -315,6 +319,15 @@ export default async function EventPage({
                 </span>
               </p>
             </div>
+          )}
+          {event.status !== 'cancelled' && upcoming.length > 0 && (
+            <DetailWeather
+              lat={event.lat}
+              lng={event.lng}
+              date={upcoming[0]!.date}
+              indoorOutdoor={event.indoorOutdoor}
+              weatherDependent={event.amenities?.weatherDependent === true}
+            />
           )}
           <DetailActions
             slug={event.slug}

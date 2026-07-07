@@ -126,3 +126,28 @@ export function useOutdoorWeather(events: WxEvent[]): Map<string, DayWeather> {
 
   return weather;
 }
+
+/**
+ * Forecast for ONE market day — the detail page's "worth driving to?" line.
+ * Reuses the same per-cell session cache as the list. `null` while loading,
+ * on failure, when inactive, or when the date is outside the ~16-day horizon.
+ */
+export function useDayWeather(
+  lat: number | null,
+  lng: number | null,
+  date: string,
+  active: boolean,
+): DayWeather | null {
+  const [day, setDay] = useState<DayWeather | null>(null);
+  useEffect(() => {
+    if (!active || lat == null || lng == null) return;
+    let cancelled = false;
+    cellWeather(lat, lng).then((cell) => {
+      if (!cancelled) setDay(cell.get(date) ?? null);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [lat, lng, date, active]);
+  return day;
+}

@@ -2285,17 +2285,29 @@ body:has(.is-map-view) {
 .venue-count strong { color: #2c605c; font-weight: 700; }
 
 /* Detail page: opening hours + actions. */
-.venue-hours { margin-top: 20px; }
+.venue-hours {
+  margin-top: 20px;
+  /* Hours are THE reason to open a shop page — give them a real card. */
+  padding: 16px 18px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+}
 .venue-hours-state {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
   color: var(--ink-soft);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
-.venue-hours-state.is-open { color: var(--green); }
+.venue-hours-state.is-open {
+  color: var(--green);
+  background: color-mix(in srgb, var(--green) 12%, transparent);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
 .venue-hours-state.is-open .dot {
   width: 8px;
   height: 8px;
@@ -2320,6 +2332,13 @@ body:has(.is-map-view) {
   font-variant-numeric: tabular-nums;
   color: var(--ink);
   padding: 7px 0;
+}
+.venue-hours-table tr.is-today {
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.venue-hours-table tr.is-today th {
+  box-shadow: inset 3px 0 0 var(--accent);
+  padding-left: 8px;
 }
 .venue-hours-table tr.is-today th,
 .venue-hours-table tr.is-today td {

@@ -274,10 +274,12 @@ export function MapView({
           source: 'route-line',
           layout: { 'line-cap': 'round', 'line-join': 'round' },
           paint: {
-            'line-color': MAP.accentDeep,
-            'line-width': ['interpolate', ['linear'], ['zoom'], 6, 2, 12, 3.5],
-            'line-dasharray': [1.6, 1.3],
-            'line-opacity': 0.85,
+            // Brighter/thicker so the loppetur route stays legible at overview
+            // zoom on mobile — it's a signature feature, not a hairline.
+            'line-color': MAP.accent,
+            'line-width': ['interpolate', ['linear'], ['zoom'], 6, 3, 12, 4.5],
+            'line-dasharray': [2.2, 1.8],
+            'line-opacity': 0.95,
           },
         });
         m.addSource('route-stops', { type: 'geojson', data: EMPTY_FC });
@@ -640,7 +642,14 @@ export function MapView({
     else if (window.matchMedia('(max-width: 899px)').matches) map.cooperativeGestures.enable();
   }, [fullscreen]);
 
-  return <div ref={containerRef} className="map-shell" />;
+  return (
+    <div
+      ref={containerRef}
+      className="map-shell"
+      role="application"
+      aria-label="Kort over loppemarkeder og faste steder"
+    />
+  );
 }
 
 /** Popup = the event-card system, floating on the map. All values escaped. */

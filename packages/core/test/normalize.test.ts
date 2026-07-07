@@ -49,6 +49,17 @@ describe('titleSignalsCancelled', () => {
   });
 });
 
+describe('cleanVenueName — filler is not a venue', () => {
+  it('rejects "På adressen"-style filler (Facebook-feed pattern)', () => {
+    expect(cleanVenueName('På adressen')).toBeNull();
+    expect(cleanVenueName('adressen')).toBeNull();
+    expect(cleanVenueName('Se adressen:')).toBeNull();
+  });
+  it('keeps real venue names containing the word', () => {
+    expect(cleanVenueName('Kulturhuset på adressen 12')).toBe('Kulturhuset på adressen 12');
+  });
+});
+
 describe('cleanVenueName', () => {
   it('keeps a short place label', () => {
     expect(cleanVenueName('Sankt Nicolai Apotek')).toBe('Sankt Nicolai Apotek');

@@ -59,6 +59,9 @@ export function cleanVenueName(name: string | null | undefined): string | null {
   if (!name) return null;
   const n = name.replace(/\s+/g, ' ').trim();
   if (!n || n.length > 80 || /[.!?]\s+\S/.test(n)) return null;
+  // Pure filler is not a venue: "På adressen" (a Facebook-feed pattern) renders
+  // as if it were a place name — junk, not information.
+  if (/^(på |ved |se )?adressen:?$/i.test(n)) return null;
   return n;
 }
 

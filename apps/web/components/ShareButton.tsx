@@ -7,7 +7,16 @@ import { useState } from 'react';
  * market into the group chat. Uses the native share sheet on mobile and
  * falls back to copying the link.
  */
-export function ShareButton({ title, path }: { title: string; path: string }) {
+export function ShareButton({
+  title,
+  path,
+  label = 'Del marked',
+}: {
+  title: string;
+  path: string;
+  /** Compact contexts (the detail action bar) pass a shorter label. */
+  label?: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   async function share() {
@@ -37,7 +46,7 @@ export function ShareButton({ title, path }: { title: string; path: string }) {
         <circle cx="18" cy="19" r="3" />
         <path d="m8.6 10.6 6.8-4.2m-6.8 7 6.8 4.2" />
       </svg>
-      {copied ? 'Link kopieret!' : 'Del marked'}
+      {copied ? 'Link kopieret!' : label}
     </button>
   );
 }

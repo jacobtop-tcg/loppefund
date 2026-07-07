@@ -47,7 +47,7 @@ export function DetailActions({
           <CalendarIcon /> Kalender
         </a>
       )}
-      <ShareButton title={title} path={sharePath} />
+      <ShareButton title={title} path={sharePath} label="Del" />
     </div>
   );
 }

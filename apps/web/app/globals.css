@@ -1664,6 +1664,7 @@ body:has(.is-map-view) {
   color: var(--ink);
   font-weight: 600;
   font-size: 14.5px;
+  white-space: nowrap; /* action labels never wrap — a two-line pill reads broken */
   cursor: pointer;
   transition: border-color 0.14s ease, background 0.14s ease, transform 0.1s ease;
 }
@@ -1717,8 +1718,17 @@ body:has(.is-map-view) {
     flex: 1;
     justify-content: center;
     min-height: 48px;
-    padding: 12px 6px;
-    font-size: 13.5px;
+    padding: 12px 4px;
+    font-size: 13px;
+    gap: 5px;
+    white-space: nowrap;
+  }
+  /* Four buttons across 375px: only the primary keeps its icon — the others
+     read fine as words alone ('Gemt' state also flips the pill's wash), and
+     the freed space keeps every label on ONE line. */
+  .detail-actions .da-btn:not(.primary) svg,
+  .detail-actions .share-btn svg {
+    display: none;
   }
   .da-btn.primary {
     flex: 1.4;

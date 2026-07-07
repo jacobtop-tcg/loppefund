@@ -349,38 +349,17 @@ export default async function EventPage({
                   )}
                 </ul>
               )}
+              {/* Google Calendar lives in the header action bar ('Kalender') —
+                  the panel keeps only the .ics secondary, which carries ALL
+                  dates and covers Apple/Outlook. One CTA per intent. */}
               {upcoming.length > 0 && (
                 <div className="add-to-cal">
-                  <a
-                    className="cal-btn primary"
-                    href={googleCalendarUrl({
-                      title: displayTitle(event.title),
-                      date: upcoming[0]!.date,
-                      startTime: upcoming[0]!.startTime,
-                      endTime: upcoming[0]!.endTime,
-                      location: [
-                        event.venueName && displayTitle(event.venueName),
-                        event.street,
-                        [event.postcode, event.city].filter(Boolean).join(' '),
-                      ]
-                        .filter(Boolean)
-                        .join(', '),
-                      details: `${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`,
-                    })}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <CalendarIcon /> Føj til Google Kalender
-                  </a>
                   <a
                     className="cal-btn"
                     href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${event.slug}/ical`}
                   >
-                    Apple / Outlook (.ics)
+                    <CalendarIcon /> Alle datoer til din kalender (.ics)
                   </a>
-                  {upcoming.length > 1 && (
-                    <span className="cal-note">Google tilføjer næste dato · .ics har alle</span>
-                  )}
                 </div>
               )}
               {event.scheduleText && (

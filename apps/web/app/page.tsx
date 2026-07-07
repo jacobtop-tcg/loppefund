@@ -50,40 +50,27 @@ export default function HomePage() {
         <Explorer events={events} now={now} />
       </main>
       <footer className="site-footer">
-        <div className="explorer-main">
-          Loppefund samler markeder automatisk fra offentlige kilder og viser altid, hvor
-          oplysningerne kommer fra. Fandt du en fejl? Kilderne er linket på hvert marked.{' '}
-          <Link href="/i-dag" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
-            Loppemarkeder i dag →
-          </Link>{' '}
-          <Link href="/i-weekenden" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
-            · I weekenden →
-          </Link>{' '}
-          <Link href="/byer" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
-            · Find din by →
-          </Link>{' '}
-          <Link href="/tip" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
-            · Tip os →
-          </Link>{' '}
-          <Link href="/kilder" style={{ color: 'var(--accent-deep)', fontWeight: 600 }}>
-            · Se vores kilder →
-          </Link>
-          {updated && (
-            <div className="data-freshness">
-              Data senest opdateret {formatUpdated(updated)}
-            </div>
-          )}
-          <div className="data-freshness">
-            Faste butikker og åbningstider fra{' '}
-            <a
-              href="https://www.openstreetmap.org/copyright"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: 'inherit', textDecoration: 'underline' }}
-            >
-              © OpenStreetMap
-            </a>{' '}
-            bidragydere
+        <div className="explorer-main footer-inner">
+          <p className="footer-trust">
+            Loppefund samler markeder automatisk fra offentlige kilder og viser altid, hvor
+            oplysningerne kommer fra. Fandt du en fejl? Kilderne er linket på hvert marked.
+          </p>
+          <nav className="footer-nav" aria-label="Genveje">
+            <Link href="/i-dag">Åbent i dag</Link>
+            <Link href="/i-weekenden">I weekenden</Link>
+            <Link href="/byer">Find din by</Link>
+            <Link href="/tip">Tip et marked</Link>
+            <Link href="/kilder">Vores kilder</Link>
+          </nav>
+          <div className="footer-meta">
+            {updated && <span>Data senest opdateret {formatUpdated(updated)}</span>}
+            <span>
+              Faste butikker og åbningstider fra{' '}
+              <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">
+                © OpenStreetMap
+              </a>{' '}
+              bidragydere
+            </span>
           </div>
         </div>
       </footer>

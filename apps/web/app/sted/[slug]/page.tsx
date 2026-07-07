@@ -174,7 +174,7 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
 
       <div className="venue-actions">
         {mapsUrl && (
-          <a className="venue-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">
+          <a className="venue-action primary" href={mapsUrl} target="_blank" rel="noopener noreferrer">
             Vis rute
           </a>
         )}

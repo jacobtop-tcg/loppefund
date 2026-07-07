@@ -20,13 +20,29 @@ export default function CitiesPage() {
         <h1 className="detail-title">Loppemarkeder i hele Danmark</h1>
         <p className="detail-place">Vælg din by og se alle kommende markeder.</p>
       </header>
-      <div className="city-cloud">
-        {cities.map((c) => (
-          <Link key={c.slug} href={`/by/${c.slug}`} className="chip">
-            {displayPlace(c.city)} <span className="city-count">{c.count}</span>
+      {/* The big cities greet you as cards; the long tail stays a compact cloud. */}
+      <div className="city-lead">
+        {cities.slice(0, 8).map((c) => (
+          <Link key={c.slug} href={`/by/${c.slug}`} className="city-lead-card">
+            <span className="city-lead-name">{displayPlace(c.city)}</span>
+            <span className="city-lead-count">
+              {c.count} {c.count === 1 ? 'marked' : 'markeder'}
+            </span>
           </Link>
         ))}
       </div>
+      {cities.length > 8 && (
+        <>
+          <h2 className="city-rest-heading">Flere byer</h2>
+          <div className="city-cloud">
+            {cities.slice(8).map((c) => (
+              <Link key={c.slug} href={`/by/${c.slug}`} className="chip">
+                {displayPlace(c.city)} <span className="city-count">{c.count}</span>
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -10,6 +10,7 @@ import {
   occurrenceWindow,
   type DateWindowKind,
 } from '../lib/client-utils.ts';
+import { dayOfMonth, monthLong } from '../lib/format.ts';
 
 export type DateWindow = DateWindowKind;
 
@@ -67,12 +68,19 @@ export function DatePageList({
   }
 
   const noun = shown.length === 1 ? 'marked' : 'markeder';
-  const when = kind === 'today' ? 'åbent i dag' : 'i weekenden';
+  // The landing page speaks the same serif voice as home: name the moment
+  // ('I dag' / 'Weekenden 11.–12. juli'), then count it quietly. Dates derive
+  // from the ISO window seeded by the build date, so hydration stays clean.
+  const lead =
+    kind === 'today' ? 'I dag' : `Weekenden ${dayOfMonth(from)}.–${dayOfMonth(to)}. ${monthLong(to)}`;
   return (
     <>
-      <p className="result-count" aria-live="polite">
-        <strong>{shown.length}</strong> {noun} {when}
-      </p>
+      <div className="result-head" style={{ margin: '8px 0 2px' }}>
+        <p className="result-lead">{lead}</p>
+        <p className="result-count" aria-live="polite">
+          <strong>{shown.length}</strong> {noun}
+        </p>
+      </div>
       <div className="event-grid" style={{ marginTop: 14 }}>
         {shown.map(({ event, date }, i) => (
           <EventCard

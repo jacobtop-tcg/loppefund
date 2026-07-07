@@ -2855,17 +2855,165 @@ body:has(.is-map-view) {
   gap: 10px;
   margin-top: 26px;
 }
+/* One decisive terracotta primary among quiet outlines — the wall of four
+   identical pine pills gave the shop page zero action hierarchy. */
 .venue-action {
   display: inline-flex;
   align-items: center;
   padding: 10px 17px;
   border-radius: 999px;
-  background: var(--brand);
-  color: #f4efe2;
-  font-weight: 560;
+  background: var(--paper-raised);
+  color: var(--brand);
+  border: 1.5px solid var(--line);
+  font-weight: 600;
+  font-size: 14.5px;
+  transition: border-color 0.14s var(--ease), background 0.14s var(--ease);
+}
+.venue-action:hover {
+  background: var(--paper-sunken);
+  border-color: var(--ink-faint);
+}
+.venue-action.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.venue-action.primary:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+}
+/* Branded 404 — dead market links from Facebook shares land here warmly. */
+.notfound {
+  text-align: center;
+  padding: 80px 20px 120px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.notfound-eyebrow {
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-deep);
+}
+.notfound-title {
+  font-size: clamp(30px, 6vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 10px 0 14px;
+}
+.notfound-lead {
+  color: var(--ink-soft);
+  font-size: 17px;
+  max-width: 46ch;
+  margin: 0 auto 28px;
+}
+.notfound-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.notfound-cta {
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: var(--paper-raised);
+  color: var(--ink);
+  font-weight: 600;
+}
+.notfound-cta:hover {
+  border-color: var(--ink-faint);
+}
+.notfound-cta.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.notfound-cta.primary:hover {
+  background: var(--accent-deep);
+}
+
+/* Footer as a readable trust story: statement, shortcuts, meta. */
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.footer-trust {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+}
+.footer-nav a {
+  color: var(--brand);
+  font-weight: 600;
   font-size: 14.5px;
 }
-.venue-action:hover { background: var(--brand-deep); }
+.footer-nav a:hover {
+  color: var(--accent-deep);
+}
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  color: var(--ink-faint);
+  font-size: 12.5px;
+}
+.footer-meta a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* /byer: the big cities greet you as cards before the long-tail cloud. */
+.city-lead {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 18px 0 30px;
+}
+.city-lead-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.12s var(--ease), box-shadow 0.2s var(--ease);
+}
+.city-lead-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+.city-lead-name {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--brand);
+}
+.city-lead-count {
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+.city-rest-heading {
+  font-size: 16px;
+  margin: 26px 0 6px;
+  color: var(--ink-soft);
+}
+@media (prefers-reduced-motion: reduce) {
+  .city-lead-card:hover {
+    transform: none;
+  }
+}
+
 .venue-attrib {
   margin-top: 30px;
   font-size: 13px;

@@ -339,6 +339,47 @@ export function slugifyCity(city: string): string {
     .slice(0, 60);
 }
 
+/** The city's permanent second-hand shops — a by-guide isn't complete with
+ *  markets alone. Deliberately WITHOUT live open-state: this feeds a static
+ *  page, and a build-time "Åbent nu" would go stale-wrong within hours. */
+export function listVenuesForCity(citySlug: string, cap = 12): VenueSummary[] {
+  return listVenues()
+    .filter((v) => v.city && slugifyCity(v.city) === citySlug)
+    .slice(0, cap);
+}
+
+/** Nearest other cities (by the centroid of each city's market coordinates) —
+ *  the "også i nærheden" cross-links that make the by-guides one connected
+ *  surface instead of 123 dead ends. */
+export function listNearbyCities(citySlug: string, n = 4): CityInfo[] {
+  const centroids = new Map<string, { lat: number; lng: number; n: number }>();
+  for (const e of listUpcomingEvents(180)) {
+    if (!e.city || e.lat == null || e.lng == null) continue;
+    const slug = slugifyCity(e.city);
+    if (!slug) continue;
+    const c = centroids.get(slug) ?? { lat: 0, lng: 0, n: 0 };
+    c.lat += e.lat;
+    c.lng += e.lng;
+    c.n++;
+    centroids.set(slug, c);
+  }
+  const me = centroids.get(citySlug);
+  if (!me || me.n === 0) return [];
+  const myLat = me.lat / me.n;
+  const myLng = me.lng / me.n;
+  return listCities()
+    .filter((c) => c.slug !== citySlug && centroids.has(c.slug))
+    .map((c) => {
+      const o = centroids.get(c.slug)!;
+      const dLat = o.lat / o.n - myLat;
+      const dLng = (o.lng / o.n - myLng) * 0.55; // rough lat/lng scale at 56°N
+      return { city: c, d2: dLat * dLat + dLng * dLng };
+    })
+    .sort((a, b) => a.d2 - b.d2)
+    .slice(0, n)
+    .map((x) => x.city);
+}
+
 export function listEventsForCity(citySlug: string): EventSummary[] {
   return listUpcomingEvents(180).filter(
     (e) => e.city && slugifyCity(e.city) === citySlug,

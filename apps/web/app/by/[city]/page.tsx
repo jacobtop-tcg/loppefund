@@ -1,7 +1,14 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { listCities, listEventsForCity, todayIso } from '../../../lib/data.ts';
-import { displayPlace } from '../../../lib/format.ts';
+import {
+  listCities,
+  listEventsForCity,
+  listNearbyCities,
+  listVenuesForCity,
+  todayIso,
+} from '../../../lib/data.ts';
+import { displayPlace, displayTitle } from '../../../lib/format.ts';
+import { VENUE_LABELS } from '../../../lib/venue-client.ts';
 import { collectionJsonLd, safeJsonLd } from '../../../lib/jsonld.ts';
 import { EventCard } from '../../../components/EventCard.tsx';
 
@@ -62,6 +69,10 @@ export default async function CityPage({
   const events = listEventsForCity(city);
   const today = todayIso();
   const name = displayPlace(info.city);
+  // A by-GUIDE, not just a list: the city's permanent second-hand shops and
+  // the neighbouring towns complete the answer for an organic visitor.
+  const venues = listVenuesForCity(city);
+  const nearby = listNearbyCities(city);
 
   return (
     <div className="container">
@@ -106,7 +117,12 @@ export default async function CityPage({
             );
           })()}
       </header>
-      <div className="event-grid" style={{ marginTop: 18 }}>
+      {events.length > 0 && (
+        <h2 className="reco-title" style={{ marginTop: 22 }}>
+          Kommende markeder
+        </h2>
+      )}
+      <div className="event-grid" style={{ marginTop: 10 }}>
         {events.map((e, i) => (
           <EventCard
             key={e.slug}
@@ -120,6 +136,43 @@ export default async function CityPage({
           />
         ))}
       </div>
+
+      {venues.length > 0 && (
+        <section aria-label={`Faste steder i ${name}`}>
+          <h2 className="reco-title" style={{ marginTop: 30 }}>
+            Genbrug &amp; faste steder i {name}
+          </h2>
+          <p className="reco-sub">
+            Åbent året rundt — se åbningstider på det enkelte sted.
+          </p>
+          <div className="city-lead">
+            {venues.map((v) => (
+              <Link key={v.slug} href={`/sted/${v.slug}`} className="city-lead-card">
+                <span className="city-lead-name">{displayTitle(v.title)}</span>
+                <span className="city-lead-count">
+                  {VENUE_LABELS[v.category as keyof typeof VENUE_LABELS] ?? 'Butik'}
+                  {v.street ? ` · ${v.street}` : ''}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {nearby.length > 0 && (
+        <section aria-label="Byer i nærheden">
+          <h2 className="reco-title" style={{ marginTop: 30 }}>
+            Også i nærheden
+          </h2>
+          <div className="city-cloud" style={{ marginTop: 10 }}>
+            {nearby.map((c) => (
+              <Link key={c.slug} href={`/by/${c.slug}`} className="chip">
+                {displayPlace(c.city)} <span className="city-count">{c.count}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

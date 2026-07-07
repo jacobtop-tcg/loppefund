@@ -4,15 +4,18 @@ import { describeRecurrence } from '@loppefund/core';
 import { loadEventDetail, loadPhotos, loadReviews, todayIso } from '../../../lib/data.ts';
 import {
   CATEGORY_LABELS,
+  dayOfMonth,
   displayPlace,
   displayTitle,
   formatDateLong,
   formatHours,
+  monthShort,
   truncateAtWord,
+  weekdayShort,
 } from '../../../lib/format.ts';
 import { DetailMap } from '../../../components/DetailMap.tsx';
-import { CalendarIcon, CameraIcon, InfoIcon, NavIcon } from '../../../components/icons.tsx';
-import { ShareButton } from '../../../components/ShareButton.tsx';
+import { CalendarIcon, CameraIcon, InfoIcon } from '../../../components/icons.tsx';
+import { DetailActions } from '../../../components/DetailActions.tsx';
 import { ReportEventForm } from '../../../components/ReportEventForm.tsx';
 import { ConfirmEventForm } from '../../../components/ConfirmEventForm.tsx';
 import { ReviewForm } from '../../../components/ReviewForm.tsx';
@@ -224,11 +227,6 @@ export default async function EventPage({
     const label = FIELD_LABELS[field];
     if (label && !(contribBySource[key] ??= []).includes(label)) contribBySource[key]!.push(label);
   }
-  const contribLine = (key: string): string | null => {
-    const l = contribBySource[key];
-    if (!l?.length) return null;
-    return l.length > 5 ? `${l.slice(0, 5).join(' · ')} m.m.` : l.join(' · ');
-  };
   const jsonLd = eventJsonLd(event, today);
   const safeWebsite = safeExternalUrl(event.contactWebsite);
   // The booking link is crawled too — validate its scheme like the website.
@@ -270,27 +268,59 @@ export default async function EventPage({
               .join(' · ')}
           </p>
           {event.status !== 'cancelled' && upcoming.length > 0 && (
-            <p className={`detail-when${upcoming[0]!.date === today ? ' today' : ''}`}>
-              <span className="detail-when-date">
-                {upcoming[0]!.date === today ? 'Åbent i dag' : formatDateLong(upcoming[0]!.date)}
+            <div className="detail-hero-when">
+              {/* The terracotta date-block the family tapped on the list card,
+                  now hero-sized — instant continuity, "hvornår?" answered
+                  before a word is read. Build-time date, hydration-safe. */}
+              <span className="detail-date-block" aria-hidden="true">
+                <span className="ddb-wd">{weekdayShort(upcoming[0]!.date)}</span>
+                <span className="ddb-day">{dayOfMonth(upcoming[0]!.date)}</span>
+                <span className="ddb-mo">{monthShort(upcoming[0]!.date)}</span>
               </span>
-              {formatHours(upcoming[0]!.startTime, upcoming[0]!.endTime) && (
-                <span className="detail-when-hours">
-                  {' · '}
-                  {formatHours(upcoming[0]!.startTime, upcoming[0]!.endTime)}
+              <p className={`detail-when${upcoming[0]!.date === today ? ' today' : ''}`}>
+                <span className="detail-when-date">
+                  {upcoming[0]!.date === today ? 'Åbent i dag' : formatDateLong(upcoming[0]!.date)}
                 </span>
-              )}
-              <span className={`detail-when-trust${isUnverified(event.confidence) ? ' low' : ''}`}>
-                {trustLabel}
-              </span>
-            </p>
+                {formatHours(upcoming[0]!.startTime, upcoming[0]!.endTime) && (
+                  <span className="detail-when-hours">
+                    {' · '}
+                    {formatHours(upcoming[0]!.startTime, upcoming[0]!.endTime)}
+                  </span>
+                )}
+                <span className={`detail-when-trust${isUnverified(event.confidence) ? ' low' : ''}`}>
+                  {trustLabel}
+                </span>
+              </p>
+            </div>
           )}
-          <p style={{ marginTop: 14 }}>
-            <ShareButton
-              title={displayTitle(event.title)}
-              path={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${event.slug}`}
-            />
-          </p>
+          <DetailActions
+            slug={event.slug}
+            title={displayTitle(event.title)}
+            sharePath={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/marked/${event.slug}`}
+            routeUrl={
+              event.lat != null && event.lng != null
+                ? `https://www.google.com/maps/dir/?api=1&destination=${event.lat},${event.lng}`
+                : undefined
+            }
+            calendarUrl={
+              event.status !== 'cancelled' && upcoming.length > 0
+                ? googleCalendarUrl({
+                    title: displayTitle(event.title),
+                    date: upcoming[0]!.date,
+                    startTime: upcoming[0]!.startTime,
+                    endTime: upcoming[0]!.endTime,
+                    location: [
+                      event.venueName && displayTitle(event.venueName),
+                      event.street,
+                      [event.postcode, event.city].filter(Boolean).join(' '),
+                    ]
+                      .filter(Boolean)
+                      .join(', '),
+                    details: `${process.env.LOPPEFUND_BASE_URL ?? 'https://jacobtop-tcg.github.io/loppefund'}/marked/${event.slug}`,
+                  })
+                : undefined
+            }
+          />
         </header>
 
         <div className="detail-grid">
@@ -456,12 +486,14 @@ export default async function EventPage({
               <h2>Praktisk</h2>
               {event.amenities && (
                 <div className="badge-row" style={{ marginBottom: 12 }}>
-                  {event.amenities.parking === true && <span className="badge free">P Parkering</span>}
+                  {/* Positive facilities read as calm neutral facts — colour is
+                      reserved for the cautions a family must plan around. */}
+                  {event.amenities.parking === true && <span className="badge">P Parkering</span>}
                   {event.amenities.parking === false && <span className="badge cancelled">Ingen parkering</span>}
-                  {event.amenities.food === true && <span className="badge free">Mad & drikke</span>}
-                  {event.amenities.toilets === true && <span className="badge free">Toiletter</span>}
-                  {event.amenities.kidsActivities === true && <span className="badge free">Børneaktiviteter</span>}
-                  {event.amenities.accessibility === true && <span className="badge free">Kørestolsvenligt</span>}
+                  {event.amenities.food === true && <span className="badge">Mad & drikke</span>}
+                  {event.amenities.toilets === true && <span className="badge">Toiletter</span>}
+                  {event.amenities.kidsActivities === true && <span className="badge">Børneaktiviteter</span>}
+                  {event.amenities.accessibility === true && <span className="badge">Kørestolsvenligt</span>}
                   {event.amenities.mobilepay === true && <span className="badge">MobilePay</span>}
                   {event.amenities.cashOnly === true && <span className="badge unverified">Kun kontanter</span>}
                   {event.amenities.weatherDependent === true && <span className="badge unverified">Vejrafhængigt</span>}
@@ -569,21 +601,8 @@ export default async function EventPage({
                       gap: 16,
                     }}
                   >
-                    <a
-                      href={`https://www.google.com/maps/dir/?api=1&destination=${event.lat},${event.lng}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: 6,
-                        fontSize: 13.5,
-                        fontWeight: 600,
-                        color: 'var(--accent-deep)',
-                      }}
-                    >
-                      <NavIcon /> Find vej
-                    </a>
+                    {/* Route CTA lives in the header action bar — one confident
+                        'Vis rute', not a duplicate weak link down here. */}
                     {/* Link out to the place on Google Maps for live hours/photos/
                         reviews — we never store or re-display Google's data. */}
                     <a
@@ -626,8 +645,14 @@ export default async function EventPage({
                       {s.name}
                     </a>{' '}
                     — senest set {s.lastConfirmedAt.slice(0, 10)}
-                    {contribLine(s.key) && (
-                      <span className="source-contrib">bidrog med: {contribLine(s.key)}</span>
+                    {(contribBySource[s.key]?.length ?? 0) > 0 && (
+                      <span className="source-contrib">
+                        {contribBySource[s.key]!.slice(0, 5).map((l) => (
+                          <span key={l} className="contrib-chip">
+                            {l}
+                          </span>
+                        ))}
+                      </span>
                     )}
                   </li>
                 ))}

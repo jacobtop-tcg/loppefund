@@ -1404,10 +1404,11 @@ body:has(.is-map-view) {
 }
 
 .detail-title {
-  font-size: clamp(28px, 4.6vw, 40px);
-  line-height: 1.08;
+  font-size: clamp(30px, 5.2vw, 46px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   margin-top: 6px;
-  max-width: 18ch;
+  max-width: 16ch;
 }
 
 .detail-place {
@@ -1435,6 +1436,48 @@ body:has(.is-map-view) {
   background: var(--brand-deep);
 }
 
+/* The hero when-moment: the same terracotta date-block the family tapped on the
+   list card, now hero-sized next to the date line — instant continuity, and
+   "hvornår?" lands before a word is read. */
+.detail-hero-when {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+.detail-date-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 58px;
+  padding: 8px 0;
+  border-radius: 14px;
+  background: linear-gradient(155deg, var(--accent), var(--accent-deep));
+  color: #fff;
+  line-height: 1.05;
+  box-shadow: var(--shadow-card);
+}
+.ddb-wd {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.9;
+}
+.ddb-day {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.ddb-mo {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.92;
+}
+
 /* Above-the-fold "when + trust" anchor — the two facts a family arriving from a
    Facebook share needs first: the next date/hours and how sure we are. */
 .detail-when {
@@ -1442,8 +1485,100 @@ body:has(.is-map-view) {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 4px 10px;
-  margin-top: 14px;
-  font-size: 17px;
+  margin-top: 0;
+  font-size: 18.5px;
+}
+.detail-when-date {
+  font-variant-numeric: tabular-nums;
+}
+
+/* One confident action bar: Vis rute / Gem / Kalender / Del. */
+.detail-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+.da-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: var(--paper-raised);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 14.5px;
+  cursor: pointer;
+  transition: border-color 0.14s ease, background 0.14s ease, transform 0.1s ease;
+}
+.da-btn:hover {
+  border-color: var(--ink-faint);
+}
+.da-btn:active {
+  transform: scale(0.97);
+}
+.da-btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.da-btn.primary:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+}
+.da-btn.saved {
+  background: var(--accent-wash);
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+/* The share button joins the bar with the same footprint. */
+.detail-actions .share-btn {
+  padding: 11px 18px;
+  font-size: 14.5px;
+  border-radius: 999px;
+}
+@media (max-width: 640px) {
+  /* Thumb-reach: pin the bar to the bottom of the phone. Deciding to go is one
+     tap — never a hunt-and-scroll. */
+  .detail-actions {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    margin: 0;
+    gap: 6px;
+    flex-wrap: nowrap;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--paper-raised) 92%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -6px 20px -12px rgba(28, 44, 34, 0.22);
+  }
+  .da-btn,
+  .detail-actions .share-btn {
+    flex: 1;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 6px;
+    font-size: 13.5px;
+  }
+  .da-btn.primary {
+    flex: 1.4;
+  }
+  /* Clear the fixed bar so footer/forms stay reachable — scoped to pages that
+     actually carry the bar. */
+  .container:has(.detail-actions) {
+    padding-bottom: 96px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .da-btn:active {
+    transform: none;
+  }
 }
 .detail-when-date {
   font-weight: 700;
@@ -1502,11 +1637,14 @@ body:has(.is-map-view) {
 }
 
 .panel + .panel {
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
+/* One confident heading voice + editorial breathing room across all panels. */
 .panel h2 {
-  font-size: 19px;
+  font-size: clamp(20px, 2.4vw, 24px);
+  letter-spacing: -0.015em;
+  line-height: 1.18;
   margin-bottom: 12px;
 }
 
@@ -1601,7 +1739,7 @@ body:has(.is-map-view) {
 
 .trust-bar {
   flex: 1;
-  height: 7px;
+  height: 9px;
   border-radius: 999px;
   background: var(--line);
   overflow: hidden;
@@ -1644,11 +1782,22 @@ body:has(.is-map-view) {
 
 /* Field-level provenance — which facts this source supplied. Quiet, so it
    informs without competing with the source name. */
+/* Per-source contribution as calm green receipt chips ('dato' 'adresse' 'pris')
+   — the field-provenance a lone Facebook post can never show, made scannable. */
 .source-contrib {
-  display: block;
-  margin-top: 2px;
-  font-size: 12px;
-  color: var(--ink-faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+.contrib-chip {
+  padding: 1.5px 8px;
+  border-radius: 999px;
+  background: var(--green-wash);
+  color: color-mix(in srgb, var(--green) 78%, var(--ink));
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .trust-note {

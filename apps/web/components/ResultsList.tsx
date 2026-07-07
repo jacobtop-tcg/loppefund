@@ -8,6 +8,34 @@ import { VenueCard } from './VenueCard.tsx';
 import { GemIcon } from './icons.tsx';
 import type { DateFilter } from './FilterBar.tsx';
 import type { DayWeather } from '../lib/weather.ts';
+import { dayOfMonth, monthLong } from '../lib/format.ts';
+
+/** "11.–12. juli" / "12. juli" / "30. juni–1. juli" from an ISO range. */
+function formatRange(from: string, to: string): string {
+  if (from === to) return `${dayOfMonth(from)}. ${monthLong(from)}`;
+  if (monthLong(from) === monthLong(to) && from.slice(0, 7) === to.slice(0, 7)) {
+    return `${dayOfMonth(from)}.–${dayOfMonth(to)}. ${monthLong(to)}`;
+  }
+  return `${dayOfMonth(from)}. ${monthLong(from)}–${dayOfMonth(to)}. ${monthLong(to)}`;
+}
+
+/** The serif statement that NAMES the moment before counting it. */
+function leadFor(dateFilter: DateFilter, from: string, to: string): string {
+  switch (dateFilter) {
+    case 'weekend':
+      return `Weekenden ${formatRange(from, to)}`;
+    case 'naeste-weekend':
+      return `Næste weekend ${formatRange(from, to)}`;
+    case 'idag':
+      return 'I dag';
+    case 'imorgen':
+      return 'I morgen';
+    case 'aabent-nu':
+      return 'Åbent lige nu';
+    default:
+      return 'Kommende markeder';
+  }
+}
 
 type Row = EventSummary & { nextDate: string; distanceKm: number | null; openNow: boolean };
 type VenueRow = VenueSummary & { distanceKm: number | null; open: boolean };
@@ -29,6 +57,8 @@ export const ResultsList = memo(function ResultsList({
   now,
   today,
   dateFilter,
+  from,
+  to,
   hasPos,
   gemsFirst,
   onGemsFirst,
@@ -45,6 +75,8 @@ export const ResultsList = memo(function ResultsList({
   now: { date: string; time: string };
   today: string;
   dateFilter: DateFilter;
+  from: string;
+  to: string;
   hasPos: boolean;
   gemsFirst: boolean;
   onGemsFirst: (v: boolean) => void;
@@ -58,19 +90,19 @@ export const ResultsList = memo(function ResultsList({
   return (
     <>
       <div className="result-meta">
-        <span className="result-count" aria-live="polite">
-          <strong>{filtered.length}</strong>{' '}
-          {filtered.length === 1 ? 'marked' : 'markeder'}
-          {dateFilter === 'weekend' && ' i weekenden'}
-          {dateFilter === 'idag' && ' i dag'}
-          {dateFilter === 'imorgen' && ' i morgen'}
-          {dateFilter === 'aabent-nu' &&
-            (filtered.length === 1 ? ' åbent lige nu' : ' åbne lige nu')}
-          {dateFilter === 'naeste-weekend' && ' næste weekend'}
-          {refinements.length > 0 && (
-            <span className="result-refinements"> · {refinements.join(' · ')}</span>
-          )}
-        </span>
+        <div className="result-head">
+          {/* keyed on dateFilter so the lead softly re-enters when the answer changes */}
+          <p className="result-lead" key={dateFilter}>
+            {leadFor(dateFilter, from, to)}
+          </p>
+          <p className="result-count" aria-live="polite">
+            <strong>{filtered.length}</strong>{' '}
+            {filtered.length === 1 ? 'marked' : 'markeder'}
+            {refinements.length > 0 && (
+              <span className="result-refinements"> · {refinements.join(' · ')}</span>
+            )}
+          </p>
+        </div>
         {filtered.some((e) => e.gem) && (
           <button
             className={`sort-gems ${gemsFirst ? 'active' : ''}`}

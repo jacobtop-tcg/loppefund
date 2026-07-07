@@ -34,17 +34,15 @@ export default function HomePage() {
               ·
             </span>
             <strong>{venueCount.toLocaleString('da-DK')}</strong> faste steder
+            {newCount > 0 && (
+              <span className="hero-fresh">
+                <span className="live-dot" aria-hidden />
+                {newCount} {newCount === 1 ? 'nyt marked' : 'nye markeder'} for nylig
+              </span>
+            )}
           </p>
           {updated && (
-            <p className="hero-updated">
-              Data opdateret {formatUpdated(updated)}
-              {newCount > 0 && (
-                <span className="hero-new">
-                  {' · '}
-                  {newCount} {newCount === 1 ? 'nyt marked' : 'nye markeder'} for nylig
-                </span>
-              )}
-            </p>
+            <p className="hero-updated">Data opdateret {formatUpdated(updated)}</p>
           )}
         </div>
       </header>

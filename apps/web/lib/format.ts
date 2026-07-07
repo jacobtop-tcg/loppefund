@@ -35,6 +35,10 @@ export function monthShort(isoDate: string): string {
   return MONTHS_SHORT[parts(isoDate).m - 1]!;
 }
 
+export function monthLong(isoDate: string): string {
+  return MONTHS_LONG[parts(isoDate).m - 1]!;
+}
+
 export function dayOfMonth(isoDate: string): number {
   return parts(isoDate).d;
 }

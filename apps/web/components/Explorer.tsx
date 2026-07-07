@@ -531,6 +531,8 @@ export function Explorer({
             now={now}
             today={today}
             dateFilter={dateFilter}
+            from={from}
+            to={to}
             hasPos={pos !== null}
             gemsFirst={gemsFirst}
             onGemsFirst={setGemsFirst}

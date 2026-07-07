@@ -2,7 +2,7 @@ import 'server-only';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import type { DatabaseSync } from 'node:sqlite';
-import { addDays, isHiddenGem, searchFold, type Amenities } from '@loppefund/core';
+import { addDays, describeRecurrence, isHiddenGem, searchFold, type Amenities } from '@loppefund/core';
 import { summarizeReviews, type ReviewSummary } from './reviews.ts';
 import { summarizePhotos, type Photo } from './photos.ts';
 import {
@@ -197,6 +197,9 @@ export interface EventSummary {
   /** From extracted amenities: the market states it's cash-only ("kun kontanter")
    *  — a bring-cash pre-trip warning. */
   cashOnly: boolean;
+  /** Human-readable recurrence ("Hver søndag"), or null — the dependable-fixture
+   *  cue a one-off Facebook post can't convey. */
+  recurrence: string | null;
   /** From extracted amenities: the market states it's cancelled/affected by rain
    *  ("aflyses ved regn"). Combined with an outdoor forecast to warn before a trip. */
   weatherDependent: boolean;
@@ -254,6 +257,7 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       // nothing is invented (a null/unknown reads as false = "not claimed").
       accessible: am?.accessibility === true,
       cashOnly: am?.cashOnly === true,
+      recurrence: describeRecurrence(e.schedule_text),
       // Enough folded description signal for keyword matches ('vintage',
       // 'børneloppemarked') without bloating the homepage payload — title,
       // city, venue, municipality and postcode are searched separately.

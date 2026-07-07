@@ -101,6 +101,37 @@ export function parseRecurrence(text: string): Rule[] {
   return rules;
 }
 
+const DA_WEEKDAY: Record<number, string> = {
+  1: 'mandag', 2: 'tirsdag', 3: 'onsdag', 4: 'torsdag', 5: 'fredag', 6: 'lørdag', 7: 'søndag',
+};
+const DA_ORDINAL: Record<number, string> = { 1: 'Første', 2: 'Anden', 3: 'Tredje', 4: 'Fjerde' };
+const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+function joinDanish(names: string[]): string {
+  if (names.length <= 1) return names[0] ?? '';
+  return `${names.slice(0, -1).join(', ')} og ${names[names.length - 1]}`;
+}
+
+/**
+ * Human-readable Danish label for a recurring schedule ("Hver søndag", "Sidste
+ * lørdag i måneden", "Torvedag i lige uger"), or null when nothing parses — so
+ * callers fall back to the raw text rather than showing a code-ish pattern.
+ * A dependable "fixture" cue a one-off Facebook post can't convey.
+ */
+export function describeRecurrence(scheduleText: string | null | undefined): string | null {
+  if (!scheduleText) return null;
+  const parts: string[] = [];
+  for (const r of parseRecurrence(scheduleText)) {
+    const days = joinDanish(r.weekdays.map((w) => DA_WEEKDAY[w] ?? '').filter(Boolean));
+    if (!days) continue;
+    if (r.kind === 'weekly') parts.push(`Hver ${days}`);
+    else if (r.kind === 'odd-weeks') parts.push(`${cap(days)} i ulige uger`);
+    else if (r.kind === 'even-weeks') parts.push(`${cap(days)} i lige uger`);
+    else if (r.kind === 'last') parts.push(`Sidste ${days} i måneden`);
+    else if (r.kind === 'nth') parts.push(`${DA_ORDINAL[r.nth ?? 0] ?? `${r.nth}.`} ${days} i måneden`);
+  }
+  return parts.length ? parts.join(' · ') : null;
+}
+
 function nthWeekdayOfMonth(y: number, mo: number, wd: number, nth: number): string | null {
   const first = `${y}-${String(mo).padStart(2, '0')}-01`;
   const firstWd = weekdayOf(first);

@@ -1,7 +1,22 @@
 import { describe, expect, it } from 'vitest';
-import { resolveSchedule } from '../src/schedule.ts';
+import { resolveSchedule, describeRecurrence } from '../src/schedule.ts';
 
 const window = { from: '2026-07-01', horizonDays: 60 };
+
+describe('describeRecurrence', () => {
+  it('renders recognised cadences as clean Danish', () => {
+    expect(describeRecurrence('Hver søndag')).toBe('Hver søndag');
+    expect(describeRecurrence('hver lørdag og søndag')).toBe('Hver lørdag og søndag');
+    expect(describeRecurrence('søndag i lige uger')).toBe('Søndag i lige uger');
+    expect(describeRecurrence('sidste lørdag i måneden')).toBe('Sidste lørdag i måneden');
+    expect(describeRecurrence('første søndag i måneden')).toBe('Første søndag i måneden');
+  });
+  it('returns null for empty or unparseable text (so callers can fall back)', () => {
+    expect(describeRecurrence(null)).toBeNull();
+    expect(describeRecurrence('')).toBeNull();
+    expect(describeRecurrence('noget uden mønster')).toBeNull();
+  });
+});
 
 describe('resolveSchedule — explicit date ranges', () => {
   it('materializes one occurrence per day in each range', () => {

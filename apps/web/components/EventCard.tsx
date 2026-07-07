@@ -49,6 +49,7 @@ function cardBody(event: CardEvent, today: string, openNow: boolean, weather?: D
           {hours ?? 'Tidspunkt ikke oplyst'}
           {moreDates > 0 && ` · +${moreDates} ${moreDates === 1 ? 'dato' : 'datoer'}`}
         </div>
+        {event.recurrence && <div className="event-recurrence">↻ {event.recurrence}</div>}
         <div className="badge-row">
           {event.newlyAdded && event.status !== 'cancelled' && (
             <span className="badge new" title="Fundet hos Loppefund inden for de sidste par uger">

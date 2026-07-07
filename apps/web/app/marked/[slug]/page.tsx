@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { describeRecurrence } from '@loppefund/core';
 import { loadEventDetail, loadPhotos, loadReviews, todayIso } from '../../../lib/data.ts';
 import {
   CATEGORY_LABELS,
@@ -334,7 +335,7 @@ export default async function EventPage({
               )}
               {event.scheduleText && (
                 <p style={{ color: 'var(--ink-soft)', fontSize: 13.5, marginBottom: 0 }}>
-                  Mønster: {event.scheduleText}
+                  {describeRecurrence(event.scheduleText) ?? `Mønster: ${event.scheduleText}`}
                 </p>
               )}
             </section>

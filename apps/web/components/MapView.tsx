@@ -10,6 +10,7 @@ import {
   displayTitle,
   formatDateLong,
   formatHours,
+  monthShort,
   weekdayShort,
 } from '../lib/format.ts';
 import { VENUE_LABELS } from '../lib/venue-client.ts';
@@ -38,6 +39,8 @@ function toVenueGeoJson(venues: MapVenue[]): GeoJSON.FeatureCollection {
           city: v.city ?? '',
           vtype: VENUE_LABELS[v.category] ?? 'Fast butik',
           open: v.open ? 1 : 0,
+          lat: v.lat,
+          lng: v.lng,
         },
       })),
   };
@@ -89,6 +92,8 @@ function toGeoJson(events: MapEvent[], today: string): GeoJSON.FeatureCollection
             // Drives marker color + label: green 'Åbent nu' > accent 'i dag' > accent-deep
             state: e.openNow ? 'open' : isToday ? 'today' : 'upcoming',
             label: isToday ? 'i dag' : `${weekdayShort(e.nextDate)} ${dayOfMonth(e.nextDate)}.`,
+            lat: e.lat,
+            lng: e.lng,
           },
         };
       }),
@@ -291,10 +296,12 @@ export function MapView({
           filter: ['has', 'point_count'],
           paint: {
             'circle-color': 'rgba(228, 87, 46, 0.18)',
-            'circle-radius': ['step', ['get', 'point_count'], 23, 10, 28, 40, 35],
+            'circle-radius': ['step', ['get', 'point_count'], 21, 10, 26, 40, 33, 120, 41],
             'circle-blur': 0.35,
           },
         });
+        // Denmark reads as a heat-map of the weekend: a 120+ Copenhagen cluster
+        // visibly out-blooms a rural 12 instead of flat equal-weight blobs.
         m.addLayer({
           id: 'clusters',
           type: 'circle',
@@ -302,7 +309,7 @@ export function MapView({
           filter: ['has', 'point_count'],
           paint: {
             'circle-color': ['step', ['get', 'point_count'], MAP.accent, 40, MAP.accentDeep],
-            'circle-radius': ['step', ['get', 'point_count'], 16, 10, 21, 40, 27],
+            'circle-radius': ['step', ['get', 'point_count'], 15, 10, 19, 40, 24, 120, 30],
             'circle-stroke-width': 2.5,
             'circle-stroke-color': MAP.paperRaised,
           },
@@ -314,7 +321,7 @@ export function MapView({
           filter: ['has', 'point_count'],
           layout: {
             'text-field': ['get', 'point_count_abbreviated'],
-            'text-size': 13,
+            'text-size': ['step', ['get', 'point_count'], 12.5, 40, 14.5, 120, 16.5],
             'text-font': fonts.bold,
             'text-allow-overlap': true, // counts must never be culled
           },
@@ -327,7 +334,7 @@ export function MapView({
           source: 'events',
           filter: ['!', ['has', 'point_count']],
           paint: {
-            'circle-radius': 15,
+            'circle-radius': ['match', ['get', 'state'], 'open', 18, 'today', 17, 12],
             'circle-blur': 0.5,
             'circle-color': [
               'match', ['get', 'state'],
@@ -349,8 +356,15 @@ export function MapView({
               'today', MAP.accent,
               MAP.accentDeep,
             ],
-            'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, 5.5, 10, 7.5, 14, 9],
-            'circle-stroke-width': 2.5,
+            // The Saturday question, answered at a glance: today's/open markets
+            // sit a clear size tier above the month's upcoming field.
+            'circle-radius': [
+              'interpolate', ['linear'], ['zoom'],
+              6, ['match', ['get', 'state'], 'upcoming', 4.5, 7],
+              10, ['match', ['get', 'state'], 'upcoming', 6.5, 9.5],
+              14, ['match', ['get', 'state'], 'upcoming', 8, 12],
+            ],
+            'circle-stroke-width': ['match', ['get', 'state'], 'upcoming', 2, 2.75],
             'circle-stroke-color': MAP.paperRaised,
           },
         });
@@ -368,7 +382,8 @@ export function MapView({
           },
         });
         // Card hover/focus -> marker highlight (filter by slug; feature-state
-        // is unreliable with clustered GeoJSON).
+        // is unreliable with clustered GeoJSON). Paint = a genuinely LIFTED pin:
+        // bigger, fat paper ring — unmistakable among a field of red dots.
         m.addLayer({
           id: 'point-highlight',
           type: 'circle',
@@ -376,8 +391,8 @@ export function MapView({
           filter: ['boolean', false],
           paint: {
             'circle-color': MAP.accent,
-            'circle-radius': 12,
-            'circle-stroke-width': 3,
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, 9, 14, 14],
+            'circle-stroke-width': 4,
             'circle-stroke-color': MAP.paperRaised,
           },
         });
@@ -442,9 +457,21 @@ export function MapView({
         };
         m.on('click', 'points', openPopup);
         m.on('click', 'point-labels', openPopup);
-        for (const layer of ['clusters', 'points', 'point-labels']) {
-          m.on('mouseenter', layer, () => (m.getCanvas().style.cursor = 'pointer'));
-          m.on('mouseleave', layer, () => (m.getCanvas().style.cursor = ''));
+        m.on('mouseenter', 'clusters', () => (m.getCanvas().style.cursor = 'pointer'));
+        m.on('mouseleave', 'clusters', () => (m.getCanvas().style.cursor = ''));
+        // Two-way hover: hovering a PIN lifts it (same highlight the list-card
+        // hover drives); leaving restores whatever card is currently hovered —
+        // map-hover and card-hover never fight.
+        for (const layer of ['points', 'point-labels']) {
+          m.on('mousemove', layer, (e) => {
+            m.getCanvas().style.cursor = 'pointer';
+            const slug = e.features?.[0]?.properties?.slug;
+            if (slug) applyHighlight(m, String(slug));
+          });
+          m.on('mouseleave', layer, () => {
+            m.getCanvas().style.cursor = '';
+            applyHighlight(m, highlightRef.current);
+          });
         }
 
         // Permanent-venue layer: its own petrol-teal source, clustered like the
@@ -652,18 +679,45 @@ export function MapView({
   );
 }
 
-/** Popup = the event-card system, floating on the map. All values escaped. */
+/** The terracotta date-block, travelling from list card to map popup. */
+function popDateBlock(p: Record<string, unknown>): string {
+  const open = p.state === 'open';
+  const isToday = open || p.state === 'today';
+  if (isToday) {
+    return `<div class="map-pop-date${open ? ' open' : ' today'}"><span class="mpd-today">I&nbsp;dag</span></div>`;
+  }
+  const d = String(p.nextDate);
+  return (
+    `<div class="map-pop-date">` +
+    `<span class="mpd-wd">${escapeHtml(weekdayShort(d))}</span>` +
+    `<span class="mpd-day">${escapeHtml(String(dayOfMonth(d)))}</span>` +
+    `<span class="mpd-mo">${escapeHtml(monthShort(d))}</span>` +
+    `</div>`
+  );
+}
+
+/** "Se marked/butik" + one-tap Rute straight to driving directions. */
+function popActions(p: Record<string, unknown>, href: string, label: string): string {
+  const route =
+    p.lat != null && p.lng != null
+      ? `<a class="map-card-route" href="https://www.google.com/maps/dir/?api=1&destination=${Number(p.lat)},${Number(p.lng)}" target="_blank" rel="noopener noreferrer" aria-label="Vis rute i Google Maps">Rute</a>`
+      : '';
+  return `<div class="map-card-actions"><a class="map-card-cta" href="${href}">${label}</a>${route}</div>`;
+}
+
+/** Popup = a mini-EventCard, floating on the map: the same terracotta
+ *  date-block as the list, title + 'city · hours', signals, then actions.
+ *  All values escaped. */
 function popupHtml(
   p: Record<string, unknown>,
   trip: { active: boolean; selected: boolean },
 ): string {
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
   const open = p.state === 'open';
-  const isToday = open || p.state === 'today';
-  const when =
-    (isToday ? 'i dag' : escapeHtml(formatDateLong(String(p.nextDate)))) +
-    (p.hours ? ` · ${escapeHtml(String(p.hours))}` : '');
   const free = p.isFree === true || p.isFree === 'true';
+  const place = [p.city ? escapeHtml(String(p.city)) : '', p.hours ? escapeHtml(String(p.hours)) : '']
+    .filter(Boolean)
+    .join(' · ');
   const badges =
     (open ? '<span class="badge open-now"><span class="dot"></span>Åbent nu</span>' : '') +
     `<span class="badge">${escapeHtml(String(p.category))}</span>` +
@@ -671,18 +725,24 @@ function popupHtml(
   // In trip mode the popup toggles the stop instead of navigating away.
   const cta = trip.active
     ? `<button type="button" class="map-popup-add" data-slug="${escapeHtml(String(p.slug))}">${trip.selected ? 'Fjern fra turen' : 'Tilføj til turen'}</button>`
-    : `<a class="map-card-cta" href="${base}/marked/${encodeURIComponent(String(p.slug))}">Se marked</a>`;
+    : popActions(p, `${base}/marked/${encodeURIComponent(String(p.slug))}`, 'Se marked');
   return (
     `<div class="map-card">` +
+    `<div class="map-card-head">${popDateBlock(p)}<div class="map-card-headtext">` +
     `<h3 class="map-card-title">${escapeHtml(String(p.title))}</h3>` +
-    `<div class="map-card-when${isToday ? ' today' : ''}">${when}${p.city ? ` · ${escapeHtml(String(p.city))}` : ''}</div>` +
+    (place ? `<div class="map-card-place">${place}</div>` : '') +
+    `</div></div>` +
     `<div class="badge-row">${badges}</div>` +
     cta +
     `</div>`
   );
 }
 
-/** Popup for a permanent venue — no date, an opening-hours state + a link out.
+// A little storefront glyph for the venue popup's petrol block.
+const STORE_GLYPH =
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10l1.5-5h13L20 10"/><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/><path d="M9 20v-6h6v6"/></svg>';
+
+/** Popup for a permanent venue — petrol date-block slot, hours state, link out.
  *  In trip mode it toggles the shop as a stop instead of linking away. */
 function venuePopupHtml(p: Record<string, unknown>, trip: { active: boolean; selected: boolean }): string {
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
@@ -692,11 +752,13 @@ function venuePopupHtml(p: Record<string, unknown>, trip: { active: boolean; sel
     `<span class="badge venue-badge">${escapeHtml(String(p.vtype))}</span>`;
   const cta = trip.active
     ? `<button type="button" class="map-popup-add" data-slug="${escapeHtml(String(p.slug))}">${trip.selected ? 'Fjern fra turen' : 'Tilføj til turen'}</button>`
-    : `<a class="map-card-cta" href="${base}/sted/${encodeURIComponent(String(p.slug))}">Se butik</a>`;
+    : popActions(p, `${base}/sted/${encodeURIComponent(String(p.slug))}`, 'Se butik');
   return (
     `<div class="map-card">` +
+    `<div class="map-card-head"><div class="map-pop-date venue">${STORE_GLYPH}</div><div class="map-card-headtext">` +
     `<h3 class="map-card-title">${escapeHtml(String(p.title))}</h3>` +
-    `<div class="map-card-when">${p.city ? escapeHtml(String(p.city)) : 'Fast butik'}</div>` +
+    `<div class="map-card-place">${p.city ? escapeHtml(String(p.city)) : 'Fast butik'}</div>` +
+    `</div></div>` +
     `<div class="badge-row">${badges}</div>` +
     cta +
     `</div>`

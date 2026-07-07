@@ -1305,13 +1305,85 @@ body:has(.is-map-view) {
   color: var(--ink);
 }
 
+/* The popup is a mini-EventCard: same terracotta date-block as the list. */
+.map-card-head {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  padding-right: 14px; /* clear the close button */
+}
+.map-pop-date {
+  flex: 0 0 auto;
+  width: 50px;
+  text-align: center;
+  border-radius: 11px;
+  background: var(--accent-deep);
+  color: #fbf6ea;
+  padding: 8px 3px 7px;
+  box-shadow: 0 3px 8px -3px rgba(30, 42, 32, 0.4);
+}
+.map-pop-date.today {
+  background: var(--accent);
+}
+.map-pop-date.open {
+  background: var(--green);
+  box-shadow: 0 3px 9px -3px rgba(47, 122, 79, 0.5);
+}
+.map-pop-date.venue {
+  background: #2f6f6a; /* petrol — the venue layer's own voice */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  color: #fff;
+}
+.mpd-wd {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.72);
+}
+.mpd-day {
+  display: block;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+.mpd-mo {
+  display: block;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 2px;
+}
+.mpd-today {
+  display: block;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 4px 0;
+  color: #fff;
+}
+.map-card-headtext {
+  min-width: 0;
+}
+
 .map-card-title {
   font-family: var(--font-display), Georgia, serif;
   font-size: 16.5px;
   font-weight: 600;
   line-height: 1.25;
   margin: 0;
-  padding-right: 18px; /* clear the close button */
+}
+.map-card-place {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 3px;
 }
 
 .map-card-when {
@@ -1323,6 +1395,35 @@ body:has(.is-map-view) {
 .map-card-when.today {
   color: var(--accent-deep);
   font-weight: 600;
+}
+
+/* Actions: 'Se marked' + one-tap Rute straight into driving directions. */
+.map-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: stretch;
+}
+.map-card-actions .map-card-cta {
+  flex: 1;
+  margin-top: 0;
+}
+.map-card-route {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper-raised);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  transition: border-color 0.13s ease, color 0.13s ease;
+}
+.map-card-route:hover {
+  border-color: var(--accent);
+  color: var(--accent-deep);
 }
 
 .map-card-cta {

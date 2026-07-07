@@ -7,6 +7,7 @@ import {
   formatDateLong,
   formatHours,
 } from '../../../lib/format.ts';
+import { isUnverified } from '../../../lib/trust.ts';
 
 // One share card per event. Statically generated at build (nodejs runtime,
 // compatible with output:export — edge is not). Mirrors the page route so
@@ -51,7 +52,12 @@ export default async function EventOgImage({ params }: { params: Promise<{ slug:
   else if (event?.indoorOutdoor === 'outdoor') chips.push('Udendørs');
   if (event?.amenities?.familyFriendly) chips.push('Børnevenligt');
   if (event?.stallCountText) chips.push(event.stallCountText);
-  const shownChips = chips.slice(0, 4);
+  // Multi-source corroboration rendered INSIDE the Facebook feed at the
+  // tap-decision moment — the structural trust edge a lone group post can't
+  // match, turned into a distribution advantage. Confirmed + multi-source only.
+  const verified =
+    !!event && event.sources.length >= 2 && !isUnverified(event.confidence);
+  const shownChips = chips.slice(0, verified ? 3 : 4);
 
   return new ImageResponse(
     (
@@ -119,8 +125,39 @@ export default async function EventOgImage({ params }: { params: Promise<{ slug:
           >
             {dateLine || 'Se datoer og praktisk info'}
           </div>
-          {shownChips.length > 0 && (
+          {(verified || shownChips.length > 0) && (
             <div style={{ display: 'flex' }}>
+              {verified && (
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    background: '#e4efe6',
+                    color: '#22593a',
+                    fontSize: 30,
+                    fontWeight: 700,
+                    padding: '9px 22px',
+                    borderRadius: 999,
+                    marginRight: 16,
+                  }}
+                >
+                  {/* Inline SVG check — the OG renderer's default font has no ✓ glyph. */}
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#22593a"
+                    strokeWidth="3.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    style={{ marginRight: 10 }}
+                  >
+                    <path d="m4.5 12.5 5 5 10-11" />
+                  </svg>
+                  Bekræftet · {event!.sources.length} kilder
+                </div>
+              )}
               {shownChips.map((c, i) => (
                 <div
                   key={i}

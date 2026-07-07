@@ -452,6 +452,28 @@ export function Explorer({
     [tripMode, exitTrip],
   );
 
+  // Concierge move: auto-fill the loppetur from the CURRENT filtered view (which
+  // already honours the active date window / radius / search). Anchor on the
+  // visitor's location if known, else the first (soonest) market, then take the
+  // NEAREST stops to that anchor — so the route is a compact day trip, not a
+  // cross-country sprawl. optimizeTripOrder then draws the drive-ordered route.
+  // A tap that turns raw data into a planned Saturday — no competitor has the
+  // corpus for it.
+  const autoPlanTrip = useCallback(() => {
+    const withCoords = filtered.filter((e) => e.lat != null && e.lng != null);
+    if (withCoords.length < 2) return;
+    const anchor = pos ?? { lat: withCoords[0]!.lat!, lng: withCoords[0]!.lng! };
+    const stops = [...withCoords]
+      .sort(
+        (a, b) =>
+          distanceKm(anchor.lat, anchor.lng, a.lat!, a.lng!) -
+          distanceKm(anchor.lat, anchor.lng, b.lat!, b.lng!),
+      )
+      .slice(0, MAX_TRIP_STOPS)
+      .map((e) => `e:${e.slug}`);
+    if (stops.length >= 2) setTripSlugs(stops);
+  }, [filtered, pos]);
+
   const locate = useCallback(() => {
     if (!navigator.geolocation) {
       setGeoError('Din browser deler ikke placering — søg på en by i stedet.');
@@ -576,7 +598,15 @@ export function Explorer({
               </>
             )}
           </span>
-          {tripUrl ? (
+          {tripSlugs.length === 0 ? (
+            <button
+              className="trip-go"
+              onClick={autoPlanTrip}
+              title="Byg automatisk en loppetur ud fra de viste markeder — tættest på dig først"
+            >
+              ⚡ Planlæg for mig
+            </button>
+          ) : tripUrl ? (
             <a className="trip-go" href={tripUrl} target="_blank" rel="noopener noreferrer">
               Åbn rute i Google Maps
             </a>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BackLink } from '../../../components/BackLink.tsx';
+import { DistanceFromYou } from '../../../components/DistanceFromYou.tsx';
 import { notFound } from 'next/navigation';
 import { describeRecurrence } from '@loppefund/core';
 import { loadEventDetail, loadPhotos, loadReviews, todayIso } from '../../../lib/data.ts';
@@ -285,6 +286,9 @@ export default async function EventPage({
             ]
               .filter(Boolean)
               .join(' · ')}
+            {event.lat != null && event.lng != null && (
+              <DistanceFromYou lat={event.lat} lng={event.lng} />
+            )}
           </p>
           {event.status !== 'cancelled' && upcoming.length > 0 && (
             <div className="detail-hero-when">

@@ -818,6 +818,15 @@ a:focus-visible .event-card {
   font-weight: 650;
   font-variant-numeric: tabular-nums;
 }
+/* "ca. 13 km fra dig" appended to the detail address line — the same terracotta
+   voice as the card's km chip, so the personal fact reads as one system. Only
+   present when the device holds a saved location (client island). */
+.detail-distance {
+  color: var(--accent-deep);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
 .meta-free,
 .meta-verified {
   color: var(--green);

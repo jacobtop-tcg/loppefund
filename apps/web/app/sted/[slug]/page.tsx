@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BackLink } from '../../../components/BackLink.tsx';
+import { DistanceFromYou } from '../../../components/DistanceFromYou.tsx';
 import { notFound } from 'next/navigation';
 import { copenhagenNow, parseOsmHours } from '@loppefund/core';
 import { listVenues, loadVenueDetail } from '../../../lib/data.ts';
@@ -165,7 +166,12 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
       <header className="detail-header">
         <div className="detail-category">{VENUE_LABELS[v.category] ?? 'Fast butik'}</div>
         <h1 className="detail-title">{displayTitle(v.title)}</h1>
-        {place && <p className="detail-place">{displayPlace(place)}</p>}
+        {place && (
+          <p className="detail-place">
+            {displayPlace(place)}
+            {v.lat != null && v.lng != null && <DistanceFromYou lat={v.lat} lng={v.lng} />}
+          </p>
+        )}
       </header>
 
       <VenueHours hoursText={v.openingHoursText} buildNow={now} />

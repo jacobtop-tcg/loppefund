@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   openDb,
   getEventBySlug,
@@ -7,6 +7,7 @@ import {
 } from '@loppefund/db';
 import type { RawEvent } from '@loppefund/core';
 import { canonicalizeRawEvent, type CanonicalizeStats } from '../src/canonicalize.ts';
+import { inDenmark } from '../src/geocode.ts';
 
 const trust = { markedskalenderen: 0.7, kultunaut: 0.6 };
 
@@ -328,5 +329,45 @@ describe('reconcileVanishedSourceEvents', () => {
     // The source lists it again next crawl → self-heals back to active.
     await canonicalizeRawEvent(db, rawA(), trust, stats);
     expect(getEventBySlug(db, 'testmarked-paa-havnen-odense-c')!.status).toBe('active');
+  });
+});
+
+describe('out-of-bounds source coordinates', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  it('rejects a North-Sea source coord and geocodes the address instead', async () => {
+    const db = openDb(':memory:');
+    upsertSource(db, { key: 'facebook-feed', name: 'FB', baseUrl: 'x', trust: 0.5 });
+    // DAWA stub: the postcode centroid resolves to a real, in-Denmark spot.
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string) => ({
+        ok: true,
+        json: async () =>
+          String(url).includes('/postnumre/')
+            ? { nr: '6857', navn: 'Blåvand', visueltcenter: [8.08, 55.56] }
+            : {},
+      })),
+    );
+    const raw: RawEvent = {
+      sourceKey: 'facebook-feed',
+      sourceUrl: 'https://facebook.com/x',
+      sourceEventId: 'blaavand-x',
+      title: 'Kræmmermarked Blåvand',
+      category: 'kraemmermarked',
+      postcode: '6857',
+      city: 'Blåvand',
+      lat: 55.45, // \
+      lng: 6.6, //  > a North-Sea coordinate — must be rejected, not stored
+      dateRanges: [{ start: future, end: future }],
+    };
+    await canonicalizeRawEvent(db, raw, { 'facebook-feed': 0.5 }, newStats());
+
+    const ev = db.prepare('SELECT lat, lng FROM events LIMIT 1').get() as {
+      lat: number | null;
+      lng: number | null;
+    };
+    expect(ev.lng).not.toBeCloseTo(6.6, 1); // the bad source coord was dropped
+    expect(inDenmark(ev.lat!, ev.lng!)).toBe(true); // resolved to a real DK spot
   });
 });

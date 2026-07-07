@@ -35,7 +35,7 @@ const NO_MATCH: GeocodeResult = {
 // centre falls in the WATER, ~90 km from the town — a wrong pin. The guard turns
 // such a result into a correct one (address-mean fallback) or a missing one,
 // never a wrong one, per the iron rule "incorrect is worse than missing".
-const DK_LAND = { minLng: 7.8, maxLng: 15.3, minLat: 54.4, maxLat: 57.9 };
+export const DK_LAND = { minLng: 7.8, maxLng: 15.3, minLat: 54.4, maxLat: 57.9 };
 export function inDenmark(lat: number, lng: number): boolean {
   return lat >= DK_LAND.minLat && lat <= DK_LAND.maxLat && lng >= DK_LAND.minLng && lng <= DK_LAND.maxLng;
 }

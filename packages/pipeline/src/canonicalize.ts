@@ -35,7 +35,7 @@ import {
   upsertRawEvent,
   type EventRow,
 } from '@loppefund/db';
-import { geocode } from './geocode.ts';
+import { DK_LAND, geocode, inDenmark } from './geocode.ts';
 
 const HORIZON_DAYS = 180;
 
@@ -292,10 +292,21 @@ export function mergeDuplicateEvents(db: DatabaseSync): number {
  * Returns how many events gained a location.
  */
 export async function backfillGeocode(db: DatabaseSync): Promise<number> {
+  // Two kinds of bad location are healed here: (a) events with NO coords that an
+  // improved geocoder could now resolve, and (b) events whose stored coords fall
+  // OUTSIDE Denmark — a pre-guard sea/abroad centroid or a bad SOURCE coordinate
+  // (e.g. a Facebook feed shipping a North-Sea longitude). Case (b) was invisible
+  // before: the old `lat IS NULL` filter skipped any event that already had a
+  // (wrong) pin, so a mis-located market stayed mis-located forever. A wrong pin
+  // is worse than none, so an out-of-bounds coord that can't be re-resolved is
+  // CLEARED, not kept.
   const rows = db
     .prepare(
-      `SELECT id, street, postcode, city FROM events
-       WHERE status = 'active' AND lat IS NULL
+      `SELECT id, street, postcode, city, lat FROM events
+       WHERE status = 'active'
+         AND (lat IS NULL
+              OR lat < ${DK_LAND.minLat} OR lat > ${DK_LAND.maxLat}
+              OR lng < ${DK_LAND.minLng} OR lng > ${DK_LAND.maxLng})
          AND (postcode IS NOT NULL OR street IS NOT NULL OR city IS NOT NULL)`,
     )
     .all() as unknown as Array<{
@@ -303,6 +314,7 @@ export async function backfillGeocode(db: DatabaseSync): Promise<number> {
     street: string | null;
     postcode: string | null;
     city: string | null;
+    lat: number | null;
   }>;
   const upd = db.prepare(
     `UPDATE events
@@ -310,8 +322,13 @@ export async function backfillGeocode(db: DatabaseSync): Promise<number> {
            postcode = COALESCE(postcode, ?), city = COALESCE(city, ?)
      WHERE id = ?`,
   );
+  const clr = db.prepare(
+    `UPDATE events SET lat = NULL, lng = NULL, geocode_quality = NULL WHERE id = ?`,
+  );
   let filled = 0;
   for (const r of rows) {
+    // geocode() only ever returns an in-Denmark result, so a non-null answer is
+    // always a valid replacement for the missing/out-of-bounds pin.
     const g = await geocode(db, {
       street: r.street ?? undefined,
       postcode: r.postcode ?? undefined,
@@ -320,6 +337,8 @@ export async function backfillGeocode(db: DatabaseSync): Promise<number> {
     if (g.lat !== null) {
       upd.run(g.lat, g.lng, g.quality, g.resolvedPostcode, g.resolvedCity, r.id);
       filled++;
+    } else if (r.lat !== null) {
+      clr.run(r.id); // had an out-of-bounds pin, couldn't re-resolve → drop it
     }
   }
   return filled;
@@ -470,7 +489,14 @@ export async function canonicalizeRawEvent(
   // Geocode when the source didn't provide coordinates.
   let lat = raw.lat ?? null;
   let lng = raw.lng ?? null;
-  let geocodeQuality: string | null = raw.lat != null ? 'source' : null;
+  // A source can ship a coordinate outside Denmark (e.g. a Facebook feed with a
+  // North-Sea longitude). A wrong pin is worse than none, so drop it here and let
+  // the address geocode below resolve a real one (or leave the event pinless).
+  if (lat !== null && lng !== null && !inDenmark(lat, lng)) {
+    lat = null;
+    lng = null;
+  }
+  let geocodeQuality: string | null = lat != null ? 'source' : null;
   let postcode = raw.postcode ?? null;
   let city = raw.city ?? null;
   if (lat === null && (street || raw.postcode)) {

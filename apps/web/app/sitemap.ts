@@ -13,9 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = todayIso();
   return [
     { url: BASE, lastModified, changeFrequency: 'daily', priority: 1 },
-    // The two highest-intent time-based searches get their own indexable pages.
+    // The highest-intent searches (time- and place-based) get their own indexable pages.
     { url: `${BASE}/i-dag`, lastModified, changeFrequency: 'daily', priority: 0.9 },
     { url: `${BASE}/i-weekenden`, lastModified, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${BASE}/naer-mig`, lastModified, changeFrequency: 'daily', priority: 0.9 },
     { url: `${BASE}/byer`, lastModified, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${BASE}/kilder`, lastModified, changeFrequency: 'weekly', priority: 0.5 },
     ...listCities().map((c) => ({

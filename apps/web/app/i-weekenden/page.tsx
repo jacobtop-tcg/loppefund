@@ -71,6 +71,7 @@ export default function WeekendPage() {
       <DatePageList events={candidates} buildToday={today} kind="weekend" />
       <nav className="intent-crosslinks" aria-label="Andre visninger">
         <Link href="/i-dag">Åbent i dag</Link>
+        <Link href="/naer-mig">I nærheden</Link>
         <Link href="/byer">Find din by</Link>
         <Link href="/">Kort & filtre</Link>
       </nav>

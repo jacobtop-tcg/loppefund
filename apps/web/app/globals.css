@@ -1519,6 +1519,91 @@ body:has(.is-map-view) {
   text-decoration: underline;
 }
 
+/* ---------- /naer-mig landing page ---------- */
+
+/* One clear action, then the privacy promise right under it — the visitor is
+   being asked to share their location, so the "device-only, never sent to us"
+   line must be visible BEFORE they tap, not buried in fine print. */
+.nearme-ask {
+  text-align: center;
+  padding: 34px 20px 10px;
+}
+
+.nearme-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 14px 26px;
+  cursor: pointer;
+  transition: background 0.18s var(--ease);
+}
+
+.nearme-btn:hover:not(:disabled) {
+  background: var(--accent-deep);
+}
+
+.nearme-btn:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.nearme-privacy {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  max-width: 44ch;
+  margin-inline: auto;
+}
+
+.geo-error {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.nearme-after {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 22px;
+  font-size: 0.9rem;
+}
+
+.nearme-after a {
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+
+.nearme-after a:hover {
+  text-decoration: underline;
+}
+
+.nearme-relocate {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: var(--ink-faint);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.nearme-relocate:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
 /* "Missing a market? Tip os →" — the empty state is the moment a visitor is
    most motivated to fill a gap; make contributing one tap away. */
 .empty-tip {

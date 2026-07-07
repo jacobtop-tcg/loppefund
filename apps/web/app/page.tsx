@@ -58,6 +58,7 @@ export default function HomePage() {
           <nav className="footer-nav" aria-label="Genveje">
             <Link href="/i-dag">Åbent i dag</Link>
             <Link href="/i-weekenden">I weekenden</Link>
+            <Link href="/naer-mig">I nærheden</Link>
             <Link href="/byer">Find din by</Link>
             <Link href="/tip">Tip et marked</Link>
             <Link href="/kilder">Vores kilder</Link>

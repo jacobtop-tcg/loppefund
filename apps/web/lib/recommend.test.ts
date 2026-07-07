@@ -5,7 +5,9 @@ import type { EventSummary } from './data.ts';
 const base = (over: Partial<EventSummary>): EventSummary => ({
   slug: 'x', title: 'X', category: 'loppemarked', venueName: null, city: null, postcode: null,
   municipality: null, lat: 55.7, lng: 12.5, approximate: false, isFree: null, indoorOutdoor: 'outdoor',
-  stallCountText: null, status: 'active', confidence: 0.6, gem: false, familyFriendly: false,
+  stallCountText: null, status: 'active', confidence: 0.6, sourceCount: 1, newlyAdded: false,
+  gem: false, familyFriendly: false, accessible: false, cashOnly: false, recurrence: null,
+  weatherDependent: false,
   searchText: '', occurrences: [{ date: '2026-07-04', startTime: '10:00', endTime: '15:00' }], ...over,
 });
 

@@ -534,6 +534,9 @@ export function Explorer({
             from={from}
             to={to}
             hasPos={pos !== null}
+            // Query-free filter signature: typing must never re-animate the list
+            // (search is already smooth via useDeferredValue); chip changes do.
+            filterKey={`${dateFilter}|${category}|${freeOnly}|${familyOnly}|${biggerOnly}|${accessibleOnly}|${verifiedOnly}|${inOut}|${gemsFirst}|${savedOnly}|${radius}`}
             gemsFirst={gemsFirst}
             onGemsFirst={setGemsFirst}
             tripMode={tripMode}

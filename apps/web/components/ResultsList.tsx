@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { EventCard } from './EventCard.tsx';
@@ -68,6 +68,7 @@ export const ResultsList = memo(function ResultsList({
   onHoverSlug,
   weather,
   refinements = [],
+  filterKey = '',
 }: {
   filtered: Row[];
   suggestions: Row[];
@@ -86,7 +87,19 @@ export const ResultsList = memo(function ResultsList({
   onHoverSlug: (slug: string | null) => void;
   weather: Map<string, DayWeather>;
   refinements?: string[];
+  /** Query-free signature of the active filters — drives the list settle. */
+  filterKey?: string;
 }) {
+  // Re-trigger the 180ms settle when the ANSWER changes (chip toggles), without
+  // remounting cards — identity, hover-highlight and mount-stagger all survive.
+  const gridRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+    el.classList.remove('is-settling');
+    void el.offsetWidth; // reflow so the animation restarts
+    el.classList.add('is-settling');
+  }, [filterKey]);
   return (
     <>
       <div className="result-meta">
@@ -145,7 +158,7 @@ export const ResultsList = memo(function ResultsList({
           </p>
         </div>
       ) : (
-        <div className="event-grid">
+        <div className="event-grid" ref={gridRef}>
           {filtered.map((e, i) => (
             <EventCard
               key={e.slug}

@@ -3,6 +3,8 @@
   --paper: #f5eee0;
   --paper-raised: #fffdf9;
   --paper-sunken: #ede4d1;
+  /* One shared physical ease for every press/settle — the app moves as one. */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ink: #201e19;
   --ink-soft: #5d554a;
   --ink-faint: #6a5f54; /* darkened from #837a6a to clear WCAG AA (5.38:1 on paper) */
@@ -753,6 +755,44 @@ a:focus-visible .event-card {
   margin-top: 10px;
 }
 
+/* One press language: every tappable surface depresses the same way. */
+.event-card-shell:active .event-card,
+.card-button:not(:disabled):active .event-card {
+  transform: translateY(-1px) scale(0.994);
+}
+.reco-card:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* Filter changes SETTLE the list into its new answer (180ms) instead of
+   flickering — cards keep their identity (no remount, stagger doesn't replay). */
+.event-grid.is-settling {
+  animation: grid-settle 0.18s var(--ease);
+}
+@keyframes grid-settle {
+  from {
+    opacity: 0.5;
+    transform: translateY(4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .event-grid.is-settling,
+  .is-map-view .map-pane {
+    animation: none;
+  }
+  .event-card-shell:active .event-card,
+  .card-button:active .event-card,
+  .reco-card:active {
+    transform: none;
+  }
+  .view-pill:active {
+    transform: translateX(-50%);
+  }
+  .trip-go:active:not(:disabled) {
+    transform: none;
+  }
+}
+
 /* TIER 2 metadata: one quiet dot-separated line under the signals. Colored
    pills are rationed to act-now signals; facts read as calm text so the title
    and terracotta date always dominate the card. */
@@ -980,6 +1020,10 @@ a:focus-visible .event-card {
   font-size: 14.5px;
   font-weight: 600;
   box-shadow: var(--shadow-card-hover);
+  transition: transform 0.12s var(--ease), box-shadow 0.16s var(--ease);
+}
+.view-pill:active {
+  transform: translateX(-50%) scale(0.96);
 }
 
 .has-trip .view-pill {
@@ -997,6 +1041,14 @@ a:focus-visible .event-card {
   z-index: 50;
   height: auto;
   margin: 0;
+  /* The map RISES into place instead of teleporting via display swap. */
+  animation: map-enter 0.22s var(--ease);
+}
+@keyframes map-enter {
+  from {
+    opacity: 0;
+    transform: scale(1.015);
+  }
 }
 
 .is-map-view .controls {
@@ -1058,6 +1110,7 @@ body:has(.is-map-view) {
     height: calc(100vh - var(--bar-h) - 16px);
     height: calc(100dvh - var(--bar-h) - 16px);
     margin: 0;
+    animation: none;
   }
 
   .is-map-view .controls {
@@ -1861,6 +1914,10 @@ body:has(.is-map-view) {
   padding: 9px 18px;
   font-weight: 600;
   font-size: 14px;
+  transition: background 0.16s var(--ease), transform 0.1s var(--ease);
+}
+.trip-go:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .trip-go:hover {

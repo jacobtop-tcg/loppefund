@@ -34,6 +34,20 @@ interface RkStore {
   url?: string;
 }
 
+/**
+ * Pull the shop's own phone from the address lines ("Tlf nr.: 32200155"). This
+ * IS authoritative per-shop data (unlike the shared national hours), so a
+ * visitor can ring the shop to confirm it's shoppable before driving. Danish
+ * 8-digit numbers are prettified to "NN NN NN NN"; anything else is kept as-is.
+ */
+function extractPhone(address: string[]): string | null {
+  const line = address.find((a) => /tlf|telefon/i.test(a ?? ''));
+  if (!line) return null;
+  const digits = line.replace(/\D+/g, '');
+  if (digits.length !== 8) return digits.length >= 6 ? digits : null;
+  return digits.replace(/(\d\d)(\d\d)(\d\d)(\d\d)/, '$1 $2 $3 $4');
+}
+
 /** Stable numeric id from the shop's street+postcode (no id in the source). */
 function stableId(key: string): number {
   let h = 0;
@@ -92,6 +106,7 @@ export function parseRodekorsShops(html: string): ChainVenue[] {
       city,
       openingHoursText: null, // RK publishes no trustworthy per-shop hours
       contactWebsite: deptUrl ?? PAGE,
+      contactPhone: extractPhone(addr),
       lat,
       lng,
     });

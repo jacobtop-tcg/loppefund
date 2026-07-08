@@ -34,6 +34,9 @@ export interface ChainVenue {
   city: string | null;
   openingHoursText: string | null;
   contactWebsite: string | null;
+  /** The shop's own phone when the source publishes one (Røde Kors does).
+   *  Authoritative per-shop data — lets a visitor ring to confirm before driving. */
+  contactPhone?: string | null;
   /** Coordinates when the source already provides them (e.g. Røde Kors); skips
    *  the DAWA geocode. Omit to geocode from the address. */
   lat?: number | null;
@@ -131,7 +134,9 @@ export async function ingestChainVenues(
         // over the generic chain page when OSM already has one.
         openingHoursText: cv.openingHoursText ?? match.opening_hours_text,
         contactWebsite: match.contact_website ?? cv.contactWebsite,
-        contactPhone: match.contact_phone,
+        // Keep an existing (OSM) phone; fill the gap from the chain's authoritative
+        // record when OSM has none — the Guderup case (real shop, no OSM phone).
+        contactPhone: match.contact_phone ?? cv.contactPhone ?? null,
         description: match.description,
       });
       stats.enriched++;
@@ -162,6 +167,7 @@ export async function ingestChainVenues(
       lng: geo.lng,
       openingHoursText: cv.openingHoursText,
       contactWebsite: cv.contactWebsite,
+      contactPhone: cv.contactPhone ?? null,
     });
     stats.inserted++;
   }

@@ -20,6 +20,7 @@ import { oplevelserKbh } from './oplevelser-kbh.ts';
 import { visitdenmark } from './visitdenmark.ts';
 import { bornholmermarked } from './bornholmermarked.ts';
 import { ksmarked } from './ksmarked.ts';
+import { holte } from './holte.ts';
 
 /** Registered source adapters. Each is independent and replaceable. */
 export const adapters: SourceAdapter[] = [
@@ -44,4 +45,5 @@ export const adapters: SourceAdapter[] = [
   visitdenmark,
   bornholmermarked,
   ksmarked,
+  holte,
 ];

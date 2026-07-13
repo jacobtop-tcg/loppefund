@@ -17,6 +17,7 @@ import {
   expirePastEvents,
   finishRun,
   listSourceCandidates,
+  listStructuredFeedDomains,
   markCandidateProbed,
   openDb,
   recordDocument,
@@ -52,6 +53,7 @@ import { fetchMoedrehjaelpenVenues } from './adapters/moedrehjaelpen.ts';
 import { fetchCvrVenues } from './adapters/cvr.ts';
 import { geocode } from './geocode.ts';
 import { adapters } from './adapters/index.ts';
+import { makeDiscoveredFeedsAdapter } from './adapters/discovered-feeds.ts';
 
 const { values, positionals } = parseArgs({
   allowPositionals: true,
@@ -300,16 +302,34 @@ if (command === 'discover-sources') {
 }
 
 const limit = values.limit ? Number(values.limit) : Infinity;
-const selected = values.source
+const staticSelected = values.source
   ? adapters.filter((a) => a.key === values.source)
   : adapters;
+
+// Hands-off source growth: fold in any domain discovery has found to expose a
+// machine-readable Tribe feed (excluding ones we already have an adapter for),
+// as one low-trust auto-ingest source. Structured data only — never a guess at
+// unstructured HTML — so new markets appear with zero human involvement and can
+// never present wrong dates as confirmed. Empty today (Danish market sites
+// rarely expose feeds); activates automatically as the web adopts them. Skipped
+// for a single-source run (`--source X`).
+const selected = [...staticSelected];
+if (!values.source) {
+  const own = new Set(adapters.map((a) => new URL(a.baseUrl).hostname.replace(/^www\./, '')));
+  const feedDomains = listStructuredFeedDomains(db).filter((d) => !own.has(d));
+  const discoveredAdapter = makeDiscoveredFeedsAdapter(feedDomains);
+  if (discoveredAdapter) {
+    console.log(`[discovered-feeds] ${feedDomains.length} auto-discovered Tribe feed(s): ${feedDomains.join(', ')}`);
+    selected.push(discoveredAdapter);
+  }
+}
 if (selected.length === 0) {
   console.error(`Unknown source "${values.source}". Available: ${adapters.map((a) => a.key).join(', ')}`);
   process.exit(1);
 }
 
 const fetcher = new PoliteFetcher();
-const trustMap = Object.fromEntries(adapters.map((a) => [a.key, a.trust]));
+const trustMap = Object.fromEntries(selected.map((a) => [a.key, a.trust]));
 
 // Captured before any crawling: raw_events whose extracted_at predates this
 // stamp were NOT re-seen this run. Used after the loop to expire events a

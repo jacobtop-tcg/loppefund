@@ -530,6 +530,32 @@ export function listSourceCandidates(
   return db.prepare(sql).all(...params) as unknown as SourceCandidateRow[];
 }
 
+/**
+ * Domains a probe found to expose a machine-readable Tribe Events feed — the
+ * safe-to-auto-ingest set for the discovered-feeds adapter. Rejected candidates
+ * are excluded; a human "reject" is final. Own-domain filtering is the caller's
+ * job (it knows the adapter registry).
+ */
+export function listStructuredFeedDomains(db: DatabaseSync): string[] {
+  const rows = db
+    .prepare(
+      `SELECT domain, probe_signals FROM source_candidates
+       WHERE probe_signals IS NOT NULL AND status != 'rejected'`,
+    )
+    .all() as unknown as Array<{ domain: string; probe_signals: string }>;
+  const out: string[] = [];
+  for (const r of rows) {
+    try {
+      if ((JSON.parse(r.probe_signals) as { tribeApi?: boolean }).tribeApi === true) {
+        out.push(r.domain);
+      }
+    } catch {
+      // malformed signals JSON — skip, never guess a feed into existence
+    }
+  }
+  return out;
+}
+
 export function markCandidateProbed(
   db: DatabaseSync,
   domain: string,

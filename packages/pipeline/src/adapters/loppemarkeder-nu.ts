@@ -100,13 +100,13 @@ export function toOccurrences(e: TribeEvent): Occurrence[] {
   return out;
 }
 
-export function tribeEventToRaw(e: TribeEvent): RawEvent {
+export function tribeEventToRaw(e: TribeEvent, sourceKey = 'loppemarkeder-nu'): RawEvent {
   const venueObj = Array.isArray(e.venue) ? e.venue[0] : e.venue;
   const addr = parseAddress(venueObj?.address ?? venueObj?.venue);
   const categorySlug = e.categories?.map((c) => c.slug ?? c.name).join(' ');
   const cost = e.cost ? decodeEntities(e.cost) : undefined;
   return {
-    sourceKey: 'loppemarkeder-nu',
+    sourceKey,
     sourceUrl: e.url,
     sourceEventId: String(e.id),
     title: decodeEntities(e.title).trim(),

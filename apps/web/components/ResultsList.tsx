@@ -100,6 +100,37 @@ export const ResultsList = memo(function ResultsList({
     void el.offsetWidth; // reflow so the animation restarts
     el.classList.add('is-settling');
   }, [filterKey]);
+
+  const venueSection = venues.length > 0 && (
+    <section className="venue-section" aria-label="Faste steder">
+      <div className="venue-section-head">
+        <h2 className="reco-title">Faste steder</h2>
+        <span className="venue-count">
+          <strong>{venues.length}</strong> genbrug, antik &amp; loppebutikker
+        </span>
+      </div>
+      <div className="event-grid">
+        {venues.slice(0, VENUE_CAP).map((v, i) => (
+          <VenueCard
+            key={v.slug}
+            venue={v}
+            now={now}
+            index={i}
+            tripMode={tripMode}
+            selected={tripSlugs.includes(`v:${v.slug}`)}
+            onToggleTrip={onToggleTrip}
+          />
+        ))}
+      </div>
+      {venues.length > VENUE_CAP && (
+        <p className="venue-more">
+          Viser {VENUE_CAP} af {venues.length}. Søg eller vælg et område (Nær mig) for at
+          indsnævre — eller zoom ind på kortet.
+        </p>
+      )}
+    </section>
+  );
+
   return (
     <>
       <div className="result-meta">
@@ -127,6 +158,10 @@ export const ResultsList = memo(function ResultsList({
         )}
       </div>
 
+      {/* When the search found SHOPS but no markets ("loppe bazar"), the hits
+          must greet the visitor first — not hide below a full-height "no
+          markets" illustration they may never scroll past. */}
+      {filtered.length === 0 && venueSection}
       {filtered.length === 0 ? (
         <div className="empty-state">
           <svg className="empty-illu" width="112" height="112" viewBox="0 0 96 96" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -176,35 +211,7 @@ export const ResultsList = memo(function ResultsList({
         </div>
       )}
 
-      {venues.length > 0 && (
-        <section className="venue-section" aria-label="Faste steder">
-          <div className="venue-section-head">
-            <h2 className="reco-title">Faste steder</h2>
-            <span className="venue-count">
-              <strong>{venues.length}</strong> genbrug, antik &amp; loppebutikker
-            </span>
-          </div>
-          <div className="event-grid">
-            {venues.slice(0, VENUE_CAP).map((v, i) => (
-              <VenueCard
-                key={v.slug}
-                venue={v}
-                now={now}
-                index={i}
-                tripMode={tripMode}
-                selected={tripSlugs.includes(`v:${v.slug}`)}
-                onToggleTrip={onToggleTrip}
-              />
-            ))}
-          </div>
-          {venues.length > VENUE_CAP && (
-            <p className="venue-more">
-              Viser {VENUE_CAP} af {venues.length}. Søg eller vælg et område (Nær mig) for at
-              indsnævre — eller zoom ind på kortet.
-            </p>
-          )}
-        </section>
-      )}
+      {filtered.length > 0 && venueSection}
     </>
   );
 });

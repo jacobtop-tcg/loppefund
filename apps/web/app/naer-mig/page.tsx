@@ -59,7 +59,8 @@ export default function NearMePage() {
         <div className="city-cloud" style={{ marginTop: 10 }}>
           {cities.slice(0, 24).map((c) => (
             <Link key={c.slug} href={`/by/${c.slug}`} className="chip">
-              {displayPlace(c.city)} <span className="city-count">{c.count}</span>
+              {displayPlace(c.city)}{' '}
+              <span className="city-count">{c.count > 0 ? c.count : c.venueCount}</span>
             </Link>
           ))}
           <Link href="/byer" className="chip">

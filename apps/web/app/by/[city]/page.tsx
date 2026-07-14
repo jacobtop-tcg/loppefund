@@ -30,7 +30,12 @@ export async function generateMetadata({
   if (!info) return { title: 'By ikke fundet — Loppefund' };
   const name = displayPlace(info.city);
   const title = `Loppemarkeder i ${name} — Loppefund`;
-  const description = `${info.count} kommende loppemarkeder, kræmmermarkeder og bagagerumsmarkeder i ${name}. Datoer, åbningstider og adresser — altid opdateret.`;
+  // A venue-rich city can have zero announced markets right now — describe what
+  // the page actually holds instead of advertising "0 kommende loppemarkeder".
+  const description =
+    info.count > 0
+      ? `${info.count} kommende loppemarkeder, kræmmermarkeder og bagagerumsmarkeder i ${name}. Datoer, åbningstider og adresser — altid opdateret.`
+      : `${info.venueCount} genbrugs-, antik- og loppebutikker i ${name} — adresser og åbningstider. Nye markeder vises, så snart de annonceres.`;
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
   // Per-city share cards for Facebook groups, not the site-wide fallback.
   // Referenced explicitly (not via file-convention auto-wiring) because that
@@ -98,8 +103,9 @@ export default async function CityPage({
         <div className="detail-category">By-guide</div>
         <h1 className="detail-title">Loppemarkeder i {name}</h1>
         <p className="detail-place">
-          {events.length} kommende {events.length === 1 ? 'marked' : 'markeder'} — opdateret
-          automatisk fra offentlige kilder.
+          {events.length > 0
+            ? `${events.length} kommende ${events.length === 1 ? 'marked' : 'markeder'} — opdateret automatisk fra offentlige kilder.`
+            : `Ingen annoncerede markeder lige nu — men ${venues.length} faste steder at gå på loppejagt i. Nye markeder vises, så snart de annonceres.`}
         </p>
         {events.length > 0 &&
           (() => {
@@ -168,7 +174,8 @@ export default async function CityPage({
           <div className="city-cloud" style={{ marginTop: 10 }}>
             {nearby.map((c) => (
               <Link key={c.slug} href={`/by/${c.slug}`} className="chip">
-                {displayPlace(c.city)} <span className="city-count">{c.count}</span>
+                {displayPlace(c.city)}{' '}
+                <span className="city-count">{c.count > 0 ? c.count : c.venueCount}</span>
               </Link>
             ))}
           </div>

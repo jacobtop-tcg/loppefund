@@ -317,23 +317,45 @@ export function listVanishedUpcomingSlugs(horizonDays = 180): string[] {
 export interface CityInfo {
   city: string;
   slug: string;
+  /** Upcoming markets (365-day horizon). Can be 0 for a venue-rich city. */
   count: number;
+  /** Permanent second-hand shops in the city. */
+  venueCount: number;
 }
 
 /** Cities with 2+ upcoming markets — the per-city SEO landing pages. */
 export function listCities(): CityInfo[] {
   const bySlug = new Map<string, CityInfo>();
-  for (const e of listUpcomingEvents(180)) {
+  // 365-day horizon: a market seven months out still deserves its city page.
+  // The old 180-day window made whole cities vanish — Sønderborg's two January
+  // markets sat 187 days out, so Denmark's #6 shop city had NO by-guide at all.
+  for (const e of listUpcomingEvents(365)) {
     if (!e.city) continue;
     const slug = slugifyCity(e.city);
     if (!slug) continue;
     const existing = bySlug.get(slug);
     if (existing) existing.count++;
-    else bySlug.set(slug, { city: e.city, slug, count: 1 });
+    else bySlug.set(slug, { city: e.city, slug, count: 1, venueCount: 0 });
+  }
+  // Venue-rich cities join even with no (near-term) events: the by-guide is
+  // valuable for its permanent shops alone — that's what a hunter visits for.
+  const venueBySlug = new Map<string, { city: string; n: number }>();
+  for (const v of listVenues()) {
+    if (!v.city) continue;
+    const slug = slugifyCity(v.city);
+    if (!slug) continue;
+    const entry = venueBySlug.get(slug) ?? { city: v.city, n: 0 };
+    entry.n++;
+    venueBySlug.set(slug, entry);
+  }
+  for (const [slug, vc] of venueBySlug) {
+    const existing = bySlug.get(slug);
+    if (existing) existing.venueCount = vc.n;
+    else bySlug.set(slug, { city: vc.city, slug, count: 0, venueCount: vc.n });
   }
   return [...bySlug.values()]
-    .filter((c) => c.count >= 2)
-    .sort((a, b) => b.count - a.count);
+    .filter((c) => c.count >= 2 || c.venueCount >= 3)
+    .sort((a, b) => b.count - a.count || b.venueCount - a.venueCount);
 }
 
 export function slugifyCity(city: string): string {
@@ -351,9 +373,23 @@ export function slugifyCity(city: string): string {
 /** The city's permanent second-hand shops — a by-guide isn't complete with
  *  markets alone. Deliberately WITHOUT live open-state: this feeds a static
  *  page, and a build-time "Åbent nu" would go stale-wrong within hours. */
-export function listVenuesForCity(citySlug: string, cap = 12): VenueSummary[] {
+// Destination shops first: a named loppebutik/antik (the reason a hunter opens
+// the page) must never be cut off by the cap while identically-named charity
+// chain shops fill the list — the invisible-Loppebazar lesson from Sønderborg.
+const VENUE_CITY_RANK: Record<string, number> = {
+  loppebutik: 0,
+  reolmarked: 1,
+  antik: 2,
+};
+
+export function listVenuesForCity(citySlug: string, cap = 24): VenueSummary[] {
   return listVenues()
     .filter((v) => v.city && slugifyCity(v.city) === citySlug)
+    .sort(
+      (a, b) =>
+        (VENUE_CITY_RANK[a.category] ?? 9) - (VENUE_CITY_RANK[b.category] ?? 9) ||
+        a.title.localeCompare(b.title, 'da'),
+    )
     .slice(0, cap);
 }
 
@@ -362,16 +398,20 @@ export function listVenuesForCity(citySlug: string, cap = 12): VenueSummary[] {
  *  surface instead of 123 dead ends. */
 export function listNearbyCities(citySlug: string, n = 4): CityInfo[] {
   const centroids = new Map<string, { lat: number; lng: number; n: number }>();
-  for (const e of listUpcomingEvents(180)) {
-    if (!e.city || e.lat == null || e.lng == null) continue;
-    const slug = slugifyCity(e.city);
-    if (!slug) continue;
+  const add = (city: string | null, lat: number | null, lng: number | null) => {
+    if (!city || lat == null || lng == null) return;
+    const slug = slugifyCity(city);
+    if (!slug) return;
     const c = centroids.get(slug) ?? { lat: 0, lng: 0, n: 0 };
-    c.lat += e.lat;
-    c.lng += e.lng;
+    c.lat += lat;
+    c.lng += lng;
     c.n++;
     centroids.set(slug, c);
-  }
+  };
+  // Venue coordinates count toward the centroid too — a venue-only city (no
+  // near-term events, e.g. Sønderborg) must still have neighbours, and be one.
+  for (const e of listUpcomingEvents(365)) add(e.city, e.lat, e.lng);
+  for (const v of listVenues()) add(v.city, v.lat, v.lng);
   const me = centroids.get(citySlug);
   if (!me || me.n === 0) return [];
   const myLat = me.lat / me.n;
@@ -390,7 +430,9 @@ export function listNearbyCities(citySlug: string, n = 4): CityInfo[] {
 }
 
 export function listEventsForCity(citySlug: string): EventSummary[] {
-  return listUpcomingEvents(180).filter(
+  // Same 365-day horizon as listCities, so a page never claims markets it
+  // doesn't show (or vice versa — the vanished-Sønderborg lesson).
+  return listUpcomingEvents(365).filter(
     (e) => e.city && slugifyCity(e.city) === citySlug,
   );
 }

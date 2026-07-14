@@ -104,8 +104,13 @@ export function Explorer({
   const [venuesLoaded, setVenuesLoaded] = useState(false);
   const { favorites, count: favCount } = useFavorites();
 
+  // Venues must be reachable through the SEARCH front door too, not only the
+  // layer toggle: a visitor typing "loppebazar" has never heard of "Faste
+  // steder" (root cause of the invisible-Loppebazar report). So the lazy fetch
+  // also fires on the first real query.
+  const wantVenues = venuesOn || query.trim().length >= 2;
   useEffect(() => {
-    if (!venuesOn || venuesLoaded) return;
+    if (!wantVenues || venuesLoaded) return;
     let cancelled = false;
     const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
     fetch(`${base}/venues.json`)
@@ -124,7 +129,7 @@ export function Explorer({
     return () => {
       cancelled = true;
     };
-  }, [venuesOn, venuesLoaded]);
+  }, [wantVenues, venuesLoaded]);
 
   // Today's date, derived from the LIVE clock — never a build-time constant.
   // The static HTML bakes `now` at build; if "today" came from a frozen prop it
@@ -302,12 +307,19 @@ export function Explorer({
   // dates, so the date chips don't apply — except "Åbent nu", which narrows them
   // to shops open right now). Respects type toggles, search and location.
   const filteredVenues = useMemo(() => {
-    if (!venuesOn) return [];
     const q = foldForSearch(deferredQuery.trim());
+    // Search is a front door: a typed query surfaces matching venues even when
+    // the layer is off — "loppebazar" must find the shop without the visitor
+    // knowing the "Faste steder" toggle exists. Without a query, the toggle
+    // still owns visibility (the default weekend view stays clean).
+    if (!venuesOn && !q) return [];
     const onlyOpen = dateFilter === 'aabent-nu';
     const result: Array<VenueSummary & { distanceKm: number | null; open: boolean }> = [];
     for (const v of venues) {
-      if (!venueTypes.has(v.category as VenueType)) continue;
+      // The per-type chips are part of the layer UI — they only bind when the
+      // layer is on. A search with the layer off must not be silently narrowed
+      // by chips the visitor can't see.
+      if (venuesOn && !venueTypes.has(v.category as VenueType)) continue;
       const st = venueOpenState(v.openingHoursText, now);
       if (onlyOpen && !st.open) continue;
       if (q) {

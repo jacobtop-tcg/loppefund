@@ -26,7 +26,9 @@ export default function CitiesPage() {
           <Link key={c.slug} href={`/by/${c.slug}`} className="city-lead-card">
             <span className="city-lead-name">{displayPlace(c.city)}</span>
             <span className="city-lead-count">
-              {c.count} {c.count === 1 ? 'marked' : 'markeder'}
+              {c.count > 0
+                ? `${c.count} ${c.count === 1 ? 'marked' : 'markeder'}`
+                : `${c.venueCount} ${c.venueCount === 1 ? 'butik' : 'butikker'}`}
             </span>
           </Link>
         ))}
@@ -37,7 +39,8 @@ export default function CitiesPage() {
           <div className="city-cloud">
             {cities.slice(8).map((c) => (
               <Link key={c.slug} href={`/by/${c.slug}`} className="chip">
-                {displayPlace(c.city)} <span className="city-count">{c.count}</span>
+                {displayPlace(c.city)}{' '}
+                <span className="city-count">{c.count > 0 ? c.count : c.venueCount}</span>
               </Link>
             ))}
           </div>

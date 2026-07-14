@@ -30,6 +30,7 @@ import {
   listCancelledUpcomingSlugs,
   listUpcomingEvents,
   listVanishedUpcomingSlugs,
+  UPCOMING_HORIZON_DAYS,
 } from '../../../lib/data.ts';
 import { distanceKm } from '../../../lib/client-utils.ts';
 
@@ -46,9 +47,13 @@ export function generateStaticParams(): Array<{ slug: string }> {
   // feed: their shared links get a soft "ikke længere annonceret" page, not a
   // silent 404. A slug is only ever in one list (single status), but dedupe
   // defensively.
-  const slugs = new Set<string>(listUpcomingEvents(180).map((e) => e.slug));
-  for (const slug of listCancelledUpcomingSlugs(180)) slugs.add(slug);
-  for (const slug of listVanishedUpcomingSlugs(180)) slugs.add(slug);
+  // Horizon MUST match the city guides + sitemap (UPCOMING_HORIZON_DAYS): a
+  // /by/[city] page lists markets up to that horizon, so every one of them needs
+  // a detail page here or the card 404s. This mismatch (365 vs 180) is exactly
+  // what made far-future markets like the Sønderborg January ones dead links.
+  const slugs = new Set<string>(listUpcomingEvents(UPCOMING_HORIZON_DAYS).map((e) => e.slug));
+  for (const slug of listCancelledUpcomingSlugs(UPCOMING_HORIZON_DAYS)) slugs.add(slug);
+  for (const slug of listVanishedUpcomingSlugs(UPCOMING_HORIZON_DAYS)) slugs.add(slug);
   return [...slugs].map((slug) => ({ slug }));
 }
 

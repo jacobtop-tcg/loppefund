@@ -27,6 +27,23 @@ const CITY_ALIASES: Array<{ canonical: string; aliases: string[] }> = [
   { canonical: 'København', aliases: ['kbh', 'cph', 'copenhagen'] },
 ];
 
+// Folded alias → folded canonical, so the LIVE filter query honours aliases too
+// (not just the autocomplete dropdown). Without this, typing "cph" and not
+// clicking the suggestion filtered to nothing, hiding every København market.
+const FOLDED_ALIASES = new Map<string, string>(
+  CITY_ALIASES.flatMap(({ canonical, aliases }) =>
+    aliases.map((a) => [foldForSearch(a), foldForSearch(canonical)] as const),
+  ),
+);
+
+/** Rewrite alias tokens ("cph"→"kobenhavn") in an already-folded query. */
+export function expandQueryAliases(foldedQuery: string): string {
+  return foldedQuery
+    .split(/\s+/)
+    .map((t) => FOLDED_ALIASES.get(t) ?? t)
+    .join(' ');
+}
+
 export function buildSearchIndex(events: EventSummary[], venues: VenueSummary[]): Suggestion[] {
   const cityCount = new Map<string, number>();
   const add = (m: Map<string, number>, key: string | null | undefined) => {

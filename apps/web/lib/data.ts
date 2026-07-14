@@ -2,7 +2,7 @@ import 'server-only';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import type { DatabaseSync } from 'node:sqlite';
-import { addDays, cleanCity, cleanVenueName, describeRecurrence, isHiddenGem, searchFold, type Amenities } from '@loppefund/core';
+import { addDays, cleanCity, cleanVenueName, describeRecurrence, isHiddenGem, searchFold, UPCOMING_HORIZON_DAYS, type Amenities } from '@loppefund/core';
 import { summarizeReviews, type ReviewSummary } from './reviews.ts';
 import { summarizePhotos, type Photo } from './photos.ts';
 import {
@@ -204,10 +204,21 @@ export interface EventSummary {
   /** From extracted amenities: the market states it's cancelled/affected by rain
    *  ("aflyses ved regn"). Combined with an outdoor forecast to warn before a trip. */
   weatherDependent: boolean;
+  /** Organizer name, e.g. "Olsenretro" — searchable (a hunter who knows the
+   *  operator, not the market's generic title). Shown on the detail page too. */
+  organizer: string | null;
+  /** Street/square the market is held on — searchable when the title is generic
+   *  ("Loppemarked") and the street is the only thing the visitor knows. */
+  street: string | null;
   /** Folded description snippet so client search can match e.g. "vintage". */
   searchText: string;
   occurrences: Array<{ date: string; startTime: string | null; endTime: string | null }>;
 }
+
+// UPCOMING_HORIZON_DAYS lives in @loppefund/core so the client (Explorer's
+// "Alle datoer" range) and the server (this file, sitemap, /marked generator)
+// read ONE value and can't drift apart. Re-exported for server call sites here.
+export { UPCOMING_HORIZON_DAYS };
 
 export function todayIso(): string {
   return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Copenhagen' }).format(new Date());
@@ -221,7 +232,7 @@ function inDkBounds(lat: number | null, lng: number | null): boolean {
   return lat != null && lng != null && lat >= 54.4 && lat <= 57.9 && lng >= 7.8 && lng <= 15.3;
 }
 
-export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
+export function listUpcomingEvents(horizonDays = UPCOMING_HORIZON_DAYS): EventSummary[] {
   const from = todayIso();
   const to = addDays(from, horizonDays);
   const nowMs = Date.now();
@@ -269,11 +280,15 @@ export function listUpcomingEvents(horizonDays = 120): EventSummary[] {
       accessible: am?.accessibility === true,
       cashOnly: am?.cashOnly === true,
       recurrence: describeRecurrence(e.schedule_text),
-      // Enough folded description signal for keyword matches ('vintage',
-      // 'børneloppemarked') without bloating the homepage payload — title,
-      // city, venue, municipality and postcode are searched separately.
+      organizer: e.organizer,
+      street: e.street,
+      // Folded description for keyword matches — a hunter searches the GOODS
+      // ('vinyl', 'frimærker', 'playmobil'), which often sit deep in the text.
+      // 400 chars covers the vast majority while bounding the payload; title,
+      // city, venue, municipality, postcode, organizer and street are searched
+      // separately (see the Explorer haystack).
       searchText: e.description
-        ? searchFold(e.description).replace(/\s+/g, ' ').trim().slice(0, 140)
+        ? searchFold(e.description).replace(/\s+/g, ' ').trim().slice(0, 400)
         : '',
       // Cap the serialized occurrence list — always-open venues have one per
       // day, which bloats the payload without changing filter results.
@@ -329,7 +344,7 @@ export function listCities(): CityInfo[] {
   // 365-day horizon: a market seven months out still deserves its city page.
   // The old 180-day window made whole cities vanish — Sønderborg's two January
   // markets sat 187 days out, so Denmark's #6 shop city had NO by-guide at all.
-  for (const e of listUpcomingEvents(365)) {
+  for (const e of listUpcomingEvents(UPCOMING_HORIZON_DAYS)) {
     if (!e.city) continue;
     const slug = slugifyCity(e.city);
     if (!slug) continue;
@@ -382,7 +397,10 @@ const VENUE_CITY_RANK: Record<string, number> = {
   antik: 2,
 };
 
-export function listVenuesForCity(citySlug: string, cap = 24): VenueSummary[] {
+// Cap set above the largest city's shop count (Aarhus C ≈ 41) so a city guide
+// never silently drops a real shop; the ordering means that if it ever DID
+// truncate a huge city, destination shops survive over charity chains.
+export function listVenuesForCity(citySlug: string, cap = 60): VenueSummary[] {
   return listVenues()
     .filter((v) => v.city && slugifyCity(v.city) === citySlug)
     .sort(
@@ -410,7 +428,7 @@ export function listNearbyCities(citySlug: string, n = 4): CityInfo[] {
   };
   // Venue coordinates count toward the centroid too — a venue-only city (no
   // near-term events, e.g. Sønderborg) must still have neighbours, and be one.
-  for (const e of listUpcomingEvents(365)) add(e.city, e.lat, e.lng);
+  for (const e of listUpcomingEvents(UPCOMING_HORIZON_DAYS)) add(e.city, e.lat, e.lng);
   for (const v of listVenues()) add(v.city, v.lat, v.lng);
   const me = centroids.get(citySlug);
   if (!me || me.n === 0) return [];
@@ -432,7 +450,7 @@ export function listNearbyCities(citySlug: string, n = 4): CityInfo[] {
 export function listEventsForCity(citySlug: string): EventSummary[] {
   // Same 365-day horizon as listCities, so a page never claims markets it
   // doesn't show (or vice versa — the vanished-Sønderborg lesson).
-  return listUpcomingEvents(365).filter(
+  return listUpcomingEvents(UPCOMING_HORIZON_DAYS).filter(
     (e) => e.city && slugifyCity(e.city) === citySlug,
   );
 }

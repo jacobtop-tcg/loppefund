@@ -2,12 +2,12 @@
 
 import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { copenhagenNow, isOpenAt, parseStallCount, type CphNow } from '@loppefund/core';
+import { copenhagenNow, isOpenAt, parseStallCount, UPCOMING_HORIZON_DAYS, type CphNow } from '@loppefund/core';
 import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
 import { isUnverified } from '../lib/trust.ts';
 import { venueOpenState, VENUE_TYPES, type VenueType } from '../lib/venue-client.ts';
-import { buildSearchIndex } from '../lib/search-index.ts';
+import { buildSearchIndex, expandQueryAliases } from '../lib/search-index.ts';
 import { useOutdoorWeather } from '../lib/weather.ts';
 import { FilterBar, type DateFilter } from './FilterBar.tsx';
 import { NAV_FLAG } from './BackLink.tsx';
@@ -51,7 +51,10 @@ function dateRangeFor(filter: DateFilter, today: string): [string, string] {
     const tomorrow = addDaysIso(today, 1);
     return [tomorrow, tomorrow];
   }
-  if (filter === 'alle') return [today, addDaysIso(today, 120)];
+  // "Alle datoer" must span the SAME horizon the page loads (data.ts uses
+  // UPCOMING_HORIZON_DAYS), or a market that exists in the dataset would still
+  // be filtered out of the one view that promises "all dates".
+  if (filter === 'alle') return [today, addDaysIso(today, UPCOMING_HORIZON_DAYS)];
   const { saturday: thisSat, sunday: thisSun } = weekendDates(today);
   if (filter === 'weekend') {
     // Show only the remaining part of the current weekend.
@@ -243,7 +246,7 @@ export function Explorer({
   const deferredQuery = useDeferredValue(query);
 
   const filtered = useMemo(() => {
-    const q = foldForSearch(deferredQuery.trim());
+    const q = expandQueryAliases(foldForSearch(deferredQuery.trim()));
     const result: Array<
       EventSummary & { nextDate: string; distanceKm: number | null; openNow: boolean }
     > = [];
@@ -263,7 +266,7 @@ export function Explorer({
       if (q) {
         const haystack =
           foldForSearch(
-            `${e.title} ${e.city ?? ''} ${e.venueName ?? ''} ${e.municipality ?? ''} ${e.postcode ?? ''}`,
+            `${e.title} ${e.city ?? ''} ${e.venueName ?? ''} ${e.municipality ?? ''} ${e.postcode ?? ''} ${e.organizer ?? ''} ${e.street ?? ''}`,
           ) + ` ${e.searchText}`;
         if (!matchesQuery(haystack, q)) continue;
       }
@@ -307,7 +310,7 @@ export function Explorer({
   // dates, so the date chips don't apply — except "Åbent nu", which narrows them
   // to shops open right now). Respects type toggles, search and location.
   const filteredVenues = useMemo(() => {
-    const q = foldForSearch(deferredQuery.trim());
+    const q = expandQueryAliases(foldForSearch(deferredQuery.trim()));
     // Search is a front door: a typed query surfaces matching venues even when
     // the layer is off — "loppebazar" must find the shop without the visitor
     // knowing the "Faste steder" toggle exists. Without a query, the toggle
@@ -324,7 +327,8 @@ export function Explorer({
       if (onlyOpen && !st.open) continue;
       if (q) {
         const hay =
-          foldForSearch(`${v.title} ${v.city ?? ''} ${v.street ?? ''}`) + ` ${v.searchText}`;
+          foldForSearch(`${v.title} ${v.city ?? ''} ${v.street ?? ''} ${v.postcode ?? ''}`) +
+          ` ${v.searchText}`;
         if (!matchesQuery(hay, q)) continue;
       }
       const d =
@@ -367,7 +371,7 @@ export function Explorer({
     // stranger's market. Date/radius are intentionally relaxed — that's the
     // point of the empty state ("nothing this weekend, but here's what's near").
     if (savedOnly) return [];
-    const q = foldForSearch(deferredQuery.trim());
+    const q = expandQueryAliases(foldForSearch(deferredQuery.trim()));
     const horizon = addDaysIso(today, 45);
     const alt: Array<EventSummary & { nextDate: string; distanceKm: number | null; openNow: boolean }> = [];
     for (const e of events) {

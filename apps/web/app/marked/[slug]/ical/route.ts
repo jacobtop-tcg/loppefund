@@ -1,10 +1,16 @@
-import { listUpcomingEvents, loadEventDetail, todayIso } from '../../../../lib/data.ts';
+import {
+  listUpcomingEvents,
+  loadEventDetail,
+  todayIso,
+  UPCOMING_HORIZON_DAYS,
+} from '../../../../lib/data.ts';
 
 export const dynamicParams = false;
 
-/** Pre-generate an .ics for every event (static export + dev). */
+/** Pre-generate an .ics for every event (static export + dev). Same horizon as
+ *  the page/city guides so a city-calendar VEVENT never links to a 404 detail. */
 export function generateStaticParams(): Array<{ slug: string }> {
-  return listUpcomingEvents(180).map((e) => ({ slug: e.slug }));
+  return listUpcomingEvents(UPCOMING_HORIZON_DAYS).map((e) => ({ slug: e.slug }));
 }
 
 /** iCalendar export: every upcoming occurrence as a VEVENT. */

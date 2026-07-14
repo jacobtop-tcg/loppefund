@@ -1,5 +1,12 @@
 import { ImageResponse } from 'next/og';
-import { loadEventDetail, listUpcomingEvents, todayIso } from '../../../lib/data.ts';
+import {
+  loadEventDetail,
+  listUpcomingEvents,
+  listCancelledUpcomingSlugs,
+  listVanishedUpcomingSlugs,
+  todayIso,
+  UPCOMING_HORIZON_DAYS,
+} from '../../../lib/data.ts';
 import {
   CATEGORY_LABELS,
   displayPlace,
@@ -15,7 +22,13 @@ import { isUnverified } from '../../../lib/trust.ts';
 export const dynamicParams = false;
 
 export function generateStaticParams(): Array<{ slug: string }> {
-  return listUpcomingEvents(180).map((e) => ({ slug: e.slug }));
+  // Mirror the page route EXACTLY (same set + horizon): every renderable
+  // /marked page — active, cancelled, and source-vanished — must have a share
+  // card, or a shared far-future / AFLYST link falls back to the generic image.
+  const slugs = new Set<string>(listUpcomingEvents(UPCOMING_HORIZON_DAYS).map((e) => e.slug));
+  for (const slug of listCancelledUpcomingSlugs(UPCOMING_HORIZON_DAYS)) slugs.add(slug);
+  for (const slug of listVanishedUpcomingSlugs(UPCOMING_HORIZON_DAYS)) slugs.add(slug);
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export const alt = 'Loppemarked på Loppefund';

@@ -5,6 +5,19 @@
  * recurrence without an anchor (e.g. "hver anden søndag" with no dates)
  * produces nothing rather than a guess.
  */
+
+/**
+ * The one upcoming-markets horizon (days), shared by every surface that renders
+ * the full upcoming set: the home Explorer + its "Alle datoer" range, the city
+ * guides, the sitemap, and the /marked static-page generator. A SINGLE constant
+ * so those surfaces can never drift apart — the drift is what let a city page
+ * (365 d) link to a market whose detail page was only generated to 180 d, so a
+ * real far-future market rendered as a card that 404'd on click. Invariant: if a
+ * market is listed anywhere, its page exists and it's searchable. (Scoped window
+ * views — /naer-mig, /i-dag, /i-weekenden — use their own smaller windows on
+ * purpose; their markets stay reachable through the full-horizon surfaces.)
+ */
+export const UPCOMING_HORIZON_DAYS = 365;
 import {
   addDays,
   getIsoWeek,

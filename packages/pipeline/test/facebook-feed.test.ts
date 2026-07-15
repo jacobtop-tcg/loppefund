@@ -238,3 +238,38 @@ describe('facebook-feed adapter', () => {
     }
   });
 });
+
+// Guards added after a real harvest produced these exact rows: Danish prose
+// ("Mvh", "Fra") kept as a TOWN, and a market dated year 3400. On a low-trust,
+// OCR-fed source, wrong beats missing — so both must be refused outright.
+describe('facebook-feed garbage guards', () => {
+  const REF = '2026-07-15';
+
+  it('refuses Danish prose words that merely LOOK like a town name', () => {
+    for (const word of ['Mvh', 'Fra', 'Hilsen', 'Tak', 'Husk', 'Kontakt']) {
+      const raw = itemToRaw(
+        { id: `p-${word}`, url: 'https://facebook.com/x', text: `Loppemarked lørdag d. 8. august, ${word} 5000` },
+        REF,
+      );
+      // Either the post is refused, or it survives WITHOUT the bogus town.
+      expect(raw?.city).not.toBe(word);
+    }
+  });
+
+  it('refuses an implausible year (the real "3400-01-01" case)', () => {
+    const raw = itemToRaw(
+      { id: 'p-3400', url: 'https://facebook.com/x', text: 'Loppemarked ØRBÆK MARKED 01-01-3400' },
+      REF,
+    );
+    expect(raw?.occurrences?.some((o) => o.date.startsWith('3400'))).not.toBe(true);
+  });
+
+  it('still accepts a clean, real announcement', () => {
+    const raw = itemToRaw(
+      { id: 'p-ok', url: 'https://facebook.com/x', text: 'Stort loppemarked lørdag d. 8. august kl. 10-16, Torvet 1, 5000 Odense C' },
+      REF,
+    );
+    expect(raw).not.toBeNull();
+    expect(raw!.occurrences?.[0]?.date).toBe('2026-08-08');
+  });
+});

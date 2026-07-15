@@ -1,2315 +1,2206 @@
 [
- {
-  "name": "Loppemarked ved Sankt Nicolai Apotek",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "endDate": "2026-07-04T14:00:00+02:00",
-  "location": {
-   "address": "Sankt Nicolai Gade 2a, 5700 Svendborg"
-  },
-  "url": "https://www.facebook.com/groups/1575345569157850/",
-  "description": "I gården bag Sankt Nicolai Apotek, lige over for kirken. Blandede ting til hjemmet, tøj, små møbler."
- },
- {
-  "name": "Loppemarked i Skårup",
-  "startDate": "2026-09-06T10:00:00+02:00",
-  "endDate": "2026-09-06T15:00:00+02:00",
-  "location": {
-   "name": "Skårup By",
-   "address": "Skårup By, 5881 Skårup"
-  },
-  "url": "https://www.facebook.com/groups/1575345569157850/events"
- },
- {
-  "name": "Sommermarked i Humble",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "endDate": "2026-07-04T15:00:00+02:00",
-  "location": {
-   "address": "Hovedgaden 51, 5932 Humble"
-  },
-  "url": "https://www.facebook.com/groups/1575345569157850/"
- },
- {
-  "name": "Sommermarked i Humble",
-  "startDate": "2026-07-11T10:00:00+02:00",
-  "endDate": "2026-07-11T15:00:00+02:00",
-  "location": {
-   "address": "Hovedgaden 51, 5932 Humble"
-  },
-  "url": "https://www.facebook.com/groups/1575345569157850/"
- },
- {
-  "name": "Sommermarked i Humble",
-  "startDate": "2026-07-18T10:00:00+02:00",
-  "endDate": "2026-07-18T15:00:00+02:00",
-  "location": {
-   "address": "Hovedgaden 51, 5932 Humble"
-  },
-  "url": "https://www.facebook.com/groups/1575345569157850/"
- },
- {
-  "name": "Sommermarked i Humble",
-  "startDate": "2026-07-25T10:00:00+02:00",
-  "endDate": "2026-07-25T15:00:00+02:00",
-  "location": {
-   "address": "Hovedgaden 51, 5932 Humble"
-  },
-  "url": "https://www.facebook.com/groups/1575345569157850/"
- },
- {
-  "name": "Loppemarked på Nødebo Kro",
-  "startDate": "2026-08-23T10:00:00+02:00",
-  "endDate": "2026-08-23T15:00:00+02:00",
-  "location": {
-   "address": "Nødebo Kro"
-  },
-  "url": "https://www.facebook.com/groups/362315834415/"
- },
- {
-  "name": "Marked i VBC Houlkær, Viborg",
-  "startDate": "2026-09-06",
-  "location": {
-   "address": "Viborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Efterårets indendørs markeder i VBC Houlkær (bagagerums-, loppe- og julemarked)."
- },
- {
-  "name": "Marked i VBC Houlkær, Viborg",
-  "startDate": "2026-09-12",
-  "location": {
-   "address": "Viborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Efterårets indendørs markeder i VBC Houlkær (bagagerums-, loppe- og julemarked)."
- },
- {
-  "name": "Marked i VBC Houlkær, Viborg",
-  "startDate": "2026-10-10",
-  "location": {
-   "address": "Viborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Efterårets indendørs markeder i VBC Houlkær (bagagerums-, loppe- og julemarked)."
- },
- {
-  "name": "Marked i VBC Houlkær, Viborg",
-  "startDate": "2026-11-14",
-  "location": {
-   "address": "Viborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Efterårets indendørs markeder i VBC Houlkær (bagagerums-, loppe- og julemarked)."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-07-04T09:00:00+02:00",
-  "endDate": "2026-07-04T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-07-11T09:00:00+02:00",
-  "endDate": "2026-07-11T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-07-18T09:00:00+02:00",
-  "endDate": "2026-07-18T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-07-25T09:00:00+02:00",
-  "endDate": "2026-07-25T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-08-01T09:00:00+02:00",
-  "endDate": "2026-08-01T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-08-08T09:00:00+02:00",
-  "endDate": "2026-08-08T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-08-15T09:00:00+02:00",
-  "endDate": "2026-08-15T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-08-22T09:00:00+02:00",
-  "endDate": "2026-08-22T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-08-29T09:00:00+02:00",
-  "endDate": "2026-08-29T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-09-05T09:00:00+02:00",
-  "endDate": "2026-09-05T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-09-12T09:00:00+02:00",
-  "endDate": "2026-09-12T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-09-19T09:00:00+02:00",
-  "endDate": "2026-09-19T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-09-26T09:00:00+02:00",
-  "endDate": "2026-09-26T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/",
-  "description": "Hver lørdag kl. 9-14, maj til september. Drives af frivillige."
- },
- {
-  "name": "Loppemarked Harte Hallen",
-  "startDate": "2026-11-01T10:00:00+01:00",
-  "endDate": "2026-11-01T14:00:00+01:00",
-  "location": {
-   "address": "Stubdrupvej 44, 6000 Kolding"
-  },
-  "url": "https://www.facebook.com/groups/1484631705148044/"
- },
- {
-  "name": "Loppemarked Horsebækvej, Otterup",
-  "startDate": "2026-07-03T10:00:00+02:00",
-  "endDate": "2026-07-03T19:00:00+02:00",
-  "location": {
-   "address": "Horsebækvej 127, 5450 Otterup"
-  },
-  "url": "https://www.facebook.com/marketplace/item/1241606154628007/"
- },
- {
-  "name": "Loppemarked Horsebækvej, Otterup",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "endDate": "2026-07-04T15:00:00+02:00",
-  "location": {
-   "address": "Horsebækvej 127, 5450 Otterup"
-  },
-  "url": "https://www.facebook.com/marketplace/item/1241606154628007/"
- },
- {
-  "name": "Loppemarked på Faaborg Havn",
-  "startDate": "2026-07-04",
-  "location": {
-   "name": "Faaborg Røgeri",
-   "address": "Vestkaj 3, 5600 Faaborg"
-  },
-  "url": "https://www.facebook.com/marketplace/item/1548953293303356/"
- },
- {
-  "name": "Kræmmer og Loppemarked i Allested-Vejle",
-  "startDate": "2026-11-07T10:00:00+01:00",
-  "location": {
-   "name": "Allested-Vejle Fritidscenter",
-   "address": "Allested-Vejle Fritidscenter, 5672 Broby"
-  },
-  "url": "https://www.facebook.com/events/search?q=Faaborg%20loppemarked",
-  "description": "Kræmmer- og loppemarked i Allested-Vejle Fritidscenter."
- },
- {
-  "name": "Kræmmer og Loppemarked i Allested-Vejle",
-  "startDate": "2026-11-08T10:00:00+01:00",
-  "location": {
-   "name": "Allested-Vejle Fritidscenter",
-   "address": "Allested-Vejle Fritidscenter, 5672 Broby"
-  },
-  "url": "https://www.facebook.com/events/search?q=Faaborg%20loppemarked",
-  "description": "Kræmmer- og loppemarked i Allested-Vejle Fritidscenter."
- },
- {
-  "name": "Kræmmermarked/bagagerumsmarked",
-  "startDate": "2026-08-22T10:00:00+02:00",
-  "location": {
-   "address": "Bredgade 64, 5485 Skamby"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Langeskov Kræmmermarked",
-  "startDate": "2026-09-18",
-  "location": {
-   "address": "Markedspladsen Grønvangen, Langeskov"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Langeskov Kræmmermarked",
-  "startDate": "2026-09-19",
-  "location": {
-   "address": "Markedspladsen Grønvangen, Langeskov"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Langeskov Kræmmermarked",
-  "startDate": "2026-09-20",
-  "location": {
-   "address": "Markedspladsen Grønvangen, Langeskov"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked Løgballevej",
-  "startDate": "2026-07-11T10:00:00+02:00",
-  "location": {
-   "address": "Løgballevej 12, 7140 Stouby"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Veteranudstilling- og kræmmermarked",
-  "startDate": "2026-08-08",
-  "location": {
-   "address": "Brødsgårdvej 52, 6000 Kolding"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Veteranudstilling- og kræmmermarked",
-  "startDate": "2026-08-09",
-  "location": {
-   "address": "Brødsgårdvej 52, 6000 Kolding"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked Grindsted",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "location": {
-   "address": "Vestergade 7, 7200 Grindsted"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Mørkøv Kræmmermarked",
-  "startDate": "2026-09-25",
-  "location": {
-   "address": "Rævebjerg 1, 4440 Mørkøv"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Mørkøv Kræmmermarked",
-  "startDate": "2026-09-26",
-  "location": {
-   "address": "Rævebjerg 1, 4440 Mørkøv"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Mørkøv Kræmmermarked",
-  "startDate": "2026-09-27",
-  "location": {
-   "address": "Rævebjerg 1, 4440 Mørkøv"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Bellahøj Kræmmermarked",
-  "startDate": "2026-09-04",
-  "location": {
-   "address": "Hvidkildevej 66"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Bellahøj Kræmmermarked",
-  "startDate": "2026-09-05",
-  "location": {
-   "address": "Hvidkildevej 66"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Bellahøj Kræmmermarked",
-  "startDate": "2026-09-06",
-  "location": {
-   "address": "Hvidkildevej 66"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked",
-  "startDate": "2026-08-08T10:00:00+02:00",
-  "location": {
-   "address": "Vestergade 7, 7200 Grindsted"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked Troldhede Kultur og Idrætscenter",
-  "startDate": "2026-08-15T09:00:00+02:00",
-  "location": {
-   "address": "Troldhede Kultur og Idrætscenter, Troldhede"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Årets store kræmmermarked",
-  "startDate": "2026-09-05T10:00:00+02:00",
-  "location": {
-   "address": "Adelgade, Skanderborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked Eventyrgården Janderup",
-  "startDate": "2026-07-08T11:00:00+02:00",
-  "location": {
-   "address": "Vesterled 52, 6851 Janderup"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked Vejers Strand",
-  "startDate": "2026-07-10T10:00:00+02:00",
-  "location": {
-   "address": "Vejers Havvej 7, Vejers Strand"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked i Klint",
-  "startDate": "2026-08-01T10:00:00+02:00",
-  "location": {
-   "address": "Klintvej 123"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked Grindsted",
-  "startDate": "2026-09-05T10:00:00+02:00",
-  "location": {
-   "address": "Vestergade 7, 7200 Grindsted"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked Grindsted",
-  "startDate": "2026-10-03T10:00:00+02:00",
-  "location": {
-   "address": "Vestergade 7, 7200 Grindsted"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked Jelsevej, Højslev",
-  "startDate": "2026-08-08T10:00:00+02:00",
-  "location": {
-   "address": "Jelsevej 201, Højslev"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Lagunen Kræmmermarked",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "location": {
-   "address": "Lagunen 8, 9370 Hou Hals"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked / Flohmarkt Blåvand",
-  "startDate": "2026-08-06T10:00:00+02:00",
-  "location": {
-   "address": "Horns Bjerge 1 - 3, 6857 Blåvand"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked / Flohmarkt Blåvand",
-  "startDate": "2026-10-22T10:00:00+02:00",
-  "location": {
-   "address": "Horns Bjerge 1 - 3, 6857 Blåvand"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked / Flohmarkt Blåvand",
-  "startDate": "2026-09-24T10:00:00+02:00",
-  "location": {
-   "address": "Horns Bjerge 1 - 3, 6857 Blåvand"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Vejsende kræmmermarked",
-  "startDate": "2026-08-01T09:00:00+02:00",
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Lagunen Kræmmermarked",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "location": {
-   "address": "Hals Strand Camping, Hals"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked / Flohmarkt Blåvand",
-  "startDate": "2026-09-03T10:00:00+02:00",
-  "location": {
-   "address": "Horns Bjerge 1 - 3, 6857 Blåvand"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked / Flohmarkt Blåvand",
-  "startDate": "2026-10-01T10:00:00+02:00",
-  "location": {
-   "address": "Horns Bjerge 1 - 3, 6857 Blåvand"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked / Flohmarkt Blåvand",
-  "startDate": "2026-09-10T10:00:00+02:00",
-  "location": {
-   "address": "Horns Bjerge 1 - 3, 6857 Blåvand"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked / Flohmarkt Blåvand",
-  "startDate": "2026-08-27T10:00:00+02:00",
-  "location": {
-   "address": "Horns Bjerge 1 - 3, 6857 Blåvand"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked / Flohmarkt Blåvand",
-  "startDate": "2026-10-08T10:00:00+02:00",
-  "location": {
-   "address": "Horns Bjerge 1 - 3, 6857 Blåvand"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Kræmmermarked / Flohmarkt Blåvand",
-  "startDate": "2026-08-20T10:00:00+02:00",
-  "location": {
-   "address": "Horns Bjerge 1 - 3, 6857 Blåvand"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Varpelevdag med kræmmermarked",
-  "startDate": "2026-09-06T10:00:00+02:00",
-  "location": {
-   "address": "Varpelev Bygade 26, Hårlev"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Lagunen Kræmmermarked",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "location": {
-   "address": "Lagunen 8, 9370 Hou Hals"
-  },
-  "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-07-11T10:00:00+02:00",
-  "location": {
-   "address": "Østergade 41, Assens"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Nyborg",
-  "startDate": "2026-07-04T11:00:00+02:00",
-  "location": {
-   "address": "Nyborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Tandslet Friskole",
-  "startDate": "2026-09-05",
-  "location": {
-   "address": "Tandslet Friskole, Tandslet"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Tandslet Friskole",
-  "startDate": "2026-09-06",
-  "location": {
-   "address": "Tandslet Friskole, Tandslet"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked på Pakhuskajen",
-  "startDate": "2026-07-26T10:00:00+02:00",
-  "location": {
-   "address": "Østre Kaj 9, 5000 Odense C"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-08-31T18:00:00+02:00",
-  "location": {
-   "address": "Svendborgvej 83, Ørbæk"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Ørbæk",
-  "startDate": "2026-10-06T18:00:00+02:00",
-  "location": {
-   "address": "Svendborgvej 83, Ørbæk"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked / idrætsuge",
-  "startDate": "2026-08-08T10:00:00+02:00",
-  "location": {
-   "address": "Idrætsvej, 6230 Rødekro"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked på Pakhuskajen",
-  "startDate": "2026-08-23T10:00:00+02:00",
-  "location": {
-   "address": "Østre Kaj 9, 5000 Odense C"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked i Tusindårsparken",
-  "startDate": "2026-08-29T09:30:00+02:00",
-  "location": {
-   "address": "Tusindårsparken"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Kræmmer og Loppemarked",
-  "startDate": "2026-11-07T10:00:00+01:00",
-  "location": {
-   "address": "Allested-Vejle Fritidscenter"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked på Plænen",
-  "startDate": "2026-09-05T10:00:00+02:00",
-  "location": {
-   "address": "Plænen v/Cypresvej 25, 6000 Kolding"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Dannemare",
-  "startDate": "2026-07-11",
-  "location": {
-   "address": "Pumpehusvej 1, Dannemare"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Dannemare",
-  "startDate": "2026-07-12",
-  "location": {
-   "address": "Pumpehusvej 1, Dannemare"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Kræmmer og Loppemarked, Allested-Vejle Fritidscenter",
-  "startDate": "2026-11-08T10:00:00+01:00",
-  "location": {
-   "address": "Allested-Vejle Fritidscenter"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Børnenes dag loppemarked",
-  "startDate": "2026-09-05",
-  "location": {
-   "address": "Mågevej, 5620 Glamsbjerg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Korsør",
-  "startDate": "2026-07-26T10:00:00+02:00",
-  "location": {
-   "address": "Gl. Banegårdsplads, Korsør, Korsør"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Bakkensbro loppemarked",
-  "startDate": "2026-08-22T10:00:00+02:00",
-  "location": {
-   "address": "Bakkensbro 6, Ullerup"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Ebberup Loppemarked",
-  "startDate": "2026-10-31",
-  "location": {
-   "address": "Ebberup Hallen, Ebberup"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Ebberup Loppemarked",
-  "startDate": "2026-11-01",
-  "location": {
-   "address": "Ebberup Hallen, Ebberup"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Henriksvej",
-  "startDate": "2026-08-01T10:00:00+02:00",
-  "location": {
-   "address": "Henriksvej, Gørlev"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-09-12",
-  "location": {
-   "address": "Jernbanegade 26, 4920 Søllested"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-09-13",
-  "location": {
-   "address": "Jernbanegade 26, 4920 Søllested"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Vemmelev Loppemarked",
-  "startDate": "2026-07-19T10:00:00+02:00",
-  "location": {
-   "address": "Stationsvej 1, 4241 Vemmelev"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Ødis Loppemarked",
-  "startDate": "2026-08-29T12:00:00+02:00",
-  "location": {
-   "address": "Steppingvej 12A, 6580 Vamdrup"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Torvet Højer",
-  "startDate": "2026-07-11T10:00:00+02:00",
-  "location": {
-   "address": "Torvet, Højer"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Sønder Boulevard",
-  "startDate": "2026-07-18T10:00:00+02:00",
-  "location": {
-   "address": "Sønder Boulevard 73, 1720 Copenhagen"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked - Fjordens dag",
-  "startDate": "2026-08-16T10:00:00+02:00",
-  "location": {
-   "address": "Strandmøllevej 247, Holbæk"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked på Bryggen",
-  "startDate": "2026-09-06T10:00:00+02:00",
-  "location": {
-   "address": "Kulturhuset Islands Brygge"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked ved Kilden",
-  "startDate": "2026-08-22T10:00:00+02:00",
-  "location": {
-   "address": "Kulturhuset Kilden"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked på Bryggen",
-  "startDate": "2026-09-27T10:00:00+02:00",
-  "location": {
-   "address": "Kulturhuset Islands Brygge, København"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked på Bryggen",
-  "startDate": "2026-08-23T10:00:00+02:00",
-  "location": {
-   "address": "Kulturhuset Islands Brygge, København"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Hundested",
-  "startDate": "2026-07-11T10:00:00+02:00",
-  "location": {
-   "address": "Søndergade 99, 3390 Hundested"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked på Bryggen",
-  "startDate": "2026-10-11T10:00:00+02:00",
-  "location": {
-   "address": "Kulturhuset Islands Brygge, København"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Varde",
-  "startDate": "2026-07-25T09:00:00+02:00",
-  "location": {
-   "address": "Varde"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked i Rønnede",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "location": {
-   "address": "Industrikrogen 8, 4683 Rønnede"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Godstedvej",
-  "startDate": "2026-08-16T14:00:00+02:00",
-  "location": {
-   "address": "Godstedvej 18, Øster Ulslev"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked Hotel Villa Strand",
-  "startDate": "2026-07-12T12:00:00+02:00",
-  "location": {
-   "address": "Hotel Villa Strand"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked"
- },
- {
-  "name": "Loppemarked på Louise Plads",
-  "startDate": "2026-09-13T10:00:00+02:00",
-  "location": {
-   "address": "Louise Plads, 9000 Aalborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
- },
- {
-  "name": "Loppemarked på Louise Plads",
-  "startDate": "2026-08-16T10:00:00+02:00",
-  "location": {
-   "address": "Louise Plads, 9000 Aalborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
- },
- {
-  "name": "Loppemarked Fælleshuset på Fyrkildevej",
-  "startDate": "2026-10-03T11:00:00+02:00",
-  "location": {
-   "address": "Fyrkildevej, Aalborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
- },
- {
-  "name": "Loppemarked i solen",
-  "startDate": "2026-08-09T11:30:00+02:00",
-  "location": {
-   "address": "Skudehavnsvej 35-37, 9000 Aalborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
- },
- {
-  "name": "Loppemarked i solen",
-  "startDate": "2026-07-12T11:30:00+02:00",
-  "location": {
-   "address": "Skudehavnsvej 35-37, 9000 Aalborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
- },
- {
-  "name": "Nordjyllands Store Kræmmer og Loppemarked",
-  "startDate": "2026-11-07",
-  "location": {
-   "address": "Gigantium, Aalborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
- },
- {
-  "name": "Nordjyllands Store Kræmmer og Loppemarked",
-  "startDate": "2026-11-08",
-  "location": {
-   "address": "Gigantium, Aalborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
- },
- {
-  "name": "Loppemarked i solen",
-  "startDate": "2026-09-13T11:30:00+02:00",
-  "location": {
-   "address": "Skudehavnsvej 35-37, 9000 Aalborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
- },
- {
-  "name": "Loppemarked på Schleppegrellsgade",
-  "startDate": "2026-09-06T10:00:00+02:00",
-  "location": {
-   "address": "Schleppegrellsgade, Aalborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
- },
- {
-  "name": "Loppemarked i Øster Uttrup",
-  "startDate": "2026-08-08T10:00:00+02:00",
-  "location": {
-   "address": "Ved Dammen 1, 9220 Aalborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
- },
- {
-  "name": "Loppemarked Haveforeningen Rugholm",
-  "startDate": "2026-07-25T11:00:00+02:00",
-  "location": {
-   "address": "Haveforeningen Rugholm"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
- },
- {
-  "name": "Stort Loppemarked på Godsbanen",
-  "startDate": "2027-01-30",
-  "location": {
-   "address": "Godsbanen, Aarhus"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
- },
- {
-  "name": "Stort Loppemarked på Godsbanen",
-  "startDate": "2027-01-31",
-  "location": {
-   "address": "Godsbanen, Aarhus"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
- },
- {
-  "name": "Flagstang Loppemarked i Mølleparken",
-  "startDate": "2026-08-15T10:00:00+02:00",
-  "location": {
-   "address": "Mølleparken"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
- },
- {
-  "name": "Loppemarked - gør et godt fund!",
-  "startDate": "2026-09-26T10:00:00+02:00",
-  "location": {
-   "address": "Hjarnøgade 1, 8000 Aarhus"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-07-04T09:00:00+02:00",
-  "endDate": "2026-07-04T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-07-11T09:00:00+02:00",
-  "endDate": "2026-07-11T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-07-18T09:00:00+02:00",
-  "endDate": "2026-07-18T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-07-25T09:00:00+02:00",
-  "endDate": "2026-07-25T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-08-01T09:00:00+02:00",
-  "endDate": "2026-08-01T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-08-08T09:00:00+02:00",
-  "endDate": "2026-08-08T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-08-15T09:00:00+02:00",
-  "endDate": "2026-08-15T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-08-22T09:00:00+02:00",
-  "endDate": "2026-08-22T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-08-29T09:00:00+02:00",
-  "endDate": "2026-08-29T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-09-05T09:00:00+02:00",
-  "endDate": "2026-09-05T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-09-12T09:00:00+02:00",
-  "endDate": "2026-09-12T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-09-19T09:00:00+02:00",
-  "endDate": "2026-09-19T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet (Høje Gladsaxe)",
-  "startDate": "2026-09-26T09:00:00+02:00",
-  "endDate": "2026-09-26T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Kathrinelund Bagklapmarked",
-  "startDate": "2026-07-05T10:00:00+02:00",
-  "endDate": "2026-07-05T15:00:00+02:00",
-  "location": {
-   "address": "Mariendalsvej 34, Assens"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Kathrinelund Bagklapmarked",
-  "startDate": "2026-07-12T10:00:00+02:00",
-  "endDate": "2026-07-12T15:00:00+02:00",
-  "location": {
-   "address": "Mariendalsvej 34, Assens"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Kathrinelund Bagklapmarked",
-  "startDate": "2026-07-19T10:00:00+02:00",
-  "endDate": "2026-07-19T15:00:00+02:00",
-  "location": {
-   "address": "Mariendalsvej 34, Assens"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Kathrinelund Bagklapmarked",
-  "startDate": "2026-07-26T10:00:00+02:00",
-  "endDate": "2026-07-26T15:00:00+02:00",
-  "location": {
-   "address": "Mariendalsvej 34, Assens"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Kathrinelund Bagklapmarked",
-  "startDate": "2026-08-02T10:00:00+02:00",
-  "endDate": "2026-08-02T15:00:00+02:00",
-  "location": {
-   "address": "Mariendalsvej 34, Assens"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Kathrinelund Bagklapmarked",
-  "startDate": "2026-08-09T10:00:00+02:00",
-  "endDate": "2026-08-09T15:00:00+02:00",
-  "location": {
-   "address": "Mariendalsvej 34, Assens"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Kathrinelund Bagklapmarked",
-  "startDate": "2026-08-16T10:00:00+02:00",
-  "endDate": "2026-08-16T15:00:00+02:00",
-  "location": {
-   "address": "Mariendalsvej 34, Assens"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Dronningensgade",
-  "startDate": "2026-09-06T10:00:00+02:00",
-  "location": {
-   "address": "Dronningensgade"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20odense"
- },
- {
-  "name": "Loppemarked Bolbro GIF Håndbold",
-  "startDate": "2026-09-06T10:00:00+02:00",
-  "location": {
-   "address": "Bolbrohallen, Friggasvej 14, 5200 Odense V"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20odense"
- },
- {
-  "name": "Bagagerumsmarked Vejlby Fed",
-  "startDate": "2026-08-30T10:00:00+02:00",
-  "location": {
-   "address": "Rigelvej 1, Vejlby Fed, Middelfart"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked",
-  "startDate": "2026-08-16T10:00:00+02:00",
-  "location": {
-   "address": "Skovvangen 42D, 6000 Kolding"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Solsikkeugens Bagagerumsmarked",
-  "startDate": "2026-08-29T10:00:00+02:00",
-  "location": {
-   "address": "Morud"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Silkeborg - Cirkuspladsen",
-  "startDate": "2026-07-18T09:00:00+02:00",
-  "location": {
-   "address": "Kastaniehøjvej 6, Cirkuspladsen, Silkeborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked / Citymarked Aarhus",
-  "startDate": "2026-08-01T10:30:00+02:00",
-  "location": {
-   "address": "Teatergaden 1, 8000 Aarhus C"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Silkeborg - Cirkuspladsen",
-  "startDate": "2026-08-15T09:00:00+02:00",
-  "location": {
-   "address": "Kastaniehøjvej 6, Cirkuspladsen, Silkeborg"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Søndervig",
-  "startDate": "2026-07-07T10:00:00+02:00",
-  "location": {
-   "address": "Nordsøvej 6, Parkering MENY VEST, Søndervig, 6950 Ringkøbing"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Aalborg",
-  "startDate": "2026-08-09T09:00:00+02:00",
-  "location": {
-   "address": "Dyrskuepladsen, Hobrovej 437, Skalborg, 9200 Aalborg SV"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Randers",
-  "startDate": "2026-08-02T09:00:00+02:00",
-  "location": {
-   "address": "Juventusvej 7, 8960 Randers SØ"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Jerup",
-  "startDate": "2026-07-11T10:00:00+02:00",
-  "location": {
-   "address": "Skagensvej 422A, Jerup"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Søndervig",
-  "startDate": "2026-07-21T10:00:00+02:00",
-  "location": {
-   "address": "Nordsøvej 6, Parkering MENY VEST, 6950 Ringkøbing"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Søndervig",
-  "startDate": "2026-08-04T10:00:00+02:00",
-  "location": {
-   "address": "Nordsøvej 6, Parkering MENY VEST, 6950 Søndervig"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Søndervig",
-  "startDate": "2026-08-11T10:00:00+02:00",
-  "location": {
-   "address": "Nordsøvej 6, Parkering MENY VEST, Søndervig, 6950 Ringkøbing"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Esbjerg",
-  "startDate": "2026-08-30T09:30:00+02:00",
-  "location": {
-   "address": "Sportsvej 15, 6705 Esbjerg Ø"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Søndervig",
-  "startDate": "2026-07-14T10:00:00+02:00",
-  "location": {
-   "address": "Nordsøvej 6, Parkering MENY VEST, 6950 Ringkøbing"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Aalborg",
-  "startDate": "2026-09-13T09:00:00+02:00",
-  "location": {
-   "address": "Dyrskuepladsen, Hobrovej 437, Skalborg, 9200 Aalborg SV"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Herning (indendørs)",
-  "startDate": "2026-09-06T10:00:00+02:00",
-  "location": {
-   "address": "Herning"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked // Summerdays 2026",
-  "startDate": "2026-07-07T10:00:00+02:00",
-  "location": {
-   "address": "7600 Struer"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Bagagerumsmarked Søndervig",
-  "startDate": "2026-10-13T10:00:00+02:00",
-  "location": {
-   "address": "Nordsøvej 6, Parkering MENY VEST, 6950 Søndervig"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Stort vintage tøjmarked ved Præstø",
-  "startDate": "2026-07-11T11:00:00+02:00",
-  "endDate": "2026-07-11T16:00:00+02:00",
-  "location": {
-   "address": "Ådalsvej 9, 4720 Præstø"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Stort vintage tøjmarked ved Præstø",
-  "startDate": "2026-07-12T11:00:00+02:00",
-  "endDate": "2026-07-12T16:00:00+02:00",
-  "location": {
-   "address": "Ådalsvej 9, 4720 Præstø"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Kræmmermarked hos Aabo Camping",
-  "startDate": "2026-07-16T10:00:00+02:00",
-  "endDate": "2026-07-16T19:00:00+02:00",
-  "location": {
-   "address": "Tversted"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Kræmmermarked hos Aabo Camping",
-  "startDate": "2026-07-23T10:00:00+02:00",
-  "endDate": "2026-07-23T19:00:00+02:00",
-  "location": {
-   "address": "Tversted"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Gørlev Heste og Kræmmermarked",
-  "startDate": "2026-07-03",
-  "location": {
-   "address": "Gørlev"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Gørlev Heste og Kræmmermarked",
-  "startDate": "2026-07-04",
-  "location": {
-   "address": "Gørlev"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Gørlev Heste og Kræmmermarked",
-  "startDate": "2026-07-05",
-  "location": {
-   "address": "Gørlev"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-09-27",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-10-04",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-10-25",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-11-01",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-11-07",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-11-08",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-11-15",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked",
-  "startDate": "2026-11-22",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Vanløses måske største loppemarked",
-  "startDate": "2026-08-15T11:00:00+02:00",
-  "location": {
-   "address": "Lyngholmvej, Vanløse"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Københavns Store Kræmmer og Loppemarked",
-  "startDate": "2026-10-24",
-  "location": {
-   "address": "Forum, København"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Københavns Store Kræmmer og Loppemarked",
-  "startDate": "2026-10-25",
-  "location": {
-   "address": "Forum, København"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Københavns hyggeligste loppemarked",
-  "startDate": "2026-07-05T10:00:00+02:00",
-  "location": {
-   "address": "Lundebakken 1, 2400 København NV"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Det Grønne Loppemarked",
-  "startDate": "2026-08-09T10:00:00+02:00",
-  "location": {
-   "address": "Jagtvej 16, 2200 Copenhagen"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Danmarks længste loppemarked (Valby)",
-  "startDate": "2026-08-29",
-  "location": {
-   "address": "Skolegade, 2500 København"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Danmarks længste loppemarked (Valby)",
-  "startDate": "2026-08-30",
-  "location": {
-   "address": "Skolegade, 2500 København"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked i Remisen",
-  "startDate": "2026-10-31",
-  "location": {
-   "address": "Blegdamsvej 132, 2100 København Ø"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked i Remisen",
-  "startDate": "2026-11-01",
-  "location": {
-   "address": "Blegdamsvej 132, 2100 København Ø"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked på Den Sorte Plads",
-  "startDate": "2026-08-29T10:00:00+02:00",
-  "location": {
-   "address": "Den Sorte Plads, København"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked i Remisen",
-  "startDate": "2026-11-14",
-  "location": {
-   "address": "Blegdamsvej 132, 2100 København Ø"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked i Remisen",
-  "startDate": "2026-11-15",
-  "location": {
-   "address": "Blegdamsvej 132, 2100 København Ø"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked ved Haraldskirken (Høje Gladsaxe Torv)",
-  "startDate": "2026-07-04T09:00:00+02:00",
-  "endDate": "2026-07-04T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked ved Haraldskirken (Høje Gladsaxe Torv)",
-  "startDate": "2026-07-11T09:00:00+02:00",
-  "endDate": "2026-07-11T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked ved Haraldskirken (Høje Gladsaxe Torv)",
-  "startDate": "2026-07-18T09:00:00+02:00",
-  "endDate": "2026-07-18T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked ved Haraldskirken (Høje Gladsaxe Torv)",
-  "startDate": "2026-07-25T09:00:00+02:00",
-  "endDate": "2026-07-25T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Nødebo Kro",
-  "startDate": "2026-08-23T10:00:00+02:00",
-  "endDate": "2026-08-23T15:00:00+02:00",
-  "location": {
-   "address": "Nødebo Kro, Nødebo"
-  },
-  "url": "https://www.facebook.com/groups/362315834415/"
- },
- {
-  "name": "Bagklapmarkedet",
-  "startDate": "2026-07-05T10:00:00+02:00",
-  "endDate": "2026-07-05T15:00:00+02:00",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Bagklapmarkedet",
-  "startDate": "2026-07-12T10:00:00+02:00",
-  "endDate": "2026-07-12T15:00:00+02:00",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Bagklapmarkedet",
-  "startDate": "2026-07-19T10:00:00+02:00",
-  "endDate": "2026-07-19T15:00:00+02:00",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Bagklapmarkedet",
-  "startDate": "2026-07-26T10:00:00+02:00",
-  "endDate": "2026-07-26T15:00:00+02:00",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Bagklapmarkedet",
-  "startDate": "2026-08-02T10:00:00+02:00",
-  "endDate": "2026-08-02T15:00:00+02:00",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Bagklapmarkedet",
-  "startDate": "2026-08-09T10:00:00+02:00",
-  "endDate": "2026-08-09T15:00:00+02:00",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Bagklapmarkedet",
-  "startDate": "2026-08-16T10:00:00+02:00",
-  "endDate": "2026-08-16T15:00:00+02:00",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Søndagsmarked Greve Midtby Center",
-  "startDate": "2026-07-05T09:00:00+02:00",
-  "endDate": "2026-07-05T14:00:00+02:00",
-  "location": {
-   "address": "Greve Midtby Center, P-plads nord, Greve"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Søndagsmarked Greve Midtby Center",
-  "startDate": "2026-07-12T09:00:00+02:00",
-  "endDate": "2026-07-12T14:00:00+02:00",
-  "location": {
-   "address": "Greve Midtby Center, P-plads nord, Greve"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Søndagsmarked Greve Midtby Center",
-  "startDate": "2026-07-19T09:00:00+02:00",
-  "endDate": "2026-07-19T14:00:00+02:00",
-  "location": {
-   "address": "Greve Midtby Center, P-plads nord, Greve"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Søndagsmarked Greve Midtby Center",
-  "startDate": "2026-07-26T09:00:00+02:00",
-  "endDate": "2026-07-26T14:00:00+02:00",
-  "location": {
-   "address": "Greve Midtby Center, P-plads nord, Greve"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Indendørs markeder i Viborg (VBC)",
-  "startDate": "2026-09-06",
-  "location": {
-   "address": "Viborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Indendørs markeder i Viborg (VBC)",
-  "startDate": "2026-09-12",
-  "location": {
-   "address": "Viborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Indendørs markeder i Viborg (VBC)",
-  "startDate": "2026-10-10",
-  "location": {
-   "address": "Viborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Indendørs markeder i Viborg (VBC)",
-  "startDate": "2026-11-14",
-  "location": {
-   "address": "Viborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Bagagerumsmarked / Citymarked Aarhus",
-  "startDate": "2026-10-03T10:30:00+02:00",
-  "location": {
-   "address": "Teatergaden 1, 8000 Aarhus C"
-  },
-  "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
- },
- {
-  "name": "Loppemarked Gråsten",
-  "startDate": "2026-07-10T10:00:00+02:00",
-  "endDate": "2026-07-10T16:00:00+02:00",
-  "location": {
-   "address": "Gråsten"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked Gråsten",
-  "startDate": "2026-07-17T10:00:00+02:00",
-  "endDate": "2026-07-17T16:00:00+02:00",
-  "location": {
-   "address": "Gråsten"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked Gråsten",
-  "startDate": "2026-07-24T10:00:00+02:00",
-  "endDate": "2026-07-24T16:00:00+02:00",
-  "location": {
-   "address": "Gråsten"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked Gråsten",
-  "startDate": "2026-07-31T10:00:00+02:00",
-  "endDate": "2026-07-31T16:00:00+02:00",
-  "location": {
-   "address": "Gråsten"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked Gråsten",
-  "startDate": "2026-08-01T10:00:00+02:00",
-  "endDate": "2026-08-01T16:00:00+02:00",
-  "location": {
-   "address": "Gråsten"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Vanløse Torv Loppemarked",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "location": {
-   "address": "Vanløse Torv, 2720 Vanløse"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Ryesgades loppemarked",
-  "startDate": "2026-08-30T10:00:00+02:00",
-  "location": {
-   "address": "Ryesgade, 2100 København Ø"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Saxogades Loppemarked",
-  "startDate": "2026-07-25T10:00:00+02:00",
-  "location": {
-   "address": "Saxogade, 1662 Copenhagen"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked i Blågårdsgade",
-  "startDate": "2026-07-05T10:00:00+02:00",
-  "location": {
-   "address": "Blågårdsgade 12, 2200 Copenhagen"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppelørdage ved springvandet på Brønshøj Torv",
-  "startDate": "2026-07-25T09:00:00+02:00",
-  "location": {
-   "address": "Brønshøj Torv, 2700 København"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Ørestad loppemarked",
-  "startDate": "2026-08-01T10:00:00+02:00",
-  "location": {
-   "address": "Ørestads Boulevard 68, Copenhagen"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Københavns Længste Loppemarked",
-  "startDate": "2026-08-29T08:00:00+02:00",
-  "location": {
-   "address": "Ørestads Boulevard 68, Copenhagen"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked & Livemusik i Grønlandsgården",
-  "startDate": "2026-08-15T10:00:00+02:00",
-  "location": {
-   "address": "Englandsvej 8, 2300 København S"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked i Grøndalsvænge",
-  "startDate": "2026-08-15T10:00:00+02:00",
-  "location": {
-   "address": "Mirabellevej, 2400 København NV"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked at VAB-13",
-  "startDate": "2026-08-08T11:00:00+02:00",
-  "location": {
-   "address": "Ved Amagerbanen 13, 2300 København S"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked på Bispebjerg Bakke",
-  "startDate": "2026-08-22T10:00:00+02:00",
-  "location": {
-   "address": "Legepladsen ved Bispebjerg Bakke 18A til 26D, København"
-  },
-  "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
- },
- {
-  "name": "Loppemarked ved Nebel Sø",
-  "startDate": "2026-08-09T10:00:00+02:00",
-  "endDate": "2026-08-09T14:00:00+02:00",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Havnen",
-  "startDate": "2026-07-04",
-  "location": {
-   "address": "Vestkaj 3, 5600 Faaborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "LoppeWorld Kræmmermarked",
-  "startDate": "2026-08-02T10:00:00+02:00",
-  "endDate": "2026-08-02T16:00:00+02:00",
-  "location": {
-   "address": "Holger Brodthagensvej 6, 4800 Nykøbing Falster"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked i gården bag Sankt Nicolai Apotek",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "endDate": "2026-07-04T14:00:00+02:00",
-  "location": {
-   "address": "Sankt Nicolai Gade 2a, 5700 Svendborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Ørbæk Marked",
-  "startDate": "2026-07-10",
-  "location": {
-   "address": "Ørbæk"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Ørbæk Marked",
-  "startDate": "2026-07-11",
-  "location": {
-   "address": "Ørbæk"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Ørbæk Marked",
-  "startDate": "2026-07-12",
-  "location": {
-   "address": "Ørbæk"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-04T11:00:00+02:00",
-  "endDate": "2026-07-04T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-05T11:00:00+02:00",
-  "endDate": "2026-07-05T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-11T11:00:00+02:00",
-  "endDate": "2026-07-11T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-12T11:00:00+02:00",
-  "endDate": "2026-07-12T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-18T11:00:00+02:00",
-  "endDate": "2026-07-18T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-19T11:00:00+02:00",
-  "endDate": "2026-07-19T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-25T11:00:00+02:00",
-  "endDate": "2026-07-25T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-26T11:00:00+02:00",
-  "endDate": "2026-07-26T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-04T11:00:00+02:00",
-  "endDate": "2026-07-04T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-05T11:00:00+02:00",
-  "endDate": "2026-07-05T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-11T11:00:00+02:00",
-  "endDate": "2026-07-11T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-12T11:00:00+02:00",
-  "endDate": "2026-07-12T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-18T11:00:00+02:00",
-  "endDate": "2026-07-18T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-19T11:00:00+02:00",
-  "endDate": "2026-07-19T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-25T11:00:00+02:00",
-  "endDate": "2026-07-25T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Gudme's loppemarked",
-  "startDate": "2026-07-26T11:00:00+02:00",
-  "endDate": "2026-07-26T15:00:00+02:00",
-  "location": {
-   "address": "Gudme"
-  },
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "name": "Loppemarked Faaborg Havn",
-  "startDate": "2026-07-04",
-  "location": {
-   "address": "Faaborg"
-  },
-  "url": "https://www.facebook.com/marketplace/item/1548953293303356/"
- },
- {
-  "name": "Loppemarked Horsebækvej",
-  "startDate": "2026-07-03T10:00:00+02:00",
-  "endDate": "2026-07-03T19:00:00+02:00",
-  "location": {
-   "address": "Horsebækvej 127, 5450 Otterup"
-  },
-  "url": "https://www.facebook.com/marketplace/item/1241606154628007/"
- },
- {
-  "name": "Loppemarked Horsebækvej",
-  "startDate": "2026-07-04T10:00:00+02:00",
-  "endDate": "2026-07-04T15:00:00+02:00",
-  "location": {
-   "address": "Horsebækvej 127, 5450 Otterup"
-  },
-  "url": "https://www.facebook.com/marketplace/item/1241606154628007/"
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-07-04T09:00:00+02:00",
-  "endDate": "2026-07-04T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, 2860 Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-07-11T09:00:00+02:00",
-  "endDate": "2026-07-11T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, 2860 Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-07-18T09:00:00+02:00",
-  "endDate": "2026-07-18T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, 2860 Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarked på Kirketorvet",
-  "startDate": "2026-07-25T09:00:00+02:00",
-  "endDate": "2026-07-25T14:00:00+02:00",
-  "location": {
-   "address": "Høje Gladsaxe Torv 2, 2860 Søborg"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarkedet Møgelgårdsvej Lystrup",
-  "startDate": "2026-07-12T10:00:00+02:00",
-  "endDate": "2026-07-12T14:00:00+02:00",
-  "location": {
-   "address": "Møgelgårdsvej 16D, 8520 Lystrup"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarkedet Møgelgårdsvej Lystrup",
-  "startDate": "2026-07-26T10:00:00+02:00",
-  "endDate": "2026-07-26T14:00:00+02:00",
-  "location": {
-   "address": "Møgelgårdsvej 16D, 8520 Lystrup"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarkedet Møgelgårdsvej Lystrup",
-  "startDate": "2026-08-09T10:00:00+02:00",
-  "endDate": "2026-08-09T14:00:00+02:00",
-  "location": {
-   "address": "Møgelgårdsvej 16D, 8520 Lystrup"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarkedet Møgelgårdsvej Lystrup",
-  "startDate": "2026-08-23T10:00:00+02:00",
-  "endDate": "2026-08-23T14:00:00+02:00",
-  "location": {
-   "address": "Møgelgårdsvej 16D, 8520 Lystrup"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarkedet Møgelgårdsvej Lystrup",
-  "startDate": "2026-09-06T10:00:00+02:00",
-  "endDate": "2026-09-06T14:00:00+02:00",
-  "location": {
-   "address": "Møgelgårdsvej 16D, 8520 Lystrup"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Loppemarkedet Møgelgårdsvej Lystrup",
-  "startDate": "2026-09-20T10:00:00+02:00",
-  "endDate": "2026-09-20T14:00:00+02:00",
-  "location": {
-   "address": "Møgelgårdsvej 16D, 8520 Lystrup"
-  },
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "name": "Kampe loppemarked",
-  "startDate": "2026-07-11T10:00:00+02:00",
-  "endDate": "2026-07-11T16:00:00+02:00",
-  "url": "https://www.facebook.com/groups/362315834415/"
- },
- {
-  "name": "Kampe loppemarked",
-  "startDate": "2026-07-12T10:00:00+02:00",
-  "endDate": "2026-07-12T16:00:00+02:00",
-  "url": "https://www.facebook.com/groups/362315834415/"
- },
- {
-  "name": "Tissø Kræmmermarked",
-  "startDate": "2026-07-05T10:00:00+02:00",
-  "endDate": "2026-07-05T15:00:00+02:00",
-  "location": {
-   "address": "Sæbyvej 48, 4270 Høng"
-  },
-  "url": "https://www.facebook.com/marketplace/item/2431477860660309/"
- },
- {
-  "name": "Tissø Kræmmermarked",
-  "startDate": "2026-07-12T10:00:00+02:00",
-  "endDate": "2026-07-12T15:00:00+02:00",
-  "location": {
-   "address": "Sæbyvej 48, 4270 Høng"
-  },
-  "url": "https://www.facebook.com/marketplace/item/2431477860660309/"
- },
- {
-  "name": "Tissø Kræmmermarked",
-  "startDate": "2026-07-19T10:00:00+02:00",
-  "endDate": "2026-07-19T15:00:00+02:00",
-  "location": {
-   "address": "Sæbyvej 48, 4270 Høng"
-  },
-  "url": "https://www.facebook.com/marketplace/item/2431477860660309/"
- },
- {
-  "name": "Tissø Kræmmermarked",
-  "startDate": "2026-07-26T10:00:00+02:00",
-  "endDate": "2026-07-26T15:00:00+02:00",
-  "location": {
-   "address": "Sæbyvej 48, 4270 Høng"
-  },
-  "url": "https://www.facebook.com/marketplace/item/2431477860660309/"
- },
- {
-  "id": "fbimg39308086732871695_101651659",
-  "text": "ook\nLIGE FORAN HARALDSKIRKEN\nHver Lørdas 9.00-14.00\nHØJE GLADSAXE TORV 2\nLOPPEMARKED DRIVES AF FRIVILLIGE\n- OG ER ALMENNYTTIGT!—\n*ALT OVERSKUD FRA UDLEJNING OG SALG\n*FRA MAD/DRIKKE GAR TIL\n*HGIS AKTIVITETER!\nSTADEPLADSER KØBES PÁ\nHGLOPPEMARKED.DK\n*Maj → September *",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimg9308086729451527_1221753730",
-  "text": "Loppemarked\npa Nødebo Kro\nDen 23. august 2026.\nkl.10.00-15.00.\n(Äben for standholdere 8.30)",
-  "url": "https://www.facebook.com/groups/362315834415/"
- },
- {
-  "id": "fbimgt39308086732845715_31215315",
-  "text": "Q Search Facebook\nGammeldags loppemarked\nHvor du kan finde alt fra møbler, værktøj, lamper, elektron\nmere.\nSå er du lige flyttet til byen, fået sommerhus eller bare tra\nnoget du kan bruge.\nSee more",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimgt39308086727885032_13294175",
-  "text": "4 MARKEDER\nI EFTERARET 2026\nHOULKÆR\nVBC\nVBC\nINDENDØRS\nBAGAGERUMSMARKED\nLOPPEMARKED\nLOPPEMARKED\nVBC\nJULEMARKED\nSØNDAG\n6. SEPTEMBER\n=2026=\nLØRDAG\nLØRDAG\n12. SEPTEMBER\n10. OKTOBER\n=2026-\n2026-\nHyggelige indendørs markeder i Viborg\nLØRDAG\n14. NOVEMBER\n= 2026 -",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimg39308086731787421_101651483",
-  "text": "LOPPEMARKED\n*PA KIRKETORVET *\nLIGE FORAN HARALDSKIRKEN\nHver Lørdas 9.00-14.00\nHØJE GLADSAXE TORV 2\nLOPPEMARKED DRIVES AF FRIVILLIGE\n- OG ER ALMENNYTTIGT! —\n-ALT OVERSKUD FRA UDLEJNING OG SALG\n* FRA MAD/DRIKKE GÅR TIL\n-HGIS AKTIVITETER!\nSTADEPLADSER KØBES PÁ\nHGLOPPEMARKED.DK\n-Maj → September +",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimg9308086727788077_1221786446",
-  "text": "Search Facebook\nGARDLOPPEMARKED\nPÅ BISPEBJERG\nHygge, musik og loppefund\nIndgang ved hjørnet af Frederiksborgvej 176\nog Bispebjerg Parkallé, 2400 København NV",
-  "url": "https://www.facebook.com/groups/362315834415/"
- },
- {
-  "id": "fbimg9308086719135793_1221866102",
-  "text": "LOPPEMARKED\nPÅ MINDEJORDEN\n÷11.00-16.00-\nGODE FUND\nTIL STORE\nOG SMA\nMAD & DRIKKE 2-\nSENERE PA\nDAGEN...\nLEG PÅ\nLEGEPLADSEN\nGULDGRAVNING",
-  "url": "https://www.facebook.com/groups/362315834415/"
- },
- {
-  "id": "fbimgt39308086650740729_95089599",
-  "text": "LOPPEMARKED på BRYGGEN\nSØN 28.6 kL 10-16\nKulturhuset Islands Brygge",
-  "url": "https://www.facebook.com/groups/785478073645748/"
- },
- {
-  "id": "fbimgt39308086723641868_36228617",
-  "text": "LOPPEMARKED LØRDAG D. 27juNi. KL.11-16\nI DREJØGADE 1-3 + JAGTVEJ 203-205\nKOM OG SE OM DU KAN GØRE ET LOPPEFUND\nGRATIS BODPLADS, DU MEDBRINGER BORD\nOG STOL ELLER ANDET TIL DIN BOD SMS BOD\nTIL 25619853 MED DIT NAVN\nTELEFONNUMMER OG EMAIL ADRESSE SA\nSENDER JEG INFO\nAFLYST VED RIGTIG DÅRLIG\nVEJR, HELDAGSREGN,STÆRKBLÆST ELLER\nKULDE\nKÆRLIG HILSEN LOPPERNE I DREJØGADE\nSUSANNE MORTENSEN",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimg39308086703745987_101654095",
-  "text": "KIRSEBÆRHAVENS\nLOPPEMARKED\nSØNDAG DEN 14. JUNI 2026\nKL. 10-16\nHVOR\nVED BOLDBURET I GÅRDEN PÅ\nHJØRNET AF HOLTEGADE OG\nJULIUS BLOMS GADE\nU",
-  "url": "https://www.facebook.com/groups/785478073645748/"
- },
- {
-  "id": "fbimgt39308086715464670_24589349",
-  "text": "STORT INDENDØRS LOPPEMARKED\nRødovre Centrum - Grundlovsdag\n5. Juni kl. 10.00-15.00",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimgt39308086710929374_24583570",
-  "text": "STORT INDENDØRS LOPPEMARKED\nRødovre Centrum - Grundlovsdag\n5. Juni kl. 10.00-15.00",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimgt39308086738570868_16813653",
-  "text": "Q Search Facebook\nStefan Schmidt\n4h -0\nEt lille hyggeligt marked med plads til børn og voksende o\nbarnligesjæle så kig gerne forbi det hvil glæde os at se di\nvi har priser fra 4 kroner og op *&®2\nGudme's loppemarked\nÅBEN HVER LØRDAG - SØNDAG -11-15",
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "id": "fbimgt39308086738438432_16813653",
-  "text": "Search Facebook\n4h •0\nEt lille hyggeligt marked med plads til børn og voksende d\nbarnligesjæle så kig gerne forbi det hvil glæde os at se dis\nvi har priser fra 4 kroner og op * d @i\nGudme's loppemarked\nÅBEN HVER LØRDAG - SØNDAG -11-15\nved nærmere info. Kontakt\nGudme's loppemarked",
-  "url": "https://www.facebook.com/groups/607762852587305/"
- },
- {
-  "id": "fbimgt39308086735001900_44874102",
-  "text": "*Rising contributor • July 2 at 8:11PM • 0\nLoppemarked d. 4 og 5 juli Marstrup Møllevej 50",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimg39308086732137588_102397766",
-  "text": "Så er der loppemarked\npå Torvet i Gråsten\nFredag den 3. juli\nFredag den 10. juli\nFredag den 17.juli\nFredag den 24.juli\nTorvedage den 31. juli og 1. august\nAlle fredage fra kl. 10.00 - 16.00\nLOPPE\nMARKED\nKøb en standplads: prisen er kun kr. 50,-\nTilmelding hos:\nAnna Villadsen tlf. 2176 5755\nKræftens\nBekæmpelse\nPladsbetalingen går ubeskåret til: Lokaludvalget for Grasten og omegn",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "mp2431477860660309",
-  "text": "😏🇩🇰.  Tissø Kræmmer marked \nSæbyvej 48, 4270 Høng \nSøndage 10-15., Kalundborg",
-  "url": "https://www.facebook.com/marketplace/item/2431477860660309/"
- },
- {
-  "id": "fbimg39308086468753524_101615456",
-  "text": "Q Search Facebook\nGruppen\nLoppemarked Sydfyn\n9 Public group • 2.5K members\n+ Invite\nAbout\nDiscussion\nPeople\nEvents\nMedia\nFiles\nAhout\n• Share\n* Joined\nQ",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimgt39308086734664307_48786908",
-  "text": "Loppemarked\nlørdag d. 4.7 kl. 10-14\ni gården bag Sankt Nicolai Apotek.\nSankt Nicolai Gade 2a, 5700\nSvendborg, lige over for kirken.\nBlandede ting til hjemmet, tøj, små\nmebler etc\nVi ses\nPs, hvis det regner eller\nblæser for meget aflyser vi.",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimgt39308086724552202_31433540",
-  "text": "Hornegydén 6, 5600 Faaborg\nTippelsbjerggaard danner rammen om et marked med\nmange forskellige kræmmerstande.\nTIPPELSBJERGGAARD LOPPE - RETRO - ANTIK\nLørdag kl. 10- 16 / Torsdag kl. 14 - 18\nManed\nMarts\nLordag\nTorsdag\n2.21\n5,19\n4,18\n2.16,30\n2.16.30\nM,28\n6,20\n4.18\n2.16.30",
-  "url": "https://www.facebook.com/photo/"
- },
- {
-  "id": "fbimgt39308086707125715_18308269",
-  "text": "ebook\nMARKED\nDen 10., 11. og 12. Juli\nSTORT KRÆMMERMARKED\nca. 300 krammere-ca. 3 km facade\nMonstertrucks\nMASSER AF UDSTILLINGER\nVeteranbiler,-motorcykler.\nmodeltog og meget mere\nLASTBILUDSTILLING\nca. 100 lastbiler\nSkinz\nTIVOLILAND\nKÆMPE MARKEDSFEST\nLerdag kl. 18.00 med\nKort Varsel og\nKeen on Queen\nStig& Vennerne\nLille Bille\nEmil tange\nMartin Kanstrup\nDrikkevarer\nmà kko\nmedbringes\nIndgans ua\nKampe\nreklamebanko\ni Otua Matturkt\nCovister te 10.0004*\nReco en Queen\nBAGAGERUMSHARKED\nSONDAG\nMorten Munster\nog Toblas\nDocopio Datos\nSe hele programmet på www.erbæk-marked.dk\nNyborg Arlasse\nTUBORG\nSaren Sarkunsiner\n2026\nFyens Stiftstidende",
-  "url": "https://www.facebook.com/photo/"
- }
+  {
+    "name": "Sommermarked i Humble",
+    "startDate": "2026-07-25T10:00:00+02:00",
+    "endDate": "2026-07-25T15:00:00+02:00",
+    "location": {
+      "address": "Hovedgaden 51, 5932 Humble"
+    },
+    "url": "https://www.facebook.com/groups/1575345569157850/"
+  },
+  {
+    "name": "Loppemarked i Skårup",
+    "startDate": "2026-09-06T10:00:00+02:00",
+    "endDate": "2026-09-06T15:00:00+02:00",
+    "location": {
+      "name": "Skårup By",
+      "address": "Skårup By, 5881 Skårup"
+    },
+    "url": "https://www.facebook.com/groups/1575345569157850/events"
+  },
+  {
+    "name": "Kampe loppemarked",
+    "startDate": "2026-07-12T10:00:00+02:00",
+    "endDate": "2026-07-12T16:00:00+02:00",
+    "url": "https://www.facebook.com/groups/362315834415/"
+  },
+  {
+    "name": "Loppemarkedet Møgelgårdsvej Lystrup",
+    "startDate": "2026-09-20T10:00:00+02:00",
+    "endDate": "2026-09-20T14:00:00+02:00",
+    "location": {
+      "address": "Møgelgårdsvej 16D, 8520 Lystrup"
+    },
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "name": "Loppemarked Harte Hallen",
+    "startDate": "2026-11-01T10:00:00+01:00",
+    "endDate": "2026-11-01T14:00:00+01:00",
+    "location": {
+      "address": "Stubdrupvej 44, 6000 Kolding"
+    },
+    "url": "https://www.facebook.com/groups/1484631705148044/"
+  },
+  {
+    "name": "Loppemarked Horsebækvej",
+    "startDate": "2026-07-04T10:00:00+02:00",
+    "endDate": "2026-07-04T15:00:00+02:00",
+    "location": {
+      "address": "Horsebækvej 127, 5450 Otterup"
+    },
+    "url": "https://www.facebook.com/marketplace/item/1241606154628007/"
+  },
+  {
+    "name": "Loppemarked Faaborg Havn",
+    "startDate": "2026-07-04",
+    "location": {
+      "address": "Faaborg"
+    },
+    "url": "https://www.facebook.com/marketplace/item/1548953293303356/"
+  },
+  {
+    "name": "Kræmmer og Loppemarked i Allested-Vejle",
+    "startDate": "2026-11-08T10:00:00+01:00",
+    "location": {
+      "name": "Allested-Vejle Fritidscenter",
+      "address": "Allested-Vejle Fritidscenter, 5672 Broby"
+    },
+    "url": "https://www.facebook.com/events/search?q=Faaborg%20loppemarked",
+    "description": "Kræmmer- og loppemarked i Allested-Vejle Fritidscenter."
+  },
+  {
+    "name": "Lagunen Kræmmermarked",
+    "startDate": "2026-07-04T10:00:00+02:00",
+    "location": {
+      "address": "Lagunen 8, 9370 Hou Hals"
+    },
+    "url": "https://www.facebook.com/events/search?q=kr%C3%A6mmermarked"
+  },
+  {
+    "name": "Loppemarked Hotel Villa Strand",
+    "startDate": "2026-07-12T12:00:00+02:00",
+    "location": {
+      "address": "Hotel Villa Strand"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "name": "Loppemarked i Øster Uttrup",
+    "startDate": "2026-08-08T10:00:00+02:00",
+    "location": {
+      "address": "Ved Dammen 1, 9220 Aalborg"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "name": "Loppemarked - gør et godt fund!",
+    "startDate": "2026-09-26T10:00:00+02:00",
+    "location": {
+      "address": "Hjarnøgade 1, 8000 Aarhus"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "name": "Loppemarked Bolbro GIF Håndbold",
+    "startDate": "2026-09-06T10:00:00+02:00",
+    "location": {
+      "address": "Bolbrohallen, Friggasvej 14, 5200 Odense V"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20odense"
+  },
+  {
+    "name": "Bagagerumsmarked / Citymarked Aarhus",
+    "startDate": "2026-10-03T10:30:00+02:00",
+    "location": {
+      "address": "Teatergaden 1, 8000 Aarhus C"
+    },
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "name": "Loppemarked på Bispebjerg Bakke",
+    "startDate": "2026-08-22T10:00:00+02:00",
+    "location": {
+      "address": "Legepladsen ved Bispebjerg Bakke 18A til 26D, København"
+    },
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "name": "Gudme's loppemarked",
+    "startDate": "2026-07-26T11:00:00+02:00",
+    "endDate": "2026-07-26T15:00:00+02:00",
+    "location": {
+      "address": "Gudme"
+    },
+    "url": "https://www.facebook.com/groups/607762852587305/"
+  },
+  {
+    "name": "Tissø Kræmmermarked",
+    "startDate": "2026-07-26T10:00:00+02:00",
+    "endDate": "2026-07-26T15:00:00+02:00",
+    "location": {
+      "address": "Sæbyvej 48, 4270 Høng"
+    },
+    "url": "https://www.facebook.com/marketplace/item/2431477860660309/"
+  },
+  {
+    "id": "fbimg39308086732871695_101651659",
+    "text": "ook\nLIGE FORAN HARALDSKIRKEN\nHver Lørdas 9.00-14.00\nHØJE GLADSAXE TORV 2\nLOPPEMARKED DRIVES AF FRIVILLIGE\n- OG ER ALMENNYTTIGT!—\n*ALT OVERSKUD FRA UDLEJNING OG SALG\n*FRA MAD/DRIKKE GAR TIL\n*HGIS AKTIVITETER!\nSTADEPLADSER KØBES PÁ\nHGLOPPEMARKED.DK\n*Maj → September *",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg9308086729451527_1221753730",
+    "text": "Loppemarked\npa Nødebo Kro\nDen 23. august 2026.\nkl.10.00-15.00.\n(Äben for standholdere 8.30)",
+    "url": "https://www.facebook.com/groups/362315834415/"
+  },
+  {
+    "id": "fbimgt39308086732845715_31215315",
+    "text": "Q Search Facebook\nGammeldags loppemarked\nHvor du kan finde alt fra møbler, værktøj, lamper, elektron\nmere.\nSå er du lige flyttet til byen, fået sommerhus eller bare tra\nnoget du kan bruge.\nSee more",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086727885032_13294175",
+    "text": "4 MARKEDER\nI EFTERARET 2026\nHOULKÆR\nVBC\nVBC\nINDENDØRS\nBAGAGERUMSMARKED\nLOPPEMARKED\nLOPPEMARKED\nVBC\nJULEMARKED\nSØNDAG\n6. SEPTEMBER\n=2026=\nLØRDAG\nLØRDAG\n12. SEPTEMBER\n10. OKTOBER\n=2026-\n2026-\nHyggelige indendørs markeder i Viborg\nLØRDAG\n14. NOVEMBER\n= 2026 -",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086731787421_101651483",
+    "text": "LOPPEMARKED\n*PA KIRKETORVET *\nLIGE FORAN HARALDSKIRKEN\nHver Lørdas 9.00-14.00\nHØJE GLADSAXE TORV 2\nLOPPEMARKED DRIVES AF FRIVILLIGE\n- OG ER ALMENNYTTIGT! —\n-ALT OVERSKUD FRA UDLEJNING OG SALG\n* FRA MAD/DRIKKE GÅR TIL\n-HGIS AKTIVITETER!\nSTADEPLADSER KØBES PÁ\nHGLOPPEMARKED.DK\n-Maj → September +",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg9308086727788077_1221786446",
+    "text": "Search Facebook\nGARDLOPPEMARKED\nPÅ BISPEBJERG\nHygge, musik og loppefund\nIndgang ved hjørnet af Frederiksborgvej 176\nog Bispebjerg Parkallé, 2400 København NV",
+    "url": "https://www.facebook.com/groups/362315834415/"
+  },
+  {
+    "id": "fbimg9308086719135793_1221866102",
+    "text": "LOPPEMARKED\nPÅ MINDEJORDEN\n÷11.00-16.00-\nGODE FUND\nTIL STORE\nOG SMA\nMAD & DRIKKE 2-\nSENERE PA\nDAGEN...\nLEG PÅ\nLEGEPLADSEN\nGULDGRAVNING",
+    "url": "https://www.facebook.com/groups/362315834415/"
+  },
+  {
+    "id": "fbimgt39308086650740729_95089599",
+    "text": "LOPPEMARKED på BRYGGEN\nSØN 28.6 kL 10-16\nKulturhuset Islands Brygge",
+    "url": "https://www.facebook.com/groups/785478073645748/"
+  },
+  {
+    "id": "fbimgt39308086723641868_36228617",
+    "text": "LOPPEMARKED LØRDAG D. 27juNi. KL.11-16\nI DREJØGADE 1-3 + JAGTVEJ 203-205\nKOM OG SE OM DU KAN GØRE ET LOPPEFUND\nGRATIS BODPLADS, DU MEDBRINGER BORD\nOG STOL ELLER ANDET TIL DIN BOD SMS BOD\nTIL 25619853 MED DIT NAVN\nTELEFONNUMMER OG EMAIL ADRESSE SA\nSENDER JEG INFO\nAFLYST VED RIGTIG DÅRLIG\nVEJR, HELDAGSREGN,STÆRKBLÆST ELLER\nKULDE\nKÆRLIG HILSEN LOPPERNE I DREJØGADE\nSUSANNE MORTENSEN",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086703745987_101654095",
+    "text": "KIRSEBÆRHAVENS\nLOPPEMARKED\nSØNDAG DEN 14. JUNI 2026\nKL. 10-16\nHVOR\nVED BOLDBURET I GÅRDEN PÅ\nHJØRNET AF HOLTEGADE OG\nJULIUS BLOMS GADE\nU",
+    "url": "https://www.facebook.com/groups/785478073645748/"
+  },
+  {
+    "id": "fbimgt39308086715464670_24589349",
+    "text": "STORT INDENDØRS LOPPEMARKED\nRødovre Centrum - Grundlovsdag\n5. Juni kl. 10.00-15.00",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086710929374_24583570",
+    "text": "STORT INDENDØRS LOPPEMARKED\nRødovre Centrum - Grundlovsdag\n5. Juni kl. 10.00-15.00",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086738570868_16813653",
+    "text": "Q Search Facebook\nStefan Schmidt\n4h -0\nEt lille hyggeligt marked med plads til børn og voksende o\nbarnligesjæle så kig gerne forbi det hvil glæde os at se di\nvi har priser fra 4 kroner og op *&®2\nGudme's loppemarked\nÅBEN HVER LØRDAG - SØNDAG -11-15",
+    "url": "https://www.facebook.com/groups/607762852587305/"
+  },
+  {
+    "id": "fbimgt39308086738438432_16813653",
+    "text": "Search Facebook\n4h •0\nEt lille hyggeligt marked med plads til børn og voksende d\nbarnligesjæle så kig gerne forbi det hvil glæde os at se dis\nvi har priser fra 4 kroner og op * d @i\nGudme's loppemarked\nÅBEN HVER LØRDAG - SØNDAG -11-15\nved nærmere info. Kontakt\nGudme's loppemarked",
+    "url": "https://www.facebook.com/groups/607762852587305/"
+  },
+  {
+    "id": "fbimgt39308086735001900_44874102",
+    "text": "*Rising contributor • July 2 at 8:11PM • 0\nLoppemarked d. 4 og 5 juli Marstrup Møllevej 50",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086732137588_102397766",
+    "text": "Så er der loppemarked\npå Torvet i Gråsten\nFredag den 3. juli\nFredag den 10. juli\nFredag den 17.juli\nFredag den 24.juli\nTorvedage den 31. juli og 1. august\nAlle fredage fra kl. 10.00 - 16.00\nLOPPE\nMARKED\nKøb en standplads: prisen er kun kr. 50,-\nTilmelding hos:\nAnna Villadsen tlf. 2176 5755\nKræftens\nBekæmpelse\nPladsbetalingen går ubeskåret til: Lokaludvalget for Grasten og omegn",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "mp2431477860660309",
+    "text": "😏🇩🇰.  Tissø Kræmmer marked \nSæbyvej 48, 4270 Høng \nSøndage 10-15., Kalundborg",
+    "url": "https://www.facebook.com/marketplace/item/2431477860660309/"
+  },
+  {
+    "id": "fbimg39308086468753524_101615456",
+    "text": "Q Search Facebook\nGruppen\nLoppemarked Sydfyn\n© Public group • 2.5K members\n+ Invite\nAbout\nDiscussion\nPeople\nEvents\nMedia\nFiles\n• Share\ni Joined -\nQ",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086734664307_48786908",
+    "text": "Loppemarked\nlørdag d. 4.7 kl. 10-14\ni gården bag Sankt Nicolai Apotek.\nSankt Nicolai Gade 2a, 5700\nSvendborg, lige over for kirken.\nBlandede ting til hjemmet, tøj, små\nmebler etc\nVi ses\nPs, hvis det regner eller\nblæser for meget aflyser vi.",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086724552202_31433540",
+    "text": "Hornegydén 6, 5600 Faaborg\nTippelsbjerggaard danner rammen om et marked med\nmange forskellige kræmmerstande.\nTIPPELSBJERGGAARD LOPPE - RETRO - ANTIK\nLørdag kl. 10- 16 / Torsdag kl. 14 - 18\nManed\nMarts\nLordag\nTorsdag\n2.21\n5,19\n4,18\n2.16,30\n2.16.30\nM,28\n6,20\n4.18\n2.16.30",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086707125715_18308269",
+    "text": "ebook\nMARKED\nDen 10., 11. og 12. Juli\nSTORT KRÆMMERMARKED\nca. 300 krammere-ca. 3 km facade\nMonstertrucks\nMASSER AF UDSTILLINGER\nVeteranbiler,-motorcykler.\nmodeltog og meget mere\nLASTBILUDSTILLING\nca. 100 lastbiler\nSkinz\nTIVOLILAND\nKÆMPE MARKEDSFEST\nLerdag kl. 18.00 med\nKort Varsel og\nKeen on Queen\nStig& Vennerne\nLille Bille\nEmil tange\nMartin Kanstrup\nDrikkevarer\nmà kko\nmedbringes\nIndgans ua\nKampe\nreklamebanko\ni Otua Matturkt\nCovister te 10.0004*\nReco en Queen\nBAGAGERUMSHARKED\nSONDAG\nMorten Munster\nog Toblas\nDocopio Datos\nSe hele programmet på www.erbæk-marked.dk\nNyborg Arlasse\nTUBORG\nSaren Sarkunsiner\n2026\nFyens Stiftstidende",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "SunAug2at10AMLoppemarkedpHillerd",
+    "text": "Sun, Aug 2 at 10 AM\nLoppemarked på Hillerød Torv\nPå Torvet I Hillerød\nInterested\nShare\n143 interested · 5 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SunSep6at10AMLoppemarkedpHillerd",
+    "text": "Sun, Sep 6 at 10 AM\nLoppemarked på Hillerød Torv\nPå Torvet I Hillerød\nInterested\nShare\n91 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SunOct4at10AMLoppemarkedpHillerd",
+    "text": "Sun, Oct 4 at 10 AM\nLoppemarked på Hillerød Torv\nPå Torvet I Hillerød\nInterested\nShare\n53 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SatOct31Nov1HillerdsStoreKrmmero",
+    "text": "Sat, Oct 31 - Nov 1\nHillerøds Store Kræmmer og Loppemarked\nRoyal Stage Hillerød\nInterested\nShare\n745 interested · 28 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SatAug15at10AMLoppemarkedpHyacin",
+    "text": "Sat, Aug 15 at 10 AM\nLoppemarked på Hyacintvej, Tulstrup\nHyacintvej, 3400 Hillerød\nGoing",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SunMay24LoppemarkedHillerd1went",
+    "text": "Sun, May 24\nLoppemarked\nHillerød\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SunJun7LoppemarkedpHillerdTorvPT",
+    "text": "Sun, Jun 7\nLoppemarked på Hillerød Torv\nPå Torvet I Hillerød\n1.8K interested · 69 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SatApr25GenbrugsperlenBredygtigt",
+    "text": "Sat, Apr 25\nGenbrugsperlen - Bæredygtigt Loppemarked\nFrederiksborg Gymnasium og HF\n62 interested · 18 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SunMay3LoppemarkedpHillerdTorvTo",
+    "text": "Sun, May 3\nLoppemarked på Hillerød Torv\nTorvet i Hillerød\n526 interested · 15 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SunJul5LoppemarkedpHillerdTorvPT",
+    "text": "Sun, Jul 5\nLoppemarked på Hillerød Torv\nPå Torvet I Hillerød\n555 interested · 16 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SatMay9Animebiografforestillinga",
+    "text": "Sat, May 9\nAnime biograf forestilling af Scarlet med cosplay walk, fotografer og mini loppemarked\nCafé Slotsbio\n40 interested · 9 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20hiller%C3%B8d"
+  },
+  {
+    "id": "SatJul4GenbrugsmarkedTndervej22T",
+    "text": "Sat, Jul 4\nGenbrugsmarked\nTøndervej 22, Toftlund\n1 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=genbrugsmarked"
+  },
+  {
+    "id": "SatMay9KMPEloppeoggenbrugsmarked",
+    "text": "Sat, May 9\nKÆMPE loppe- og genbrugsmarked i Aars!\nMessecenter Vesthimmerland\n1.1K interested · 66 went",
+    "url": "https://www.facebook.com/events/search?q=genbrugsmarked"
+  },
+  {
+    "id": "SunJul12Antikmarked1went",
+    "text": "Sun, Jul 12\nAntikmarked\n1 went",
+    "url": "https://www.facebook.com/events/search?q=antikmarked"
+  },
+  {
+    "id": "SunMay17Loppeogantikmarked8inter",
+    "text": "Sun, May 17\nLoppe og antikmarked\n8 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=antikmarked"
+  },
+  {
+    "id": "mp1372658401630869",
+    "text": "Loppemarked, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1372658401630869/"
+  },
+  {
+    "id": "mp1997127614315001",
+    "text": "Loppemarked - masser af billigt børnetøj og ting til hjemmet, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1997127614315001/"
+  },
+  {
+    "id": "mp1589647776060418",
+    "text": "Loppemarked i Langeskov, Kerteminde",
+    "url": "https://www.facebook.com/marketplace/item/1589647776060418/"
+  },
+  {
+    "id": "mp1738117840532471",
+    "text": "Loppemarked på Lindevej, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1738117840532471/"
+  },
+  {
+    "id": "mp1736104754064776",
+    "text": "Loppemarked- betal hvad du vil., Assens, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1736104754064776/"
+  },
+  {
+    "id": "mp1380736127244238",
+    "text": "LOPPEMARKED, Veflinge, Fyn, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1380736127244238/"
+  },
+  {
+    "id": "mp1524163822700118",
+    "text": "Loppemarked-odense.dk, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1524163822700118/"
+  },
+  {
+    "id": "mp1714769679536235",
+    "text": "Oprydning salg Loppemarked, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1714769679536235/"
+  },
+  {
+    "id": "mp4450483721943031",
+    "text": "Loppemarked i Nybølle, Faaborg",
+    "url": "https://www.facebook.com/marketplace/item/4450483721943031/"
+  },
+  {
+    "id": "mp1005487511993395",
+    "text": "Loppemarked/Oprydning salg, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1005487511993395/"
+  },
+  {
+    "id": "mp1977645616445272",
+    "text": "Loppemarked, Assens, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1977645616445272/"
+  },
+  {
+    "id": "mp1455934936269823",
+    "text": "GADE LOPPEMARKED I ESPE🤩☀️ 11-16., Faaborg",
+    "url": "https://www.facebook.com/marketplace/item/1455934936269823/"
+  },
+  {
+    "id": "mp1316926036919061",
+    "text": "Retro / Loppemarked, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1316926036919061/"
+  },
+  {
+    "id": "mp956766903878801",
+    "text": "Loppemarked, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/956766903878801/"
+  },
+  {
+    "id": "mp1724577612017447",
+    "text": "Loppemarked, Faaborg",
+    "url": "https://www.facebook.com/marketplace/item/1724577612017447/"
+  },
+  {
+    "id": "mp785952884545945",
+    "text": "Loppemarked søndag 5. juli Odense NV, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/785952884545945/"
+  },
+  {
+    "id": "mp1577444110564023",
+    "text": "Loppemarked BYD, Middelfart, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1577444110564023/"
+  },
+  {
+    "id": "mp1335971045387363",
+    "text": "Loppemarked på Stigevej 270, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1335971045387363/"
+  },
+  {
+    "id": "mp1019687640766103",
+    "text": "LOPPEMARKED, Snoghøj, Vejle, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1019687640766103/"
+  },
+  {
+    "id": "mp2219458645507344",
+    "text": "Loppemarked, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/2219458645507344/"
+  },
+  {
+    "id": "mp1564569491685081",
+    "text": "Kræmmerting og Loppemarked, Nyborg, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1564569491685081/"
+  },
+  {
+    "id": "mp988480607478535",
+    "text": "Vej loppemarked, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/988480607478535/"
+  },
+  {
+    "id": "mp1548953293303356",
+    "text": "Loppemarked Fåborg Havn 4/7, Faaborg",
+    "url": "https://www.facebook.com/marketplace/item/1548953293303356/"
+  },
+  {
+    "id": "mp1647766769646433",
+    "text": "Loppemarkedet d. 17-18 fra 10.00-15.00, Nyborg, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1647766769646433/"
+  },
+  {
+    "id": "mp1314928130743671",
+    "text": "Loppemarked, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1314928130743671/"
+  },
+  {
+    "id": "mp3932872956848688",
+    "text": "Loppemarked Axeltorvet Fredericia, Fredericia",
+    "url": "https://www.facebook.com/marketplace/item/3932872956848688/"
+  },
+  {
+    "id": "mp1567835678010235",
+    "text": "Loppemarked 🥳, Nyborg, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1567835678010235/"
+  },
+  {
+    "id": "mp1401746798525687",
+    "text": "Loppemarked, Faaborg",
+    "url": "https://www.facebook.com/marketplace/item/1401746798525687/"
+  },
+  {
+    "id": "mp936874836077373",
+    "text": "Loppemarked, Kerteminde",
+    "url": "https://www.facebook.com/marketplace/item/936874836077373/"
+  },
+  {
+    "id": "mp1180372568488581",
+    "text": "Bedste loppemarked, Nyborg, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1180372568488581/"
+  },
+  {
+    "id": "mp1998517410746280",
+    "text": "Loppemarked ting, Kerteminde",
+    "url": "https://www.facebook.com/marketplace/item/1998517410746280/"
+  },
+  {
+    "id": "mp27779333845031069",
+    "text": "Loppemarked, Vejen, Ribe, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/27779333845031069/"
+  },
+  {
+    "id": "mp27865705239703872",
+    "text": "Loppemarked 5854 Gislev, Faaborg",
+    "url": "https://www.facebook.com/marketplace/item/27865705239703872/"
+  },
+  {
+    "id": "mp27974338718817295",
+    "text": "Loppemarked., Suldrup, Nordjylland, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/27974338718817295/"
+  },
+  {
+    "id": "mp26263075233359268",
+    "text": "Loppemarked!!, Assens, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/26263075233359268/"
+  },
+  {
+    "id": "mp27236284295995639",
+    "text": "Stort FDF-Loppemarked, Odense, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/27236284295995639/"
+  },
+  {
+    "id": "mp27732557809702431",
+    "text": "Torg / loppemarked. H0",
+    "url": "https://www.facebook.com/marketplace/item/27732557809702431/"
+  },
+  {
+    "id": "SatAug22at10AMLoppemarkediOddFel",
+    "text": "Sat, Aug 22 at 10 AM\nLoppemarked i Odd Fellow Huset\nFrederiksgade 15, 4200 Slagelse, Danmark\nInterested\nShare\n28 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20slagelse"
+  },
+  {
+    "id": "SatJul11Loppemarkedmedbilligudst",
+    "text": "Sat, Jul 11\nLoppemarked med billig udstyr\nSlagelse\n5 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20slagelse"
+  },
+  {
+    "id": "SatJun20SlagelseFAMILIEloppemark",
+    "text": "Sat, Jun 20\nSlagelse FAMILIE-loppemarked\nSlagelse Lystanlæg\n55 interested · 10 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20slagelse"
+  },
+  {
+    "id": "ThuMay14StortLOPPEMARKEDogbenthu",
+    "text": "Thu, May 14\nStort LOPPEMARKED og åbent hus på Veteranhjem Slagelse\nSdr. Stationsvej 26, 4200 Slagelse, Denmark\n31 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20slagelse"
+  },
+  {
+    "id": "SatApr18TJLOPPEMARKEDISLAGELSEFr",
+    "text": "Sat, Apr 18\n🌸 TØJ- & LOPPEMARKED I SLAGELSE 🌸\nFrederiksgade 15, 4200 Slagelse, Danmark\n27 interested · 7 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20slagelse"
+  },
+  {
+    "id": "SatMay9LoppemarkedSandager44200S",
+    "text": "Sat, May 9\nLoppemarked\nSandager 4, 4200 Slagelse\n1 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20slagelse"
+  },
+  {
+    "id": "SunMay17LOPPEMARKEDSctJrgensgade",
+    "text": "Sun, May 17\nLOPPEMARKED - Sct.Jørgensgade, Hans Tausensgade, Bag Klostret - kørende HESTEVOGN\nSct Jørgensgade\n72 interested · 26 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20slagelse"
+  },
+  {
+    "id": "SatJul18at11AMand15moreLoppetorv",
+    "text": "Sat, Jul 18 at 11 AM and 15 more\nLoppetorvet - Københavns Loppetorv\nIsraels Plads, 1361 København K, Danmark\nInterested\nShare\n22 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppetorv"
+  },
+  {
+    "id": "SunAug2at11AMand2moreLoppetorvet",
+    "text": "Sun, Aug 2 at 11 AM and 2 more\nLoppetorvet og Tøjtøj Market - Københavns Loppetorv\nIsraels Plads, 1361 København K, Danmark\nInterested\nShare\n4 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppetorv"
+  },
+  {
+    "id": "ThuMay14GastronomiskloppetorvpLu",
+    "text": "Thu, May 14\nGastronomisk loppetorv på Lumskebugten\nRestaurant Lumskebugten\n13 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=loppetorv"
+  },
+  {
+    "id": "fbimg39308086746294955_102466052",
+    "text": "Hyggeligt lokalt\nLOPPEMARKED\ni kolonihaveforeningen\n4. MAJ\nDato\nd. 18/7\nTid\nkl. 10.00 - 15.00.\nSted\nHF 4 maj,\nLersøstien 127/fælleshuset\n2100 KBH Ø\nDer er ca 10-15 boder\nDer er mulighed for at\nkøbe kaffe, te og kage\nsamt kolde drikke.",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39994226747450443_15748914",
+    "text": "FJELLERUP STRAND\nKRAMMEK\n•MARKED:\nDEN 16. - 19. JULI 2026\nKampe\n-hoppeland/\nTivoli\nKRÆMMER\nMARKEDET\nÅBNER HVER\nDAG KL. 10%\nBankospil\nTorsdag kl. 19%0\ni teltet\nLivemusik\nmed\nKRILL\nLerdag\nkl. 21000\"\nFed musik - Fed lordag\nDet sker kl. 14.00\nStreetfood\nmarked\nLUKKER\nMod\nklovnen Alfredo\nLordag kl.13°\ni teltet\nWWW..JELLERUPKRAM.DK\n*jellerup Aktilletshus, Fjollehaven Fjellerup, FJAS (Fjellerup amaterscene) og andre kulturelle ociale",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086745981385_102388933",
+    "text": "Avedøre Boligselskab's\nLIVE\nLoppemarked\nMUSIC\nPå græsplænen i Byparken\nSom altid masser af loppestande, to hoppeborg til børn, live musik og mulighed\nfor at købe slushice, popcorn, kaffe/the og drikkevarer.\nSom noget nyt er der i år karrusel til børn.\nLørdag d. 15. august 2026 kl. 11-16\nStandplads kræver tilmelding til loppemarkedsudvalget på mail, dette gælder både for beboere og udefrakommende:\nloppemarked@avbs.dk\nStandpladserne er 3x3 meter, og der er begrænset antall\nSidste år var alle pladser booket, men i år kommer der flere pladser,\nLOPPE\nMARKED\ndog stadig et begrænset antal.\nGratis for beboere i Avedøre Stationsby Nord, Syd & Store Hus\n50 kr. for standplads for udefrakommende\nTilmelding senest d. 9. august 2026\nMvh.\nLoppemarkedsudvalget\nAvedøre Boligselskab",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086745830886_101645712",
+    "text": "Husk VORES\nSIDSTE\nLOPPEMARKED!\nMasser af tøj, ting og gode fund til både store og små!\nONSDAG\nDEN 15. JULI\nKL. 11.00-16.00\nMOGENSBÆKVEJ 5\n9881 SDR. BINDSLEV\nVI GLADER OS\nTIL AT SE JER!\nVi gleder s\ntil at se jer!\nDER KAN KUN\nBETALES MED\nELLER\nMobilePay\nKONTANT\nMASSER AF TØJ, TING OG\nALT MULIGT ANDET!\nKOM OG GØR\nET GODT KUP!",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086739983533_102441899",
+    "text": "FINE HOEMME\nHAKLET TING\nKAN\nKOBES\nKOB\nET\nBALKIT\nMED SKUHFIDUSER OG KikS\nOG LAN DET VED BALET\nLOPPEMARKED\nKOM OG GøR\nEN GOD HANDEL\nBiLLiG\nSAGER\nAIT SKAL\nSOMMERHYGGE\nKL. 10-18°°\nDer Salges cookies\nog Kaffe samt slush Ice\nTIL BØRNENE, DER KAN\nNYDES I HYGGE OMRÅDET.\nOGA VAGTLET\nSALG AF FEG\nomade\nmed\nAktiviteter,",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086741968335_101645526",
+    "text": "Husk VORES\nSIDSTE\nLOPPEMARKED!\nMasser af tøj, ting og gode fund til både store og små!\nONSDAG\nDEN 15. JULI\nKL. 11.00-16.00\nMOGENSBÆKVEJ 5\n9881 SDR. BINDSLEV\nVI GLADER OS\nTIL AT SE JER!\nVi gleder s\ntil at se jer!\nDER KAN KUN\nBETALES MED\nELLER\nMobilePay\nKONTANT\nMASSER AF TØJ, TING OG\nALT MULIGT ANDET!\nKOM OG GØR\nET GODT KUP!",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086740621806_40446233",
+    "text": "LOPPEMARKED\ni Hunseby-Maglemer - Skelstrup\nBeboerne har ryddet ud i gemmerne\nog er klar til et brag af et fælles loppemarked.\nDu har nu chancen for at gøre en rigtig\ngod handel blandt de mange loppeboder\ni Hunseby - Maglemer & Skelstrup\nMaske du kan være heldig, at blive budt på en kop kaffe undervejs...\n-sả ta' traveskoene på og kom til en festlig loppedag!\nSøndag\n12. Juli\nKI. 10 - 16",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086742129506_101652134",
+    "text": "LOPPEMARKED\n*PA KIRKETORVET *\nLIGE FORAN HARALDSKIRKEN\nHver Lørdas 9.00-14.00\nHØJE GLADSAXE TORV 2\nLOPPEMARKED DRIVES AF FRIVILLIGE\n--OG ER ALMENNYTTIGT! -\n*ALT OVERSKUD FRA UDLEJNING OG SALG\n*FRA MAD/DRIKKE GAR TIL\n*HGIS AKTIVITETER!\nSTADEPLADSER KØBES PÁ\nHGLOPPEMARKED.DK\n-Maj → September +",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt15525610742799220_25053273",
+    "text": "Sommer loppemarked\nLør. 11. + søn. 12. Juli Kl. 10-16\nFogedgardsvei 14\n4760 Vordingborg",
+    "url": "https://www.facebook.com/groups/362315834415/"
+  },
+  {
+    "id": "fbimg39308086739437490_102442571",
+    "text": "-LOPPEMARKED\nPIPKVARTERET,\nKØGE -2026\nSØNDAG D.\nKL.\n2. AUGUST 2026\n10.00-15.00\nVi er stærkt tilbage - og glader os til\nloppemarked i Pipkvarteret\nTraditionen tro bliver Pipkvarteret første\nsendag i august måned forvandlet til ét\nstort skattejagtområde, når hele Pipkvarteret\nfyldes med loppeboder! 54\nDel gerne begivenheden og budskabet\nmed naboer, kolleger, venner og familie\nVi glader os til at se jer sandag d. 2. august\ntil loppemarked i Pipkvarteret, Koge *\nDANSKE\nMASSALESE\nGRØNNINGEN &\nGLENTEVEJ,\n4600 KOGE\nGODE FUND\nGOD STEMNING\nGODT NABOSKAB",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086740611323_15114264",
+    "text": "KRÆMMERMARKED\nLØRDAG DEN 11. JULI\nKL. 10-16\nLogballe Camping\nPØLSER\nMED BRØD\nFADØL\nSODAVAND\nHJEMMEBAGTE\nKAGER\nKom og gør et godt køb-\nvi gloeder os til at se dig!\nKAFFE OG TE\nKAN KØBES\nC",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "SatOct17Oct18KMPELOPPEMARKEDPFNG",
+    "text": "Sat, Oct 17 - Oct 18\nKÆMPE LOPPEMARKED PÅ FÆNGSLET 17.-18. OKT\nFÆNGSLET\nInterested\nShare\n1.5K interested · 69 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20horsens"
+  },
+  {
+    "id": "SunAug2at8AMand1moreBagagerumsma",
+    "text": "Sun, Aug 2 at 8 AM and 1 more\nBagagerumsmarked hos loppemarked til gavn for dyr i nød\nParallelvej 14, 8700 Horsens, Danmark\nInterested\nShare\n16 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20horsens"
+  },
+  {
+    "id": "SunJun7bagaerumsmarkedhosloppema",
+    "text": "Sun, Jun 7\nbagaerumsmarked hos loppemarked til gavn for dyr i nød\nParallelvej, 8700 Horsens, Danmark\n5 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20horsens"
+  },
+  {
+    "id": "SatApr25Smedegade81Loppemarked87",
+    "text": "Sat, Apr 25\nSmedegade 81 Loppemarked\n8700 Horsens\n7 interested · 4 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20horsens"
+  },
+  {
+    "id": "SatApr11KMPELOPPEMARKEDPFNGSLETH",
+    "text": "Sat, Apr 11\nKÆMPE LOPPEMARKED PÅ FÆNGSLET HORSENS 11.-12. APRIL\nFÆNGSLET\n47 interested · 8 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20horsens"
+  },
+  {
+    "id": "SatApr11STORTLOPPEMARKEDPFNGSLET",
+    "text": "Sat, Apr 11\nSTORT LOPPEMARKED PÅ FÆNGSLET\nFÆNGSLET\n3.8K interested · 362 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20horsens"
+  },
+  {
+    "id": "mp1336456838650717",
+    "text": "Marked i Lohals havn. Masser af kræmmer., Faaborg",
+    "url": "https://www.facebook.com/marketplace/item/1336456838650717/"
+  },
+  {
+    "id": "mp1592075868748446",
+    "text": "Gårdsalg / kræmmermarked ting, Herning, Denmark",
+    "url": "https://www.facebook.com/marketplace/item/1592075868748446/"
+  },
+  {
+    "id": "mp1034642282572903",
+    "text": "Tørring antik og kræmmermarked, Hedensted",
+    "url": "https://www.facebook.com/marketplace/item/1034642282572903/"
+  },
+  {
+    "id": "SatJan302027Jan312027STORTLOPPEM",
+    "text": "Sat, Jan 30, 2027 - Jan 31, 2027\nSTORT LOPPEMARKED PÅ GODSBANEN 30.-31. JANUAR\nGodsbanen\nInterested\nShare\n110 interested · 9 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatAug15at10AMFlagstangLoppemark",
+    "text": "Sat, Aug 15 at 10 AM\nFlagstang Loppemarked i Mølleparken - Lørdag d. 15 August!\nMølleparken\nInterested\nShare\n269 interested · 10 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatAug29at11AMTeseianSummerTESEk",
+    "text": "Sat, Aug 29 at 11 AM\nTeseian Summer: TESE-kunstnernes loppemarked i galleriet\nGraven 21, 8000 Aarhus, Denmark\nInterested\nShare\n20 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatJul25at11AMLoppemarkedogbrned",
+    "text": "Sat, Jul 25 at 11 AM\nLoppemarked og børnedag.\nHaveforeningen Rugholm\nInterested\nShare\n9 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatSep26at10AMLoppemarkedgretgod",
+    "text": "Sat, Sep 26 at 10 AM\nLoppemarked - gør et godt fund!\nHjarnøgade 1, 8000 Aarhus, Denmark\nInterested\nShare\n13 interested · 6 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SunJun21LoppemarkedpChristiansbj",
+    "text": "Sun, Jun 21\nLoppemarked på Christiansbjerg\nIdrætsbørnehaven Motalagade\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatJun13Loppemarkedjlheibergsvej",
+    "text": "Sat, Jun 13\nLoppemarked\nj. l. heibergsvej 47, åbyhøj\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatJun27Norsgadesrligeloppemarke",
+    "text": "Sat, Jun 27\nNorsgades årlige loppemarked\nNorsgade, 8000 Aarhus C, Danmark\n14 interested · 4 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SunJun21LoppemarkediMotalagadeId",
+    "text": "Sun, Jun 21\nLoppemarked i Motalagade\nIdrætsbørnehaven Motalagade\n12 interested · 12 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SunJun7LoppemarkedWillemoesgade2",
+    "text": "Sun, Jun 7\nLoppemarked Willemoesgade 2026\nWillemoesgade 78, 8200 Aarhus N, Danmark\nThis event was canceled",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatJun13LoppemarkedhosAnnieibyhj",
+    "text": "Sat, Jun 13\nLoppemarked hos Annie i Åbyhøj\nJ.L. Heibergsvej 47-49 Åbyhøj, Aarhus\n17 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatMay23LoppemarkedAarhus1intere",
+    "text": "Sat, May 23\nLoppemarked\nAarhus\n1 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SunMay17FlagstangLoppemarkedpGod",
+    "text": "Sun, May 17\nFlagstang Loppemarked på Godsbanen\nGodsbanen\n1K interested · 30 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "FriMay22LoppemarkedAarhus1went",
+    "text": "Fri, May 22\nLoppemarked\nAarhus\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatMay9SpejdernesloppemarkedAarh",
+    "text": "Sat, May 9\nSpejdernes loppemarked Aarhus Syd/Egelund\n5 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatJun6LoppemarkedigrdenUniversi",
+    "text": "Sat, Jun 6\n🌞 Loppemarked i gården 🌞 (Universitetsboligerne)\nUniversitetsbyen 52, 8000 Aarhus C, Danmark\nThis event was canceled",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatMay2STORTLOPPEMARKEDPGODSBANE",
+    "text": "Sat, May 2\nSTORT LOPPEMARKED PÅ GODSBANEN 2.-3. MAJ\nGodsbanen\nJen was interested",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SunMay24TrashGirls8000KultureltL",
+    "text": "Sun, May 24\nTrashGirls8000 - Kulturelt Loppemarked #10\nInstitut for (X), Godsbanen, Aarhus\nThis event was canceled",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SunMay3LoppemarkedmedKONTURpArki",
+    "text": "Sun, May 3\nLoppemarked med KONTUR på Arkitektskolen Aarhus\nExners Plads 7, Aarhus\n36 interested · 7 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatMay2LoppemarkediparkenvedMars",
+    "text": "Sat, May 2\nLoppemarked i parken ved MarselisborgCentret\nEvald Krogs Gade 1-17, Aarhus\nJen was interested",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatMay23LOPPEMARKED2026Thungade2",
+    "text": "Sat, May 23\nLOPPEMARKED 2026\nThunøgade 2A, 8000 Aarhus, Denmark\n1.1K interested · 36 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatApr18LOPPEMARKEDIGRDENHeghGul",
+    "text": "Sat, Apr 18\nLOPPEMARKED I GÅRDEN - Høegh Guldbergsgade 89/91\nHøegh Guldbergsgade 89 8000 Århus C\n98 interested · 8 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SunJun7FinnebyensLoppemarkedFinn",
+    "text": "Sun, Jun 7\nFinnebyens Loppemarked\nFinnebyen\n49 interested · 17 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SunMay10ChristiansbjergLoppemark",
+    "text": "Sun, May 10\nChristiansbjerg Loppemarked\nAarhus\n17 interested · 4 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "WedJun3SteinerLoppemarkedStrandv",
+    "text": "Wed, Jun 3\nSteiner Loppemarked\nStrandvejen 90, 8000 Aarhus C, Danmark\n42 interested · 9 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SunMay10LOPPEMARKEDVEDRDEBGENord",
+    "text": "Sun, May 10\nLOPPEMARKED VED RØDEBØGE🌞🌳\nNordre Ringgade 70, 8200 Aarhus N, Danmark\n36 interested · 10 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatApr11OFLoppemarkedTandlgeskol",
+    "text": "Sat, Apr 11\nOF Loppemarked\nTandlægeskolen Aarhus\nThis event was canceled",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatApr11LoppemarkedBestilbodnuLi",
+    "text": "Sat, Apr 11\nLoppemarked *Bestil bod nu*\nLivøsmøgen 40, 8000 Aarhus, Denmark\n73 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SunApr19LoppemarkedpMarselisborg",
+    "text": "Sun, Apr 19\nLoppemarked på Marselisborg\nMarselisborg Gymnasium\n42 interested · 9 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatApr18FlagstangLoppemarkedpGod",
+    "text": "Sat, Apr 18\nFlagstang Loppemarked på Godsbanen\nGodsbanen\n1.2K interested · 39 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aarhus"
+  },
+  {
+    "id": "SatSep19at10AMLoppemarkediHCrste",
+    "text": "Sat, Sep 19 at 10 AM\nLoppemarked i H.C. Ørsteds gade\nH.C. Ørsteds Gade 17, 6700 Esbjerg\nInterested\nShare\n667 interested · 39 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20esbjerg"
+  },
+  {
+    "id": "SatJul4Loppemarked6715Gjesing11i",
+    "text": "Sat, Jul 4\nLoppemarked\n6715 - Gjesing\n11 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20esbjerg"
+  },
+  {
+    "id": "SatJul4LoppemarkedGrnlandsparken",
+    "text": "Sat, Jul 4\nLoppemarked\nGrønlandsparken 220\n3 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20esbjerg"
+  },
+  {
+    "id": "SunJun14LoppemarkedifinnehuseneD",
+    "text": "Sun, Jun 14\nLoppemarked i finnehusene D 14/6\nStines Gavebod\n27 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20esbjerg"
+  },
+  {
+    "id": "SatMay30LoppemarkedSnderengen386",
+    "text": "Sat, May 30\nLoppemarked\nSønderengen 38, 6700 Esbjerg, Danmark\nThis event was canceled",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20esbjerg"
+  },
+  {
+    "id": "MonMay25LoppemarkedpSEAEsbjergSp",
+    "text": "Mon, May 25\nLoppemarked på SEA Esbjerg\nSpangsbjerg Kirkevej 103, 6700 Esbjerg, Danmark\n140 interested · 33 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20esbjerg"
+  },
+  {
+    "id": "SatJul4LOPPEMARKEDmHusrumogFairh",
+    "text": "Sat, Jul 4\nLOPPEMARKED m. Husrum og Fairhuset\nSkjoldsgade 41, 6700 Esbjerg, Danmark\n37 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20esbjerg"
+  },
+  {
+    "id": "SunMay17LoppemarkedigadenIngeman",
+    "text": "Sun, May 17\nLoppemarked i gaden\nIngemanns Allé\n8 interested · 4 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20esbjerg"
+  },
+  {
+    "id": "SatMay2KlunsKunstLoppemarkedFinl",
+    "text": "Sat, May 2\nKluns & Kunst - Loppemarked\nFinlandsgade 62, Esbjerg\n25 interested · 6 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20esbjerg"
+  },
+  {
+    "id": "SatAug1at10AMloppemarkedInterest",
+    "text": "Sat, Aug 1 at 10 AM\nloppemarked\nInterested\nShare\n4 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatSep5Sep6LoppemarkedTandsletFr",
+    "text": "Sat, Sep 5 - Sep 6\nLoppemarked\nTandslet Friskole\nInterested\nShare\n68 interested · 13 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug22at10AMBakkensbroloppemar",
+    "text": "Sat, Aug 22 at 10 AM\nBakkensbro loppemarked\nBakkensbro 6, Ullerup\nInterested\nShare\n25 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "FriJul17Jul19LoppemarkedFlyttesa",
+    "text": "Fri, Jul 17 - Jul 19\nLoppemarked / Flyttesalg / HELE WEEKENDEN!\nTornhøjvej 29, 6200 Tumbøl, Danmark\nInterested\nShare\n33 interested · 7 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatJul18at11AMand1moreloppemarke",
+    "text": "Sat, Jul 18 at 11 AM and 1 more\nloppemarked\nNyborg\nInterested\nShare\n6 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug8at10AMLoppemarkedidrtsuge",
+    "text": "Sat, Aug 8 at 10 AM\nLoppemarked / idrætsuge\nIdrætsvej, 6230 Rødekro, Danmark\nInterested\nShare\n16 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatSep5at10AMLoppemarkedPlnenvCy",
+    "text": "Sat, Sep 5 at 10 AM\nLoppemarked\nPlænen v/Cypresvej 25, 6000 Kolding, Danmark\nInterested\nShare\n11 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug29at930AMLoppemarkediTusin",
+    "text": "Sat, Aug 29 at 9:30 AM\nLoppemarked i Tusindårsparken\nTusindårsparken\nInterested\nShare\n33 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "MonAug31at6PMLoppemarkedSvendbor",
+    "text": "Mon, Aug 31 at 6 PM\nLoppemarked\nSvendborgvej 83, Ørbæk\nInterested\nShare\n2 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunJul26at10AMLoppemarkedpPakhus",
+    "text": "Sun, Jul 26 at 10 AM\nLoppemarked på Pakhuskajen\nØstre Kaj 9, 5000 Odense C, Danmark\nInterested\nShare\nLisbeth is interested",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunJul19at9AMand14moreOdenseLopp",
+    "text": "Sun, Jul 19 at 9 AM and 14 more\nOdense Loppemarked 2026!\nEdisonsvej , 5000 Odense, Denmark\nInterested\nShare\n134 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug29at12PMdisLoppemarked2026",
+    "text": "Sat, Aug 29 at 12 PM\nØdis Loppemarked 2026\nSteppingvej 12A, 6580 Vamdrup, Danmark\nInterested\nShare\n49 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "WedDec2at6PMLoppemarkedSvendborg",
+    "text": "Wed, Dec 2 at 6 PM\nLoppemarked\nSvendborgvej 83, Ørbæk\nInterested\nShare\n3 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "TueOct6at6PMLoppemarkedSvendborg",
+    "text": "Tue, Oct 6 at 6 PM\nLoppemarked\nSvendborgvej 83, Ørbæk\nInterested\nShare\n4 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatOct31Nov1EbberupLoppemarkedEb",
+    "text": "Sat, Oct 31 - Nov 1\nEbberup Loppemarked\nEbberup Hallen\nInterested\nShare\n2 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug23at10AMLoppemarkedpPakhus",
+    "text": "Sun, Aug 23 at 10 AM\nLoppemarked på Pakhuskajen\nØstre Kaj 9, 5000 Odense C, Danmark\nInterested\nShare\n18 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatSep5at10PMBrnenesdagloppemark",
+    "text": "Sat, Sep 5 at 10 PM\nBørnenes dag loppemarked\nMågevej, 5620 Glamsbjerg, Denmark\nInterested\nShare\n31 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug8at10AMLoppemarkedRejsbyRe",
+    "text": "Sat, Aug 8 at 10 AM\nLoppemarked Rejsby\nRejsby Landevej 3, 6780 Skærbæk, Danmark\nInterested\nShare\n6 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug15at10AMVEJLESLNGSTELOPPEM",
+    "text": "Sat, Aug 15 at 10 AM\nVEJLES LÆNGSTE LOPPEMARKED\nGrejsdalen\nInterested\nShare\n57 interested · 15 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatNov7at10AMKrmmerogLoppemarked",
+    "text": "Sat, Nov 7 at 10 AM\nKræmmer og Loppemarked\nAllested-Vejle Fritidscenter - Officel\nInterested\nShare\n31 interested · 5 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunNov8at10AMKrmmerogLoppemarked",
+    "text": "Sun, Nov 8 at 10 AM\nKræmmer og Loppemarked\nAllested-Vejle Fritidscenter - Officel\nInterested\nShare\n20 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "ThisSaturdayat10AMLoppemarkedSnd",
+    "text": "This Saturday at 10 AM\nLoppemarked\nSønder Boulevard 73, 1720 Copenhagen, Denmark\nInterested\nShare\n231 interested · 7 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug16at10AMLOPPEMARKEDFjorden",
+    "text": "Sun, Aug 16 at 10 AM\nLOPPEMARKED- Fjordens dag\nStrandmøllevej 247, Holbæk\nInterested\nShare\n289 interested · 22 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunSep6at10AMLoppemarkedpBryggen",
+    "text": "Sun, Sep 6 at 10 AM\nLoppemarked på Bryggen\nKulturhuset Islands Brygge\nInterested\nShare\n244 interested · 11 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug22at10AMLoppemarkedvedKild",
+    "text": "Sat, Aug 22 at 10 AM\nLoppemarked ved Kilden\nKulturhuset Kilden\nInterested\nShare\n48 interested · 5 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "FriJul17Jul19LoppemarkedHoltetve",
+    "text": "Fri, Jul 17 - Jul 19\nLoppemarked\nHoltetvej 14, 9362 Gandrup\nInterested\nShare\n6 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatSep19at10AMLoppemarkedMDMadse",
+    "text": "Sat, Sep 19 at 10 AM\nLoppemarked\nM. D. Madsensvej, 3450 Allerød\nInterested\nShare\n49 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug23at10AMLoppemarkedpBrygge",
+    "text": "Sun, Aug 23 at 10 AM\nLoppemarked på Bryggen\nKulturhuset Islands Brygge\nInterested\nShare\n226 interested · 9 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatJul25at11AMloppemarkedMarkske",
+    "text": "Sat, Jul 25 at 11 AM\nloppemarked\nMarkskellet 76 og 78\nInterested\nShare\n8 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunOct11at10AMLoppemarkedpBrygge",
+    "text": "Sun, Oct 11 at 10 AM\nLoppemarked på Bryggen\nKulturhuset Islands Brygge\nInterested\nShare\n118 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "ThisSundayat10AMVEMMELEVLOPPEMAR",
+    "text": "This Sunday at 10 AM\nVEMMELEV LOPPEMARKED 2026\nStationsvej 1 , 4241 Vemmelev, Denmark\nInterested\nShare\n192 interested · 12 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug23at9AMand1moreLoppemarked",
+    "text": "Sun, Aug 23 at 9 AM and 1 more\nLoppemarked i Slusegården\nI. C. Modewegs Vej 5A, 2800 Kongens Lyngby, Denmark\nInterested\nShare\n289 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "HappeningnowLoppemarkediKorsrKor",
+    "text": "Happening now\nLoppemarked i Korsør\nKorsør Lystskov 2, 4220 Korsør, Denmark\nInterested\nShare\n210 interested · 9 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatJul25at9AMloppemarkedSkolegad",
+    "text": "Sat, Jul 25 at 9 AM\nloppemarked\nSkolegade 20, Ølgod\nInterested\nShare\n9 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "ThisSundayat8AMLoppemarkediOrdru",
+    "text": "This Sunday at 8 AM\nLoppemarked i Ordrup\nOrdrupvej, 4540 Fårevejle, Danmark\nInterested\nShare\n50 interested · 6 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug16at2PMLoppemarkedGodstedv",
+    "text": "Sun, Aug 16 at 2 PM\nLoppemarked\nGodstedvej 18, Øster Ulslev, Denmark\nInterested\nShare\n87 interested · 7 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug23at10AMLoppemarkedNdeboKr",
+    "text": "Sun, Aug 23 at 10 AM\nLoppemarked Nødebo Kro\nNødebovej 26, 3480\nInterested\nShare\n38 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug2at10AMand1moreLoppemarked",
+    "text": "Sun, Aug 2 at 10 AM and 1 more\nLoppemarked Tårnby Torv\nTårnby Torv, 2770 Kastrup, Danmark, 2770 Tårnby, Denmark\nInterested\nShare\n606 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunJul26at10AMLoppemarkedKorsrGl",
+    "text": "Sun, Jul 26 at 10 AM\nLoppemarked Korsør\nGl.Banegårdsplads.Korsr\nInterested\nShare\n42 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatJul25at10AMloppemarkedVardeIn",
+    "text": "Sat, Jul 25 at 10 AM\nloppemarked\nVarde\nInterested\nShare\n1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunJul26at12PMLoppemarkedHotelVi",
+    "text": "Sun, Jul 26 at 12 PM\nLoppemarked\nHotel Villa Strand\nInterested\nShare\n235 interested · 10 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatSep12Sep13LoppemarkedJernbane",
+    "text": "Sat, Sep 12 - Sep 13\nLoppemarked\nJernbanegade 26, 4920 Søllested, Danmark\nInterested\nShare\n32 interested · 5 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug1at10AMLoppemarkedHenriksv",
+    "text": "Sat, Aug 1 at 10 AM\nLoppemarked\nHenriksvej, Gørlev\nInterested\nShare\n9 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug8at10AMloppemarkedVardeInt",
+    "text": "Sat, Aug 8 at 10 AM\nloppemarked\nVarde\nInterested\nShare\n1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatJul25at10AMStaldenFlytteLoppe",
+    "text": "Sat, Jul 25 at 10 AM\nStalden Flytte Loppemarked\nJyderup, Vestsjalland, Denmark\nInterested\nShare\n31 interested · 5 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatJul25at10AMLoppemarked2026Ste",
+    "text": "Sat, Jul 25 at 10 AM\nLoppemarked 2026\nStenstrupvej 41, 4573 Højby, Denmark\nInterested\nShare\n35 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug22at10AMLoppemarkediHaslev",
+    "text": "Sat, Aug 22 at 10 AM\nLoppemarked i Haslev\nFreerslev Overdrevsvej, 4690 Haslev, Danmark\nInterested\nShare\n10 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug22at10AMLoppemarkedIBydels",
+    "text": "Sat, Aug 22 at 10 AM\nLoppemarked I Bydelshuset\nLangkærvej 2, 8381 Tilst, Denmark\nInterested\nShare\n96 interested · 12 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug2at10AMloppemarkedblangsle",
+    "text": "Sun, Aug 2 at 10 AM\nloppemarked\nblangslevvej 15 4700 Næstved\nInterested\nShare\n9 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatAug8at9AMloppemarkedSkolegade",
+    "text": "Sat, Aug 8 at 9 AM\nloppemarked\nSkolegade 20, Ølgod\nInterested\nShare\n12 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatSep5at10AMLoppemarkedforbrnVi",
+    "text": "Sat, Sep 5 at 10 AM\nLoppemarked for børn\nViby J. Gammel Kongevej 7-13, Viby J\nInterested\nShare\n46 interested · 7 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunOct11at10AMLoppemarkedHasselv",
+    "text": "Sun, Oct 11 at 10 AM\nLoppemarked\nHasselvej 15, 8620 Kjellerup, Denmark\nInterested\nShare\n78 interested · 5 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatSep5at10AMLoppemarkediVallens",
+    "text": "Sat, Sep 5 at 10 AM\nLoppemarked i Vallensbæk\nVallensbæk Vand- og Idrætsby\nInterested\nShare\n143 interested · 18 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunSep6at10AMLoppemarkedpSchlepp",
+    "text": "Sun, Sep 6 at 10 AM\nLoppemarked på Schleppegrellsgade\nSchleppegrellsgade, Aalborg\nInterested\nShare\n599 interested · 33 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatSep5at10AMTofteloppernesLoppe",
+    "text": "Sat, Sep 5 at 10 AM\nTofteloppernes Loppemarked 2026\nØsttoften, 8250 Egå, Denmark\nInterested\nShare\n348 interested · 21 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunJul19at8AMand11moreGentoftelo",
+    "text": "Sun, Jul 19 at 8 AM and 11 more\nGentofte loppemarked\nGentofte Loppemarked\nInterested\nShare\n1.2K interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug30at10AMKmpeloppemarkedMar",
+    "text": "Sun, Aug 30 at 10 AM\nKæmpe loppemarked Mariagerhallen\nMariagerhallen\nInterested\nShare\n82 interested · 6 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug9at10AMand7moreLoppemarked",
+    "text": "Sun, Aug 9 at 10 AM and 7 more\nLoppemarked i Blågårdsgade\nBlågårdsgade 12, 2200 Copenhagen, Denmark\nInterested\nShare\n2.1K interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatOct31Nov1LoppemarkedIRemisenB",
+    "text": "Sat, Oct 31 - Nov 1\nLoppemarked I Remisen\nBlegdamsvej 132, 2100 Kbh Ø\nThis event was canceled",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug23at10AMLOPPEMARKEDITJHUSH",
+    "text": "Sun, Aug 23 at 10 AM\nLOPPEMARKED I TØJHUSHAVEN\nRemisen • J.V. Martins Plads 3 • 8900 Randers C\nInterested\nShare\n1.2K interested · 45 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunAug30at11AMBagagerumssalgLopp",
+    "text": "Sun, Aug 30 at 11 AM\nBagagerumssalg / Loppemarked 🧸👗👠\nNæstved Storcenter 44, 4700 Næstved, Denmark\nInterested\nShare\n93 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "FriJul17at11AMand2moreUdendrsLop",
+    "text": "Fri, Jul 17 at 11 AM and 2 more\nUdendørs Loppemarked\nPostvejen 14, 6720 Fanø Vesterhavsbad, Denmark\nInterested\nShare\n52 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SunJul26at10AMLoppemarkedpFortet",
+    "text": "Sun, Jul 26 at 10 AM\nLoppemarked på Fortet\nPrins Knuds Dæmning 2, 2791 Dragør, Denmark\nInterested\nShare\n49 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "SatNov14Nov15LoppemarkedIRemisen",
+    "text": "Sat, Nov 14 - Nov 15\nLoppemarked I Remisen\nBlegdamsvej 132, 2100 Kbh Ø\nInterested\nShare\n81 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked"
+  },
+  {
+    "id": "httpswwwfacebookcomgroups7211746",
+    "text": "Kent Nielsen\n \n·\n13h\nHvorfor har i butikspriser når det er et kræmmermarked \nReply\nShare",
+    "url": "https://www.facebook.com/groups/721174666810053/posts/1422931729967673/"
+  },
+  {
+    "id": "fbimgt39994226746130044_21827407",
+    "text": "OPEN\nBy Night\nFREDAGO\nPØLSER\nPA GRILLEN\nLade UDENDØRS\nMARKED V\nKOM MED DIT BORD,\nOG SÆLG GULDET\nFRA GEMMERNE\nDET ER GANSKE GRATIS\nABEN\nBUTIKKEN OG\nHAVEN ER ABEN\nFRA KL. 10\nKRÆMMERNE\nSTILLER OP\nI LØBET AF DAGEN\nVI GÅR HJEM.\nNAR DER IKKE ER\nFLERE GÆSTER\nVittrup Gl. mejeri\nLøkkensvej 826\n9480 Løkken\nVittrup Gl. mejeri\nGenbrug med hjerte\nGENBRUG\nKom og gor et fund\ni hyggelige rammer\n-vi gloeder os\ntil at se dig!",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgvt39994226745769662_8701876",
+    "text": "STORT\nLOPPEMARKED\nMyrhøj Camping holder\nstort loppemarked\nLØRDAG DEN 18-07\nKL. 10.00-16.00\nGRATIS STAND\nTLF. 53 54 72 34\nMyrhøj Camping\nLøgstørvej 69 • 9640 Farsø",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086731132136_367005765",
+    "text": "Loppemarken Juelsminde\nLoppe-/ Bagagerumsmarked\nKOM OG\nGØR ET KUP!\nLørdag d. 11 juli uge 28\nfra kl 9-16\nGRATIS\nSTADEPLADSER\nALLE ER\nVELKOMNE!\n2026\nDANMARKS HYGGELISTE\nLOPPEMARKED!\nKom og vær med!\nFADØL\nFADOL\nKOLDE FADØL,\nSODAVAND & KAFFE\nKOLD KARTOFFELSALAT\nMED FRIKADELLER\nHOTDOC'S 1\nOG PØLSER\nOG FRITTER!\nINFO TIL OPSTILLERE:\n• Abent på pladsen fra kl. 7\nGod stemning\n•Gratis stadepladser\n-for hele familien.\n• Ingen tilmelding\n-man kommer bare!\nKIG FORBI - DU VIL IKKE FORTRYDE DET!\nMASSER AF HYGGE OG GODE FUND!\n* VI GLÆDER OS TIL AT SE DIG! *\nMantadoc\nGludvej 6, 7130 Juelsminde",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086743337075_40765343",
+    "text": "LOPPEMARKED\nved\nØLGOD CAMPING\nHVER ANDEN LØRDAG\n* 13 JUNI\nKL. 10.00 - 15.00\n* 27 JUNI\nKL. 10.00-15.00\n* 11 JULI\nKL. 10.00-14.00\n* 18 JULI\nKL. 10.00 - 15.00\n8 AUGUST\nKL. 10.00 - 15.00\nKom og gør\nen god handel!!\nSTED:\nØLGOD CAMPING\nSKOLEGADE 20, 6870 ØLGOD\nBOOK EN PLADS PÅ\nTLF. 23932987\nVED FOR FÅ TILMELDTE AFLYSES MARKEDET.",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086744273789_10167653",
+    "text": "CIRKUS\nER SLUT\nVejret bliver\nfantastisk!\nOG NU ER\nRØRVIG\nLOPPEMARKED\n→ tilbage!\nSØNDAG\n12/7\n9 TOLDBODVEJ\nVED KROEN\nKL. 9-14\nVi glader os til at se jer!\nRORVIG KRO\nKom forbi og\ngor et godt keb!",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086741013376_101632337",
+    "text": "ked på lørdag kl.10-15\nMUSICON\nLOPPEMARKED\nmusicon_loppemarked\nM Carvine • Leaving Town\nnts\nsen • 4d\nmenne",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086710099058_361826192",
+    "text": "ersen\nributor • June 4 •0\nLOPPEMARKEN\nJUELSMINDE\nLOPPE- / BAGAGERUMSMARKED\nLØRDAG\nUGE 28\nD. 11 JULI\nFRA KL. 9-16\n2026\n*GRATIS STADEPLADS *\nALLE ER VELKOMNE!\nDU BESTEMMER SELV STØRRELSEN PA DIN STAND\nGOOD\nVIBES\nFADOL & KOLDE\nLOPPEFUND &\nHYGGELIG STEMNING\nDRIKKEVARER\nBAGAGERUMSSALG\nFOR ALLE\nMASSER AF HYGGE OG GOD STEMNING\n-KOM OG VAR MED!-\nMANTADOC\nGLUDVEJ 6 7130 JUELSMINDE",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086743996065_102395718",
+    "text": "KRÆMMERE\nSØGES!\nBLIV EN DEL AF\nSIGERSTED VOGNTRÆFS\nSTORE LASTBILARRANGEMENT\n9 Roskilde Dyrskueplads\n7.•8.•9. august\nSCANIA\nVi forventer 3.000-8.000 besogende!\nStandpris kun 500 kr.\nMulighed for overnatning\npa pladsen\nStrem, bad og toiletter\nUnderholdning hele\nweekenden\nTILMELDING:\n81 65 12 89\nsigerstedvogntraef\n@gmail.com\nOp til 100 standpladser\nBOOK DIN STAND NU -\nPLADSERNE BLIVER HURTIGT FYLDT!\nEN WEEKEND\nFYLDT MED\nLASTBILER,\nFÆLLESSKAB 0G\nGOD HANDEL!\n***",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086742208835_33839976",
+    "text": "Sælg og find\n\"støvet guld\"\nfreepik.com\nHAVNSØ Kræmmer-\nog Loppemarked\nHavnepladsen/Havnsø, 4591 Føllenslev\nLØRDAGE 9:00-15:00\nIngen tilmelding. Opstilling fra kl. 7:00\nPris pr. påbegyndt 6 m.: 75 kr\nArrangør: Værftet i Havnsø\nwww.vrft.dk-vrft@yahoo.com\n40 45 32 49 (Dorit)",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "SunAug16at10AMBagagerumsmarked16",
+    "text": "Sun, Aug 16 at 10 AM\nBagagerumsmarked 16. august\nSkovvangen 42D, 6000 Kolding, Denmark\nInterested\nShare\n99 interested · 10 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunAug30at10AMBagagerumsMarkedVe",
+    "text": "Sun, Aug 30 at 10 AM\nBagagerumsMarked Vejlby Fed☀️\nRigelvej 1, Vejlby Fed, Middelfart\nInterested\nShare\n181 interested · 10 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatAug29at10AMSolsikkeugensBagag",
+    "text": "Sat, Aug 29 at 10 AM\nSolsikkeugens Bagagerumsmarked\nMorud\nInterested\nShare\n12 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatAug22at10AMKrmmermarkedbagage",
+    "text": "Sat, Aug 22 at 10 AM\nKræmmermarked/bagagerumsmarked\nBredgade 64, 5485 Skamby, Denmark\nInterested\nShare\n38 interested · 6 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "ThisSaturdayat9AMBagagerumsmarke",
+    "text": "This Saturday at 9 AM\nBagagerumsmarked Silkeborg - Cirkuspladsen\nKastaniehøjvej 6, Cirkuspladsen, Silkeborg\nInterested\nShare\n457 interested · 15 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatAug1at1030AMBagagerumsmarkedC",
+    "text": "Sat, Aug 1 at 10:30 AM\nBagagerumsmarked / Citymarked Aarhus\nTeatergaden 1, 8000 Aarhus C\nInterested\nShare\n183 interested · 5 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatAug15at9AMBagagerumsmarkedSil",
+    "text": "Sat, Aug 15 at 9 AM\nBagagerumsmarked Silkeborg - Cirkuspladsen\nKastaniehøjvej 6, Cirkuspladsen, Silkeborg\nInterested\nShare\n201 interested · 6 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunAug30at930AMBagagerumsmarkedE",
+    "text": "Sun, Aug 30 at 9:30 AM\nBagagerumsmarked Esbjerg\nSportsvej 15, 6705 Esbjerg Ø, Danmark\nInterested\nShare\n145 interested · 13 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatOct3at1030AMBagagerumsmarkedC",
+    "text": "Sat, Oct 3 at 10:30 AM\nBagagerumsmarked / Citymarked Aarhus\nTeatergaden 1, 8000 Aarhus C\nInterested\nShare\n70 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "TueJul21at10AMBagagerumsmarkedSn",
+    "text": "Tue, Jul 21 at 10 AM\nBagagerumsmarked Søndervig\nNordsøvej 6, Parkering MENY VEST, Søndervig, 6950 Ringkøbing, Danmark\nInterested\nShare\n45 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunSep6at10AMBagagerumsmarkedHer",
+    "text": "Sun, Sep 6 at 10 AM\nBagagerumsmarked Herning (indendørs)\nBagagerumsmarked Herning\nInterested\nShare\n174 interested · 9 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunSep13at9AMBagagerumsmarkedAal",
+    "text": "Sun, Sep 13 at 9 AM\nBagagerumsmarked Aalborg\nDyrskuepladsen, Hobrovej 437, Skalborg, 9200 Aalborg SV, Danmark\nInterested\nShare\n369 interested · 15 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunAug2at9AMBagagerumsmarkedRand",
+    "text": "Sun, Aug 2 at 9 AM\nBagagerumsmarked Randers\nJuventusvej 7, 8960 Randers SØ, Danmark\nInterested\nShare\n212 interested · 8 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "TueJul21at10AMand1moreBagagerums",
+    "text": "Tue, Jul 21 at 10 AM and 1 more\nBagagerumsmarked // Summerdays 2026\n7600 Struer, Denmark\nInterested\nShare\n124 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunAug9at9AMBagagerumsmarkedAalb",
+    "text": "Sun, Aug 9 at 9 AM\nBagagerumsmarked Aalborg\nDyrskuepladsen, Hobrovej 437, Skalborg, 9200 Aalborg SV, Danmark\nInterested\nShare\n517 interested · 16 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "TueAug4at10AMBagagerumsmarkedSnd",
+    "text": "Tue, Aug 4 at 10 AM\nBagagerumsmarked Søndervig\nNordsøvej 6, Parkering MENY VEST, Søndervig, 6950 Ringkøbing, Danmark\nInterested\nShare\n8 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "TueAug11at10AMBagagerumsmarkedSn",
+    "text": "Tue, Aug 11 at 10 AM\nBagagerumsmarked Søndervig\nNordsøvej 6, Parkering MENY VEST, Søndervig, 6950 Ringkøbing, Danmark\nInterested\nShare\n13 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "TueOct13at10AMBagagerumsmarkedSn",
+    "text": "Tue, Oct 13 at 10 AM\nBagagerumsmarked Søndervig\nNordsøvej 6, Parkering MENY VEST, Søndervig, 6950 Ringkøbing, Danmark\nInterested\nShare\n3 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatAug1at1PMBagagerumsmarkediTol",
+    "text": "Sat, Aug 1 at 1 PM\nBagagerumsmarked i Tolne\nNorth Denmark Region\nInterested\nShare\n27 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunSep20at10AMBagagerumsmarkediA",
+    "text": "Sun, Sep 20 at 10 AM\nBagagerumsmarked i AZ\nA. F. Heidemannsvej 20, Hjørring\nInterested\nShare\n41 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatJun27Bagagerumsmarked1interes",
+    "text": "Sat, Jun 27\nBagagerumsmarked\n1 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatJun20BagagerumsmarkedoghyggeU",
+    "text": "Sat, Jun 20\nBagagerumsmarked og hygge\nUdbyhøjvej 330, Harridslev\nThis event was canceled",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunJun21bagagerumsmarkedHrsholmH",
+    "text": "Sun, Jun 21\nbagagerumsmarked Hørsholm\nHørsholm\n4 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatJun6BagagerumsmarkedViborgDyr",
+    "text": "Sat, Jun 6\nBagagerumsmarked Viborg\nDyreskuepladsen\n26 interested · 3 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatJun20BagagerumsmarkedNstved4i",
+    "text": "Sat, Jun 20\nBagagerumsmarked\nNæstved\n4 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatAug15Aug16bagagerumsmarkedtil",
+    "text": "Sat, Aug 15 - Aug 16\nbagagerumsmarked til Lyngså Landliggerfest\nInterested\nShare\n2 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunMay31BagagerumsmarkedFaaborg9",
+    "text": "Sun, May 31\nBagagerumsmarked\nFaaborg\n94 interested · 12 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunJun7GratisBagagerumsmarkedRib",
+    "text": "Sun, Jun 7\nGratis Bagagerumsmarked\nRibevej 3, Randers\n65 interested · 6 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunJun7GratisbagagerumsmarkedRib",
+    "text": "Sun, Jun 7\nGratis bagagerumsmarked\nRibevej 3, Randers\n39 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunMay10LionsBagagerumsmarkedKol",
+    "text": "Sun, May 10\nLions Bagagerumsmarked\nKolding Storcenter\n91 interested · 14 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "MonMay25SjovlrdagBagagerumsmarke",
+    "text": "Mon, May 25\nSjovlørdag Bagagerumsmarked\n2 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "FriJun5Studsgrdbagagerumsmarked1",
+    "text": "Fri, Jun 5\nStudsgård bagagerumsmarked\n1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunMay10retsfrstebagagerumsmarke",
+    "text": "Sun, May 10\nÅrets første bagagerumsmarked\nSkovvangen 42D, 6000 Kolding, Denmark\n223 interested · 11 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatMay30BagagerumsmarkedSjllands",
+    "text": "Sat, May 30\nBagagerumsmarked\nSjællandsgade 34, 7400 Herning, Denmark\n45 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "MonMay25Loppemarkedbagagerumsmar",
+    "text": "Mon, May 25\nLoppemarked/bagagerumsmarked\nKlør-Fire 12, Broager\n117 interested · 14 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatMay23knaberfestensbagagerumsm",
+    "text": "Sat, May 23\nknaberfestens-bagagerumsmarked\n1 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatAug29at10AMBagagerumsmarked20",
+    "text": "Sat, Aug 29 at 10 AM\nBagagerumsmarked 2026 hos Autohuset Vestergaard Svendborg\nOdensevej 42, 5700 Svendborg, Denmark\nInterested\nShare\n33 interested · 7 going",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunJun21Bagagerumsmarked21juniSk",
+    "text": "Sun, Jun 21\nBagagerumsmarked 21. juni\nSkovvangen 42D, 6000 Kolding, Denmark\n149 interested · 17 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunMay31BagagerumsmarkedogFamili",
+    "text": "Sun, May 31\nBagagerumsmarked og Familiedag\nTårup Byvej 26, 5871 Frørup, Denmark\n19 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunJun7BagagerumsmarkedLoppemark",
+    "text": "Sun, Jun 7\nBagagerumsmarked\nLoppemarked til fordel for gadehundene\n32 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatMay23Bagagerumsmarked202640in",
+    "text": "Sat, May 23\nBagagerumsmarked 2026\n40 interested · 10 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatJun20Spejdernesbagagerumsmark",
+    "text": "Sat, Jun 20\nSpejdernes bagagerumsmarked 8260 Viby\nKirkestien 2, 8260 Viby J.\n1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatJun20SPEJDERNESBAGAGERUMSMARK",
+    "text": "Sat, Jun 20\nSPEJDERNES BAGAGERUMSMARKED 8260 VIBY\nP-pladsen v/ Viby Kirke, 8260 Viby\n1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatJun20Bagagerumsmarked20juni20",
+    "text": "Sat, Jun 20\nBagagerumsmarked - 20. juni 2026\nKirkevej, 8260 Viby J, Denmark\n693 interested · 34 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatMay23BagagerumsmarkediAabybro",
+    "text": "Sat, May 23\nBagagerumsmarked i Aabybro\nAabybro Center, Aabybro\n418 interested · 22 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatMay23BagagerumsmarkedSkolebak",
+    "text": "Sat, May 23\nBagagerumsmarked\nSkolebakken 10, 8305 Kolby, Denmark\n14 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SunJun7STORTUDENDRSLOPPEMARKEDBA",
+    "text": "Sun, Jun 7\n🎉 STORT UDENDØRS LOPPEMARKED / BAGAGERUMSMARKED 🎉\nLøgumklostervej 136, 6200 Åbenrå, Denmark\n410 interested · 24 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatMay30BagagerumsmarkedSommerfe",
+    "text": "Sat, May 30\nBagagerumsmarked\nSommerfestpladsen\n5 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatJun20BagagerumsmarkedNstvedHa",
+    "text": "Sat, Jun 20\nBagagerumsmarked\nNæstved Handelsgymnasium ZBC\n2 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "SatJun20BagagerumsmarkedNstved1w",
+    "text": "Sat, Jun 20\nBagagerumsmarked\nNæstved\n1 went",
+    "url": "https://www.facebook.com/events/search?q=bagagerumsmarked"
+  },
+  {
+    "id": "fbimgvt39994226743186541_9796996",
+    "text": "Ta' til Fyns største Folkefest\nØRBÆK\nMARKED\nGRATIS ENTRÉ\nparkering endtaget\nDen 10., 11. og 12. juli\nSTORT KRÆMMERMARKED\nca. 300 krammere - ca. 3 km facade\nMonstertrucks\nMASSER AF UDSTILLINGER\nVeteranbiler,-motorcykler,\nmodeltog og meget mere\nLASTBILUDSTILLING\nca. 100 lastbiler\nSkinz\nTIVOLILAND\nKÆMPE MARKEDSFEST\nLerdag kl. 18.00 med\nKort Varsel og\nKeen on Queen\nStig & Vennerne\nLille Bill\nEmil Lang\nMartin Kanstrup\nDrikkevarer\nma Te\nmedbringes\nTorsdag den 9 ual\nKæmpe\nreklamebanko\nk. 18.30/ Oibek Mepurkt\nGevindter tor 10000 vis\naf kroner\nKeen on Queen\nHUSK\nBAGAGERUMSMARKED\nSONUAG\nMorten Munster\nog Tobl:\nDodpatihe Dotos\nSe hele programmet på www.erbæk-marked.dk\nNyborg\nSeren Savkunsin\n2021\nFyens Stiftstidend",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39994226742001548_15712814",
+    "text": "Search Facebook\nMARKED\nDen 10., 11. og 12. juli\nSTORT KRÆMMERMARKED\nca. 300 kræmmere - ca. 3 km facade\nMonstertrucks\nMASSER AF UDSTILLINGER\nVeteranbiler.-motorcykler.\nmodeltog og meget mere\nLASTBILUDSTILLING\nca. 100 lastbiler\nSkinz\nTIVOLILAND\nKÆMPE MARKEDSFEST\nLerdag kl. 18.00 med\nKort Varsel og\nKeen on Queen\nStig & Vennerne\nLille Bill\nEmilLang\nMartin Kanstrup\nDrikkevarer\nmã Tikke\nTorstig den SM\nKæmpe\nreklamehanko\nM 18.30/Obek Mispunkt\nGevinster tor 10.000-vs\naKroner\nKeen on Queen:\nBAGAGERUMSMARKED\nSONDAG\nAl Nyborg\naster\nog Tob\nDorpeifine Dotos\nSe hele programmet på www.orbæk-marked.dk\nSarenSarkunsin\n2021\nFyens Stiftstidend",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39308086740917562_13597418",
+    "text": "Kræmmermarked\nStofmøllen d. 25/7 2026\nFra kl. 10.00 til kl. 16.00.\nHar du lyst til at deltage ring til os på telefon 62 61\n68 88, SMS til 81443106 eller email\nweb@stofmoellen.dk.\nGRATIS at være kræmmer!\nDet er gratis at deltage, men ved tilmelding betales\nkr. 200,-..\nBeløbet refunderes, når markedet lukker kl. 16.00.\nDer kan købes drikkevarer, grillpølser, kaffe og kage.\nAdressen er hos Stofmøllen på:\nSvendborgvej 303, 5600 Fåborg.",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39994226740437957_29127904",
+    "text": "Ta' til Fyns største Folkefest\nØRBÆK\nMARKED\nDen 10., 11. og 12. juli\nSTORT KRÆMMERMARKED\nca. 300 kræmmere - ca. 3 km facade\nMonstertrucks\nMASSER AF UDSTILLINGER\nVeteranbiler,-motorcykler.\nmodeltog og meget mere\nLASTBILUDSTILLING\nca. 100 lastbiler\nSkinz\nTIVOLILAND\nKÆMPE MARKEDSFEST\nLerdag kl. 18.00 med\nKort Varsel og\nKeen on Queen\nStig & Vennerne\nGRATIS ENTRE\nLille Bille\nEmil Lango\nMartin Kanstrup\nDrikkevarer\nmả liko\nmedbringes\nTrabg on 2 la\nKampe\nreklamebanko\nkL 18301 Boas Masukt\nGrater tr 13000 el\nafkrores\nMUSK\nBAGAGEHIMSMARKED\nSONDAS\nMorten Münster\nog Totilas\nDopethe Motos\nSe hele programmet på www.erbæk-marked.dk\nAl Nyborg\nARBEKAsE\nSarto Santantem\n2026\nFyens Surtsbdende",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimgt39994226721667319_16516708",
+    "text": "Ta til Fyns starste Folketest\nORBÆK\nMARKED\n10-12. Jul\nProgram 2026:\nTorsdag den 9. juli\nKæmpe reklamebanko\nBrugsen\nMat op chillevaer ad ilde mederinges.\nFredag den 10. Jull\n15.00\n17.30\n17.30\n19.00\n20.00\n21.00\n02.00\nNyborg Seniororkester • Store Oase\nLastbl paraden starter fra Cirkle K.Nyborg\nFolkedans - Store Oase\nMotocrossartisterne med Monstertruck\nStig og Vennerne\nDodo and The Dodos\nLU0 1.1\n34004 00 2219\nEmil Lange\nPlatsen lukkar\nDixielani\nSwini\nJehnny Madsen\nLerdag den 11 juli\n08.00\n10.00-18.00 UDSTILLINGER ABNER\n10.30\n11.00\nOfficisi ibning af istbluds)\nDixieland Swingband - rundt på pladsen\n11.00\nBrandt og Patell classic hits - Store Oase\n11.00-16.00\nSaren Savkunstner materseskarstrer\n1100-17.00 Ponytrak\nStor frikadellefest\nFrikadeler og kald kartoffelsalat inkl.1 el eller vand\n-watou wototind taalet toch\n13.00\nMotocrossartisterne med Monstertruck\n13.30\n14.00\n14.30\nChilismagnings konkurrence-Markedstehet\nMatroserne • Store Oase\n\"Skarpt Indspark\" - Trucker Scenen\nStandup m/\nMartin Kanstrup - Marketstetet\n16.30\n18.00\nJohnny Madsen Jam - Store Oase\nMARKEDSFEST Markedseetet\n21.00\n21.00\n(2.00\nned Kort Varsel\nMarkedsteltet abnes for alle. Festaften med\nKeen on Queen\n•s Kort Varsel\nDrop loc Delotek g SKINZ\nKeen on ou\nog Tobias-\nMain? The Dodes\nSendag den 12. juli\nBAGAGERUMSMARKED FOR PRIVATE\n08.30\nHAVETRAKTORTRÆK pi Opviscingsplatsen\npa tt. 20 65 13 58\n10.00-14.00 HAVETRAKTORTRÆK: forskalipe klasser\nUDSTILLINGER ASNER\nDrop lec Kannhop kookarrende\n11.00-15.00\nSeren Savkunstner motorserskunstner\n11.00-17.00\nPonytrak\nLille Bille Shoar - Markedststet\nMr. Hollywood • Store Oase\nMorten Münster og Tobias\nkoncer sammielnproe\nTak for i ar og ol gensyn\nEmil\nLange\nMartin\nKanstrup\nSKINZ\nStig og Vennerne",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086727465581_101649044",
+    "text": "June 20 at 12:53 PM •6\nLoppemarked i skuret. Åbent hver dag fra kl 09-\nESBE\nROS:\nSAVNEDE (\nВацет\nBooks",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086715455962_102362132",
+    "text": "book\nİ BRANDESKOV\nSendag d. 9/826 kl. 10.00-15.00\nFOR KRÆMMERE & PRIVATE\nSå er det tid for LANDSBYMARKED 2028 i Brandeskov.\nHar du ryddet ud i kalder og på lott?\nvERife\nHar du en hobby du gerne vil vise frem og evt. salge af?\nEller har du et niche-erhverv, som du gerne vi promovere og\nSARTe AT?\nSå skal du selvfolgelig have en stand på vares årlige LANDSBYMARKED\nStanden er på ca. 20 m og bestiles ved at sende en mail eler SMS til Conny på\nbskovstotte@gmail.com eller 3030 7046.\nHuskat medbringe bord/borde.\nEn stand koster kr.150.00 plus en gevinst ti vores lotteri.\nBetaling sker til bank 9370 248-03-54005 (Spar Nord/Nykredit) ciler på mobilepay 411701\nVi ser frem ti en hyggelig dag sammen med Jer her i Brandeskov.\nMed venlig hilsen\nBrandeskov Forsamlingshus' Stetteforening",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "SatAug15at11AMVanlsesmskestrstel",
+    "text": "Sat, Aug 15 at 11 AM\nVanløses måske største loppemarked\nLyngholmvej\nInterested\nShare\nVibe is interested",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatOct24Oct25KbenhavnsStoreKrmme",
+    "text": "Sat, Oct 24 - Oct 25\nKøbenhavns Store Kræmmer og Loppemarked\nForum, København\nInterested\nShare\n872 interested · 33 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug2at10AMand2moreKbenhavnshy",
+    "text": "Sun, Aug 2 at 10 AM and 2 more\nKøbenhavns hyggeligste loppemarked\nLundebakken 1, 2400 København NV, 2400\nInterested\nShare\n137 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug30at12AMLoppemarkedCopenha",
+    "text": "Sun, Aug 30 at 12 AM\nLoppemarked\nCopenhagen\nInterested\nShare\n98 interested · 7 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug8at10AMLoppemarkedKonkylie",
+    "text": "Sat, Aug 8 at 10 AM\nLoppemarked\nKonkyliestien 7\nInterested\nShare\n3 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug9at10AMand3moreDetGrnneLop",
+    "text": "Sun, Aug 9 at 10 AM and 3 more\nDet Grønne Loppemarked 2026\nJagtvej 16, 2200 Copenhagen, Denmark\nInterested\nShare\n2.3K interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug29Aug30Danmarkslngsteloppe",
+    "text": "Sat, Aug 29 - Aug 30\nDanmarks længste loppemarked (Valby)\nSkolegade, 2500 København, Danmark\nInterested\nShare\n367 interested · 10 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatJul18at10AMand16moreVanlsetor",
+    "text": "Sat, Jul 18 at 10 AM and 16 more\nVanløse torv loppemarked\nVanløse torv, 2720 Vanløse, Denmark\nInterested\nShare\n172 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug9at12PMCopenhagenPridessto",
+    "text": "Sun, Aug 9 at 12 PM\nCopenhagen Prides store loppemarked\nRådhuspladsen\nInterested\nShare\n150 interested · 9 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug15at10AMand1moreLoppemarke",
+    "text": "Sat, Aug 15 at 10 AM and 1 more\nLoppemarked - Bispebjerg bakke 1-11\nBispebjerg bakke 1 - ved siden af Tagensvej\nInterested\nShare\n12 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug23at10AMSkibbroensKajfesto",
+    "text": "Sun, Aug 23 at 10 AM\nSkibbroens Kajfest- og Loppemarked 2026\nSkibbroen 4, 2450 København SV, Danmark\nInterested\nShare\n33 interested · 10 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug29at10AMLoppemarkedpDenSor",
+    "text": "Sat, Aug 29 at 10 AM\nLoppemarked på Den Sorte Plads 2026\nDen Sorte Plads\nInterested\nShare\n69 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug16at10AMBatildasinternatio",
+    "text": "Sun, Aug 16 at 10 AM\nBatilda’s internationale gadefestival + loppemarked & udendørs bar\nUtterslevtorv 6\nInterested\nShare\n13 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug30at10AMRyesgadesloppemark",
+    "text": "Sun, Aug 30 at 10 AM\nRyesgades loppemarked\nRyesgade, 2100 København Ø, Danmark\nInterested\nShare\n4 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatJul25at10AMand2moreSAXOGADESL",
+    "text": "Sat, Jul 25 at 10 AM and 2 more\nSAXOGADES LOPPEMARKED\nSaxogade, 1662 Copenhagen, Denmark\nInterested\nShare\n759 interested · 16 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatSep19at10AMrestadloppemarked1",
+    "text": "Sat, Sep 19 at 10 AM\nØrestad loppemarked 19 september 2026\nØrestads boulevard 68, Copenhagen\nInterested\nShare\n102 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug15at10AMLoppemarkediGrndal",
+    "text": "Sat, Aug 15 at 10 AM\nLoppemarked i Grøndalsvænge 15/8 2026\nMirabellevej, 2400 København NV, Danmark\nInterested\nShare\n674 interested · 18 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug8at11AMand1moreLOPPEMARKED",
+    "text": "Sat, Aug 8 at 11 AM and 1 more\nLOPPEMARKED at VAB-13\nVed Amagerbanen 13, 2300 København S, Danmark\nInterested\nShare\n95 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunOct18at11AMKFUKKFUMLoppemarke",
+    "text": "Sun, Oct 18 at 11 AM\nKFUK & KFUM Loppemarked (indendørs)\nStore Kannikestræde 19, 1169 København K, Danmark\nInterested\nShare\n26 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug15at10AMLoppemarkedLivemus",
+    "text": "Sat, Aug 15 at 10 AM\nLoppemarked & Livemusik i Grønlandsgården! ☀️\nEnglandsvej 8, 2300 København S, Danmark\nInterested\nShare\n38 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug23at10AMLoppemarkediNrrehu",
+    "text": "Sun, Aug 23 at 10 AM\nLoppemarked i Nørrehus\nSandbjerggade 52, 2200 København N, Danmark\nInterested\nShare\n1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug16at10AMBASTIANSMINDELOPPE",
+    "text": "Sun, Aug 16 at 10 AM\nBASTIANSMINDE LOPPEMARKED 2026\nH/F Bastiansminde\nInterested\nShare\n115 interested · 15 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug30at10AMBredygtigtLoppemar",
+    "text": "Sun, Aug 30 at 10 AM\nBæredygtigt Loppemarked - Enghave Plads\nEnghave Plads, København V, Danmark\nInterested\nShare\n41 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug29at11AMLoppemarkediGammel",
+    "text": "Sat, Aug 29 at 11 AM\nLoppemarked i Gammel Allerslev\nLejre\nInterested\nShare\n66 interested · 19 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug16at10AMLOPPEMARKEDHALMTOR",
+    "text": "Sun, Aug 16 at 10 AM\nLOPPEMARKED HALMTORVET - 16 august\nHalmtorvet, Copenhagen.\nInterested\nShare\n160 interested · 7 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug29at8AMKbenhavnsLngsteLopp",
+    "text": "Sat, Aug 29 at 8 AM\nKøbenhavns Længste Loppemarked 29 august 2026\nØrestads boulevard 68, Copenhagen\nInterested\nShare\n3.9K interested · 129 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug22at9AMLoppemarkedVesterVo",
+    "text": "Sat, Aug 22 at 9 AM\nLoppemarked Vester Voldgade\nVester Voldgade, Copenhagen, Denmark\nInterested\nShare\n16 interested · 11 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug22at10AMLoppemarkedpBispeb",
+    "text": "Sat, Aug 22 at 10 AM\nLoppemarked på Bispebjerg Bakke\nLegepladsen ved Bispebjerg Bakke 18A til 26D\nInterested\nShare\n13 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug30at10AMFarumshyggeligstel",
+    "text": "Sun, Aug 30 at 10 AM\nFarums hyggeligste loppemarked\nRørmosevej 7\nInterested\nShare\n57 interested · 13 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug30at10AMLoppemarkedigrdenK",
+    "text": "Sun, Aug 30 at 10 AM\nLoppemarked i gården\nKastrupvej 82\nInterested\nShare\n14 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunAug16at9AMLoppemarkediDeEngel",
+    "text": "Sun, Aug 16 at 9 AM\nLoppemarked i De Engelske Rækkehuse\nKlampenborg\nInterested\nShare\n6 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "ThisSaturdayat10AMLoppemarkedpEl",
+    "text": "This Saturday at 10 AM\nLoppemarked på Elers' Kollegium\nElers’ Kollegium\nInterested\nShare\n12 interested · 6 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunSep13at10AMLOPPEMARKEDHALMTOR",
+    "text": "Sun, Sep 13 at 10 AM\nLOPPEMARKED HALMTORVET - 13 september\nHalmtorvet, Copenhagen.\nInterested\nShare\n69 interested · 5 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SunOct18at9AMLoppemarkedoghyggei",
+    "text": "Sun, Oct 18 at 9 AM\nLoppemarked og hygge i RCYN\nRessourceCenter Ydre Nørrebro\nInterested\nShare\n1 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatJul11LoppemarkediKantorparken",
+    "text": "Sat, Jul 11\nLoppemarked i Kantorparken 2400\nBøllegård alle 23\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatJul4Loppemarkedsalgaflostdisc",
+    "text": "Sat, Jul 4\nLoppemarked-salg af lost discs fra Valbyparken\nHammelstrupvej 3, 2450 Copenhagen, Denmark\n11 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20k%C3%B8benhavn"
+  },
+  {
+    "id": "SatAug29at10AMByttemarkedKulturh",
+    "text": "Sat, Aug 29 at 10 AM\nByttemarked\nKulturhuset Rejsestalden\nInterested\nShare\n21 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatAug15at1PMByttemarkedPlatform",
+    "text": "Sat, Aug 15 at 1 PM\nByttemarked\nPlatformen - Esbjerg\nInterested\nShare\n9 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatNov14at1PMByttemarkedPlatform",
+    "text": "Sat, Nov 14 at 1 PM\nByttemarked\nPlatformen - Esbjerg\nInterested\nShare\n3 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatNov7at10AMByttemarkedJgerspri",
+    "text": "Sat, Nov 7 at 10 AM\nByttemarked - Jægerspris Bibliotek\nJægerspris Bibliotek\nInterested\nShare\n6 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatNov21at12PMByttemarkedSilkebo",
+    "text": "Sat, Nov 21 at 12 PM\nByttemarked Silkeborg ver. 60\nLunden Silkeborg\nInterested\nShare\n28 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunAug23at12PMByttemarkedSilkebo",
+    "text": "Sun, Aug 23 at 12 PM\nByttemarked Silkeborg ver. 59\nLunden Silkeborg\nInterested\nShare\n70 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunApr112027at12PMByttemarkedSil",
+    "text": "Sun, Apr 11, 2027 at 12 PM\nByttemarked Silkeborg ver. 62\nLunden Silkeborg\nInterested\nShare\n14 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunJan102027at12PMByttemarkedSil",
+    "text": "Sun, Jan 10, 2027 at 12 PM\nByttemarked Silkeborg ver. 61\nLunden Silkeborg\nInterested\nShare\n23 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatJun20ByttemarkediSolbakkehall",
+    "text": "Sat, Jun 20\nByttemarked i Solbakkehallen\nSolbakke-hallen\n41 interested · 8 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "FriNov27at2PMGrnfredagmedbyttema",
+    "text": "Fri, Nov 27 at 2 PM\nGrøn fredag med byttemarked\nAllegade 2, 3000 Helsingør, Denmark\nInterested\nShare\n3 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunJul5ByttemarkedSwapeventSkole",
+    "text": "Sun, Jul 5\nByttemarked / Swap event\nSkolerne i Boserup\n9 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunApr112027at12PMByttemarkedver",
+    "text": "Sun, Apr 11, 2027 at 12 PM\nByttemarked ver. 62 11.04.2027\nThis event was canceled",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatMay9ByttemarkedMajMadtilHerni",
+    "text": "Sat, May 9\nByttemarked Maj\nMad til Herning\n12 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatMay30ByttemarkedPlatformenEsb",
+    "text": "Sat, May 30\nByttemarked\nPlatformen - Esbjerg\n42 interested · 7 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatMay2Byttemarked9interested4we",
+    "text": "Sat, May 2\nByttemarked\n9 interested · 4 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunApr12BYTTEMARKEDIVILLAENVeste",
+    "text": "Sun, Apr 12\nBYTTEMARKED I VILLAEN\nVestervejen 37A\n34 interested · 6 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatApr11ByttemarkedSolsortevej68",
+    "text": "Sat, Apr 11\nByttemarked\nSolsortevej 68, 8860 Ulstrup, Danmark\n10 interested · 3 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunApr19ByttemarkediSuldrupAnlgs",
+    "text": "Sun, Apr 19\nByttemarked i Suldrup\nAnlægsvej 10, 9541 Suldrup, Danmark\n38 interested · 8 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatMay9ByttemarkedogRepairCafKul",
+    "text": "Sat, May 9\nByttemarked og Repair Café\nKulturhuset Rejsestalden\n68 interested · 12 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatApr25Byttemarkedplantebytte19",
+    "text": "Sat, Apr 25\nByttemarked & plantebytte\n19 interested · 4 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunJul5RootsofConnectionFestival",
+    "text": "Sun, Jul 5\nRoots of Connection Festival & Byttemarked\n10 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatApr25ByttemarkedpVangedeBibli",
+    "text": "Sat, Apr 25\nByttemarked på Vangede Bibliotek\nVangede Bibliotek\n5 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunAug30at1PMFrogPlantebytBestyr",
+    "text": "Sun, Aug 30 at 1 PM\nFrø- og Plantebyt - Bestyrelsens egen Bente og hendes mand ligger have til efterårets byttemarked.\nKlintevej 10, 3720 Aakirkeby, Danmark\nInterested\nShare\n15 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatApr25ByttemarkedpSkibbyBiblio",
+    "text": "Sat, Apr 25\nByttemarked på Skibby Bibliotek\nSkibby Bibliotek, Nyvej 7C 4050 Skibby\n65 interested · 12 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "WedJun10FyraftensByttemarkediFre",
+    "text": "Wed, Jun 10\nFyraftensByttemarked i Frederiksholm kirke\nLouis Pios Gade 8-10, 2450 Copenhagen, Denmark\n228 interested · 15 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatApr25Byttemarkedforpuslespilo",
+    "text": "Sat, Apr 25\nByttemarked for puslespil og brætspil\nKirketorvet 2, 4660 Store Heddinge, Denmark\n3 interested · 3 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "FriApr24Bredygtigbarselbyttemark",
+    "text": "Fri, Apr 24\nBæredygtig barsel - byttemarked med fokus på baby\nEspergærde Bibliotek\n5 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatApr25GrntByttemarkedFrplanter",
+    "text": "Sat, Apr 25\nGrønt Byttemarked: Frø, planter - og måske haveting?\nStevns Bibliotekerne, Hårlev Bibliotek\n3 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "FriApr24UGE17Byttemarkedmedtjogp",
+    "text": "Fri, Apr 24\nUGE17: Byttemarked med tøj og puslespil\nDansk Centralbibliotek for Sydslesvig\n9 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunAug23at12PMRELOVEFamilieverks",
+    "text": "Sun, Aug 23 at 12 PM\nRELOVE Familieverksted + Byttemarked\nSofienberg kirke\nInterested\nShare\n71 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunMay17ByttemarkedSilkeborgver5",
+    "text": "Sun, May 17\nByttemarked Silkeborg ver. 57\nLunden Silkeborg\n79 interested · 8 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SunJun21ByttemarkedSilkeborgver5",
+    "text": "Sun, Jun 21\nByttemarked Silkeborg ver. 58\nLunden Silkeborg\n66 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatApr11ByttemarkedKirkesvingen7",
+    "text": "Sat, Apr 11\nByttemarked!\nKirkesvingen 7\n28 interested · 7 went",
+    "url": "https://www.facebook.com/events/search?q=byttemarked"
+  },
+  {
+    "id": "SatSep12at10AMSTORTLOPPEMARKEDIV",
+    "text": "Sat, Sep 12 at 10 AM\n🎉 STORT LOPPEMARKED I VIBORG 🎉\nVævervej 4 , 8800 Viborg, Denmark\nInterested\nShare\n43 interested · 3 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20viborg"
+  },
+  {
+    "id": "Tomorrowat10AMLoppemarkedTapdruv",
+    "text": "Tomorrow at 10 AM\nLoppemarked Tapdruvej 123 8800 Viborg\nTapdrupvej 123 8800 Viborg\nInterested\nShare\n3 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20viborg"
+  },
+  {
+    "id": "SatOct17Oct18ViborgsStoreKrmmero",
+    "text": "Sat, Oct 17 - Oct 18\nViborgs Store Kræmmer og loppemarked\nTingvej 20, 8800 Viborg, Danmark\nInterested\nShare\n608 interested · 22 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20viborg"
+  },
+  {
+    "id": "SunApr26Vestermllevejsloppemarke",
+    "text": "Sun, Apr 26\nVestermøllevej’s loppemarked\nVestermøllevej 26\n32 interested · 9 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20viborg"
+  },
+  {
+    "id": "SatMay30LoppemarkedCentralDenmar",
+    "text": "Sat, May 30\nLoppemarked\nCentral Denmark Region\n8 interested · 3 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20viborg"
+  },
+  {
+    "id": "FriMay1LoppemarkediPortenVesterg",
+    "text": "Fri, May 1\nLoppemarked i Porten\nVestergade 3, Viborg 8800 Viborg, Denmark\n72 interested · 8 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20viborg"
+  },
+  {
+    "id": "SunAug23at10AMLoppemarkedvDetlil",
+    "text": "Sun, Aug 23 at 10 AM\nLoppemarked v. Det lille ishus, Vejle\nDet lille ishus - Ibæk strandvej - Vejle\nInterested\nShare\n189 interested · 4 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20vejle"
+  },
+  {
+    "id": "SatOct10Oct11VejlesstoreKrmmerog",
+    "text": "Sat, Oct 10 - Oct 11\nVejles store Kræmmer og Loppemarked\nDGI Huset Vejle\nInterested\nShare\n690 interested · 30 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20vejle"
+  },
+  {
+    "id": "SatOct10at10AMLoppemarkedInteres",
+    "text": "Sat, Oct 10 at 10 AM\nLoppemarked\nInterested\nShare\n3 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20vejle"
+  },
+  {
+    "id": "SunJun21BagagerumsloppemarkediAl",
+    "text": "Sun, Jun 21\nBagagerums-loppemarked i Allested-Vejle\nAllested-Vejle Fritidscenter - Officel\n43 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20vejle"
+  },
+  {
+    "id": "SatJun13BrnenesloppemarkediFUTUR",
+    "text": "Sat, Jun 13\nBørnenes loppemarked i FUTURUM\nVandel Skole\n11 interested · 6 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20vejle"
+  },
+  {
+    "id": "SatMay16LOPPEMARKEDVEJLEBrnetjle",
+    "text": "Sat, May 16\nLOPPEMARKED VEJLE - Børnetøj, legetøj og udstyr\nKlostergade 1, 7100 Vejle, Denmark\n80 interested · 6 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20vejle"
+  },
+  {
+    "id": "SunMay10LoppemarkedvDetlilleishu",
+    "text": "Sun, May 10\nLoppemarked v. Det lille ishus, Vejle\nDet lille ishus - Ibæk strandvej - Vejle\n198 interested · 16 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20vejle"
+  },
+  {
+    "id": "SunJun28loppemarkedJerlev1went",
+    "text": "Sun, Jun 28\nloppemarked\nJerlev\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20vejle"
+  },
+  {
+    "id": "SatJul11LOPPEMARKEDSYDBYENSILKEB",
+    "text": "Sat, Jul 11\nLOPPEMARKED SYDBYEN SILKEBORG\nFrederiksberggade 16, silkeborg\n30 interested · 3 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SatJul4LoppemarkedpSortenborgvej",
+    "text": "Sat, Jul 4\nLoppemarked på Sortenborgvej i Silkeborg.\nSortenborgvej 37\n7 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SatMay23LoppemarkediSmingevedSil",
+    "text": "Sat, May 23\nLoppemarked i Sminge ved Silkeborg\nSørkelvej 93, 8600 Silkeborg, Danmark\n36 interested · 3 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SatJun6LoppemarkedLysbroSilkebor",
+    "text": "Sat, Jun 6\nLoppemarked - Lysbro - Silkeborg\nHerningvej 62, 8600 Silkeborg\n21 interested · 3 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SunJun7UDENDRSLOPPEMARKED7JUNISI",
+    "text": "Sun, Jun 7\nUDENDØRS LOPPEMARKED - 7 JUNI SILKELOPPEN\nA C illumsvej 1, Silkeborg\n1.2K interested · 48 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SatJun6LoppemarkedSilkeborgvej82",
+    "text": "Sat, Jun 6\nLoppemarked Silkeborgvej 82, Sporup, den 06/07. juni 2026 fra 10 til 17.\nSilkeborgvej 82, 8472 Sporup, Danmark\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SatApr18LoppemarkediSilkeborg860",
+    "text": "Sat, Apr 18\nLoppemarked i Silkeborg, 8600\nSejs-Svejbæk - Silkeborg\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SatMay2LoppemarkedEgeAllSilkebor",
+    "text": "Sat, May 2\nLoppemarked Ege Allé Silkeborg\nEge Alle\n29 interested · 21 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SatApr25LOPPEMARKEDISILKEBORGLin",
+    "text": "Sat, Apr 25\n🌟 LOPPEMARKED I SILKEBORG 🌟\nLinåvej 60, 8600 Silkeborg\n24 interested · 10 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SatApr18LoppemarkediSilkeborgLrd",
+    "text": "Sat, Apr 18\nLoppemarked i Silkeborg. Lørdag og søndag den 18. og 19. April. Kl. 10 til 16.00 begge dage. Kom og\n1 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SatApr18LoppemarkedSejsSvejbkSil",
+    "text": "Sat, Apr 18\nLoppemarked\nSejs-Svejbæk - Silkeborg\n1 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20silkeborg"
+  },
+  {
+    "id": "SunSep13at10AMLoppemarkedpLouise",
+    "text": "Sun, Sep 13 at 10 AM\nLoppemarked på Louise Plads - 13 september 🎉\nLouise Plads, 9000 Aalborg, Denmark\nInterested\nShare\n345 interested · 9 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunAug16at10AMLoppemarkedpLouise",
+    "text": "Sun, Aug 16 at 10 AM\nLoppemarked på Louise Plads - 16 august 🎉\nLouise Plads, 9000 Aalborg, Denmark\nInterested\nShare\n370 interested · 10 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatOct3at11AMloppemarkedFlleshus",
+    "text": "Sat, Oct 3 at 11 AM\nloppemarked\nFælleshuset på Fyrkildevej\nInterested\nShare\n11 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunAug9at1130AMLoppemarkedisolen",
+    "text": "Sun, Aug 9 at 11:30 AM\nLoppemarked i solen\nSkudehavnsvej 35-37, 9000 Aalborg, Denmark\nInterested\nShare\n115 interested · 1 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunSep13at1130AMLoppemarkedisole",
+    "text": "Sun, Sep 13 at 11:30 AM\nLoppemarked i solen\nSkudehavnsvej 35-37, 9000 Aalborg, Denmark\nInterested\nShare\n27 interested · 2 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatAug8at10AMLoppemarkedisterUtt",
+    "text": "Sat, Aug 8 at 10 AM\nLoppemarked i Øster Uttrup\nVed Dammen 1, 9220 Aalborg, Denmark\nInterested\nShare\n368 interested · 51 going",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "FriJul3LoppemarkedimingrdhaveiVe",
+    "text": "Fri, Jul 3\nLoppemarked i min gårdhave i Vestbyen\nIstedgade 9, 9000 Aalborg, Danmark\n14 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatJul4LoppemarkedBlegkildeAlleB",
+    "text": "Sat, Jul 4\nLoppemarked Blegkilde Alle\nBlegkilde Allé\n17 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatJul4LoppemarkedvedDensocialec",
+    "text": "Sat, Jul 4\nLoppemarked ved Den sociale cafe Hjerterummet\nJyllandsgade 24, 9000 Aalborg, Denmark\n80 interested · 7 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunJun7LoppemarkedisolenSkudehav",
+    "text": "Sun, Jun 7\nLoppemarked i solen\nSkudehavnsvej 35-37, 9000 Aalborg, Denmark\n229 interested · 13 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatJun13LoppemarkedGundorfslund3",
+    "text": "Sat, Jun 13\nLoppemarked\nGundorfslund 32, Aalborg\n9 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunJun14benthusloppemarkedSolvan",
+    "text": "Sun, Jun 14\nÅbent hus / loppemarked\nSolvangen 39\n5 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunMay31ByensLngsteLoppemarkedNr",
+    "text": "Sun, May 31\nByens Længste Loppemarked?\nNørre Tranders Vej og Johannes Ewalds Vej\n201 interested · 29 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatJun6LoppemarkediSundhedsogKva",
+    "text": "Sat, Jun 6\nLoppemarked i Sundheds- og Kvartershuset\nSundheds- og Kvartershuset\n26 interested · 8 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunMay31loppemarkedstaldRygaardS",
+    "text": "Sun, May 31\nloppemarked stald Rygaard\nStald Rygaard\n3 interested · 5 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunMay10DetFrieloppemarkedFreder",
+    "text": "Sun, May 10\nDet Frie loppemarked Frederikstorv Aalborg\n1 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatMay23PrivatLoppemarkedHadsund",
+    "text": "Sat, May 23\nPrivat Loppemarked\nHadsundvej 136a\n7 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatApr25Markedsdagstortloppemark",
+    "text": "Sat, Apr 25\nMarkedsdag - stort loppemarked\nSohngårdsholmsvej 53, Aalborg\n21 interested · 28 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunApr19PrivatLoppemarkedkomoggr",
+    "text": "Sun, Apr 19\nPrivat Loppemarked - kom og gør et godt køb - 18. og 19. april\nAmagergade 1, 9000 Aalborg, Danmark\n17 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatApr25PrivatloppemarkedHadsund",
+    "text": "Sat, Apr 25\nPrivat loppemarked\nHadsundvej 136a\n2 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatMay9LoppemarkedLvstikkevej25M",
+    "text": "Sat, May 9\nLoppemarked Løvstikkevej 25\nMølholm\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunJul12LoppemarkedisolenSkudeha",
+    "text": "Sun, Jul 12\nLoppemarked i solen\nSkudehavnsvej 35-37, 9000 Aalborg, Denmark\n176 interested · 7 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunMay17LoppemarkedisolenSkudeha",
+    "text": "Sun, May 17\nLoppemarked i solen\nSkudehavnsvej 35-37, 9000 Aalborg, Denmark\n129 interested · 11 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunMay10LoppemarkedINrreTranders",
+    "text": "Sun, May 10\nLoppemarked I Nørre Tranders\nLemvigvej 113, 9220 Aalborg Øst, Danmark\n86 interested · 8 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunMay3DtfrieloppemarkedpFrederi",
+    "text": "Sun, May 3\nDét frie loppemarked på Frederikstorv\nFrederikstorv Aalborg\n21 interested · 7 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatApr25LoppemarkedHeimdalsgade6",
+    "text": "Sat, Apr 25\nLoppemarked - Heimdalsgade 61, 9000 Aalborg\n5 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunMay10LoppemarkedpSchleppegrel",
+    "text": "Sun, May 10\nLoppemarked på Schleppegrellsgade & Ryesgade\nSchleppegrellsgade, Aalborg\n821 interested · 65 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunMay17LoppemarkedpLouisePlads1",
+    "text": "Sun, May 17\nLoppemarked på Louise Plads - 17 maj 🎉\nLouise Plads, 9000 Aalborg, Denmark\n1.2K interested · 60 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunJun28LoppemarkedpLouisePlads2",
+    "text": "Sun, Jun 28\nLoppemarked på Louise Plads - 28 juni 🎉\nLouise Plads, 9000 Aalborg, Denmark\n1.2K interested · 47 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SatApr18LoppemarkediSundparkenAk",
+    "text": "Sat, Apr 18\nLoppemarked i Sundparken\nAktivitetshuset Sallingsundvej\n64 interested · 21 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20aalborg"
+  },
+  {
+    "id": "SunJun28LOPPEMARKEDHelsingr1inte",
+    "text": "Sun, Jun 28\nLOPPEMARKED\nHelsingør\n1 interested · 1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20helsing%C3%B8r"
+  },
+  {
+    "id": "SatApr18LoppemarkedHelsingrLille",
+    "text": "Sat, Apr 18\nLoppemarked\nHelsingør Lilleskole\n31 interested · 17 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20helsing%C3%B8r"
+  },
+  {
+    "id": "SatJul11Loppemarkedistergade9ste",
+    "text": "Sat, Jul 11\nLoppemarked i Østergade 9\nØstergade 9 næstved\n17 interested · 4 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "SatJul4BagagerumsmarkedLoppemark",
+    "text": "Sat, Jul 4\nBagagerumsmarked/Loppemarked i Sct. Jørgens Park\nSct. Jørgens Park - Næstveds Butikscenter\n187 interested · 19 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "SunMay31LoppemarkediNstved1went",
+    "text": "Sun, May 31\nLoppemarked i Næstved\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "SatJun20LoppemarkedvedSktJrgensK",
+    "text": "Sat, Jun 20\nLoppemarked ved Skt. Jørgens Kirke\nParkvej 101, 4700 Næstved, Denmark\n301 interested · 21 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "SatJun20LoppemarkedHolstedgaard1",
+    "text": "Sat, Jun 20\nLoppemarked\nHolstedgaard\n1 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "SatJun6loppemarkedpHavevejNstved",
+    "text": "Sat, Jun 6\nloppemarked på Havevej Næstved\n2 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "SunMay10HJELOPPERLOPPEMARKEDPHJE",
+    "text": "Sun, May 10\n🛍 HØJE LOPPER – LOPPEMARKED PÅ HØJE PLADS 🛍\nHØJE PLADS\n120 interested · 13 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "SatMay9LoppemarkedGeorgBrandesVe",
+    "text": "Sat, May 9\nLoppemarked Georg Brandes Vej 5\nGeorg Brandes Vej 5, 4700 Næstved\n1 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "SunJun21LoppemarkedBagagerumssal",
+    "text": "Sun, Jun 21\nLoppemarked / Bagagerumssalg🧸👕\nNæstved Storcenter 44, 4700 Næstved, Denmark\n208 interested · 22 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "SatApr25LoppemarkedHvedevnget64N",
+    "text": "Sat, Apr 25\nLoppemarked\nHvedevænget 64, Næstved\n22 interested · 2 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "SunApr26LoppemarkedpGavnvejGavnv",
+    "text": "Sun, Apr 26\nLoppemarked på Gavnøvej\nGavnøvej, 4700 Næstved, Danmark\n999 interested · 72 went",
+    "url": "https://www.facebook.com/events/search?q=loppemarked%20n%C3%A6stved"
+  },
+  {
+    "id": "fbimgt39308086741379750_35616841",
+    "text": "Q Search Facebook\nLOPPEMARKED\nSENDAG D.12/7\nKL 10-15 •\nPÅ OTTANGGARD",
+    "url": "https://www.facebook.com/photo/"
+  },
+  {
+    "id": "fbimg39308086744862952_102442378",
+    "text": "BROEN\nSØNDERBORG\nBØRNELOPPEMARKED\nET GODT FUND - EN GOD SAG\nBROEN Sønderborg laver nyt tiltag\ni Gammelgab, nærmere Skeldevej 23.\nBROEN Sønderborg er en frivillig forening som prøver\nat lave arrangementer som kan give et økonomisk\noverskud til fordel for udsatte familier så foreningen\nkan støtte økonomisk med tilskud til kontingent,\nudstyr, sportsskoler og sportsrejser.\nAlle der har\nbørnerelaterede ting\nkan kebe en stand til\n50 kr.\nBørn der selv vil\nsælge deres brugte\nlegetej kan få en\nGRATIS STAND.\nBØRNELOPPEMARKECTT VIL FOREGA\nLØRDAG DEN 18. JULI\nI TIDSRUMMET KL. 10 - 15.\nVed interesse i en stand kontakt Naja på 61544420\nDer vil være\nkaffe, kage og\nsaftevand salg.\nHyggekrog\nmed tegnebord\ntil de kreative.\nCirkus Pyt\nkommer or\nlaver et par\nnumre!\nKOM OG GØR ET KUP - OG STØT EN GOD SAG!\nBROEN\nSØNDERBORG\nRAiRA",
+    "url": "https://www.facebook.com/photo/"
+  }
 ]

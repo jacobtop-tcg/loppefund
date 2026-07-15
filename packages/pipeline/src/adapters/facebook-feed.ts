@@ -146,22 +146,28 @@ export function eventToRaw(item: FeedItem, refDate: string): RawEvent | null {
   const addr = splitAddress(where.address);
   const id = item.id ?? createHash('sha256').update(item.name + start.date).digest('hex').slice(0, 16);
 
-  return {
-    sourceKey: 'facebook-feed',
-    sourceUrl: item.eventUrl ?? item.url ?? `fbevent:${id}`,
-    sourceEventId: `fbevent-${id}`,
-    title: item.name.trim(),
-    description: item.description?.trim() || undefined,
-    category: undefined, // canonicalizer derives from title via normalizeCategory
-    venueName: where.name,
-    street: addr.street,
-    postcode: addr.postcode,
-    city: addr.city ?? where.city,
-    lat: where.latitude,
-    lng: where.longitude,
-    occurrences,
-    cancelled: item.isCanceled || item.canceled || undefined,
-  };
+  // The event path used to skip sanitizeFbLocation entirely, so an
+  // event-shaped item could keep a year-as-postcode or a prose "town" the post
+  // path would have refused. Same source, same OCR/prose risk — same guards.
+  return plausibleDates(
+    sanitizeFbLocation({
+      sourceKey: 'facebook-feed',
+      sourceUrl: item.eventUrl ?? item.url ?? `fbevent:${id}`,
+      sourceEventId: `fbevent-${id}`,
+      title: item.name.trim(),
+      description: item.description?.trim() || undefined,
+      category: undefined, // canonicalizer derives from title via normalizeCategory
+      venueName: where.name,
+      street: addr.street,
+      postcode: addr.postcode,
+      city: addr.city ?? where.city,
+      lat: where.latitude,
+      lng: where.longitude,
+      occurrences,
+      cancelled: item.isCanceled || item.canceled || undefined,
+    }),
+    refDate,
+  );
 }
 
 // Facebook/OCR "chrome": UI text and scrape artefacts that get glued onto a
@@ -211,11 +217,58 @@ const STREET_NOISE =
 // read as a postcode next to an org name ("2026 Fyens Stiftstidende").
 const CITY_OK = /^[A-ZÆØÅ][a-zæøåé]+(?:[ -][A-ZÆØÅa-zæøå]+){0,2}$/;
 const CITY_BAD = /stiftstidende|avis|posten|tidende|nyheder|facebook/i;
+
+/**
+ * A YEAR misread as a postcode is the single biggest source of junk towns on
+ * this feed. Real harvest rows: "…19. JULI 2026 Kampe", "d. 25/7 2026 Fra kl.
+ * 10.00", "… 2026 Mvh" — each time the year 2026 was taken as the postcode and
+ * the NEXT prose word became the town ("Kampe", "Fra", "Mvh").
+ *
+ * Denmark has no postcode in this band: the 2000-series jumps 2000 (Frederiks-
+ * berg) → 2100 (København Ø), so 2019-2035 can only ever be a year. Refusing
+ * them kills the whole class at its root rather than blacklisting each word.
+ */
+const YEAR_NOT_POSTCODE = /^20(1[9]|2\d|3[0-5])$/;
+
+/**
+ * Danish prose that survives CITY_OK because it is simply a capitalised word.
+ * Belt-and-braces behind YEAR_NOT_POSTCODE: a sign-off, preposition or filler
+ * word is never a postal town, whatever number precedes it.
+ */
+const CITY_PROSE =
+  /^(?:mvh|hilsen|hilsner|tak|fra|til|med|kl|kun|husk|nyt|se|kom|ring|sms|pris|priser|gratis|salg|stande|stadeplads|program|arrangeret|kontakt|info|alle|vi|du|der|og|samt|osv|mm|ca|ps|obs)$/i;
+
 function sanitizeFbLocation(raw: RawEvent): RawEvent {
   const street = raw.street && STREET_NOISE.test(raw.street) ? undefined : raw.street;
-  const cityOk = !!raw.city && CITY_OK.test(raw.city) && !CITY_BAD.test(raw.city);
-  const postcode = raw.postcode && cityOk ? raw.postcode : undefined;
+  const cityOk =
+    !!raw.city &&
+    CITY_OK.test(raw.city) &&
+    !CITY_BAD.test(raw.city) &&
+    !CITY_PROSE.test(raw.city.trim());
+  const postcodeOk = !!raw.postcode && !YEAR_NOT_POSTCODE.test(raw.postcode.trim());
+  const postcode = postcodeOk && cityOk ? raw.postcode : undefined;
   return { ...raw, street, postcode, city: postcode ? raw.city : undefined };
+}
+
+/**
+ * An OCR-mangled poster can hand the parser an impossible date — a real harvest
+ * produced "3400-01-01" from "ORBÆK MARKED 10-12. Jul Program 2026:". A market
+ * 1,374 years out is not a market; drop such occurrences, and the draft with
+ * them if nothing plausible survives. Missing over incorrect.
+ */
+const MAX_FUTURE_DAYS = 730;
+
+function plausibleDates(raw: RawEvent, refDate: string): RawEvent | null {
+  if (!raw.occurrences?.length) return raw;
+  const maxDate = new Date(Date.parse(`${refDate}T00:00:00Z`) + MAX_FUTURE_DAYS * 86400000)
+    .toISOString()
+    .slice(0, 10);
+  const minDate = new Date(Date.parse(`${refDate}T00:00:00Z`) - 366 * 86400000)
+    .toISOString()
+    .slice(0, 10);
+  const occurrences = raw.occurrences.filter((o) => o.date >= minDate && o.date <= maxDate);
+  if (occurrences.length === 0) return null;
+  return { ...raw, occurrences };
 }
 
 export function itemToRaw(item: FeedItem, refDate: string): RawEvent | null {
@@ -238,7 +291,7 @@ export function itemToRaw(item: FeedItem, refDate: string): RawEvent | null {
   // Reject a draft whose title is still chrome the cleaner missed — better no
   // event than "*Rising contributor" or "ebook" showing up as a market.
   if (CHROME_TITLE.test(raw.title)) return null;
-  return sanitizeFbLocation(raw);
+  return plausibleDates(sanitizeFbLocation(raw), refDate);
 }
 
 export const facebookFeed: SourceAdapter = {

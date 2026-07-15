@@ -328,6 +328,21 @@ if (selected.length === 0) {
   process.exit(1);
 }
 
+/**
+ * Sources whose crawl is a PARTIAL SAMPLE, not an enumeration — they must never
+ * drive the vanished-reconcile, however clean the run looks.
+ *
+ * The vanish logic reasons "present last run, absent now = withdrawn". That is
+ * sound for a calendar we page through exhaustively. It is catastrophic for
+ * Facebook: the harvester scrolls a time-budgeted slice of 40 groups/searches
+ * and FB serves different posts each visit, so a market missing from today's
+ * sample means only "not scrolled past", never "cancelled". Measured on a real
+ * harvest: treating it as healthy expired 157 events and removed 70 real
+ * upcoming markets in one run. Missing over incorrect — a partial sample may
+ * only ADD.
+ */
+const PARTIAL_SAMPLE_SOURCES = new Set(['facebook-feed']);
+
 const fetcher = new PoliteFetcher();
 const trustMap = Object.fromEntries(selected.map((a) => [a.key, a.trust]));
 
@@ -369,8 +384,11 @@ for (const adapter of selected) {
     }
     const expiredApi = expirePastEvents(db, new Date().toISOString().slice(0, 10));
     stats.expired = expiredApi;
-    // A clean full API pull is trustworthy enough to reconcile disappearances.
-    if (fullCrawl && stats.discovered > 0) healthySources.push(adapter.key);
+    // A clean full API pull is trustworthy enough to reconcile disappearances —
+    // but only if the source really is an ENUMERATION (see PARTIAL_SAMPLE_SOURCES).
+    if (fullCrawl && stats.discovered > 0 && !PARTIAL_SAMPLE_SOURCES.has(adapter.key)) {
+      healthySources.push(adapter.key);
+    }
     finishRun(db, runId, stats);
     console.log(`[${adapter.key}] done:`, JSON.stringify(stats));
     continue;

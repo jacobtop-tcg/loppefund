@@ -42,6 +42,58 @@ import { fileURLToPath } from 'node:url';
 // fileURLToPath (not URL.pathname) so a repo path with spaces/special chars —
 // e.g. ".../Loppemarkeder i DK" — is decoded, not left percent-encoded (%20).
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+
+/**
+ * ACCUMULATE, NEVER REPLACE.
+ *
+ * Every run is a PARTIAL, non-deterministic sample of Facebook: the time budget
+ * cuts it short, and FB serves different posts each visit. So the harvest is a
+ * sample, never an enumeration. Overwriting the feed with one sample silently
+ * drops every market the run happened not to scroll past — measured once at
+ * 70 real upcoming markets lost and 157 events expired in a single run.
+ *
+ * The feed is therefore a UNION keyed on the post's stable id, and entries only
+ * ever leave it by AGE (their day is long past), never by absence from a run.
+ * Fresher text for a known id wins, so a corrected/updated post still updates.
+ */
+const HARVEST_KEEP_DAYS = 400;
+
+export function harvestKey(item) {
+  return String(item.id ?? item.url ?? item.postUrl ?? item.text ?? '').slice(0, 120);
+}
+
+/** Newest date this item refers to, for ageing out; null when undated. */
+function harvestDate(item) {
+  const iso = item.startDate ?? item.endDate ?? null;
+  return typeof iso === 'string' && /^\d{4}-\d{2}-\d{2}/.test(iso) ? iso.slice(0, 10) : null;
+}
+
+export function mergeHarvest(existing, fresh, today = new Date().toISOString().slice(0, 10)) {
+  const cutoff = new Date(Date.parse(`${today}T00:00:00Z`) - HARVEST_KEEP_DAYS * 86400000)
+    .toISOString()
+    .slice(0, 10);
+  const byKey = new Map();
+  for (const item of [...(existing ?? []), ...(fresh ?? [])]) {
+    const key = harvestKey(item);
+    if (!key) continue;
+    byKey.set(key, item); // fresh wins on a re-seen id
+  }
+  // Drop only what is genuinely stale-by-date. Undated posts are kept: a
+  // recurring "hver søndag" announcement has no date but is still true.
+  return [...byKey.values()].filter((i) => {
+    const d = harvestDate(i);
+    return d === null || d >= cutoff;
+  });
+}
+
+async function readExistingHarvest(path) {
+  try {
+    const parsed = JSON.parse(await readFile(path, 'utf8'));
+    return Array.isArray(parsed) ? parsed : (parsed.items ?? []);
+  } catch {
+    return []; // first run, or an unreadable file — start clean
+  }
+}
 const CONFIG = resolve(ROOT, 'scripts/fb-harvest.config.json');
 const SESSION_DIR = resolve(ROOT, '.fb-session'); // persistent login, gitignored
 // Output path. Defaults to the committed feed the pipeline ingests, but can be
@@ -356,12 +408,23 @@ async function main() {
 
   await ctx.close();
   await mkdir(dirname(OUT), { recursive: true });
-  await writeFile(OUT, JSON.stringify(items, null, 2));
-  console.log(`\nHarvested ${items.length} market-related posts -> ${OUT}`);
+  const merged = mergeHarvest(await readExistingHarvest(OUT), items);
+  await writeFile(OUT, JSON.stringify(merged, null, 2));
+  console.log(
+    `\nHarvested ${items.length} market-related posts this run` +
+      ` -> ${merged.length} in the accumulated feed (${OUT})`,
+  );
   console.log('Publish that file and set LOPPEFUND_FB_FEED_URLS to its URL, then run the pipeline.');
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+// Only harvest when RUN as a script. Without this guard a plain `import` of
+// this file (a unit test of mergeHarvest, say) silently opens a real Facebook
+// session — an automated login nobody asked for, against an account FB can
+// limit for exactly that. Importing must be inert; harvesting must be explicit.
+const isEntryPoint = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isEntryPoint) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}

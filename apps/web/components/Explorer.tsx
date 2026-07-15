@@ -235,7 +235,6 @@ export function Explorer({
     window.history.replaceState(null, '', url);
   }, [hydrated, dateFilter, category, query, freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, savedOnly, gemsFirst, view, tripMode, tripSlugs]);
 
-  const [from, to] = dateRangeFor(dateFilter, today);
 
   // Autocomplete index (cities + market/venue names), built once from the data.
   const searchIndex = useMemo(() => buildSearchIndex(events, venues), [events, venues]);
@@ -244,6 +243,17 @@ export function Explorer({
   // passes over ~700 events + ~1100 venues run against a deferred value — React
   // keeps the last result on screen and recomputes off the critical path.
   const deferredQuery = useDeferredValue(query);
+
+  // SEARCH IS A FRONT DOOR TO THE WHOLE DATABASE, NOT TO THE CURRENT DATE CHIP.
+  // Typing a name/town means "find this", never "find this, but only if it falls
+  // in this weekend". The old behaviour answered "0 markeder · »sønderborg«"
+  // while two real Sønderborg markets sat in the DB in January — data present,
+  // invisible to the person looking for it. So an active query spans the FULL
+  // horizon; the date chips stay in charge of BROWSING (when there's no query).
+  const searching = deferredQuery.trim().length > 0;
+  const [from, to] = searching
+    ? [today, addDaysIso(today, UPCOMING_HORIZON_DAYS)]
+    : dateRangeFor(dateFilter, today);
 
   const filtered = useMemo(() => {
     const q = expandQueryAliases(foldForSearch(deferredQuery.trim()));
@@ -571,6 +581,7 @@ export function Explorer({
             now={now}
             today={today}
             dateFilter={dateFilter}
+            searching={searching}
             from={from}
             to={to}
             hasPos={pos !== null}

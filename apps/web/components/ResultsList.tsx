@@ -20,7 +20,11 @@ function formatRange(from: string, to: string): string {
 }
 
 /** The serif statement that NAMES the moment before counting it. */
-function leadFor(dateFilter: DateFilter, from: string, to: string): string {
+function leadFor(dateFilter: DateFilter, from: string, to: string, searching = false): string {
+  // A query spans every date (see Explorer), so the lead must not keep claiming
+  // the date chip's window — "Weekenden 18.–19. juli" over search results for
+  // "sønderborg" is simply false.
+  if (searching) return 'Søgeresultater';
   switch (dateFilter) {
     case 'weekend':
       return `Weekenden ${formatRange(from, to)}`;
@@ -69,6 +73,7 @@ export const ResultsList = memo(function ResultsList({
   weather,
   refinements = [],
   filterKey = '',
+  searching = false,
 }: {
   filtered: Row[];
   suggestions: Row[];
@@ -89,6 +94,8 @@ export const ResultsList = memo(function ResultsList({
   refinements?: string[];
   /** Query-free signature of the active filters — drives the list settle. */
   filterKey?: string;
+  /** A search query is active, so results span every date, not the chip's window. */
+  searching?: boolean;
 }) {
   // Re-trigger the 180ms settle when the ANSWER changes (chip toggles), without
   // remounting cards — identity, hover-highlight and mount-stagger all survive.
@@ -136,12 +143,23 @@ export const ResultsList = memo(function ResultsList({
       <div className="result-meta">
         <div className="result-head">
           {/* keyed on dateFilter so the lead softly re-enters when the answer changes */}
-          <p className="result-lead" key={dateFilter}>
-            {leadFor(dateFilter, from, to)}
+          <p className="result-lead" key={searching ? 'search' : dateFilter}>
+            {leadFor(dateFilter, from, to, searching)}
           </p>
+          {/* The count must describe EVERYTHING found. It used to say "0 markeder"
+              while twenty shops rendered right below it — the headline number the
+              eye trusts, denying data that was on screen. Shops are counted as
+              first-class results, not a footnote. */}
           <p className="result-count" aria-live="polite">
             <strong>{filtered.length}</strong>{' '}
             {filtered.length === 1 ? 'marked' : 'markeder'}
+            {venues.length > 0 && (
+              <>
+                {' · '}
+                <strong>{venues.length}</strong>{' '}
+                {venues.length === 1 ? 'fast sted' : 'faste steder'}
+              </>
+            )}
             {refinements.length > 0 && (
               <span className="result-refinements"> · {refinements.join(' · ')}</span>
             )}

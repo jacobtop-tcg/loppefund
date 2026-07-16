@@ -9,6 +9,7 @@ import { isUnverified } from '../lib/trust.ts';
 import { formatDateLong } from '../lib/format.ts';
 import { venueOpenState, VENUE_TYPES, type VenueType } from '../lib/venue-client.ts';
 import { buildSearchIndex, expandQueryAliases } from '../lib/search-index.ts';
+import { buildCityGazetteer, suggestCities } from '../lib/city-gazetteer.ts';
 import { useOutdoorWeather } from '../lib/weather.ts';
 import { FilterBar, type DateFilter } from './FilterBar.tsx';
 import { NAV_FLAG } from './BackLink.tsx';
@@ -97,6 +98,15 @@ export function Explorer({
   const [inOut, setInOut] = useState<'indoor' | 'outdoor' | null>(null);
   const [view, setView] = useState<'list' | 'map'>('list');
   const [pos, setPos] = useState<{ lat: number; lng: number } | null>(null);
+  /**
+   * WHERE the position came from. A real device fix is "where I am" and worth
+   * remembering; a town picked to sort one trip is not. Without this the
+   * persistence effect below would overwrite the visitor's saved home the moment
+   * they picked "Odense" as a start, and /naer-mig would think they had moved.
+   */
+  const [posSource, setPosSource] = useState<'gps' | 'by' | null>(null);
+  /** The picked town's name, so the UI can say what it is sorting from. */
+  const [posLabel, setPosLabel] = useState<string | null>(null);
   const [radius, setRadius] = useState<number | null>(null);
   const [locating, setLocating] = useState(false);
   const [geoError, setGeoError] = useState<string | null>(null);
@@ -118,6 +128,9 @@ export function Explorer({
    */
   const [originAsked, setOriginAsked] = useState(false);
   const [originDismissed, setOriginDismissed] = useState(false);
+  /** The town picker — the way out for anyone who denied the permission. */
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [cityQuery, setCityQuery] = useState('');
   const [savedOnly, setSavedOnly] = useState(false);
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
   // Permanent-venue layer (thrift/antique/flea shops): off by default so the
@@ -141,8 +154,12 @@ export function Explorer({
   // the Google button stayed disabled forever. The app's own "Del turen" button
   // produced exactly that link, because it drops `q` — the one parameter that
   // could otherwise have triggered the fetch.
+  // ...and when the town picker opens: 129 of the 413 towns exist ONLY in the
+  // shop data, so a gazetteer without it would silently fail to offer them.
+  // Gated on the picker rather than trip mode, so only a visitor who actually
+  // asks for the list pays the ~340 KB.
   const wantVenues =
-    venuesOn || query.trim().length >= 2 || tripSlugs.some((t) => t.startsWith('v:'));
+    venuesOn || query.trim().length >= 2 || tripSlugs.some((t) => t.startsWith('v:')) || pickerOpen;
   useEffect(() => {
     if (!wantVenues || venuesLoaded) return;
     let cancelled = false;
@@ -223,6 +240,9 @@ export function Explorer({
     const savedLoc = readSavedLocation();
     if (savedLoc) {
       setPos({ lat: savedLoc.lat, lng: savedLoc.lng });
+      // Every record ever written to this key came from getCurrentPosition —
+      // it is backed, not guessed.
+      setPosSource('gps');
       if (savedLoc.radius !== null) setRadius(savedLoc.radius);
     }
     setHydrated(true);
@@ -236,11 +256,12 @@ export function Explorer({
   }, []);
 
   // Remember the location on this device whenever it changes, so the next visit
-  // restores it. Only persists a real position; clearing is handled in clearPos.
+  // restores it. Only a REAL device fix counts as home — a town picked to sort a
+  // single loppetur is a start point, not a move. Clearing is in clearPos.
   useEffect(() => {
-    if (!hydrated || !pos) return;
+    if (!hydrated || !pos || posSource !== 'gps') return;
     writeSavedLocation({ lat: pos.lat, lng: pos.lng, radius });
-  }, [hydrated, pos, radius]);
+  }, [hydrated, pos, posSource, radius]);
 
   // On any relevant filter change, keep the URL in sync via replaceState so
   // refresh/back restore state without polluting history. SSR-guarded.
@@ -534,6 +555,15 @@ export function Explorer({
   const needsOrigin =
     tripMode && !pos && !originDismissed && (tripSlugs.length >= 2 || originAsked);
 
+  // Built from the coordinates the app already has — no endpoint, no geocoder,
+  // no invented data. Deferred until the picker opens: that is when the shop
+  // layer has landed, and 129 of the 413 towns exist only in it.
+  const gazetteer = useMemo(
+    () => (pickerOpen ? buildCityGazetteer([...events, ...venues]) : []),
+    [pickerOpen, events, venues],
+  );
+  const citySuggestions = useMemo(() => suggestCities(gazetteer, cityQuery), [gazetteer, cityQuery]);
+
   /** How far stop 1 is from the user — the number behind "this makes no sense". */
   const firstLegKm = useMemo(
     () => (pos && tripRoute[0] ? distanceKm(pos.lat, pos.lng, tripRoute[0].lat, tripRoute[0].lng) : null),
@@ -683,6 +713,8 @@ export function Explorer({
     navigator.geolocation.getCurrentPosition(
       (p) => {
         setPos({ lat: p.coords.latitude, lng: p.coords.longitude });
+        setPosSource('gps');
+        setPosLabel(null);
         setLocating(false);
         setGeoError(null); // a later success must wipe an earlier failure
       },
@@ -707,6 +739,8 @@ export function Explorer({
 
   const clearPos = useCallback(() => {
     setPos(null);
+    setPosSource(null);
+    setPosLabel(null);
     setRadius(null);
     clearSavedLocation(); // forget the device-local location too
   }, []);
@@ -771,7 +805,11 @@ export function Explorer({
             tripMode={tripMode}
             tripSlugs={tripSlugs}
             tripRoute={tripRoute}
-          onGeolocate={setPos}
+          onGeolocate={(p) => {
+            setPos(p);
+            setPosSource('gps');
+            setPosLabel(null);
+          }}
             onToggleTrip={toggleTrip}
             fullscreen={view === 'map'}
           />
@@ -815,7 +853,7 @@ export function Explorer({
                 )}
                 {tripKm && tripKm.km > 0 && (
                   <span style={{ color: 'var(--ink-soft)', fontWeight: 400 }}>
-                    {' · '}~{Math.round(tripKm.km)} km {tripKm.label}
+                    {' · '}~{Math.round(tripKm.km)} km {posLabel ? `fra ${posLabel}` : tripKm.label}
                   </span>
                 )}
                 {/* Rides the existing live region, so a screen reader is told
@@ -851,20 +889,63 @@ export function Explorer({
             <div className="trip-ask" role="group" aria-label="Startpunkt">
               <span className="trip-ask-q">Hvor starter I fra?</span>
               <button className="trip-go" onClick={locate} disabled={locating}>
-                {locating ? 'Finder\u2026' : 'Brug min placering'}
+                {locating ? 'Finder…' : 'Brug min placering'}
+              </button>
+              <button className="trip-clear" onClick={() => setPickerOpen((v) => !v)}>
+                Vælg by
               </button>
               <button
                 className="trip-clear"
                 onClick={() => {
                   setOriginDismissed(true);
                   setOriginAsked(false);
+                  setPickerOpen(false);
                 }}
               >
                 Spring over
               </button>
               <span className="trip-ask-note">
-                {geoError ?? 'Bruges kun til at sortere stoppene. Gemmes kun p\u00e5 din enhed.'}
+                {geoError ?? 'Bruges kun til at sortere stoppene. Gemmes kun på din enhed.'}
               </span>
+              {pickerOpen && (
+                <div className="trip-picker">
+                  <input
+                    type="search"
+                    className="search-box"
+                    value={cityQuery}
+                    onChange={(e) => setCityQuery(e.target.value)}
+                    placeholder="Skriv en by — fx Sønderborg"
+                    aria-label="Søg efter en by at starte fra"
+                  />
+                  <ul className="trip-picker-list">
+                    {citySuggestions.length === 0 ? (
+                      <li className="trip-picker-empty">
+                        {gazetteer.length === 0 ? 'Henter byer…' : 'Ingen by matcher'}
+                      </li>
+                    ) : (
+                      citySuggestions.map((c) => (
+                        <li key={`${c.label}-${c.lat}`}>
+                          <button
+                            type="button"
+                            className="trip-picker-city"
+                            onClick={() => {
+                              setPos({ lat: c.lat, lng: c.lng });
+                              // 'by', never 'gps': a town chosen for one trip is
+                              // a start point, not this device's home.
+                              setPosSource('by');
+                              setPosLabel(c.label);
+                              setPickerOpen(false);
+                              setCityQuery('');
+                            }}
+                          >
+                            {c.label}
+                          </button>
+                        </li>
+                      ))
+                    )}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
           {/* Reordering is an act the user performs, never one that happens to

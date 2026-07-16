@@ -46,6 +46,13 @@ const MapView = dynamic(() => import('./MapView.tsx').then((m) => m.MapView), {
 // market worth driving to. ~113 of the events clear it — a useful, honest set.
 const BIGGER_STALLS = 15;
 
+// Past this, a first stop is far enough that the route is worth questioning out
+// loud. ~45 min of driving in Denmark: far enough that nobody starts a loppetur
+// there by accident, near enough that a genuine "drive out, work back" plan
+// isn't nagged. It gates a QUESTION, never an action — the worst it can do is
+// offer a sort the user declines.
+const FAR_FIRST_LEG_KM = 40;
+
 /** [from, to] inclusive for each date filter. Weekend = Sat+Sun (or rest of it). */
 function dateRangeFor(filter: DateFilter, today: string): [string, string] {
   if (filter === 'idag' || filter === 'aabent-nu') return [today, today];
@@ -103,6 +110,14 @@ export function Explorer({
   const [tripUndo, setTripUndo] = useState<string[] | null>(null);
   /** Which day "⚡ Planlæg for mig" planned for, or null when the user picked. */
   const [tripNotice, setTripNotice] = useState<string | null>(null);
+  /**
+   * The trip asks where you START — the one input that decides whether an order
+   * makes sense. Session-only on purpose: "skip" is a decision about this trip,
+   * not a preference to remember, and a persisted dismissal would silently
+   * disable the fix forever.
+   */
+  const [originAsked, setOriginAsked] = useState(false);
+  const [originDismissed, setOriginDismissed] = useState(false);
   const [savedOnly, setSavedOnly] = useState(false);
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
   // Permanent-venue layer (thrift/antique/flea shops): off by default so the
@@ -493,9 +508,36 @@ export function Explorer({
         .filter((s): s is { id: string; lat: number; lng: number } => s !== null),
     [tripSlugs, coordForStop],
   );
-  const { tripUrl, tripKm } = useMemo(
-    () => ({ tripUrl: buildTripUrl(tripRoute), tripKm: tripDistanceKm(tripRoute, pos) }),
-    [tripRoute, pos],
+  // Two DIFFERENT numbers, and conflating them is how the bar came to read
+  // "~8 km" for a drive Google measured at 165 km:
+  //   with a start -> the whole journey, including getting to stop 1
+  //   without one  -> only the distance BETWEEN the stops, which is all we know
+  // The label has to change with the meaning, so tripKm carries its own words.
+  const { tripUrl, tripKm } = useMemo(() => {
+    const url = buildTripUrl(tripRoute);
+    if (tripRoute.length === 0) return { tripUrl: url, tripKm: null };
+    return {
+      tripUrl: url,
+      tripKm: pos
+        ? { km: tripDistanceKm(tripRoute, pos), label: 'fra dig' }
+        : { km: tripDistanceKm(tripRoute.slice(1), tripRoute[0]!), label: 'mellem stoppene' },
+    };
+  }, [tripRoute, pos]);
+
+  /**
+   * Ask where the trip starts once an ORDER EXISTS — two stops — and not before.
+   * One stop has no order to get wrong, so asking then is unexplained noise, and
+   * an unexplained permission prompt gets denied. A denial is permanent and
+   * per-origin: code can never re-prompt. So the ask has to be worth its one
+   * shot, which means it must arrive with a visible reason attached.
+   */
+  const needsOrigin =
+    tripMode && !pos && !originDismissed && (tripSlugs.length >= 2 || originAsked);
+
+  /** How far stop 1 is from the user — the number behind "this makes no sense". */
+  const firstLegKm = useMemo(
+    () => (pos && tripRoute[0] ? distanceKm(pos.lat, pos.lng, tripRoute[0].lat, tripRoute[0].lng) : null),
+    [pos, tripRoute],
   );
 
   // Handlers passed to the memoized FilterBar/ResultsList must be referentially
@@ -520,6 +562,15 @@ export function Explorer({
    * an act the user performs and can undo, not something that happens to them.
    */
   const optimizeTrip = useCallback(() => {
+    // The remedy must ask for the input it needs. Without a start point this
+    // used to fall through to a no-op: the user tapped the app's only fix and
+    // NOTHING happened — no reorder, no message, no state change. Ordering
+    // without a start is now unrepresentable (optimizeTripOrder requires one),
+    // so there is exactly one honest thing left to do: ask.
+    if (!pos) {
+      setOriginAsked(true);
+      return;
+    }
     const stops = tripSlugs
       .map((id) => {
         const c = coordForStop(id);
@@ -532,7 +583,12 @@ export function Explorer({
     // user's choice — park it at the end rather than drop it from their own
     // selection.
     const next = [...ordered, ...tripSlugs.filter((id) => !ordered.includes(id))];
-    if (next.every((id, i) => id === tripSlugs[i])) return; // already sorted: no-op, no undo
+    if (next.every((id, i) => id === tripSlugs[i])) {
+      // Already optimal. Say so — silence after tapping the only remedy reads
+      // exactly like a broken button, which is how this bug was reported.
+      setTripNotice('Rækkefølgen er allerede den korteste');
+      return;
+    }
     setTripUndo(tripSlugs);
     setTripSlugs(next);
     // NOT the setTripSlugs(prev => …) form on purpose: setTripUndo inside an
@@ -565,6 +621,14 @@ export function Explorer({
   // A tap that turns raw data into a planned Saturday — no competitor has the
   // corpus for it.
   const autoPlanTrip = useCallback(() => {
+    // Its own label promises "tættest på dig først". Without a start point that
+    // was an unbacked assertion: the anchor fell back to the soonest market in
+    // the list, so the app centred the whole plan on a town the user had never
+    // heard of and still called it "closest to you". Ask instead of pretending.
+    if (!pos) {
+      setOriginAsked(true);
+      return;
+    }
     const withCoords = filtered.filter((e) => e.lat != null && e.lng != null);
     if (withCoords.length < 2) return;
 
@@ -585,7 +649,7 @@ export function Explorer({
     // the occurrence check rather than a nextDate equality test.
     const sameDay = withCoords.filter((e) => e.occurrences.some((o) => o.date === day));
 
-    const anchor = pos ?? { lat: sameDay[0]!.lat!, lng: sameDay[0]!.lng! };
+    const anchor = pos;
     const near = [...sameDay]
       .sort(
         (a, b) =>
@@ -611,7 +675,7 @@ export function Explorer({
 
   const locate = useCallback(() => {
     if (!navigator.geolocation) {
-      setGeoError('Din browser deler ikke placering — søg på en by i stedet.');
+      setGeoError('Din browser deler ikke placering.');
       return;
     }
     setLocating(true);
@@ -622,11 +686,22 @@ export function Explorer({
         setLocating(false);
         setGeoError(null); // a later success must wipe an earlier failure
       },
-      () => {
+      (err) => {
         setLocating(false);
-        setGeoError('Kunne ikke hente din placering — tjek tilladelser, eller søg på en by.');
+        // The three failure modes are NOT the same thing and must not share
+        // copy: a denial is permanent and per-origin (code cannot re-prompt —
+        // only the browser's own site settings can), while a timeout indoors is
+        // worth retrying. Telling a blocked user to "check permissions" is the
+        // only useful thing; telling a timed-out user that is a wild goose chase.
+        setGeoError(
+          err.code === err.PERMISSION_DENIED
+            ? 'Du har slået placering fra for siden — det kan kun ændres i browserens indstillinger.'
+            : 'Kunne ikke finde din placering lige nu. Prøv igen.',
+        );
       },
-      { timeout: 8000 },
+      // A fix from the last 5 minutes is plenty for sorting a day trip, and it
+      // answers instantly instead of waking the GPS.
+      { timeout: 8000, maximumAge: 300_000 },
     );
   }, []);
 
@@ -696,6 +771,7 @@ export function Explorer({
             tripMode={tripMode}
             tripSlugs={tripSlugs}
             tripRoute={tripRoute}
+          onGeolocate={setPos}
             onToggleTrip={toggleTrip}
             fullscreen={view === 'map'}
           />
@@ -737,9 +813,9 @@ export function Explorer({
                     {tripNotice}
                   </span>
                 )}
-                {tripKm > 0 && (
+                {tripKm && tripKm.km > 0 && (
                   <span style={{ color: 'var(--ink-soft)', fontWeight: 400 }}>
-                    {' · '}~{Math.round(tripKm)} km i fugleflugt
+                    {' · '}~{Math.round(tripKm.km)} km {tripKm.label}
                   </span>
                 )}
                 {/* Rides the existing live region, so a screen reader is told
@@ -771,6 +847,26 @@ export function Explorer({
               Åbn rute i Google Maps
             </button>
           )}
+          {needsOrigin && (
+            <div className="trip-ask" role="group" aria-label="Startpunkt">
+              <span className="trip-ask-q">Hvor starter I fra?</span>
+              <button className="trip-go" onClick={locate} disabled={locating}>
+                {locating ? 'Finder\u2026' : 'Brug min placering'}
+              </button>
+              <button
+                className="trip-clear"
+                onClick={() => {
+                  setOriginDismissed(true);
+                  setOriginAsked(false);
+                }}
+              >
+                Spring over
+              </button>
+              <span className="trip-ask-note">
+                {geoError ?? 'Bruges kun til at sortere stoppene. Gemmes kun p\u00e5 din enhed.'}
+              </span>
+            </div>
+          )}
           {/* Reordering is an act the user performs, never one that happens to
               them. The km figure moves in front of them when they tap it — the
               number that used to launder a silent reorder now prices it. */}
@@ -786,10 +882,12 @@ export function Explorer({
                 title={
                   pos
                     ? 'Sorterer stoppene til den korteste køretur fra din placering'
-                    : 'Sorterer stoppene til den korteste køretur — starter ved dit første stop'
+                    : 'Vi ved ikke hvor du starter fra — tryk for at oplyse det'
                 }
               >
-                Optimér rækkefølgen
+                {pos && firstLegKm !== null && firstLegKm > FAR_FIRST_LEG_KM
+                  ? `Stop 1 er ${Math.round(firstLegKm)} km væk — sortér efter afstand`
+                  : 'Optimér rækkefølgen'}
               </button>
             ))}
           {tripSlugs.length >= 2 && (

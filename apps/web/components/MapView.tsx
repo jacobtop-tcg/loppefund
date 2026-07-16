@@ -133,6 +133,7 @@ export function MapView({
   tripSlugs = [],
   tripRoute = [],
   onToggleTrip,
+  onGeolocate,
   fullscreen = false,
 }: {
   events: MapEvent[];
@@ -143,6 +144,8 @@ export function MapView({
   tripSlugs?: string[];
   tripRoute?: RouteStop[];
   onToggleTrip?: (slug: string) => void;
+  /** Fired when the map's own "Find min placering" control gets a fix. */
+  onGeolocate?: (p: { lat: number; lng: number }) => void;
   fullscreen?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -167,6 +170,10 @@ export function MapView({
   tripRef.current = { tripMode, tripSlugs, onToggleTrip };
   const tripRouteRef = useRef(tripRoute);
   tripRouteRef.current = tripRoute;
+  // Held in a ref like every other live value here: the map effect runs once on
+  // mount, so a prop in its closure would freeze at the first render.
+  const onGeolocateRef = useRef(onGeolocate);
+  onGeolocateRef.current = onGeolocate;
   const highlightRef = useRef(highlightSlug);
   highlightRef.current = highlightSlug;
 
@@ -253,13 +260,20 @@ export function MapView({
       ro = new ResizeObserver(() => map?.resize());
       ro.observe(container);
       map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
-      map.addControl(
-        new maplibregl.GeolocateControl({
-          positionOptions: { enableHighAccuracy: false, timeout: 8000 },
-          fitBoundsOptions: { maxZoom: 12 },
-        }),
-        'top-right',
-      );
+      // The map's own crosshair. Nothing listened to it: the visitor granted
+      // permission, watched the map fly to their town, and the app still had no
+      // idea where they were — so the loppetur went on ordering stops blind next
+      // to a control that had just been handed the answer. Permission is the
+      // expensive part and it has already been paid here; throwing the fix away
+      // was pure waste.
+      const geolocate = new maplibregl.GeolocateControl({
+        positionOptions: { enableHighAccuracy: false, timeout: 8000 },
+        fitBoundsOptions: { maxZoom: 12 },
+      });
+      map.addControl(geolocate, 'top-right');
+      geolocate.on('geolocate', (e: { coords: GeolocationCoordinates }) => {
+        onGeolocateRef.current?.({ lat: e.coords.latitude, lng: e.coords.longitude });
+      });
       map.on('load', () => {
         const m = map!;
         m.addSource('events', {

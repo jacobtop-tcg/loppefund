@@ -191,19 +191,22 @@ export function pickTripDay(stops: readonly DatedStop[]): string | null {
  * Google's Maps URL API visits waypoints in the given order and won't
  * re-optimise, so ordering them ourselves is what makes the actual route sane.
  *
- * ANCHORING, AND WHY IT IS NOT A FREE CHOICE.
+ * THE START IS REQUIRED, AND THAT IS THE WHOLE POINT.
  * With no known start the route is an open path — and an open path and its
- * exact reversal always have IDENTICAL length. Our own objective function
- * therefore cannot tell the user's order from its mirror: the two are tied, and
- * something outside the objective has to break the tie. The old code broke it
- * with `b.lat - a.lat`. Latitude appears nowhere in the objective, so the tie
- * was decided by nothing at all — and a user tapping stops south->north got
- * their trip handed back exactly reversed. It wasn't a bad trade; the optimiser
- * had no opinion and acted anyway.
+ * exact reversal always have IDENTICAL length. The objective function is
+ * therefore TIED: it genuinely cannot tell "stop 1 is 200 km away" from "stop 4
+ * is 200 km away", because both drives are the same number of kilometres. Only
+ * a start point breaks that tie.
  *
- * We now anchor on the FIRST stop the user chose. It is equally deterministic,
- * it is the only start signal we have, and it can never hand the user back
- * their own sequence reversed.
+ * The old code broke it with `b.lat - a.lat` — latitude appears nowhere in the
+ * objective, so the tie was decided by nothing, and a user tapping south->north
+ * got their trip reversed. The fix after that anchored on the user's first tap,
+ * which cannot reverse them but is not a signal either: it is where they
+ * happened to tap first, and it still let stop 1 sit 200 km from home.
+ *
+ * Both were attempts to invent the missing input. So `start` is now a REQUIRED
+ * parameter: ordering without one is not expressible, and every caller has to
+ * name the anchor it is using — out loud, in the UI, to the user.
  *
  * Nearest-neighbour is not the optimal TSP tour, but for the <=10 stops a
  * weekend loppetur allows it is within a few km of optimal and, crucially,
@@ -215,18 +218,12 @@ export function pickTripDay(stops: readonly DatedStop[]): string | null {
  */
 export function optimizeTripOrder<T extends TripStop>(
   stops: readonly T[],
-  start?: TripStop | null,
+  start: TripStop,
 ): T[] {
   if (stops.length <= 1) return [...stops];
   const remaining = [...stops];
   const ordered: T[] = [];
-  let cursor: TripStop;
-  if (start) {
-    cursor = start;
-  } else {
-    ordered.push(remaining.shift()!); // the user's own first stop anchors the chain
-    cursor = ordered[0]!;
-  }
+  let cursor: TripStop = start;
   while (remaining.length) {
     let bestIdx = 0;
     let bestD = Infinity;
@@ -245,15 +242,19 @@ export function optimizeTripOrder<T extends TripStop>(
 }
 
 /**
- * Total driving-ish distance (km, great-circle) along the ordered stops,
- * counting the leg from `start` (the user's location) to the first stop when
- * known. An honest info-scent for "is this weekend worth the drive?".
+ * Total great-circle distance from `start` through every stop in order.
+ *
+ * `start` is REQUIRED for the same reason it is on optimizeTripOrder: the old
+ * signature silently dropped the start->first leg when it had no start, so the
+ * bar could read "~8 km" for a drive Google measured at 165 km. A caller with no
+ * real start must now say what it is measuring — `tripDistanceKm(stops.slice(1),
+ * stops[0])` is "between the stops", and must be labelled as such.
  */
-export function tripDistanceKm(stops: readonly TripStop[], start?: TripStop | null): number {
+export function tripDistanceKm(stops: readonly TripStop[], start: TripStop): number {
   if (stops.length === 0) return 0;
   let total = 0;
-  let cursor = start ?? stops[0]!;
-  const legs = start ? stops : stops.slice(1);
+  let cursor: TripStop = start;
+  const legs = stops;
   for (const s of legs) {
     total += distanceKm(cursor.lat, cursor.lng, s.lat, s.lng);
     cursor = s;

@@ -3779,3 +3779,27 @@ body:has(.is-map-view) {
   background: var(--paper-sunken, rgba(0, 0, 0, 0.05));
   color: var(--ink-soft);
 }
+
+/* --- "Hvor starter I fra?" -------------------------------------------------
+   The trip's missing input, asked where the trip is built. It sits inside the
+   trip bar rather than floating over the map, because it is part of planning —
+   not an interruption of it. */
+.trip-ask {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--paper-raised);
+  border: 1px dashed var(--line);
+}
+.trip-ask-q {
+  font-weight: 560;
+  font-size: 0.85rem;
+}
+.trip-ask-note {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  flex-basis: 100%;
+}

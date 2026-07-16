@@ -112,9 +112,11 @@ describe('optimizeTripOrder', () => {
   const D = { id: 'D', lat: 56.00, lng: 12.45 }; // north
   const scrambled = [C, A, D, B];
 
+  const HOME = { lat: 55.35, lng: 12.28 }; // south of A
+
   it('returns <=1 stop unchanged', () => {
-    expect(optimizeTripOrder([])).toEqual([]);
-    expect(optimizeTripOrder([A])).toEqual([A]);
+    expect(optimizeTripOrder([], HOME)).toEqual([]);
+    expect(optimizeTripOrder([A], HOME)).toEqual([A]);
   });
 
   it('keeps exactly the same set of stops (no drops or dupes)', () => {
@@ -128,35 +130,36 @@ describe('optimizeTripOrder', () => {
     expect(out.map((s) => s.id)).toEqual(['A', 'B', 'C', 'D']);
   });
 
-  // THE REGRESSION. A user tapped four stops south->north and got them back
-  // north->south. Anchoring on the user's own first pick makes that impossible.
-  //
-  // NOTE: do not use `scrambled` for anchorless assertions. From C the first hop
-  // is a 2.2 m margin (C->B 22.4586 km vs C->D 22.4564 km) — a test locked to
-  // that asserts float ordering, not behaviour. These chains from A are
-  // unambiguous: B=22 km, C=45, D=67.
-  it('anchors on the first stop the user chose — and never reverses them', () => {
-    expect(optimizeTripOrder([A, B, C, D]).map((s) => s.id)).toEqual(['A', 'B', 'C', 'D']);
-    expect(optimizeTripOrder([D, C, B, A]).map((s) => s.id)).toEqual(['D', 'C', 'B', 'A']);
+  // THE COMPLAINT, as arithmetic. A user in the south picked four markets and
+  // got stop 1 two hundred kilometres away. Only a start point can prevent that
+  // — which is why optimizeTripOrder now REQUIRES one and there is no anchorless
+  // branch left to get wrong.
+  it('puts the stop nearest the user first — whatever order they were tapped in', () => {
+    const south = { lat: 55.35, lng: 12.28 };
+    const north = { lat: 56.05, lng: 12.47 };
+    // Tapped worst-first: the far one, then back down.
+    const tapped = [D, C, B, A];
+    expect(optimizeTripOrder(tapped, south).map((s) => s.id)).toEqual(['A', 'B', 'C', 'D']);
+    // And from the north the SAME taps give the opposite, correct, drive.
+    expect(optimizeTripOrder(tapped, north).map((s) => s.id)).toEqual(['D', 'C', 'B', 'A']);
   });
 
-  // WHY the anchor is not a free choice, expressed as an executable fact.
-  // With no start the route is an open path, and an open path and its reversal
-  // have identical length — so the objective function is TIED and something
-  // outside it must break the tie. The old code broke it on latitude, which the
-  // objective never mentions. This test is the tripwire: if it holds, no
-  // distance-based argument can ever justify preferring one direction, and
-  // re-adding a geographic anchor cannot be defended as "optimisation".
+  // WHY a start is required rather than defaulted. With no start the route is an
+  // open path, and an open path and its reversal have IDENTICAL length — so the
+  // objective is TIED and cannot tell "stop 1 is 200 km away" from "stop 4 is".
+  // Every previous attempt to break that tie without a start (northernmost, then
+  // first-tapped) invented the missing input. This test is the tripwire: while
+  // the two lengths are equal, no distance argument can justify a default anchor.
   it('a startless route and its reversal are exactly the same length', () => {
-    expect(tripDistanceKm([A, B, C, D])).toBeCloseTo(tripDistanceKm([D, C, B, A]), 9);
+    expect(tripDistanceKm([A, B, C, D].slice(1), A)).toBeCloseTo(
+      tripDistanceKm([D, C, B, A].slice(1), D),
+      9,
+    );
   });
 
   it('is idempotent — sorting an already sorted route changes nothing', () => {
-    const start = { lat: 55.35, lng: 12.28 };
-    const once = optimizeTripOrder(scrambled, start);
-    expect(optimizeTripOrder(once, start)).toEqual(once);
-    const anchorless = optimizeTripOrder([A, B, C, D]);
-    expect(optimizeTripOrder(anchorless)).toEqual(anchorless);
+    const once = optimizeTripOrder(scrambled, HOME);
+    expect(optimizeTripOrder(once, HOME)).toEqual(once);
   });
 
   it('never produces a longer route than the raw scrambled order', () => {
@@ -168,9 +171,21 @@ describe('optimizeTripOrder', () => {
 });
 
 describe('tripDistanceKm', () => {
-  it('is 0 for zero or one stop without a start', () => {
-    expect(tripDistanceKm([])).toBe(0);
-    expect(tripDistanceKm([{ lat: 55.6, lng: 12.5 }])).toBe(0);
+  it('is 0 for no stops', () => {
+    expect(tripDistanceKm([], { lat: 55.6, lng: 12.5 })).toBe(0);
+  });
+
+  // The bar read "~8 km" for a drive Google measured at 165 km, because the old
+  // signature silently dropped the start->first leg when it had no start. A
+  // caller with no real start must now say it is measuring BETWEEN the stops.
+  it('counts every leg from the start — the getting-there km is not free', () => {
+    const home = { lat: 55.0, lng: 12.0 };
+    const far = [{ lat: 56.0, lng: 12.0 }, { lat: 56.1, lng: 12.0 }];
+    const whole = tripDistanceKm(far, home);
+    const between = tripDistanceKm(far.slice(1), far[0]!);
+    expect(whole).toBeGreaterThan(110); // ~111 km just to reach stop 1
+    expect(between).toBeLessThan(15);
+    expect(whole - between).toBeGreaterThan(100); // the leg that used to vanish
   });
 
   it('counts the start->first leg when a start is given', () => {
@@ -185,9 +200,10 @@ describe('tripDistanceKm', () => {
       { lat: 55.5, lng: 12.0 },
       { lat: 56.0, lng: 12.0 },
     ];
-    // Two half-degree-lat legs, ~55.6 km each.
-    expect(tripDistanceKm(stops)).toBeGreaterThan(105);
-    expect(tripDistanceKm(stops)).toBeLessThan(115);
+    // Measured BETWEEN the stops: two half-degree-lat legs, ~55.6 km each.
+    const between = tripDistanceKm(stops.slice(1), stops[0]!);
+    expect(between).toBeGreaterThan(105);
+    expect(between).toBeLessThan(115);
   });
 });
 

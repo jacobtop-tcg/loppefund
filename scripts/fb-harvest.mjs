@@ -38,6 +38,10 @@ import { dirname, resolve, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+// The classifier's own Danish vocabulary — one source of truth. A second,
+// hand-kept list here would drift out of step with it, and the drift would be
+// invisible: a post we never wrote down leaves no trace to notice.
+import { isFleaCorpusCandidate } from '@loppefund/core';
 
 // fileURLToPath (not URL.pathname) so a repo path with spaces/special chars —
 // e.g. ".../Loppemarkeder i DK" — is decoded, not left percent-encoded (%20).
@@ -289,10 +293,24 @@ async function main() {
     }
   }
 
-  // Keep an item only if it mentions a market keyword and has usable text.
+  /**
+   * Keep an item if it is plausibly ours and has usable text.
+   *
+   * The config keyword list is necessarily about EVENTS — "loppemarked",
+   * "kræmmermarked", "stadeplads". Measured on a real 429-post harvest: 392
+   * posts carried an event word, 6 mentioned a hidden place, and ALL SIX also
+   * happened to contain an event word. Not one post was admitted on its own
+   * hidden-place merit, so the corpus informal_place is built from had already
+   * been filtered to exclude exactly what it looks for — and no classifier
+   * downstream can recover a post the harvester never wrote down.
+   *
+   * So isFleaCorpusCandidate() is a FLOOR the config cannot silently omit: it
+   * lets "Vi åbner laden igen på lørdag" through, which mentions no market at
+   * all and is unmistakably one of ours.
+   */
   function keep(id, text, url, iso) {
     if (seen.has(id) || !text || text.replace(/\s+/g, ' ').trim().length < 15) return;
-    if (!keywords.some((k) => text.toLowerCase().includes(k))) return;
+    if (!keywords.some((k) => text.toLowerCase().includes(k)) && !isFleaCorpusCandidate(text)) return;
     seen.add(id);
     items.push({ id: id.replace(/\W+/g, '').slice(0, 32), text, url, startDate: iso ?? undefined });
   }

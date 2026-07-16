@@ -191,6 +191,38 @@ const TYPE_BY_EVIDENCE: Array<[RegExp, InformalPlaceType]> = [
  * the CAUTIOUS side (one-off, review) — publishing a private home as a
  * permanent destination is the expensive mistake here, not missing a barn.
  */
+/**
+ * Is this post worth KEEPING in the raw corpus at all?
+ *
+ * Exists for the Facebook harvester, whose gate is a config-supplied keyword
+ * list — and that list is necessarily about EVENTS ("loppemarked",
+ * "kræmmermarked", "stadeplads"). Measured on a real 429-post harvest: 392 posts
+ * carried an event word, only 6 mentioned a hidden place, and ALL SIX also
+ * happened to contain an event word. Not one post got in on its own hidden-place
+ * merit — so the corpus that informal_place is built from had already been
+ * filtered to exclude exactly what it is looking for, and no classifier
+ * downstream could recover a post the harvester never wrote down.
+ *
+ * So the harvest gate ORs this in as a FLOOR that a config cannot silently omit.
+ * It deliberately reuses the same phrase tables classifyPost() judges with: a
+ * separate hand-kept list in the script would drift out of step with the
+ * classifier, and the drift would be invisible — missing posts leave no trace.
+ *
+ * Keep it CHEAP and slightly generous. This decides what gets written down, not
+ * what gets published; classifyPost() and an operator both still stand between
+ * a post and a live page. A false positive costs a line in a JSON file. A false
+ * negative costs a hidden place nobody will ever find again.
+ */
+export function isFleaCorpusCandidate(rawText: string): boolean {
+  const t = fold(rawText);
+  return (
+    FLEA_VOCAB.test(t) ||
+    PLACE_HABIT.some((r) => r.re.test(t)) ||
+    DOEDSBO.some((r) => r.re.test(t)) ||
+    FORENING.some((r) => r.re.test(t))
+  );
+}
+
 export function classifyPost(rawText: string): Classification {
   const t = fold(rawText);
   const evidence: string[] = [];

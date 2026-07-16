@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { classifyPost } from './informal-classify.ts';
+import { classifyPost , isFleaCorpusCandidate} from './informal-classify.ts';
 
 describe('classifyPost — the hidden-place vocabulary', () => {
   it('recognises a recurring barn as an informal place', () => {
@@ -107,5 +107,50 @@ describe('classifyPost — refusing junk', () => {
   it('is deterministic', () => {
     const t = 'Gårdsalg med lopper hver søndag';
     expect(classifyPost(t)).toEqual(classifyPost(t));
+  });
+});
+
+describe('isFleaCorpusCandidate — the harvest gate floor', () => {
+  // THE MEASURED BUG: on a real 429-post harvest, 392 posts carried an event
+  // word and only 6 mentioned a hidden place — all six riding in on an event
+  // word they happened to contain. Not one got in on its own merit, because the
+  // config keyword list is necessarily about events. These are the posts that
+  // were being thrown away at the door.
+  it('admits a hidden place that never says "loppemarked"', () => {
+    for (const post of [
+      'Vi åbner laden igen på lørdag — masser af gammelt indbo',
+      'Der er åbent på gården hele weekenden, kom forbi',
+      'Kig ind når flaget er ude',
+      'Vi rydder et dødsbo og sælger fra 10-15',
+      'Selvbetjent loppeskur ved indkørslen, betal i kassen',
+      'Gårdsalg søndag — møbler, porcelæn og værktøj',
+      'Lopper i garagen igen i weekenden',
+    ]) {
+      expect(isFleaCorpusCandidate(post)).toBe(true);
+    }
+  });
+
+  it('still admits the ordinary event posts the old gate kept', () => {
+    expect(isFleaCorpusCandidate('Stort loppemarked i Svendborg på lørdag')).toBe(true);
+    expect(isFleaCorpusCandidate('Kræmmermarked med 40 stader')).toBe(true);
+  });
+
+  it('does not admit posts about nothing of ours', () => {
+    for (const post of [
+      'Sælger min bil, Toyota Yaris 2012, ring for pris',
+      'Nogen der har set min kat? Sort med hvide poter',
+      'Tak for en dejlig fest i går alle sammen',
+      'Til salg: barnevogn, næsten ny',
+    ]) {
+      expect(isFleaCorpusCandidate(post)).toBe(false);
+    }
+  });
+
+  it('is generous rather than clever — it decides what gets WRITTEN DOWN', () => {
+    // A false positive costs a line in a JSON file; a false negative costs a
+    // hidden place nobody will ever find again. classifyPost() and a human both
+    // still stand between this and a published page.
+    expect(isFleaCorpusCandidate('Foreningen holder loppesalg i kælderen')).toBe(true);
+    expect(isFleaCorpusCandidate('Spejderne sælger brugte ting til fordel for turen')).toBe(true);
   });
 });

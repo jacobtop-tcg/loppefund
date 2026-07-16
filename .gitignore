@@ -10,6 +10,11 @@ data/cache/
 apps/web/out/
 *.tsbuildinfo
 
+# Local env overrides. This is where a key ends up when someone is in a hurry
+# (Next reads it automatically), so it must never be committable.
+.env.local
+.env*.local
+
 # Self-hosted Facebook harvester: login session (cookies!) — never commit
 .fb-session/
 scripts/fb-harvest.config.json

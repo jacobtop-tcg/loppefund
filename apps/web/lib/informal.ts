@@ -10,6 +10,7 @@ import {
 } from '@loppefund/core';
 import { listInformalPlaces } from '@loppefund/db';
 import { getDb } from './data.ts';
+import { PLACE_TYPE_LABELS, SIGNAL_LABELS } from './informal-labels.ts';
 
 /**
  * THE PUBLICATION BOUNDARY for informal places.
@@ -118,8 +119,24 @@ export function listPublicInformalPlaces(): InformalPlaceSummary[] {
     out.push({
       ...view,
       trustLayer: trustLayerFor(internal),
+      // Index everything the CARD shows, in the words it shows them in.
+      // Anything visible but unindexed is a broken promise: a visitor who reads
+      // "Værktøj" on a card and types it into the search box must not be told
+      // there is nothing. So the Danish labels go in — not the internal slugs —
+      // alongside the free-text opening notes and the recurrence rumour.
       searchText: searchFold(
-        [view.name, view.city, view.municipality, view.placeType, view.description ?? '']
+        [
+          view.name,
+          view.city,
+          view.municipality,
+          view.postcode,
+          PLACE_TYPE_LABELS[view.placeType],
+          view.placeType,
+          ...view.inventorySignals.map((s) => SIGNAL_LABELS[s]),
+          view.recurrencePattern ?? '',
+          view.openingNotes ?? '',
+          view.description ?? '',
+        ]
           .filter(Boolean)
           .join(' '),
       ),

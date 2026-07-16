@@ -3694,3 +3694,81 @@ body:has(.is-map-view) {
 /* One grid row for the caption: without this, the label's bare text node and
    its required-asterisk span land on separate rows. */
 .perle-cap { display: block; }
+
+/* --- Hidden-place filters -------------------------------------------------
+   The filter panel sits above three trust sections that must stay visually
+   distinct; nothing here may make a Radar card read like a confirmed one. */
+.ip-filters {
+  padding: 14px;
+  margin-bottom: 18px;
+}
+.ip-fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0; /* let the chip-row scroll instead of stretching the panel */
+}
+.ip-legend {
+  padding: 0;
+  margin-top: 12px;
+  font-size: 0.78rem;
+  font-weight: 560;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+.ip-selects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.ip-select {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  flex: 1 1 160px;
+}
+.ip-select select {
+  border: 1px solid var(--line);
+  background: var(--paper-raised);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 7px 8px;
+  font: inherit;
+  font-size: 0.85rem;
+}
+.ip-toggles {
+  margin-top: 12px;
+}
+/* Date chips elsewhere scroll sideways because there are few of them and order
+   implies time. A filter panel is different: there are ~14 inventory chips and
+   no order, so anything past the edge is a filter the visitor never learns
+   exists. Wrap instead. */
+.ip-filters .chip-row {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+.chip-clear {
+  border-style: dashed;
+  color: var(--ink-soft);
+}
+.ip-count {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+.ip-card-signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+.ip-signal {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--paper-sunken, rgba(0, 0, 0, 0.05));
+  color: var(--ink-soft);
+}

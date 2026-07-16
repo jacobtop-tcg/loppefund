@@ -19,3 +19,4 @@ export * from './informal-confidence.ts';
 export * from './fund-score.ts';
 export * from './informal-resolve.ts';
 export * from './informal-classify.ts';
+export * from './informal-filter.ts';

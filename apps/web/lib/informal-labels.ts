@@ -1,4 +1,9 @@
-import type { InformalPlaceType, InformalPlaceStatus, TrustLayer } from '@loppefund/core';
+import type {
+  InformalPlaceType,
+  InformalPlaceStatus,
+  InventorySignal,
+  TrustLayer,
+} from '@loppefund/core';
 
 /**
  * Danish labels for the informal-place vocabulary.
@@ -18,6 +23,36 @@ export const PLACE_TYPE_LABELS: Record<InformalPlaceType, string> = {
   'privat-saelger': 'Privat sælger',
   genbrugsbod: 'Genbrugsbod',
   andet: 'Skjult loppested',
+};
+
+/**
+ * What a place is known to hold, in the words a hunter would use.
+ *
+ * These drive the "Hvad leder du efter?" chips — the filter that matters most,
+ * because nobody drives out to "a loppelade"; they drive out for the vinyl.
+ */
+export const SIGNAL_LABELS: Record<InventorySignal, string> = {
+  moebler: 'Møbler',
+  'dansk-design': 'Dansk design',
+  keramik: 'Keramik',
+  porcelaen: 'Porcelæn',
+  glas: 'Glas',
+  vinyl: 'Vinyl',
+  lego: 'Lego',
+  legetoej: 'Legetøj',
+  vaerktoej: 'Værktøj',
+  elektronik: 'Elektronik',
+  boeger: 'Bøger',
+  toej: 'Tøj',
+  smykker: 'Smykker',
+  samlerobjekter: 'Samlerobjekter',
+  cykler: 'Cykler',
+  retro: 'Retro',
+  antik: 'Antik',
+  landbrugsantik: 'Landbrugsantik',
+  lamper: 'Lamper',
+  usorteret: 'Usorteret',
+  blandet: 'Blandet',
 };
 
 export const STATUS_LABELS: Record<InformalPlaceStatus, string> = {

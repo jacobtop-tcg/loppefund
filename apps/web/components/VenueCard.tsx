@@ -20,6 +20,7 @@ export function VenueCard({
   tripMode = false,
   selected = false,
   tripIndex,
+  tripFull = false,
   onToggleTrip,
 }: {
   venue: VenueSummary;
@@ -29,6 +30,8 @@ export function VenueCard({
   selected?: boolean;
   /** 1-based position on the trip, or undefined when not on it. */
   tripIndex?: number;
+  /** True when the trip is at MAX_TRIP_STOPS and cannot take another. */
+  tripFull?: boolean;
   onToggleTrip?: (id: string) => void;
 }) {
   const state = venueOpenState(venue.openingHoursText, now);
@@ -36,13 +39,24 @@ export function VenueCard({
   // Omit the place line entirely when we have no real location — printing the
   // type word "Fast butik" as if it were a town read as a bug.
   const place = venue.city ?? venue.street ?? null;
-  const selectable = tripMode && venue.lat != null && venue.lng != null;
+  // At the cap, an unselected card is NOT selectable — it looked and behaved
+  // like a live toggle that silently did nothing, and a screen reader was told
+  // it was an unpressed toggle that never presses. A full trip must read as
+  // full. Already-selected cards stay tappable so you can always take one off.
+  const selectable =
+    tripMode && venue.lat != null && venue.lng != null && (selected || !tripFull);
 
   const article = (
     <article
       className={`event-card venue-card venue-${venue.category}${selected ? ' selected' : ''}${tripMode && !selectable ? ' trip-disabled' : ''}`}
       style={{ animationDelay: `${Math.min(index, 12) * 35}ms` }}
-      title={tripMode && !selectable ? 'Mangler placering — kan ikke lægges på ruten' : undefined}
+      title={
+        tripMode && !selectable
+          ? venue.lat == null || venue.lng == null
+            ? 'Mangler placering — kan ikke lægges på ruten'
+            : 'Turen er fuld — fjern et stop for at bytte'
+          : undefined
+      }
     >
       {tripMode && selectable && (
         <span className="select-ring" aria-hidden>

@@ -172,6 +172,7 @@ export function EventCard({
   tripMode = false,
   selected = false,
   tripIndex,
+  tripFull = false,
   onToggleTrip,
   onHoverChange,
 }: {
@@ -184,6 +185,8 @@ export function EventCard({
   selected?: boolean;
   /** 1-based position on the trip, or undefined when not on it. */
   tripIndex?: number;
+  /** True when the trip is at MAX_TRIP_STOPS and cannot take another. */
+  tripFull?: boolean;
   onToggleTrip?: (slug: string) => void;
   onHoverChange?: (slug: string | null) => void;
 }) {
@@ -198,13 +201,24 @@ export function EventCard({
       }
     : {};
   const saved = isFavorite(event.slug);
-  const selectable = tripMode && event.lat != null && event.lng != null;
+  // At the cap, an unselected card is NOT selectable — it looked and behaved
+  // like a live toggle that silently did nothing, and a screen reader was told
+  // it was an unpressed toggle that never presses. A full trip must read as
+  // full. Already-selected cards stay tappable so you can always take one off.
+  const selectable =
+    tripMode && event.lat != null && event.lng != null && (selected || !tripFull);
 
   const article = (
     <article
       className={`event-card cat-${event.category}${selected ? ' selected' : ''}${tripMode && !selectable ? ' trip-disabled' : ''}`}
       style={{ animationDelay: `${Math.min(index, 12) * 35}ms` }}
-      title={tripMode && !selectable ? 'Mangler placering — kan ikke lægges på ruten' : undefined}
+      title={
+        tripMode && !selectable
+          ? event.lat == null || event.lng == null
+            ? 'Mangler placering — kan ikke lægges på ruten'
+            : 'Turen er fuld — fjern et stop for at bytte'
+          : undefined
+      }
     >
       {tripMode && selectable && (
         <span className="select-ring" aria-hidden>

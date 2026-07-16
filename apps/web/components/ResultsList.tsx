@@ -2,6 +2,7 @@
 
 import { memo, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { MAX_TRIP_STOPS } from '../lib/client-utils.ts';
 import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { EventCard } from './EventCard.tsx';
 import { VenueCard } from './VenueCard.tsx';
@@ -126,6 +127,7 @@ export const ResultsList = memo(function ResultsList({
             tripMode={tripMode}
             selected={tripSlugs.includes(`v:${v.slug}`)}
             tripIndex={tripSlugs.indexOf(`v:${v.slug}`) + 1 || undefined}
+            tripFull={tripSlugs.length >= MAX_TRIP_STOPS}
             onToggleTrip={onToggleTrip}
           />
         ))}
@@ -224,6 +226,7 @@ export const ResultsList = memo(function ResultsList({
               tripMode={tripMode}
               selected={tripSlugs.includes(`e:${e.slug}`)}
               tripIndex={tripSlugs.indexOf(`e:${e.slug}`) + 1 || undefined}
+              tripFull={tripSlugs.length >= MAX_TRIP_STOPS}
               onToggleTrip={onToggleTrip}
               onHoverChange={onHoverSlug}
             />

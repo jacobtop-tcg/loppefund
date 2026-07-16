@@ -263,30 +263,47 @@ export function Explorer({
     writeSavedLocation({ lat: pos.lat, lng: pos.lng, radius });
   }, [hydrated, pos, posSource, radius]);
 
-  // On any relevant filter change, keep the URL in sync via replaceState so
-  // refresh/back restore state without polluting history. SSR-guarded.
+  /**
+   * The complete shareable state, in one place.
+   *
+   * Both the address bar and the "Del turen" button read this. They used to
+   * disagree: the bar carried every filter while the share button hand-built
+   * `?tur=…` and silently dropped `dato`, `kat` and `q`. So the recipient landed
+   * on the default weekend view with a trip whose stops weren't in it — unable
+   * to inspect or remove them — and, before the venue-fetch fix, with a dead
+   * route, because `q` was the very parameter that would have loaded the shops.
+   */
+  const explorerQuery = useMemo(
+    () =>
+      serializeExplorerParams({
+        dateFilter,
+        category,
+        query,
+        freeOnly,
+        familyOnly,
+        biggerOnly,
+        accessibleOnly,
+        verifiedOnly,
+        inOut,
+        savedOnly,
+        gemsFirst,
+        view,
+        // The trip only lives in the URL while trip mode is on — leaving the
+        // mode leaves a clean, shareable filter URL behind.
+        trip: tripMode ? tripSlugs : [],
+      }),
+    [dateFilter, category, query, freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, savedOnly, gemsFirst, view, tripMode, tripSlugs],
+  );
+
+  // Keep the URL in sync via replaceState so refresh/back restore state without
+  // polluting history. SSR-guarded.
   useEffect(() => {
     if (!hydrated || typeof window === 'undefined') return;
-    const qs = serializeExplorerParams({
-      dateFilter,
-      category,
-      query,
-      freeOnly,
-      familyOnly,
-      biggerOnly,
-      accessibleOnly,
-      verifiedOnly,
-      inOut,
-      savedOnly,
-      gemsFirst,
-      view,
-      // The trip only lives in the URL while trip mode is on — leaving the
-      // mode leaves a clean, shareable filter URL behind.
-      trip: tripMode ? tripSlugs : [],
-    });
-    const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+    const url = explorerQuery
+      ? `${window.location.pathname}?${explorerQuery}`
+      : window.location.pathname;
     window.history.replaceState(null, '', url);
-  }, [hydrated, dateFilter, category, query, freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, savedOnly, gemsFirst, view, tripMode, tripSlugs]);
+  }, [hydrated, explorerQuery]);
 
 
   // Autocomplete index (cities + market/venue names), built once from the data.
@@ -976,7 +993,7 @@ export function Explorer({
             // recreates the whole plan for the rest of the family.
             <ShareButton
               title="Vores loppetur"
-              path={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/?tur=${tripSlugs.join(',')}`}
+              path={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/${explorerQuery ? `?${explorerQuery}` : ''}`}
               label="Del turen"
             />
           )}

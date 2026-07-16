@@ -16,7 +16,16 @@
  * is not consent to broadcast it forever to everyone, next to a one-tap
  * directions link. When in doubt, this module blurs.
  */
-import type { AddressVisibility, GeoPrecision, InformalPlace } from './informal-place.ts';
+import type {
+  AddressVisibility,
+  InformalSourceRecord,
+  GeoPrecision,
+  InformalPlace,
+  InformalPlaceStatus,
+  InformalPlaceType,
+  InventorySignal,
+  PriceLevel,
+} from './informal-place.ts';
 
 /**
  * Grid size for area-level publication, in degrees of latitude.
@@ -33,7 +42,7 @@ export const AREA_GRID_DEG = 0.02;
 export interface PublicInformalPlace {
   slug: string;
   name: string;
-  placeType: string;
+  placeType: InformalPlaceType;
   description: string | null;
   /** Present ONLY for 'fuld'. */
   street: string | null;
@@ -51,11 +60,11 @@ export interface PublicInformalPlace {
   phone: string | null;
   facebookUrl: string | null;
   websiteUrl: string | null;
-  status: string;
+  status: InformalPlaceStatus;
   confidence: number;
   fundScore: number;
-  priceLevel: string | null;
-  inventorySignals: string[];
+  priceLevel: PriceLevel | null;
+  inventorySignals: InventorySignal[];
   lastSeenAt: string;
   lastVerifiedAt: string | null;
   callBeforeVisiting: boolean;
@@ -65,7 +74,7 @@ export interface PublicInformalPlace {
   /** Public provenance: type + date + url only. Excerpts and reviewer identities
    *  stay internal — provenance must be auditable without republishing someone's
    *  post or naming a moderator. */
-  sources: Array<{ sourceType: string; url: string | null; observedAt: string }>;
+  sources: Array<{ sourceType: InformalSourceRecord['sourceType']; url: string | null; observedAt: string }>;
   visitCount: number;
 }
 

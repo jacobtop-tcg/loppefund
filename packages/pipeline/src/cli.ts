@@ -59,6 +59,7 @@ import {
   ingestInformalPlaces,
   loadVettedPlaces,
 } from './informal-ingest.ts';
+import { checkInformalQuality, formatQualityReport } from './informal-quality.ts';
 
 const { values, positionals } = parseArgs({
   allowPositionals: true,
@@ -233,6 +234,13 @@ if (command === 'informal-places') {
     for (const s of suggestions) {
       console.log(`  [${s.verdict}] ${s.a} <-> ${s.b} (score ${s.score}): ${s.reasons.join('; ')}`);
     }
+  }
+  // Make decay LOUD. A hidden place rots quietly — the barn shuts, the number
+  // changes — and nobody notices unless something looks. This is the looking.
+  const issues = checkInformalQuality(db, today);
+  if (issues.some((i) => i.severity !== 'info')) {
+    console.log('\nDatakvalitet:');
+    console.log(formatQualityReport(issues));
   }
   process.exit(0);
 }

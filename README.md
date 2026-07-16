@@ -51,6 +51,11 @@ node packages/pipeline/src/cli.ts rebuild
 node packages/pipeline/src/cli.ts discover-sources --probe-limit 10
 node packages/pipeline/src/cli.ts discover-sources --promote example.dk
 
+# Hidden/informal places (loppelader, gaardsalg, doedsbo): ingest the
+# operator-vetted data/informal-places.json, score it, and print merge
+# suggestions + the data-quality report. See docs/informal-places.md.
+node packages/pipeline/src/cli.ts informal-places
+
 # Start the app on http://localhost:3000
 npm run web
 
@@ -59,6 +64,22 @@ npm test
 ```
 
 Requires Node.js ≥ 22.5 (uses the built-in `node:sqlite`).
+
+## Skjulte loppesteder
+
+The third entity class, alongside dated **events** and permanent **venues**:
+private loppelader, gaardsalg, recurring garagesalg and doedsbo lagers — the
+places that hide the real finds and appear in no catalogue.
+
+They carry **two independent scores** (`confidence` = "is it real?", `fundScore`
+= "worth the drive?" — they pull in opposite directions on purpose), a
+**visibility model** that keeps private addresses out of the published payload
+entirely, and **three trust layers** that keep unverified leads visibly apart
+from places you can plan around.
+
+**Read [docs/informal-places.md](docs/informal-places.md) before touching them** —
+especially the privacy rule (published = public, permanently) and the deploy
+guard (`migrate()` never runs on a code push).
 
 ## Architecture
 

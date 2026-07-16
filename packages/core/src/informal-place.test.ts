@@ -297,8 +297,11 @@ describe('computeFundScore', () => {
       visitReports: [], websiteUrl: null, facebookUrl: null, kmToLargeCity: 50,
       status: 'sporadic', sourceCount: 1, flags: { notOnGoogleMaps: true },
     });
+    // The whole thesis in two numbers: Radar-level certainty, tempting rummage.
+    // (Thresholds are on the normalised scale — see FUND_SCALE.)
     expect(conf.score).toBeLessThan(45); // Radar territory
-    expect(fund.score).toBeGreaterThan(70); // yet a tempting rummage
+    expect(fund.score).toBeGreaterThan(60); // yet clearly worth a look
+    expect(fund.score - conf.score).toBeGreaterThan(25); // and they diverge sharply
   });
 
   it('never promises — the wording stays hedged', () => {

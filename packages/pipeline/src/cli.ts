@@ -54,6 +54,11 @@ import { fetchCvrVenues } from './adapters/cvr.ts';
 import { geocode } from './geocode.ts';
 import { adapters } from './adapters/index.ts';
 import { makeDiscoveredFeedsAdapter } from './adapters/discovered-feeds.ts';
+import {
+  findMergeSuggestions,
+  ingestInformalPlaces,
+  loadVettedPlaces,
+} from './informal-ingest.ts';
 
 const { values, positionals } = parseArgs({
   allowPositionals: true,
@@ -207,6 +212,28 @@ if (command === 'tips') {
     console.log(`[tip ${tip.id}] -> "${raw.title}" (${raw.occurrences?.[0]?.date})`);
   }
   console.log(`tips: ${tips.length} nye, ${stats.created} oprettet, ${stats.merged} matchede eksisterende, ${unparsed} kræver manuel behandling`);
+  process.exit(0);
+}
+
+if (command === 'informal-places') {
+  // Hidden/informal places. The ONLY write path is the operator-vetted file —
+  // a scraped post is a LEAD, never a publication, because these records point
+  // at private homes. Scores are computed here (in the build) and stored, so
+  // the client only ever reads them.
+  const file = join(dirname(values.db!), 'informal-places.json');
+  const vetted = loadVettedPlaces(file);
+  const today = new Date().toISOString().slice(0, 10);
+  const runId = startRun(db, 'informal-places');
+  const stats = ingestInformalPlaces(db, vetted, today);
+  finishRun(db, runId, stats);
+  console.log('informal-places done:', JSON.stringify(stats));
+  const suggestions = findMergeSuggestions(db);
+  if (suggestions.length > 0) {
+    console.log('\nMerge suggestions (never applied automatically — a human decides):');
+    for (const s of suggestions) {
+      console.log(`  [${s.verdict}] ${s.a} <-> ${s.b} (score ${s.score}): ${s.reasons.join('; ')}`);
+    }
+  }
   process.exit(0);
 }
 

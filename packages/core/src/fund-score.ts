@@ -121,6 +121,25 @@ export const RURAL_KM = 25;
 /** At or under this many independent sources, a place is "barely known". */
 export const FEW_TRACES_MAX = 2;
 
+/**
+ * The raw points a place could reach if EVERY positive signal fired at once
+ * (BASE + all positives = 157). Measured, not guessed: without normalising by
+ * it, the model saturates — the first real ingest produced 100/100 for BOTH a
+ * verified barn and a one-tip dødsbo lager, i.e. a score that cannot rank.
+ *
+ * Scaling by the theoretical maximum keeps the point model transparent (each
+ * weight still means what it says) while making the OUTPUT discriminate: a very
+ * strong place lands in the 80s, a merely promising one in the 50s, and 100 is
+ * reserved for something that genuinely ticks every box.
+ */
+export const FUND_SCALE =
+  BASE +
+  FUND_W.privateSeller + FUND_W.clearanceSale + FUND_W.unsortedStock +
+  FUND_W.fewOnlineTraces + FUND_W.ruralRemote + FUND_W.sporadicOpening +
+  FUND_W.noWebshop + FUND_W.notOnGoogleMaps + FUND_W.lowPrices +
+  FUND_W.mixedCategories + FUND_W.negotiable + FUND_W.freshStock +
+  FUND_W.goodFindsReported;
+
 export function computeFundScore(input: FundScoreInput): FundScoreResult {
   let score = BASE;
   const reasons: string[] = [];
@@ -230,7 +249,10 @@ export function computeFundScore(input: FundScoreInput): FundScoreResult {
     reasons.push('Mange professionelle kræmmere');
   }
 
-  const clamped = Math.max(0, Math.min(100, Math.round(score)));
+  // Normalise against the theoretical maximum so the score RANKS instead of
+  // saturating (see FUND_SCALE). Negatives can push below zero; clamp both ends.
+  const scaled = Math.round((score / FUND_SCALE) * 100);
+  const clamped = Math.max(0, Math.min(100, scaled));
   return { score: clamped, reasons, summary: summarize(clamped, reasons) };
 }
 

@@ -159,6 +159,32 @@ export function distanceKm(lat1: number, lng1: number, lat2: number, lng2: numbe
   return 2 * R * Math.asin(Math.sqrt(a));
 }
 
+/** Just enough of an event to choose a trip day for it. */
+export interface DatedStop {
+  /** The soonest occurrence inside the active date range. */
+  nextDate: string;
+  occurrences: ReadonlyArray<{ date: string }>;
+}
+
+/**
+ * Pick the day an auto-planned loppetur should cover — or null if no single day
+ * has two markets to string together.
+ *
+ * A trip is ONE DAY. The filtered view is not: it spans both weekend days by
+ * default and up to a year under a search, so "take the nearest N markets" was
+ * welding Saturday-only and Sunday-only markets into one driving route. Nothing
+ * downstream could catch it — a TripStop is `{lat, lng}`, so a date can never
+ * reach the optimiser. The day therefore has to be decided before the stops are.
+ *
+ * "The soonest day that works" is the honest reading of "plan my next trip".
+ * Membership is tested against `occurrences`, not `nextDate`, so a market open
+ * both Saturday and Sunday counts for whichever day is chosen.
+ */
+export function pickTripDay(stops: readonly DatedStop[]): string | null {
+  const days = [...new Set(stops.map((s) => s.nextDate))].sort();
+  return days.find((d) => stops.filter((s) => s.occurrences.some((o) => o.date === d)).length >= 2) ?? null;
+}
+
 /**
  * Order trip stops into an efficient drive. Greedy nearest-neighbour: from
  * `start` (the user's location) repeatedly hop to the closest unvisited stop.

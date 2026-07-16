@@ -5,6 +5,7 @@ import {
   foldForSearch,
   matchesQuery,
   optimizeTripOrder,
+  pickTripDay,
   parseExplorerParams,
   serializeExplorerParams,
   tripDistanceKm,
@@ -303,5 +304,43 @@ describe('serializeExplorerParams', () => {
       freeOnly: true,
     };
     expect(parseExplorerParams('?' + serializeExplorerParams(state))).toEqual(state);
+  });
+});
+
+describe('pickTripDay', () => {
+  const ev = (nextDate: string, dates: string[] = [nextDate]) => ({
+    nextDate,
+    occurrences: dates.map((date) => ({ date })),
+  });
+  const SAT = '2026-07-18';
+  const SUN = '2026-07-19';
+
+  it('returns null when nothing can be strung together', () => {
+    expect(pickTripDay([])).toBeNull();
+    expect(pickTripDay([ev(SAT)])).toBeNull(); // one market is not a trip
+  });
+
+  // THE BUG: the weekend view spans Sat AND Sun, and the planner chained them
+  // into one undrivable Google route.
+  it('picks ONE day — never welds a weekend together', () => {
+    const day = pickTripDay([ev(SAT), ev(SAT), ev(SUN), ev(SUN)]);
+    expect(day).toBe(SAT); // the soonest day that works
+  });
+
+  it('skips a day that has only one market and takes the next that works', () => {
+    expect(pickTripDay([ev(SAT), ev(SUN), ev(SUN)])).toBe(SUN);
+  });
+
+  it('counts a market open BOTH days towards whichever day is chosen', () => {
+    // Saturday has one Sat-only market + one both-days market -> Saturday works.
+    expect(pickTripDay([ev(SAT), ev(SAT, [SAT, SUN])])).toBe(SAT);
+    // Only the both-days market plus a Sunday one: Saturday has just the one,
+    // so it must fall through to Sunday, where both are open.
+    expect(pickTripDay([ev(SAT, [SAT, SUN]), ev(SUN)])).toBe(SUN);
+  });
+
+  it('handles a 365-day span (search widens the window to a year)', () => {
+    const day = pickTripDay([ev('2026-12-24'), ev(SAT), ev(SAT), ev('2026-09-01')]);
+    expect(day).toBe(SAT); // soonest workable, not merely soonest
   });
 });

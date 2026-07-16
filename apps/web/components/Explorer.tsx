@@ -6,6 +6,7 @@ import { copenhagenNow, isOpenAt, parseStallCount, UPCOMING_HORIZON_DAYS, type C
 import type { EventSummary, VenueSummary } from '../lib/data.ts';
 import { useFavorites } from '../lib/favorites.ts';
 import { isUnverified } from '../lib/trust.ts';
+import { formatDateLong } from '../lib/format.ts';
 import { venueOpenState, VENUE_TYPES, type VenueType } from '../lib/venue-client.ts';
 import { buildSearchIndex, expandQueryAliases } from '../lib/search-index.ts';
 import { useOutdoorWeather } from '../lib/weather.ts';
@@ -30,6 +31,7 @@ import {
   MAX_TRIP_STOPS,
   optimizeTripOrder,
   parseExplorerParams,
+  pickTripDay,
   serializeExplorerParams,
   tripDistanceKm,
   weekendDates,
@@ -99,6 +101,8 @@ export function Explorer({
   const [tripSlugs, setTripSlugs] = useState<string[]>([]);
   /** The selection as it was before the last "Optimér rækkefølgen", or null. */
   const [tripUndo, setTripUndo] = useState<string[] | null>(null);
+  /** Which day "⚡ Planlæg for mig" planned for, or null when the user picked. */
+  const [tripNotice, setTripNotice] = useState<string | null>(null);
   const [savedOnly, setSavedOnly] = useState(false);
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
   // Permanent-venue layer (thrift/antique/flea shops): off by default so the
@@ -115,7 +119,15 @@ export function Explorer({
   // layer toggle: a visitor typing "loppebazar" has never heard of "Faste
   // steder" (root cause of the invisible-Loppebazar report). So the lazy fetch
   // also fires on the first real query.
-  const wantVenues = venuesOn || query.trim().length >= 2;
+  //
+  // ...and on a shared trip that contains one. Without that clause a `?tur=`
+  // link with a `v:` stop was DEAD ON ARRIVAL: venues.json never loaded, so the
+  // stop had no coordinate, the bar counted a stop the route didn't have, and
+  // the Google button stayed disabled forever. The app's own "Del turen" button
+  // produced exactly that link, because it drops `q` — the one parameter that
+  // could otherwise have triggered the fetch.
+  const wantVenues =
+    venuesOn || query.trim().length >= 2 || tripSlugs.some((t) => t.startsWith('v:'));
   useEffect(() => {
     if (!wantVenues || venuesLoaded) return;
     let cancelled = false;
@@ -179,8 +191,9 @@ export function Explorer({
     setView(parsed.view);
     // A shared loppetur link recreates the whole trip. Event stops are
     // validated against the baked event list (a stale link never injects junk);
-    // venue stops pass through — the venue layer lazy-loads and unknown venue
-    // slugs simply never render as stops.
+    // venue stops pass through and are validated once venues.json arrives —
+    // `wantVenues` now watches tripSlugs, so a shared trip fetches the layer it
+    // needs. Unknown venue slugs simply never render as stops.
     if (parsed.trip.length > 0) {
       const known = new Set(events.map((e) => `e:${e.slug}`));
       const valid = parsed.trip.filter((t) => t.startsWith('v:') || known.has(t));
@@ -489,6 +502,7 @@ export function Explorer({
   // stable, or every hoveredSlug change re-renders 600+ cards.
   const toggleTrip = useCallback((slug: string) => {
     setTripUndo(null); // the undo would point at a selection that no longer exists
+    setTripNotice(null); // once the user edits the selection, it isn't "our plan" any more
     setTripSlugs((prev) =>
       prev.includes(slug)
         ? prev.filter((x) => x !== slug)
@@ -535,6 +549,7 @@ export function Explorer({
     setTripMode(false);
     setTripSlugs([]);
     setTripUndo(null);
+    setTripNotice(null);
   }, []);
 
   const toggleTripMode = useCallback(
@@ -552,8 +567,26 @@ export function Explorer({
   const autoPlanTrip = useCallback(() => {
     const withCoords = filtered.filter((e) => e.lat != null && e.lng != null);
     if (withCoords.length < 2) return;
-    const anchor = pos ?? { lat: withCoords[0]!.lat!, lng: withCoords[0]!.lng! };
-    const near = [...withCoords]
+
+    // ONE DAY — not one weekend, and certainly not one year.
+    //
+    // `filtered` spans BOTH weekend days on the default chip, and up to 365 days
+    // under "Alle datoer" or any active search. Taking the nearest N regardless
+    // of date welded Saturday-only and Sunday-only markets into a single Google
+    // Maps route, numbered 1..N. That trip cannot be driven, and no code path
+    // downstream could detect it: a TripStop is just {lat, lng} — a date can
+    // never reach the optimiser.
+    //
+    // So the day is chosen HERE: the soonest day that actually has two markets
+    // to string together. "Planlæg for mig" means "plan my next loppe-day".
+    const day = pickTripDay(withCoords);
+    if (!day) return;
+    // A market running Sat AND Sun belongs to whichever day we picked — hence
+    // the occurrence check rather than a nextDate equality test.
+    const sameDay = withCoords.filter((e) => e.occurrences.some((o) => o.date === day));
+
+    const anchor = pos ?? { lat: sameDay[0]!.lat!, lng: sameDay[0]!.lng! };
+    const near = [...sameDay]
       .sort(
         (a, b) =>
           distanceKm(anchor.lat, anchor.lng, a.lat!, a.lng!) -
@@ -571,6 +604,9 @@ export function Explorer({
     // plan is centred on come out last.
     setTripUndo(null);
     setTripSlugs(optimizeTripOrder(near, anchor).map((s) => s.id));
+    // Say which day we picked. The app just made a choice on the user's behalf;
+    // it does not get to make that choice silently.
+    setTripNotice(formatDateLong(day));
   }, [filtered, pos]);
 
   const locate = useCallback(() => {
@@ -695,6 +731,12 @@ export function Explorer({
               <>
                 <strong>{tripSlugs.length}</strong> stop
                 {tripSlugs.length >= MAX_TRIP_STOPS && ' (maks)'}
+                {tripNotice && (
+                  <span style={{ color: 'var(--ink-soft)', fontWeight: 400 }}>
+                    {' · '}
+                    {tripNotice}
+                  </span>
+                )}
                 {tripKm > 0 && (
                   <span style={{ color: 'var(--ink-soft)', fontWeight: 400 }}>
                     {' · '}~{Math.round(tripKm)} km i fugleflugt
@@ -765,6 +807,7 @@ export function Explorer({
               onClick={() => {
                 setTripSlugs([]);
                 setTripUndo(null);
+                setTripNotice(null);
               }}
             >
               Ryd

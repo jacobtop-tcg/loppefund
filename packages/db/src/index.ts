@@ -1,4 +1,5 @@
 import { DatabaseSync } from 'node:sqlite';
+import { VISIBILITY_EXPOSURE } from '@loppefund/core';
 import { createHash } from 'node:crypto';
 import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
@@ -986,13 +987,31 @@ export interface InformalPlaceValues {
   moderationNotes?: string | null;
 }
 
+
+/**
+ * SQL that ranks an address_visibility by how public it is, built from core's
+ * VISIBILITY_EXPOSURE so the ladder cannot drift between the two.
+ */
+function exposureSql(col: string): string {
+  const whens = Object.entries(VISIBILITY_EXPOSURE)
+    .map(([v, n]) => `WHEN '${v}' THEN ${n}`)
+    .join(' ');
+  return `(CASE ${col} ${whens} ELSE 0 END)`;
+}
+
 /**
  * Insert or update a place, keyed on slug.
  *
  * The slug is NEVER rewritten on conflict — the same URL-stability contract
  * upsertVenue holds, so a published /perle/<slug> keeps working even when the
- * place is renamed upstream. address_visibility is likewise never silently
- * widened here: loosening it is a human decision, made in review.
+ * place is renamed upstream.
+ *
+ * address_visibility moves in ONE direction: it can be TIGHTENED by a re-ingest
+ * but never loosened. Loosening is a human decision made in review. Tightening
+ * is a takedown, and a takedown must always go through — this field used to be
+ * frozen entirely after insert, which meant that setting 'ikke-offentlig' for a
+ * private seller who asked to be removed was silently ignored, and the only real
+ * takedown was a hand-written SQL UPDATE nobody had written down.
  */
 export function upsertInformalPlace(db: DatabaseSync, v: InformalPlaceValues): number {
   const now = new Date().toISOString();
@@ -1022,7 +1041,12 @@ export function upsertInformalPlace(db: DatabaseSync, v: InformalPlaceValues): n
        confidence=excluded.confidence, fund_score=excluded.fund_score,
        score_flags=excluded.score_flags, price_level=excluded.price_level,
        inventory_signals=excluded.inventory_signals, image_urls=excluded.image_urls,
-       moderation_notes=excluded.moderation_notes, updated_at=excluded.updated_at`,
+       moderation_notes=excluded.moderation_notes, updated_at=excluded.updated_at,
+       address_visibility=CASE
+         WHEN ${exposureSql('excluded.address_visibility')} <= ${exposureSql('informal_places.address_visibility')}
+         THEN excluded.address_visibility
+         ELSE informal_places.address_visibility
+       END`,
   ).run(
     v.slug, v.canonicalName, JSON.stringify(v.aliases ?? []), v.placeType,
     v.description ?? null, v.street ?? null, v.postcode ?? null, v.city ?? null,

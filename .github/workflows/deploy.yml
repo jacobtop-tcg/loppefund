@@ -101,6 +101,12 @@ jobs:
           # keep the candidate list fresh for review/promotion. Never blocks
           # the deploy. Cheap: reads existing raw events + politely probes a few.
           node packages/pipeline/src/cli.ts discover-sources --probe-limit 8 || true
+          # Hidden places. This had never run in CI, which is why the table did
+          # not exist in production and informal-places.json shipped as `[]`:
+          # migrate() runs only from openDb(), and the static export opens the DB
+          # read-only. The command is idempotent and reads an operator-vetted
+          # file — with no file it is a no-op, so it is safe on every crawl.
+          node packages/pipeline/src/cli.ts informal-places || true
           node packages/pipeline/src/cli.ts stats
 
       # Persist only when we actually crawled — a push reuses the restored cache

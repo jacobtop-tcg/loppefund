@@ -60,6 +60,7 @@ export default function HomePage() {
             <Link href="/i-weekenden">I weekenden</Link>
             <Link href="/naer-mig">I nærheden</Link>
             <Link href="/byer">Find din by</Link>
+            <Link href="/skjulte-steder">Skjulte steder</Link>
             <Link href="/tip">Tip et marked</Link>
             <Link href="/kilder">Vores kilder</Link>
           </nav>

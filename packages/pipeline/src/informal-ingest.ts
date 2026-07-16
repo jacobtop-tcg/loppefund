@@ -44,6 +44,17 @@ import {
 export interface VettedInformalPlace {
   slug: string;
   name: string;
+  /**
+   * Other names the place goes by ("Loppeladen", "Laden hos Ruth").
+   *
+   * The column existed and entity resolution already read it — but nothing ever
+   * wrote it, so it was always `[]` and alias matching was dead weight. Worse,
+   * `aliases=excluded.aliases` sits in the upsert's ON CONFLICT, so anything a
+   * human typed straight into the DB was erased on the next run: the same
+   * data-destroying shape as the Facebook harvest bug in 38d4d71. The vetted
+   * file is the only write path, so the field belongs here.
+   */
+  aliases?: string[];
   placeType: InformalPlaceType;
   /** Cautious default — an entry MUST opt in to a full address. */
   addressVisibility?: AddressVisibility;
@@ -94,16 +105,34 @@ export interface InformalIngestStats {
 /** Read the operator-vetted file. Absent/broken = no places, never a throw:
  *  a missing community file must not break a crawl. */
 export function loadVettedPlaces(path: string): VettedInformalPlace[] {
-  if (!existsSync(path)) return [];
+  // SAY SO. Returning [] quietly is what let this whole feature never run and
+  // nobody notice: the command exited 0, printed "0 vetted", and looked like a
+  // clean pass. A missing file must still not break a crawl — but silence about
+  // it is how a feature stays at zero rows for weeks while looking healthy.
+  if (!existsSync(path)) {
+    console.warn(`informal-places: no vetted file at ${path} — nothing to ingest.`);
+    return [];
+  }
   try {
     const parsed = JSON.parse(readFileSync(path, 'utf8')) as unknown;
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter(
+    if (!Array.isArray(parsed)) {
+      console.warn(`informal-places: ${path} is not a JSON array — ignoring it.`);
+      return [];
+    }
+    const ok = parsed.filter(
       (p): p is VettedInformalPlace =>
         !!p && typeof (p as VettedInformalPlace).slug === 'string' &&
         typeof (p as VettedInformalPlace).name === 'string',
     );
-  } catch {
+    if (ok.length < parsed.length) {
+      console.warn(
+        `informal-places: ${parsed.length - ok.length} of ${parsed.length} entries lack a slug/name — skipped.`,
+      );
+    }
+    return ok;
+  } catch (err) {
+    // A broken file is an operator mistake worth shouting about, not a no-op.
+    console.warn(`informal-places: could not read ${path} — ${(err as Error).message}`);
     return [];
   }
 }
@@ -205,6 +234,7 @@ export function ingestInformalPlaces(
     const id = upsertInformalPlace(db, {
       slug: v.slug,
       canonicalName: v.name,
+      aliases: v.aliases,
       placeType: v.placeType,
       description: v.description ?? null,
       street: v.street ?? null,

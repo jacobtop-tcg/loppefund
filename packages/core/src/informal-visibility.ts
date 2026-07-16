@@ -90,6 +90,33 @@ export function blurCoord(lat: number, lng: number): { lat: number; lng: number 
   };
 }
 
+/**
+ * How PUBLIC each level is, high = more exposed. Ordered by what actually
+ * reaches the build: 'fuld' ships a street; 'omraade' and 'kun-aabningsdage'
+ * ship a blurred pin (the latter degrades to the former on a static host);
+ * 'kontakt-kraeves' ships no pin at all; the last two ship nothing.
+ *
+ * Exists so a re-ingest can TIGHTEN visibility but never LOOSEN it. The upsert
+ * used to freeze this field entirely after insert, which is safe in one
+ * direction and an obligation-shaped hole in the other: when a private seller
+ * asks to be taken down, setting 'ikke-offentlig' in the vetted file was
+ * silently ignored, and the only real takedown was a hand-written SQL UPDATE.
+ * A request to be removed must be the one change that always goes through.
+ */
+export const VISIBILITY_EXPOSURE: Record<AddressVisibility, number> = {
+  fuld: 5,
+  omraade: 4,
+  'kun-aabningsdage': 3,
+  'kontakt-kraeves': 2,
+  intern: 1,
+  'ikke-offentlig': 0,
+};
+
+/** True when `next` is at least as private as `current` — the only allowed move. */
+export function isTightening(current: AddressVisibility, next: AddressVisibility): boolean {
+  return VISIBILITY_EXPOSURE[next] <= VISIBILITY_EXPOSURE[current];
+}
+
 const ADDRESS_NOTE: Record<AddressVisibility, string | null> = {
   fuld: null,
   omraade: 'Kun omtrentligt område — stedet er privat.',

@@ -26,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/i-weekenden`, lastModified, changeFrequency: 'daily', priority: 0.9 },
     { url: `${BASE}/naer-mig`, lastModified, changeFrequency: 'daily', priority: 0.9 },
     { url: `${BASE}/byer`, lastModified, changeFrequency: 'weekly', priority: 0.8 },
+    // The hidden-place cluster. It was unreachable: /tip-perle linked only from
+    // /skjulte-steder and /skjulte-steder only from /tip-perle, with nothing
+    // pointing in and neither in the sitemap. A tip form nobody can reach
+    // collects no tips — which is exactly what happened.
+    { url: `${BASE}/skjulte-steder`, lastModified, changeFrequency: 'daily', priority: 0.8 },
+    { url: `${BASE}/tip-perle`, lastModified, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/kilder`, lastModified, changeFrequency: 'weekly', priority: 0.5 },
     ...listCities().map((c) => ({
       url: `${BASE}/by/${c.slug}`,

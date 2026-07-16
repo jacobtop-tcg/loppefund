@@ -892,6 +892,9 @@ export interface InformalPlaceRow {
   open_when_flag_is_out: number;
   confidence: number;
   fund_score: number;
+  /** JSON {reasons: string[], summary: string}, or null on a pre-v5 row. */
+  confidence_explain: string | null;
+  fund_explain: string | null;
   score_flags: string;
   price_level: string | null;
   inventory_signals: string;
@@ -985,6 +988,10 @@ export interface InformalPlaceValues {
   inventorySignals?: string[];
   imageUrls?: string[];
   moderationNotes?: string | null;
+  /** JSON {reasons, summary} from computeInformalConfidence — why this score. */
+  confidenceExplain?: string | null;
+  /** JSON {reasons, summary} from computeFundScore — why this score. */
+  fundExplain?: string | null;
 }
 
 
@@ -1021,9 +1028,10 @@ export function upsertInformalPlace(db: DatabaseSync, v: InformalPlaceValues): n
        municipality, region, lat, lng, geo_precision, address_visibility, contact_name,
        phone, phone_norm, email, facebook_url, website_url, first_seen_at, last_seen_at,
        last_verified_at, status, recurrence, opening_notes, call_before_visiting,
-       open_when_flag_is_out, confidence, fund_score, score_flags, price_level,
+       open_when_flag_is_out, confidence, fund_score, confidence_explain, fund_explain,
+       score_flags, price_level,
        inventory_signals, image_urls, merged_ids, moderation_notes, created_at, updated_at)
-     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'[]',?,?,?)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'[]',?,?,?)
      ON CONFLICT(slug) DO UPDATE SET
        canonical_name=excluded.canonical_name, aliases=excluded.aliases,
        place_type=excluded.place_type, description=excluded.description,
@@ -1039,6 +1047,7 @@ export function upsertInformalPlace(db: DatabaseSync, v: InformalPlaceValues): n
        call_before_visiting=excluded.call_before_visiting,
        open_when_flag_is_out=excluded.open_when_flag_is_out,
        confidence=excluded.confidence, fund_score=excluded.fund_score,
+       confidence_explain=excluded.confidence_explain, fund_explain=excluded.fund_explain,
        score_flags=excluded.score_flags, price_level=excluded.price_level,
        inventory_signals=excluded.inventory_signals, image_urls=excluded.image_urls,
        moderation_notes=excluded.moderation_notes, updated_at=excluded.updated_at,
@@ -1056,7 +1065,8 @@ export function upsertInformalPlace(db: DatabaseSync, v: InformalPlaceValues): n
     v.websiteUrl ?? null, v.firstSeenAt, v.lastSeenAt, v.lastVerifiedAt ?? null,
     v.status ?? 'unverified', v.recurrence ?? null, v.openingNotes ?? null,
     v.callBeforeVisiting ? 1 : 0, v.openWhenFlagIsOut ? 1 : 0, v.confidence ?? 0,
-    v.fundScore ?? 0, v.scoreFlags ?? '{}', v.priceLevel ?? null,
+    v.fundScore ?? 0, v.confidenceExplain ?? null, v.fundExplain ?? null,
+    v.scoreFlags ?? '{}', v.priceLevel ?? null,
     JSON.stringify(v.inventorySignals ?? []), JSON.stringify(v.imageUrls ?? []),
     v.moderationNotes ?? null, now, now,
   );

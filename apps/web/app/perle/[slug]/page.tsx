@@ -35,17 +35,31 @@ export async function generateMetadata({
   };
 }
 
-/** A score with its reasoning — never a bare number the visitor must trust. */
+/**
+ * A score with the reasons that produced it — never a bare number.
+ *
+ * The docblock used to say that while the component rendered one hardcoded
+ * sentence: the fund bar read "Et skøn over sandsynligheden for gode køb" for a
+ * 12/100 and for a 94/100 alike. Both scorers had always returned their Danish
+ * reasons; ingest threw them away. They are stored now, so the bar can show its
+ * working — and a visitor can disagree with it, which is the point.
+ *
+ * `reasons` may be empty on a pre-v5 row. Then we say we cannot explain it,
+ * rather than inventing a sentence that sounds like one.
+ */
 function ScoreBar({
   label,
   score,
   tone,
-  explain,
+  caveat,
+  reasons,
 }: {
   label: string;
   score: number;
   tone: 'confidence' | 'fund';
-  explain: string;
+  /** What the number is NOT — the honesty line, always shown. */
+  caveat: string;
+  reasons: string[];
 }) {
   return (
     <div className={`ip-score ip-score-${tone}`}>
@@ -56,7 +70,16 @@ function ScoreBar({
       <div className="ip-score-track" aria-hidden>
         <div className="ip-score-fill" style={{ width: `${score}%` }} />
       </div>
-      <p className="ip-score-explain">{explain}</p>
+      <p className="ip-score-explain">{caveat}</p>
+      {reasons.length > 0 ? (
+        <ul className="ip-score-reasons">
+          {reasons.map((r) => (
+            <li key={r}>{r}</li>
+          ))}
+        </ul>
+      ) : (
+        <p className="ip-score-reasons-none">Vi kan ikke forklare dette tal — behandl det derefter.</p>
+      )}
     </div>
   );
 }
@@ -112,13 +135,15 @@ export default async function InformalPlacePage({
           label="Hvor sikre er vi på stedet?"
           score={p.confidence}
           tone="confidence"
-          explain={`Status: ${STATUS_LABELS[p.status] ?? p.status}. Bygget på ${p.sources.length} ${p.sources.length === 1 ? 'kilde' : 'kilder'}${p.lastVerifiedAt ? `, senest bekræftet ${p.lastVerifiedAt}` : ''}.`}
+          caveat={`Status: ${STATUS_LABELS[p.status] ?? p.status}. Bygget på ${p.sources.length} ${p.sources.length === 1 ? 'kilde' : 'kilder'}${p.lastVerifiedAt ? `, senest bekræftet ${p.lastVerifiedAt}` : ''}.`}
+          reasons={p.confidenceReasons}
         />
         <ScoreBar
           label="Fundpotentiale"
           score={p.fundScore}
           tone="fund"
-          explain="Et skøn over sandsynligheden for gode køb — aldrig en garanti."
+          caveat="Et skøn over sandsynligheden for gode køb — aldrig en garanti."
+          reasons={p.fundReasons}
         />
       </div>
 

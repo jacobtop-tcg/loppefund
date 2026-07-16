@@ -236,6 +236,16 @@ export interface InformalPlace {
   // --- scores (computed; see informal-confidence.ts + fund-score.ts) ---
   confidence: number; // 0..100 "is this real?"
   fundScore: number; // 0..100 "is it worth the drive?"
+  /**
+   * The Danish reasons each scorer gave, stored alongside the number.
+   *
+   * Both scorers have always returned these; ingest used to throw them away, so
+   * the detail page showed a precise-looking bar under a single hardcoded
+   * sentence — the same words for a 12/100 and a 94/100. Optional because a
+   * pre-v5 row has none.
+   */
+  confidenceReasons?: string[];
+  fundReasons?: string[];
 
   // --- character ---
   priceLevel: PriceLevel | null;

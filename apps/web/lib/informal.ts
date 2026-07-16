@@ -85,6 +85,10 @@ function toInternal(r: ReturnType<typeof listInformalPlaces>[number]): InformalP
     openWhenFlagIsOut: !!r.open_when_flag_is_out,
     confidence: r.confidence,
     fundScore: r.fund_score,
+    // The reasons behind each number. Null on a pre-v5 row, which the UI must
+    // treat as "no explanation available" rather than inventing one.
+    confidenceReasons: j<{ reasons?: string[] }>(r.confidence_explain, {}).reasons ?? [],
+    fundReasons: j<{ reasons?: string[] }>(r.fund_explain, {}).reasons ?? [],
     priceLevel: r.price_level as InformalPlace['priceLevel'],
     inventorySignals: j<InformalPlace['inventorySignals']>(r.inventory_signals, []),
     imageUrls: j<string[]>(r.image_urls, []),

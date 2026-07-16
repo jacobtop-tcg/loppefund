@@ -63,6 +63,17 @@ export interface PublicInformalPlace {
   status: InformalPlaceStatus;
   confidence: number;
   fundScore: number;
+  /**
+   * WHY each score is what it is, in the scorer's own Danish.
+   *
+   * Safe to publish, and checked: every reason is CATEGORICAL, never personal —
+   * "Præcis adresse oplyst i en kilde" says an address exists, not what it is;
+   * "Set i 3 uafhængige kilder", "Aktivitet inden for 18 dage". None carries an
+   * address, a phone number or a name. If a future reason ever would, it must
+   * be stripped here, not in the UI.
+   */
+  confidenceReasons: string[];
+  fundReasons: string[];
   priceLevel: PriceLevel | null;
   inventorySignals: InventorySignal[];
   lastSeenAt: string;
@@ -173,6 +184,8 @@ export function publicView(place: InformalPlace): PublicInformalPlace | null {
     status: place.status,
     confidence: place.confidence,
     fundScore: place.fundScore,
+    confidenceReasons: place.confidenceReasons ?? [],
+    fundReasons: place.fundReasons ?? [],
     priceLevel: place.priceLevel,
     inventorySignals: place.inventorySignals,
     lastSeenAt: place.lastSeenAt,

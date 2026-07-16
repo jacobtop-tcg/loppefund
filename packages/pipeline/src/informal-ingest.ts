@@ -264,6 +264,13 @@ export function ingestInformalPlaces(
       openWhenFlagIsOut: v.openWhenFlagIsOut ?? false,
       confidence: conf.score,
       fundScore: fund.score,
+      // Both scorers hand back the Danish reasons that produced the number.
+      // Those used to be dropped on the floor here, which made every promise of
+      // an explainable score false: the detail page rendered a precise-looking
+      // bar under one hardcoded sentence, identical for a 12/100 and a 94/100.
+      // Store them WITH the score, or the score is just a number to be trusted.
+      confidenceExplain: JSON.stringify({ reasons: conf.reasons, summary: conf.summary }),
+      fundExplain: JSON.stringify({ reasons: fund.reasons, summary: fund.summary }),
       scoreFlags: JSON.stringify(v.flags ?? {}),
       priceLevel: v.priceLevel ?? null,
       inventorySignals: v.inventorySignals ?? [],

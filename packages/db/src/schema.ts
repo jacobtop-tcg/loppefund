@@ -5,7 +5,7 @@ import type { DatabaseSync } from 'node:sqlite';
  *  paths (see informalPlacesTableExists in index.ts), because migrate() runs
  *  only from openDb(), and a code-push deploy builds from a cached DB that was
  *  never migrated. */
-export const SCHEMA_VERSION = 4;
+export const SCHEMA_VERSION = 5;
 
 export function migrate(db: DatabaseSync): void {
   db.exec(`
@@ -310,6 +310,18 @@ export function migrate(db: DatabaseSync): void {
   );
   if (!candidateColumns.has('covered_titles')) {
     db.exec(`ALTER TABLE source_candidates ADD COLUMN covered_titles INTEGER`);
+  }
+
+  // Same story for the score explanations: CREATE TABLE IF NOT EXISTS won't add
+  // them to a database that already has informal_places.
+  const informalColumns = new Set(
+    (db.prepare(`PRAGMA table_info(informal_places)`).all() as Array<{ name: string }>).map(
+      (c) => c.name,
+    ),
+  );
+  if (informalColumns.size > 0 && !informalColumns.has('confidence_explain')) {
+    db.exec(`ALTER TABLE informal_places ADD COLUMN confidence_explain TEXT`);
+    db.exec(`ALTER TABLE informal_places ADD COLUMN fund_explain TEXT`);
   }
 
   db.prepare(

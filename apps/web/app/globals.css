@@ -3835,3 +3835,27 @@ body:has(.is-map-view) {
   font-size: 0.78rem;
   color: var(--ink-soft);
 }
+
+/* The reasons behind a score. They are the point of the bar — a number the
+   visitor cannot argue with is one they have to take on faith. */
+.ip-score-reasons {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.ip-score-reasons li {
+  font-size: 0.72rem;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+.ip-score-reasons-none {
+  margin: 6px 0 0;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}

@@ -3576,3 +3576,121 @@ body:has(.is-map-view) {
   .ip-card { transition: none; }
   .ip-card:hover { transform: none; }
 }
+
+/* ---------- TIP EN SKJULT PERLE ----------
+   A long form that must not feel like paperwork: grouped into four small
+   fieldsets, each answerable from memory while standing in a driveway. */
+
+.perle-promise {
+  background: var(--paper-raised, #fffdf9);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 18px 0 8px;
+}
+.perle-promise h2 { font-size: 17px; margin: 0 0 8px; }
+.perle-promise ul { margin: 0; padding-left: 18px; }
+.perle-promise li { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); margin-bottom: 5px; }
+
+.perle-form { display: grid; gap: 18px; margin: 18px 0 30px; }
+.perle-form fieldset {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px 16px;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+.perle-form legend {
+  font-family: var(--font-serif, inherit);
+  font-size: 16px;
+  padding: 0 6px;
+}
+.perle-form label { display: grid; gap: 5px; font-size: 14px; color: var(--ink-soft); }
+.perle-form input[type='text'],
+.perle-form input[type='url'],
+.perle-form input[type='date'],
+.perle-form input:not([type]),
+.perle-form select,
+.perle-form textarea {
+  font: inherit;
+  font-size: 15px;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--paper-raised, #fffdf9);
+  color: var(--ink);
+  width: 100%;
+}
+.perle-form input:focus-visible,
+.perle-form select:focus-visible,
+.perle-form textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.perle-form small { font-size: 12.5px; color: var(--ink-faint); }
+.req { color: var(--accent-deep); }
+
+/* The consent block is visually the heaviest thing on the page — it decides
+   whether a stranger's home address gets published. It should feel like a
+   decision, not a field. */
+.perle-consent-block {
+  border-color: var(--accent) !important;
+  background: #fdf4ef;
+}
+.perle-hint { font-size: 13px; color: var(--ink-soft); margin: 0 0 4px; }
+.perle-radio,
+.perle-check {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+}
+.perle-radio input,
+.perle-check input { margin-top: 3px; flex: none; }
+
+.perle-cats { display: flex; flex-wrap: wrap; gap: 8px 14px; }
+.perle-cat {
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+.perle-consent {
+  background: var(--paper-raised, #fffdf9);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  line-height: 1.5;
+}
+
+.perle-submit {
+  justify-self: start;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 13px 26px;
+  cursor: pointer;
+  transition: background 0.18s var(--ease);
+}
+.perle-submit:hover:not(:disabled) { background: var(--accent-deep); }
+.perle-submit:disabled { opacity: 0.65; cursor: default; }
+
+.perle-footnote { font-size: 12.5px; color: var(--ink-faint); margin: 0; }
+
+@media (max-width: 640px) {
+  .perle-cats { gap: 6px 10px; }
+  .perle-cat { font-size: 13px; }
+}
+
+/* One grid row for the caption: without this, the label's bare text node and
+   its required-asterisk span land on separate rows. */
+.perle-cap { display: block; }

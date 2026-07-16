@@ -3435,3 +3435,144 @@ body:has(.is-map-view) {
 @media (prefers-reduced-motion: reduce) {
   .empty-illu { animation: none; }
 }
+
+/* ---------- SKJULTE STEDER (informal places) ----------
+   The visual grammar carries the trust promise. A Radar lead must LOOK
+   provisional next to a confirmed place — same information, visibly lower
+   confidence — because a visitor reads weight and colour long before they read
+   a status word. Confirmed gets the calm green of the verified badge; check-
+   first the amber of the advisory; radar a muted, dashed, deliberately
+   unfinished treatment. */
+
+.ip-layer {
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 14px 0 6px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.ip-layer strong { display: block; margin-bottom: 2px; }
+.ip-layer-bekraeftet { background: #e4efe6; color: #22593a; }
+.ip-layer-kontroller-foerst { background: #f6ecd4; color: #6b4f16; }
+.ip-layer-radar {
+  background: repeating-linear-gradient(
+    135deg, #f0ece6, #f0ece6 8px, #eae5dd 8px, #eae5dd 16px
+  );
+  color: #5d554a;
+  border: 1px dashed #b9ae9d;
+}
+
+.ip-address-note {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.ip-warnings { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.ip-warn {
+  background: #f6ecd4;
+  color: #6b4f16;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.ip-warn a { color: inherit; text-decoration: underline; }
+
+/* Two scores, side by side and visibly DIFFERENT — never one blended number.
+   Confidence is the sober one; fund is the tempting one. Showing them together
+   is the honest answer to "should I drive?". */
+.ip-scores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+.ip-score {
+  background: var(--paper-raised, #fffdf9);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.ip-score-head { display: flex; justify-content: space-between; align-items: baseline; }
+.ip-score-label { font-size: 13px; color: var(--ink-soft); }
+.ip-score-value { font-size: 18px; font-variant-numeric: tabular-nums; }
+.ip-score-track {
+  height: 6px;
+  background: #eae5dd;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+.ip-score-fill { height: 100%; border-radius: 999px; }
+.ip-score-confidence .ip-score-fill { background: #4a7c59; }
+.ip-score-fund .ip-score-fill { background: var(--accent); }
+.ip-score-explain { font-size: 12.5px; color: var(--ink-faint); line-height: 1.45; margin: 0; }
+
+.ip-description { font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 4px 0 18px; }
+
+.ip-facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 14px; }
+.ip-facts dt { color: var(--ink-faint); }
+.ip-facts dd { margin: 0; }
+
+.ip-sources { list-style: none; padding: 0; margin: 0; font-size: 13.5px; }
+.ip-sources li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.ip-source-type { font-weight: 600; text-transform: capitalize; }
+.ip-source-date { color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.ip-visits { font-size: 13.5px; color: var(--ink-soft); margin-top: 10px; }
+.ip-report { font-size: 13.5px; color: var(--ink-faint); margin: 22px 0 40px; }
+
+/* --- the three sections on /skjulte-steder --- */
+.ip-section { margin-top: 30px; }
+.ip-section-title { font-size: 20px; margin-bottom: 2px; }
+.ip-section-body { font-size: 13.5px; color: var(--ink-faint); margin: 0 0 12px; max-width: 62ch; }
+/* Radar sits visibly apart: dimmed and rule-separated, so the eye never reads
+   it as part of the trustworthy set. */
+.ip-section-radar { opacity: 0.86; border-top: 1px dashed #b9ae9d; padding-top: 18px; }
+
+.ip-card {
+  display: block;
+  background: var(--paper-raised, #fffdf9);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+.ip-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(60, 45, 25, 0.1); }
+.ip-section-radar .ip-card { border-style: dashed; background: transparent; }
+.ip-card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.ip-card-type { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); }
+.ip-card-fund { font-weight: 700; font-variant-numeric: tabular-nums; }
+.ip-fund-high { color: var(--accent-deep); }
+.ip-fund-mid { color: var(--ink-soft); }
+.ip-card-fund-unit { font-size: 11px; font-weight: 500; color: var(--ink-faint); }
+.ip-card-name { font-size: 17px; margin: 6px 0 2px; }
+.ip-card-where { font-size: 13.5px; color: var(--ink-soft); }
+.ip-card-area { color: var(--ink-faint); font-style: italic; }
+.ip-card-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+.ip-card-conf { font-variant-numeric: tabular-nums; }
+.ip-card-warn {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b4f16;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ip-card { transition: none; }
+  .ip-card:hover { transform: none; }
+}

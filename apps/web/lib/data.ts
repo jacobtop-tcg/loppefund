@@ -30,7 +30,9 @@ function resolveDbPath(): string {
   return join(process.cwd(), 'data', 'loppefund.db');
 }
 
-function getDb(): DatabaseSync {
+/** Shared read-only handle. Exported so the informal-place layer (lib/informal.ts)
+ *  reuses the SAME connection + fallback rather than opening its own. */
+export function getDb(): DatabaseSync {
   if (db) return db;
   const path = resolveDbPath();
   try {

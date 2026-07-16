@@ -836,3 +836,267 @@ export function anyLinkedPayload(db: DatabaseSync, eventId: number): string | nu
     .get(eventId) as unknown as { payload: string } | undefined;
   return row?.payload ?? null;
 }
+
+// ===========================================================================
+// INFORMAL PLACES (schema v4)
+//
+// THE GUARD IS NOT OPTIONAL. migrate() runs only from openDb(); the Next static
+// export uses openDbReadOnly() (which never migrates), and a push to main builds
+// from a cache-restored DB that may predate this table entirely. Without the
+// guard below, every informal-place read would throw and take the whole deploy
+// down. This mirrors venuesTableExists() — the same lesson, already learned once.
+// ===========================================================================
+
+/** True when the informal_places table exists in THIS database file. A DB
+ *  written before schema v4 has none — degrade to "no places", exactly as the
+ *  venues guard does, so a stale cached DB still builds. */
+export function informalPlacesTableExists(db: DatabaseSync): boolean {
+  const r = db
+    .prepare(
+      `SELECT COUNT(*) AS c FROM sqlite_master WHERE type = 'table' AND name = 'informal_places'`,
+    )
+    .get() as { c: number };
+  return r.c > 0;
+}
+
+export interface InformalPlaceRow {
+  id: number;
+  slug: string;
+  canonical_name: string;
+  aliases: string;
+  place_type: string;
+  description: string | null;
+  street: string | null;
+  postcode: string | null;
+  city: string | null;
+  municipality: string | null;
+  region: string | null;
+  lat: number | null;
+  lng: number | null;
+  geo_precision: string;
+  address_visibility: string;
+  contact_name: string | null;
+  phone: string | null;
+  phone_norm: string | null;
+  email: string | null;
+  facebook_url: string | null;
+  website_url: string | null;
+  first_seen_at: string;
+  last_seen_at: string;
+  last_verified_at: string | null;
+  status: string;
+  recurrence: string | null;
+  opening_notes: string | null;
+  call_before_visiting: number;
+  open_when_flag_is_out: number;
+  confidence: number;
+  fund_score: number;
+  score_flags: string;
+  price_level: string | null;
+  inventory_signals: string;
+  image_urls: string;
+  merged_ids: string;
+  moderation_notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+/** Every informal place, with its sources and visit reports attached. Returns []
+ *  when the table is absent (pre-v4 DB) — never throws. */
+export function listInformalPlaces(
+  db: DatabaseSync,
+  opts: { includeRejected?: boolean } = {},
+): Array<InformalPlaceRow & { sources: unknown[]; reports: unknown[] }> {
+  if (!informalPlacesTableExists(db)) return [];
+  const where = opts.includeRejected ? '' : `WHERE status != 'rejected'`;
+  const rows = db
+    .prepare(`SELECT * FROM informal_places ${where} ORDER BY id`)
+    .all() as unknown as InformalPlaceRow[];
+  const srcStmt = db.prepare(
+    `SELECT source_type, url, observed_at, excerpt, verified_by FROM informal_place_sources
+     WHERE place_id = ? ORDER BY observed_at DESC`,
+  );
+  const repStmt = db.prepare(
+    `SELECT * FROM informal_place_reports WHERE place_id = ? ORDER BY visited_at DESC`,
+  );
+  return rows.map((r) => ({
+    ...r,
+    sources: srcStmt.all(r.id) as unknown[],
+    reports: repStmt.all(r.id) as unknown[],
+  }));
+}
+
+/** One place by slug, or null (also null on a pre-v4 DB). */
+export function getInformalPlaceBySlug(
+  db: DatabaseSync,
+  slug: string,
+): (InformalPlaceRow & { sources: unknown[]; reports: unknown[] }) | null {
+  if (!informalPlacesTableExists(db)) return null;
+  const row = db.prepare(`SELECT * FROM informal_places WHERE slug = ?`).get(slug) as
+    | InformalPlaceRow
+    | undefined;
+  if (!row) return null;
+  const sources = db
+    .prepare(
+      `SELECT source_type, url, observed_at, excerpt, verified_by FROM informal_place_sources
+       WHERE place_id = ? ORDER BY observed_at DESC`,
+    )
+    .all(row.id) as unknown[];
+  const reports = db
+    .prepare(`SELECT * FROM informal_place_reports WHERE place_id = ? ORDER BY visited_at DESC`)
+    .all(row.id) as unknown[];
+  return { ...row, sources, reports };
+}
+
+export interface InformalPlaceValues {
+  slug: string;
+  canonicalName: string;
+  aliases?: string[];
+  placeType: string;
+  description?: string | null;
+  street?: string | null;
+  postcode?: string | null;
+  city?: string | null;
+  municipality?: string | null;
+  region?: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  geoPrecision?: string;
+  addressVisibility?: string;
+  contactName?: string | null;
+  phone?: string | null;
+  phoneNorm?: string | null;
+  email?: string | null;
+  facebookUrl?: string | null;
+  websiteUrl?: string | null;
+  firstSeenAt: string;
+  lastSeenAt: string;
+  lastVerifiedAt?: string | null;
+  status?: string;
+  recurrence?: string | null;
+  openingNotes?: string | null;
+  callBeforeVisiting?: boolean;
+  openWhenFlagIsOut?: boolean;
+  confidence?: number;
+  fundScore?: number;
+  scoreFlags?: string;
+  priceLevel?: string | null;
+  inventorySignals?: string[];
+  imageUrls?: string[];
+  moderationNotes?: string | null;
+}
+
+/**
+ * Insert or update a place, keyed on slug.
+ *
+ * The slug is NEVER rewritten on conflict — the same URL-stability contract
+ * upsertVenue holds, so a published /perle/<slug> keeps working even when the
+ * place is renamed upstream. address_visibility is likewise never silently
+ * widened here: loosening it is a human decision, made in review.
+ */
+export function upsertInformalPlace(db: DatabaseSync, v: InformalPlaceValues): number {
+  const now = new Date().toISOString();
+  db.prepare(
+    `INSERT INTO informal_places(
+       slug, canonical_name, aliases, place_type, description, street, postcode, city,
+       municipality, region, lat, lng, geo_precision, address_visibility, contact_name,
+       phone, phone_norm, email, facebook_url, website_url, first_seen_at, last_seen_at,
+       last_verified_at, status, recurrence, opening_notes, call_before_visiting,
+       open_when_flag_is_out, confidence, fund_score, score_flags, price_level,
+       inventory_signals, image_urls, merged_ids, moderation_notes, created_at, updated_at)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'[]',?,?,?)
+     ON CONFLICT(slug) DO UPDATE SET
+       canonical_name=excluded.canonical_name, aliases=excluded.aliases,
+       place_type=excluded.place_type, description=excluded.description,
+       street=excluded.street, postcode=excluded.postcode, city=excluded.city,
+       municipality=excluded.municipality, region=excluded.region,
+       lat=excluded.lat, lng=excluded.lng, geo_precision=excluded.geo_precision,
+       contact_name=excluded.contact_name, phone=excluded.phone,
+       phone_norm=excluded.phone_norm, email=excluded.email,
+       facebook_url=excluded.facebook_url, website_url=excluded.website_url,
+       last_seen_at=excluded.last_seen_at, last_verified_at=excluded.last_verified_at,
+       status=excluded.status, recurrence=excluded.recurrence,
+       opening_notes=excluded.opening_notes,
+       call_before_visiting=excluded.call_before_visiting,
+       open_when_flag_is_out=excluded.open_when_flag_is_out,
+       confidence=excluded.confidence, fund_score=excluded.fund_score,
+       score_flags=excluded.score_flags, price_level=excluded.price_level,
+       inventory_signals=excluded.inventory_signals, image_urls=excluded.image_urls,
+       moderation_notes=excluded.moderation_notes, updated_at=excluded.updated_at`,
+  ).run(
+    v.slug, v.canonicalName, JSON.stringify(v.aliases ?? []), v.placeType,
+    v.description ?? null, v.street ?? null, v.postcode ?? null, v.city ?? null,
+    v.municipality ?? null, v.region ?? null, v.lat ?? null, v.lng ?? null,
+    v.geoPrecision ?? 'unknown', v.addressVisibility ?? 'omraade', v.contactName ?? null,
+    v.phone ?? null, v.phoneNorm ?? null, v.email ?? null, v.facebookUrl ?? null,
+    v.websiteUrl ?? null, v.firstSeenAt, v.lastSeenAt, v.lastVerifiedAt ?? null,
+    v.status ?? 'unverified', v.recurrence ?? null, v.openingNotes ?? null,
+    v.callBeforeVisiting ? 1 : 0, v.openWhenFlagIsOut ? 1 : 0, v.confidence ?? 0,
+    v.fundScore ?? 0, v.scoreFlags ?? '{}', v.priceLevel ?? null,
+    JSON.stringify(v.inventorySignals ?? []), JSON.stringify(v.imageUrls ?? []),
+    v.moderationNotes ?? null, now, now,
+  );
+  const row = db.prepare(`SELECT id FROM informal_places WHERE slug = ?`).get(v.slug) as {
+    id: number;
+  };
+  return row.id;
+}
+
+/** Record one observation. Idempotent on (place, type, url, observed_at) so a
+ *  re-crawl never inflates the source count — independence, not volume, is what
+ *  the confidence model rewards. */
+export function addInformalSource(
+  db: DatabaseSync,
+  placeId: number,
+  s: {
+    sourceType: string;
+    url?: string | null;
+    observedAt: string;
+    excerpt?: string | null;
+    verifiedBy?: string | null;
+    rawRef?: string | null;
+  },
+): void {
+  db.prepare(
+    `INSERT INTO informal_place_sources(place_id, source_type, url, observed_at, excerpt, verified_by, raw_ref, created_at)
+     VALUES (?,?,?,?,?,?,?,?)
+     ON CONFLICT(place_id, source_type, url, observed_at) DO UPDATE SET
+       excerpt=excluded.excerpt, verified_by=excluded.verified_by`,
+  ).run(
+    placeId, s.sourceType, s.url ?? null, s.observedAt, s.excerpt ?? null,
+    s.verifiedBy ?? null, s.rawRef ?? null, new Date().toISOString(),
+  );
+}
+
+/** Record a community visit report. */
+export function addInformalReport(
+  db: DatabaseSync,
+  placeId: number,
+  r: {
+    visitedAt: string;
+    wasOpen?: boolean | null;
+    priceLevel?: string | null;
+    stockLevel?: string | null;
+    freshStock?: boolean | null;
+    sellerKind?: string | null;
+    negotiable?: boolean | null;
+    categories?: string[];
+    worthTheDrive?: boolean | null;
+    comment?: string | null;
+    reporter?: string | null;
+    reportedClosed?: boolean;
+  },
+): void {
+  const b = (x: boolean | null | undefined) => (x === null || x === undefined ? null : x ? 1 : 0);
+  db.prepare(
+    `INSERT INTO informal_place_reports(place_id, visited_at, was_open, price_level, stock_level,
+       fresh_stock, seller_kind, negotiable, categories, worth_the_drive, comment, reporter,
+       reported_closed, created_at)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+  ).run(
+    placeId, r.visitedAt, b(r.wasOpen), r.priceLevel ?? null, r.stockLevel ?? null,
+    b(r.freshStock), r.sellerKind ?? null, b(r.negotiable), JSON.stringify(r.categories ?? []),
+    b(r.worthTheDrive), r.comment ?? null, r.reporter ?? null, r.reportedClosed ? 1 : 0,
+    new Date().toISOString(),
+  );
+}

@@ -1,6 +1,11 @@
 import type { DatabaseSync } from 'node:sqlite';
 
-export const SCHEMA_VERSION = 3;
+/** v4 adds the informal_places family. NOTE: nothing READS this — it is a
+ *  record, not a gate. Every new table must therefore be guarded at its read
+ *  paths (see informalPlacesTableExists in index.ts), because migrate() runs
+ *  only from openDb(), and a code-push deploy builds from a cached DB that was
+ *  never migrated. */
+export const SCHEMA_VERSION = 4;
 
 export function migrate(db: DatabaseSync): void {
   db.exec(`
@@ -123,6 +128,104 @@ export function migrate(db: DatabaseSync): void {
     );
     CREATE INDEX IF NOT EXISTS idx_venues_status ON venues(status);
     CREATE INDEX IF NOT EXISTS idx_venues_category ON venues(category);
+
+    -- INFORMAL PLACES — hidden/informal flea spots (private loppelader, gårdsalg,
+    -- recurring garagesalg, dødsbo lagers, "åbent når flaget er ude").
+    --
+    -- A THIRD entity, deliberately neither an event nor a venue:
+    --   * not an event — it has a HABIT, not dates. Forcing it into occurrences
+    --     is the failure resolveSchedule's MAX_CONSECUTIVE_FILL already guards
+    --     (a 24/7 private sale once became 30 daily markets).
+    --   * not a venue — venues are OSM/chain businesses, corroborated by
+    --     construction, so they carry no confidence and no provenance. A private
+    --     barn known from one Facebook post needs both.
+    --
+    -- PRIVACY: street/lat/lng here are INTERNAL. address_visibility governs what
+    -- may ever be published, and that is enforced in the data layer
+    -- (packages/core informal-visibility.ts) — never in the UI, because on a
+    -- static export anything serialized is public forever.
+    CREATE TABLE IF NOT EXISTS informal_places (
+      id INTEGER PRIMARY KEY,
+      slug TEXT NOT NULL UNIQUE,          -- assigned once; never rewritten (URL stability)
+      canonical_name TEXT NOT NULL,
+      aliases TEXT NOT NULL DEFAULT '[]', -- JSON string[]
+      place_type TEXT NOT NULL DEFAULT 'andet',
+      description TEXT,
+      street TEXT,                        -- INTERNAL — see address_visibility
+      postcode TEXT,
+      city TEXT,
+      municipality TEXT,
+      region TEXT,
+      lat REAL,                           -- INTERNAL — blurred before publishing
+      lng REAL,
+      geo_precision TEXT NOT NULL DEFAULT 'unknown',   -- exact|street|postcode|area|unknown
+      address_visibility TEXT NOT NULL DEFAULT 'omraade', -- cautious by default
+      contact_name TEXT,
+      phone TEXT,
+      phone_norm TEXT,                    -- E.164-ish, for entity resolution
+      email TEXT,
+      facebook_url TEXT,
+      website_url TEXT,
+      first_seen_at TEXT NOT NULL,
+      last_seen_at TEXT NOT NULL,
+      last_verified_at TEXT,
+      status TEXT NOT NULL DEFAULT 'unverified',
+      recurrence TEXT,                    -- JSON InformalRecurrence
+      opening_notes TEXT,
+      call_before_visiting INTEGER NOT NULL DEFAULT 0,
+      open_when_flag_is_out INTEGER NOT NULL DEFAULT 0,
+      confidence INTEGER NOT NULL DEFAULT 0,  -- 0..100 "is it real?"  (own model)
+      fund_score INTEGER NOT NULL DEFAULT 0,  -- 0..100 "worth the drive?" (own model)
+      score_flags TEXT NOT NULL DEFAULT '{}', -- JSON reviewer/classifier flags
+      price_level TEXT,                   -- lav | middel | hoej
+      inventory_signals TEXT NOT NULL DEFAULT '[]', -- JSON InventorySignal[]
+      image_urls TEXT NOT NULL DEFAULT '[]',
+      merged_ids TEXT NOT NULL DEFAULT '[]',
+      moderation_notes TEXT,              -- INTERNAL — never published
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS idx_informal_status ON informal_places(status);
+    CREATE INDEX IF NOT EXISTS idx_informal_type ON informal_places(place_type);
+    CREATE INDEX IF NOT EXISTS idx_informal_phone ON informal_places(phone_norm);
+
+    -- Provenance atoms. Never deleted: a place's whole story must stay
+    -- reconstructible, and excerpt/verified_by are INTERNAL (the public view
+    -- ships only type + url + date).
+    CREATE TABLE IF NOT EXISTS informal_place_sources (
+      id INTEGER PRIMARY KEY,
+      place_id INTEGER NOT NULL REFERENCES informal_places(id) ON DELETE CASCADE,
+      source_type TEXT NOT NULL,
+      url TEXT,
+      observed_at TEXT NOT NULL,
+      excerpt TEXT,
+      verified_by TEXT,
+      raw_ref TEXT,                       -- optional pointer into raw_events/tips
+      created_at TEXT NOT NULL,
+      UNIQUE(place_id, source_type, url, observed_at)
+    );
+    CREATE INDEX IF NOT EXISTS idx_informal_sources_place ON informal_place_sources(place_id);
+
+    -- Community visit reports. Signals, never votes — a single report may not
+    -- flip a place's status (see informal-confidence.ts CLOSED_REPORT_QUORUM).
+    CREATE TABLE IF NOT EXISTS informal_place_reports (
+      id INTEGER PRIMARY KEY,
+      place_id INTEGER NOT NULL REFERENCES informal_places(id) ON DELETE CASCADE,
+      visited_at TEXT NOT NULL,
+      was_open INTEGER,
+      price_level TEXT,
+      stock_level TEXT,
+      fresh_stock INTEGER,
+      seller_kind TEXT,
+      negotiable INTEGER,
+      categories TEXT NOT NULL DEFAULT '[]',
+      worth_the_drive INTEGER,
+      comment TEXT,
+      reporter TEXT,
+      reported_closed INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS idx_informal_reports_place ON informal_place_reports(place_id);
 
     CREATE TABLE IF NOT EXISTS geocode_cache (
       query TEXT PRIMARY KEY,

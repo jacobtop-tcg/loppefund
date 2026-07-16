@@ -127,9 +127,35 @@ describe('optimizeTripOrder', () => {
     expect(out.map((s) => s.id)).toEqual(['A', 'B', 'C', 'D']);
   });
 
-  it('anchors on the northernmost stop and chains south when start is unknown', () => {
-    const out = optimizeTripOrder(scrambled);
-    expect(out.map((s) => s.id)).toEqual(['D', 'C', 'B', 'A']);
+  // THE REGRESSION. A user tapped four stops south->north and got them back
+  // north->south. Anchoring on the user's own first pick makes that impossible.
+  //
+  // NOTE: do not use `scrambled` for anchorless assertions. From C the first hop
+  // is a 2.2 m margin (C->B 22.4586 km vs C->D 22.4564 km) — a test locked to
+  // that asserts float ordering, not behaviour. These chains from A are
+  // unambiguous: B=22 km, C=45, D=67.
+  it('anchors on the first stop the user chose — and never reverses them', () => {
+    expect(optimizeTripOrder([A, B, C, D]).map((s) => s.id)).toEqual(['A', 'B', 'C', 'D']);
+    expect(optimizeTripOrder([D, C, B, A]).map((s) => s.id)).toEqual(['D', 'C', 'B', 'A']);
+  });
+
+  // WHY the anchor is not a free choice, expressed as an executable fact.
+  // With no start the route is an open path, and an open path and its reversal
+  // have identical length — so the objective function is TIED and something
+  // outside it must break the tie. The old code broke it on latitude, which the
+  // objective never mentions. This test is the tripwire: if it holds, no
+  // distance-based argument can ever justify preferring one direction, and
+  // re-adding a geographic anchor cannot be defended as "optimisation".
+  it('a startless route and its reversal are exactly the same length', () => {
+    expect(tripDistanceKm([A, B, C, D])).toBeCloseTo(tripDistanceKm([D, C, B, A]), 9);
+  });
+
+  it('is idempotent — sorting an already sorted route changes nothing', () => {
+    const start = { lat: 55.35, lng: 12.28 };
+    const once = optimizeTripOrder(scrambled, start);
+    expect(optimizeTripOrder(once, start)).toEqual(once);
+    const anchorless = optimizeTripOrder([A, B, C, D]);
+    expect(optimizeTripOrder(anchorless)).toEqual(anchorless);
   });
 
   it('never produces a longer route than the raw scrambled order', () => {

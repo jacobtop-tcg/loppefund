@@ -171,6 +171,7 @@ export function EventCard({
   weather,
   tripMode = false,
   selected = false,
+  tripIndex,
   onToggleTrip,
   onHoverChange,
 }: {
@@ -181,6 +182,8 @@ export function EventCard({
   weather?: DayWeather;
   tripMode?: boolean;
   selected?: boolean;
+  /** 1-based position on the trip, or undefined when not on it. */
+  tripIndex?: number;
   onToggleTrip?: (slug: string) => void;
   onHoverChange?: (slug: string | null) => void;
 }) {
@@ -205,9 +208,7 @@ export function EventCard({
     >
       {tripMode && selectable && (
         <span className="select-ring" aria-hidden>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round">
-            <path d="m4 12 5 5 11-11" />
-          </svg>
+          {selected && tripIndex ? tripIndex : null}
         </span>
       )}
       {cardBody(event, today, openNow, weather)}
@@ -223,6 +224,7 @@ export function EventCard({
         type="button"
         className="card-button"
         aria-pressed={selectable ? selected : undefined}
+        aria-label={selected && tripIndex ? `${event.title} — stop ${tripIndex} på turen` : undefined}
         disabled={!selectable}
         onClick={() => selectable && onToggleTrip?.(`e:${event.slug}`)}
         {...hoverProps}

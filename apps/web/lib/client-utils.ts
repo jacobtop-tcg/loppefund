@@ -160,16 +160,32 @@ export function distanceKm(lat1: number, lng1: number, lat2: number, lng2: numbe
 }
 
 /**
- * Order trip stops into an efficient drive instead of the arbitrary order the
- * user tapped them in. Greedy nearest-neighbour: from `start` (the user's
- * location) repeatedly hop to the closest unvisited stop. Google's Maps URL
- * API visits waypoints in the given order and won't re-optimise, so ordering
- * them ourselves is what makes the actual route sane. With no known start we
- * anchor on the northernmost stop for a stable, deterministic top-down chain.
+ * Order trip stops into an efficient drive. Greedy nearest-neighbour: from
+ * `start` (the user's location) repeatedly hop to the closest unvisited stop.
+ * Google's Maps URL API visits waypoints in the given order and won't
+ * re-optimise, so ordering them ourselves is what makes the actual route sane.
+ *
+ * ANCHORING, AND WHY IT IS NOT A FREE CHOICE.
+ * With no known start the route is an open path — and an open path and its
+ * exact reversal always have IDENTICAL length. Our own objective function
+ * therefore cannot tell the user's order from its mirror: the two are tied, and
+ * something outside the objective has to break the tie. The old code broke it
+ * with `b.lat - a.lat`. Latitude appears nowhere in the objective, so the tie
+ * was decided by nothing at all — and a user tapping stops south->north got
+ * their trip handed back exactly reversed. It wasn't a bad trade; the optimiser
+ * had no opinion and acted anyway.
+ *
+ * We now anchor on the FIRST stop the user chose. It is equally deterministic,
+ * it is the only start signal we have, and it can never hand the user back
+ * their own sequence reversed.
  *
  * Nearest-neighbour is not the optimal TSP tour, but for the <=10 stops a
  * weekend loppetur allows it is within a few km of optimal and, crucially,
- * deterministic and instant — far better than raw click order.
+ * deterministic and instant.
+ *
+ * NOTE: this is only ever called when the user ASKS for it (the "Optimér
+ * rækkefølgen" button) or when the app itself chose the stops (autoPlanTrip).
+ * It must never run as a silent render step — see Explorer's tripRoute.
  */
 export function optimizeTripOrder<T extends TripStop>(
   stops: readonly T[],
@@ -182,8 +198,7 @@ export function optimizeTripOrder<T extends TripStop>(
   if (start) {
     cursor = start;
   } else {
-    remaining.sort((a, b) => b.lat - a.lat); // northernmost first
-    ordered.push(remaining.shift()!);
+    ordered.push(remaining.shift()!); // the user's own first stop anchors the chain
     cursor = ordered[0]!;
   }
   while (remaining.length) {

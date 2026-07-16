@@ -125,6 +125,7 @@ export const ResultsList = memo(function ResultsList({
             index={i}
             tripMode={tripMode}
             selected={tripSlugs.includes(`v:${v.slug}`)}
+            tripIndex={tripSlugs.indexOf(`v:${v.slug}`) + 1 || undefined}
             onToggleTrip={onToggleTrip}
           />
         ))}
@@ -222,6 +223,7 @@ export const ResultsList = memo(function ResultsList({
               weather={weather.get(e.slug)}
               tripMode={tripMode}
               selected={tripSlugs.includes(`e:${e.slug}`)}
+              tripIndex={tripSlugs.indexOf(`e:${e.slug}`) + 1 || undefined}
               onToggleTrip={onToggleTrip}
               onHoverChange={onHoverSlug}
             />

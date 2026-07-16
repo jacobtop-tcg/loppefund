@@ -619,6 +619,13 @@ a:focus-visible .event-card {
   display: grid;
   place-items: center;
   color: transparent;
+  /* The ring carries the stop NUMBER, not a checkmark: now that tap order is
+     route order, the list has to be able to show which stop is which. Tabular
+     figures keep "10" from wobbling against "1". */
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
   transition: all 0.13s ease;
 }
 

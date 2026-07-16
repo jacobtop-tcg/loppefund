@@ -94,7 +94,11 @@ export function Explorer({
   const [now, setNow] = useState<CphNow>(initialNow);
   const [gemsFirst, setGemsFirst] = useState(false);
   const [tripMode, setTripMode] = useState(false);
-  const [tripSlugs, setTripSlugs] = useState<string[]>([]); // insertion order = route order
+  // Insertion order IS route order — nothing downstream reorders it. The only
+  // thing that ever rewrites this array is optimizeTrip(), on an explicit tap.
+  const [tripSlugs, setTripSlugs] = useState<string[]>([]);
+  /** The selection as it was before the last "Optimér rækkefølgen", or null. */
+  const [tripUndo, setTripUndo] = useState<string[] | null>(null);
   const [savedOnly, setSavedOnly] = useState(false);
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
   // Permanent-venue layer (thrift/antique/flea shops): off by default so the
@@ -458,23 +462,24 @@ export function Explorer({
     },
     [eventsBySlug, venuesBySlug],
   );
-  // Order the stops into an efficient drive — from the user's location when we
-  // have it — instead of the arbitrary order they were tapped, then hand Google
-  // Maps the sane sequence (its URL API won't re-optimise waypoints itself).
-  // The total distance is an honest "is this weekend worth the drive?" scent.
-  // Memoised on the selection + location so it doesn't recompute on every hover
-  // or the 60s clock tick (which re-render this component with the same trip).
-  // The optimized visit order, keeping each stop's id so the map can draw the
-  // route line and number the stops in the order Google Maps will drive them.
-  const tripRoute = useMemo(() => {
-    const stops = tripSlugs
-      .map((id) => {
-        const c = coordForStop(id);
-        return c ? { id, lat: c.lat, lng: c.lng } : null;
-      })
-      .filter((s): s is { id: string; lat: number; lng: number } => s !== null);
-    return optimizeTripOrder(stops, pos);
-  }, [tripSlugs, coordForStop, pos]);
+  // Route order IS the order the user tapped. We never silently reorder: the
+  // "Optimér rækkefølgen" button rewrites tripSlugs itself, so state, URL, map
+  // numbers and the Google route can never disagree.
+  //
+  // `pos` is deliberately NOT a dependency. It used to be, and that meant the
+  // pins silently renumbered mid-session the moment geolocation resolved — and
+  // that a shared ?tur= link (which carries tap order) rendered a DIFFERENT
+  // order on the recipient's device than the sender ever saw.
+  const tripRoute = useMemo(
+    () =>
+      tripSlugs
+        .map((id) => {
+          const c = coordForStop(id);
+          return c ? { id, lat: c.lat, lng: c.lng } : null;
+        })
+        .filter((s): s is { id: string; lat: number; lng: number } => s !== null),
+    [tripSlugs, coordForStop],
+  );
   const { tripUrl, tripKm } = useMemo(
     () => ({ tripUrl: buildTripUrl(tripRoute), tripKm: tripDistanceKm(tripRoute, pos) }),
     [tripRoute, pos],
@@ -483,6 +488,7 @@ export function Explorer({
   // Handlers passed to the memoized FilterBar/ResultsList must be referentially
   // stable, or every hoveredSlug change re-renders 600+ cards.
   const toggleTrip = useCallback((slug: string) => {
+    setTripUndo(null); // the undo would point at a selection that no longer exists
     setTripSlugs((prev) =>
       prev.includes(slug)
         ? prev.filter((x) => x !== slug)
@@ -492,9 +498,43 @@ export function Explorer({
     );
   }, []);
 
+  /**
+   * The ONLY place the app reorders a trip — and only when asked.
+   *
+   * It writes back into tripSlugs rather than sorting on the way to the map, so
+   * the sorted order is what gets numbered, shared and driven. Reordering is now
+   * an act the user performs and can undo, not something that happens to them.
+   */
+  const optimizeTrip = useCallback(() => {
+    const stops = tripSlugs
+      .map((id) => {
+        const c = coordForStop(id);
+        return c ? { id, lat: c.lat, lng: c.lng } : null;
+      })
+      .filter((s): s is { id: string; lat: number; lng: number } => s !== null);
+    if (stops.length < 2) return;
+    const ordered = optimizeTripOrder(stops, pos).map((s) => s.id);
+    // A stop we have no coordinate for isn't routable, but it is still the
+    // user's choice — park it at the end rather than drop it from their own
+    // selection.
+    const next = [...ordered, ...tripSlugs.filter((id) => !ordered.includes(id))];
+    if (next.every((id, i) => id === tripSlugs[i])) return; // already sorted: no-op, no undo
+    setTripUndo(tripSlugs);
+    setTripSlugs(next);
+    // NOT the setTripSlugs(prev => …) form on purpose: setTripUndo inside an
+    // updater is a side effect, and strict mode double-invokes updaters.
+  }, [tripSlugs, pos, coordForStop]);
+
+  const undoOptimize = useCallback(() => {
+    if (!tripUndo) return;
+    setTripSlugs(tripUndo);
+    setTripUndo(null);
+  }, [tripUndo]);
+
   const exitTrip = useCallback(() => {
     setTripMode(false);
     setTripSlugs([]);
+    setTripUndo(null);
   }, []);
 
   const toggleTripMode = useCallback(
@@ -513,15 +553,24 @@ export function Explorer({
     const withCoords = filtered.filter((e) => e.lat != null && e.lng != null);
     if (withCoords.length < 2) return;
     const anchor = pos ?? { lat: withCoords[0]!.lat!, lng: withCoords[0]!.lng! };
-    const stops = [...withCoords]
+    const near = [...withCoords]
       .sort(
         (a, b) =>
           distanceKm(anchor.lat, anchor.lng, a.lat!, a.lng!) -
           distanceKm(anchor.lat, anchor.lng, b.lat!, b.lng!),
       )
       .slice(0, MAX_TRIP_STOPS)
-      .map((e) => `e:${e.slug}`);
-    if (stops.length >= 2) setTripSlugs(stops);
+      .map((e) => ({ id: `e:${e.slug}`, lat: e.lat!, lng: e.lng! }));
+    if (near.length < 2) return;
+    // This is the ONE path where the app chose the stops, so it is entitled to
+    // choose the order too — but it must now do so explicitly, because the
+    // implicit reorder in tripRoute is gone.
+    //
+    // Order from the SAME anchor the selection was built around. Selecting
+    // around one point and then chaining from another made the market the whole
+    // plan is centred on come out last.
+    setTripUndo(null);
+    setTripSlugs(optimizeTripOrder(near, anchor).map((s) => s.id));
   }, [filtered, pos]);
 
   const locate = useCallback(() => {
@@ -651,6 +700,11 @@ export function Explorer({
                     {' · '}~{Math.round(tripKm)} km i fugleflugt
                   </span>
                 )}
+                {/* Rides the existing live region, so a screen reader is told
+                    the order changed — the whole disclosure in one word. */}
+                {tripUndo && (
+                  <span style={{ color: 'var(--ink-soft)', fontWeight: 400 }}>{' · '}sorteret</span>
+                )}
               </>
             )}
           </span>
@@ -675,6 +729,27 @@ export function Explorer({
               Åbn rute i Google Maps
             </button>
           )}
+          {/* Reordering is an act the user performs, never one that happens to
+              them. The km figure moves in front of them when they tap it — the
+              number that used to launder a silent reorder now prices it. */}
+          {tripSlugs.length >= 2 &&
+            (tripUndo ? (
+              <button className="trip-clear" onClick={undoOptimize}>
+                Fortryd sortering
+              </button>
+            ) : (
+              <button
+                className="trip-clear"
+                onClick={optimizeTrip}
+                title={
+                  pos
+                    ? 'Sorterer stoppene til den korteste køretur fra din placering'
+                    : 'Sorterer stoppene til den korteste køretur — starter ved dit første stop'
+                }
+              >
+                Optimér rækkefølgen
+              </button>
+            ))}
           {tripSlugs.length >= 2 && (
             // Share the LOPPEFUND trip, not just the Google route — the link
             // recreates the whole plan for the rest of the family.
@@ -685,7 +760,13 @@ export function Explorer({
             />
           )}
           {tripSlugs.length > 0 && (
-            <button className="trip-clear" onClick={() => setTripSlugs([])}>
+            <button
+              className="trip-clear"
+              onClick={() => {
+                setTripSlugs([]);
+                setTripUndo(null);
+              }}
+            >
               Ryd
             </button>
           )}

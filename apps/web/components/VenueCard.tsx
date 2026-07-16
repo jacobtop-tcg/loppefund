@@ -19,6 +19,7 @@ export function VenueCard({
   index,
   tripMode = false,
   selected = false,
+  tripIndex,
   onToggleTrip,
 }: {
   venue: VenueSummary;
@@ -26,6 +27,8 @@ export function VenueCard({
   index: number;
   tripMode?: boolean;
   selected?: boolean;
+  /** 1-based position on the trip, or undefined when not on it. */
+  tripIndex?: number;
   onToggleTrip?: (id: string) => void;
 }) {
   const state = venueOpenState(venue.openingHoursText, now);
@@ -43,9 +46,7 @@ export function VenueCard({
     >
       {tripMode && selectable && (
         <span className="select-ring" aria-hidden>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round">
-            <path d="m4 12 5 5 11-11" />
-          </svg>
+          {selected && tripIndex ? tripIndex : null}
         </span>
       )}
       <div className={`date-block venue-stub venue-${venue.category}`} aria-hidden>
@@ -84,6 +85,7 @@ export function VenueCard({
         type="button"
         className="card-button"
         aria-pressed={selectable ? selected : undefined}
+        aria-label={selected && tripIndex ? `${venue.title} — stop ${tripIndex} på turen` : undefined}
         disabled={!selectable}
         onClick={() => selectable && onToggleTrip?.(`v:${venue.slug}`)}
       >

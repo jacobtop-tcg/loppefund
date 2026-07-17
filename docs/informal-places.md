@@ -168,16 +168,26 @@ barn's 80, and still sits below it.
 `sporadic`, `call_first`, `unverified`, `possibly_inactive`, `historical`,
 `rejected`.
 
-Decay thresholds live in `informal-quality.ts` and are configurable:
+Decay and quorum thresholds are configurable, and they live in **two** files —
+the scoring ones with the scorer, the reporting ones with the report:
 
-| Constant | Default | Meaning |
-|---|---|---|
-| `FRESH_DAYS` | 60 | Full recency credit in confidence |
-| `STALE_DAYS` | 540 | Recency credit reaches zero |
-| `SINGLE_OBS_STALE_DAYS` | 180 | A lone observation older than this is a rumour |
-| `STALE_AFTER_DAYS` | 365 | `confirmed_active` beyond this is flagged |
-| `HISTORICAL_AFTER_DAYS` | 540 | Anything still claiming to be live is flagged |
-| `CLOSED_REPORT_QUORUM` | 2 | Reports needed before the closed-penalty bites fully |
+| Constant | Where | Default | Meaning |
+|---|---|---|---|
+| `FRESH_DAYS` | `core/informal-confidence.ts` | 60 | Full recency credit in confidence |
+| `STALE_DAYS` | `core/informal-confidence.ts` | 540 | Recency credit reaches zero |
+| `SINGLE_OBS_STALE_DAYS` | `core/informal-confidence.ts` | 180 | A lone observation older than this is a rumour |
+| `CLOSED_REPORT_QUORUM` | `core/informal-confidence.ts` | 2 | Visits needed before a report counts fully — in BOTH directions (see below) |
+| `VISIT_QUORUM` | `core/fund-score.ts` | 2 | Same rule for the fund score |
+| `STALE_AFTER_DAYS` | `pipeline/informal-quality.ts` | 365 | `confirmed_active` beyond this is flagged |
+| `HISTORICAL_AFTER_DAYS` | `pipeline/informal-quality.ts` | 540 | Anything still claiming to be live is flagged |
+
+**The quorum rule is "half at one, full at two", not "ignore one".** A lone
+visitor is the only first-hand evidence this dataset ever gets; refusing to hear
+them throws away the thing that makes the feature worth having. So a single
+report counts half and the reason says so ("kun 1 besøg — tæller halvt"). It
+applies in both directions: one visitor can neither make a place nor condemn it.
+Operator flags are exempt — a human who has vetted the place is not a sample of
+one.
 
 ---
 

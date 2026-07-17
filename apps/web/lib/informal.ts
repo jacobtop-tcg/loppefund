@@ -92,7 +92,26 @@ function toInternal(r: ReturnType<typeof listInformalPlaces>[number]): InformalP
     priceLevel: r.price_level as InformalPlace['priceLevel'],
     inventorySignals: j<InformalPlace['inventorySignals']>(r.inventory_signals, []),
     imageUrls: j<string[]>(r.image_urls, []),
-    visitReports: (r.reports as unknown[]).map(() => ({}) as InformalPlace['visitReports'][number]),
+    // Map the reports FOR REAL. This used to be `.map(() => ({}))`: the SQL
+    // fetched every column and the mapper threw all of them away, leaving an
+    // array of empty objects wearing the InformalVisitReport type. Only
+    // `.length` was ever read, so it worked — and it was a trap set for whoever
+    // next reads a field here and silently gets undefined. A type that lies is
+    // worse than a missing field, because nothing fails.
+    visitReports: (r.reports as Array<Record<string, unknown>>).map((v) => ({
+      visitedAt: String(v.visited_at),
+      wasOpen: v.was_open == null ? null : !!v.was_open,
+      priceLevel: (v.price_level ?? null) as InformalPlace['visitReports'][number]['priceLevel'],
+      stockLevel: (v.stock_level ?? null) as InformalPlace['visitReports'][number]['stockLevel'],
+      freshStock: v.fresh_stock == null ? null : !!v.fresh_stock,
+      sellerKind: (v.seller_kind ?? null) as InformalPlace['visitReports'][number]['sellerKind'],
+      negotiable: v.negotiable == null ? null : !!v.negotiable,
+      categories: j<string[]>((v.categories as string | null) ?? null, []),
+      worthTheDrive: v.worth_the_drive == null ? null : !!v.worth_the_drive,
+      comment: (v.comment ?? null) as string | null,
+      reporter: (v.reporter ?? null) as string | null,
+      reportedClosed: !!v.reported_closed,
+    })),
     mergedIds: j<number[]>(r.merged_ids, []),
     moderationNotes: r.moderation_notes,
     createdAt: r.created_at,

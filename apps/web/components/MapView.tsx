@@ -451,6 +451,9 @@ export function MapView({
           });
         });
         const openPopup = (e: maplibregl.MapLayerMouseEvent) => {
+          // A route badge sits on top of its own marker. Without this, one tap
+          // would both remove the stop and open its popup.
+          if (m.queryRenderedFeatures(e.point, { layers: ['route-stop-badge'] }).length > 0) return;
           const f = e.features?.[0];
           if (!f) return;
           const p = f.properties as Record<string, unknown>;
@@ -617,6 +620,23 @@ export function MapView({
           },
           paint: { 'text-color': MAP.paper },
         });
+
+        // TAP A BADGE TO DROP THAT STOP. The badges render from tripRoute, not
+        // from the filtered list, so they are the ONLY surface that always shows
+        // every stop — including one stranded outside the current date chip,
+        // which previously could only be removed by clearing the whole trip.
+        m.on('click', 'route-stop-badge', (e) => {
+          const id = e.features?.[0]?.properties?.id;
+          if (typeof id === 'string') tripRef.current.onToggleTrip?.(id);
+        });
+        for (const layer of ['route-stop-badge', 'route-stop-number']) {
+          m.on('mouseenter', layer, () => {
+            m.getCanvas().style.cursor = 'pointer';
+          });
+          m.on('mouseleave', layer, () => {
+            m.getCanvas().style.cursor = '';
+          });
+        }
 
         readyRef.current = true;
         // Props may have changed while the style loaded.

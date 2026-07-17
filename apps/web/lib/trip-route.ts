@@ -26,7 +26,11 @@ export function toRouteGeoJson(route: RouteStop[]): {
       features: route.map((s, i) => ({
         type: 'Feature',
         geometry: { type: 'Point', coordinates: [s.lng, s.lat] },
-        properties: { n: String(i + 1) },
+        // The id travels with the badge so tapping it can remove that stop. The
+        // badge used to carry only its number, which made it a label rather than
+        // a control — and left a stop that had fallen out of the filtered list
+        // unremovable except by clearing the whole trip.
+        properties: { n: String(i + 1), id: s.id },
       })),
     },
   };

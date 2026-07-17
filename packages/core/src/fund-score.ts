@@ -140,6 +140,33 @@ export const FUND_SCALE =
   FUND_W.mixedCategories + FUND_W.negotiable + FUND_W.freshStock +
   FUND_W.goodFindsReported;
 
+
+/**
+ * How many visit reports it takes before a report-derived signal counts fully.
+ *
+ * One visitor is not nothing — refusing to hear them would throw away the only
+ * first-hand evidence this dataset ever gets. But one visitor should not be able
+ * to move the score as far as three can: "der kan forhandles" from a single good
+ * afternoon is a mood, not a property of the place. So a lone report counts
+ * HALF, and the reason says so out loud. Nothing is discarded; nothing is
+ * over-trusted.
+ *
+ * Operator flags are unaffected — a human who has vetted the place is not a
+ * sample of one.
+ */
+export const VISIT_QUORUM = 2;
+
+/** 0 for no reports, 0.5 for a single one, 1 from the quorum up. */
+function reportShare(n: number): number {
+  if (n <= 0) return 0;
+  return n >= VISIT_QUORUM ? 1 : 0.5;
+}
+
+/** "(3 besøg)" / "(kun 1 besøg — tæller halvt)" — the count is part of the claim. */
+function visitNote(n: number): string {
+  return n >= VISIT_QUORUM ? `(${n} besøg)` : '(kun 1 besøg — tæller halvt)';
+}
+
 export function computeFundScore(input: FundScoreInput): FundScoreResult {
   let score = BASE;
   const reasons: string[] = [];
@@ -179,15 +206,19 @@ export function computeFundScore(input: FundScoreInput): FundScoreResult {
     reasons.push('Ikke på Google Maps');
   }
 
-  // Price level: reported by visitors, so it beats any guess.
+  // Price level: reported by visitors, so it beats any guess — but a single
+  // visitor's guess is still a single visitor's guess. An operator-set level is
+  // taken at full weight; a level derived from one report is halved.
   const reportedPrices = input.visitReports.map((r) => r.priceLevel).filter(Boolean) as PriceLevel[];
   const price = input.priceLevel ?? majority(reportedPrices);
+  const priceShare = input.priceLevel ? 1 : reportShare(reportedPrices.length);
+  const priceNote = input.priceLevel ? '' : ` ${visitNote(reportedPrices.length)}`;
   if (price === 'lav') {
-    score += FUND_W.lowPrices;
-    reasons.push('Lave rapporterede priser');
+    score += Math.round(FUND_W.lowPrices * priceShare);
+    reasons.push(`Lave rapporterede priser${priceNote}`);
   } else if (price === 'hoej') {
-    score += FUND_W.highPrices;
-    reasons.push('Høje rapporterede priser');
+    score += Math.round(FUND_W.highPrices * priceShare);
+    reasons.push(`Høje rapporterede priser${priceNote}`);
   }
 
   const mixed = input.inventorySignals.length >= 4 || input.inventorySignals.includes('blandet');
@@ -195,26 +226,37 @@ export function computeFundScore(input: FundScoreInput): FundScoreResult {
     score += FUND_W.mixedCategories;
     reasons.push('Mange blandede varekategorier');
   }
-  if (input.visitReports.some((r) => r.negotiable === true)) {
-    score += FUND_W.negotiable;
-    reasons.push('Der kan forhandles');
+  const negotiable = input.visitReports.filter((r) => r.negotiable === true).length;
+  if (negotiable > 0) {
+    score += Math.round(FUND_W.negotiable * reportShare(negotiable));
+    reasons.push(`Der kan forhandles ${visitNote(negotiable)}`);
   }
-  if (input.visitReports.some((r) => r.freshStock === true)) {
-    score += FUND_W.freshStock;
-    reasons.push('Nye varer kommer til');
+  const freshStock = input.visitReports.filter((r) => r.freshStock === true).length;
+  if (freshStock > 0) {
+    score += Math.round(FUND_W.freshStock * reportShare(freshStock));
+    reasons.push(`Nye varer kommer til ${visitNote(freshStock)}`);
   }
   const goodFinds = input.visitReports.filter((r) => r.worthTheDrive === true).length;
   if (goodFinds > 0) {
-    score += FUND_W.goodFindsReported;
-    reasons.push(`${goodFinds} besøgende anbefaler turen`);
+    score += Math.round(FUND_W.goodFindsReported * reportShare(goodFinds));
+    reasons.push(
+      goodFinds >= VISIT_QUORUM
+        ? `${goodFinds} besøgende anbefaler turen`
+        : '1 besøgende anbefaler turen (tæller halvt)',
+    );
   }
 
   // --- negatives ---
-  const professional =
-    f.professionalDealer || input.visitReports.some((r) => r.sellerKind === 'professionel');
-  if (professional) {
-    score += FUND_W.professionalDealer;
-    reasons.push('Professionel handel');
+  // An operator who has vetted the place is not a sample of one, so their flag
+  // lands at full weight. A lone visitor calling it professional is halved like
+  // any other single report.
+  const proReports = input.visitReports.filter((r) => r.sellerKind === 'professionel').length;
+  const proShare = f.professionalDealer ? 1 : reportShare(proReports);
+  if (proShare > 0) {
+    score += Math.round(FUND_W.professionalDealer * proShare);
+    reasons.push(
+      f.professionalDealer ? 'Professionel handel' : `Professionel handel ${visitNote(proReports)}`,
+    );
   }
   if (f.curatedVintage) {
     score += FUND_W.curatedVintage;

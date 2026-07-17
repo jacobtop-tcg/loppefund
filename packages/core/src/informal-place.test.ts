@@ -348,3 +348,66 @@ describe('trustLayerFor', () => {
     expect(trustLayerFor({ status: 'rejected', confidence: 95, callBeforeVisiting: false })).toBe('radar');
   });
 });
+
+// ---------------------------------------------------------------------------
+// THE QUORUM. The brief: "Beskyt mod én enkelt rapport, der får for stor
+// indflydelse." Note "for stor" — too much, not any. A lone visitor is the only
+// first-hand evidence this dataset ever gets; refusing to hear them throws it
+// away. So one report counts HALF and the reason says which it was.
+// ---------------------------------------------------------------------------
+describe('one visitor must not weigh as much as three', () => {
+  const bare = (visits: InformalVisitReport[]) => ({
+    placeType: 'loppelade' as const, inventorySignals: [], priceLevel: null,
+    visitReports: visits, websiteUrl: null, facebookUrl: null, kmToLargeCity: null,
+    status: 'recently_observed' as const, sourceCount: 1, flags: {},
+  });
+
+  it('halves a signal resting on a single visit, and says so', () => {
+    const one = computeFundScore(bare([visit({ worthTheDrive: true })]));
+    const two = computeFundScore(bare([
+      visit({ worthTheDrive: true }),
+      visit({ visitedAt: '2026-07-08', worthTheDrive: true }),
+    ]));
+    expect(one.score).toBeLessThan(two.score);
+    expect(one.reasons.join(' ')).toContain('tæller halvt');
+    expect(two.reasons.join(' ')).toContain('2 besøgende anbefaler turen');
+  });
+
+  it('still HEARS a lone visitor rather than discarding them', () => {
+    const none = computeFundScore(bare([]));
+    const one = computeFundScore(bare([visit({ worthTheDrive: true })]));
+    expect(one.score).toBeGreaterThan(none.score); // half of something, not nothing
+  });
+
+  it('protects in the NEGATIVE direction too — one visitor cannot condemn a place', () => {
+    const one = computeFundScore(bare([visit({ sellerKind: 'professionel' })]));
+    const two = computeFundScore(bare([
+      visit({ sellerKind: 'professionel' }),
+      visit({ visitedAt: '2026-07-08', sellerKind: 'professionel' }),
+    ]));
+    expect(two.score).toBeLessThan(one.score);
+  });
+
+  it('an operator flag is not a sample of one — full weight, no caveat', () => {
+    const byVisitor = computeFundScore(bare([visit({ sellerKind: 'professionel' })]));
+    const byOperator = computeFundScore({ ...bare([]), flags: { professionalDealer: true } });
+    expect(byOperator.score).toBeLessThan(byVisitor.score);
+    expect(byOperator.reasons).toContain('Professionel handel');
+  });
+
+  it('confidence guards the CONFIRMING report as it already guarded the closing one', () => {
+    const base = {
+      sources: [src()], lastSeenAt: '2026-07-10', lastVerifiedAt: null,
+      street: null, phone: null, lat: null, lng: null,
+      geoPrecision: 'unknown' as const, recurrence: null, openingNotes: null,
+      imageUrls: [], flags: {},
+    };
+    const one = computeInformalConfidence({ ...base, visitReports: [visit({ wasOpen: true })] }, TODAY);
+    const two = computeInformalConfidence({
+      ...base,
+      visitReports: [visit({ wasOpen: true }), visit({ visitedAt: '2026-07-08', wasOpen: true })],
+    }, TODAY);
+    expect(one.score).toBeLessThan(two.score);
+    expect(one.reasons.join(' ')).toContain('tæller halvt');
+  });
+});

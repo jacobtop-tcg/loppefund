@@ -340,6 +340,80 @@ round-trip, the **pre-v4 database path**, and the data-quality checks.
 
 ---
 
+## Notifications — a design, deliberately not built
+
+The brief asks for notifications ("nyt skjult sted inden for X km", "nyt
+dødsbosalg i valgt område", "ny observation på et favoritsted", "sted åbner
+denne weekend", "sted ikke længere aktivt", "høj fundscore i nærheden") and, in
+the same breath, says not to build a user platform for them. This section is the
+deliverable. Nothing below is implemented.
+
+**Why not now.** Every notification needs three things this app does not have:
+an identity to notify, a place to store a subscription, and something that runs
+when the visitor is not looking. A static export has none. Bolting on accounts
+would be the largest single change in the project, to serve a corpus that is
+currently empty. The rule that has held all night applies: build the machinery
+when there is data for it to act on.
+
+**What already exists, and is the actual precondition.** The signals are all
+there and all precomputed: `lastSeenAt`, `lastVerifiedAt`, `status`,
+`confidence`, `fundScore`, `inventorySignals`, a blurred `lat/lng`, and
+`/informal-places.json` — a complete public feed, regenerated twice daily. Any
+notifier is a diff over two snapshots of that file plus a distance test. The
+hard part is delivery, not detection.
+
+**The three designs, cheapest first.**
+
+1. **A feed, not a notification.** Publish `/skjulte-steder/nyt.xml` (RSS/Atom)
+   of places whose `firstSeenAt` falls in the last N days, and a per-municipality
+   variant. Zero infrastructure, no identity, no consent question — the reader
+   subscribes with their own tool. It answers "nyt skjult sted i mit område" for
+   the people most likely to want it. This is the one to build first, and it is
+   ~40 lines of route.
+
+2. **Client-side watch.** localStorage keeps the visitor's filters (kommune,
+   interests, minimum fundScore) plus the id-set they last saw. On each visit,
+   diff against the freshly fetched JSON and show "3 nye siden sidst". Still no
+   account, no server, no data leaving the device — the same posture as
+   `favorites.ts` and `saved-location.ts`. It only fires when they come back,
+   which is honest: we are not a push channel, we are a page that remembers.
+
+3. **Real push.** Web Push needs a service worker (fine, static) AND a server
+   holding subscription endpoints and VAPID keys (not fine). This is the one
+   that requires the architecture to change. Do not start here. If it ever
+   happens, the subscription store is the only new state, and the trigger is
+   still the same diff from (1).
+
+**What must not be notified, whatever the mechanism.** A Radar place must never
+generate a "new place near you" alert — the whole point of the third layer is
+that we are not confident enough to send someone driving. Alerts are for
+`bekraeftet` and, with the trust-layer wording attached, `kontroller-foerst`. And
+an alert must never carry an address the place itself would not publish; it goes
+through `publicView()` like everything else, or it becomes a channel that leaks
+what the page refuses to.
+
+## Future integrations
+
+Recorded here so the reasoning is not buried in a code comment.
+
+* **The day this gains a server** is the day `kun-aabningsdage` becomes real.
+  The model already expresses "address is revealed on opening days"; only the
+  static host forces it to degrade to area-level. One branch in `publicView()`
+  changes; nothing else does. That is why the value exists despite currently
+  behaving as `omraade`.
+* **Image analysis** (see Known limitations) plugs in at ingest, not at read: the
+  point is to turn photos into `inventorySignals`, which are already a first-class
+  field the UI filters on. The interface is `(imageUrl) => InventorySignal[]`;
+  everything downstream is built.
+* **A review UI**, if the tip volume ever justifies one, should copy the
+  `source_candidates` pattern (`setCandidateStatus` + `discover-sources
+  --promote/--reject --note`) rather than invent a second one. It is already the
+  project's answer to "a queue a human works through", and it needs no server.
+* **CVR** is deliberately NOT the spine for hidden places. A private loppelade
+  has no CVR number and is not less real for it — that is the founding premise
+  of this datatype, and any future integration must not quietly reintroduce
+  business logic as the truth test.
+
 ## Known limitations
 
 1. **The corpus, not the model.** See Classification. The harvester points at
@@ -350,9 +424,15 @@ round-trip, the **pre-v4 database path**, and the data-quality checks.
    humans via the tip form.
 4. **Visit reports** are modelled and stored, and feed both scores, but they
    arrive through the same human-vetted rail; there is no live write path.
-5. **Notifications / personalisation** are modelled (`inventorySignals`,
-   categories) but not built.
-6. **`confidence` saturates at the top** (see FUND_SCALE note).
-7. **No admin UI.** Review is a committed JSON + the CLI report. That is the
+5. **Notifications** are designed (see above) and not built — deliberately, for
+   the reasons given there.
+6. **Personalisation landed on the wrong entity.** All 17 interests are
+   modelled, filterable and chip-rendered for hidden places — of which there are
+   currently zero — while the 739 markets have no `inventorySignals` field to
+   filter on at all. The brief asked for category filtering; it was built for the
+   empty side of the product. This is the largest real gap in the feature, and it
+   is not an informal-places problem.
+7. **`confidence` saturates at the top** (see FUND_SCALE note).
+8. **No admin UI.** Review is a committed JSON + the CLI report. That is the
    least-maintenance option that fits a static site; a heavier tool would be a
    liability.

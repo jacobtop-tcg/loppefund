@@ -217,10 +217,20 @@ export function computeInformalConfidence(
     score += INFORMAL_W.phoneVerified;
     reasons.push('Bekræftet telefonisk');
   }
+  // The same protection the CLOSED report already gets, in the other direction.
+  // CLOSED_REPORT_QUORUM guarded against one visitor killing a place; nothing
+  // guarded against one visitor confirming it, and the brief asked for both.
+  // A lone visit still counts — it is first-hand evidence and the only kind this
+  // dataset ever gets — but at half, and the reason says which it was.
   const confirmedVisits = input.visitReports.filter((r) => r.wasOpen === true && !r.reportedClosed);
   if (confirmedVisits.length > 0) {
-    score += INFORMAL_W.userVisitConfirmed;
-    reasons.push(`Bekræftet ved besøg (${confirmedVisits.length})`);
+    const full = confirmedVisits.length >= CLOSED_REPORT_QUORUM;
+    score += full ? INFORMAL_W.userVisitConfirmed : Math.round(INFORMAL_W.userVisitConfirmed / 2);
+    reasons.push(
+      full
+        ? `Bekræftet ved besøg (${confirmedVisits.length})`
+        : 'Bekræftet ved ét besøg (tæller halvt)',
+    );
   }
 
   // --- recency: a place is only as current as its last sighting ---

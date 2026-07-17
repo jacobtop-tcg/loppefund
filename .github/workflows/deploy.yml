@@ -1,3 +1,38 @@
+# ACTION VERSIONS ARE PINNED DELIBERATELY OLD. Read this before "just bumping".
+#
+# Every build warns that checkout@v4, setup-node@v4, cache@v4 and configure-pages@v5
+# declare node20. They are ALREADY being force-run on node24 and they work — the
+# cache history proves it. There is no announced date on which node20-declaring
+# actions stop working. The warning is cosmetic; do not let it stampede you.
+#
+# WHEN you do bump, the targets are v5 for checkout and setup-node (the FIRST
+# node24 major — v6/v7 clear nothing extra and add surface; checkout@v7 shipped
+# 2026-06 with an open regression whose fix is not yet in the tag), v6 for cache,
+# v6 for configure-pages, v5 for deploy-pages, and v5 — NEVER v4 — for
+# upload-pages-artifact: v4 excludes dotfiles with no opt-out and would silently
+# drop the .nojekyll below; `include-hidden-files: true` only exists from v5.
+#
+# THE CACHE BUMP IS SAFE, and this is computed rather than hoped: a cache entry is
+# addressed by sha256(paths|compressionMethod|versionSalt). versionSalt is '1.0' in
+# v4, v5 and v6; `path` stays `data`; and getCompressionMethod never branches on
+# zstd's version (it returns zstd-without-long whenever zstd exists). So
+#     sha256("data|zstd-without-long|1.0") = 3ad75f27293d65a1...46e69
+# which is exactly the version every stored loppefund-db-* entry carries. A v6
+# restore addresses the byte-identical entry a v4 save wrote.
+#
+# HOW TO VERIFY A BUMP WITHOUT A CRAWL: the restore step below runs on EVERY push
+# (its `if` gates on db_source, not on the event) — only the crawl and the save are
+# push-excluded. So bump `restore` first, push, and confirm a cache hit in the log.
+# A push never saves, so a miss cannot poison anything. Bump `save` only after that.
+#
+# WHY A MISS MATTERS: `save` is `if: always()` and writes loppefund-db-<run_id>,
+# always the newest entry, and `restore-keys` picks the most recently created
+# match. So a restore miss doesn't cost one run — the crawl rebuilds from the
+# COMMITTED data/loppefund.db (the deliberate cold-start floor, see the
+# db_source: committed dispatch input) and then saves THAT as the newest entry,
+# and every later run inherits it. The floor means a miss costs the accumulation
+# since that commit, not everything.
+
 name: Refresh data & deploy
 
 # Free continuous-update engine on GitHub's free tier. Two speeds, on purpose:

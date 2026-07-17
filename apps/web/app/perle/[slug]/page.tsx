@@ -211,7 +211,7 @@ export default async function InformalPlacePage({
       </section>
 
       <p className="ip-report">
-        Passer noget ikke? <Link href="/tip-perle">Send en rettelse</Link> — skjulte steder
+        Passer noget ikke? <Link href={`/tip-perle?sted=${p.slug}`}>Send en rettelse</Link> — skjulte steder
         ændrer sig, og vi vil hellere fjerne et forkert end beholde det.
       </p>
     </div>

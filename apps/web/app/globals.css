@@ -3859,3 +3859,21 @@ body:has(.is-map-view) {
   color: var(--ink-soft);
   font-style: italic;
 }
+
+/* A yes/no/don't-know question. Laid out inline so three short answers read as
+   one question rather than three separate asks. */
+.perle-tri {
+  border: 0;
+  padding: 0;
+  margin: 0 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.perle-tri legend {
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 4px;
+}

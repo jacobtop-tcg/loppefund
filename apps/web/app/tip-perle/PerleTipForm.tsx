@@ -53,6 +53,36 @@ const CATEGORIES: Array<[string, string]> = [
   ['usorteret', 'Usorteret rod'],
 ];
 
+
+/**
+ * A yes / no / don't-know question.
+ *
+ * These were checkboxes, and an unticked box was sent as "nej/ved ikke". But
+ * "der er intet skilt" and "jeg kiggede ikke efter" are DIFFERENT facts about a
+ * stranger's driveway, and the model has `boolean | null` precisely so it can
+ * hold the difference. Collapsing them threw away the only thing that
+ * distinguishes an observation from a silence — and then an operator had to
+ * guess which one the tipper meant.
+ *
+ * Nothing is pre-selected: a default would be us answering on their behalf.
+ */
+function TriState({ name, label }: { name: string; label: string }) {
+  return (
+    <fieldset className="perle-tri">
+      <legend className="perle-cap">{label}</legend>
+      {[
+        ['ja', 'Ja'],
+        ['nej', 'Nej'],
+        ['ukendt', 'Ved ikke'],
+      ].map(([v, l]) => (
+        <label key={v} className="perle-check">
+          <input type="radio" name={name} value={v} /> <span>{l}</span>
+        </label>
+      ))}
+    </fieldset>
+  );
+}
+
 export function PerleTipForm() {
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle');
   const [error, setError] = useState('');
@@ -81,19 +111,31 @@ export function PerleTipForm() {
       hvor: where,
       type: String(data.get('placeType') ?? ''),
       adresse_maa_vises: String(data.get('visibility') ?? ''),
-      skilt_ved_vejen: data.get('sign') ? 'ja' : 'nej/ved ikke',
+      // "" when unanswered. An unanswered question is not a "no" — the operator
+      // must be able to see which questions the tipper actually answered.
+      skilt_ved_vejen: String(data.get('sign') ?? ''),
       faste_aabningstider: String(data.get('openingNotes') ?? ''),
-      ring_foerst: data.get('callFirst') ? 'ja' : 'nej/ved ikke',
-      flaget_er_ude: data.get('flag') ? 'ja' : 'nej/ved ikke',
+      ring_foerst: String(data.get('callFirst') ?? ''),
+      flaget_er_ude: String(data.get('flag') ?? ''),
       sidst_besoegt: String(data.get('lastVisit') ?? ''),
       varer: categories.join(', '),
       prisniveau: String(data.get('priceLevel') ?? ''),
-      kan_forhandles: data.get('negotiable') ? 'ja' : 'nej/ved ikke',
+      kan_forhandles: String(data.get('negotiable') ?? ''),
       kontakt: String(data.get('contact') ?? ''),
       kildelink: String(data.get('sourceUrl') ?? ''),
       kommentar: String(data.get('comment') ?? ''),
       indsender: String(data.get('reporter') ?? ''),
     };
+    // Which place is this about? The detail page's "Send en rettelse" link hands
+    // us the slug; without it the operator received "åbningstiderne passer ikke"
+    // with no way to know which of N places it meant. Read from the URL at
+    // submit time rather than via useSearchParams, which would need a Suspense
+    // boundary under `output: export` for a single string.
+    const about =
+      typeof window !== 'undefined'
+        ? new URLSearchParams(window.location.search).get('sted')
+        : null;
+    if (about) payload.retter_sted = about;
 
     if (WEB3FORMS_KEY) {
       setState('sending');
@@ -181,15 +223,9 @@ export function PerleTipForm() {
 
       <fieldset>
         <legend>Sådan kommer man ind</legend>
-        <label className="perle-check">
-          <input type="checkbox" name="sign" /> <span>Der er et skilt ved vejen</span>
-        </label>
-        <label className="perle-check">
-          <input type="checkbox" name="callFirst" /> <span>Man skal ringe først</span>
-        </label>
-        <label className="perle-check">
-          <input type="checkbox" name="flag" /> <span>Åbent når flaget er ude</span>
-        </label>
+        <TriState name="sign" label="Er der et skilt ved vejen?" />
+        <TriState name="callFirst" label="Skal man ringe først?" />
+        <TriState name="flag" label="Åbent når flaget er ude?" />
         <label>
           <span className="perle-cap">Faste åbningstider?</span>
           <input name="openingNotes" placeholder="fx “søndage 10-16” eller “kun når flaget er ude”" />
@@ -219,9 +255,7 @@ export function PerleTipForm() {
             <option value="hoej">Højt</option>
           </select>
         </label>
-        <label className="perle-check">
-          <input type="checkbox" name="negotiable" /> <span>Man kan forhandle</span>
-        </label>
+        <TriState name="negotiable" label="Kan man forhandle?" />
       </fieldset>
 
       <fieldset>

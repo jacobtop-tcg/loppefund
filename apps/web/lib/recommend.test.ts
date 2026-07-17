@@ -78,3 +78,55 @@ describe('recommend', () => {
     expect(recs.some((r) => r.event.slug === 'p')).toBe(false);
   });
 });
+
+describe('recommend — the window respects what the visitor is looking at', () => {
+  const today = '2026-07-03'; // a Friday
+  const satSun: [string, string] = ['2026-07-04', '2026-07-05']; // this weekend
+
+  const g = (slug: string, date: string) =>
+    base({ slug, gem: true, confidence: 0.85, occurrences: [{ date, startTime: null, endTime: null }] });
+
+  // THE DEFECT: the rail called itself "where should we go this weekend?" while
+  // being fed the whole 21-day horizon, so a market three weeks out could sit
+  // above the weekend list. A stated date window must scope the picks.
+  it('excludes a market outside the chosen window', () => {
+    const recs = recommend(
+      [g('this-weekend-a', '2026-07-04'), g('this-weekend-b', '2026-07-05'), g('next-week', '2026-07-24')],
+      null,
+      today,
+      { window: satSun },
+    );
+    const slugs = recs.map((r) => r.event.slug);
+    expect(slugs).toContain('this-weekend-a');
+    expect(slugs).not.toContain('next-week'); // 3 weeks out — not this weekend
+  });
+
+  it('without a window, keeps the full 21-day horizon (unchanged behaviour)', () => {
+    const recs = recommend(
+      [g('soon', '2026-07-04'), g('two-weeks', '2026-07-16')],
+      null,
+      today,
+    );
+    expect(recs.map((r) => r.event.slug)).toEqual(expect.arrayContaining(['soon', 'two-weeks']));
+  });
+
+  it('never recommends the past even when the window opens before today', () => {
+    const recs = recommend(
+      [g('yesterday', '2026-07-02'), g('tomorrow', '2026-07-04')],
+      null,
+      today,
+      { window: ['2026-07-01', '2026-07-05'] },
+    );
+    expect(recs.map((r) => r.event.slug)).toEqual(['tomorrow']);
+  });
+
+  it('clamps a year-long window to the horizon, so "Alle datoer" stays sane', () => {
+    const recs = recommend(
+      [g('soon', '2026-07-05'), g('far', '2027-01-01')],
+      null,
+      today,
+      { window: ['2026-07-03', '2027-07-03'] },
+    );
+    expect(recs.map((r) => r.event.slug)).not.toContain('far'); // beyond the 21-day cap
+  });
+});

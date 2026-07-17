@@ -49,16 +49,29 @@ export function recommend(
     distanceKm?: (aLat: number, aLng: number, bLat: number, bLng: number) => number;
     /** Slugs the visitor has saved — a strong intent signal, boosted + labelled. */
     favorites?: Set<string>;
+    /**
+     * The date window the visitor is actually looking at, e.g. [Sat, Sun] for
+     * "I weekenden". When given, picks are drawn from THIS window (capped at the
+     * horizon) instead of the whole horizon — so a rail that calls itself "where
+     * should we go this weekend?" cannot put a market three weeks out above a
+     * weekend list. Omitted → the horizon, unchanged.
+     */
+    window?: [from: string, to: string];
   } = {},
 ): Recommendation[] {
   const horizon = addDaysIso(today, opts.horizonDays ?? 21);
   const dist = opts.distanceKm;
   const favorites = opts.favorites;
+  // Never recommend the past, and never past the horizon — but honour a tighter
+  // window the visitor chose. `to` is clamped to the horizon so "Alle datoer"
+  // (which spans a year) keeps its existing 21-day rec behaviour.
+  const from = opts.window ? (opts.window[0] > today ? opts.window[0] : today) : today;
+  const to = opts.window && opts.window[1] < horizon ? opts.window[1] : horizon;
   const out: Recommendation[] = [];
 
   for (const e of events) {
     if (e.status !== 'active') continue;
-    const next = e.occurrences.find((o) => o.date >= today && o.date <= horizon);
+    const next = e.occurrences.find((o) => o.date >= from && o.date <= to);
     if (!next) continue;
 
     const d =

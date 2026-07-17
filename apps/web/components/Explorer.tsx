@@ -452,8 +452,18 @@ export function Explorer({
   // "Til dig": personalized top picks from the full upcoming set (independent of
   // the active filter). Shown only when the visitor is browsing, not searching.
   const recs = useMemo(
-    () => recommend(events, pos, today, { distanceKm, limit: 4, favorites: new Set(favorites) }),
-    [events, pos, today, favorites],
+    () =>
+      recommend(events, pos, today, {
+        distanceKm,
+        limit: 4,
+        favorites: new Set(favorites),
+        // Scope the rail to the SAME window the list shows, so it can't
+        // recommend next month above "Weekenden 18.-19. juli". Only when a real
+        // date filter is active — while searching, the window is the whole
+        // horizon and the rail is hidden anyway.
+        window: searching ? undefined : dateRangeFor(dateFilter, today),
+      }),
+    [events, pos, today, favorites, dateFilter, searching],
   );
 
   // The empty state must always help onward: when filters yield nothing,

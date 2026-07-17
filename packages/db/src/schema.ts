@@ -5,7 +5,7 @@ import type { DatabaseSync } from 'node:sqlite';
  *  paths (see informalPlacesTableExists in index.ts), because migrate() runs
  *  only from openDb(), and a code-push deploy builds from a cached DB that was
  *  never migrated. */
-export const SCHEMA_VERSION = 5;
+export const SCHEMA_VERSION = 6;
 
 export function migrate(db: DatabaseSync): void {
   db.exec(`
@@ -298,6 +298,13 @@ export function migrate(db: DatabaseSync): void {
   );
   if (!eventColumns.has('amenities')) {
     db.exec(`ALTER TABLE events ADD COLUMN amenities TEXT`);
+  }
+  // What the market's own text says it sells, as JSON InventorySignal[]. The
+  // brief asked for category filtering; hidden places got all 17 interests and
+  // the 739 markets — the entire database — got none, because there was no field
+  // to filter on. Derived, never authored: see core/inventory.ts.
+  if (!eventColumns.has('inventory_signals')) {
+    db.exec(`ALTER TABLE events ADD COLUMN inventory_signals TEXT`);
   }
 
   // How many of a candidate's mined titles are already canonical — lets the

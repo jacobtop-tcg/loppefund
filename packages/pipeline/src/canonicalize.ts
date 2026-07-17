@@ -9,6 +9,7 @@ import {
   cleanStreet,
   cleanVenueName,
   extractAmenities,
+  extractInventorySignals,
   extractStallCountText,
   inferIndoorOutdoor,
   inferIsFreeFromText,
@@ -676,6 +677,11 @@ export async function canonicalizeRawEvent(
     const mergedAmenities = merged.description
       ? JSON.stringify(extractAmenities(merged.description))
       : null;
+    // Inventory reads the TITLE too — "Antik & Design Marked" is the whole
+    // signal for a market whose description says nothing about goods.
+    const mergedInventory = JSON.stringify(
+      extractInventorySignals(`${merged.title} ${merged.description ?? ''}`),
+    );
     merged.confidence = computeConfidence({
       maxSourceTrust: Math.max(trust, ...Object.keys(provenance).map((f) => currentTrust(f))),
       sourceCount,
@@ -684,7 +690,7 @@ export async function canonicalizeRawEvent(
       hasGoodLocation: merged.lat !== null && !['C', 'P'].includes(merged.geocodeQuality ?? ''),
       hasConcreteDates: occurrences.length > 0,
     });
-    updateEvent(db, e.id, { ...merged, amenities: mergedAmenities });
+    updateEvent(db, e.id, { ...merged, amenities: mergedAmenities, inventorySignals: mergedInventory });
 
     // Occurrences re-derive from ALL linked raw payloads, so a date a source
     // retracted disappears and reschedules take effect. Per date, the
@@ -805,6 +811,9 @@ export async function canonicalizeRawEvent(
     firstSeenAt: now,
     lastSeenAt: now,
     amenities: raw.description ? JSON.stringify(extractAmenities(raw.description)) : null,
+    inventorySignals: JSON.stringify(
+      extractInventorySignals(`${raw.title} ${raw.description ?? ''}`),
+    ),
   });
   replaceOccurrences(db, id, occurrences);
   linkEventSource(db, id, rawId);

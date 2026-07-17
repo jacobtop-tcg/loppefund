@@ -85,6 +85,13 @@ export function Explorer({
   const [dateFilter, setDateFilter] = useState<DateFilter>('weekend');
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<string | null>(null);
+  /**
+   * Interests the visitor is hunting ("vinyl", "møbler"). OR within — a hunter
+   * after vinyl OR lego wants both piles. Matches a market only when its own
+   * text ADVERTISES the thing; two markets in three say nothing, and this filter
+   * must never be read as "the rest don't have it".
+   */
+  const [interests, setInterests] = useState<string[]>([]);
   const [freeOnly, setFreeOnly] = useState(false);
   const [familyOnly, setFamilyOnly] = useState(false);
   // "Større markeder" — answers the mandate's "which are worth driving to?".
@@ -306,6 +313,14 @@ export function Explorer({
   }, [hydrated, explorerQuery]);
 
 
+  // Only the interests some market actually advertises, most common first. A
+  // chip that can return nothing is a promise the data can't keep.
+  const interestOptions = useMemo(() => {
+    const n = new Map<string, number>();
+    for (const e of events) for (const s of e.inventorySignals) n.set(s, (n.get(s) ?? 0) + 1);
+    return [...n.entries()].sort((a, b) => b[1] - a[1]).map(([k]) => k);
+  }, [events]);
+
   // Autocomplete index (cities + market/venue names), built once from the data.
   const searchIndex = useMemo(() => buildSearchIndex(events, venues), [events, venues]);
 
@@ -337,6 +352,7 @@ export function Explorer({
       if (dateFilter === 'aabent-nu' && !openNow) continue;
       if (savedOnly && !favorites.includes(e.slug)) continue;
       if (category && e.category !== category) continue;
+      if (interests.length > 0 && !interests.some((i) => e.inventorySignals.includes(i as never))) continue;
       if (freeOnly && e.isFree !== true) continue;
       if (familyOnly && !e.familyFriendly) continue;
       if (biggerOnly && (parseStallCount(e.stallCountText) ?? 0) < BIGGER_STALLS) continue;
@@ -384,7 +400,7 @@ export function Explorer({
     }
     if (gemsFirst) result.sort((a, b) => Number(b.gem) - Number(a.gem));
     return result;
-  }, [events, from, to, deferredQuery, category, freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
+  }, [events, from, to, deferredQuery, category, interests, freeOnly, familyOnly, biggerOnly, accessibleOnly, verifiedOnly, inOut, pos, radius, dateFilter, now, gemsFirst, savedOnly, favorites]);
 
   // The permanent-venue layer, filtered in parallel with events (venues have no
   // dates, so the date chips don't apply — except "Åbent nu", which narrows them
@@ -458,6 +474,7 @@ export function Explorer({
       const upcoming = e.occurrences.filter((o) => o.date >= today && o.date <= horizon);
       if (upcoming.length === 0) continue;
       if (category && e.category !== category) continue;
+      if (interests.length > 0 && !interests.some((i) => e.inventorySignals.includes(i as never))) continue;
       if (freeOnly && e.isFree !== true) continue;
       if (familyOnly && !e.familyFriendly) continue;
       if (biggerOnly && (parseStallCount(e.stallCountText) ?? 0) < BIGGER_STALLS) continue;
@@ -768,6 +785,7 @@ export function Explorer({
         query={query} onQuery={setQuery} searchIndex={searchIndex}
         dateFilter={dateFilter} onDateFilter={setDateFilter}
         category={category} onCategory={setCategory}
+        interestOptions={interestOptions} interests={interests} onInterests={setInterests}
         freeOnly={freeOnly} onFreeOnly={setFreeOnly}
         familyOnly={familyOnly} onFamilyOnly={setFamilyOnly}
         biggerOnly={biggerOnly} onBiggerOnly={setBiggerOnly}

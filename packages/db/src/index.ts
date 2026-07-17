@@ -130,6 +130,9 @@ export interface EventRow {
   last_seen_at: string;
   /** Amenities JSON (see @loppefund/core Amenities) or null. */
   amenities: string | null;
+  /** InventorySignal[] JSON — what the market's own text SAYS it sells. Null or
+   *  [] means it said nothing, never that it sells nothing. */
+  inventory_signals: string | null;
 }
 
 type EventValues = Omit<CanonicalEvent, 'id' | 'fieldProvenance' | 'isFree'> & {
@@ -137,13 +140,15 @@ type EventValues = Omit<CanonicalEvent, 'id' | 'fieldProvenance' | 'isFree'> & {
   fieldProvenance: Record<string, string>;
   /** Serialized Amenities or null. */
   amenities?: string | null;
+  /** Serialized InventorySignal[] or null. */
+  inventorySignals?: string | null;
 };
 
 const EVENT_COLUMNS = `slug, title, description, category, venue_name, street, postcode, city,
   municipality, lat, lng, geocode_quality, organizer, contact_website, contact_email,
   contact_phone, price_text, is_free, stall_count_text, indoor_outdoor, schedule_text,
   opening_hours_text, status, confidence, field_provenance, first_seen_at, last_seen_at,
-  search_text, amenities`;
+  search_text, amenities, inventory_signals`;
 
 function eventParams(e: EventValues): Array<string | number | null> {
   const searchText = searchFold(
@@ -158,7 +163,7 @@ function eventParams(e: EventValues): Array<string | number | null> {
     e.isFree === null ? null : e.isFree ? 1 : 0,
     e.stallCountText, e.indoorOutdoor, e.scheduleText, e.openingHoursText, e.status,
     e.confidence, JSON.stringify(e.fieldProvenance), e.firstSeenAt, e.lastSeenAt,
-    searchText, e.amenities ?? null,
+    searchText, e.amenities ?? null, e.inventorySignals ?? null,
   ];
 }
 

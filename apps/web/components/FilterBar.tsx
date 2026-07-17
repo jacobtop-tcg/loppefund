@@ -28,6 +28,36 @@ const CATEGORY_CHIPS: Array<{ key: string; label: string }> = [
 const RADIUS_CHIPS = [10, 25, 50] as const;
 
 /**
+ * What a hunter is actually after. The brief asked for category filtering and it
+ * was built for hidden places — of which there are none — while the 739 markets,
+ * the entire database, had only four event TYPES to filter by. Nobody hunts "a
+ * kræmmermarked"; they hunt the vinyl.
+ *
+ * The labels are ordered by how much of the corpus advertises each, so the
+ * chips that lead are the ones that pay. Only signals some market actually
+ * mentions are offered — see Explorer's `interestOptions`.
+ */
+const INTEREST_LABELS: Record<string, string> = {
+  toej: 'Tøj',
+  retro: 'Retro',
+  antik: 'Antik',
+  legetoej: 'Legetøj',
+  keramik: 'Keramik',
+  moebler: 'Møbler',
+  smykker: 'Smykker',
+  boeger: 'Bøger',
+  samlerobjekter: 'Samlerobjekter',
+  porcelaen: 'Porcelæn',
+  vaerktoej: 'Værktøj',
+  vinyl: 'Vinyl',
+  cykler: 'Cykler',
+  elektronik: 'Elektronik',
+  glas: 'Glas',
+  'dansk-design': 'Dansk design',
+  lego: 'Lego',
+};
+
+/**
  * The slim sticky bar: search + one scrollable chip line (dates | location |
  * saved + trip) with the secondary filters folded into a CSS-only popover.
  * Memoized — Explorer re-renders on every card hover (hoveredSlug) and this
@@ -41,6 +71,10 @@ export const FilterBar = memo(function FilterBar(props: {
   onDateFilter: (v: DateFilter) => void;
   category: string | null;
   onCategory: (v: string | null) => void;
+  /** Interests some market in the current data actually advertises. */
+  interestOptions: string[];
+  interests: string[];
+  onInterests: (v: string[]) => void;
   freeOnly: boolean;
   onFreeOnly: (v: boolean) => void;
   familyOnly: boolean;
@@ -121,6 +155,7 @@ export const FilterBar = memo(function FilterBar(props: {
 
   const secondaryCount =
     (props.category ? 1 : 0) +
+    props.interests.length +
     (props.freeOnly ? 1 : 0) +
     (props.accessibleOnly ? 1 : 0) +
     (props.inOut ? 1 : 0);
@@ -187,6 +222,34 @@ export const FilterBar = memo(function FilterBar(props: {
             {secondaryCount > 0 && <span className="count-dot">{secondaryCount}</span>}
           </summary>
           <div className="filter-panel">
+            {props.interestOptions.length > 0 && (
+              <div className="filter-group">
+                {/* "Nævner", not "har". Two markets in three say nothing about
+                    their goods, and silence is not absence — a market that never
+                    writes "møbler" almost certainly still has some. The label is
+                    the whole honesty of this filter. */}
+                <div className="filter-group-label">Nævner varer</div>
+                <div className="chips">
+                  {props.interestOptions.map((k) => {
+                    const on = props.interests.includes(k);
+                    return (
+                      <button
+                        key={k}
+                        className={`chip ${on ? 'active' : ''}`}
+                        aria-pressed={on}
+                        onClick={() =>
+                          props.onInterests(
+                            on ? props.interests.filter((x) => x !== k) : [...props.interests, k],
+                          )
+                        }
+                      >
+                        {INTEREST_LABELS[k] ?? k}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
             <div className="filter-group">
               <div className="filter-group-label">Type</div>
               <div className="chips">

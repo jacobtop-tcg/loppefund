@@ -2,7 +2,7 @@ import 'server-only';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import type { DatabaseSync } from 'node:sqlite';
-import { addDays, cleanCity, cleanVenueName, describeRecurrence, isHiddenGem, searchFold, UPCOMING_HORIZON_DAYS, type Amenities } from '@loppefund/core';
+import { addDays, cleanCity, cleanVenueName, describeRecurrence, isHiddenGem, searchFold, UPCOMING_HORIZON_DAYS, type Amenities, type InventorySignal } from '@loppefund/core';
 import { summarizeReviews, type ReviewSummary } from './reviews.ts';
 import { summarizePhotos, type Photo } from './photos.ts';
 import {
@@ -206,6 +206,14 @@ export interface EventSummary {
   /** From extracted amenities: the market states it's cancelled/affected by rain
    *  ("aflyses ved regn"). Combined with an outdoor forecast to warn before a trip. */
   weatherDependent: boolean;
+  /**
+   * What the market's own text SAYS it sells (see core/inventory.ts).
+   *
+   * [] means the text said nothing — which is 2 markets in 3 — and NEVER that
+   * the market sells none of it. Any UI built on this must say "nævner", not
+   * "har", or it turns silence into a claim.
+   */
+  inventorySignals: InventorySignal[];
   /** Organizer name, e.g. "Olsenretro" — searchable (a hunter who knows the
    *  operator, not the market's generic title). Shown on the detail page too. */
   organizer: string | null;
@@ -281,6 +289,11 @@ export function listUpcomingEvents(horizonDays = UPCOMING_HORIZON_DAYS): EventSu
       // nothing is invented (a null/unknown reads as false = "not claimed").
       accessible: am?.accessibility === true,
       cashOnly: am?.cashOnly === true,
+      // Undefined on a pre-v6 cached DB (the column only exists after a crawl
+      // has run migrate()), which degrades to [] — no chips, no lie.
+      inventorySignals: e.inventory_signals
+        ? (JSON.parse(e.inventory_signals) as InventorySignal[])
+        : [],
       recurrence: describeRecurrence(e.schedule_text),
       organizer: e.organizer,
       street: e.street,
